@@ -96,7 +96,6 @@
                         <div class="col-md-2" style="width: 19%;"></div>
                         <div class="col-sm-9" style="width: 75%; background-color: #fff; padding-left:50px; padding-top:50px; padding-right:50px;">
                             <!-- padding-left:50px; padding-top:50px; padding-right:50px;-->
-                            <button type="button" class="btn btn-primary" style="margin-bottom:40px;" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Minor Job Request</button>
                         </div>
                     </div>
                     <div class="row">
@@ -113,7 +112,7 @@
                                 </thead>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Major Job Request</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Minor Job Request</button>
                             </div>
                         </div>
                     </div>
