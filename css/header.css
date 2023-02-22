@@ -1,0 +1,38 @@
+body {
+    padding-top: 90px;
+    
+}
+
+header {
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+}
+
+.navplace{
+    padding-right: 40px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    float: right;
+}
+
+header .gnav .menu {
+    display: flex;
+    text-align: right;
+    
+}
+
+
+header .gnav .menu li {
+    list-style: none;
+}
+
+.navplace p {
+    margin-top: 10px;
+}

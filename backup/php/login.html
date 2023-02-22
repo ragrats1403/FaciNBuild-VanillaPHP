@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>  
+<head>  
+    <title>UC Manager</title>  
+    <!--insert style.css file inside index.html-->  
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel = "stylesheet" type = "text/css" href = "css/login.css">
+    <script type="text/javascript" src="javascripts/validiation.js"></script> 
+</head>  
+<body>
+<div id = "container">     
+   <div class = "frm">
+        <div class = "disp-img"></div>
+        <h4 style="margin-top: -20px; color: rgb(70, 130, 180);">LAPU-LAPU AND MANDAUE</h4>
+        <form name="f1" action = "authentication.php" onsubmit = "return validation()" method = "POST">
+        <form class = "login-form">
+             
+            <h5>Welcome to the University of Cebu homepage!</h5> 
+            <p>    
+                <input type = "text" id ="user" name = "user" placeholder="username"/>  
+            </p>  
+            <p>    
+                <input type = "password" id ="pass" name = "pass" placeholder="password"/>  
+            </p>  
+            <p>     
+                <button type = "submit">LOGIN</button>  
+            </p>
+            
+            </form>  
+        </form>  
+    </div> 
+</body> 
+        <footer>
+        ©All rights reserved by Team Escalera.
+        </footer> 
+</html>  

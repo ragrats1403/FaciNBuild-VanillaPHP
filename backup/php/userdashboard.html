@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UC Manager</title>
+    <link rel="stylesheet" href="css/dashboard.css" />
+    
+  </head>
+  <body>
+    
+    
+    <div class="navigation">
+      <ul>
+        <li class="list active">
+          <a href="userdashboard.html">
+            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+            <span class="title">User Dashboard</span>
+          </a>
+        </li>
+        <li class="list">
+          <a href="#">
+            <span class="icon"
+              ><ion-icon name="person-circle-outline"></ion-icon
+            ></span>
+            <span class="title">Profile</span>
+          </a>
+        </li>
+        <li class="list">
+          <a href="#">
+            <span class="icon"><ion-icon name="tv-outline"></ion-icon></span>
+            <span class="title">Inventory</span>
+          </a>
+        </li>
+        <li class="list">
+          <a href="#">
+            <span class="icon"
+              ><ion-icon name="settings-outline"></ion-icon
+            ></span>
+            <span class="title">Settings</span>
+          </a>
+        </li>
+        <li class="list">
+          <a href="#">
+            <span class="icon"
+              ><ion-icon name="id-card-outline"></ion-icon
+            ></span>
+            <span class="title">Equipments</span>
+          </a>
+        </li>
+        <li class="list">
+          <a href="help.html">
+            <span class="icon"
+              ><ion-icon name="help-circle-outline"></ion-icon
+            ></span>
+            <span class="title">Help</span>
+          </a>
+        </li>
+        <li class="list">
+          <a href="logout.php" class="btn">
+            <span class="icon"
+              ><ion-icon name="log-out-outline"></ion-icon
+            ></span>
+              <span class="title">Sign Out</span> 
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="area">
+      <input type="radio" name="tab_name" id="tab1" checked>
+      <label class="tab_class" for="tab1">Test</label>
+      <div class="content_class">
+        <p>タブ1のコンテンツを表示します
+        <table class = "phptable">
+          <tbody>         
+            <?php include('phpfiles/testdata.php');?>
+          </tbody>
+        </table>
+        </p>
+      </div>
+      <input type="radio" name="tab_name" id="tab2" >
+      <label class="tab_class" for="tab2">タブ2</label>
+      <div class="content_class">
+        <p>タブ2のコンテンツを表示します</p>
+      </div>
+      <input type="radio" name="tab_name" id="tab3" >
+      <label class="tab_class" for="tab3">タブ3</label>
+      <div class="content_class">
+        <p>タブ3のコンテンツを表示します</p>
+      </div>
+      <input type="radio" name="tab_name" id="tab4" >
+      <label class="tab_class" for="tab4">タブ4</label>
+      <div class="content_class">
+        <p>タブ4のコンテンツを表示します</p>
+      </div>
+      <input type="radio" name="tab_name" id="tab5" >
+      <label class="tab_class" for="tab5">タブ5</label>
+      <div class="content_class">
+        <p>タブ5のコンテンツを表示します</p>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script>
+      const list = document.querySelectorAll(".list");
+      console.log(list);
+      function activeLink() {
+        list.forEach((item) =>
+          // console.log(item);
+          item.classList.remove("active")
+        );
+        this.classList.add("active");
+      }
+
+      list.forEach((item) => {
+        item.addEventListener("click", activeLink);
+      });
+    </script>
+  </body>
+  <footer>
+    <p>©All rights reserved by Team Escalera.</p>
+  </footer>
+</html>

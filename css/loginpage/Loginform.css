@@ -1,0 +1,93 @@
+body {
+    position: relative;
+    background-repeat: no-repeat;
+    overflow-y: hidden;
+    background-size: cover;
+    background-image: url('../../images/chamberbg.png');
+}
+.imagecontainer{
+    width: 100%;
+   
+}
+div.formContainer {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+div.formContainer form {
+    background-color: #f8ecec;
+    width: 70%;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #dfdfdf;
+    box-shadow: 30px 43px 32px -34px #777777;
+    border-radius: 18px;
+}
+
+div.uiForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 400px;
+}
+
+div.formField {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+input{
+    width: 100%;
+    border: 1px solid grey;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+#input:focus {
+    outline: none;
+}
+
+
+label{
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin: auto;
+}
+
+button {
+    background-color: #613E0B;
+    width: 100%;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 30px;
+    color: white;   
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background-color: #175892;
+}
+
+.errorMsg {
+    color: red;
+    margin: 0;
+    align-self: flex-start;
+}
+
+.msgOk {
+    color: green;
+    margin-top: 15px;
+}
