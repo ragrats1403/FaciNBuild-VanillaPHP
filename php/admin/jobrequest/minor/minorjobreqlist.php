@@ -233,7 +233,7 @@
             var id = $(this).data('id');
             var trid = $(this).closest('tr').attr('id');
             $.ajax({
-                url: "get_single_user.php",
+                url: "get_request_details.php",
                 data: {
                     id: id
                 },
@@ -380,7 +380,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Update Job Request</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
