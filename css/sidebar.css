@@ -116,7 +116,7 @@ body {
     display: block;
 }
 
-.navdiv ul li .tooltip {
+/*.navdiv ul li .tooltip {
     position: absolute;
     height: 35px;
     width: 122px;
@@ -138,7 +138,7 @@ body {
     transition: all 0.5s ease;
     opacity: 1;
 }
-
+*/
 .navdiv ul li a {
     color: black;
     display: flex;
@@ -151,12 +151,12 @@ body {
 
 .navdiv ul li a:hover {
     color: #11101d;
-    background: rgb(224, 224, 224);
+    background: #7CD0F2;
 }
 
 .navdiv ul li div:hover {
     color: #11101d;
-    background: rgb(224, 224, 224);
+    background: #7CD0F2;
     border-radius: 12px;
     transition: all 0.4s ease;
 }
@@ -243,8 +243,12 @@ body {
 
 .sidebar .profile #log_out {
     left: 88%;
+    background-color: none;
 }
 
-.sidebar .profile #log_out {
-    background: none;
+.sidebar .profile #log_out:hover{
+    color: #11101d;
+    background-color: #7CD0F2;
+    border-radius: 12px;
+    transition: all 0.4s ease;
 }
