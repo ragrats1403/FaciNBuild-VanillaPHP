@@ -109,7 +109,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-2"></div>
-                        <div class="col-md-8" style="background-color: #EDEDEE; padding-left:50px; padding-top:50px; padding-right:50px;">
+                        <div class="col-md-8" style="background-color: #FFF; padding-left:50px; padding-top:50px; padding-right:50px;">
                             <!-- padding-left:50px; padding-top:50px; padding-right:50px;-->
                             <h1>List Of Equipments</h1><!-- TO be redesigned.. -->
                             <!--<button type="button" class="btn btn-primary" style="margin-bottom:40px;" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Equipment</button>-->
@@ -117,7 +117,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2"></div>
-                        <div class="col-md-8" style="background-color: #EDEDEE; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
+                        <div class="col-md-8" style="background-color: #FFF; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <table id="datatable" class="table">
                                 <thead>
