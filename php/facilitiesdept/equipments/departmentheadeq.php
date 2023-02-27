@@ -16,20 +16,14 @@
 </head>
 
 <header>
-    <div class="imgctrl">
-
+    <div class= "imgctrl">
+        
     </div>
     <div class="navplace">
-        <h5>Hello, </h5>
-        <nav class="gnav">
-            <ul class="menu">
-                <li><a href=""></a></li>
-                <li>
-                    <h5><a href="">Department Head</a></h5>
-                </li>
-            </ul>
+        <p>Hello, Administrator</p>
+      <nav class="gnav">
         </nav>
-    </div><!-- -->
+    </div>
 </header>
 
 <body>
