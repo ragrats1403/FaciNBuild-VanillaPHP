@@ -32,7 +32,6 @@
             <div class="logo">
                 <img src="../../../images/Brown_logo_faci.png" />
             </div>
-            <i class="bx bx-menu" id="btn"></i>
         </div>
         <div class="navdiv">
             <ul class="nav_list">
