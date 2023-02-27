@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../css/sidebar.css">
-    <link rel="stylesheet" type="text/css" href="../../../css/header.css">
-    <link rel="stylesheet" type="text/css" href="../../../css/admin/adminaccount.css" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" type="text/css" href="../../../css/body.css">    
+    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>  
 </head>
 
-<header>
+<header class="shadow">
     <div class="imgctrl">
 
     </div>
@@ -26,7 +26,7 @@
     </div>
 </header>
 
-<body>
+<body style="padding-top: 0px;">
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -86,15 +86,14 @@
             <div class="row">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-8" style="background-color: #ccc; padding-left:50px; padding-top:50px; padding-right:50px;">
+                        <div class="col-md-2" style="width: 15%;"></div>
+                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-top:50px; padding-right:50px;">
                             <!-- padding-left:50px; padding-top:50px; padding-right:50px;-->
-                            <button type="button" class="btn btn-primary" style="margin-bottom:40px;" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Equipment</button>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2"></div>
-                        <div class="col-md-8" style="background-color: #ccc; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
+                        <div class="col-md-2" style="width: 15%;"></div>
+                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <table id="datatable" class="table">
                                 <thead>
@@ -119,8 +118,10 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="col-sm-12 d-flex justify-content-end">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Equipment</button>
+                            </div>
                         </div>
-                        <div class="col-md-2"></div>
                     </div>
                 </div>
             </div>

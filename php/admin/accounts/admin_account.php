@@ -16,7 +16,7 @@
     
 </head>
 
-<header>
+<header class="shadow">
     <div class="imgctrl">
 
     </div>
@@ -110,18 +110,15 @@
                 <div class="container">
 
                     <div class="row">
-                        <div class="col-md-2" style="width: 19%;"></div>
-                        <div class="col-sm-9" style="width: 75%; background-color: #FFF; padding-left:50px; padding-right:50px;">
+                        <div class="col-md-2" style="width: 15%;"></div>
+                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-top:50px; padding-left:50px; padding-right:50px;">
                             <!-- padding-left:50px; padding-top:50px; padding-right:50px;-->
-                            <div class="col-sm-12 d-flex justify-content-start pt-3">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Account</button>
-                        </div>
                      </div>
                     </div>
                     
                     <div class="row">
-                    <div class="col-md-2" style="width: 19%;"></div>
-                        <div class="col-md-9" style="width: 75%; background-color: #FFF; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
+                    <div class="col-md-2" style="width: 15%;"></div>
+                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <table id="datatable" class="table">
                                 <thead>
@@ -148,6 +145,10 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="col-sm-12 d-flex justify-content-end">
+                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Account</button>
+                            </div>
+                        
                         </div>
                         <div class="col-md-2"></div>
                     </div>
