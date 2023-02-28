@@ -20,7 +20,7 @@
         
     </div>
     <div class="navplace">
-        <img src="../../../images/ico/notification-regular-24.png" />
+        <i class='bx bxs-bell'></i>
         <p>Hello, Department Head</p>
       <nav class="gnav">
         </nav>
