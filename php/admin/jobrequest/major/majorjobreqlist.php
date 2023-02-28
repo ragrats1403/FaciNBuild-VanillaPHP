@@ -15,7 +15,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
 </head>
 
-<header>
+<header class="shadow">
     <div class= "imgctrl">
         
     </div>
@@ -100,14 +100,14 @@
                 <div class="container">
 
                     <div class="row">
-                        <div class="col-md-2" style="width: 19%;"></div>
-                        <div class="col-sm-9" style="width: 75%; background-color: #FFF; padding-left:50px; padding-top:50px; padding-right:50px;">
+                        <div class="col-md-2" style="width: 15%;"></div>
+                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-top:50px; padding-right:50px;">
                             <!-- padding-left:50px; padding-top:50px; padding-right:50px;-->
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-2" style="width: 19%;"></div>
-                        <div class="col-sm-9" style="width: 75%; background-color: #FFF; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
+                    <div class="row">   
+                        <div class="col-md-2" style="width: 15%;"></div>
+                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <table id="datatable" class="table" >
                                 <thead>
