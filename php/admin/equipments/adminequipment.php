@@ -20,6 +20,7 @@
         
     </div>
     <div class="navplace">
+        <img src="../../../images/ico/notification-regular-24.png" />
         <p>Hello, Administrator</p>
       <nav class="gnav">
         </nav>
