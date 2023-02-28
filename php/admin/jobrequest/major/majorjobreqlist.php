@@ -20,6 +20,7 @@
         
     </div>
     <div class="navplace">
+        <i class='bx bxs-bell'></i>
         <p>Hello, Administrator</p>
       <nav class="gnav">
         </nav>
