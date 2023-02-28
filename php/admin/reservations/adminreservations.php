@@ -15,11 +15,12 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
-<header>
+<header class="shadow">
     <div class= "imgctrl">
         
     </div>
     <div class="navplace">
+        <img src="../../../images/ico/notification-regular-24.png" />
         <p>Hello, Administrator</p>
       <nav class="gnav">
         </nav>
