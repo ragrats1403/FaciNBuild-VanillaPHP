@@ -231,12 +231,12 @@
         });
         //edit button control 
         $(document).on('click', '.editBtn', function(event) {
-            var minorjobid = $(this).data('minorjobid');
+            var id = $(this).data('id');
             var trid = $(this).closest('tr').attr('minorjobid');
             $.ajax({
                 url: "get_request_details.php",
                 data: {
-                    minorjobid: minorjobid
+                    id: id
                 },
                 type: 'POST',
                 success: function(data) {
@@ -245,6 +245,7 @@
                     $('#trid').val(trid);
                     $('#_ctrlnumber').val(json.majorjobid);
                     $('#_department').val(json.department);
+                    $('#editMinorjreqmodal').modal('show');
                     //$('#_datemajorjr').val(json.datesubmitted);
                     $('').val();
                     $('').val();
@@ -396,7 +397,7 @@
                 <div class="modal-body">
                     <form id="updateUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
-                            <input type="hidden" id="minorjobid" name="minorjobid" value="">
+                            <input type="hidden" id="id" name="id" value="">
                             <input type="hidden" id="trid" name="trid" value="">
                             <!-- Form Controls-->   
                             <div class="row justify-content-center" style="padding-bottom:10px;">
