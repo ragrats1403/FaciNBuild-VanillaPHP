@@ -20,7 +20,11 @@
         
     </div>
     <div class="navplace">
-        <i class='bx bxs-bell'></i>
+     <div>
+        <button type="button" class="icon-button">    
+        <span class='bx bxs-bell'></i>
+        <span class="icon-button__badge"></span>
+     </div>
         <p>Hello, PCO</p>
       <nav class="gnav">
         </nav>

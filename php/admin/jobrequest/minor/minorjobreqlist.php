@@ -472,6 +472,7 @@
                                     <input type="date" class="form-control input-sm col-xs-1" id="_dateconfirmed">
                                 </div>
                             </div>
+
                             <!-- Form Controls End-->
                         </div>
                         <div class="modal-footer">
