@@ -392,11 +392,21 @@
     <!-- edit user modal-->
     <!-- Modal -->
     <div class="modal fade" id="editMinorjreqmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog " style="max-width:1000px;">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update Job Request</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header row">
+
+                    <div class="col-md-3" style="width:21%;">
+                        <h5 class="modal-title" id="exampleModalLabel">Update Job Request</h5>
+                    </div>
+
+                    <div class="col-md-6" style="width:30%">
+                        <label class="" style="padding-right:10px;" for="inputName">ID</label>
+                        <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
+                    </div>
+
+                    <button type="button" style="padding-left: max(15px, 5%);" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    
                 </div>
                 <div class="modal-body">
                     <form id="updateUserForm" action="javascript:void();" method="POST">
@@ -405,11 +415,6 @@
                             <input type="hidden" id="trid" name="trid" value="">
                             <!-- Form Controls-->   
                             <div class="row justify-content-center" style="padding-bottom:10px;">
-                            <div class="col-md-6 ">
-                            <label for="inputName" class="col-sm-2 col-form-label">ID</label>
-                            <input type="text" name="_ID" class="form-control" id="_ID" disabled>
-                            </div>
-                            
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Name:</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="_Name" placeholder="Name">
