@@ -405,11 +405,6 @@
                             <input type="hidden" id="trid" name="trid" value="">
                             <!-- Form Controls-->   
                             <div class="row justify-content-center" style="padding-bottom:10px;">
-                            <div class="col-md-6 ">
-                            <label for="inputName" class="col-sm-2 col-form-label">ID</label>
-                            <input type="text" name="_ID" class="form-control" id="_ID" disabled>
-                            </div>
-                            
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Name:</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="_Name" placeholder="Name">
@@ -467,6 +462,7 @@
                                     <input type="date" class="form-control input-sm col-xs-1" id="_dateconfirmed">
                                 </div>
                             </div>
+
                             <!-- Form Controls End-->
                         </div>
                         <div class="modal-footer">
