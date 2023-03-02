@@ -42,6 +42,12 @@
         </div>
         <div class ="navdiv">
         <ul class="nav_list">
+        <li>
+                    <a href="#">
+                        <i class='bx bx-clipboard'></i>
+                        <span class="link_name">Calendar Of Activities</span>
+                    </a>
+                </li>
             <li>
                 <a href="../../../php/systemadministrator/accounts/admin_account.php">
                     <i class='bx bx-user'></i>
