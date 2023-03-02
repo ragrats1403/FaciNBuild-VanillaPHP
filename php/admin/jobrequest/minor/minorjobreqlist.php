@@ -395,8 +395,8 @@
         <div class="modal-dialog " style="max-width:1000px;">
             <div class="modal-content">
                 <div class="modal-header row">
-                    <div class="col-md-6" style="width:26%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Update Job Request</h5>
+                    <div class="col-md-6" style="width:17%;">
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Job Request</h5>
                     </div>
                     <div class="col-md-6" style="width:30%">
                         <label class="" style="padding-right:10px;" for="inputName">ID</label>
@@ -471,9 +471,9 @@
 
                             <!-- Form Controls End-->
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        <div class="modal-footer justify-content-md-center">
+                            <button type="submit" class="btn btn-success col-md-2">Approve</button>
+                            <button type="button" class="btn btn-danger col-md-2" data-bs-dismiss="modal">Decline</button>
                         </div>
                     </form>
                 </div>
