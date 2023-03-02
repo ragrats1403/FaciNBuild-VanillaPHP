@@ -17,19 +17,20 @@
     
 </head>
 
-<header>
+<header class="shadow">
     <div class= "imgctrl">
         
     </div>
     <div class="navplace">
-        <h5>Hello, </h5>
-        <nav class="gnav">
-            <ul class="menu">
-                <li><a href=""></a></li>
-                <li><h5><a href="">User</a></h5></li>
-            </ul>
+       <div>
+        <button type="button" class="icon-button">    
+        <span class='bx bxs-bell'></i>
+        <span class="icon-button__badge"></span>
+       </div>    
+        <p>Hello, Welcome !</p>
+      <nav class="gnav">
         </nav>
-    </div><!-- -->
+    </div>
 </header>
 
 <body>
@@ -41,6 +42,12 @@
         </div>
         <div class ="navdiv">
         <ul class="nav_list">
+        <li>
+                    <a href="#">
+                        <i class='bx bx-clipboard'></i>
+                        <span class="link_name">Calendar Of Activities</span>
+                    </a>
+                </li>
             <li>
                 <a href="../../../php/systemadministrator/accounts/admin_account.php">
                     <i class='bx bx-user'></i>
