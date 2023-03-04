@@ -245,10 +245,16 @@
                 type: 'POST',
                 success: function(data) {
                     var json = JSON.parse(data);
+                    //var itemwdesc = json.item + json.item_desc;
                     $('#minorjobid').val(json.minorjobid);
                     $('#trid').val(trid);
-                    $('#_ctrlnumber').val(json.majorjobid);
+                    $('#_ID').val(id);
+                    $('#_datemajorjr').val(json.datesubmitted);
                     $('#_department').val(json.department);
+                    $('#_quantity').val(json.quantity);
+                    $('#_itemdesc').val(json.item_desc);
+                    $('#_item').val(json.item);
+                    $('#_purpose').val(json.purpose);
                     $('#editMinorjreqmodal').modal('show');
                     //$('#_datemajorjr').val(json.datesubmitted);
                     $('').val();
@@ -340,6 +346,7 @@
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <h5 class="text-uppercase fw-bold" style="padding-bottom:10px;" >A. Requisition(To be filled up by the requesting party)</h5>
+                                <label class="fw-bold" for="date">Quantity:</label>
                                 <div class="col-md-2 ">
                                     <input type="name" class="form-control input-sm col-xs-1" id="requisition" placeholder="Quantity">
                                 </div>
@@ -347,11 +354,13 @@
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <h5 class="text-uppercase fw-bold" style="padding-bottom:10px;" >ITEM WITH COMPLETE DESCRIPTION</h5>
                                 <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Description:</label>
                                     <textarea placeholder="Description" class="form-control" rows="2" id="itemdesc"></textarea>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose"></textarea>
                                 </div>
                             </div>
@@ -396,7 +405,7 @@
             <div class="modal-content">
                 <div class="modal-header row">
                     <div class="col-md-6" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Job Request</h5>
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
                     </div>
                     <div class="col-md-6" style="width:30%">
                         <label class="" style="padding-right:10px;" for="inputName">ID</label>
@@ -410,40 +419,42 @@
                             <input type="hidden" id="id" name="id" value="">
                             <input type="hidden" id="trid" name="trid" value="">
                             <!-- Form Controls-->   
-                            <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Name:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_Name" >
-                                </div>
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">No:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_ctrlnumber" >
-                                </div>
-                            </div>
+                            
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_department" >
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_department" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_datemajorjr" >
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_datemajorjr" disabled>
                                 </div>
                             </div>
-                            <div class="justify-content-center" style="padding-bottom:10px;">
+                            <div class="justify-content-center">
                                 <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                <div class="col-md-2">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_requisition" placeholder="Description">
+                                <div class="col-md-2" style="padding-bottom:10px">
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity" placeholder="Quantity" disabled>
                                 </div>
                             </div>
-                            <div class="justify-content-center" style="padding-bottom:10px;">
-                                <h5 class="text-uppercase fw-bold" >ITEM WITH COMPLETE DESCRIPTION</h5>
+
+                            <div class="row">
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Item Name:</label>
+                                    <input type="form-control" class="form-control" id ="_item"placeholder="Item" disabled>
+                                </div>
+                            </div>
+
+                            <div class="justify-content-center">
                                 <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Description:</label>
                                     <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description"></textarea>
                                 </div>
                             </div>
-                            <div class="justify-content-center" style="padding-bottom:10px;">
+
+                            <div class="justify-content-center">
                                 <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose"></textarea>
                                 </div>
                             </div>
