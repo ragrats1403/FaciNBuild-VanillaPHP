@@ -401,17 +401,17 @@
     <!-- edit user modal-->
     <!-- Modal -->
     <div class="modal fade" id="editMinorjreqmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog " style="max-width:1000px;">
-            <div class="modal-content">
-                <div class="modal-header row">
-                    <div class="col-md-6" style="width:17%;">
+        <div class="modal-dialog " style="max-width:1100px;">
+            <div class="modal-content ">
+                <div class="modal-header justify-content-center" style="margin-left:1px; max-width:1100px;">
+                    <div class="col-md-2" style="width:17%;">
                         <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
                     </div>
-                    <div class="col-md-6" style="width:30%">
-                        <label class="" style="padding-right:10px;" for="inputName">ID</label>
+                    <div class="col-md-2" style="width:30%">
+                        <label class="" style="" for="inputName">ID</label>
                         <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
                     </div>
-                    <button type="button" style="padding-left: max(15px, 5%);" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" style="" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="updateUserForm" action="javascript:void();" method="POST">
