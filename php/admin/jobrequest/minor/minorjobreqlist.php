@@ -166,20 +166,31 @@
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
             event.preventDefault();
-            var name = $('#inputName').val();
-            var username = $('#inputUsername').val();
-            var password = $('#inputPassword').val();
-            var rolelevel = $('#inputRolelevel').val();
-            var roleid = $('#inputRoleID').val();
-            if (username != '' && password != '' && rolelevel != '' && roleid != '') {
+            var department = $('#department').val();
+            var date = $('#datemajorjr').val();
+            var quantity = $('#_quantity_').val();
+            var itemname = $('#_item_').val();
+            var description = $('#_itemdesc_').val();
+            var purpose = $('#_purpose_').val();
+            var renderedby = $('#renderedby').val();
+            var daterendered = $('#daterendered').val();
+            var confirmedby = $('#confirmedby').val();
+            var dateconfirmed = $('#dateconfirmed').val();
+            if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '' && renderedby != '' && daterendered != '' && confirmedby != '' && dateconfirmed != '') {
                 $.ajax({
-                    url: "add_user.php",
+                    url: "add_data.php",
                     data: {
-                        name: name,
-                        username: username,
-                        password: password,
-                        rolelevel: rolelevel,
-                        roleid: roleid
+                        department: department,
+                        date: date,
+                        quantity: quantity,
+                        itemname: itemname,
+                        description: description,
+                        purpose: purpose,
+                        renderedby: renderedby,
+                        daterendered: daterendered,
+                        confirmedby: confirmedby,
+                        dateconfirmed: dateconfirmed,
+                        
                     },
                     type: 'POST',
                     success: function(data) {
@@ -189,11 +200,16 @@
                             table = $('#datatable').DataTable();
                             table.draw();
                             alert('Successfully Added User!');
-                            $('#inputName').val('');
-                            $('#inputUsername').val('');
-                            $('#inputPassword').val('');
-                            $('#inputRolelevel').val('');
-                            $('#inputRoleID').val('');
+                            $('#department').val('');
+                            $('#datemajorjr').val('');
+                            $('#_quantity_').val('');
+                            $('#_item_').val('');
+                            $('#_itemdesc_').val('');
+                            $('#_purpose_').val('');
+                            $('#renderedby').val('');
+                            $('#daterendered').val('');
+                            $('#confirmedby').val('');
+                            $('#dateconfirmed').val('');
                             $('#addUserModal').modal('hide');
                         }
                     }
@@ -309,31 +325,21 @@
             });
         });
     </script>
+                        
     <!-- Script Process End-->
     <!-- add user modal-->
     <!-- Modal Popup -->
     <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="max-width:1000px;">
+        <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-center" id="exampleModalLabel">Minor Job Request Form</h5>
+                <div class="modal-header" style="max-width:1100px;">
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
                             <!-- Form Controls-->
-
-                            <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Name:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="Name" placeholder="Name">
-                                </div>
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">No:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="ctrlnumber" placeholder="No.">
-                                </div>
-                            </div>
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
@@ -341,27 +347,36 @@
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date">
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
+                                    
                                 </div>
                             </div>
-                            <div class="justify-content-center" style="padding-bottom:10px;">
-                                <h5 class="text-uppercase fw-bold" style="padding-bottom:10px;" >A. Requisition(To be filled up by the requesting party)</h5>
-                                <label class="fw-bold" for="date">Quantity:</label>
-                                <div class="col-md-2 ">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="requisition" placeholder="Quantity">
+                            <div class="justify-content-center">
+                                <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
+                                <div class="col-md-2" style="padding-bottom:10px">
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                 </div>
                             </div>
-                            <div class="justify-content-center" style="padding-bottom:10px;">
-                                <h5 class="text-uppercase fw-bold" style="padding-bottom:10px;" >ITEM WITH COMPLETE DESCRIPTION</h5>
+
+                            <div class="row">
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Item Name:</label>
+                                    <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
+                                </div>
+                            </div>
+
+                            <div class="justify-content-center">
                                 <div class="col-md-12" >
                                     <label class="fw-bold" for="date">Description:</label>
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="itemdesc"></textarea>
+                                    <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
                                 </div>
                             </div>
-                            <div class="justify-content-center" style="padding-bottom:10px;">
+
+                            <div class="justify-content-center">
                                 <div class="col-md-12" >
                                     <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose"></textarea>
+                                    <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
                                 </div>
                             </div>
                             
@@ -388,9 +403,9 @@
 
                             <!-- Form Controls End-->
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <div class="modal-footer justify-content-md-center">
+                            <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
                         </div>
                     </form>
                 </div>
@@ -403,7 +418,7 @@
     <div class="modal fade" id="editMinorjreqmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog " style="max-width:1100px;">
             <div class="modal-content ">
-                <div class="modal-header justify-content-center" style="margin-left:1px; max-width:1100px;">
+                <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:17%;">
                         <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
                     </div>
@@ -491,6 +506,16 @@
             </div>
         </div>
     </div>
+    <script>
+                            //datetime auto fill up
+                            var now = new Date();
+                            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                            document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
+                            //Requesting department auto fill up
+                            
+                          /*  var deptname;
+                            document.getElementById('inputRoleID').value = deptname;*/
+                         </script>
     <!-- edit user modalPopup end-->
 </body>
 
