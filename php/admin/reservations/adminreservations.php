@@ -105,62 +105,97 @@
     </script>-->
 
     <div class="table1">
-
         <div class="container-fluid">
             <div class="row">
                 <div class="container">
 
                     <div class="row">
                         <div class="col-md-2" style="width: 15%;"></div>
-                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-top:50px; padding-left:50px; padding-right:50px;">
+                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-top:50px; padding-right:50px;">
                             <!-- padding-left:50px; padding-top:50px; padding-right:50px;-->
-                     </div>
+                        </div>
                     </div>
-                    
                     <div class="row">
-                    <div class="col-md-2" style="width: 15%;"></div>
+                        <div class="col-md-2" style="width: 15%;"></div>
                         <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
-                            <form action="">
-                                Please select the facilities you would like to request.<br><br>
-                                    <input type="checkbox" id="annex_avr" name="Annex AVR" value="annex_avr">
-                                    <label for="annex_avr"> Annex AVR</label>
-                                    <input type="checkbox" id="new_avr" name="New AVR" value="new_avr">
-                                    <label for="new_avr"> New AVR</label>
-                                    <input type="checkbox" id="cbe_functionhall" name="CBE Function Hall" value="cbe_functionhall">
-                                    <label for="cbe_functionhall"> CBE Function Hall</label>
-                                    <input type="checkbox" id="auditorium" name="Auditorium" value="auditorium">
-                                    <label for="auditorium"> Auditorium</label>
-                                    <input type="checkbox" id="be_functionhall" name="BE Function Hall" value="be_functionhall">
-                                    <label for="be_functionhall"> BE Function Hall</label><br><br>
-
-                                    Date Filed: <input type="textbox"> Actual Date of Use: <input type="textbox"> Time in: <input type="textbox"> Time Out: <input type="textbox"><br>
-                                    Requesting Party: <input type="textbox"> Department/College: <input type="textbox"><br>
-                                    Purpose of Activity: <input type="textbox"><br>
-                                    Estimated No. of Audience/Participants: <input type="textbox"> Stage Performers (if any): <input type="textbox">
-                                    <br><br>
-                                    NB: All other equipment(e.g. Backdrop, chairs, etc.,) shall be the responsibility of the requesting party.
-                                    Technician’s, Electrical, Janitor’s and security guards overtime fees/excess fees are subject to the terms an condition provided at the bank thereof.<br>
-                                    Secure Reservation from the AVR (filled up by the AVR personnel only) Date: Time:<br>
-                                    2. The activity is officially endorsed and approved by the adviser, Chairperson/Dean, Department Head,
-                                    and the SAO/ Cultural Directory. (if “disapproved”, it must be so stated, citing briefly the reason thereof)<br><br>
-                                    
-                                    <table id="datatable" class="table">
-                                    <thead>
-                                        <th>Equipments to Reserve</th>
-                                        <th>Available</th>
-                                        <th>Quantity to Reserve</th>
-                                    </thead>
-                                    Adviser <input type="textbox"> CHAIRPERSON/DEAN/DEPARTMENT <input type="textbox">
-                            </form>
+                            <table id="datatable" class="table" >
+                                <thead>
+                                    <th>ID</th>
+                                    <th>Department</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Options</th>
+                                </thead>
+                            </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">View Add ons</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Reservation</button>
                             </div>
-                        
                         </div>
-                        <div class="col-md-2"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div> 
+
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog-scrollable" style="max-width:1100px;">
+            <div class="modal-content">
+                <div class="modal-header" style="max-width:1100px;">
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Reservation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- BODY END-->
+                <div class="modal-body ">
+                    <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
+                    <form action="">
+                        Please select the facilities you would like to request.<br><br>
+                            <input type="checkbox" id="annex_avr" name="Annex AVR" value="annex_avr">
+                            <label for="annex_avr"> Annex AVR</label>
+                            <input type="checkbox" id="new_avr" name="New AVR" value="new_avr">
+                            <label for="new_avr"> New AVR</label>
+                            <input type="checkbox" id="cbe_functionhall" name="CBE Function Hall" value="cbe_functionhall">
+                            <label for="cbe_functionhall"> CBE Function Hall</label>
+                            <input type="checkbox" id="auditorium" name="Auditorium" value="auditorium">
+                            <label for="auditorium"> Auditorium</label>
+                            <input type="checkbox" id="be_functionhall" name="BE Function Hall" value="be_functionhall">
+                            <label for="be_functionhall"> BE Function Hall</label><br><br>
+
+                            Date Filed: <input type="textbox"> Actual Date of Use: <input type="textbox"> Time in: <input type="textbox"> Time Out: <input type="textbox"><br>
+                            Requesting Party: <input type="textbox"> Department/College: <input type="textbox"><br>
+                            Purpose of Activity: <input type="textbox"><br>
+                            Estimated No. of Audience/Participants: <input type="textbox"> Stage Performers (if any): <input type="textbox">
+                            <br><br>
+                            NB: All other equipment(e.g. Backdrop, chairs, etc.,) shall be the responsibility of the requesting party.
+                            Technician’s, Electrical, Janitor’s and security guards overtime fees/excess fees are subject to the terms an condition provided at the bank thereof.<br>
+                            Secure Reservation from the AVR (filled up by the AVR personnel only) Date: Time:<br>
+                            2. The activity is officially endorsed and approved by the adviser, Chairperson/Dean, Department Head,
+                            and the SAO/ Cultural Directory. (if “disapproved”, it must be so stated, citing briefly the reason thereof)
+                            NB: All other equipment(e.g. Backdrop, chairs, etc.,) shall be the responsibility of the requesting party.
+                            Technician’s, Electrical, Janitor’s and security guards overtime fees/excess fees are subject to the terms an condition provided at the bank thereof.<br>
+                            Secure Reservation from the AVR (filled up by the AVR personnel only) Date: Time:<br>
+                            2. The activity is officially endorsed and approved by the adviser, Chairperson/Dean, Department Head,
+                            and the SAO/ Cultural Directory. (if “disapproved”, it must be so stated, citing briefly the reason thereof)<br><br>
+                            
+                            <table id="datatable" class="table">
+                            <thead>
+                                <th>Equipments to Reserve</th>
+                                <th>Available</th>
+                                <th>Quantity to Reserve</th>
+                            </thead>
+                            Adviser <input type="textbox"> CHAIRPERSON/DEAN/DEPARTMENT <input type="textbox">
+                    </form>
+                    <div class="col-sm-12 d-flex justify-content-end">
+                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">View Add ons</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div> 
+                </div>
+                <!-- BODY END-->
             </div>
         </div>
     </div>

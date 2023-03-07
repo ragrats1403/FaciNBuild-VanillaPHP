@@ -3,24 +3,29 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Calendar of Activities</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../css/sidebar.css">
-    <link rel="stylesheet" type="text/css" href="../../../css/header.css">
-    <link rel="stylesheet" type="text/css" href="../../../css/admin/adminaccount.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/sidebar.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/header.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/body.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/admin/adminaccount.css?<?=time()?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" type="text/css" href="../../../css/body.css"> 
     
 </head>
 
-<header>
+<header class="shadow">
     <div class= "imgctrl">
         
-    </div>
+    </div>   
     <div class="navplace">
+    <div>
+        <button type="button" class="icon-button">    
+        <span class='bx bxs-bell'></i>
+        <span class="icon-button__badge"></span>
+    </div> 
         <p>Hello, User</p>
       <nav class="gnav">
         </nav>
@@ -33,42 +38,31 @@
             <div class="logo">
                 <img src="../../../images/Brown_logo_faci.png" />
             </div>
-            <i class="bx bx-menu" id="btn"></i>
         </div>
-        <div class ="navdiv">
-        <ul class="nav_list">
-            <li>
-                <a href="../../../php/systemadministrator/accounts/admin_account.php">
-                    <i class='bx bx-user'></i>
-                    <span class="link_name">Account</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../../php/systemadministrator/jobrequest/adminjobreq.php">
-                    <i class='bx bx-clipboard'></i>
-                    <span class="link_name">Job Request</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../../php/systemadministrator/equipments/adminequipment.php">
-                    <i class='bx bx-wrench'></i>
-                    <span class="link_name">Equipment</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../../php/systemadministrator/reservations/adminreservations.php">
-                    <i class='bx bx-check-square'></i>
-                    <span class="link_name">Reservation</span>
-                </a>
-            </li>
-        </ul>
-        <div class="profile_content">
+
+        <div class="navdiv">
+            <ul class="nav_list">
+                <li>
+                    <a href="../../../php/user/userdashboard.php">
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">Calendar of Activities</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../php/user/reservation/userreservation.php">
+                        <i class='bx bx-check-square'></i>
+                        <span class="link_name">Reservation</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
                     <img src="../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">Name Here</div>
-                            <div class="role">Role Here</div>
+                            <div class="name">User</div>
+                            <div class="role">User</div>
                         </div>
                     </div>
                     <a href="../../../logout.php">
@@ -78,38 +72,38 @@
             </div>
         </div>
     </div>
-    <script>
-        let btn = document.querySelector("#btn");
-        let sidebar = document.querySelector(".sidebar");
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
-        btn.onclick = function() {
-            sidebar.classList.toggle("active");
-        }
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- Tab links -->
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
-</div>
+    <div class="table1">
 
-<!-- Tab content -->
-<div id="London" class="tabcontent">
-  <h3>London</h3>
-  <p>London is the capital city of England.</p>
-</div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="container">
 
-<div id="Paris" class="tabcontent">
-  <h3>Paris</h3>
-  <p>Paris is the capital of France.</p>
-</div>
-
-<div id="Tokyo" class="tabcontent">
-  <h3>Tokyo</h3>
-  <p>Tokyo is the capital of Japan.</p>
-</div>
-
-</body>
-
+                    <div class="row">
+                        <div class="col-md-2" style="width: 15%;"></div>
+                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-top:50px; padding-left:50px; padding-right:50px;">
+                            <!-- padding-left:50px; padding-top:50px; padding-right:50px;-->
+                            <h2 style= "text-align: center">CALENDAR OF ACTIVITIES</h2>
+                     </div>
+                    </div>
+                    
+                    <div class="row">
+                    <div class="col-md-2" style="width: 15%;"></div>
+                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
+                            <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
+                            <table id="datatable" class="table">
+                                <thead>
+                                    <th>Event Name</th>
+                                    <th>Date</th>
+                                    <th>Time Start</th>
+                                    <th>Time End</th>
+                                    <th>Venue</th>
+                                </thead>
 </html>
