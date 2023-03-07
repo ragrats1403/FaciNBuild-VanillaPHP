@@ -52,6 +52,15 @@
                     <span class="link_name">Reservation</span>
                 </a>
             </li>
+            <li>
+                <div class="dropdown">
+                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Job Request
+                    </span>
+
+                </div>
+            </li>
         </ul>
         <div class="profile_content">
                 <div class="profile">
