@@ -497,7 +497,7 @@
 
                             <!-- Form Controls End-->
                         </div>
-                        <div class="modal-footer justify-content-md-center">
+                        <div class="modal-footer justify-content-md-right">
                             <button type="submit" class="btn btn-success col-md-2">Approve</button>
                             <button type="button" class="btn btn-danger col-md-2" data-bs-dismiss="modal">Decline</button>
                         </div>
