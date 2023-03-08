@@ -134,7 +134,7 @@
         <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header" style="max-width:1100px;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Reservation Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
@@ -270,29 +270,70 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
-                <form action="">
-                        Please select the facilities you would like to request.<br><br>
-                            <input type="checkbox" id="annex_avr" name="Annex AVR" value="annex_avr">
-                            <label for="annex_avr"> Annex AVR</label>
-                            <input type="checkbox" id="new_avr" name="New AVR" value="new_avr">
-                            <label for="new_avr"> New AVR</label>
-                            <input type="checkbox" id="cbe_functionhall" name="CBE Function Hall" value="cbe_functionhall">
-                            <label for="cbe_functionhall"> CBE Function Hall</label>
-                            <input type="checkbox" id="auditorium" name="Auditorium" value="auditorium">
-                            <label for="auditorium"> Auditorium</label>
-                            <input type="checkbox" id="be_functionhall" name="BE Function Hall" value="be_functionhall">
-                            <label for="be_functionhall"> BE Function Hall</label><br><br>
-
+                <form id="saveUserForm" action="javascript:void();" method="POST">
+                        <div class="modal-body">
+                            <!-- Form Controls-->
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Date Filed:</label>
-                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed">
+                                    <label class="fw-bold" for="date">Department:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
                                 </div>
                                 <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Actual Date of Use:</label>
-                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use">
+                                    <label class="fw-bold" for="date">Date:</label>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
+                                    
                                 </div>
                             </div>
+                            <div class="justify-content-center">
+                                <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
+                                <div class="col-md-2" style="padding-bottom:10px">
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Item Name:</label>
+                                    <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
+                                </div>
+                            </div>
+
+                            <div class="justify-content-center">
+                                <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Description:</label>
+                                    <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="justify-content-center">
+                                <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Purpose:</label>
+                                    <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="row justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-6" >
+                                    <label class="fw-bold" for="renderedby">Rendered by:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="renderedby">
+                                </div>
+                                <div class="col-md-6" >
+                                    <label class="fw-bold" for="date">Date:</label>
+                                    <input type="date" class="form-control input-sm col-xs-1" id="daterendered">
+                                </div>
+                            </div>
+                            <div class="row justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-6" >
+                                    <label class="fw-bold" for="renderedby">Confirmed by:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="confirmedby">
+                                </div>
+                                <div class="col-md-6" >
+                                    <label class="fw-bold" for="date">Date:</label>
+                                    <input type="date" class="form-control input-sm col-xs-1" id="dateconfirmed">
+                                </div>
+                            </div>
+
                     </form>
                 </div>
             </div>
