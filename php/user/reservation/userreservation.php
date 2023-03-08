@@ -120,7 +120,7 @@
                                 </thead>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Reservation</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Reservation</button>     
                             </div>
                         </div>
                     </div>
@@ -129,17 +129,16 @@
         </div>
     </div> 
 
+    <!-- View add ons mod -->
     <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header" style="max-width:1100px;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Reservation</h5>
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <!-- BODY END-->
                 <div class="modal-body ">
-                    <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
-                    <form action="">
+                <form action="">
                         Please select the facilities you would like to request.<br><br>
                             <input type="checkbox" id="annex_avr" name="Annex AVR" value="annex_avr">
                             <label for="annex_avr"> Annex AVR</label>
@@ -161,6 +160,7 @@
                                     <label class="fw-bold" for="date">Actual Date of Use:</label>
                                     <input type="datetime-local" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use">
                                 </div>
+                            </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Time In:</label>
                                     <input type="datetime-local" class="form-control input-sm col-xs-1" id="timein" placeholder="Time In">
@@ -177,7 +177,7 @@
                                     <label class="fw-bold" for="date">College/Department:</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="collegeordepartment" placeholder="College/Department">
                                 </div>
-                                <div class="justify-content-center">
+                            <div class="justify-content-center">
                                 <div class="col-md-12" >
                                     <label class="fw-bold" for="date">Purpose of Activity:</label>
                                     <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
@@ -252,22 +252,52 @@
 
                              </label>
                                   
-                    </form>
                     <div class="col-sm-12 d-flex justify-content-end">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">View Add-ons</button>
-
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal1">Create Reservation 2</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div> 
-                </div>
-                <!-- BODY END-->
-            </div>
-        </div>
-    </div>
-</body>
 
+        <!-- Modal Popup -->
+    <div class="modal" id="addUserModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width:1100px;">
+            <div class="modal-content">
+                <div class="modal-header" style="max-width:1100px;">
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body ">
+                <form action="">
+                        Please select the facilities you would like to request.<br><br>
+                            <input type="checkbox" id="annex_avr" name="Annex AVR" value="annex_avr">
+                            <label for="annex_avr"> Annex AVR</label>
+                            <input type="checkbox" id="new_avr" name="New AVR" value="new_avr">
+                            <label for="new_avr"> New AVR</label>
+                            <input type="checkbox" id="cbe_functionhall" name="CBE Function Hall" value="cbe_functionhall">
+                            <label for="cbe_functionhall"> CBE Function Hall</label>
+                            <input type="checkbox" id="auditorium" name="Auditorium" value="auditorium">
+                            <label for="auditorium"> Auditorium</label>
+                            <input type="checkbox" id="be_functionhall" name="BE Function Hall" value="be_functionhall">
+                            <label for="be_functionhall"> BE Function Hall</label><br><br>
+
+                            <div class="row justify-content-center" style="padding-bottom:13px;">
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Date Filed:</label>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed">
+                                </div>
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Actual Date of Use:</label>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use">
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- BODY END-->
+</body>
 </html>

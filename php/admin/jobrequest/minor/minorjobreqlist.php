@@ -507,16 +507,15 @@
         </div>
     </div>
     <script>
-                            //datetime auto fill up
-                            var now = new Date();
-                            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                            document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
-                            //Requesting department auto fill up
-                            
-                          /*  var deptname;
-                            document.getElementById('inputRoleID').value = deptname;*/
-                         </script>
+        //datetime auto fill up
+        var now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
+        //Requesting department auto fill up
+        
+        /*  var deptname;
+        document.getElementById('inputRoleID').value = deptname;*/
+    </script>
     <!-- edit user modalPopup end-->
 </body>
-
 </html>
