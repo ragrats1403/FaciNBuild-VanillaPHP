@@ -286,82 +286,54 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
-                    <form id="saveUserForm" action="javascript:void();" method="POST">
+                <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
                             <!-- Form Controls-->
-
-                            <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6 ">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="Namemajorjr" placeholder="Job request no.">
-                                </div>
-                                <div class="col-md-6 ">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="numbermajorjr" placeholder="Requisition no.">
-                                </div>
-                            </div>
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="departmentmajorjr" placeholder="Department">
+                                    <label class="fw-bold" for="date">Department:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
                                 </div>
                                 <div class="col-md-6 ">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date">
+                                    <label class="fw-bold" for="date">Date:</label>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
+                                    
                                 </div>
                             </div>
-                            <div class="justify-content-center" style="padding-bottom:10px;">
-                                <h5 class="text-uppercase fw-bold" style="padding-bottom:10px;" >A. Requisition(To be filled up by the requesting party)</h5>
-                            </div>
-                            <div class="row" style="padding-bottom:10px;">
-                                <div class="col-md-3" style="width: 40%;">
-                                    <h5 class="text-uppercase fw-bold" style="padding-bottom:10px; " >ITEM WITH COMPLETE DESCRIPTION</h5>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="majorjrqty" placeholder="Quantity">
-                                </div>  
-                            </div>
-
-                            <div class="row" style="padding-bottom:10px;">
-                                <div class="col-md-9" style="width: 80%;">
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="majorjrdesc"></textarea>
-                                </div>
-                                <div class="col-md-1" style="width: 1%;">
-                                <button class="text-secondary btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"  aria-haspopup="true" aria-expanded="false" style="background-color: #fff;">Dropdown button </button>
+                            <div class="justify-content-center">
+                                <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
+                                <div class="col-md-2" style="padding-bottom:10px">
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                 </div>
                             </div>
 
-                            <div class="justify-content-center" style="padding-bottom:10px;">
+                            <div class="row">
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Item Name:</label>
+                                    <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
+                                </div>
+                            </div>
+
+                            <div class="justify-content-center">
                                 <div class="col-md-12" >
-                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp"></textarea>
+                                    <label class="fw-bold" for="date">Description:</label>
+                                    <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
                                 </div>
                             </div>
-                            
-                            <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6" >
-                                    <label class="fw-bold" for="renderedby">Requested By</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="majorjrreqby">
+
+                            <div class="justify-content-center">
+                                <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Purpose:</label>
+                                    <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
                                 </div>
-                                <div class="col-md-6" >
-                                    <label class="fw-bold" for="date">Approved By</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="majorjrappby">
-                                </div>
-                            </div>
-                            <div class=" row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6" style="padding-bottom:10px;" >
-                                    <label class="fw-bold" for="renderedby">Department Head</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="majorjrdepthd">
-                                </div>
-                                <div class="col-md-6" >
-                                    <label class="fw-bold" for="date">Noted By</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="majorjrnoteby">
-                                </div>
-                                <div class="col-md-7" style="background-color: #fff4c4;">
-                                </div>
-                                <label class="fw-bold" style="padding-left:640px;" for="renderedby">PROPERTY CUSTODIAN</label>
                             </div>
 
                             <!-- Form Controls End-->
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <div class="modal-footer justify-content-md-center">
+                            <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
                         </div>
                     </form>
                 </div>
