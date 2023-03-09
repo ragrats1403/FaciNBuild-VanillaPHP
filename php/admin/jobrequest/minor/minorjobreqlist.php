@@ -415,6 +415,8 @@
     <!-- add user modal end-->
     <!-- edit user modal-->
     <!-- Modal -->
+
+    
     <div class="modal fade" id="editMinorjreqmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog " style="max-width:1100px;">
             <div class="modal-content ">
@@ -477,29 +479,32 @@
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6" >
                                     <label class="fw-bold" for="renderedby">Rendered by:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_renderedby">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_renderedby" disabled>
                                 </div>
                                 <div class="col-md-6" >
                                     <label class="fw-bold" for="date">Date:</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="_daterendered">
+                                    <input type="date" class="form-control input-sm col-xs-1" id="_daterendered" disabled>
                                 </div>
                             </div>
+                            <div class="modal-footer justify-content-md-right">
+                                <button type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
+                            <button type="submit" class="btn btn-success col-md-1" id="end-editing">Update</button>
+                        </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6" >
                                     <label class="fw-bold" for="renderedby">Confirmed by:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_confirmedby">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_confirmedby" disabled>
                                 </div>
                                 <div class="col-md-6" >
                                     <label class="fw-bold" for="date">Date:</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="_dateconfirmed">
+                                    <input type="date" class="form-control input-sm col-xs-1" id="_dateconfirmed" disabled>
                                 </div>
                             </div>
-
-                            <!-- Form Controls End-->
+                            <div class="modal-footer justify-content-md-right">
+                            <button type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
+                            <button type="submit" class="btn btn-success col-md-1" id="end-editing">Update</button>
                         </div>
-                        <div class="modal-footer justify-content-md-right">
-                            <button type="submit" class="btn btn-success col-md-2">Approve</button>
-                            <button type="button" class="btn btn-danger col-md-2" data-bs-dismiss="modal">Decline</button>
+                            <!-- Form Controls End-->
                         </div>
                     </form>
                 </div>
@@ -515,6 +520,19 @@
         
         /*  var deptname;
         document.getElementById('inputRoleID').value = deptname;*/
+
+        /*toggle edit and update buttons*/
+        const paragraph = document.getElementById("_renderedby, ");
+const edit_button = document.getElementById("edit-button");
+const end_button = document.getElementById("end-editing");
+
+edit_button.addEventListener("click", function() {
+  paragraph.contentEditable = true;
+} );
+
+end_button.addEventListener("click", function() {
+  paragraph.contentEditable = false;
+} )
     </script>
     <!-- edit user modalPopup end-->
 </body>
