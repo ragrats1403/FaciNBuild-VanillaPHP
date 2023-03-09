@@ -3,85 +3,81 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Job Request List</title>
+    <title>Celndar of Activities</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
+    <link rel="stylesheet" type="text/css" href="../../../css/sidebar.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/header.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/body.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/admin/adminaccount.css?<?=time()?>" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
 </head>
 
 <header class="shadow">
     <div class= "imgctrl">
         
-    </div>
+    </div>   
     <div class="navplace">
-       <div>
+    <div>
         <button type="button" class="icon-button">    
         <span class='bx bxs-bell'></i>
         <span class="icon-button__badge"></span>
-       </div>
-        <p>Hello, Administrator</p>
+    </div> 
+        <p>Hello, Building Department</p>
       <nav class="gnav">
         </nav>
     </div>
 </header>
 
-<body style="padding-top: 0px;">
-
-<div class="sidebar">
+<body>
+    <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../../images/Brown_logo_faci.png" />
+                <img src="../../../images/Brown_logo_faci.png" />
             </div>
         </div>
-        <div class ="navdiv">
-        <ul class="nav_list">
-            <li>
-                <a href="../../../../php/admin/accounts/admin_account.php">
-                    <i class='bx bx-user'></i>
-                    <span class="link_name">Account</span>
-                </a>
-            </li>
-            <li>
+
+        <div class="navdiv">
+            <ul class="nav_list">
+                <li>
+                    <a href="../../../php/buildingdept/buildingdeptdashboard.php">
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">Calendar of Activities</span>
+                    </a>
+                </li>
+                <li>
                 <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Job Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../php/buildingdept/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
             </li>
-            <li>
-                <a href="../../../../php/admin/equipments/adminequipment.php">
-                    <i class='bx bx-wrench'></i>
-                    <span class="link_name">Equipment</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../../../php/admin/reservations/adminreservations.php">
-                    <i class='bx bx-check-square'></i>
-                    <span class="link_name">Reservation</span>
-                </a>
-            </li>
-        </ul>
-        <div class="profile_content">
+                <li>
+                    <a href="../../../php/buildingdept/reservation/buildingdeptreservation.php">
+                        <i class='bx bx-check-square'></i>
+                        <span class="link_name">Reservation</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                    <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                    <img src="../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">Admin</div>
-                            <div class="role">System Administrator</div>
+                            <div class="name">Building Dept</div>
+                            <div class="role">Building Department</div>
                         </div>
                     </div>
-                    <a href="../../../../logout.php">
+                    <a href="../../../logout.php">
                         <i class='bx bx-log-out' id="log_out"></i>
                     </a>
                 </div>
@@ -96,7 +92,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
+    <!--<script>
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
+
+        btn.onclick = function() {
+            sidebar.classList.toggle("active");
+        }
+    </script>-->
+    <!-- Data Table Start-->
+    <!--<h1 class="text-center">Faci N Build Test table control</h1>-->
     <div class="table1">
 
         <div class="container-fluid">
@@ -105,34 +110,54 @@
 
                     <div class="row">
                         <div class="col-md-2" style="width: 15%;"></div>
-                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-top:50px; padding-right:50px;">
+                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-top:50px; padding-left:50px; padding-right:50px;">
                             <!-- padding-left:50px; padding-top:50px; padding-right:50px;-->
-                        </div>
+                     </div>
                     </div>
-                    <div class="row">   
-                        <div class="col-md-2" style="width: 15%;"></div>
+                    
+                    <div class="row">
+                    <div class="col-md-2" style="width: 15%;"></div>
                         <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
-                            <table id="datatable" class="table" >
+                            <table id="datatable" class="table">
                                 <thead>
                                     <th>ID</th>
-                                    <th>Department</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Role Level</th>
+                                    <th>Role ID</th>
                                     <th>Options</th>
+
                                 </thead>
+                                <tbody>
+                                    <tr>
+                                        <!---
+                                    <td>1</td>
+                                    <td>Rajesh</td>
+                                    <td>raj@gmail.com</td>
+                                    <td>131131231</td>
+                                    <td>Mumbai</td>
+                                    <td><a class="btn ">Edit</a><a href="">Delete</a></td>
+                                    -->
+
+                                    </tr>
+                                </tbody>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Major Job Request</button>
+                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Account</button>
                             </div>
+                        
                         </div>
+                        <div class="col-md-2"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-      <!-- Optional JavaScript; choose one of the two! -->
-  <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Data Table End-->
+
+    <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- Script Process Start-->
@@ -154,7 +179,7 @@
                 $(nRow).attr('id', aData[0]);
             },
             'columnDefs': [{
-                'target': [0, 4],
+                'target': [0, 5],
                 'orderable': false,
             }],
         scrollY: 200,
@@ -287,7 +312,7 @@
                         var row = table.row("[id='" + trid + "']");
                         row.row("[id='" + trid + "']").data([id, name, username, password, rolelevel, roleid, button]);
                         $('#editUserModal').modal('hide');
-                    } else { 
+                    } else {
                         alert('failed');
                     }
                 }
@@ -298,59 +323,45 @@
     <!-- add user modal-->
     <!-- Modal Popup -->
     <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="max-width:1000px;">
+        <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header justify-content-center" style="max-width:1100px;">
-                    <div class="col-md-2" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
-                    </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body ">
+                <div class="modal-body">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
                             <!-- Form Controls-->
 
-                            <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6 ">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="Namemajorjr" placeholder="Job request no.">
-                                </div>
-                                <div class="col-md-6 ">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="numbermajorjr" placeholder="Requisition no.">
+                            <div class="mb-3 row">
+                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="inputName" class="form-control" id="inputName">
                                 </div>
                             </div>
-                            <div class="row justify-content-center" style="padding-bottom:13px;">
-                                <div class="col-md-6 ">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="departmentmajorjr" placeholder="Department">
-                                </div>
-                                <div class="col-md-6 ">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date">
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="inputUsername" class="form-control" id="inputUsername">
                                 </div>
                             </div>
-                            <div class="justify-content-center" style="padding-bottom:10px;">
-                                <h5 class="text-uppercase fw-bold" style="padding-bottom:10px;" >A. Requisition(To be filled up by the requesting party)</h5>
-                            </div>
-                            <div class="row" style="padding-bottom:10px;">
-                                <div class="col-md-3" style="width: 40%;">
-                                    <h5 class="text-uppercase fw-bold" style="padding-bottom:10px; " >ITEM WITH COMPLETE DESCRIPTION</h5>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="majorjrqty" placeholder="Quantity">
-                                </div>  
-                            </div>
-
-                            <div class="row" style="padding-bottom:10px;">
-                                <div class="col-md-9" style="width: 80%;">
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="majorjrdesc"></textarea>
-                                </div>
-                                <div class="col-md-1" style="width: 1%;">
-                                <button class="text-secondary btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"  aria-haspopup="true" aria-expanded="false" style="background-color: #fff;">Dropdown button </button>
+                            <div class="mb-3 row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputPassword" name="inputPassword">
                                 </div>
                             </div>
-
-                            <div class="justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-12" >
-                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp"></textarea>
+                            <div class="mb-3 row">
+                                <label for="inputRolelevel" class="col-sm-2 col-form-label">RoleLevel</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputRolelevel" name="inputRolelevel">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputRoleID" class="col-sm-2 col-form-label">RoleID</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputRoleID" name="inputRoleID">
                                 </div>
                             </div>
 
@@ -358,8 +369,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
-                            <button type="button" class="btn btn-danger">Decline</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
                 </div>
@@ -372,14 +382,8 @@
     <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header justify-content-center" style="max-width:1100px;">
-                    <div class="col-md-2" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
-                    </div>
-                    <div class="col-md-2" style="width:30%">
-                        <label class="" for="inputName">ID</label>
-                        <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
-                    </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -420,9 +424,9 @@
                             </div>
                             <!-- Form Controls End-->
                         </div>
-                        <div class="modal-footer justify-content-md-center">
-                            <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
                 </div>
@@ -430,6 +434,10 @@
         </div>
     </div>
     <!-- edit user modalPopup end-->
+
+
+
+
 </body>
 
 </html>

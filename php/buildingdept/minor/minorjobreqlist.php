@@ -25,7 +25,7 @@
         <span class='bx bxs-bell'></i>
         <span class="icon-button__badge"></span>
       </div>
-        <p>Hello, Administrator</p>
+        <p>Hello, Building Department</p>
       <nav class="gnav">
         </nav>
     </div>
@@ -42,9 +42,9 @@
         <div class ="navdiv">
         <ul class="nav_list">
             <li>
-                <a href="../../../../php/admin/accounts/admin_account.php">
+                <a href="../../../../php/buildingdept/buildingdeptdashboard.php">
                     <i class='bx bx-user'></i>
-                    <span class="link_name">Account</span>
+                    <span class="link_name">Calendar of Activities</span>
                 </a>
             </li>
             <li>
@@ -54,19 +54,13 @@
                         Job Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/buildingdept/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
             </li>
             <li>
-                <a href="../../../../php/admin/equipments/adminequipment.php">
-                    <i class='bx bx-wrench'></i>
-                    <span class="link_name">Equipment</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../../../php/admin/reservations/adminreservations.php">
+                <a href="../../../../php/buildingdept/reservation/buildingdeptreservation.php">
                     <i class='bx bx-check-square'></i>
                     <span class="link_name">Reservation</span>
                 </a>
@@ -77,8 +71,8 @@
                     <div class="profile_details">
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">Admin</div>
-                            <div class="role">System Administrator</div>
+                            <div class="name">Building Dept</div>
+                            <div class="role">Building Department</div>
                         </div>
                     </div>
                     <a href="../../../../logout.php">
@@ -172,11 +166,11 @@
             var itemname = $('#_item_').val();
             var description = $('#_itemdesc_').val();
             var purpose = $('#_purpose_').val();
-            /*var renderedby = $('#renderedby').val();
+            var renderedby = $('#renderedby').val();
             var daterendered = $('#daterendered').val();
             var confirmedby = $('#confirmedby').val();
-            var dateconfirmed = $('#dateconfirmed').val();*/
-            if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '') {
+            var dateconfirmed = $('#dateconfirmed').val();
+            if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '' && renderedby != '' && daterendered != '' && confirmedby != '' && dateconfirmed != '') {
                 $.ajax({
                     url: "add_data.php",
                     data: {
@@ -186,7 +180,10 @@
                         itemname: itemname,
                         description: description,
                         purpose: purpose,
-                        
+                        renderedby: renderedby,
+                        daterendered: daterendered,
+                        confirmedby: confirmedby,
+                        dateconfirmed: dateconfirmed,
                         
                     },
                     type: 'POST',
@@ -203,6 +200,10 @@
                             $('#_item_').val('');
                             $('#_itemdesc_').val('');
                             $('#_purpose_').val('');
+                            $('#renderedby').val('');
+                            $('#daterendered').val('');
+                            $('#confirmedby').val('');
+                            $('#dateconfirmed').val('');
                             $('#addUserModal').modal('hide');
                         }
                     }
@@ -347,7 +348,7 @@
                                 </div>
                             </div>
                             <div class="justify-content-center">
-                                <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
+                                <h5 class="text-uppercase fw-bold" >Requisition(To be filled up by the requesting party)</h5>
                                 <div class="col-md-2" style="padding-bottom:10px">
                                     <label class="fw-bold" for="date">Quantity:</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
@@ -373,7 +374,8 @@
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
                                 </div>
-                            </div>  
+                            </div>
+
                             <!-- Form Controls End-->
                         </div>
                         <div class="modal-footer justify-content-md-center">
@@ -399,7 +401,7 @@
                     </div>
                     <div class="col-md-2" style="width:15%">
                         <label class=""  for="inputName">Status:</label>
-                        <input type="text" style="width:20%" class="col-sm-2" name="_ID" class="form-control">
+                        <input type="text" style="width:20%" class="col-sm-2" name="_ID" class="form-control" id="_ID">
                     </div>
                     <div class="col-md-2" style="width:30%">
                         <label class=""  for="inputName">ID:</label>
@@ -488,29 +490,5 @@
             </div>
         </div>
     </div>
-    <script>
-        //datetime auto fill up
-        var now = new Date();
-        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
-        //Requesting department auto fill up
-        
-        /*  var deptname;
-        document.getElementById('inputRoleID').value = deptname;*/
-
-        /*toggle edit and update buttons*/
-        const paragraph = document.getElementById("");          //NOT DONE YET!
-const edit_button = document.getElementById("edit-button");
-const end_button = document.getElementById("end-editing");
-
-edit_button.addEventListener("click", function() {
-  paragraph.contentEditable = true;
-} );
-
-end_button.addEventListener("click", function() {
-  paragraph.contentEditable = false;
-} )
-    </script>
-    <!-- edit user modalPopup end-->
 </body>
 </html>

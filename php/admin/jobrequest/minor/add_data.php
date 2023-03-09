@@ -7,14 +7,14 @@ $quantity = $_POST['quantity'];
 $itemname = $_POST['itemname'];
 $description = $_POST['description'];
 $purpose = $_POST['purpose'];
-$renderedby = $_POST['renderedby'];
+/*$renderedby = $_POST['renderedby'];
 $daterendered = $_POST['daterendered'];
 $confirmedby = $_POST['confirmedby'];
-$dateconfirmed = $_POST['dateconfirmed'];
+$dateconfirmed = $_POST['dateconfirmed'];*/
 
 
 
-$sql = "INSERT INTO `minorjreq` (`department`,`datesubmitted`,`item`,`item_desc`,`purpose`,`renderedby`,`daterendered`,`confirmedby`,`dateconfirmed`) VALUES ('$department','$date','$quantity','$itemname','$description',' $purpose', '$renderedby', '$daterendered', '$confirmedby', '$dateconfirmed')";
+$sql = "INSERT INTO `minorjreq` (`department`,`datesubmitted`, `quantity`, `item`,`item_desc`,`purpose`) VALUES ('$department','$date','$quantity','$itemname','$description',' $purpose')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
     $data = array(

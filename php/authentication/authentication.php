@@ -49,6 +49,7 @@ if ($count == 1){
     }
     //Building
     if($rolerow[0] == 2){
+        header("location: ../../buildingdept/dashboard.php");
         
     }
     //admin
