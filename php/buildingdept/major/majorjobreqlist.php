@@ -327,15 +327,18 @@
                                 </div>
                             </div>
                             <div class="justify-content-center">
-                                <h5 class="text-uppercase fw-bold" >Requisition(To be filled up by the requesting party)</h5>
-                            </div>
-                            <div class="row" style="padding-bottom:10px;">
-                                <div class="col-md-3" style="width: 40%;">
-                                    <h5 class="text-uppercase fw-bold" style=" margin-top:5px;" >ITEM WITH COMPLETE DESCRIPTION</h5>
+                                <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
+                                <div class="col-md-2" style="padding-bottom:10px">
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                 </div>
-                                <div class="col-md-2">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="majorjrqty" placeholder="Quantity">
-                                </div>  
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Item Name:</label>
+                                    <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
+                                </div>
                             </div>
 
                             <div class="row" style="padding-bottom:10px;">
@@ -345,8 +348,17 @@
                                 </div>
                                 <div class="col-md-1" style="width: 1%;">
                                     <br>
-                                    <button class="text-secondary btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"  aria-haspopup="true" aria-expanded="false" style="background-color: #fff;">Dropdown button </button>
-                                </div> 
+                                    <div class="dropdown"> 
+                                <button id="btnOpenMenu" class="btn btn-primary dropdown-toggle"  
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdownmenu
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="btnOpenMenu">
+                                    <button class="dropdown-item" type="button">Outsource</a>
+                                    <button class="dropdown-item" type="button">Bill of Materials</a>
+                                    
+                                </div>
+                            </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">

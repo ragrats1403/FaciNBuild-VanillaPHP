@@ -58,6 +58,18 @@ if ($count == 1){
 
 
     }
+    //user 
+    if($rolerow[0] == 4){
+        header("location: ../user/userdashboard.php");
+    }
+    //CADS
+    if($rolerow[0] == 5){
+        header("location: ../cad/minorrreservation.ph");
+    }
+    //PCO
+    if($rolerow[0] == 6){
+        header("location: ../pco/minorreservation.ph ");
+    }
 }
 else{
     $alert = "<script type='text/javascript'>alert('Login failed. Invalid username or password.');

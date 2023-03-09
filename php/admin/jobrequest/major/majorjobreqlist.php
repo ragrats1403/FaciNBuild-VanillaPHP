@@ -313,53 +313,70 @@
 
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Job Request no.</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="Namemajorjr" placeholder="Job request no.">
                                 </div>
                                 <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Requisition no.</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="numbermajorjr" placeholder="Requisition no.">
                                 </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Department</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="departmentmajorjr" placeholder="Department">
                                 </div>
                                 <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Date</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date">
                                 </div>
                             </div>
-                            <div class="justify-content-center" style="padding-bottom:10px;">
-                                <h5 class="text-uppercase fw-bold" style="padding-bottom:10px;" >A. Requisition(To be filled up by the requesting party)</h5>
-                            </div>
-                            <div class="row" style="padding-bottom:10px;">
-                                <div class="col-md-3" style="width: 40%;">
-                                    <h5 class="text-uppercase fw-bold" style="padding-bottom:10px; " >ITEM WITH COMPLETE DESCRIPTION</h5>
+                            <div class="justify-content-center">
+                                <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
+                                <div class="col-md-2" style="padding-bottom:10px">
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                 </div>
-                                <div class="col-md-2">
-                                    <input type="name" class="form-control input-sm col-xs-1" id="majorjrqty" placeholder="Quantity">
-                                </div>  
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Item Name:</label>
+                                    <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
+                                </div>
                             </div>
 
                             <div class="row" style="padding-bottom:10px;">
-                                <div class="col-md-9" style="width: 80%;">
+                                <div class="col-md-9" style="width: 79%;">
+                                    <label class="fw-bold" for="date">Description:</label>
                                     <textarea placeholder="Description" class="form-control" rows="2" id="majorjrdesc"></textarea>
                                 </div>
                                 <div class="col-md-1" style="width: 1%;">
-                                <button class="text-secondary btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"  aria-haspopup="true" aria-expanded="false" style="background-color: #fff;">Dropdown button </button>
+                                    <br>
+                                    <div class="dropdown"> 
+                                <button id="btnOpenMenu" class="btn btn-primary dropdown-toggle"  
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Dropdownmenu
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="btnOpenMenu">
+                                    <button class="dropdown-item" type="button">Outsource</a>
+                                    <button class="dropdown-item" type="button">Bill of Materials</a>
+                                    
                                 </div>
                             </div>
-
+                            </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-12" >
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp"></textarea>
                                 </div>
                             </div>
 
                             <!-- Form Controls End-->
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
-                            <button type="button" class="btn btn-danger">Decline</button>
+                        <div class="modal-footer justify-content-md-center">
+                            <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
                         </div>
                     </form>
                 </div>
@@ -423,6 +440,7 @@
                         <div class="modal-footer justify-content-md-center">
                             <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
+                            <button type="button" class="btn btn-danger">Decline</button>
                         </div>
                     </form>
                 </div>
