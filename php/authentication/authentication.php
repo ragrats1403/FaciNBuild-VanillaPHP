@@ -70,6 +70,10 @@ if ($count == 1){
     if($rolerow[0] == 6){
         header("location: ../pco/minorreservation.ph ");
     }
+    //SAO
+    if($rolerow[0] == 7){
+        header("location: ../../sao/reservation.php");
+    }
 }
 else{
     $alert = "<script type='text/javascript'>alert('Login failed. Invalid username or password.');
