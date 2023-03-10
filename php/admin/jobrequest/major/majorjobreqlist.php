@@ -346,24 +346,15 @@
                                 </div>
                             </div>
 
-                            <div class="row" style="padding-bottom:10px;">
-                                <div class="col-md-9" style="width: 79%;">
-                                    <label class="fw-bold" for="date">Description:</label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Description:</label>
+                                    <select class="" style="width: 150px; Border: none;" name="cars" id="cars">
+                                        <option value="volvo">Outsource</option>
+                                        <option value="saab">Bill of materials</option>
+                                    </select>
                                     <textarea placeholder="Description" class="form-control" rows="2" id="majorjrdesc"></textarea>
                                 </div>
-                                <div class="col-md-1" style="width: 1%;">
-                                    <br>
-                                    <div class="dropdown"> 
-                                <button id="btnOpenMenu" class="btn btn-primary dropdown-toggle"  
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Dropdownmenu
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="btnOpenMenu">
-                                    <button class="dropdown-item" type="button">Outsource</a>
-                                    <button class="dropdown-item" type="button">Bill of Materials</a>
-                                    
-                                </div>
-                            </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
@@ -371,9 +362,6 @@
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp"></textarea>
                                 </div>
                             </div>
-
-                            <!-- Form Controls End-->
-                        </div>
                         <div class="modal-footer justify-content-md-center">
                             <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
