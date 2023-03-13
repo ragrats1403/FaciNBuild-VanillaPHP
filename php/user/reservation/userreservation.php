@@ -255,6 +255,9 @@
                     <div class="col-sm-12 d-flex justify-content-end">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal1">Add-On</button>
                     </div>
+                    <div>
+                       <input type="submit" value="Submit">
+                    </div>
                     </form>
                 </div>
             </div>
