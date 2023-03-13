@@ -362,6 +362,15 @@
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp"></textarea>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
+                                    <select class="" style="width: 150px; Border: none;" name="cars" id="cars">
+                                        <option value="volvo">Outsource</option>
+                                        <option value="saab">Bill of materials</option>
+                                    </select>
+                                </div>
+                            </div>
                         <div class="modal-footer justify-content-md-center">
                             <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
