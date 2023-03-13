@@ -480,6 +480,12 @@
                             <button type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
                             <button type="submit" class="btn btn-success col-md-1" id="end-editing">Update</button>
                         </div>
+                        <div class="justify-content-center">
+                                <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Feedback:</label>
+                                    <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Feedback"></textarea>
+                                </div>
+                            </div>
                         <div>
                               <button type="submit" class="btn btn-primary">Approve</button>
                               <button type="submit" class="btn btn-danger">Decline</buttonz>
