@@ -480,6 +480,11 @@
                             <button type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
                             <button type="submit" class="btn btn-success col-md-1" id="end-editing">Update</button>
                         </div>
+                        <div>
+                              <button type="submit" class="btn btn-primary">Approve</button>
+                              <button type="submit" class="btn btn-danger">Decline</buttonz>
+                        </div>
+
                             <!-- Form Controls End-->
                         </div>
                     </form>
