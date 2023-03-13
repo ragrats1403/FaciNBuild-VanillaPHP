@@ -528,14 +528,31 @@
         paragraph.contentEditable = false;
         } )
         //Onclick event for enabling button
+        function autofilldate(filldate) {
+
+            //document.getElementById("_daterendered").valueAsDate = today;
+            //document.getElementById('_daterendered').value = new Date().toISOString();
+            /*var now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('_daterendered').value = now.toISOString().substring(0, 10);
+            
+            */
+            var now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById(filldate).value = now.toISOString().substring(0, 10);
+            
+        }
         function enableFields() {
             document.getElementById("_renderedby").disabled = false;
             document.getElementById("_daterendered").disabled = false;
+           
+            autofilldate("_daterendered");
+            
         }
         function enableFields2() {
-            
             document.getElementById("_confirmedby").disabled = false;
             document.getElementById("_dateconfirmed").disabled = false;
+            autofilldate("_dateconfirmed");
         }
         
     </script>
