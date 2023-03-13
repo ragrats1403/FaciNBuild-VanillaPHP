@@ -250,6 +250,8 @@
             document.getElementById("_daterendered").disabled = true;
             document.getElementById("_confirmedby").disabled = true;
             document.getElementById("_dateconfirmed").disabled = true;
+            document.getElementById("_daterendered").value = null;
+            document.getElementById("_dateconfirmed").value = null;
             $.ajax({
                 url: "get_request_details.php",
                 data: {
