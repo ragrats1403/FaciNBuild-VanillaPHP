@@ -246,6 +246,10 @@
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('tr').attr('minorjobid');
+            document.getElementById("_renderedby").disabled = true;
+            document.getElementById("_daterendered").disabled = true;
+            document.getElementById("_confirmedby").disabled = true;
+            document.getElementById("_dateconfirmed").disabled = true;
             $.ajax({
                 url: "get_request_details.php",
                 data: {
@@ -265,6 +269,7 @@
                     $('#_item').val(json.item);
                     $('#_purpose').val(json.purpose);
                     $('#editMinorjreqmodal').modal('show');
+
                     //$('#_datemajorjr').val(json.datesubmitted);
                     $('').val();
                     $('').val();
@@ -463,7 +468,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-md-right">
-                                <button type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
+                                <button onclick = "enableFields()" type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
                             <button type="submit" class="btn btn-success col-md-1" id="end-editing">Update</button>
                         </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
@@ -477,7 +482,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-md-right">
-                            <button type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
+                            <button onclick = "enableFields2()" type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
                             <button type="submit" class="btn btn-success col-md-1" id="end-editing">Update</button>
                         </div>
                         <div class="justify-content-center">
@@ -512,16 +517,27 @@
 
         /*toggle edit and update buttons*/
         const paragraph = document.getElementById("");          //NOT DONE YET!
-const edit_button = document.getElementById("edit-button");
-const end_button = document.getElementById("end-editing");
+        const edit_button = document.getElementById("edit-button");
+        const end_button = document.getElementById("end-editing");
 
-edit_button.addEventListener("click", function() {
-  paragraph.contentEditable = true;
-} );
+        edit_button.addEventListener("click", function() {
+        paragraph.contentEditable = true;
+        } );
 
-end_button.addEventListener("click", function() {
-  paragraph.contentEditable = false;
-} )
+        end_button.addEventListener("click", function() {
+        paragraph.contentEditable = false;
+        } )
+        //Onclick event for enabling button
+        function enableFields() {
+            document.getElementById("_renderedby").disabled = false;
+            document.getElementById("_daterendered").disabled = false;
+        }
+        function enableFields2() {
+            
+            document.getElementById("_confirmedby").disabled = false;
+            document.getElementById("_dateconfirmed").disabled = false;
+        }
+        
     </script>
     <!-- edit user modalPopup end-->
 </body>
