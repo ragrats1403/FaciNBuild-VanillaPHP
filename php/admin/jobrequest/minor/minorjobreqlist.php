@@ -287,7 +287,19 @@
                                     <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose"></textarea>
                                 </div>
                             </div>
-                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
+                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections">
+                                        <option value="C">CARPENTRY</option>
+                                        <option value="P">PLUMBING</option>
+                                        <option value="A">AIRCON</option>
+                                        <option value="E">ELECTRICAL</option>
+                                    
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6" >
                                     <label class="fw-bold" for="renderedby">Rendered by:</label>
@@ -320,18 +332,6 @@
                                 <div class="col-md-12" >
                                     <label class="fw-bold" for="date">Feedback:</label>
                                     <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections">
-                                        <option value="C">CARPENTRY</option>
-                                        <option value="P">PLUMBING</option>
-                                        <option value="A">AIRCON</option>
-                                        <option value="E">ELECTRICAL</option>
-
-                                    </select>
                                 </div>
                             </div>
                         <div>
