@@ -36,7 +36,7 @@
 <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../../images/Brown_logo_faci.png" />
+                <img src="../../../../images/Black_logo.png" />
             </div>
         </div>
         <div class ="navdiv">
