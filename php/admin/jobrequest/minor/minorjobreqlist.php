@@ -322,11 +322,23 @@
                                     <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
+                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections">
+                                        <option value="C">CARPENTRY</option>
+                                        <option value="P">PLUMBING</option>
+                                        <option value="A">AIRCON</option>
+                                        <option value="E">ELECTRICAL</option>
+
+                                    </select>
+                                </div>
+                            </div>
                         <div>
                         <div class="modal-footer justify-content-md-center">
                               <button type="submit" class="btn btn-primary">Approve</button>
                               <button type="button" class="btn btn-danger">Decline</button>
-                              <button type="submit" class="btn btn-danger">Update</button>
+                              <button type="submit" class="btn btn-info text-white">Update</button>
                          </div>
                         </div>
 
