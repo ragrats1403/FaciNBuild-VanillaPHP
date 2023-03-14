@@ -149,7 +149,7 @@
                 <form action="">
                         Please select the facilities you would like to request.<br><br>
                             <input type="checkbox" id="annex_avr" name="Annex AVR" value="annex_avr">
-                            <label for="annex_avr"> Annex AVR</label>
+                            <label for="annex_avr"> Old AVR</label>
                             <input type="checkbox" id="new_avr" name="New AVR" value="new_avr">
                             <label for="new_avr"> New AVR</label>
                             <input type="checkbox" id="cbe_functionhall" name="CBE Function Hall" value="cbe_functionhall">
