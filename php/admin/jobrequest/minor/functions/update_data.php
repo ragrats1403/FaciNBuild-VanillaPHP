@@ -1,13 +1,15 @@
-<?php include('../../../connection/connection.php');
-
+<?php include('../../../../connection/connection.php');
 $id = $_POST['id'];
-$name = $_POST['name'];
-$username = $_POST['username'];
-$password = $_POST['password'];
-$rolelevel = $_POST['rolelevel'];
-$roleid = $_POST['roleid'];
+$department = $_POST['department'];
+$date = $_POST['date'];
+$quantity = $_POST['quantity'];
+$itemname = $_POST['itemname'];
+$description = $_POST['description'];
+$purpose = $_POST['purpose'];
+$feedback = $_POST['feedback'];
 
-$sql = "UPDATE `users` SET `name` = '$name',`username`='$username', `password`= '$password', `rolelevel`='$rolelevel',`roleid` = '$roleid' WHERE id = '$id'";
+
+$sql = "UPDATE `minorjreq` SET `department` = '$department',`datesubmitted`='$date', `quantity`= '$quantity', `item`='$itemname',`item_desc` = '$description', `purpose` = '$purpose', `feedback` = '$feedback' WHERE minorjobid = '$id'";
 $query = mysqli_query($con, $sql);
 
 if ($query == true) {

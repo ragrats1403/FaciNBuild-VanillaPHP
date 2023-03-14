@@ -53,7 +53,7 @@ paging: false
             type: 'POST',
             success: function(data) {
                 var json = JSON.parse(data);
-                status = json.status;
+                var status = json.status;
                 if (status = 'success') {
                     table = $('#datatable').DataTable();
                     table.draw();
@@ -131,6 +131,7 @@ $(document).on('click', '.editBtn', function(event) {
             $('#_itemdesc').val(json.item_desc);
             $('#_item').val(json.item);
             $('#_purpose').val(json.purpose);
+            $('#_inputFeedback').val(json.feedback);
             $('#editMinorjreqmodal').modal('show');
 
             //$('#_datemajorjr').val(json.datesubmitted);
@@ -153,33 +154,36 @@ $(document).on('click', '.editBtn', function(event) {
 $(document).on('submit', '#updateUserForm', function() {
     var id = $('#id').val();
     var trid = $('#trid').val();
-    var name = $('#_inputName').val();
-    var username = $('#_inputUsername').val();
-    var password = $('#_inputPassword').val();
-    var rolelevel = $('#_inputRoleLevel').val();
-    var roleid = $('#_inputRoleID').val();
+    var department = $('#department').val();
+    var date = $('#datemajorjr').val();
+    var quantity = $('#_quantity_').val();
+    var itemname = $('#_item_').val();
+    var description = $('#_itemdesc_').val();
+    var purpose = $('#_purpose_').val();
     var feedback = $('#_inputFeedback').val();
     $.ajax({
         url: "functions/update_data.php",
         data: {
             id: id,
-            name: name,
-            username: username,
-            password: password,
-            rolelevel: rolelevel,
-            roleid: roleid
+            department: department,
+            date: date,
+            quantity: quantity,
+            itemname: itemname,
+            description: description,
+            purpose: purpose,
+            feedback: feedback
         },
         type: 'POST',
         success: function(data) {
             var json = JSON.parse(data);
-            status = json.status;
+            var status = json.status;
             if (status == 'success') {
                 alert('Updated Successfully!');
-                table = $('#datatable').DataTable();
-                var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a> <a href="javascript:void();" class="btn btn-sm btn-danger" data-id="' + id + '" >Delete</a>';
+                /*table = $('#datatable').DataTable();
+                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
                 var row = table.row("[id='" + trid + "']");
-                row.row("[id='" + trid + "']").data([id, name, username, password, rolelevel, roleid, button]);
-                $('#editUserModal').modal('hide');
+                row.row("[id='" + trid + "']").data([department, date, button]);*/
+                $('#editMinorjreqmodal').modal('hide');
             } else { 
                 alert('failed');
             }
