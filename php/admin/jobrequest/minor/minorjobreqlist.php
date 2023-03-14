@@ -117,6 +117,7 @@
                                 <thead>
                                     <th>ID</th>
                                     <th>Department</th>
+                                    <th>Section</th>
                                     <th>Date</th>
                                     <th>Status</th>
                                     <th>Options</th>
