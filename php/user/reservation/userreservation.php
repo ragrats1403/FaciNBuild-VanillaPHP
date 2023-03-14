@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/modal.css/modal.css?<?=time()?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
@@ -112,7 +113,7 @@
                         <div class="col-md-2" style="width: 15%;"></div>
                         <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
-                            <table id="datatable" class="table" >
+                            <table id="datatable" class="table">
                                 <thead>
                                     <th>ID</th>
                                     <th>Department</th>
@@ -122,7 +123,7 @@
                                 </thead>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Reservation</button>     
+                                <a data-toggle="modal" href="#myModal" class="btn btn-primary">Create reservation</a>
                             </div>
                         </div>
                     </div>
@@ -132,12 +133,11 @@
     </div> 
 
     <!-- View add ons mod -->
-    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal " tabindex="-1" id="myModal" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
-                <div class="modal-header" style="max-width:1100px;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Reservation Form</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header justify-content-center" style="max-width:1100px;">
+                    <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Reservation Form</h5>
                 </div>
                 <div class="modal-body ">
                 <form action="">
@@ -250,29 +250,26 @@
                              The undersigned requesting party and/or its officers, advisers and department head bind themselves to any and all of the terms and conditions stipulated in this FORM.
                              <br>
                              <br>
-                            
-
-                             </label>
-                                  
+                             </label>                 
                     <div class="col-sm-12 d-flex justify-content-end">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal1">Add-On</button>
-                    </div>
-                    <div>
-                       <input type="submit" value="Submit">
+                        <a data-toggle="modal" href="#myModal2" class="btn btn-primary">Add-ons</a>
                     </div>
                     </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <a data-toggle="modal" href="#myModal" class="btn btn-primary">Create reservation</a>
                 </div>
             </div>
         </div>
     </div>
 
-        <!-- Modal Popup -->
-    <div class="modal" id="addUserModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal Popup -->
+    <div class="modal shadow p-3 mb-5 bg-white rounded" tabindex="-1" id="myModal2" aria-labelledby="exampleModalLabel" data-backdrop="static">
         <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
-                <div class="modal-header" style="max-width:1100px;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header justify-content-center" style="max-width:1100px;">
+                        <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel" >Job Request</h5>
                 </div>
                 <div class="modal-body ">
                 <form id="saveUserForm" action="javascript:void();" method="POST">
@@ -341,9 +338,14 @@
 
                     </form>
                 </div>
+                <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <a href="#" class="btn btn-primary">Save</a>
+                </div>
             </div>
         </div>
     </div>
+
     <!-- BODY END-->
 </body>
 </html>
