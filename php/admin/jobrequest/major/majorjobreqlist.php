@@ -338,22 +338,10 @@
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Item Name:</label>
                                     <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Description:</label>
-                                    <select class="" style="width: 150px; Border: none;" name="cars" id="cars">
-                                        <option value="volvo">Outsource</option>
-                                        <option value="saab">Bill of materials</option>
-                                    </select>
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="majorjrdesc"></textarea>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
