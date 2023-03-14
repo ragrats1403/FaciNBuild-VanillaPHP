@@ -158,8 +158,9 @@ $(document).on('submit', '#updateUserForm', function() {
     var password = $('#_inputPassword').val();
     var rolelevel = $('#_inputRoleLevel').val();
     var roleid = $('#_inputRoleID').val();
+    var feedback = $('#_inputFeedback').val();
     $.ajax({
-        url: "functions/update_user.php",
+        url: "functions/update_data.php",
         data: {
             id: id,
             name: name,

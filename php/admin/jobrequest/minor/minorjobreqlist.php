@@ -305,7 +305,7 @@
                         <div class="justify-content-center">
                                 <div class="col-md-12" >
                                     <label class="fw-bold" for="date">Feedback:</label>
-                                    <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Feedback"></textarea>
+                                    <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
                                 </div>
                             </div>
                         <div>
