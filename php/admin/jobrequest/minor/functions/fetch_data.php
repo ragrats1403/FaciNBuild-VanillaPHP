@@ -1,4 +1,4 @@
-<?php include('../../../connection/connection.php');
+<?php include('../../../../connection/connection.php');
 
 $sql = "select * FROM minorjreq";
 $query = mysqli_query($con, $sql);

@@ -1,4 +1,4 @@
-<?php include('../../connection/connection.php');
+<?php include('../../../../connection/connection.php');
 
 $id = $_POST['id'];
 

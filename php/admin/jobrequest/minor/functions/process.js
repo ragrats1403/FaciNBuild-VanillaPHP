@@ -5,7 +5,7 @@ $('#datatable').DataTable({
     'paging': true,
     'order': [],
     'ajax': {
-        'url': 'fetch_data.php',
+        'url': 'functions/fetch_data.php',
         'type': 'post',
 
     },
@@ -39,7 +39,7 @@ paging: false
     var dateconfirmed = $('#dateconfirmed').val();*/
     if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '') {
         $.ajax({
-            url: "add_data.php",
+            url: "functions/add_data.php",
             data: {
                 department: department,
                 date: date,
@@ -81,7 +81,7 @@ $(document).on('click', '.btnDelete', function(event) {
 
 
         $.ajax({
-            url: "delete_user.php",
+            url: "functions/delete_user.php",
             data: {
                 id: id
             },
@@ -114,7 +114,7 @@ $(document).on('click', '.editBtn', function(event) {
     document.getElementById("_daterendered").value = null;
     document.getElementById("_dateconfirmed").value = null;
     $.ajax({
-        url: "get_request_details.php",
+        url: "functions/get_request_details.php",
         data: {
             id: id
         },
@@ -159,7 +159,7 @@ $(document).on('submit', '#updateUserForm', function() {
     var rolelevel = $('#_inputRoleLevel').val();
     var roleid = $('#_inputRoleID').val();
     $.ajax({
-        url: "update_user.php",
+        url: "functions/update_user.php",
         data: {
             id: id,
             name: name,
