@@ -311,7 +311,8 @@
                         <div>
                         <div class="modal-footer justify-content-md-center">
                               <button type="submit" class="btn btn-primary">Approve</button>
-                              <button type="submit" class="btn btn-danger">Decline</button>
+                              <button type="button" class="btn btn-danger">Decline</button>
+                              <button type="submit" class="btn btn-danger">Update</button>
                          </div>
                         </div>
 
