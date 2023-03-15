@@ -34,7 +34,6 @@ div.formContainer form {
 div.uiForm {
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
     align-items: center;
     justify-content: space-evenly;
     height: 400px;

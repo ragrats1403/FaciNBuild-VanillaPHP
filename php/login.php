@@ -2,7 +2,7 @@
 <title> </title>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/loginpage/Loginform.css" />
+    <link rel="stylesheet" type="text/css" href="../css/loginpage/Loginform.css?<?= time() ?>" />
     <script type="text/javascript"></script>
     <script type="text/javascript" src="../js/validiation.js"></script>
 </head>
