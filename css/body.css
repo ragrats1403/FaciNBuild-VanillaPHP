@@ -42,8 +42,8 @@ body {
     max-width: 800px;
   }
   
-  input {
-    height: 2em;
-    width: 2em;
+  input.tacbox {
+    height: 1em;
+    width: 1em;
     vertical-align: middle;
   }

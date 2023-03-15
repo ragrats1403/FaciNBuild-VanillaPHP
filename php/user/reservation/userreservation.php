@@ -226,11 +226,11 @@
                         </div>
                     </form>
                 </div>
+                <div class="modal-footer">
                 <div class="tacbox">
                     <input id="termscond" type="checkbox" onchange="updateButtonState()" />
-                    <label for="termscond"> I agree to these <button id="myBtn">Terms and Condition prior to Approval</button></label>
+                    <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>
                 </div>
-                <div class="modal-footer">
                     <a href="#" data-dismiss="modal" class="btn">Close</a>
                     <a data-toggle="modal" href="#myModal" class="btn btn-primary disabled" id='termscond-create'>Create reservation</a>
                 </div>
