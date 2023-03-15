@@ -219,43 +219,16 @@
                                 <th>Available</th>
                                 <th>Quantity to Reserve</th>
                             </thead>
-                             </table> 
-                             <h5 class="fw-bold" style="text-align:center;">OTHER TERMS AND CONDITION PRIOR TO APPROVAL</h5>
-                             <label>1. ADMINISTRATION OR INSTITUTIONAL FUNCTIONS OR ACTIVITIES WILL BE GIVEN PRIORITY. PRIOR NOTICE AND REASSIGNMENT/RESCHEDULING OF AFFECTED PROGRAM OR ACTIVITIES WILL BE REARRANGED.
-                             <br>
-                             <br>
-                             2. RESERVATION SHOULD BE MADE FIVE(5) DAYS PRIOR TO THE ACTUAL DATE OF USE.
-                             <br>
-                             <br>
-                             3. The requesting party agrees on the following:<br>
-                             3.1 To remove any and all backdrops, props, papers and things brought by user.<br>
-                             3.2 To free and discharged the University of Cebu Lapu-lapu and Mandaue and its officers from any and all suits, actions or damages arising from the accidents, injuries, damages or incidents that may be suffered by the requesting party's use of the school facilities, and to personally assume any and all such obligations and liabilities.
-                             3.3 When the use exceeds beyond the regular duty of electricians, technicians and staff, the requesting party will provide snack/meals and pay their overtime fees at the rates fixed by the HR Office.
-                             3.4 When janitorial services are required by the University of Cebu Lapu-lapu and Mandaue to efficiently clean the used venues/areas, the requesting party will pay their janitorial overtime fees fixed by the HR Office.
-                             3.5 When security guards are required by the University of Cebu Lapu-lapu and Mandaue by reason of nature the affair and/or number of target population, the user will provide security guards at the cost of the requesting party/user, who shall directly request the security agency.
-                             <br>
-                             <br>
-                             4. STRICTLY NO ID, NO ENTRY; electricity will be charged, no alcohol inside, NO ENTRY for those students who are under the influence of alcohol and drugs.
-                             <br>
-                             <br>
-                             5. When tickets are sold by the requesting party , the use of the venues shall be subject to further conditions.
-                             <br>
-                             <br>
-                             6. If the requesting party is an outsider, and if allowed, they will pay the rentals to be fixed by the University.
-                             <br>
-                             <br>
-                             ADDENDA (by UCLM)
-                             <br>
-                             <br>
-                             The undersigned requesting party and/or its officers, advisers and department head bind themselves to any and all of the terms and conditions stipulated in this FORM.
-                             <br>
-                             <br>
-                             </label>                 
+                             </table>               
                     <div class="col-sm-12 d-flex justify-content-end">
                         <a data-toggle="modal" href="#myModal2" class="btn btn-primary">Add-ons</a>
                     </div>
                     </form>
                 </div>
+                <div class="tacbox">
+                              <input id="checkbox" type="checkbox" />
+                              <label for="checkbox"> I agree to these <a href="#">Terms and Conditions</a>.</label>
+                </div> 
                 <div class="modal-footer">
                     <a href="#" data-dismiss="modal" class="btn">Close</a>
                     <a data-toggle="modal" href="#myModal" class="btn btn-primary">Create reservation</a>

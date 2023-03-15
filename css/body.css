@@ -35,3 +35,15 @@ body {
 #datatable tbody td{
     border-right: 1px solid #404040;
 }
+.tacbox {
+    display:block;
+    padding: 10px;
+    margin: auto;
+    max-width: 400px;
+  }
+  
+  input {
+    height: 2em;
+    width: 2em;
+    vertical-align: middle;
+  }
