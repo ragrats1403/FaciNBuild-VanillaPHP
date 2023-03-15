@@ -145,6 +145,9 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="col-sm-12 d-flex justify-content-end">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Equipment</button>
+                            </div>
                         </div>
                         <div class="col-md-2"></div>
                     </div>
@@ -152,6 +155,111 @@
             </div>
         </div>
     </div>
+    <!-- Script Process End-->
+    <!-- add user modal-->
+    <!-- Modal Popup -->
+    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Equipment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="saveUserForm" action="javascript:void();" method="POST">
+                        <div class="modal-body">
+                            <!-- Form Controls-->
+                            <div class="mb-3 row">
+                                <label for="inputEqname" class="col-sm-2 col-form-label">Equipment Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="inputEqname" class="form-control" id="inputEqname">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputQty" class="col-sm-2 col-form-label">Quantity</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="inputQty" class="form-control" id="inputQty">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputFacility" class="col-sm-2 col-form-label">Facility</label>
+                                <div class="col-sm-10">
+                                    <!--<input type="text" class="form-control" id="inputFacility" name="inputFacility">-->
+                                    
+                                    <select name="inputFacility" id="inputFacility" class="form-control">
+                                        <option value="AVR">AVR</option>
+                                        <option value="OLD AVR">OLD AVR</option>
+                                        <option value="FUNCTION HALL">FUNCTION HALL</option>
+                                        <option value="AUDITORIUM">AUDITORIUM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+
+                            <!-- Form Controls End-->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- add user modal end-->
+    <!-- edit user modal-->
+    <!-- Modal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Equipment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateUserForm" action="javascript:void();" method="POST">
+                        <div class="modal-body">
+                            <input type="hidden" id="id" name="id" value="">
+                            <input type="hidden" id="trid" name="trid" value="">
+                            <!-- Form Controls-->
+                            <div class="mb-3 row">
+                                <label for="inputEqname" class="col-sm-2 col-form-label">Equipment Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="_inputEqname" class="form-control" id="_inputEqname">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputQty" class="col-sm-2 col-form-label">Quantity</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="_inputQty" class="form-control" id="_inputQty">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputFacility" class="col-sm-2 col-form-label">Facility</label>
+                                <div class="col-sm-10">
+                                    <!--<input type="text" class="form-control" id="inputFacility" name="inputFacility">-->
+                                    <select name="_inputFacility" id="_inputFacility" class="form-control" disabled>
+                                        <option value="AVR">AVR</option>
+                                        <option value="OLD AVR">OLD AVR</option>
+                                        <option value="FUNCTION HALL">FUNCTION HALL</option>
+                                        <option value="AUDITORIUM">AUDITORIUM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Form Controls End-->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- edit user modalPopup end-->
     <!-- Data Table End-->
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -186,6 +294,39 @@
         });
     </script>
     <script type="text/javascript">
+        //add button control
+        $(document).on('submit', '#saveUserForm', function(event) {
+            event.preventDefault();
+            var equipmentname = $('#inputEqname').val();
+            var qty = $('#inputQty').val();
+            var facility = $('#inputFacility').val();
+            if (equipmentname != '' && qty != '' && facility != '') {
+                $.ajax({
+                    url: "add_equipments.php",
+                    data: {
+                        equipmentname: equipmentname,
+                        qty: qty,
+                        facility: facility
+                    },
+                    type: 'POST',
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        status = json.status;
+                        if (status = 'success') {
+                            table = $('#datatable').DataTable();
+                            table.draw();
+                            alert('Successfully Added Equipment!');
+                            $('#inputEqname').val('');
+                            $('#inputQty').val('');
+                            $('#inputFacility').val('');
+                            $('#addUserModal').modal('hide');
+                        }
+                    }
+                });
+            } else {
+                alert("Please fill all the Required fields");
+            }
+        });
         //delete user button control
         $(document).on('click', '.btnDelete', function(event) {
             var table = $('#datatable').DataTable();
@@ -194,7 +335,7 @@
             if (confirm('Are you sure to delete this Equipment?')) {
 
 
-                $.ajax({    
+                $.ajax({
                     url: "delete_equipments.php",
                     data: {
                         id: id
@@ -217,7 +358,59 @@
                 return null;
             }
         });
-
+        //edit button control 
+        $(document).on('click', '.editBtn', function(event) {
+            var id = $(this).data('id');
+            var trid = $(this).closest('tr').attr('id');
+            $.ajax({
+                url: "get_single_eq.php",
+                data: {
+                    id: id
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    $('#id').val(json.id);
+                    $('#trid').val(trid);
+                    $('#_inputEqname').val(json.equipmentname)
+                    $('#_inputQty').val(json.quantity);
+                    $('#_inputFacility').val(json.facility);
+                    $('#editUserModal').modal('show');
+                }
+            });
+        });
+        //update
+        $(document).on('submit', '#updateUserForm', function() {
+            var id = $('#id').val();
+            var trid = $('#trid').val();
+            var equipmentname = $('#_inputEqname').val();
+            var qty = $('#_inputQty').val();
+            var facility = $('#_inputFacility').val();
+            $.ajax({
+                url: "update_equipments.php",
+                data: {
+                    id: id,
+                    equipmentname: equipmentname,
+                    qty: qty,
+                    facility: facility
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    status = json.status;
+                    if (status == 'success') {
+                        alert('Updated Successfully!');
+                        table = $('#datatable').DataTable();
+                        var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a>';
+                        var row = table.row("[id='" + trid + "']");
+                        row.row("[id='" + trid + "']").data([id, equipmentname, qty, facility, button]);
+                        $('#editUserModal').modal('hide');
+                    } else {
+                        alert('failed');
+                    }
+                }
+            });
+        });
     </script>
     <!-- Script Process End-->
     
