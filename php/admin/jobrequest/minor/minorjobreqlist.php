@@ -357,8 +357,10 @@
                             </div>
                         <div>
                         <div class="modal-footer justify-content-md-center">
-                              <button type="submit" class="btn btn-primary">Approve</button>
-                              <button type="button" class="btn btn-danger">Decline</button>
+                        <a href= "javascript:void();" class ="btn btn-primary approveBtn">Approve All</a>
+                        <a href= "javascript:void();" class ="btn btn-danger declineBtn">Decline All</a>
+                              <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
+                              <button type="button" class="btn btn-danger">Decline</button>-->
                               <button type="submit" class="btn btn-info text-white">Update</button>
                          </div>
                         </div>

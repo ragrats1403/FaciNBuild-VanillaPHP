@@ -146,7 +146,7 @@
                             <table id="datatable" class="table">
                                 <thead>
                                     <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Department</th>
                                     <th>Username</th>
                                     <th>Password</th>
                                     <th>Role Level</th>

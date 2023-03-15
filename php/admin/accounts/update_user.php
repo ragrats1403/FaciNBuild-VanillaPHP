@@ -7,7 +7,7 @@ $password = $_POST['password'];
 $rolelevel = $_POST['rolelevel'];
 $roleid = $_POST['roleid'];
 
-$sql = "UPDATE `users` SET `name` = '$name',`username`='$username', `password`= '$password', `rolelevel`='$rolelevel',`roleid` = '$roleid' WHERE id = '$id'";
+$sql = "UPDATE `users` SET `department` = '$name',`username`='$username', `password`= '$password', `rolelevel`='$rolelevel',`roleid` = '$roleid' WHERE id = '$id'";
 $query = mysqli_query($con, $sql);
 
 if ($query == true) {

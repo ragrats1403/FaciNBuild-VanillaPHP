@@ -8,7 +8,7 @@ $roleid = $_POST['roleid'];
 
 
 
-$sql = "INSERT INTO `users` (`username`,`password`,`rolelevel`,`roleid`,`name`) VALUES ('$username','$password','$rolelevel','$roleid','$name')";
+$sql = "INSERT INTO `users` (`username`,`password`,`rolelevel`,`roleid`,`department`) VALUES ('$username','$password','$rolelevel','$roleid','$name')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
     $data = array(

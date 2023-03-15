@@ -9,7 +9,7 @@ if (isset($_POST['search']['value'])) {
     $sql .= " WHERE username like '%" . $search_value . "%' ";
     $sql .= " OR rolelevel like '%" . $search_value . "%' ";
     $sql .= " OR roleid like '%" . $search_value . "%' ";
-    $sql .= " OR name like '%" . $search_value . "%' ";
+    $sql .= " OR department like '%" . $search_value . "%' ";
 }
 
 if (isset($_POST['order'])) {
@@ -36,7 +36,7 @@ $filtered_rows = $filtered_rows -1;
 while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray = array();
     $subarray[] = $row['id'];
-    $subarray[] = $row['name'];
+    $subarray[] = $row['department'];
     $subarray[] = $row['username'];
     $subarray[] = $row['password'];
     $subarray[] = $row['rolelevel'];
