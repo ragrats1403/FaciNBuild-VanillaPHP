@@ -35,11 +35,7 @@
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-<<<<<<< Updated upstream
-                <img src="../../../images/Black_logo.png"/>
-=======
                 <img src="../../../images/Black_logo.png" />
->>>>>>> Stashed changes
             </div>
         </div>
         <div class ="navdiv">
@@ -109,10 +105,12 @@
     </script>-->
 
     <div class="table1">
+
         <div class="container-fluid">
             <div class="row">
                 <div class="container">
-                        <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
+                    <div class="row">
+                        <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px;">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <table id="datatable" class="table" >
                                 <thead>
