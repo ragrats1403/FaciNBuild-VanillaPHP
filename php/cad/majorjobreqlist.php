@@ -55,7 +55,7 @@
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="../../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/cad/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
             </li>
@@ -96,16 +96,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="container">
-
                     <div class="row">
-                        <div class="col-md-2" style="width: 19%;"></div>
-                        <div class="col-sm-9" style="width: 75%; background-color: #fff; padding-left:50px; padding-top:50px; padding-right:50px;">
-                            <!-- padding-left:50px; padding-top:50px; padding-right:50px;-->
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2" style="width: 19%;"></div>
-                        <div class="col-sm-9" style="width: 75%; background-color: #fff; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
+                        <div class="col-sm-9" style="width: 100%; background-color: #fff; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <table id="datatable" class="table" >
                                 <thead>

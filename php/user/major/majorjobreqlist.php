@@ -97,16 +97,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="container">
-
-                    <div class="row">
-                        <div class="col-md-2" style="width: 15%;"></div>
-                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-top:50px; padding-right:50px;">
-                            <!-- padding-left:50px; padding-top:50px; padding-right:50px;-->
-                        </div>
-                    </div>
                     <div class="row">   
-                        <div class="col-md-2" style="width: 15%;"></div>
-                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
+                        <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <table id="datatable" class="table" >
                                 <thead>

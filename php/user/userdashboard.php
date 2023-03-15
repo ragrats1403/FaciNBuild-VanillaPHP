@@ -97,19 +97,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="container">
-
                     <div class="row">
-                        <div class="col-md-2" style="width: 15%;"></div>
-                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-top:50px; padding-left:50px; padding-right:50px;">
-                            <!-- padding-left:50px; padding-top:50px; padding-right:50px;-->
-                            <h2 style= "text-align: center">CALENDAR OF ACTIVITIES</h2>
-                     </div>
-                    </div>
-                    
-                    <div class="row">
-                    <div class="col-md-2" style="width: 15%;"></div>
-                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
+                        <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF;  padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
+                            <h2 style= "text-align: center">CALENDAR OF ACTIVITIES</h2>
                             <table id="datatable" class="table">
                                 <thead>
                                     <th>Event Name</th>
@@ -118,4 +109,5 @@
                                     <th>Time End</th>
                                     <th>Venue</th>
                                 </thead>
+</body>
 </html>

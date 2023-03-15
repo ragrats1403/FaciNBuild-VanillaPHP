@@ -113,15 +113,7 @@
             <div class="row">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-2" style="width: 15%;" ></div>
-                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-top:50px; padding-right:50px;">
-                            <!-- padding-left:50px; padding-top:50px; padding-right:50px;-->
-                            <!--<button type="button" class="btn btn-primary" style="margin-bottom:40px;" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Equipment</button>-->
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2" style="width: 15%;"></div>
-                        <div class="col-sm-12 shadow" style="width: 83%; background-color: #FFF; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
+                        <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <table id="datatable" class="table">
                                 <thead>
@@ -149,7 +141,6 @@
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Equipment</button>
                             </div>
                         </div>
-                        <div class="col-md-2"></div>
                     </div>
                 </div>
             </div>
