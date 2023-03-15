@@ -349,6 +349,19 @@
                             </div>
                             <div class="justify-content-center">
                                 <h5 class="text-uppercase fw-bold" >Requisition(To be filled up by the requesting party)</h5>
+                                <br>
+                                <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" style="padding-bottom:20px;" for="date">Section:</label>
+                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections">
+                                        <option value="C">CARPENTRY</option>
+                                        <option value="P">PLUMBING</option>
+                                        <option value="A">AIRCON</option>
+                                        <option value="E">ELECTRICAL</option>
+
+                                    </select>
+                                </div>
+                            </div>
                                 <div class="col-md-2" style="padding-bottom:10px">
                                     <label class="fw-bold" for="date">Quantity:</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">

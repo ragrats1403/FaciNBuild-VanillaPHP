@@ -311,8 +311,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-md-right">
-                                <button onclick = "enableFields()" type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                            <button type="submit" class="btn btn-success col-md-1" id="end-editing">Update</button>
+                                <button onclick = "enableFields()" type="button" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
+                            <button type="button" class="btn btn-success col-md-1" id="end-editing">Update</button>
                         </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6" >
@@ -325,8 +325,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-md-right">
-                            <button onclick = "enableFields2()" type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                            <button type="submit" class="btn btn-success col-md-1" id="end-editing">Update</button>
+                            <button onclick = "enableFields2()" type="button" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
+                            <button type="button" class="btn btn-success col-md-1" id="end-editing">Update</button>
                         </div>
                         <div class="justify-content-center">
                                 <div class="col-md-12" >
@@ -341,7 +341,6 @@
                               <button type="submit" class="btn btn-info text-white">Update</button>
                          </div>
                         </div>
-
                             <!-- Form Controls End-->
                         </div>
                     </form>
