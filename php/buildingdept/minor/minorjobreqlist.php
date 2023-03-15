@@ -181,7 +181,7 @@
                                             <option value="E">ELECTRICAL</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1" style="">
+                                    <div class="col-md-1">
                                         <button type="submit" class="btn btn-success">Approve</button>
                                     </div>
                                     <div class="col-md-1" style="padding-left:20px;">
