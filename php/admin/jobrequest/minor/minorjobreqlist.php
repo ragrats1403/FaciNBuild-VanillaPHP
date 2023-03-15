@@ -171,19 +171,17 @@
                             </div>
                             <div class="justify-content-center">
                                 <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                <br>
                                 <div class="row">
-                                <div class="col-md-12">
-                                    <label class="fw-bold" style="padding-bottom:20px;" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: 5px;" name="sect" id="sect">
-                                        <option value="C">CARPENTRY</option>
-                                        <option value="P">PLUMBING</option>
-                                        <option value="A">AIRCON</option>
-                                        <option value="E">ELECTRICAL</option>
-
-                                    </select>
+                                    <div class="col-md-12">
+                                        <label class="fw-bold" for="date">Section:</label>
+                                        <select class="" style="width: 150px; Border: 5px;" name="sect" id="sect">
+                                            <option value="C">CARPENTRY</option>
+                                            <option value="P">PLUMBING</option>
+                                            <option value="A">AIRCON</option>
+                                            <option value="E">ELECTRICAL</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
                                 <div class="col-md-2" style="padding-bottom:10px">
                                     <label class="fw-bold" for="date">Quantity:</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
@@ -295,8 +293,11 @@
                                         <option value="P">PLUMBING</option>
                                         <option value="A">AIRCON</option>
                                         <option value="E">ELECTRICAL</option>
-                                    
                                     </select>
+                                </div>  
+                                <div class="justify-content-md-center" style="padding-bottom:5px;">
+                                    <button type="submit" class="btn btn-success">Approve</button>
+                                    <button type="button" class="btn btn-danger">Decline</button>
                                 </div>
                             </div>
                             <br>
