@@ -330,7 +330,7 @@
                                 <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
                                 <div class="row">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Section:</label>
+                                    <label class="fw-bold" style="padding-top:10px;" for="date">Section:</label>
                                     <select class="" style="width: 150px; Border: none;" name="cars" id="cars">
                                         <option value="volvo">Outsource</option>
                                         <option value="saab">Bill of materials</option>
