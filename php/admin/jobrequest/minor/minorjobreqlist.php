@@ -294,10 +294,32 @@
                                         <option value="E">ELECTRICAL</option>
                                     </select>
                                 </div>
-                                <div class="col-md-1" style="">
-                                    <button type="submit" class="btn btn-success">Approve</button>
+                            </div>
+                            <div class="row" style="padding-top:6px;">     
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Status:</label>
+                                </div> 
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "">
+                                </div> 
+                                <div class="col-md-1">
+                                    <button type="submit" class="btn btn-success" >Approve</button>
                                 </div>
-                                <div class="col-md-1" style="padding-left:20px;">
+                                <div class="col-md-1" style="padding-left:18px;">
+                                    <button type="button" class="btn btn-danger">Decline</button>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top:6px;">     
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Status:</label>
+                                </div> 
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "">
+                                </div> 
+                                <div class="col-md-1">
+                                    <button type="submit" class="btn btn-success" >Approve</button>
+                                </div>
+                                <div class="col-md-1" style="padding-left:18px;">
                                     <button type="button" class="btn btn-danger">Decline</button>
                                 </div>
                             </div>
