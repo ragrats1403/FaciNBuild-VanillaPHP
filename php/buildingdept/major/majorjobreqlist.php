@@ -328,6 +328,15 @@
                             </div>
                             <div class="justify-content-center">
                                 <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
+                                <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Section:</label>
+                                    <select class="" style="width: 150px; Border: none;" name="cars" id="cars">
+                                        <option value="volvo">Outsource</option>
+                                        <option value="saab">Bill of materials</option>
+                                    </select>
+                                </div>
+                            </div>
                                 <div class="col-md-2" style="padding-bottom:10px">
                                     <label class="fw-bold" for="date">Quantity:</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
@@ -353,16 +362,6 @@
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp"></textarea>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
-                                    <select class="" style="width: 150px; Border: none;" name="cars" id="cars">
-                                        <option value="volvo">Outsource</option>
-                                        <option value="saab">Bill of materials</option>
-                                    </select>
-                                </div>
-                            </div>
-
                             <!-- Form Controls End-->
                         </div>
                         <div class="modal-footer justify-content-md-center">
