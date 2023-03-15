@@ -115,7 +115,7 @@ $(document).on('click', '.btnDelete', function(event) {
         return null;
     }
 });
-//testbutton 
+//approve button 
 $(document).on('click', '.approveBtn', function(event){
     //var status = "Approved";
     var id = $('#_ID').val();
@@ -147,6 +147,40 @@ $(document).on('click', '.approveBtn', function(event){
     });
     //alert('test');
 });
+//reject/decline button
+$(document).on('click', '.declineBtn', function(event){
+    //var status = "Approved";
+    var id = $('#_ID').val();
+    var trid = $('#trid').val();
+    $.ajax({
+        url: "functions/declinerequest.php",
+        data: {
+            id: id,
+            
+        },
+        type: 'POST',
+        success: function(data) {
+            var json = JSON.parse(data);
+            var status = json.status;
+            if (status == 'success') {
+                table = $('#datatable').DataTable();
+                table.draw();
+                alert('Request Declined Successfully!');
+               
+                /*table = $('#datatable').DataTable();
+                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                var row = table.row("[id='" + trid + "']");
+                row.row("[id='" + trid + "']").data([department, date, button]);*/
+                $('#editMinorjreqmodal').modal('hide');
+            } else { 
+                alert('failed');
+            }
+        }
+    });
+    //alert('test');
+});
+
+
 //edit button control 
 $(document).on('click', '.editBtn', function(event) {
     var id = $(this).data('id');
