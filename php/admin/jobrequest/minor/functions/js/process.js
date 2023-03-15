@@ -57,7 +57,7 @@ paging: false
                 if (status = 'success') {
                     table = $('#datatable').DataTable();
                     table.draw();
-                    alert('Successfully Added User!');
+                    alert('Successfully Created Request!');
                     $('#department').val('');
                     $('#datemajorjr').val('');
                     $('#_quantity_').val('');
@@ -65,6 +65,10 @@ paging: false
                     $('#_itemdesc_').val('');
                     $('#_purpose_').val('');
                     $('#addUserModal').modal('hide');
+                    //force remove faded background  -Ragrats
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+                    //force remove end
                 }
             }
         });
