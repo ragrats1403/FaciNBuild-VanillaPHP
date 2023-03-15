@@ -245,8 +245,8 @@ $(document).on('click', '.editBtn', function(event) {
 $(document).on('click', '.updateBtn', function() {
     var id = $('#_ID').val();
     var trid = $('#trid').val();
-    var department = $('#department').val();
-    var date = $('#datemajorjr').val();
+    var department = $('#_department').val();
+    var date = $('#_datemajorjr').val();
     var quantity = $('#_quantity_').val();
     var itemname = $('#_item_').val();
     var description = $('#_itemdesc_').val();
@@ -270,11 +270,13 @@ $(document).on('click', '.updateBtn', function() {
             var status = json.status;
             if (status == 'success') {
                 alert('Updated Successfully!');
+                table = $('#datatable').DataTable();
+                table.draw();
                 /*table = $('#datatable').DataTable();
                 var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
                 var row = table.row("[id='" + trid + "']");
                 row.row("[id='" + trid + "']").data([department, date, button]);*/
-                $('#_step1').val(json.bdstatus);
+                $('#editMinorjreqmodal').modal('hide');
             } else { 
                 alert('failed');
             }
