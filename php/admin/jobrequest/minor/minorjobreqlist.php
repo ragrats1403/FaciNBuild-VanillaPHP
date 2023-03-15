@@ -175,7 +175,7 @@
                                 <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:20px;" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections">
+                                    <select class="" style="width: 150px; Border: 5px;" name="sect" id="sect">
                                         <option value="C">CARPENTRY</option>
                                         <option value="P">PLUMBING</option>
                                         <option value="A">AIRCON</option>
@@ -234,7 +234,7 @@
                     </div>
                     <div class="col-md-2" style="width:15%">
                         <label class=""  for="inputName">Status:</label>
-                        <input type="text" style="width:20%" class="col-sm-2" name="_ID" class="form-control">
+                        <input type="text" style="width:20%" class="col-sm-2" name="_ID" class="form-control" id= "_statustext">
                     </div>
                     <div class="col-md-2" style="width:30%">
                         <label class=""  for="inputName">ID:</label>
@@ -290,7 +290,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections">
+                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="_sect">
                                         <option value="C">CARPENTRY</option>
                                         <option value="P">PLUMBING</option>
                                         <option value="A">AIRCON</option>

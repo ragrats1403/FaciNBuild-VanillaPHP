@@ -2,7 +2,7 @@
 
 $id = $_POST['id'];
 
-$sql = "DELETE FROM users WHERE id='$id'";
+$sql = "DELETE FROM minorjreq WHERE minorjobid='$id'";
 $query = mysqli_query($con, $sql);
 if ($query == true) 
 {
