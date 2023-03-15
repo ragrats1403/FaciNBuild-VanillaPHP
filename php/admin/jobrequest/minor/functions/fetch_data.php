@@ -8,6 +8,7 @@ if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
     $sql .= " WHERE minorjobid like '%" . $search_value . "%' ";
     $sql .= " OR department like '%" . $search_value . "%' ";
+    $sql .= " OR section like '%" . $search_value . "%' ";
     $sql .= " OR datesubmitted like '%" . $search_value . "%' ";
     $sql .= " OR status like '%" . $search_value . "%' ";
 }
@@ -37,10 +38,10 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray = array();
     $subarray[] = $row['minorjobid'];
     $subarray[] = $row['department'];
-    $subarray[] = $row['department'];
+    $subarray[] = $row['section'];
     $subarray[] = $row['datesubmitted'];
     $subarray[] = $row['status']; 
-    $subarray[] = '<a href= "javascript:void();" data-id="' . $row['minorjobid'] . '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+    $subarray[] = '<a href= "javascript:void();" data-id="' . $row['minorjobid'] . '" class ="btn btn-sm btn-info editBtn">More Info</a> <a href= "javascript:void();" data-id="' . $row['minorjobid'] . '" class ="btn btn-sm btn-danger btnDelete">Delete</a>';
     $data[] = $subarray;
 }
 

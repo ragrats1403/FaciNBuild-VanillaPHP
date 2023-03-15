@@ -1,4 +1,6 @@
 <?php include('../../../../connection/connection.php');
+
+
 $id = $_POST['id'];
 $department = $_POST['department'];
 $date = $_POST['date'];
@@ -7,6 +9,7 @@ $itemname = $_POST['itemname'];
 $description = $_POST['description'];
 $purpose = $_POST['purpose'];
 $feedback = $_POST['feedback'];
+
 
 
 $sql = "UPDATE `minorjreq` SET `department` = '$department',`datesubmitted`='$date', `quantity`= '$quantity', `item`='$itemname',`item_desc` = '$description', `purpose` = '$purpose', `feedback` = '$feedback' WHERE minorjobid = '$id'";

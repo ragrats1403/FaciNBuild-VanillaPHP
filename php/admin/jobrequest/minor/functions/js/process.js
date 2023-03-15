@@ -33,11 +33,14 @@ paging: false
     var itemname = $('#_item_').val();
     var description = $('#_itemdesc_').val();
     var purpose = $('#_purpose_').val();
+
+    var e = document.getElementById("sect");
+    var section = e.options[e.selectedIndex].text;
     /*var renderedby = $('#renderedby').val();
     var daterendered = $('#daterendered').val();
     var confirmedby = $('#confirmedby').val();
     var dateconfirmed = $('#dateconfirmed').val();*/
-    if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '') {
+    if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '' && section != '') {
         $.ajax({
             url: "functions/add_data.php",
             data: {
@@ -47,6 +50,7 @@ paging: false
                 itemname: itemname,
                 description: description,
                 purpose: purpose,
+                section: section
                 
                 
             },
@@ -55,11 +59,15 @@ paging: false
                 var json = JSON.parse(data);
                 var status = json.status;
                 if (status = 'success') {
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
                     table = $('#datatable').DataTable();
                     table.draw();
                     alert('Successfully Created Request!');
                     $('#department').val('');
-                    $('#datemajorjr').val('');
+                    var now = new Date();
+                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                    document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
                     $('#_quantity_').val('');
                     $('#_item_').val('');
                     $('#_itemdesc_').val('');
@@ -81,11 +89,11 @@ $(document).on('click', '.btnDelete', function(event) {
     var table = $('#datatable').DataTable();
     event.preventDefault();
     var id = $(this).data('id');
-    if (confirm('Are you sure to delete this user?')) {
+    if (confirm('Are you sure to delete this request?')) {
 
 
         $.ajax({
-            url: "functions/delete_user.php",
+            url: "functions/delete_data.php",
             data: {
                 id: id
             },
@@ -117,6 +125,8 @@ $(document).on('click', '.editBtn', function(event) {
     document.getElementById("_dateconfirmed").disabled = true;
     document.getElementById("_daterendered").value = null;
     document.getElementById("_dateconfirmed").value = null;
+    document.getElementById("_sect").disabled = true;
+    document.getElementById("_statustext").disabled = true;
     $.ajax({
         url: "functions/get_request_details.php",
         data: {
@@ -135,6 +145,11 @@ $(document).on('click', '.editBtn', function(event) {
             $('#_itemdesc').val(json.item_desc);
             $('#_item').val(json.item);
             $('#_purpose').val(json.purpose);
+            $('#_statustext').val(json.status);
+            var e = document.getElementById("_sect");
+            var section = e.options[e.selectedIndex].text;
+
+            e.options[e.selectedIndex].text = json.section;
             $('#_inputFeedback').val(json.feedback);
             $('#editMinorjreqmodal').modal('show');
 
