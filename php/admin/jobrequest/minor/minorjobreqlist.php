@@ -181,33 +181,12 @@
                                             <option value="E">ELECTRICAL</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1" style="">
-                                        <button type="submit" class="btn btn-success">Approve</button>
-                                    </div>
-                                    <div class="col-md-1" style="padding-left:20px;">
-                                        <button type="button" class="btn btn-danger">Decline</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" style="padding-top:6px;">     
-                                <div class="col-md-1">
-                                    <label class="fw-bold" for="inputName">Status:</label>
-                                </div> 
-                                <div class="col-md-1">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "">
-                                </div> 
-                                <div class="col-md-1" style="margin-left: 72px;">
-                                    <button type="submit" class="btn btn-success">Approve</button>
-                                </div>
-                                <div class="col-md-1" style="padding-left:18px;">
-                                    <button type="button" class="btn btn-danger">Decline</button>
                                 </div>
                             </div>
                             <div class="col-md-2" style="padding-bottom:10px">
                                 <label class="fw-bold" for="date">Quantity:</label>
                                 <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                             </div>
-                            
                             <div class="row">
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Item Name:</label>
@@ -250,11 +229,11 @@
                     <div class="col-md-2" style="width:17%;">
                         <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
                     </div>
-                    <div class="col-md-2" style="width:15%">
+                    <div class="col-md-12" style="width:15%">
                         <label class=""  for="inputName">Status:</label>
-                        <input type="text" style="width:100%" class="col-sm-1" name="_ID" class="form-control" id= "_statustext">
+                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id= "_statustext">
                     </div>
-                    <div class="col-md-2" style="width:30%">
+                    <div class="col-md-1" style="width:10%">
                         <label class=""  for="inputName">ID:</label>
                         <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
                     </div>
@@ -314,13 +293,28 @@
                                         <option value="A">AIRCON</option>
                                         <option value="E">ELECTRICAL</option>
                                     </select>
-                                </div>  
-                                <div class="justify-content-md-center" style="padding-bottom:5px;">
+                                </div>
+                                <div class="col-md-1" style="">
                                     <button type="submit" class="btn btn-success">Approve</button>
+                                </div>
+                                <div class="col-md-1" style="padding-left:20px;">
                                     <button type="button" class="btn btn-danger">Decline</button>
                                 </div>
                             </div>
-                            <br>
+                            <div class="row" style="padding-top:6px;">     
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Status:</label>
+                                </div> 
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "">
+                                </div> 
+                                <div class="col-md-1">
+                                    <button type="submit" class="btn btn-success" >Approve</button>
+                                </div>
+                                <div class="col-md-1" style="padding-left:18px;">
+                                    <button type="button" class="btn btn-danger">Decline</button>
+                                </div>
+                            </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6" >
                                     <label class="fw-bold" for="renderedby">Rendered by:</label>
