@@ -47,6 +47,12 @@
                 </a>
             </li>
             <li>
+                <a href="../../../../php/admin/reservations/admincalendar.php">
+                    <i class='bx bx-user'></i>
+                    <span class="link_name">Calendar of Activities</span>
+                </a>
+            </li>
+            <li>
                 <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
