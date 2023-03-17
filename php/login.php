@@ -1,5 +1,5 @@
 <html>
-<title> </title>
+<title>Faci N' Build - Login Page</title>
 
 <head>
     <link rel="stylesheet" type="text/css" href="../css/loginpage/Loginform.css?<?= time() ?>" />
