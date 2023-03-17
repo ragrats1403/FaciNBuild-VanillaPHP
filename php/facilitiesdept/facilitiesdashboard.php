@@ -3,69 +3,78 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Equipments</title>
-
+    <title>Celndar of Activities</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>  
+    <link rel="stylesheet" type="text/css" href="../../../css/sidebar.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/header.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/body.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/admin/adminaccount.css?<?=time()?>" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
 </head>
 
 <header class="shadow">
-    <div class="imgctrl">
-
-    </div>
+    <div class= "imgctrl">
+        
+    </div>   
     <div class="navplace">
-     <div>
+    <div>
         <button type="button" class="icon-button">    
         <span class='bx bxs-bell'></i>
         <span class="icon-button__badge"></span>
-     </div>
-        <p>Hello, Department Head</p>
+    </div> 
+        <p>Hello, Building Department</p>
       <nav class="gnav">
         </nav>
     </div>
 </header>
 
-<body style="padding-top: 0px;">
+<body>
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../images/Brown_logo_faci.png" />
             </div>
         </div>
+
         <div class="navdiv">
             <ul class="nav_list">
-            <li>
-                    <a href="#">
-                        <i class='bx bx-clipboard'></i>
-                        <span class="link_name">Calendar Of Activities</span>
-                    </a>
-                </li>         
                 <li>
-                    <a href="departmentheadeq.php">
-                        <i class='bx bx-wrench'></i>
-                        <span class="link_name">Equipment</span>
+                    <a href="../../../php/buildingdept/buildingdeptdashboard.php">
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">Calendar of Activities</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                <div class="dropdown">
+                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Job Request
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="../../../php/buildingdept/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
+                    </ul>
+                </div>
+            </li>
+                <li>
+                    <a href="../../../php/buildingdept/reservation/buildingdeptreservation.php">
                         <i class='bx bx-check-square'></i>
                         <span class="link_name">Reservation</span>
                     </a>
                 </li>
             </ul>
+            
             <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
                     <img src="../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">Department Head</div>
-                            <div class="role">Facilities Management</div>
+                            <div class="name">Building Dept</div>
+                            <div class="role">Building Department</div>
                         </div>
                     </div>
                     <a href="../../../logout.php">
@@ -75,15 +84,23 @@
             </div>
         </div>
     </div>
-    <script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--<script>
         let btn = document.querySelector("#btn");
         let sidebar = document.querySelector(".sidebar");
 
         btn.onclick = function() {
             sidebar.classList.toggle("active");
         }
-    </script>
-     <!-- Data Table Start-->
+    </script>-->
+    <!-- Data Table Start-->
     <!--<h1 class="text-center">Faci N Build Test table control</h1>-->
     <div class="table1">
 
@@ -96,9 +113,11 @@
                             <table id="datatable" class="table">
                                 <thead>
                                     <th>ID</th>
-                                    <th>Equipment Name</th>
-                                    <th>Quantity</th>
-                                    <th>Facility Stored</th>                                    
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Role Level</th>
+                                    <th>Role ID</th>
                                     <th>Options</th>
 
                                 </thead>
@@ -117,9 +136,11 @@
                                 </tbody>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Equipment</button>
+                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Account</button>
                             </div>
+                        
                         </div>
+                        <div class="col-md-2"></div>
                     </div>
                 </div>
             </div>
@@ -149,7 +170,7 @@
                 $(nRow).attr('id', aData[0]);
             },
             'columnDefs': [{
-                'target': [0, 4],
+                'target': [0, 5],
                 'orderable': false,
             }],
         scrollY: 200,
@@ -162,16 +183,20 @@
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
             event.preventDefault();
-            var equipmentname = $('#inputEqname').val();
-            var qty = $('#inputQty').val();
-            var facility = $('#inputFacility').val();
-            if (equipmentname != '' && qty != '' && facility != '') {
+            var name = $('#inputName').val();
+            var username = $('#inputUsername').val();
+            var password = $('#inputPassword').val();
+            var rolelevel = $('#inputRolelevel').val();
+            var roleid = $('#inputRoleID').val();
+            if (username != '' && password != '' && rolelevel != '' && roleid != '') {
                 $.ajax({
-                    url: "add_equipments.php",
+                    url: "add_user.php",
                     data: {
-                        equipmentname: equipmentname,
-                        qty: qty,
-                        facility: facility
+                        name: name,
+                        username: username,
+                        password: password,
+                        rolelevel: rolelevel,
+                        roleid: roleid
                     },
                     type: 'POST',
                     success: function(data) {
@@ -180,10 +205,12 @@
                         if (status = 'success') {
                             table = $('#datatable').DataTable();
                             table.draw();
-                            alert('Successfully Added Equipment!');
-                            $('#inputEqname').val('');
-                            $('#inputQty').val('');
-                            $('#inputFacility').val('');
+                            alert('Successfully Added User!');
+                            $('#inputName').val('');
+                            $('#inputUsername').val('');
+                            $('#inputPassword').val('');
+                            $('#inputRolelevel').val('');
+                            $('#inputRoleID').val('');
                             $('#addUserModal').modal('hide');
                         }
                     }
@@ -197,11 +224,11 @@
             var table = $('#datatable').DataTable();
             event.preventDefault();
             var id = $(this).data('id');
-            if (confirm('Are you sure to delete this Equipment?')) {
+            if (confirm('Are you sure to delete this user?')) {
 
 
                 $.ajax({
-                    url: "delete_equipments.php",
+                    url: "delete_user.php",
                     data: {
                         id: id
                     },
@@ -228,7 +255,7 @@
             var id = $(this).data('id');
             var trid = $(this).closest('tr').attr('id');
             $.ajax({
-                url: "get_single_eq.php",
+                url: "get_single_user.php",
                 data: {
                     id: id
                 },
@@ -237,27 +264,33 @@
                     var json = JSON.parse(data);
                     $('#id').val(json.id);
                     $('#trid').val(trid);
-                    $('#_inputEqname').val(json.equipmentname)
-                    $('#_inputQty').val(json.quantity);
-                    $('#_inputFacility').val(json.facility);
+                    $('#_inputName').val(json.name)
+                    $('#_inputUsername').val(json.username);
+                    $('#_inputPassword').val(json.password);
+                    $('#_inputRoleLevel').val(json.rolelevel);
+                    $('#_inputRoleID').val(json.roleid);
                     $('#editUserModal').modal('show');
                 }
             });
         });
-        //update
+
         $(document).on('submit', '#updateUserForm', function() {
             var id = $('#id').val();
             var trid = $('#trid').val();
-            var equipmentname = $('#_inputEqname').val();
-            var qty = $('#_inputQty').val();
-            var facility = $('#_inputFacility').val();
+            var name = $('#_inputName').val();
+            var username = $('#_inputUsername').val();
+            var password = $('#_inputPassword').val();
+            var rolelevel = $('#_inputRoleLevel').val();
+            var roleid = $('#_inputRoleID').val();
             $.ajax({
-                url: "update_equipments.php",
+                url: "update_user.php",
                 data: {
                     id: id,
-                    equipmentname: equipmentname,
-                    qty: qty,
-                    facility: facility
+                    name: name,
+                    username: username,
+                    password: password,
+                    rolelevel: rolelevel,
+                    roleid: roleid
                 },
                 type: 'POST',
                 success: function(data) {
@@ -266,9 +299,9 @@
                     if (status == 'success') {
                         alert('Updated Successfully!');
                         table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a>';
+                        var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a> <a href="javascript:void();" class="btn btn-sm btn-danger" data-id="' + id + '" >Delete</a>';
                         var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([id, equipmentname, qty, facility, button]);
+                        row.row("[id='" + trid + "']").data([id, name, username, password, rolelevel, roleid, button]);
                         $('#editUserModal').modal('hide');
                     } else {
                         alert('failed');
@@ -284,39 +317,44 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add New Equipment</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
                             <!-- Form Controls-->
+
                             <div class="mb-3 row">
-                                <label for="inputEqname" class="col-sm-2 col-form-label">Equipment Name</label>
+                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="inputEqname" class="form-control" id="inputEqname">
+                                    <input type="text" name="inputName" class="form-control" id="inputName">
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="inputQty" class="col-sm-2 col-form-label">Quantity</label>
+                                <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="inputQty" class="form-control" id="inputQty">
+                                    <input type="text" name="inputUsername" class="form-control" id="inputUsername">
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="inputFacility" class="col-sm-2 col-form-label">Facility</label>
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                                 <div class="col-sm-10">
-                                    <!--<input type="text" class="form-control" id="inputFacility" name="inputFacility">-->
-                                    
-                                    <select name="inputFacility" id="inputFacility" class="form-control">
-                                        <option value="AVR">AVR</option>
-                                        <option value="OLD AVR">OLD AVR</option>
-                                        <option value="FUNCTION HALL">FUNCTION HALL</option>
-                                        <option value="AUDITORIUM">AUDITORIUM</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="inputPassword" name="inputPassword">
                                 </div>
                             </div>
-                            
+                            <div class="mb-3 row">
+                                <label for="inputRolelevel" class="col-sm-2 col-form-label">RoleLevel</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputRolelevel" name="inputRolelevel">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputRoleID" class="col-sm-2 col-form-label">RoleID</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputRoleID" name="inputRoleID">
+                                </div>
+                            </div>
 
                             <!-- Form Controls End-->
                         </div>
@@ -336,7 +374,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update Equipment</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -346,30 +384,35 @@
                             <input type="hidden" id="trid" name="trid" value="">
                             <!-- Form Controls-->
                             <div class="mb-3 row">
-                                <label for="inputEqname" class="col-sm-2 col-form-label">Equipment Name</label>
+                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="_inputEqname" class="form-control" id="_inputEqname">
+                                    <input type="text" name="_inputName" class="form-control" id="_inputName">
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="inputQty" class="col-sm-2 col-form-label">Quantity</label>
+                                <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="_inputQty" class="form-control" id="_inputQty">
+                                    <input type="text" name="_inputUsername" class="form-control" id="_inputUsername">
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="inputFacility" class="col-sm-2 col-form-label">Facility</label>
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                                 <div class="col-sm-10">
-                                    <!--<input type="text" class="form-control" id="inputFacility" name="inputFacility">-->
-                                    <select name="_inputFacility" id="_inputFacility" class="form-control" disabled>
-                                        <option value="AVR">AVR</option>
-                                        <option value="OLD AVR">OLD AVR</option>
-                                        <option value="FUNCTION HALL">FUNCTION HALL</option>
-                                        <option value="AUDITORIUM">AUDITORIUM</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="_inputPassword" name="_inputPassword">
                                 </div>
                             </div>
-                            
+                            <div class="mb-3 row">
+                                <label for="inputRoleLevel" class="col-sm-2 col-form-label">RoleLevel</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="_inputRoleLevel" name="_inputRoleLevel">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputRoleID" class="col-sm-2 col-form-label">RoleID</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="_inputRoleID" name="_inputRoleID">
+                                </div>
+                            </div>
                             <!-- Form Controls End-->
                         </div>
                         <div class="modal-footer">
@@ -383,7 +426,9 @@
     </div>
     <!-- edit user modalPopup end-->
 
+
+
+
 </body>
+
 </html>
-
-
