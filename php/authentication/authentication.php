@@ -47,13 +47,13 @@ if ($count == 1){
         }
         
     }
-    //Building
+    //Facilities Department
     if($rolerow[0] == 2){
         header("location: ../../buildingdept/dashboard.php");
         
     }
     //admin
-    if($rolerow[0] == 3 && $rolelvl[0] == 4){
+    if($rolelvl[0] == 7){
         header("location: ../systemadministrator/accounts/admin_account.php");
 
 

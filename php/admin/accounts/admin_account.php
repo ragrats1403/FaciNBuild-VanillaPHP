@@ -288,7 +288,7 @@
                     var json = JSON.parse(data);
                     $('#id').val(json.id);
                     $('#trid').val(trid);
-                    $('#_inputName').val(json.name)
+                    $('#_inputName').val(json.department)
                     $('#_inputUsername').val(json.username);
                     $('#_inputPassword').val(json.password);
                     $('#_inputRoleLevel').val(json.rolelevel);
@@ -325,7 +325,7 @@
                         table = $('#datatable').DataTable();
                         var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a> <a href="javascript:void();" class="btn btn-sm btn-danger" data-id="' + id + '" >Delete</a>';
                         var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([id, name, username, password, rolelevel, roleid, button]);
+                        row.row("[id='" + trid + "']").data([id, department, username, password, rolelevel, roleid, button]);
                         $('#editUserModal').modal('hide');
                     } else {
                         alert('failed');

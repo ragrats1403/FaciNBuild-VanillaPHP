@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
     <link rel="stylesheet" type="text/css" href="../../../../css/modal.css/modal.css?<?= time() ?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script type="text/javascript" src="js/autofill.js"></script>
 </head>
 
 <header class="shadow">
@@ -115,7 +116,7 @@
                                 </thead>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <a data-toggle="modal" href="#myModal" class="btn btn-primary">Create reservation</a>
+                                <a data-toggle="modal" href="#myModal" class="btn btn-primary createresBtn">Create reservation</a>
                             </div>
                         </div>
                     </div>
@@ -133,7 +134,8 @@
                 </div>
                 <div class="modal-body ">
                     <form action="">
-                        Please select the facilities you would like to request.<br><br>
+                        Please select the facilities you would like to request.
+                        <!--
                         <input type="checkbox" id="annex_avr" name="Annex AVR" value="annex_avr">
                         <label for="annex_avr"> Annex AVR</label>
                         <input type="checkbox" id="new_avr" name="New AVR" value="new_avr">
@@ -143,26 +145,44 @@
                         <input type="checkbox" id="auditorium" name="Auditorium" value="auditorium">
                         <label for="auditorium"> Auditorium</label>
                         <input type="checkbox" id="be_functionhall" name="BE Function Hall" value="be_functionhall">
-                        <label for="be_functionhall"> BE Function Hall</label><br><br>
+                        <label for="be_functionhall"> BE Function Hall</label><br><br>-->
+                        <div class="col-md-6 ">
+                            <select class="form-control input-sm col-xs-1" name="sections" id="faci">
+                                select = document.getElementById("faci");
+                                <?php include('../../connection/connection.php');
+                                $sql = "SELECT facilityname FROM facility";
+                                $query = mysqli_query($con,$sql);
+                                $i=1;
+                                while($row = mysqli_fetch_assoc($query)){
+                                    echo "<option value=$i>".$row["facilityname"]."</option>";
+                                    $i++;
+                                }
+                                ?>
+                                            
 
+                                            
+                            </select>
+                            </div>
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Date Filed:</label>
-                                <input type="datetime-local" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed">
+                                <input type="date" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
                             </div>
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Actual Date of Use:</label>
                                 <input type="datetime-local" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use">
                             </div>
                         </div>
-                        <div class="col-md-6 ">
+                        
+                        <div class="col-md-2">
                             <label class="fw-bold" for="date">Time In:</label>
-                            <input type="datetime-local" class="form-control input-sm col-xs-1" id="timein" placeholder="Time In">
+                            <input type="time" class="form-control input-sm col-xs-1" id="timein" placeholder="Time In">
                         </div>
-                        <div class="col-md-6 ">
+                        <div class="col-md-2">
                             <label class="fw-bold" for="date">Time Out:</label>
-                            <input type="datetime-local" class="form-control input-sm col-xs-1" id="timeout" placeholder="Time Out">
+                            <input type="time" class="form-control input-sm col-xs-1" id="timeout" placeholder="Time Out">
                         </div>
+
                         <div class="col-md-6 ">
                             <label class="fw-bold" for="date">Requesting Party:</label>
                             <input type="name" class="form-control input-sm col-xs-1" id="reqparty" placeholder="Requesting Party">
@@ -227,6 +247,11 @@
                     <a data-toggle="modal" href="#myModal" class="btn btn-primary disabled" id='termscond-create'>Create reservation</a>
                 </div>
                 <script>
+                    //date auto fill
+                    var now = new Date();
+                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                    document.getElementById('datefiled').value = now.toISOString().substring(0,10);
+                    //date end
                     function updateButtonState() {
                         var checkbox = document.getElementById("termscond");
                         var button = document.getElementById("termscond-create");
@@ -323,7 +348,24 @@
             </div>
         </div>
     </div>
-
+ <script>
+    $(document).on('click', '.createresBtn', function(event){
+    $.ajax({
+        url: "testfill.php",
+        type: "POST",
+        
+        success: function(data) {
+            var json = JSON.parse(data);
+            var status = json.status;
+            select = document.getElementById("faci");
+            
+           
+           
+        }
+    });
+    //alert('test');
+});
+  </script>
     <!-- BODY END-->
 </body>
 
