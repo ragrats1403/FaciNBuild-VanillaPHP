@@ -80,26 +80,25 @@
         <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                    <img src="../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                    <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                        <div class="name">Admin</div>
-                        <div class="role">System Administrator</div>
+                            <div class="name">Admin</div>
+                            <div class="role">System Administrator</div>
                         </div>
                     </div>
-                    <a href="../../../logout.php">
+                    <a href="../../../../logout.php">
                         <i class='bx bx-log-out' id="log_out"></i>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="table1">
-    <div class="containercal">
+    <div class="conts">
       <div class="left">
         <div class="calendar">
           <div class="month">
             <i class="fas fa-angle-left prev"></i>
-            <div class="date"></div>
+            <div class="date">Month ug year sa calendar</div>
             <i class="fas fa-angle-right next"></i>
           </div>
           <div class="weekdays">
@@ -115,7 +114,7 @@
           <div class="goto-today">
             <div class="goto">
               <input type="text" placeholder="mm/yyyy" class="date-input" />
-              <button class="goto-btn">Go</button>
+              <button class="goto-btn">Ok</button>
             </div>
             <button class="today-btn">Today</button>
           </div>
@@ -123,41 +122,14 @@
       </div>
       <div class="right">
         <div class="today-date">
-          <div class="event-day"></div>
-          <div class="event-date"></div>
+          <div class="event-day">Unsa adlawa </div>
+          <div class="event-date">Diri dapat full date</div>
         </div>
         <div class="events"></div>
         <div class="add-event-wrapper">
           <div class="add-event-header">
-            <div class="title">Add Event</div>
-            <i class="fas fa-times close"></i>
-          </div>
-          <div class="add-event-body">
-            <div class="add-event-input">
-              <input type="text" placeholder="Event Name" class="event-name" />
-            </div>
-            <div class="add-event-input">
-              <input
-                type="text"
-                placeholder="Event Time From"
-                class="event-time-from"
-              />
-            </div>
-            <div class="add-event-input">
-              <input
-                type="text"
-                placeholder="Event Time To"
-                class="event-time-to"
-              />
-            </div>
-          </div>
-          <div class="add-event-footer">
-            <button class="add-event-btn">Add Event</button>
           </div>
         </div>
       </div>
-      <button class="add-event">
-        <i class="fas fa-plus"></i>
-      </button>
     </div>
 </body>
