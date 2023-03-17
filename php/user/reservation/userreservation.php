@@ -349,8 +349,9 @@
         </div>
     </div>
  <script>
+    //what happens when clicking create reservation
     $(document).on('click', '.createresBtn', function(event){
-    $.ajax({
+   /* $.ajax({
         url: "testfill.php",
         type: "POST",
         
@@ -363,7 +364,7 @@
            
         }
     });
-    //alert('test');
+    //alert('test');*/
 });
   </script>
     <!-- BODY END-->
