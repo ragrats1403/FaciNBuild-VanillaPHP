@@ -2,6 +2,7 @@
 //session starts
 session_start();
 include('../connection/connection.php');
+//
 $username = $_POST['user'];
 $password = $_POST['pass'];
 
@@ -18,15 +19,16 @@ if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 }
 
-$sql = "SELECT rolelevel FROM users WHERE username = ?";
+$sql = "SELECT rolelevel, password FROM users WHERE username = ?";
 if ($stmt = $con->prepare($sql)) {
     $stmt->bind_param("s", $param_username);
     $param_username = $_SESSION['user'];
     $stmt->execute();
     $stmt->store_result();
     if ($stmt->num_rows == 1) {
-        $stmt->bind_result($rolelevel);
+        $stmt->bind_result($rolelevel, $password);
         $stmt->fetch();
+        if($_POST['pass'] == $password){
 
         //Admin
         if ($rolelevel == 1) {
@@ -63,15 +65,19 @@ if ($stmt = $con->prepare($sql)) {
             header("Location: ../sao/saodashboard.php");
             exit;
         }
-    } else {
+        
+    } 
+    else {
         session_destroy();
         $alert = "<script type='text/javascript'>alert('Login failed. Invalid username or password.');
             window.location = '../login.php';
             </script>";
         echo $alert;
     }
+}
     //close statement
     $stmt->close();
 }
 //close connection
 $con->close();
+?>

@@ -16,11 +16,11 @@
             <div className="uiForm">
                 <div className="formField">
                     <label id="label">Username</label>
-                    <input type="text" id="user" placeholder="Username" name="user" />
+                    <input type="text" id="user" placeholder="Username" name="user" required/>
                 </div>
                 <div className="formField">
                     <label id="label">Password</label>
-                    <input type="password" id="pass" placeholder="Password" name="pass" />
+                    <input type="password" id="pass" placeholder="Password" name="pass" required/>
                 </div>
                 <button className="submitBtn">Login</button>
             </div>
