@@ -100,9 +100,9 @@
       <div class="left">
         <div class="calendar">
           <div class="month">
-            <i class="fas fa-angle-left prev"></i>
-            <div class="date">Month ug year sa calendar</div>
-            <i class="fas fa-angle-right next"></i>
+          <button class="buttonRIGHT"><<</button>
+            <div class="date">March 2023</div>
+            <button class="buttonLEFT">>></button>
           </div>
           <div class="weekdays">
             <div>Sun</div>
@@ -125,11 +125,13 @@
       </div>
       <div class="right">
         <div class="today-date">
-          <div class="event-day">Unsa adlawa </div>
-          <div class="event-date">Diri dapat full date</div>
+          <div class="event-day">Tue </div>
+          <div class="event-date">March 20,2023</div>
         </div>
         <div class="events"></div>
         <div class="add-event-wrapper">
+        <button type="submit" id="edit-button">Edit</button>
+        <button type="submit" id="end-editing">Done</button>
           <div class="add-event-header">
           </div>
         </div>
