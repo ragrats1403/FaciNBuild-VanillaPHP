@@ -1,10 +1,9 @@
 <?php
 //session starts
 session_start();
-include('../connection/connection.php');
-//
+
 $username = $_POST['user'];
-$password = $_POST['pass'];
+$password_input = $_POST['pass'];
 
 $_SESSION['user'] = $username;
 
@@ -26,58 +25,55 @@ if ($stmt = $con->prepare($sql)) {
     $stmt->execute();
     $stmt->store_result();
     if ($stmt->num_rows == 1) {
-        $stmt->bind_result($rolelevel, $password);
+        $stmt->bind_result($rolelevel, $password_db);
         $stmt->fetch();
-        if($_POST['pass'] == $password){
-
-        //Admin
-        if ($rolelevel == 1) {
-            header("Location: ../admin/accounts/admin_account.php");
-            exit;
-        }
-        //Building
-        if ($rolelevel == 2) {
-            header("Location: ../buildingdept/buildingdeptdashboard.php");
-            exit;
-        }
-        //Building
-        if ($rolelevel == 3) {
-            header("Location: ../facilitiesdept/facilitiesdashboard.php");
-            exit;
-        }
-        //User
-        if ($rolelevel == 4) {
-            header("Location: ../user/userdashboard.php");
-            exit;
-        }
-        //CAD
-        if ($rolelevel == 5) {
-            header("Location: ../cad/majorjobreqlist.php");
-            exit;
-        }
-        //PCO
-        if ($rolelevel == 6) {
-            header("Location: ../pco/majorjobreqlist.php");
-            exit;
-        }
-        //SAO
-        if ($rolelevel == 7) {
-            header("Location: ../sao/saodashboard.php");
-            exit;
-        }
-        
-    } 
-    else {
-        session_destroy();
-        $alert = "<script type='text/javascript'>alert('Login failed. Invalid username or password.');
+        if ($password_input == $password_db) {
+            switch ($rolelevel) {
+                case 1:
+                    header("Location: ../admin/accounts/admin_account.php"); //admin
+                    break;
+                case 2:
+                    header("Location: ../buildingdept/buildingdeptdashboard.php"); //building department
+                    break;
+                case 3:
+                    header("Location: ../facilitiesdept/facilitiesdashboard.php"); //facilities department
+                    break;
+                case 4:
+                    header("Location: ../user/userdashboard.php"); //user
+                    break;
+                case 5:
+                    header("Location: ../cad/majorjobreqlist.php"); //cad
+                    break;
+                case 6:
+                    header("Location: ../pco/majorjobreqlist.php"); //pco
+                    break;
+                case 7:
+                    header("Location: ../sao/saodashboard.php"); //sao
+                    break;
+                default:
+                    session_destroy();
+                    $alert = "<script type='text/javascript'>alert('Login failed. Invalid username or password.');
             window.location = '../login.php';
             </script>";
+                    echo $alert;
+                    break;
+            }
+        } else {
+            session_destroy();
+            $alert = "<script type='text/javascript'>alert('Login failed. Invalid username or password.');
+            window.location = '../login.php';
+            </script>";
+            echo $alert;
+        }
+    } else {
+        session_destroy();
+        $alert = "<script type='text/javascript'>alert('Login failed. Invalid username or password.');
+        window.location = '../login.php';
+        </script>";
         echo $alert;
     }
-}
     //close statement
     $stmt->close();
 }
 //close connection
 $con->close();
-?>
