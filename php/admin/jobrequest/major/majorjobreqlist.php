@@ -107,10 +107,10 @@
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <table id="datatable" class="table" >
                                 <thead>
-                                    <th>ID</th>
+                                    <th>Job Request no.</th>
+                                    <th>Requisition no.</th>
                                     <th>Department</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
+                                    <th>Quantity</th>
                                     <th>Options</th>
                                 </thead>
                             </table>
@@ -140,7 +140,6 @@
             'ajax': {
                 'url': 'fetch_data.php',
                 'type': 'post',
-
             },
             'fnCreatedRow': function(nRow, aData, iDataIndex) {
                 $(nRow).attr('id', aData[0]);
@@ -155,6 +154,7 @@
 
         });
     </script>
+    
     <script type="text/javascript">
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
