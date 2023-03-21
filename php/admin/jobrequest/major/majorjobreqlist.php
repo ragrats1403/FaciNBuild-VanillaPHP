@@ -201,8 +201,6 @@
             event.preventDefault();
             var id = $(this).data('id');
             if (confirm('Are you sure to delete this user?')) {
-
-
                 $.ajax({
                     url: "delete_user.php",
                     data: {
@@ -244,7 +242,6 @@
                     $('#_inputUsername').val(json.username);
                     $('#_inputPassword').val(json.password);
                     $('#_inputRoleLevel').val(json.rolelevel);
-                    $('#_inputRoleID').val(json.roleid);
                     $('#editUserModal').modal('show');
                 }
             });
