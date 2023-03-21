@@ -371,20 +371,4 @@ body {
 .events .event:hover::after {
   display: flex;
 }
-button:hover {
-  box-shadow: 2px 2px 3px ;
-}
-
-button:active {
-  box-shadow: 1px 1px 3px ;
-}
-button {
-  width: 80px;
-  padding: 5px;
-  margin: 0 3px;
-  background-color: #4bbdff;
-  outline: none;
-  border: 1px solid #4bbdff;
-  box-shadow: 2px 2px 2px #3f3f3f;
-}
   
