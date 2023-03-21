@@ -57,12 +57,12 @@ body {
   display: flex;
 
   border-radius: 10px;
-  background-color: #e0e3f0;
+  background-color: #f5f1f1;
 }
 .left {
   width: 60%;
   padding: 20px;
-  background-color:#DEEFF5;
+  background: #2279BE;
 }
 .calendar {
   position: relative;
@@ -123,6 +123,7 @@ body {
   font-size: 1rem;
   font-weight: 500;
   text-transform: capitalize;
+    border-color:#404040;
 }
 .weekdays div {
   width: 14.28%;
@@ -230,7 +231,7 @@ body {
   align-items: center;
   border-radius: 5px;
   overflow: hidden;
-  border: 1px solid var(--primary-clr);
+  border: 1px solid;
 }
 .calendar .goto-today .goto input {
   width: 100%;
@@ -244,14 +245,14 @@ body {
 }
 .calendar .goto-today button {
   padding: 5px 10px;
-  border: 1px solid var(--primary-clr);
+  border: 1px solid;
   border-radius: 5px;
   background-color: transparent;
   cursor: pointer;
   color: var(--primary-clr);
 }
 .calendar .goto-today button:hover {
-  color: #fff;
+  color: #34bfff;
   background-color: var(--primary-clr);
 }
 .calendar .goto-today .goto button {
@@ -277,10 +278,10 @@ body {
   justify-content: space-between;
   padding: 0 40px;
   padding-left: 70px;
-  margin-top: 50px;
+  margin-top: 70px;
   margin-bottom: 20px;
   text-transform: capitalize;
-  background-color: #DEEFF5;
+  background: #2279BE;
   
 }
 .right .today-date .event-day {
@@ -301,7 +302,7 @@ body {
   overflow-x: hidden;
   flex-direction: column;
   padding-left: 4px;
-  background-color: #DEEFF5;
+  background: #2279BE;
 }
 .events .event {
   position: relative;
@@ -369,5 +370,21 @@ body {
 }
 .events .event:hover::after {
   display: flex;
+}
+button:hover {
+  box-shadow: 2px 2px 3px ;
+}
+
+button:active {
+  box-shadow: 1px 1px 3px ;
+}
+button {
+  width: 80px;
+  padding: 5px;
+  margin: 0 3px;
+  background-color: #4bbdff;
+  outline: none;
+  border: 1px solid #4bbdff;
+  box-shadow: 2px 2px 2px #3f3f3f;
 }
   
