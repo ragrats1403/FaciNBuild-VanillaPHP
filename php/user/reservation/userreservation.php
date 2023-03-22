@@ -247,6 +247,7 @@
                     <a data-toggle="modal" href="#myModal" class="btn btn-primary disabled" id='termscond-create'>Create reservation</a>
                 </div>
                 <script>
+                    
                     //date auto fill
                     var now = new Date();
                     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
@@ -266,6 +267,8 @@
             </div>
         </div>
     </div>
+   
+
 
     <!-- Modal Popup -->
     <div class="modal shadow p-3 mb-5 bg-white rounded" tabindex="-1" id="myModal2" aria-labelledby="exampleModalLabel" data-backdrop="static">
