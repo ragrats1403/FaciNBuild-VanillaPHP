@@ -11,8 +11,16 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/modal.css/modal.css?<?= time() ?>" />
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <header class="shadow">
@@ -287,7 +295,7 @@
     <!-- add user modal-->
     <!-- Modal Popup -->
     <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="max-width:1000px;">
+        <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:17%;">
@@ -365,6 +373,7 @@
                             <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
                         </div>
+                    </div>
                     </form>
                 </div>
             </div>
@@ -373,8 +382,8 @@
     <!-- add user modal end-->
     <!-- edit user modal-->
     <!-- Modal -->
-    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog "style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:17%;">
@@ -387,48 +396,76 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="updateUserForm" action="javascript:void();" method="POST">
+                <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
-                            <input type="hidden" id="id" name="id" value="">
-                            <input type="hidden" id="trid" name="trid" value="">
                             <!-- Form Controls-->
-                            <div class="mb-3 row">
-                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="_inputName" class="form-control" id="_inputName">
+
+                            <div class="row justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Job Request no.</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="Namemajorjr" placeholder="Job request no.">
+                                </div>
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Requisition no.</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="numbermajorjr" placeholder="Requisition no.">
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="_inputUsername" class="form-control" id="_inputUsername">
+                            <div class="row justify-content-center" style="padding-bottom:13px;">
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Department</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="departmentmajorjr" placeholder="Department">
+                                </div>
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Date</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date">
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="_inputPassword" name="_inputPassword">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
+                                    <label class="fw-bold" for="date">Section:</label>
+                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections">
+                                        <option value="C">CARPENTRY</option>
+                                        <option value="P">PLUMBING</option>
+                                        <option value="A">AIRCON</option>
+                                        <option value="E">ELECTRICAL</option>
+
+                                    </select>
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="inputRoleLevel" class="col-sm-2 col-form-label">RoleLevel</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="_inputRoleLevel" name="_inputRoleLevel">
+                            <div>
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="inputRoleID" class="col-sm-2 col-form-label">RoleID</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="_inputRoleID" name="_inputRoleID">
+                            
+                            <div>
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Item Name:</label>
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="_item_"placeholder="Item">
                                 </div>
                             </div>
-                            <!-- Form Controls End-->
-                        </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Purpose:</label>
+                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
+                                    <select class="" style="width: 150px; Border: none;" name="cars" id="cars">
+                                        <option value="volvo">Outsource</option>
+                                        <option value="saab">Bill of materials</option>
+                                    </select>
+                                </div>
+                            </div>
                         <div class="modal-footer justify-content-md-center">
                             <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
-                            <button type="button" class="btn btn-danger">Decline</button>
                         </div>
+                    </div>
                     </form>
                 </div>
             </div>
