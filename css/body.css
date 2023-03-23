@@ -101,7 +101,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 50px;
-  font-size: 1.2rem;
+  font-size: 2.0rem;
   font-weight: 500;
   text-transform: capitalize;
 }
@@ -371,4 +371,22 @@ body {
 .events .event:hover::after {
   display: flex;
 }
-  
+.add-event-footer .add-event-btn {
+  height: 30px;
+  font-size: 1rem;
+  font-weight: 500;
+  position:absolute;
+  right: 300px;
+  outline: slategrey;
+  border: solid;
+  color: #f2f3f3;
+  background-color:  #2279BE;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: black;
+}
+.add-event-footer .add-event-btn:hover {
+  background-color: #abd3d8;
+  color: black;
+}

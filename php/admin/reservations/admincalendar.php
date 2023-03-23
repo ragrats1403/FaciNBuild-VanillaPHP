@@ -100,9 +100,7 @@
       <div class="left">
         <div class="calendar">
           <div class="month">
-          <button class="buttonRIGHT"><<</button>
             <div class="date">March 2023</div>
-            <button class="buttonLEFT">>></button>
           </div>
           <div class="weekdays">
             <div>Sun</div>
@@ -117,7 +115,7 @@
           <div class="goto-today">
             <div class="goto">
               <input type="text" placeholder="mm/yyyy" class="date-input" />
-              <button class="goto-btn">Ok</button>
+              <button class="goto-btn">Find</button>
             </div>
             <button class="today-btn">Today</button>
           </div>
@@ -130,9 +128,11 @@
         </div>
         <div class="events"></div>
         <div class="add-event-wrapper">
-        <button type="submit" id="edit-button">Edit</button>
-        <button type="submit" id="end-editing">Done</button>
           <div class="add-event-header">
+          <div class="title">Add Event
+          </div>
+          <div class="add-event-footer">
+            <button class="add-event-btn">Add Event</button>
           </div>
         </div>
       </div>
