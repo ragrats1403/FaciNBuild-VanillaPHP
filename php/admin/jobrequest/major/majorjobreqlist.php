@@ -21,6 +21,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
 </head>
 
 <header class="shadow">
@@ -246,10 +247,14 @@
                     var json = JSON.parse(data);
                     $('#id').val(json.id);
                     $('#trid').val(trid);
-                    $('#_inputName').val(json.name)
-                    $('#_inputUsername').val(json.username);
-                    $('#_inputPassword').val(json.password);
-                    $('#_inputRoleLevel').val(json.rolelevel);
+                    $('#jobrequestno').val(json.jobreqno);
+                    $('#requino').val(json.requino);
+                    $('#department').val(json.department);
+                    $('#sections').val(json.section);
+                    $('#quantity').val(json.quantity);
+                    $('#item').val(json.item);
+                    $('#purpose').val(json.purpose);
+                    $('#remark').val(json.outsource);    
                     $('#editUserModal').modal('show');
                 }
             });
@@ -311,28 +316,28 @@
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Job Request no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="Namemajorjr" placeholder="Job request no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="Namemajorjr1" placeholder="Job request no.">
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Requisition no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="numbermajorjr" placeholder="Requisition no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="numbermajorjr1" placeholder="Requisition no.">
                                 </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="departmentmajorjr" placeholder="Department">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="departmentmajorjr1" placeholder="Department">
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="datemajorjr1" placeholder="Date">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
                                     <label class="fw-bold" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections">
+                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections1">
                                         <option value="C">CARPENTRY</option>
                                         <option value="P">PLUMBING</option>
                                         <option value="A">AIRCON</option>
@@ -344,20 +349,20 @@
                             <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id="_quantity_1" placeholder="Quantity">
                                 </div>
                             </div>
                             
                             <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="_item_"placeholder="Item">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="_item_1"placeholder="Item">
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp"></textarea>
+                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp1"></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -403,21 +408,21 @@
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Job Request no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="Namemajorjr" placeholder="Job request no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="jobrequestno" placeholder="Job request no.">
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Requisition no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="numbermajorjr" placeholder="Requisition no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="requino" placeholder="Requisition no.">
                                 </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="departmentmajorjr" placeholder="Department">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="date" placeholder="Date">
                                 </div>
                             </div>
                             <div class="row">
@@ -429,33 +434,32 @@
                                         <option value="P">PLUMBING</option>
                                         <option value="A">AIRCON</option>
                                         <option value="E">ELECTRICAL</option>
-
                                     </select>
                                 </div>
                             </div>
                             <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id="quantity" placeholder="Quantity">
                                 </div>
                             </div>
                             
                             <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="_item_"placeholder="Item">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="item"placeholder="Item">
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp"></textarea>
+                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose"></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
-                                    <select class="" style="width: 150px; Border: none;" name="cars" id="cars">
+                                    <select class="" style="width: 150px; Border: none;" name="cars" id="remark">
                                         <option value="volvo">Outsource</option>
                                         <option value="saab">Bill of materials</option>
                                     </select>
