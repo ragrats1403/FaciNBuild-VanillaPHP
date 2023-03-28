@@ -5,11 +5,9 @@ $requino = $_POST['requino'];
 $department = $_POST['department'];
 $quantity = $_POST['quantity'];
 $item = $_POST['item'];
-$section = $_POST['section'];
 $purpose = $_POST['purpose'];
-$outsource = $_POST['outsource'];
 
-$sql = "UPDATE `majoreq` SET `requino`='$requino', `department`= '$department', `quantity`='$quantity',`item` = '$item' ,`section` = '$section' ,`purpose` = '$purpose' ,`outsource` = '$outsource' WHERE jobreqno = '$jobreqno'";
+$sql = "UPDATE `majoreq` SET `requino`='$requino', `department`= '$department', `quantity`='$quantity',`item` = '$item' ,`purpose` = '$purpose' WHERE jobreqno = '$jobreqno'";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
     $data = array(
