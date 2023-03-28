@@ -51,8 +51,6 @@ paging: false
                 description: description,
                 purpose: purpose,
                 section: section
-                
-                
             },
             type: 'POST',
             success: function(data) {
