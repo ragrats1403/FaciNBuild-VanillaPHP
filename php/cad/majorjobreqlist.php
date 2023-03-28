@@ -54,7 +54,7 @@
                         Job Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="">Minor Job Request</a>
                         <a class="dropdown-item" href="../../../../php/cad/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
