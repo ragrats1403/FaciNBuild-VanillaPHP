@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+session_start();
+require('../../authentication/anti_pagetrans.php');
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -14,7 +18,6 @@
     <link rel="stylesheet" type="text/css" href="../../../css/admin/adminaccount.css?<?=time()?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
 </head>
-
 <header class="shadow">
     <div class= "imgctrl">
         
