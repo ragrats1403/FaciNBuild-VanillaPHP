@@ -110,35 +110,6 @@
                     <div class="row">
                         <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
-                            <table id="datatable" class="table">
-                                <thead>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Username</th>
-                                    <th>Password</th>
-                                    <th>Role Level</th>
-                                    <th>Role ID</th>
-                                    <th>Options</th>
-
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <!---
-                                    <td>1</td>
-                                    <td>Rajesh</td>
-                                    <td>raj@gmail.com</td>
-                                    <td>131131231</td>
-                                    <td>Mumbai</td>
-                                    <td><a class="btn ">Edit</a><a href="">Delete</a></td>
-                                    -->
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="col-sm-12 d-flex justify-content-end">
-                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Account</button>
-                            </div>
-                        
                         </div>
                         <div class="col-md-2"></div>
                     </div>

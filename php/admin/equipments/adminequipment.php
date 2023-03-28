@@ -13,8 +13,8 @@
     <link rel="stylesheet" type="text/css" href="../../../css/body.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../css/admin/adminaccount.css?<?=time()?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
-</head>
 
+</head>
 <header class="shadow">
     <div class= "imgctrl">
         
