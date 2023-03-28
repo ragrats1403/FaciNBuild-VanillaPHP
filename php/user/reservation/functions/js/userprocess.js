@@ -82,3 +82,64 @@ $('#closemodal').click(function() {
     $('#myModal').modal('hide');
 });
 
+
+
+$(document).on('submit', '#myModal', function(event) {
+    event.preventDefault();
+    var department = $('#department').val();
+    var date = $('#datemajorjr').val();
+    var quantity = $('#_quantity_').val();
+    var itemname = $('#_item_').val();
+    var description = $('#_itemdesc_').val();
+    var purpose = $('#_purpose_').val();
+
+    var e = document.getElementById("sect");
+    var section = e.options[e.selectedIndex].text;
+    /*var renderedby = $('#renderedby').val();
+    var daterendered = $('#daterendered').val();
+    var confirmedby = $('#confirmedby').val();
+    var dateconfirmed = $('#dateconfirmed').val();*/
+    if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '' && section != '') {
+        $.ajax({
+            url: "functions/add_data.php",
+            data: {
+                department: department,
+                date: date,
+                quantity: quantity,
+                itemname: itemname,
+                description: description,
+                purpose: purpose,
+                section: section
+                
+                
+            },
+            type: 'POST',
+            success: function(data) {
+                var json = JSON.parse(data);
+                var status = json.status;
+                if (status = 'success') {
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+                    table = $('#datatable').DataTable();
+                    table.draw();
+                    alert('Successfully Created Request!');
+                    $('#department').val('');
+                    var now = new Date();
+                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                    document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
+                    $('#_quantity_').val('');
+                    $('#_item_').val('');
+                    $('#_itemdesc_').val('');
+                    $('#_purpose_').val('');
+                    $('#addUserModal').modal('hide');
+                    //force remove faded background  -Ragrats
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+                    //force remove end
+                }
+            }
+        });
+    } else {
+        alert("Please fill all the Required fields");
+    }
+});

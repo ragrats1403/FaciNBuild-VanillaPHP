@@ -119,7 +119,7 @@
                                 </thead>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Create reservation</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reservationModal">Create reservation</button>
                             
                             </div>
                         </div>
@@ -369,7 +369,7 @@
         <!-- Add ons modal popup end-->
 
         <!-- Create Reservation start-->
-        <div class="modal " tabindex="-1" id="myModal" aria-labelledby="exampleModalLabel">
+        <div class="modal " tabindex="-1" id="reservationModal" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
@@ -492,7 +492,7 @@
                     <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>
                 </div>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a data-toggle="modal" href="#myModal" class="btn btn-primary disabled" id='termscond-create'>Create reservation</a>
+                    <button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>
                 </div>
                 <script>
                     
