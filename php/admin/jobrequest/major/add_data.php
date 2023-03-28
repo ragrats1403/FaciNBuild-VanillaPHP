@@ -1,4 +1,4 @@
-<?php include('../../connection/connection.php');
+<?php include('../../../connection/connection.php');
 
 $jobreqno = $_POST['jobreqno'];
 $requino = $_POST['requino'];
@@ -17,7 +17,6 @@ if ($query == true) {
     );
     echo json_encode($data);
 } else {
-
     $data = array(
         'status' => 'failed',
     );
