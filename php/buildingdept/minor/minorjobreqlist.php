@@ -67,12 +67,6 @@
                 </div>
             </li>
             <li>
-                <a href="../../../../php/admin/equipments/adminequipment.php">
-                    <i class='bx bx-wrench'></i>
-                    <span class="link_name">Equipment</span>
-                </a>
-            </li>
-            <li>
                 <a href="../../../../php/admin/reservations/adminreservations.php">
                     <i class='bx bx-check-square'></i>
                     <span class="link_name">Reservation</span>

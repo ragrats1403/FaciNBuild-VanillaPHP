@@ -26,7 +26,7 @@
         <span class='bx bxs-bell'></i>
         <span class="icon-button__badge"></span>
     </div> 
-        <p>Hello, Building Department</p>
+        <p>Hello, SAO</p>
       <nav class="gnav">
         </nav>
     </div>
@@ -73,8 +73,8 @@
                     <div class="profile_details">
                     <img src="../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">Building Dept</div>
-                            <div class="role">Building Department</div>
+                            <div class="name">SAO Dept</div>
+                            <div class="role">SAO Department</div>
                         </div>
                     </div>
                     <a href="../../../logout.php">

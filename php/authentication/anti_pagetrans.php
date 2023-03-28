@@ -24,8 +24,8 @@ if (!isset($_SESSION['flg']) && $_SESSION['flg'] !== "ok") {
     $_SESSION = array();
 
     // Delete cookies
-    if (isset($_COOKIE[session_name()])) {
-        setcookie(session_name(), '', time() - 42000, '/');
+    if (isset($_COOKIE['PHPSESSID'])) {
+        setcookie('PHPSESSID', '', time() - 42000, '/');
     }
 
     // Destroy sessions

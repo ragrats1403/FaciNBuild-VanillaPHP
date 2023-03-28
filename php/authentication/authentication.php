@@ -1,7 +1,6 @@
 <?php
 //session starts
 session_start();
-$_SESSION['flg']="ok";
 $username = $_POST['user'];
 $password_input = $_POST['pass'];
 
