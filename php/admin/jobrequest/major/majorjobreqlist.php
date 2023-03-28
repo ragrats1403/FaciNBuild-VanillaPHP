@@ -235,7 +235,7 @@
         //edit button control 
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
-            var trid = $(this).closest('tr').attr('id');
+            var trid = $(this).closest('tr').attr('minorjobid');
             $.ajax({
                 url: "get_single_user.php",
                 data: {
@@ -249,33 +249,46 @@
                     $('#jobrequestno').val(json.jobreqno);
                     $('#requino').val(json.requino);
                     $('#department').val(json.department);
-                    $('#sections').val(json.section);
+                    var e = document.getElementById("sections");
+                    var section = e.options[e.selectedIndex].text;
+                    e.options[e.selectedIndex].text = json.section;
+                    /*$('#sections').val(json.section);*/
                     $('#quantity').val(json.quantity);
                     $('#item').val(json.item);
                     $('#purpose').val(json.purpose);
-                    $('#remark').val(json.outsource);    
+                    var e = document.getElementById("remark");
+                    var outsource = e.options[e.selectedIndex].text;
+                    e.options[e.selectedIndex].text = json.outsource;
+                    /*$('#remark').val(json.outsource);*/
                     $('#editUserModal').modal('show');
                 }
             });
         });
 
-        $(document).on('submit', '#updateUserForm', function() {
+        $(document).on('submit', '#editUserModal', function() {
+
             var id = $('#id').val();
             var trid = $('#trid').val();
-            var name = $('#_inputName').val();
-            var username = $('#_inputUsername').val();
-            var password = $('#_inputPassword').val();
-            var rolelevel = $('#_inputRoleLevel').val();
-            var roleid = $('#_inputRoleID').val();
+            var jobreqno = $('#jobrequestno').val();
+            var requino = $('#requino').val();
+            var department = $('#department').val();
+            var section = $('#sections').val();
+            var quantity = $('#quantity').val();
+            var item = $('#item').val();
+            var purpose = $('#purpose').val();
+            var outsource = $('#remark').val();    
+
             $.ajax({
                 url: "update_user.php",
                 data: {
-                    id: id,
-                    name: name,
-                    username: username,
-                    password: password,
-                    rolelevel: rolelevel,
-                    roleid: roleid
+                    jobreqno: jobreqno,
+                    requino: requino,
+                    department: department,
+                    section: section,
+                    quantity: quantity,
+                    item: item,
+                    purpose: purpose,
+                    outsource: outsource
                 },
                 type: 'POST',
                 success: function(data) {
@@ -284,7 +297,7 @@
                     if (status == 'success') {
                         alert('Updated Successfully!');
                         table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a> <a href="javascript:void();" class="btn btn-sm btn-danger" data-id="' + id + '" >Delete</a>';
+                        var button = '<a href= "javascript:void();" data-id="'+jobreqno+'" class ="btn btn-sm btn-info editBtn">More Info</a>';
                         var row = table.row("[id='" + trid + "']");
                         row.row("[id='" + trid + "']").data([id, name, username, password, rolelevel, roleid, button]);
                         $('#editUserModal').modal('hide');
@@ -337,6 +350,7 @@
                                     <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
                                     <label class="fw-bold" for="date">Section:</label>
                                     <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections1">
+                                        <option value="0">Select</option>
                                         <option value="C">CARPENTRY</option>
                                         <option value="P">PLUMBING</option>
                                         <option value="A">AIRCON</option>
@@ -368,6 +382,7 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
                                     <select class="" style="width: 150px; Border: none;" name="cars" id="cars">
+                                        <option value="0">Select</option>
                                         <option value="volvo">Outsource</option>
                                         <option value="saab">Bill of materials</option>
                                     </select>
@@ -392,10 +407,6 @@
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:17%;">
                         <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
-                    </div>
-                    <div class="col-md-2" style="width:30%">
-                        <label class="" for="inputName">ID</label>
-                        <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -428,11 +439,11 @@
                                 <div class="col-md-12">
                                     <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
                                     <label class="fw-bold" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections">
-                                        <option value="C">CARPENTRY</option>
-                                        <option value="P">PLUMBING</option>
-                                        <option value="A">AIRCON</option>
-                                        <option value="E">ELECTRICAL</option>
+                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections" disabled>
+                                        <option value="CARPENTRY">CARPENTRY</option>
+                                        <option value="PLUMBING">PLUMBING</option>
+                                        <option value="AIRCON">AIRCON</option>
+                                        <option value="ELECTRICAL">ELECTRICAL</option>
                                     </select>
                                 </div>
                             </div>
@@ -458,9 +469,10 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
-                                    <select class="" style="width: 150px; Border: none;" name="cars" id="remark">
-                                        <option value="volvo">Outsource</option>
-                                        <option value="saab">Bill of materials</option>
+                                    <select class="" style="width: 150px; Border: none;" id="remark" disabled>
+                                        <option value="1">Select</option>
+                                        <option value="Outsource">Outsource</option>
+                                        <option value="Bill of materials">Bill of materials</option>
                                     </select>
                                 </div>
                             </div>
