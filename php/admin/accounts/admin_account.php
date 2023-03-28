@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-session_start();
-require('../../authentication/anti_pagetrans.php');
-?>
 
 <head>
     <meta charset="UTF-8">
