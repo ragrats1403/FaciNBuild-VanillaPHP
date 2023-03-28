@@ -12,9 +12,15 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
-    <link rel="stylesheet" type="text/css" href="../../../../css/modal.css/modal.css?<?= time() ?>" />
+    <link rel="stylesheet" type="text/css" href="../../../ccs/modal/modal.css<?= time() ?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script type="text/javascript" src="js/autofill.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <header class="shadow">
@@ -83,13 +89,7 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
     <!--<script>
         let btn = document.querySelector("#btn");
         let sidebar = document.querySelector(".sidebar");
@@ -98,7 +98,7 @@
             sidebar.classList.toggle("active");
         }
     </script>-->
-
+        
     <div class="table1">
         <div class="container-fluid">
             <div class="row">
@@ -109,14 +109,18 @@
                             <table id="datatable" class="table">
                                 <thead>
                                     <th>ID</th>
+                                    <th>Event Name</th>
                                     <th>Department</th>
-                                    <th>Date</th>
+                                    <th>Facility</th>
+                                    <th>Date Filed</th>
+                                    <th>Actual Date of Use</th>
                                     <th>Status</th>
                                     <th>Options</th>
                                 </thead>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <a data-toggle="modal" href="#myModal" class="btn btn-primary createresBtn">Create reservation</a>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Create reservation</button>
+                            
                             </div>
                         </div>
                     </div>
@@ -124,9 +128,248 @@
             </div>
         </div>
     </div>
+    
+     <!-- Script Process Start-- DO NOT MOVE THIS Script tags!!-->
+     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
+     <script type="text/javascript" src="functions/js/userprocess.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Modal Popup for More Info button-->
+    <div class="modal fade" id="test" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:1100px;">
+            <div class="modal-content">
+            <div class="modal-header justify-content-center" style="max-width:1100px;">
+                    <div class="col-md-2" style="width:17%;">
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
+                    </div>
+                    <div class="col-md-12" style="width:15%">
+                        <label class=""  for="inputName">Status:</label>
+                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id= "_statustext">
+                    </div>
+                    <div class="col-md-1" style="width:10%">
+                        <label class=""  for="inputName">ID:</label>
+                        <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    
+            </div>
+            
+                <div class="modal-body ">
+                    <form action="">
+                        Please select the facilities you would like to request.
+                        <!--
+                        <input type="checkbox" id="annex_avr" name="Annex AVR" value="annex_avr">
+                        <label for="annex_avr"> Annex AVR</label>
+                        <input type="checkbox" id="new_avr" name="New AVR" value="new_avr">
+                        <label for="new_avr"> New AVR</label>
+                        <input type="checkbox" id="cbe_functionhall" name="CBE Function Hall" value="cbe_functionhall">
+                        <label for="cbe_functionhall"> CBE Function Hall</label>
+                        <input type="checkbox" id="auditorium" name="Auditorium" value="auditorium">
+                        <label for="auditorium"> Auditorium</label>
+                        <input type="checkbox" id="be_functionhall" name="BE Function Hall" value="be_functionhall">
+                        <label for="be_functionhall"> BE Function Hall</label><br><br>-->
+                        <div class="row justify-content-center" style="padding-bottom:13px;">
+                            <div class="col-md-6 ">
+                                <!-- redacted
+                                <select class="form-control input-sm col-xs-1" name="sections" id="faci">
+                                    select = document.getElementById("faci");
+                                    <?php include('../../connection/connection.php');
+                                    $sql = "SELECT facilityname FROM facility";
+                                    $query = mysqli_query($con,$sql);
+                                    $i=1;
+                                    while($row = mysqli_fetch_assoc($query)){
+                                        echo "<option value=$i>".$row["facilityname"]."</option>";
+                                        $i++;
+                                    }
+                                    ?>               
+                                </select>-->
+                                <input type="text" class="form-control input-sm col-xs-1" id="_facility" placeholder="Facility">           
 
-    <!-- View add ons mod -->
-    <div class="modal " tabindex="-1" id="myModal" aria-labelledby="exampleModalLabel">
+                            </div>
+                            <div class="col-md-6 ">
+                            <input type="text" class="form-control input-sm col-xs-1" id="_eventname" placeholder="Event Name">
+                            </div>        
+                        </div>
+                        <div class="row justify-content-center" style="padding-bottom:13px;">
+                            <div class="col-md-6 ">
+                                <label class="fw-bold" for="date">Date Filed:</label>
+                                <input type="date" class="form-control input-sm col-xs-1" id="_datefiled" placeholder="Date Filed" disabled>
+                            </div>
+                            <div class="col-md-6 ">
+                                <label class="fw-bold" for="date">Actual Date of Use:</label>
+                                <input type="date" class="form-control input-sm col-xs-1" id="_actualdate" placeholder="Actual Date of Use">
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <label class="fw-bold" for="date">Time In:</label>
+                            <input type="time" class="form-control input-sm col-xs-1" id="_timein" placeholder="Time In">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="fw-bold" for="date">Time Out:</label>
+                            <input type="time" class="form-control input-sm col-xs-1" id="_timeout" placeholder="Time Out">
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <label class="fw-bold" for="date">Requesting Party:</label>
+                            <input type="name" class="form-control input-sm col-xs-1" id="_reqparty" placeholder="Requesting Party">
+                        </div>
+                        <div class="col-md-6 ">
+                            <label class="fw-bold" for="date">College/Department:</label>
+                            <input type="name" class="form-control input-sm col-xs-1" id="_collegeordepartment" placeholder="College/Department">
+                        </div>
+                        <div class="justify-content-center">
+                            <div class="col-md-12">
+                                <label class="fw-bold" for="date">Purpose of Activity:</label>
+                                <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <label class="fw-bold" for="date">Estimated No. of Audience/Participants:</label>
+                            <input type="name" class="form-control input-sm col-xs-1" id="_numparticipants" placeholder="Estimated No. of Audience/Participants">
+                        </div>
+                        <div class="col-md-6 ">
+                            <label class="fw-bold" for="date">Stage Performers (if any):</label>
+                            <input type="name" class="form-control input-sm col-xs-1" id="_stageperformers" placeholder="Stage Performers (if any)">
+                        </div>
+                        <br><br><br>
+                        <label>NB: All other equipment (e.g. Backdrop, chairs, etc.,) shall be the responsibility of the requesting party.
+                            Technician’s, Electrical, Janitor’s and security guards overtime fees/excess fees are subject to the terms an condition provided at the bank thereof.<br>
+                            Secure Reservation from the AVR (filled up by the AVR personnel only)
+                            <div class="col-md-6 ">
+                                <label class="fw-bold" for="date">Date and Time</label>
+                                <input type="datetime-local" class="form-control input-sm col-xs-1" id="_date_avr" placeholder="Date"><br>
+                            </div>
+                            2. The activity is officially endorsed and approved by the adviser, Chairperson/Dean, Department Head,
+                            and the SAO/ Cultural Directory. (if “disapproved”, it must be so stated, citing briefly the reason thereof)<br><br>
+                        </label>
+
+                        <div class="col-md-6 ">
+                            <label class="fw-bold" for="date">Adviser</label>
+                            <input type="name" class="form-control input-sm col-xs-1" id="_adviser" placeholder="Adviser">
+                        </div>
+                        <div class="col-md-6 ">
+                            <label class="fw-bold" for="date">CHAIRPERSON/DEAN/DEPARTMENT</label>
+                            <input type="name" class="form-control input-sm col-xs-1" id="_chairdeandep" placeholder="CHAIRPERSON/DEAN/DEPARTMENT">
+                        </div>
+
+                        <table id="datatable" class="table">
+                            <thead>
+                                <th>Equipments to Reserve</th>
+                                <th>Available</th>
+                                <th>Quantity to Reserve</th>
+                            </thead>
+                        </table>
+                        <div class="col-sm-12 d-flex justify-content-end">
+                            <a data-toggle="modal" href="#myModal2" class="btn btn-primary">Add-ons</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="tacbox">
+                        <input id="termscond" type="checkbox"/>
+                        <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                <script>
+                    document.getElementById("termscond").checked = true;
+                        document.getElementById("termscond").disabled = true;
+                    //date auto fill
+                    var now = new Date();
+                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                    document.getElementById('datefiled').value = now.toISOString().substring(0,10);
+                    //date end
+                    
+                </script>
+            </div>
+        </div>
+    </div>
+        <!-- Modal Popup End -->
+        <!-- Add ons modal popup-->
+        <div class="modal shadow p-3 mb-5 bg-white rounded" tabindex="-1" id="myModal2" aria-labelledby="exampleModalLabel" data-backdrop="static">
+        <div class="modal-dialog" style="max-width:1100px;">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center" style="max-width:1100px;">
+                    <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Job Request</h5>
+                </div>
+                <div class="modal-body ">
+                    <form id="saveUserForm" action="javascript:void();" method="POST">
+                        <div class="modal-body">
+                            <!-- Form Controls-->
+                            <div class="row justify-content-center" style="padding-bottom:13px;">
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Department:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
+                                </div>
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Date:</label>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
+                                </div>
+                            </div>
+                            <div class="justify-content-center">
+                                <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
+                                <div class="col-md-2" style="padding-bottom:10px">
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Item Name:</label>
+                                    <input type="form-control" class="form-control" id="_item_" placeholder="Item">
+                                </div>
+                            </div>
+
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Description:</label>
+                                    <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Purpose:</label>
+                                    <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-6">
+                                    <label class="fw-bold" for="renderedby">Rendered by:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="renderedby">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="fw-bold" for="date">Date:</label>
+                                    <input type="date" class="form-control input-sm col-xs-1" id="daterendered">
+                                </div>
+                            </div>
+                            <div class="row justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-6">
+                                    <label class="fw-bold" for="renderedby">Confirmed by:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="confirmedby">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="fw-bold" for="date">Date:</label>
+                                    <input type="date" class="form-control input-sm col-xs-1" id="dateconfirmed">
+                                </div>
+                            </div>
+                            </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <a href="#" class="btn btn-primary">Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- Add ons modal popup end-->
+
+        <!-- Create Reservation start-->
+        <div class="modal " tabindex="-1" id="myModal" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
@@ -146,23 +389,28 @@
                         <label for="auditorium"> Auditorium</label>
                         <input type="checkbox" id="be_functionhall" name="BE Function Hall" value="be_functionhall">
                         <label for="be_functionhall"> BE Function Hall</label><br><br>-->
-                        <div class="col-md-6 ">
-                            <select class="form-control input-sm col-xs-1" name="sections" id="faci">
-                                select = document.getElementById("faci");
-                                <?php include('../../connection/connection.php');
-                                $sql = "SELECT facilityname FROM facility";
-                                $query = mysqli_query($con,$sql);
-                                $i=1;
-                                while($row = mysqli_fetch_assoc($query)){
-                                    echo "<option value=$i>".$row["facilityname"]."</option>";
-                                    $i++;
-                                }
-                                ?>
-                                            
+                        <div class="row justify-content-center" style="padding-bottom:13px;">
+                            <div class="col-md-6 ">
+                                <select class="form-control input-sm col-xs-1" name="sections" id="faci">
+                                    select = document.getElementById("faci");
+                                    <?php include('../../connection/connection.php');
+                                    $sql = "SELECT facilityname FROM facility";
+                                    $query = mysqli_query($con,$sql);
+                                    $i=1;
+                                    while($row = mysqli_fetch_assoc($query)){
+                                        echo "<option value=$i>".$row["facilityname"]."</option>";
+                                        $i++;
+                                    }
+                                    ?>
+                                                
 
-                                            
-                            </select>
+                                                
+                                </select>
                             </div>
+                            <div class="col-md-6 ">
+                            <input type="text" class="form-control input-sm col-xs-1" id="eventname" placeholder="Event Name">
+                            </div>        
+                        </div>
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Date Filed:</label>
@@ -243,7 +491,7 @@
                     <input id="termscond" type="checkbox" onchange="updateButtonState()" />
                     <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>
                 </div>
-                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <a data-toggle="modal" href="#myModal" class="btn btn-primary disabled" id='termscond-create'>Create reservation</a>
                 </div>
                 <script>
@@ -267,109 +515,14 @@
             </div>
         </div>
     </div>
+        <!-- create reservation end -->
+    
+   
    
 
-
-    <!-- Modal Popup -->
-    <div class="modal shadow p-3 mb-5 bg-white rounded" tabindex="-1" id="myModal2" aria-labelledby="exampleModalLabel" data-backdrop="static">
-        <div class="modal-dialog" style="max-width:1100px;">
-            <div class="modal-content">
-                <div class="modal-header justify-content-center" style="max-width:1100px;">
-                    <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Job Request</h5>
-                </div>
-                <div class="modal-body ">
-                    <form id="saveUserForm" action="javascript:void();" method="POST">
-                        <div class="modal-body">
-                            <!-- Form Controls-->
-                            <div class="row justify-content-center" style="padding-bottom:13px;">
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Department:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
-                                </div>
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Date:</label>
-                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
-
-                                </div>
-                            </div>
-                            <div class="justify-content-center">
-                                <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
-                                <div class="col-md-2" style="padding-bottom:10px">
-                                    <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control" id="_item_" placeholder="Item">
-                                </div>
-                            </div>
-
-                            <div class="justify-content-center">
-                                <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
-                                    <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="justify-content-center">
-                                <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6">
-                                    <label class="fw-bold" for="renderedby">Rendered by:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="renderedby">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="fw-bold" for="date">Date:</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="daterendered">
-                                </div>
-                            </div>
-                            <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6">
-                                    <label class="fw-bold" for="renderedby">Confirmed by:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="confirmedby">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="fw-bold" for="date">Date:</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="dateconfirmed">
-                                </div>
-                            </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" data-dismiss="modal" class="btn">Close</a>
-                    <a href="#" class="btn btn-primary">Save</a>
-                </div>
-            </div>
-        </div>
-    </div>
- <script>
-    //what happens when clicking create reservation
-    $(document).on('click', '.createresBtn', function(event){
-   /* $.ajax({
-        url: "testfill.php",
-        type: "POST",
-        
-        success: function(data) {
-            var json = JSON.parse(data);
-            var status = json.status;
-            select = document.getElementById("faci");
-            
-           
-           
-        }
-    });
-    //alert('test');*/
-});
-  </script>
+    
+    
+ 
     <!-- BODY END-->
 </body>
 
