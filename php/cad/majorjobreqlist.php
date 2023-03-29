@@ -42,7 +42,7 @@
         <div class ="navdiv">
         <ul class="nav_list">
             <li>
-                <a href="../../../../php/cad/caddashboard.php">
+                <a href="../../../../php/cad/cadcalendarofactivities.php">
                     <i class='bx bx-user'></i>
                     <span class="link_name">Calendar of Activities</span>
                 </a>
@@ -54,7 +54,7 @@
                         Job Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/cad/minorjobreqlist.php">Minor Job Request</a>
                         <a class="dropdown-item" href="../../../../php/cad/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>

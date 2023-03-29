@@ -50,6 +50,12 @@
         <div class ="navdiv">
         <ul class="nav_list">
             <li>
+                    <a href="../../../php/admin/reservations/admincalendar.php">
+                        <i class='bx bx-calendar'></i>
+                        <span class="link_name">Calendar of Activities</span>
+                    </a>
+            </li>
+            <li>
                 <a href="../../../../php/admin/accounts/admin_account.php">
                     <i class='bx bx-user'></i>
                     <span class="link_name">Account</span>

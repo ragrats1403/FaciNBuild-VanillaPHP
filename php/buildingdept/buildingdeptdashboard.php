@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Celndar of Activities</title>
+    <title>Calendar of Activities</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -44,7 +44,7 @@
             <ul class="nav_list">
                 <li>
                     <a href="../../../php/buildingdept/buildingdeptdashboard.php">
-                        <i class='bx bx-user'></i>
+                        <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
                 </li>
@@ -108,10 +108,18 @@
             <div class="row">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
+                        <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF;  padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
+                            <h2 style= "text-align: center">CALENDAR OF ACTIVITIES</h2>
+                            <table id="datatable" class="table">
+                                <thead>
+                                    <th>Event Name</th>
+                                    <th>Date</th>
+                                    <th>Time Start</th>
+                                    <th>Time End</th>
+                                    <th>Venue</th>
+                                </thead>
                         </div>
-                        <div class="col-md-2"></div>
                     </div>
                 </div>
             </div>
@@ -396,9 +404,6 @@
         </div>
     </div>
     <!-- edit user modalPopup end-->
-
-
-
 
 </body>
 
