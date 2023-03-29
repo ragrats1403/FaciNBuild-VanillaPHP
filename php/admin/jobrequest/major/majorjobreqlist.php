@@ -364,7 +364,7 @@
     
         $(document).on('click', '.declineBtn', function(event){
             //var status = "Approved";
-            var id = $('#id').val();
+            var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
             $.ajax({
                 url: "declinerequest.php",
@@ -397,7 +397,7 @@
         $(document).on('click', '.step1approveBtn', function(event){
 
             //var status = "Approved";
-            var id = $('#id').val();
+            var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
             $.ajax({
                 url: "step1approve.php",
@@ -430,7 +430,7 @@
         $(document).on('click', '.step2approveBtn', function(event){
 
             //var status = "Approved";
-            var id = $('#id').val();
+            var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
             $.ajax({
                 url: "step2approve.php",
@@ -462,7 +462,7 @@
 
 $(document).on('click', '.step3approveBtn', function(event){
 //var status = "Approved";
-var id = $('#id').val();
+var id = $('#jobrequestno').val();
 var trid = $('#trid').val();
 $.ajax({
     url: "step3approve.php",
@@ -495,7 +495,7 @@ $.ajax({
 });
 
 $(document).on('click', '.step1declineBtn', function(event){
-    var id = $('#id').val();
+    var id = $('#jobrequestno').val();
     var trid = $('#trid').val();
     $.ajax({
         url: "step1decline.php",
@@ -527,7 +527,7 @@ $(document).on('click', '.step1declineBtn', function(event){
 });
 
 $(document).on('click', '.step2declineBtn', function(event){
-    var id = $('#id').val();
+    var id = $('#jobrequestno').val();
     var trid = $('#trid').val();
     $.ajax({
         url: "step2decline.php",
@@ -559,7 +559,7 @@ $(document).on('click', '.step2declineBtn', function(event){
 });
 
 $(document).on('click', '.step3declineBtn', function(event){
-    var id = $('#id').val();
+    var id = $('#jobrequestno').val();
     var trid = $('#trid').val();
     $.ajax({
         url: "step3decline.php",
@@ -713,35 +713,35 @@ $(document).on('click', '.step3declineBtn', function(event){
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Job Request no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="jobrequestno" placeholder="Job request no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="jobrequestno" placeholder="Job request no." disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Requisition no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="requino" placeholder="Requisition no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="requino" placeholder="Requisition no." disabled>
                                 </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="date" placeholder="Date">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="date" placeholder="Date" disabled>
                                 </div>
                             </div>   
                             <div class="row">
                                 <div class="col-md-12" >
                                     <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
                                     <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="quantity" placeholder="Quantity">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id="quantity" placeholder="Quantity" disabled>
                                 </div>
                             </div>
                             
                             <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="item"placeholder="Item">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="item"placeholder="Item" disabled>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
@@ -772,7 +772,7 @@ $(document).on('click', '.step3declineBtn', function(event){
                                     <label class="fw-bold" for="inputName">Step 1 Status:</label>
                                 </div> 
                                 <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1" disabled>
                                 </div> 
                                 <div class="col-md-1">
                                     <!--Id:step1approveBtn-->
@@ -788,7 +788,7 @@ $(document).on('click', '.step3declineBtn', function(event){
                                     <label class="fw-bold" for="inputName">Step 2 Status:</label>
                                 </div> 
                                 <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step2">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step2" disabled>
                                 </div> 
                                 <div class="col-md-1">
                                     <!--Id:step2approveBtn-->
@@ -804,7 +804,7 @@ $(document).on('click', '.step3declineBtn', function(event){
                                     <label class="fw-bold" for="inputName">Step 3 Status:</label>
                                 </div> 
                                 <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step3">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step3" disabled>
                                 </div> 
                                 <div class="col-md-1">
                                     <!--Id:step3approveBtn-->
