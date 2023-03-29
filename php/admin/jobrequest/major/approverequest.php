@@ -1,15 +1,13 @@
-<?php include('../../../../connection/connection.php');
-
+<?php include('../../../connection/connection.php');
 
 $id = $_POST['id'];
-
 
 /*
 bdstatus
 cadstatus
 pcostatus
 */
-$sql = "UPDATE `minorjreq` SET `bdstatus` = 'Approved',`cadstatus`='Approved', `pcostatus`= 'Approved', `status`='Approved' WHERE minorjobid = '$id'";
+$sql = "UPDATE `majoreq` SET `status`='Approved', `bdstatus` = 'Approved',`cadstatus`='Approved', `pcostatus`= 'Approved' WHERE jobreqno = '$id'";
 $query = mysqli_query($con, $sql);
 
 if ($query == true) {

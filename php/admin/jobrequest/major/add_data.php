@@ -11,7 +11,7 @@ $description = $_POST['description'];
 $purpose = $_POST['purpose'];
 $outsource = $_POST['outsource'];
 
-$sql = "INSERT INTO `majoreq` (`jobreqno`,`requino`,`department`,`date`,`quantity`,`item`,`section`,`description`,`purpose`,`outsource`) VALUES ('$jobreqno','$requino','$department','$date','$quantity','$item','$section','$description','$purpose','$outsource')";
+$sql = "INSERT INTO `majoreq` (`jobreqno`,`requino`,`department`,`date`,`quantity`,`item`,`section`,`description`,`purpose`,`outsource`,`status`,`bdstatus`,`cadstatus`,`pcostatus`) VALUES ('$jobreqno','$requino','$department','$date','$quantity','$item','$section','$description','$purpose','$outsource','Pending','Pending','Pending','Pending')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
     $data = array(
