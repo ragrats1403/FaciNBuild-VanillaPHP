@@ -174,13 +174,22 @@
         //add button control
         $(document).on('submit', '#addUserModal', function(event) {
             event.preventDefault();
-            var requino = $('#requino').val();
-            var department = $('#department').val();
-            var date = $('#date').val();
-            var quantity = $('#quantity').val();
-            var item = $('#item').val();
-            var item = $('#description').val();
-            var purpose = $('#purpose').val();
+            var requino = $('#requi').val();
+            var department = $('#depart').val();
+            var date = $('#deeto').val();
+            var quantity = $('#quan').val();
+            var item = $('#ite').val();
+
+            var e = document.getElementById("section");//dropdown
+            var section = e.options[e.selectedIndex].text;//end
+
+            var description = $('#desc').val();
+            var purpose = $('#purp').val();
+
+            var e = document.getElementById("mark");//dropdown
+            var outsource = e.options[e.selectedIndex].text;//end
+
+            if (department != '' && date != '' && quantity != '' && item != '' && section != '' && description != '' && purpose != '' && outsource != '') {
             $.ajax({
                 url: "add_data.php",
                 data: {
@@ -189,8 +198,10 @@
                     date: date,
                     quantity: quantity,
                     item: item,
+                    section: section,
                     description: description,
-                    purpose: purpose
+                    purpose: purpose,
+                    outsource: outsource
                 },
                 type: 'POST',
                 success: function(data) {
@@ -200,17 +211,25 @@
                         table = $('#datatable').DataTable();
                         table.draw();
                         alert('Successfully Added User!');
-                        $('#requino').val('');
-                        $('#department').val('');
-                        $('#date').val('');
-                        $('#quantity').val('');
-                        $('#item').val('');
-                        $('#description').val('');
-                        $('#purpose').val('');
+                        $('#requi').val('');
+                        $('#depart').val('');
+                        $('#deeto').val('');
+                        $('#quan').val('');
+                        $('#ite').val('');
+                        $('#section').val('');
+                        $('#desc').val('');
+                        $('#purp').val('');
+                        $('#mark').val('');
                         $('#addUserModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
                     }
                 }
             });
+        }
+            else {
+                alert("Please fill all the Required fields");
+            }
         });
         //delete user button control
         /*$(document).on('click', '.btnDelete', function(event) {
@@ -612,28 +631,28 @@ $(document).on('click', '.step3declineBtn', function(event){
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Job Request no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="Namemajorjr1" placeholder="Job request no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="no" placeholder="Job request no." disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Requisition no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="numbermajorjr1" placeholder="Requisition no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="requi" placeholder="Requisition no.">
                                 </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="departmentmajorjr1" placeholder="Department">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="Department">
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="datemajorjr1" placeholder="Date">
+                                    <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
                                     <label class="fw-bold" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections1">
+                                    <select class="" style="width: 150px; Border: 5px;" name="section" id="section">
                                         <option value="0">Select</option>
                                         <option value="C">CARPENTRY</option>
                                         <option value="P">PLUMBING</option>
@@ -646,32 +665,32 @@ $(document).on('click', '.step3declineBtn', function(event){
                             <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="_quantity_1" placeholder="Quantity">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id="quan" placeholder="Quantity">
                                 </div>
                             </div>
                             
                             <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="_item_1"placeholder="Item">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="ite"placeholder="Item">
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Description:</label>
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="majorjrpurp1"></textarea>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="desc"></textarea>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp1"></textarea>
+                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="purp"></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
-                                    <select class="" style="width: 150px; Border: none;" name="cars" id="cars">
+                                    <select class="" style="width: 150px; Border: none;" name="cars" id="mark">
                                         <option value="0">Select</option>
                                         <option value="volvo">Outsource</option>
                                         <option value="saab">Bill of materials</option>
