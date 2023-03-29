@@ -42,8 +42,8 @@
         <div class ="navdiv">
         <ul class="nav_list">
             <li>
-                <a href="../../../../php/buildingdept/buildingdeptdashboard.php">
-                    <i class='bx bx-user'></i>
+                <a href="../../../php/buildingdept/buildingdeptdashboard.php">
+                    <i class='bx bx-calendar'></i>
                     <span class="link_name">Calendar of Activities</span>
                 </a>
             </li>
