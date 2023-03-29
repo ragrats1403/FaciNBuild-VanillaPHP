@@ -125,6 +125,7 @@
                                     <th>Requisition no.</th>
                                     <th>Department</th>
                                     <th>Quantity</th>
+                                    <th>Status</th>
                                     <th>Options</th>
                                 </thead>
                             </table>
@@ -173,13 +174,22 @@
         //add button control
         $(document).on('submit', '#addUserModal', function(event) {
             event.preventDefault();
-            var requino = $('#requino').val();
-            var department = $('#department').val();
-            var date = $('#date').val();
-            var quantity = $('#quantity').val();
-            var item = $('#item').val();
-            var item = $('#description').val();
-            var purpose = $('#purpose').val();
+            var requino = $('#requi').val();
+            var department = $('#depart').val();
+            var date = $('#deeto').val();
+            var quantity = $('#quan').val();
+            var item = $('#ite').val();
+
+            var e = document.getElementById("section");//dropdown
+            var section = e.options[e.selectedIndex].text;//end
+
+            var description = $('#desc').val();
+            var purpose = $('#purp').val();
+
+            var e = document.getElementById("mark");//dropdown
+            var outsource = e.options[e.selectedIndex].text;//end
+
+            if (department != '' && date != '' && quantity != '' && item != '' && section != '' && description != '' && purpose != '' && outsource != '') {
             $.ajax({
                 url: "add_data.php",
                 data: {
@@ -188,8 +198,10 @@
                     date: date,
                     quantity: quantity,
                     item: item,
+                    section: section,
                     description: description,
-                    purpose: purpose
+                    purpose: purpose,
+                    outsource: outsource
                 },
                 type: 'POST',
                 success: function(data) {
@@ -199,17 +211,25 @@
                         table = $('#datatable').DataTable();
                         table.draw();
                         alert('Successfully Added User!');
-                        $('#requino').val('');
-                        $('#department').val('');
-                        $('#date').val('');
-                        $('#quantity').val('');
-                        $('#item').val('');
-                        $('#description').val('');
-                        $('#purpose').val('');
+                        $('#requi').val('');
+                        $('#depart').val('');
+                        $('#deeto').val('');
+                        $('#quan').val('');
+                        $('#ite').val('');
+                        $('#section').val('');
+                        $('#desc').val('');
+                        $('#purp').val('');
+                        $('#mark').val('');
                         $('#addUserModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
                     }
                 }
             });
+        }
+            else {
+                alert("Please fill all the Required fields");
+            }
         });
         //delete user button control
         $(document).on('click', '.btnDelete', function(event) {
@@ -243,7 +263,7 @@
         //edit button control 
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
-            var trid = $(this).closest('tr').attr('majoreq');
+            var trid = $(this).closest('trid').attr('majoreq');
             $.ajax({
                 url: "get_single_user.php",
                 data: {
@@ -269,13 +289,18 @@
                     var e = document.getElementById("remark");
                     var outsource = e.options[e.selectedIndex].text;
                     e.options[e.selectedIndex].text = json.outsource;
+
+                    $('#_statustext').val(json.status);
+                    $('#_step1').val(json.bdstatus);
+                    $('#_step2').val(json.pcostatus);
+                    $('#_step3').val(json.cadstatus);
                     /*$('#remark').val(json.outsource);*/
                     $('#editUserModal').modal('show');
                 }
             });
         });
 
-        $(document).on('submit', '#editUserModal', function() {
+        $(document).on('click', '.updateBtn', function() {
 
             var id = $('#id').val();
             var trid = $('#trid').val();
@@ -288,7 +313,7 @@
             var item = $('#item').val();
             var description = $('#description').val();
             var purpose = $('#purpose').val();
-            var outsource = $('#remark').val();    
+            var outsource = $('#remark').val();
 
             $.ajax({
                 url: "update_user.php",
@@ -321,6 +346,270 @@
                 }
             });
         });
+
+        //APPROVE=================================================
+        
+        $(document).on('click', '.approveBtn', function(event){
+            var id = $('#jobrequestno').val();
+            var trid = $('#trid').val();
+            $.ajax({
+                url: "approverequest.php",
+                data: {
+                    id: id,
+                },
+                type: 'POST',
+                success: function(data) {
+                    try {
+                        var json = JSON.parse(data);
+                        var status = json.status;
+                        if (status == 'success') {
+                            table = $('#datatable').DataTable();
+                            table.draw();
+                            alert('Approved Successfully!');
+                            $('#editUserModal').modal('hide');
+                        } else { 
+                            alert('failed');
+                        }
+                    } catch(e) {
+                        console.log('An error occurred while processing the response: ' + e);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log('An error occurred while making the request: ' + textStatus + ' ' + errorThrown);
+                }
+            });
+        });
+
+    
+        $(document).on('click', '.declineBtn', function(event){
+            //var status = "Approved";
+            var id = $('#jobrequestno').val();
+            var trid = $('#trid').val();
+            $.ajax({
+                url: "declinerequest.php",
+                data: {
+                    id: id,
+                    
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    var status = json.status;
+                    if (status == 'success') {
+                        table = $('#datatable').DataTable();
+                        table.draw();
+                        alert('Request Declined Successfully!');
+                    
+                        /*table = $('#datatable').DataTable();
+                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                        var row = table.row("[id='" + trid + "']");
+                        row.row("[id='" + trid + "']").data([department, date, button]);*/
+                        $('#editUserModal').modal('hide');
+                    } else { 
+                        alert('failed');
+                    }
+                }
+            });
+            //alert('test');
+        });
+
+        $(document).on('click', '.step1approveBtn', function(event){
+
+            //var status = "Approved";
+            var id = $('#jobrequestno').val();
+            var trid = $('#trid').val();
+            $.ajax({
+                url: "step1approve.php",
+                data: {
+                    id: id,
+                    
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    var status = json.status;
+                    if (status == 'success') {
+                        table = $('#datatable').DataTable();
+                        table.draw();
+                        alert('Step 1 Approved Successfully!');
+                    
+                        /*table = $('#datatable').DataTable();
+                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                        var row = table.row("[id='" + trid + "']");
+                        row.row("[id='" + trid + "']").data([department, date, button]);*/
+                        $('#_step1').val('Approved');
+                    } else { 
+                        alert('failed');
+                    }
+                }
+            });
+            //alert('test');
+        });
+
+        $(document).on('click', '.step2approveBtn', function(event){
+
+            //var status = "Approved";
+            var id = $('#jobrequestno').val();
+            var trid = $('#trid').val();
+            $.ajax({
+                url: "step2approve.php",
+                data: {
+                    id: id,
+                    
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    var status = json.status;
+                    if (status == 'success') {
+                        table = $('#datatable').DataTable();
+                        table.draw();
+                        alert('Step 2 Approved Successfully!');
+                    
+                        /*table = $('#datatable').DataTable();
+                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                        var row = table.row("[id='" + trid + "']");
+                        row.row("[id='" + trid + "']").data([department, date, button]);*/
+                        $('#_step2').val('Approved');
+                    } else { 
+                        alert('failed');
+                    }
+                }
+            });
+        //alert('test');
+        });
+
+$(document).on('click', '.step3approveBtn', function(event){
+//var status = "Approved";
+var id = $('#jobrequestno').val();
+var trid = $('#trid').val();
+$.ajax({
+    url: "step3approve.php",
+    data: {
+        id: id,
+        
+    },
+    type: 'POST',
+    success: function(data) {
+        var json = JSON.parse(data);
+        var status = json.status;
+        if (status == 'success') {
+            table = $('#datatable').DataTable();
+            table.draw();
+            alert('Step 3 Approved Successfully!');
+
+           
+            /*table = $('#datatable').DataTable();
+            var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+            var row = table.row("[id='" + trid + "']");
+            row.row("[id='" + trid + "']").data([department, date, button]);*/
+            //$('#_itemdesc_').text('');
+            $('#_step3').val('Approved');
+            $('#_statustext').val('Approved');
+        } else { 
+            alert('failed');
+        }
+    }
+    });
+});
+
+$(document).on('click', '.step1declineBtn', function(event){
+    var id = $('#jobrequestno').val();
+    var trid = $('#trid').val();
+    $.ajax({
+        url: "step1decline.php",
+        data: {
+            id: id,
+            
+        },
+        type: 'POST',
+        success: function(data) {
+            var json = JSON.parse(data);
+            var status = json.status;
+            if (status == 'success') {
+                table = $('#datatable').DataTable();
+                table.draw();
+                alert('Step 1 Declined Successfully!');
+
+            
+                /*table = $('#datatable').DataTable();
+                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                var row = table.row("[id='" + trid + "']");
+                row.row("[id='" + trid + "']").data([department, date, button]);*/
+                //$('#_itemdesc_').text('');
+                $('#_step1').val('Declined');
+            } else { 
+                alert('failed');
+            }
+        }
+        });
+});
+
+$(document).on('click', '.step2declineBtn', function(event){
+    var id = $('#jobrequestno').val();
+    var trid = $('#trid').val();
+    $.ajax({
+        url: "step2decline.php",
+        data: {
+            id: id,
+            
+        },
+        type: 'POST',
+        success: function(data) {
+            var json = JSON.parse(data);
+            var status = json.status;
+            if (status == 'success') {
+                table = $('#datatable').DataTable();
+                table.draw();
+                alert('Step 2 Declined Successfully!');
+
+            
+                /*table = $('#datatable').DataTable();
+                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                var row = table.row("[id='" + trid + "']");
+                row.row("[id='" + trid + "']").data([department, date, button]);*/
+                //$('#_itemdesc_').text('');
+                $('#_step2').val('Declined');
+            } else { 
+                alert('failed');
+            }
+        }
+        });
+});
+
+$(document).on('click', '.step3declineBtn', function(event){
+    var id = $('#jobrequestno').val();
+    var trid = $('#trid').val();
+    $.ajax({
+        url: "step3decline.php",
+        data: {
+            id: id,
+            
+        },
+        type: 'POST',
+        success: function(data) {
+            var json = JSON.parse(data);
+            var status = json.status;
+            if (status == 'success') {
+                table = $('#datatable').DataTable();
+                table.draw();
+                alert('Step 3 Declined Successfully!');
+
+            
+                /*table = $('#datatable').DataTable();
+                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                var row = table.row("[id='" + trid + "']");
+                row.row("[id='" + trid + "']").data([department, date, button]);*/
+                //$('#_itemdesc_').text('');
+                $('#_step3').val('Declined');
+                $('#_statustext').val('Declined');
+                
+            } else { 
+                alert('failed');
+            }
+        }
+        });
+}); 
     </script>
     <!-- Script Process End-->
     <!-- add user modal-->
@@ -342,28 +631,28 @@
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Job Request no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="Namemajorjr1" placeholder="Job request no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="no" placeholder="Job request no." disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Requisition no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="numbermajorjr1" placeholder="Requisition no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="requi" placeholder="Requisition no.">
                                 </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="departmentmajorjr1" placeholder="Department">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="Department">
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="datemajorjr1" placeholder="Date">
+                                    <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
                                     <label class="fw-bold" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections1">
+                                    <select class="" style="width: 150px; Border: 5px;" name="section" id="section">
                                         <option value="0">Select</option>
                                         <option value="C">CARPENTRY</option>
                                         <option value="P">PLUMBING</option>
@@ -376,32 +665,32 @@
                             <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="_quantity_1" placeholder="Quantity">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id="quan" placeholder="Quantity">
                                 </div>
                             </div>
                             
                             <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="_item_1"placeholder="Item">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="ite"placeholder="Item">
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Description:</label>
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="majorjrpurp1"></textarea>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="desc"></textarea>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp1"></textarea>
+                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="purp"></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
-                                    <select class="" style="width: 150px; Border: none;" name="cars" id="cars">
+                                    <select class="" style="width: 150px; Border: none;" name="cars" id="mark">
                                         <option value="0">Select</option>
                                         <option value="volvo">Outsource</option>
                                         <option value="saab">Bill of materials</option>
@@ -428,45 +717,50 @@
                     <div class="col-md-2" style="width:17%;">
                         <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
                     </div>
+                    <div class="col-md-12" style="width:15%">
+                        <label class=""  for="inputName">Status:</label>
+                        <input type="text" style="width:60%" class="col-sm-1" name="id" class="form-control" id= "_statustext">
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                 <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
                             <!-- Form Controls-->
-
+                            <input type="hidden" id="id" name="id" value="">
+                            <input type="hidden" id="trid" name="trid" value="">
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Job Request no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="jobrequestno" placeholder="Job request no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="jobrequestno" placeholder="Job request no." disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Requisition no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="requino" placeholder="Requisition no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="requino" placeholder="Requisition no." disabled>
                                 </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="date" placeholder="Date">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="date" placeholder="Date" disabled>
                                 </div>
                             </div>   
                             <div class="row">
                                 <div class="col-md-12" >
                                     <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
                                     <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="quantity" placeholder="Quantity">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id="quantity" placeholder="Quantity" disabled>
                                 </div>
                             </div>
                             
                             <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="item"placeholder="Item">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="item"placeholder="Item" disabled>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
@@ -497,7 +791,7 @@
                                     <label class="fw-bold" for="inputName">Step 1 Status:</label>
                                 </div> 
                                 <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1" disabled>
                                 </div> 
                                 <div class="col-md-1">
                                     <!--Id:step1approveBtn-->
@@ -513,7 +807,7 @@
                                     <label class="fw-bold" for="inputName">Step 2 Status:</label>
                                 </div> 
                                 <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step2">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step2" disabled>
                                 </div> 
                                 <div class="col-md-1">
                                     <!--Id:step2approveBtn-->
@@ -529,7 +823,7 @@
                                     <label class="fw-bold" for="inputName">Step 3 Status:</label>
                                 </div> 
                                 <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step3">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step3" disabled>
                                 </div> 
                                 <div class="col-md-1">
                                     <!--Id:step3approveBtn-->
