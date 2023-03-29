@@ -1,8 +1,8 @@
-<?php include('../../connection/connection.php');
+<?php include('../../../connection/connection.php');
 
 $id = $_POST['id'];
 
-$sql = "DELETE FROM users WHERE id='$id'";
+$sql = "DELETE FROM majoreq WHERE jobreqno='$id'";
 $query = mysqli_query($con, $sql);
 if ($query == true) 
 {

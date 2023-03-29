@@ -232,7 +232,7 @@
             }
         });
         //delete user button control
-        /*$(document).on('click', '.btnDelete', function(event) {
+        $(document).on('click', '.btnDelete', function(event) {
             var table = $('#datatable').DataTable();
             event.preventDefault();
             var id = $(this).data('id');
@@ -260,7 +260,7 @@
                 return null;
             }
         });
-        //edit button control */
+        //edit button control 
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
