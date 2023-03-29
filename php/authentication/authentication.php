@@ -28,26 +28,26 @@ if ($stmt = $con->prepare($sql)) {
         $stmt->fetch();
         if ($password_input == $password_db) {
             switch ($rolelevel) {
-                case 1:
-                    header("Location: ../admin/accounts/admin_account.php"); //admin
+                case '1': //admin
+                    $folder = '..\admin\accounts\admin_account.php';
                     break;
-                case 2:
-                    header("Location: ../buildingdept/buildingdeptdashboard.php"); //building department
+                case '2': //building department
+                    $folder = '..\buildingdept\buildingdeptdashboard.php';
                     break;
-                case 3:
-                    header("Location: ../facilitiesdept/facilitiesdashboard.php"); //facilities department
+                case '3': //facilities department
+                    $folder = '..\facilitiesdept\facilitiesdashboard.php';
                     break;
-                case 4:
-                    header("Location: ../user/userdashboard.php"); //user
+                case '4': //user
+                    $folder = '..\user\userdashboard.php';
                     break;
-                case 5:
-                    header("Location: ../cad/majorjobreqlist.php"); //cad
+                case '5': //cad
+                    $folder = '..\cad\majorjobreqlist.php';
                     break;
-                case 6:
-                    header("Location: ../pco/majorjobreqlist.php"); //pco
+                case '6': //pco
+                    $folder = '..\pco\majorjobreqlist.php';
                     break;
-                case 7:
-                    header("Location: ../sao/saodashboard.php"); //sao
+                case '7': //sao
+                    $folder = '..\sao\saodashboard.php';
                     break;
                 default:
                     session_destroy();
@@ -57,6 +57,9 @@ if ($stmt = $con->prepare($sql)) {
                     echo $alert;
                     break;
             }
+            $_SESSION['rolelevel'] = $rolelevel;
+            header("Location: $folder");
+            exit;
         } else {
             session_destroy();
             $alert = "<script type='text/javascript'>alert('Login failed. Invalid username or password.');

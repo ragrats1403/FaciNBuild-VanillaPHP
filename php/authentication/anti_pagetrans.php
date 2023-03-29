@@ -1,33 +1,60 @@
 <?php
-//Session starts
+
 session_start();
 
-if (!isset($_SESSION['flg']) && $_SESSION['flg'] !== "ok") {
-    echo '
-        <div align="center">
-            <h1>You dont have a permission to display this page.</h1>
-            <p style="color : red;">
-            Direct access to this page is prohibited.
-            </p>
-            <p><strong>If you have disabled cookies, please enable them.</strong></p>
-            <p>
-                <ul style=" list-style-type: none;">
-                    <li><a href="https://support.google.com/chrome/answer/95647?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">Clear, allow, & manage cookies in Chrome</a></li>
-                    <li><a href="https://support.mozilla.org/en/kb/enable-and-disable-cookies-website-preferences" target="_blank">Enhanced Tracking Protection in Firefox for desktop</a></li>
-                    <li><a href="https://support.microsoft.com/en/help/17442/windows-internet-explorer-delete-manage-cookies" target="_blank">Delete and manage cookies</a></li>
-                </ul>
-            </p>
-        </div><!--div center-->
-    ';
-    exit();
-} else {
-    $_SESSION = array();
-
-    // Delete cookies
-    if (isset($_COOKIE['PHPSESSID'])) {
-        setcookie('PHPSESSID', '', time() - 42000, '/');
-    }
-
-    // Destroy sessions
-    session_destroy();
+// ログインしていない場合には、ログインページにリダイレクトする
+if (!isset($_SESSION['rolelevel'])) {
+    header("Location: ../../../index.php");
+    exit;
 }
+
+// ユーザーの$rolelevelを取得する
+$rolelevel = $_SESSION['rolelevel'];
+
+// 不正な遷移が行われた場合には、ログに記録する
+if (!checkRoleLevel($rolelevel, $_SERVER['REQUEST_URI'])) {
+    logError("Unauthorized access attempt by user with role level $rolelevel to URL ".$_SERVER['REQUEST_URI']);
+    // エラーページにリダイレクトする
+    header("Location: ../../authentication/error.php");
+    exit;
+}
+
+/**
+ * $rolelevelに対応するURLかどうかを確認する
+ *
+ * @param int $rolelevel ユーザーの$rolelevel
+ * @param string $url 確認するURL
+ * @return bool $rolelevelに対応するURLである場合にはtrue、そうでない場合にはfalseを返す
+ */
+function checkRoleLevel($rolelevel, $url) {
+    switch ($rolelevel) {
+        case 1:
+            return preg_match("/^\/admin\//", $url);
+        case 2:
+            return preg_match("/^\/buildingdept\//", $url);
+        case 3:
+            return preg_match("/^\/facilitiesdept\//", $url);
+        case 4:
+            return preg_match("/^\/user\//", $url);
+        case 5:
+            return preg_match("/^\/cad\//", $url);
+        case 6:
+            return preg_match("/^\/pco\//", $url);
+        case 7:
+            return preg_match("/^\/sao\//", $url);    
+        default:
+            return false;
+    }
+}
+
+/**
+ * エラーログを記録する
+ *
+ * @param string $message エラーメッセージ
+ */
+function logError($message) {
+    // エラーログをファイルに追記する
+    file_put_contents("error.log", date("Y-m-d H:i:s")." ".$message."\n", FILE_APPEND);
+}
+
+?>
