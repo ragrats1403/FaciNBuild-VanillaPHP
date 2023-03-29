@@ -1,22 +1,34 @@
-<?php include('../../../../connection/connection.php');
+<?php include('../../../connection/connection.php');
 
+//variables
 
+$eventname = $_POST['eventname'];
+$datefiled = $_POST['datefiled'];
+$actualdate = $_POST['actualdate'];
+$timein = $_POST['timein'];
+$timeout = $_POST['timeout'];
+$reqparty = $_POST['reqparty'];
 $department = $_POST['department'];
-$date = $_POST['date'];
-$quantity = $_POST['quantity'];
-$itemname = $_POST['itemname'];
-$description = $_POST['description'];
 $purpose = $_POST['purpose'];
-$section = $_POST['section'];
-
+$numparticipants = $_POST['numparticipants'];
+$stageperf = $_POST['stageperf'];
+$adviser = $_POST['adviser'];
+$chairman = $_POST['chairman'];
+$faci = $_POST['faci'];
 /*$renderedby = $_POST['renderedby'];
 $daterendered = $_POST['daterendered'];
 $confirmedby = $_POST['confirmedby'];
 $dateconfirmed = $_POST['dateconfirmed'];*/
 
+//conflict checking section start
 
 
-$sql = "INSERT INTO `minorjreq` (`department`,`datesubmitted`, `quantity`, `item`,`item_desc`,`purpose`, `section`, `bdstatus`,`cadstatus`,`pcostatus`,`status`) VALUES ('$department','$date','$quantity','$itemname','$description',' $purpose', '$section','Pending', 'Pending', 'Pending', 'Pending')";
+
+
+//conflict checking section end
+
+
+$sql = "INSERT INTO `reservation` (`department`, `eventname`, `facility`, `requestingparty`, `purposeofactivity`, `datefiled`, `actualdateofuse`, `timestart`, `timeend`, `participants`, `stageperformers`, `adviser`, `chairperson`, `status`, `fdstatus`, `saostatus`) VALUES ('$department','$eventname','$faci','$reqparty',' $purpose', '$datefiled', '$actualdate', '$timein', '$timeout', '$numparticipants', '$stageperf', '$adviser', '$chairman', 'Pending', 'Pending', 'Pending')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
     $data = array(

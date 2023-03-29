@@ -1,8 +1,8 @@
-<?php include('../../../../connection/connection.php');
+<?php include('../../../connection/connection.php');
 
 $id = $_POST['id'];
 
-$sql = "DELETE FROM minorjreq WHERE minorjobid='$id'";
+$sql = "DELETE FROM `reservation` WHERE reservationid ='$id' and `status` = 'Pending'";
 $query = mysqli_query($con, $sql);
 if ($query == true) 
 {
@@ -10,7 +10,6 @@ if ($query == true)
        'status'=>'success',
       
    );
-
    echo json_encode($data);
 }
 else

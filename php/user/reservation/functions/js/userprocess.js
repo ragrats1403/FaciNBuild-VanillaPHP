@@ -83,33 +83,46 @@ $('#closemodal').click(function() {
 });
 
 
+//create reservation
 
-$(document).on('submit', '#myModal', function(event) {
+$(document).on('click', '.submitBtn', function(event) {
     event.preventDefault();
-    var department = $('#department').val();
-    var date = $('#datemajorjr').val();
-    var quantity = $('#_quantity_').val();
-    var itemname = $('#_item_').val();
-    var description = $('#_itemdesc_').val();
-    var purpose = $('#_purpose_').val();
-
-    var e = document.getElementById("sect");
-    var section = e.options[e.selectedIndex].text;
+    var eventname= $('#eventname').val();
+    var datefiled= $('#datefiled').val();
+    var actualdate= $('#actualdate').val();
+    var timein= $('#timein').val();
+    var timeout= $('#timeout').val();
+    var reqparty= $('#reqparty').val();
+    var department= $('#collegeordepartment').val();
+    var purpose = $('#purpose').val();
+    var numparticipants = $('#numparticipants').val();
+    var stageperf = $('#stageperformers').val();
+    var adviser = $('#adviser').val();
+    var chairman = $('#chairdeandep').val();
+    var e = document.getElementById("faci");
+    
+    var faci = e.options[e.selectedIndex].text;
     /*var renderedby = $('#renderedby').val();
     var daterendered = $('#daterendered').val();
     var confirmedby = $('#confirmedby').val();
     var dateconfirmed = $('#dateconfirmed').val();*/
-    if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '' && section != '') {
+    if (eventname != '' && datefiled != '' && actualdate != '' && timein != '' && timeout != '' && reqparty != '' && department != '' && purpose != '' && numparticipants != '' && stageperf != '' && adviser != '' && chairman != '') {
         $.ajax({
             url: "functions/add_data.php",
             data: {
+                eventname: eventname,
+                datefiled: datefiled,
+                actualdate: actualdate,
+                timein: timein,
+                timeout: timeout,
+                reqparty: reqparty,
                 department: department,
-                date: date,
-                quantity: quantity,
-                itemname: itemname,
-                description: description,
                 purpose: purpose,
-                section: section
+                numparticipants: numparticipants,
+                stageperf: stageperf,
+                adviser: adviser,
+                chairman: chairman,
+                faci: faci,
                 
                 
             },
@@ -117,29 +130,79 @@ $(document).on('submit', '#myModal', function(event) {
             success: function(data) {
                 var json = JSON.parse(data);
                 var status = json.status;
+                
                 if (status = 'success') {
-                    $('body').removeClass('modal-open');
-                    $('.modal-backdrop').remove();
-                    table = $('#datatable').DataTable();
-                    table.draw();
+                    
                     alert('Successfully Created Request!');
-                    $('#department').val('');
-                    var now = new Date();
+                    //$('#department').val('');
+                    /*var now = new Date();
                     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                    document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
-                    $('#_quantity_').val('');
-                    $('#_item_').val('');
-                    $('#_itemdesc_').val('');
-                    $('#_purpose_').val('');
-                    $('#addUserModal').modal('hide');
+                    document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);*/
+                    $('#eventname').val('');
+                    $('#actualdate').val('');
+                    $('#timein').val('');
+                    $('#timeout').val('');
+                    $('#reqparty').val('');
+                    $('#collegeordepartment').val('');
+                    $('#purpose').val('');
+                    $('#numparticipants').val('');
+                    $('#stageperformers').val('');
+                    $('#adviser').val('');
+                    $('#chairdeandep').val('');
+                    $('#reserModal').modal('hide');
                     //force remove faded background  -Ragrats
                     $('body').removeClass('modal-open');
                     $('.modal-backdrop').remove();
+
                     //force remove end
+
+                    //update table list
+                    table = $('#datatable').DataTable();
+                    table.draw();
                 }
             }
         });
     } else {
         alert("Please fill all the Required fields");
+    }
+
+});
+
+
+
+
+
+//delete pending reservation
+$(document).on('click', '.deleteBtn', function(event) {
+    //alert("test");
+    //confirm('test');
+    
+    event.preventDefault();
+    var id = $(this).data('id');
+    if (confirm('Are you sure to delete this request?')) {
+        $.ajax({
+            url: "functions/delete_data.php",
+            data: {
+                id: id
+            },
+            type: 'POST',
+            success: function(data) {
+                var json = JSON.parse(data);
+                var status = json.status;
+                //var table = $('#datatable').DataTable();
+
+                if (status == 'success') {
+                    $('#' + id).closest('tr').remove();
+                    //table.draw();
+
+                } else {
+                    alart('failed');
+                    return;
+                }
+            }
+        });
+    } 
+    else {
+        return null;
     }
 });

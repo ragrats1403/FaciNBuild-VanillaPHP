@@ -119,7 +119,7 @@
                                 </thead>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reservationModal">Create reservation</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reserModal">Create reservation</button>
                             
                             </div>
                         </div>
@@ -130,9 +130,9 @@
     </div>
     
      <!-- Script Process Start-- DO NOT MOVE THIS Script tags!!-->
-     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
-     <script type="text/javascript" src="functions/js/userprocess.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
+    <script type="text/javascript" src="functions/js/userprocess.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- Modal Popup for More Info button-->
     <div class="modal fade" id="test" aria-hidden="true">
@@ -369,7 +369,7 @@
         <!-- Add ons modal popup end-->
 
         <!-- Create Reservation start-->
-        <div class="modal " tabindex="-1" id="reservationModal" aria-labelledby="exampleModalLabel">
+        <div class="modal " tabindex="-1" id="reserModal" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
@@ -418,7 +418,7 @@
                             </div>
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Actual Date of Use:</label>
-                                <input type="datetime-local" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use">
+                                <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use">
                             </div>
                         </div>
                         
@@ -442,7 +442,7 @@
                         <div class="justify-content-center">
                             <div class="col-md-12">
                                 <label class="fw-bold" for="date">Purpose of Activity:</label>
-                                <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
+                                <textarea class="form-control" rows="2" id="purpose" placeholder="Purpose"></textarea>
                             </div>
                         </div>
                         <div class="col-md-6 ">
@@ -492,7 +492,9 @@
                     <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>
                 </div>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>
+                    <!--<button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>-->
+                    <a href= "javascript:void();" class ="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
+                    
                 </div>
                 <script>
                     
