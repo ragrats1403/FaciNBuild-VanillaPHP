@@ -27,6 +27,7 @@ if ($stmt = $con->prepare($sql)) {
         $stmt->bind_result($rolelevel, $password_db);
         $stmt->fetch();
         if ($password_input == $password_db) {
+            $_SESSION['rolelevel'] = $rolelevel;
             switch ($rolelevel) {
                 case '1': //admin
                     $folder = '..\admin\accounts\admin_account.php';
@@ -57,7 +58,6 @@ if ($stmt = $con->prepare($sql)) {
                     echo $alert;
                     break;
             }
-            $_SESSION['rolelevel'] = $rolelevel;
             header("Location: $folder");
             exit;
         } else {
