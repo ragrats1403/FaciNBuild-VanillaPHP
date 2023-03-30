@@ -356,16 +356,13 @@
         //APPROVE=================================================
         
 
-        $(document).on('click', '.step1approveBtn', function(event){
-
-            //var status = "Approved";
+        $(document).on('click', '.step2declineBtn', function(event){
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
             $.ajax({
-                url: "step1approve.php",
+                url: "step2decline.php",
                 data: {
                     id: id,
-                    
                 },
                 type: 'POST',
                 success: function(data) {
@@ -374,53 +371,53 @@
                     if (status == 'success') {
                         table = $('#datatable').DataTable();
                         table.draw();
-                        alert('Step 1 Approved Successfully!');
+                        alert('Step 2 Declined Successfully!');
+                        
+                        /*table = $('#datatable').DataTable();
+                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                        var row = table.row("[id='" + trid + "']");
+                        row.row("[id='" + trid + "']").data([department, date, button]);*/
+                        //$('#_itemdesc_').text('');
+                        $('#_step2').val('Declined');
+                    } else { 
+                        alert('failed');
+                    }
+                }
+                });
+        });
+
+        $(document).on('click', '.step2approveBtn', function(event){
+            //var status = "Approved";
+            var id = $('#jobrequestno').val();
+            var trid = $('#trid').val();
+            $.ajax({
+                url: "step2approve.php",
+                data: {
+                    id: id,
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    var status = json.status;
+                    if (status == 'success') {
+                        table = $('#datatable').DataTable();
+                        table.draw();
+                        alert('Step 2 Approved Successfully!');
                         $('#editUserModal').modal('hide');
                         /*table = $('#datatable').DataTable();
                         var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
                         var row = table.row("[id='" + trid + "']");
                         row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        $('#_step1').val('Approved');
+                        $('#_step2').val('Approved');
                     } else { 
                         alert('failed');
                     }
                 }
             });
-            //alert('test');
+        //alert('test');
         });
 
 
-    $(document).on('click', '.step1declineBtn', function(event){
-        var id = $('#jobrequestno').val();
-        var trid = $('#trid').val();
-        $.ajax({
-            url: "step1decline.php",
-            data: {
-                id: id,
-                
-            },
-            type: 'POST',
-            success: function(data) {
-                var json = JSON.parse(data);
-                var status = json.status;
-                if (status == 'success') {
-                    table = $('#datatable').DataTable();
-                    table.draw();
-                    alert('Step 1 Declined Successfully!');
-
-                
-                    /*table = $('#datatable').DataTable();
-                    var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                    var row = table.row("[id='" + trid + "']");
-                    row.row("[id='" + trid + "']").data([department, date, button]);*/
-                    //$('#_itemdesc_').text('');
-                    $('#_step1').val('Declined');
-                } else { 
-                    alert('failed');
-                }
-            }
-            });
-    });
 
     </script>
     <!-- Script Process End-->
@@ -635,8 +632,8 @@
                             </div>
                         <div>
                             <div class="modal-footer justify-content-md-center">
-                                <a href= "javascript:void();" class ="btn btn-success step1approveBtn">Approve</a>
-                                <a href= "javascript:void();" class ="btn btn-danger step1declineBtn">Decline</a>
+                                <a href= "javascript:void();" class ="btn btn-success step2approveBtn">Approve</a>
+                                <a href= "javascript:void();" class ="btn btn-danger step2declineBtn">Decline</a>
                                 <a href= "javascript:void();" class ="btn btn-info text-white updateBtn">Update</a>
                                 <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
                                 <button type="button" class="btn btn-danger">Decline</button>
