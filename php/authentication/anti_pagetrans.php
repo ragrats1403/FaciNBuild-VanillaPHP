@@ -40,7 +40,7 @@ function checkRoleLevel($rolelevel, $url)
         case 5:
             return preg_match("/^\/php\/cad\/.*$/", $url);
         case 6:
-            return preg_match("/^\/php\/pco\//", $url);
+            return preg_match("/^\/php\/pco\/.*$/", $url);
         case 7:
             return preg_match("/^\/php\/sao\/(major|reservation)\/.*$/", $url);
         default:
