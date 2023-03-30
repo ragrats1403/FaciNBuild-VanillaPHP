@@ -481,7 +481,9 @@
                                 <th>Quantity to Reserve</th>
                             </thead>
                         </table>
+                        <div id="container"></div>
                         <div class="col-sm-12 d-flex justify-content-end">
+                        <button type="button" id="add" onclick="addOption()">Add a statement</button>
                             <a data-toggle="modal" href="#myModal2" class="btn btn-primary">Add-ons</a>
                         </div>
                     </form>
@@ -497,6 +499,18 @@
                     
                 </div>
                 <script>
+                    function addOption(){
+                    var container = document.getElementById('container');
+                    var select = document.createElement('select');
+                    for(i = 0, i<=5; i++;){
+                    var option = document.createElement('option');
+                    option.innerHTML = i;
+                    select.appendChild(option);
+                    }
+                    container.appendChild(select);
+                    
+                    }
+                </script>
                     
                     //date auto fill
                     var now = new Date();
