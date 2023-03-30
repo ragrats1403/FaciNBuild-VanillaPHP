@@ -1,4 +1,4 @@
-<?php include('../../../connection/connection.php');
+<?php include('../../connection/connection.php');
 
 $sql = "select * FROM majoreq";
 $query = mysqli_query($con, $sql);

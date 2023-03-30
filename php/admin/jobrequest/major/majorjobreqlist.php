@@ -232,7 +232,7 @@
             }
         });
         //delete user button control
-        /*$(document).on('click', '.btnDelete', function(event) {
+        $(document).on('click', '.btnDelete', function(event) {
             var table = $('#datatable').DataTable();
             event.preventDefault();
             var id = $(this).data('id');
@@ -260,7 +260,7 @@
                 return null;
             }
         });
-        //edit button control */
+        //edit button control 
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
@@ -719,7 +719,7 @@ $(document).on('click', '.step3declineBtn', function(event){
                     </div>
                     <div class="col-md-12" style="width:15%">
                         <label class=""  for="inputName">Status:</label>
-                        <input type="text" style="width:60%" class="col-sm-1" name="id" class="form-control" id= "_statustext">
+                        <input type="text" style="width:60%" class="col-sm-1" name="id" class="form-control" id= "_statustext" disabled>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

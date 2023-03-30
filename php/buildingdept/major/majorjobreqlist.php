@@ -11,8 +11,16 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/modal.css/modal.css?<?= time() ?>" />
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <header class="shadow">
@@ -25,7 +33,7 @@
         <span class='bx bxs-bell'></i>
         <span class="icon-button__badge"></span>
        </div>
-        <p>Hello, Building Department</p>
+        <p>Hello, Administrator</p>
       <nav class="gnav">
         </nav>
     </div>
@@ -36,15 +44,21 @@
 <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../../images/Brown_logo_faci.png" />
+                <img src="../../../../images/Black_logo.png" />
             </div>
         </div>
         <div class ="navdiv">
         <ul class="nav_list">
             <li>
-                <a href="../../../php/buildingdept/buildingdeptdashboard.php">
-                    <i class='bx bx-calendar'></i>
-                    <span class="link_name">Calendar of Activities</span>
+                    <a href="../../../php/admin/reservations/admincalendar.php">
+                        <i class='bx bx-calendar'></i>
+                        <span class="link_name">Calendar of Activities</span>
+                    </a>
+            </li>
+            <li>
+                <a href="../../../../php/admin/accounts/admin_account.php">
+                    <i class='bx bx-user'></i>
+                    <span class="link_name">Account</span>
                 </a>
             </li>
             <li>
@@ -54,14 +68,19 @@
                         Job Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/buildingdept/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
             </li>
             <li>
+                <a href="../../../../php/admin/equipments/adminequipment.php">
+                    <i class='bx bx-wrench'></i>
+                    <span class="link_name">Equipment</span>
+                </a>
+            </li>
             <li>
-                <a href="../../../../php/buildingdept/reservation/buildingdeptreservation.php">
+                <a href="../../../../php/admin/reservations/adminreservations.php">
                     <i class='bx bx-check-square'></i>
                     <span class="link_name">Reservation</span>
                 </a>
@@ -72,8 +91,8 @@
                     <div class="profile_details">
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">Building Dept</div>
-                            <div class="role">Building Department</div>
+                            <div class="name">Admin</div>
+                            <div class="role">System Administrator</div>
                         </div>
                     </div>
                     <a href="../../../../logout.php">
@@ -102,9 +121,10 @@
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <table id="datatable" class="table" >
                                 <thead>
-                                    <th>ID</th>
+                                    <th>Job Request no.</th>
+                                    <th>Requisition no.</th>
                                     <th>Department</th>
-                                    <th>Date</th>
+                                    <th>Quantity</th>
                                     <th>Status</th>
                                     <th>Options</th>
                                 </thead>
@@ -135,7 +155,6 @@
             'ajax': {
                 'url': 'fetch_data.php',
                 'type': 'post',
-
             },
             'fnCreatedRow': function(nRow, aData, iDataIndex) {
                 $(nRow).attr('id', aData[0]);
@@ -150,54 +169,73 @@
 
         });
     </script>
+    
     <script type="text/javascript">
         //add button control
-        $(document).on('submit', '#saveUserForm', function(event) {
+        $(document).on('submit', '#addUserModal', function(event) {
             event.preventDefault();
-            var name = $('#inputName').val();
-            var username = $('#inputUsername').val();
-            var password = $('#inputPassword').val();
-            var rolelevel = $('#inputRolelevel').val();
-            var roleid = $('#inputRoleID').val();
-            if (username != '' && password != '' && rolelevel != '' && roleid != '') {
-                $.ajax({
-                    url: "add_user.php",
-                    data: {
-                        name: name,
-                        username: username,
-                        password: password,
-                        rolelevel: rolelevel,
-                        roleid: roleid
-                    },
-                    type: 'POST',
-                    success: function(data) {
-                        var json = JSON.parse(data);
-                        status = json.status;
-                        if (status = 'success') {
-                            table = $('#datatable').DataTable();
-                            table.draw();
-                            alert('Successfully Added User!');
-                            $('#inputName').val('');
-                            $('#inputUsername').val('');
-                            $('#inputPassword').val('');
-                            $('#inputRolelevel').val('');
-                            $('#inputRoleID').val('');
-                            $('#addUserModal').modal('hide');
-                        }
+            var requino = $('#requi').val();
+            var department = $('#depart').val();
+            var date = $('#deeto').val();
+            var quantity = $('#quan').val();
+            var item = $('#ite').val();
+
+            var e = document.getElementById("section");//dropdown
+            var section = e.options[e.selectedIndex].text;//end
+
+            var description = $('#desc').val();
+            var purpose = $('#purp').val();
+
+            var e = document.getElementById("mark");//dropdown
+            var outsource = e.options[e.selectedIndex].text;//end
+
+            if (department != '' && date != '' && quantity != '' && item != '' && section != '' && description != '' && purpose != '' && outsource != '') {
+            $.ajax({
+                url: "add_data.php",
+                data: {
+                    requino: requino,
+                    department: department,
+                    date: date,
+                    quantity: quantity,
+                    item: item,
+                    section: section,
+                    description: description,
+                    purpose: purpose,
+                    outsource: outsource
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    status = json.status;
+                    if (status = 'success') {
+                        table = $('#datatable').DataTable();
+                        table.draw();
+                        alert('Successfully Added User!');
+                        $('#requi').val('');
+                        $('#depart').val('');
+                        $('#deeto').val('');
+                        $('#quan').val('');
+                        $('#ite').val('');
+                        $('#section').val('');
+                        $('#desc').val('');
+                        $('#purp').val('');
+                        $('#mark').val('');
+                        $('#addUserModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
                     }
-                });
-            } else {
+                }
+            });
+        }
+            else {
                 alert("Please fill all the Required fields");
             }
         });
-        //delete user button control
         $(document).on('click', '.btnDelete', function(event) {
             var table = $('#datatable').DataTable();
             event.preventDefault();
             var id = $(this).data('id');
             if (confirm('Are you sure to delete this user?')) {
-
-
                 $.ajax({
                     url: "delete_user.php",
                     data: {
@@ -221,10 +259,10 @@
                 return null;
             }
         });
-        //edit button control 
+        //edit button control */
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
-            var trid = $(this).closest('tr').attr('id');
+            var trid = $(this).closest('trid').attr('majoreq');
             $.ajax({
                 url: "get_single_user.php",
                 data: {
@@ -235,33 +273,62 @@
                     var json = JSON.parse(data);
                     $('#id').val(json.id);
                     $('#trid').val(trid);
-                    $('#_inputName').val(json.name)
-                    $('#_inputUsername').val(json.username);
-                    $('#_inputPassword').val(json.password);
-                    $('#_inputRoleLevel').val(json.rolelevel);
-                    $('#_inputRoleID').val(json.roleid);
+                    $('#jobrequestno').val(json.jobreqno);
+                    $('#requino').val(json.requino);
+                    $('#department').val(json.department);
+                    $('#date').val(json.date);
+                    var e = document.getElementById("sections");
+                    var section = e.options[e.selectedIndex].text;
+                    e.options[e.selectedIndex].text = json.section;
+                    /*$('#sections').val(json.section);*/
+                    $('#quantity').val(json.quantity);
+                    $('#item').val(json.item);
+                    $('#description').val(json.description);
+                    $('#purpose').val(json.purpose);
+                    var e = document.getElementById("remark");
+                    var outsource = e.options[e.selectedIndex].text;
+                    e.options[e.selectedIndex].text = json.outsource;
+
+                    $('#_statustext').val(json.status);
+                    $('#_step1').val(json.bdstatus);
+                    $('#_step2').val(json.pcostatus);
+                    $('#_step3').val(json.cadstatus);
+                    /*$('#remark').val(json.outsource);*/
                     $('#editUserModal').modal('show');
                 }
             });
         });
 
-        $(document).on('submit', '#updateUserForm', function() {
+        $(document).on('click', '.updateBtn', function() {
+
             var id = $('#id').val();
             var trid = $('#trid').val();
-            var name = $('#_inputName').val();
-            var username = $('#_inputUsername').val();
-            var password = $('#_inputPassword').val();
-            var rolelevel = $('#_inputRoleLevel').val();
-            var roleid = $('#_inputRoleID').val();
+            var jobreqno = $('#jobrequestno').val();
+            var requino = $('#requino').val();
+            var department = $('#department').val();
+            var date = $('#date').val();
+            var e = document.getElementById("sections");
+            var section = e.options[e.selectedIndex].text;
+            var quantity = $('#quantity').val();
+            var item = $('#item').val();
+            var description = $('#description').val();
+            var purpose = $('#purpose').val();
+            var e = document.getElementById("remark");
+            var outsource = e.options[e.selectedIndex].text;
+
             $.ajax({
                 url: "update_user.php",
                 data: {
-                    id: id,
-                    name: name,
-                    username: username,
-                    password: password,
-                    rolelevel: rolelevel,
-                    roleid: roleid
+                    jobreqno: jobreqno,
+                    requino: requino,
+                    department: department,
+                    date: date,
+                    section: section,
+                    quantity: quantity,
+                    item: item,
+                    description: description,
+                    purpose: purpose,
+                    outsource: outsource
                 },
                 type: 'POST',
                 success: function(data) {
@@ -269,10 +336,14 @@
                     status = json.status;
                     if (status == 'success') {
                         alert('Updated Successfully!');
+                        var e = document.getElementById("sections");
+                        e.options[e.selectedIndex].text = json.section;
+                        var e = document.getElementById("remark");
+                        e.options[e.selectedIndex].text = json.outsource;
                         table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a> <a href="javascript:void();" class="btn btn-sm btn-danger" data-id="' + id + '" >Delete</a>';
+                        /*var button = '<a href= "javascript:void();" data-id="'+jobreqno+'" class ="btn btn-sm btn-info editBtn">More Info</a>';
                         var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([id, name, username, password, rolelevel, roleid, button]);
+                        row.row("[id='" + trid + "']").data([jobreqno, requino, department, date, section, quantity, item , description,purpose , outsource]);*/
                         $('#editUserModal').modal('hide');
                     } else { 
                         alert('failed');
@@ -280,12 +351,83 @@
                 }
             });
         });
+
+
+        //APPROVE=================================================
+        
+
+        $(document).on('click', '.step1approveBtn', function(event){
+
+            //var status = "Approved";
+            var id = $('#jobrequestno').val();
+            var trid = $('#trid').val();
+            $.ajax({
+                url: "step1approve.php",
+                data: {
+                    id: id,
+                    
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    var status = json.status;
+                    if (status == 'success') {
+                        table = $('#datatable').DataTable();
+                        table.draw();
+                        alert('Step 1 Approved Successfully!');
+                        $('#editUserModal').modal('hide');
+                        /*table = $('#datatable').DataTable();
+                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                        var row = table.row("[id='" + trid + "']");
+                        row.row("[id='" + trid + "']").data([department, date, button]);*/
+                        $('#_step1').val('Approved');
+                    } else { 
+                        alert('failed');
+                    }
+                }
+            });
+            //alert('test');
+        });
+
+
+$(document).on('click', '.step1declineBtn', function(event){
+    var id = $('#jobrequestno').val();
+    var trid = $('#trid').val();
+    $.ajax({
+        url: "step1decline.php",
+        data: {
+            id: id,
+            
+        },
+        type: 'POST',
+        success: function(data) {
+            var json = JSON.parse(data);
+            var status = json.status;
+            if (status == 'success') {
+                table = $('#datatable').DataTable();
+                table.draw();
+                alert('Step 1 Declined Successfully!');
+
+            
+                /*table = $('#datatable').DataTable();
+                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                var row = table.row("[id='" + trid + "']");
+                row.row("[id='" + trid + "']").data([department, date, button]);*/
+                //$('#_itemdesc_').text('');
+                $('#_step1').val('Declined');
+            } else { 
+                alert('failed');
+            }
+        }
+        });
+});
+
     </script>
     <!-- Script Process End-->
     <!-- add user modal-->
     <!-- Modal Popup -->
     <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="max-width:1000px;">
+        <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:17%;">
@@ -301,65 +443,77 @@
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Job Request no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="Namemajorjr" placeholder="Job request no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="no" placeholder="Job request no." disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Requisition no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="numbermajorjr" placeholder="Requisition no.">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="requi" placeholder="Requisition no.">
                                 </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="departmentmajorjr" placeholder="Department">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="Department">
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date">
+                                    <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date">
                                 </div>
                             </div>
-                            <div class="justify-content-center">
-                                <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                <div class="row">
+                            <div class="row">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" style="padding-top:10px;" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: none;" name="cars" id="cars">
-                                        <option value="volvo">Outsource</option>
-                                        <option value="saab">Bill of materials</option>
+                                    <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
+                                    <label class="fw-bold" for="date">Section:</label>
+                                    <select class="" style="width: 150px; Border: 5px;" name="section" id="section">
+                                        <option value="0">Select</option>
+                                        <option value="C">CARPENTRY</option>
+                                        <option value="P">PLUMBING</option>
+                                        <option value="A">AIRCON</option>
+                                        <option value="E">ELECTRICAL</option>
+
                                     </select>
                                 </div>
                             </div>
-                                <div class="col-md-2" style="padding-bottom:10px">
+                            <div>
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id="quan" placeholder="Quantity">
                                 </div>
                             </div>
-
-                            <div class="row">
+                            
+                            <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="ite"placeholder="Item">
                                 </div>
                             </div>
-
-                            <div class="row">
+                            <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Description:</label>
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="majorjrdesc"></textarea>
+                                    <label class="fw-bold" for="date">Description:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="desc"></textarea>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp"></textarea>
+                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="purp"></textarea>
                                 </div>
                             </div>
-                            <!-- Form Controls End-->
-                        </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
+                                    <select class="" style="width: 150px; Border: none;" name="cars" id="mark">
+                                        <option value="0">Select</option>
+                                        <option value="volvo">Outsource</option>
+                                        <option value="saab">Bill of materials</option>
+                                    </select>
+                                </div>
+                            </div>
                         <div class="modal-footer justify-content-md-center">
                             <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
                         </div>
+                    </div>
                     </form>
                 </div>
             </div>
@@ -368,65 +522,128 @@
     <!-- add user modal end-->
     <!-- edit user modal-->
     <!-- Modal -->
-    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog "style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:17%;">
                         <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
                     </div>
-                    <div class="col-md-2" style="width:15%">
+                    <div class="col-md-12" style="width:15%">
                         <label class=""  for="inputName">Status:</label>
-                        <input type="text" style="width:20%" class="col-sm-2" name="_ID" class="form-control" id="_ID">
-                    </div>
-                    <div class="col-md-2" style="width:30%">
-                        <label class=""  for="inputName">ID:</label>
-                        <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
+                        <input type="text" style="width:60%" class="col-sm-1" name="id" class="form-control" id= "_statustext" disabled>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="updateUserForm" action="javascript:void();" method="POST">
+                <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
+                            <!-- Form Controls-->
                             <input type="hidden" id="id" name="id" value="">
                             <input type="hidden" id="trid" name="trid" value="">
-                            <!-- Form Controls-->
-                            <div class="mb-3 row">
-                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="_inputName" class="form-control" id="_inputName">
+                            <div class="row justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Job Request no.</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="jobrequestno" placeholder="Job request no." disabled>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Requisition no.</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="requino" placeholder="Requisition no." disabled>
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="_inputUsername" class="form-control" id="_inputUsername">
+                            <div class="row justify-content-center" style="padding-bottom:13px;">
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Department</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" disabled>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Date</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="date" placeholder="Date" disabled>
+                                </div>
+                            </div>   
+                            <div class="row">
+                                <div class="col-md-12" >
+                                    <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id="quantity" placeholder="Quantity" disabled>
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="_inputPassword" name="_inputPassword">
+                            
+                            <div>
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Item Name:</label>
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="item"placeholder="Item" disabled>
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="inputRoleLevel" class="col-sm-2 col-form-label">RoleLevel</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="_inputRoleLevel" name="_inputRoleLevel">
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Description:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="description"></textarea>
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="inputRoleID" class="col-sm-2 col-form-label">RoleID</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="_inputRoleID" name="_inputRoleID">
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Purpose:</label>
+                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose"></textarea>
                                 </div>
                             </div>
-                            <!-- Form Controls End-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Section:</label>
+                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections">
+                                        <option value="se">Select</option>
+                                        <option value="CARPENTRY">CARPENTRY</option>
+                                        <option value="PLUMBING">PLUMBING</option>
+                                        <option value="AIRCON">AIRCON</option>
+                                        <option value="ELECTRICAL">ELECTRICAL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top:6px;">     
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                </div> 
+                                <div class="col-md-2" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1" disabled>
+                                </div> 
+                            </div>
+                            <div class="row" style="padding-top:6px;">     
+                                <div class="col-md-1" style="margin-top:5px;">  
+                                    <label class="fw-bold" for="inputName">Step 2 Status:</label>
+                                </div> 
+                                <div class="col-md-2" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step2" disabled>
+                                </div> 
+                            </div>
+                            <div class="row" style="padding-top:6px;">     
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Step 3 Status:</label>
+                                </div> 
+                                <div class="col-md-2" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step3" disabled>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
+                                    <select class="" style="width: 150px; Border: none;" id="remark">
+                                        <option value="1">Select</option>
+                                        <option value="Outsource">Outsource</option>
+                                        <option value="Bill of materials">Bill of materials</option>
+                                    </select>
+                                </div>
+                            </div>
+                        <div>
+                            <div class="modal-footer justify-content-md-center">
+                                <a href= "javascript:void();" class ="btn btn-success step1approveBtn">Approve</a>
+                                <a href= "javascript:void();" class ="btn btn-danger step1declineBtn">Decline</a>
+                                <a href= "javascript:void();" class ="btn btn-info text-white updateBtn">Update</a>
+                                <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
+                                <button type="button" class="btn btn-danger">Decline</button>
+                                <button type="submit" class="btn btn-info text-white">Update</button>-->
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
+                    </div>
                     </form>
                 </div>
             </div>
