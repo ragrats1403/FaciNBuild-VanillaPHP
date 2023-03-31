@@ -54,13 +54,13 @@
                         Job Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="">Minor Job Request</a>
-                        <a class="dropdown-item" href="">Major Job Request</a>
+                        <a class="dropdown-item" href="./../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="./../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
             </li>
             <li>
-                <a href="">
+                <a href="./../../../php/facilitiesdept/reservations/reservations.php">
                     <i class='bx bx-check-square'></i>
                     <span class="link_name">Reservation</span>
                 </a>
