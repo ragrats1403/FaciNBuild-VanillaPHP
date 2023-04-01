@@ -13,7 +13,7 @@ $('#datatable').DataTable({
         $(nRow).attr('id', aData[0]);
     },
     'columnDefs': [{
-        'target': [0, 4],
+        'target': [0,3],
         'orderable': false,
     }],
 scrollY: 200,

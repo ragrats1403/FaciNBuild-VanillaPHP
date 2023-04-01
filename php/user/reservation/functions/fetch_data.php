@@ -7,7 +7,7 @@ $count_all_rows = mysqli_num_rows($query);
 if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
     $sql .= " WHERE reservationid like '%" . $search_value . "%' ";
-    $sql .= " OR department like '%" . $search_value . "%' ";
+    $sql .= " OR requestingparty like '%" . $search_value . "%' ";
     $sql .= " OR facility like '%" . $search_value . "%' ";
     $sql .= " OR eventname like '%" . $search_value . "%' ";
     $sql .= " OR datefiled like '%" . $search_value . "%' ";
@@ -39,7 +39,7 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray = array();
     $subarray[] = $row['reservationid'];
     $subarray[] = $row['eventname'];
-    $subarray[] = $row['department'];
+    $subarray[] = $row['requestingparty'];
     $subarray[] = $row['facility'];
     $subarray[] = $row['datefiled'];
     $subarray[] = $row['actualdateofuse'];

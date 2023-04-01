@@ -110,7 +110,7 @@
                                 <thead>
                                     <th>ID</th>
                                     <th>Event Name</th>
-                                    <th>Department</th>
+                                    <th>Requesting party</th>
                                     <th>Facility</th>
                                     <th>Date Filed</th>
                                     <th>Actual Date of Use</th>
