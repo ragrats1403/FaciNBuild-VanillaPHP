@@ -244,6 +244,8 @@
                             $('#inputRolelevel').val('');
                             $('#inputRoleID').val('');
                             $('#addUserModal').modal('hide');
+                            $('body').removeClass('modal-open');
+                            $('.modal-backdrop').remove();
                         }
                     }
                 });
@@ -335,6 +337,7 @@
                         var row = table.row("[id='" + trid + "']");
                         row.row("[id='" + trid + "']").data([id, department, username, password, rolelevel, roleid, button]);
                         $('#editUserModal').modal('hide');
+                        
                     } else {
                         alert('failed');
                     }

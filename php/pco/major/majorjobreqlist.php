@@ -23,17 +23,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
-<header class="shadow">
+<header>
     <div class= "imgctrl">
         
     </div>
     <div class="navplace">
-       <div>
+     <div>
         <button type="button" class="icon-button">    
         <span class='bx bxs-bell'></i>
         <span class="icon-button__badge"></span>
-       </div>
-        <p>Hello, Administrator</p>
+     </div>  
+        <p>Hello, PCO</p>
       <nav class="gnav">
         </nav>
     </div>
@@ -44,46 +44,38 @@
 <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../../images/Black_logo.png" />
+                <img src="../../../../images/Brown_logo_faci.png" />
             </div>
         </div>
         <div class ="navdiv">
         <ul class="nav_list">
             <li>
-                    <a href="../../../php/admin/reservations/admincalendar.php">
-                        <i class='bx bx-calendar'></i>
-                        <span class="link_name">Calendar of Activities</span>
-                    </a>
-            </li>
-            <li>
-                <a href="../../../../php/admin/accounts/admin_account.php">
-                    <i class='bx bx-user'></i>
-                    <span class="link_name">Account</span>
+                <a href="../../../../php/facilitiesdept/reservations/facilitiescalendar.php">
+                    <i class='bx bx-calendar'></i>
+                    <span class="link_name">Calendar of Activities</span>
                 </a>
             </li>
             <li>
                 <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Job Request
+                        Manage Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="./../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
-            </li>
-            <li>
-                <a href="../../../../php/admin/equipments/adminequipment.php">
-                    <i class='bx bx-wrench'></i>
-                    <span class="link_name">Equipment</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../../../php/admin/reservations/adminreservations.php">
-                    <i class='bx bx-check-square'></i>
-                    <span class="link_name">Reservation</span>
-                </a>
+                <div class="dropdown">
+                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        View/Create Request
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="">Major Job Request</a>
+                        <a class="dropdown-item" href="">Minor Job Request</a>
+                        <a class="dropdown-item" href="">Request Reservation</a>
+                    </ul>
+                </div>
             </li>
         </ul>
         <div class="profile_content">
@@ -91,11 +83,11 @@
                     <div class="profile_details">
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">Admin</div>
-                            <div class="role">System Administrator</div>
+                            <div class="name">PCO Dept.</div>
+                            <div class="role">PCO Department</div>
                         </div>
                     </div>
-                    <a href="../../../../logout.php">
+                    <a href="../../../logout.php">
                         <i class='bx bx-log-out' id="log_out"></i>
                     </a>
                 </div>

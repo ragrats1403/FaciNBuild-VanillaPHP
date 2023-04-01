@@ -51,19 +51,23 @@
                 <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Job Request
+                        Manage Request
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="../../../../php/cad/majorjobreqlist.php">Major Job Request</a>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        View/Create Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="../../../../php/cad/minorjobreqlist.php">Minor Job Request</a>
                         <a class="dropdown-item" href="../../../../php/cad/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/cad/cadreservation.php">Reservation</a>
                     </ul>
                 </div>
-            </li>
-            <li>
-                <a href="../../../../php/cad/cadreservation.php">
-                    <i class='bx bx-check-square'></i>
-                    <span class="link_name">Reservation</span>
-                </a>
             </li>
         </ul>
         <div class="profile_content">
