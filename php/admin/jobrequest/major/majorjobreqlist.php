@@ -50,10 +50,10 @@
         <div class ="navdiv">
         <ul class="nav_list">
             <li>
-                    <a href="../../../php/admin/reservations/admincalendar.php">
-                        <i class='bx bx-calendar'></i>
-                        <span class="link_name">Calendar of Activities</span>
-                    </a>
+                <a href="../../../admin/reservations/admincalendar.php">
+                    <i class='bx bx-calendar'></i>
+                    <span class="link_name">Calendar of Activities</span>
+                </a>
             </li>
             <li>
                 <a href="../../../../php/admin/accounts/admin_account.php">
@@ -64,7 +64,7 @@
             <li>
                 <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
-                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class=" btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Job Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -103,14 +103,6 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
     <div class="table1">
 
         <div class="container-fluid">
@@ -132,6 +124,7 @@
                             <div class="col-sm-12 d-flex justify-content-end">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Major Job Request</button>
                             </div>
+                            
                         </div>
                     </div>
                 </div>

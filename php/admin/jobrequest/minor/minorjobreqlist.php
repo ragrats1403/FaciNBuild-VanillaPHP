@@ -49,7 +49,7 @@
         <div class ="navdiv">
         <ul class="nav_list">
             <li>
-                    <a href="../../../php/admin/reservations/admincalendar.php">
+                    <a href="../../../admin/reservations/admincalendar.php">
                         <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
@@ -65,8 +65,8 @@
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Job Request
-                    </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    </span >
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
                         <a class="dropdown-item" href="../../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
                         <a class="dropdown-item" href="../../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
