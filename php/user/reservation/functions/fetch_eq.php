@@ -38,8 +38,8 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     //$subarray[] = $row['id'];
     $subarray[] = $row['equipmentname'];
     $subarray[] = $row['quantity'];
-    $subarray[] = '<input type="text"  id="' . $row['id'] . '">
-                    <a href="javascript:void();" data-id="'.$row['id'].'"  class="btn btn-info btn-sm addBtn" >Add to Reservation</a>';
+    $subarray[] = '<input type="text"  id="a'.$row['id'].'">
+                    <a href="javascript:void();" data-id="'.$row['id'].'"  class="btn btn-info btn-sm addresBtn" >Add to Reservation</a>';
     $data[] = $subarray;
 }
 
