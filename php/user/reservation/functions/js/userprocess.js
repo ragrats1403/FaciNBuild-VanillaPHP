@@ -22,6 +22,9 @@ paging: false
 
 });
 
+
+
+
 //table display end
  
 //edit button control 

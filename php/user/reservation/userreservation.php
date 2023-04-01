@@ -391,7 +391,7 @@
                         <label for="be_functionhall"> BE Function Hall</label><br><br>-->
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
-                                <select class="form-control input-sm col-xs-1" name="sections" id="faci">
+                                <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange ="dynamicEq()" >
                                     select = document.getElementById("faci");
                                     <?php include('../../connection/connection.php');
                                     $sql = "SELECT facilityname FROM facility";
@@ -473,15 +473,22 @@
                             <label class="fw-bold" for="date">CHAIRPERSON/DEAN/DEPARTMENT</label>
                             <input type="name" class="form-control input-sm col-xs-1" id="chairdeandep" placeholder="CHAIRPERSON/DEAN/DEPARTMENT">
                         </div>
-
-                        <table id="datatable" class="table">
+                        <div class="table-responsive">
+                        <table id="testtable" class="table" width="100%" >
                             <thead>
-                                <th>Equipments to Reserve</th>
-                                <th>Available</th>
-                                <th>Quantity to Reserve</th>
+                                <th>ID</th>
+                                <th>Equipments to Reserve</th>                                  
+                                <th>Options</th>
                             </thead>
                         </table>
-                        <div id="container"></div>
+                        </div>
+                        
+                            <div class="col-md-2 ">
+                            <div id="container">
+                            </div>
+                            </div>
+
+                        
                         <div class="col-sm-12 d-flex justify-content-end">
                         <button type="button" id="add" onclick="addOption()">Add a statement</button>
                             <a data-toggle="modal" href="#myModal2" class="btn btn-primary">Add-ons</a>
@@ -499,19 +506,62 @@
                     
                 </div>
                 <script>
+                            
+
+                        function dynamicEq(){
+                            var e = document.getElementById("faci");
+                            var faci = e.options[e.selectedIndex].text;
+                            $('#testtable').DataTable({
+                                'autoWidth': false,
+                                'serverSide': true,
+                                'processing': true,
+                                'paging': true,
+                                'order': [],
+                                'ajax': {
+                                    'url': 'functions/fetch_eq.php',
+                                    'type': 'post',
+                                    'data':{
+                                        faci:faci,
+                                    },
+                                    
+
+                                },
+                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                    $(nRow).attr('id', aData[0]);
+                                },
+                                'columnDefs': [{
+                                    'target': [0, 2],
+                                    'orderable': false,
+                                }],
+                            scrollY: 200,
+                            scrollCollapse: true,
+                            paging: false 
+
+                            });
+
+                            $(document).ready(function() {
+                            
+                                $("#testtable").ajax.reload();
+    
+                        });
+                        }
+
+                        </script>
+                <script>
                     function addOption(){
                     var container = document.getElementById('container');
                     var select = document.createElement('select');
+                    select.className = "form-control input-sm col-xs-1";
                     for(i = 0, i<=5; i++;){
-                    var option = document.createElement('option');
-                    option.innerHTML = i;
-                    select.appendChild(option);
+                        var option = document.createElement('option');
+                        option.innerHTML = i;
+                        select.appendChild(option);
                     }
                     container.appendChild(select);
                     
-                    }
+                    }   
                 </script>
-                    
+                    <script>
                     //date auto fill
                     var now = new Date();
                     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
