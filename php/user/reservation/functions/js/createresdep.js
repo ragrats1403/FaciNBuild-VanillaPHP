@@ -74,74 +74,81 @@ $(document).on('click', '.addresBtn', function(event){
     var hiddenval = 'v'+id;
     var hiddenfaci = 'f'+id;
     var value = document.getElementById(nid).value;
-    $.ajax({
-        url: "functions/getequipment.php",
-        data: {
-            id:id,
-        },
-        type: 'POST',
-        success: function(data) {
-            var json = JSON.parse(data);
-            var eqname = json.equipmentname;
-            var container = document.getElementById('container2');
-            var newDiv = document.createElement('div');
-            var divCol = document.createElement('div');
-
-            //variables for hidden inputs for getting values
-            var hid = document.createElement('input');
-            var heqname = document.createElement('input');
-            var hvalue = document.createElement('input');
-            var hfaci = document.createElement('input');
+    //var checkval = document.getElementById("hid").value;
+    if(document.getElementById(hiddenid)==null){
+        $.ajax({
+            url: "functions/getequipment.php",
+            data: {
+                id:id,
+            },
+            type: 'POST',
+            success: function(data) {
+                var json = JSON.parse(data);
+                var eqname = json.equipmentname;
+                var container = document.getElementById('container2');
+                var newDiv = document.createElement('div');
+                var divCol = document.createElement('div');
+    
+                //variables for hidden inputs for getting values
+                var hid = document.createElement('input');
+                var heqname = document.createElement('input');
+                var hvalue = document.createElement('input');
+                var hfaci = document.createElement('input');
+                
+                //assigning attributes and values to each variable[to get them for backend]
             
-            //assigning attributes and values to each variable[to get them for backend]
-        
-            hid.type = 'hidden';
-            hid.id = hiddenid;
-            hid.value = json.id;
-
-            heqname.type = 'hidden';
-            heqname.id = hiddeneqn;
-            heqname.value = json.equipmentname;
-
-            hvalue.type = 'hidden';
-            hvalue.id = hiddenval;
-            hvalue.value = value;
-
-            hfaci.type = 'hidden';
-            hfaci.id = hiddenfaci;
-            hfaci.value = json.facility;
-
-            
-
-
-            divCol2 = document.createElement('div');
-            newDiv.className = "row";
-            divCol.className = "col-md-2";
-            divCol2.className = "col-md-2";
-            var btn = document.createElement('button');
-            btn.className = "btn btn-sm btn-danger removeEq"+value;
-            btn.setAttribute("onclick","removeAddedEq();");
-            btn.style.marginTop = '3px';
-            btn.innerHTML = "Remove";
-            var textbox = document.createElement('text');
-            //var joinedtxt = json.equipmentname + '';
-            textbox.className = "form-control input-sm col-xs-1 disabled";
-            textbox.innerHTML = eqname +' x '+ value;
-
-
-            divCol.appendChild(textbox);
-            divCol2.appendChild(btn);
-            newDiv.appendChild(divCol);
-            newDiv.appendChild(divCol2);
-            container.appendChild(newDiv);
-            container.appendChild(hid);
-            container.appendChild(heqname);
-            container.appendChild(hvalue);
-            container.appendChild(hfaci);
-            
-
-        }
-    });
+                hid.type = 'hidden';
+                hid.id = hiddenid;
+                hid.value = json.id;
+    
+                heqname.type = 'hidden';
+                heqname.id = hiddeneqn;
+                heqname.value = json.equipmentname;
+    
+                hvalue.type = 'hidden';
+                hvalue.id = hiddenval;
+                hvalue.value = value;
+    
+                hfaci.type = 'hidden';
+                hfaci.id = hiddenfaci;
+                hfaci.value = json.facility;
+    
+                
+    
+    
+                divCol2 = document.createElement('div');
+                newDiv.className = "row";
+                divCol.className = "col-md-2";
+                divCol2.className = "col-md-2";
+                var btn = document.createElement('button');
+                btn.className = "btn btn-sm btn-danger removeEq"+value;
+                btn.setAttribute("onclick","removeAddedEq();");
+                btn.style.marginTop = '3px';
+                btn.innerHTML = "Remove";
+                var textbox = document.createElement('text');
+                //var joinedtxt = json.equipmentname + '';
+                textbox.className = "form-control input-sm col-xs-1 disabled";
+                textbox.innerHTML = eqname +' x '+ value;
+    
+    
+                divCol.appendChild(textbox);
+                divCol2.appendChild(btn);
+                newDiv.appendChild(divCol);
+                newDiv.appendChild(divCol2);
+                container.appendChild(newDiv);
+                container.appendChild(hid);
+                container.appendChild(heqname);
+                container.appendChild(hvalue);
+                container.appendChild(hfaci);
+                
+    
+            }
+        });
+    }
+    else{
+        alert("This equipment is already added to the reservation form!");
+    }
+    
     
 
 });
