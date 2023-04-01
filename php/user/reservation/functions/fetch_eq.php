@@ -35,10 +35,12 @@ $filtered_rows = mysqli_num_rows($run_query);
 $filtered_rows = $filtered_rows -1;
 while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray = array();
-    $subarray[] = $row['id'];
+    //$subarray[] = $row['id'];
     $subarray[] = $row['equipmentname'];
+    $subarray[] = $row['quantity'];
     $subarray[] = $row['facility'];
-    $subarray[] = '<a href="javascript:void();" data-id="' . $row['id'] . '"  class="btn btn-info btn-sm editBtn" >Edit</a> 
+    $subarray[] = '<input type="name"  id="' . $row['id'] . '">
+                    <a href="javascript:void();" data-id="' . $row['id'] . '"  class="btn btn-info btn-sm editBtn" >Edit</a> 
                     <a href= "javascript:void();" data-id="' . $row['id'] . '" class ="btn btn-sm btn-danger btnDelete">Delete</a>';
     $data[] = $subarray;
 }

@@ -478,9 +478,9 @@
                         <div class="table-responsive">
                         <table id="testtable" class="table" width="100%" >
                             <thead>
-                                <th>ID</th>
-                                <th>Equipments to Reserve</th>
-                                <th>Facility</th>                                   
+                                <th>Equipments Name</th>
+                                <th>Facility</th> 
+                                <th>Quantity</th>                                  
                                 <th>Options</th>
                             </thead>
                         </table>
@@ -508,45 +508,7 @@
                     <a href= "javascript:void();" class ="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
                     
                 </div>
-                <script>
-                            $("#reserModal").on('shown.bs.modal', function () {
-                                    alert('The modal is fully shown.');
-                            });
-
-                        function dynamicEq(){
-                            var e = document.getElementById("faci");
-                            var faci = e.options[e.selectedIndex].text;
-                            $('#testtable').DataTable().clear().destroy();
-                            $('#testtable').DataTable({
-                                'searching':false,
-                                'autoWidth': false,
-                                'serverSide': true,
-                                'processing': true,
-                                "bJQueryUI": true,
-                                'paging': true,
-                                'order': [],
-                                'ajax': {
-                                    'url': 'functions/fetch_eq.php',
-                                    'type': 'post',
-                                    'data':{
-                                        faci:faci,
-                                    },
-                                },
-                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
-                                    $(nRow).attr('id', aData[0]);
-                                },
-                                'columnDefs': [{
-                                    'target': [0, 2],
-                                    'orderable': false,
-                                }],
-                            scrollY: 200,
-                            scrollCollapse: true,
-                            paging: false 
-
-                            });
-                        }
-
-                        </script>
+                <script type="text/javascript" src="functions/js/createresdep.js"></script>                       
                 <script>
                     function addOption(){
                     var container = document.getElementById('container');
