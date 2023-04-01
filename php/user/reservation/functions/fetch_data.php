@@ -44,7 +44,7 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = $row['datefiled'];
     $subarray[] = $row['actualdateofuse'];
     $subarray[] = $row['status'];
-    $subarray[] = '<a href= "javascript:void();" data-id="' . $row['reservationid'] . '" class ="btn btn-sm btn-info editBtn">More Info</a> <a href= "javascript:void();" data-id="' . $row['reservationid'] . '" class ="btn btn-sm btn-danger deleteBtn">Delete</a>';
+    $subarray[] = '<a href= "javascript:void();" data-id="' . $row['reservationid'] . '" class ="btn btn-sm btn-info editBtn" >More Info</a> <a href= "javascript:void();" data-id="' . $row['reservationid'] . '" class ="btn btn-sm btn-danger deleteBtn">Delete</a>';
     $data[] = $subarray;
     
 }
