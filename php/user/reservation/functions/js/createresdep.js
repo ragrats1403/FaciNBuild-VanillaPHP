@@ -161,9 +161,10 @@ function updateButtonState() {
     var checkbox = document.getElementById("termscond");
     var button = document.getElementById("termscond-create");
 
-    if (checkbox.checked) {
+    if (checkbox.checked == true) {
         button.classList.remove("disabled");
-    } else {
+    }
+    else {
         button.classList.add("disabled");
     }
 }

@@ -447,15 +447,13 @@
                             <label class="fw-bold" for="date">Stage Performers (if any):</label>
                             <input type="name" class="form-control input-sm col-xs-1" id="stageperformers" placeholder="Stage Performers (if any)">
                         </div>
-                        <br><br><br>
+                        <br><br>
                         <label>NB: All other equipment (e.g. Backdrop, chairs, etc.,) shall be the responsibility of the requesting party.
                             Technician’s, Electrical, Janitor’s and security guards overtime fees/excess fees are subject to the terms an condition provided at the bank thereof.<br>
                             Secure Reservation from the AVR (filled up by the AVR personnel only)
-                            <div class="col-md-6 ">
-                                <label class="fw-bold" for="date">Date and Time</label>
-                                <input type="datetime-local" class="form-control input-sm col-xs-1" id="date_avr" placeholder="Date"><br>
-                            </div>
-                            2. The activity is officially endorsed and approved by the adviser, Chairperson/Dean, Department Head,
+                            <br>
+                            <br>
+                            The activity is officially endorsed and approved by the adviser, Chairperson/Dean, Department Head,
                             and the SAO/ Cultural Directory. (if “disapproved”, it must be so stated, citing briefly the reason thereof)<br><br>
                         </label>
 
