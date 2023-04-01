@@ -487,12 +487,13 @@
                         </table>
                         </div>
                         <label class="fw-bold">Equipments Added To Reservation</label>
-                            <div class="col-md-2 ">
-                                <div id="container">
-                                </div>
-                            </div>
+                        <a href= "javascript:void();" class ="btn btn-primary clear disabled">Save Changes</a>
+                                <div id="container1">
+                                    <div id="container2">
+                                    
 
-                        
+                                    </div>
+                                </div>
                         <div class="col-sm-12 d-flex justify-content-end">
                             <a data-toggle="modal" href="#myModal2" class="btn btn-primary">Add-ons</a>
                         </div>
