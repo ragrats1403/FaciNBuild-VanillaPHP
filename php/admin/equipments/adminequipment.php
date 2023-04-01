@@ -317,6 +317,8 @@
                             $('#inputQty').val('');
                             $('#inputFacility').val('');
                             $('#addUserModal').modal('hide');
+                            $('body').removeClass('modal-open');
+                            $('.modal-backdrop').remove();
                         }
                     }
                 });
