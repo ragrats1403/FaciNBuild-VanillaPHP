@@ -182,9 +182,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2" style="padding-bottom:10px">
-                                <label class="fw-bold" for="date">Quantity:</label>
-                                <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
+                            <div class="row">
+                                <div class="col-md-2" style="width:20%">
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
@@ -273,14 +275,14 @@
                             <div class="justify-content-center">
                                 <div class="col-md-12" >
                                     <label class="fw-bold" for="date">Description:</label>
-                                    <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description"></textarea>
+                                    <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description" disabled></textarea>
                                 </div>
                             </div>
 
                             <div class="justify-content-center">
                                 <div class="col-md-12" >
                                     <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose"></textarea>
+                                    <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose" disabled></textarea>
                                 </div>
                             </div>
                             <div class="row">

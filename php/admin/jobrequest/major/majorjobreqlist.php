@@ -732,7 +732,7 @@ $(document).on('click', '.step3declineBtn', function(event){
                                     <input type="name" class="form-control input-sm col-xs-1" id="requino" placeholder="Requisition no." disabled>
                                 </div>
                             </div>
-                            <div class="row justify-content-center" style="padding-bottom:13px;">
+                            <div class="row justify-content-center">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" disabled>
@@ -741,10 +741,10 @@ $(document).on('click', '.step3declineBtn', function(event){
                                     <label class="fw-bold" for="date">Date</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="date" placeholder="Date" disabled>
                                 </div>
+                                <h5 class="text-uppercase fw-bold " style="padding-top:13px;" >A. Requisition(To be filled up by the requesting party)</h5>
                             </div>   
                             <div class="row">
-                                <div class="col-md-12" >
-                                    <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
+                                <div class="col-md-2" style="width:22%">
                                     <label class="fw-bold" for="date">Quantity:</label>
                                     <input type="form-control" class="form-control input-sm col-xs-1" id="quantity" placeholder="Quantity" disabled>
                                 </div>
@@ -753,19 +753,19 @@ $(document).on('click', '.step3declineBtn', function(event){
                             <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="item"placeholder="Item" disabled>
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id ="item" placeholder="Item" disabled>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Description:</label>
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="description"></textarea>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="description" disabled></textarea>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose"></textarea>
+                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose" disabled></textarea>
                                 </div>
                             </div>
                             <div class="row">
