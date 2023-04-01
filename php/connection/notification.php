@@ -1,24 +1,28 @@
 <?php
+
 $host = "localhost";
 $user = "root";
-$password = '';
+$password = "";
 $db_name = "testdb";
+
+// Connect to the database
 $con = mysqli_connect($host, $user, $password, $db_name);
-//notification bell con
-$sql = "select * FROM notif_data";
-$query = mysqli_query($con, $sql);
-$count_all_rows = mysqli_num_rows($query);
-echo $count_all_rows;
-/*
-if($result->num_rows > 0){
-    //output data of each row
-    while($row = $result->fetch_assoc()){
-        echo "id: " . $row["id"]. " - Notification: " . $row["description"];
-    }
+
+// Check for errors
+if (mysqli_connect_errno()) {
+    die("Failed to connect to MySQL: " . mysqli_connect_error());
 }
-else{
-    echo "0 results";
+
+// Query the database for unread notifications
+$sql = "SELECT * FROM notif_data WHERE is_read = 0 ORDER BY created_at DESC";
+$result = mysqli_query($con, $sql);
+
+// Fetch the results as an array of associative arrays
+$notifications = array();
+while ($row = mysqli_fetch_assoc($result)) {
+    $notifications[] = $row;
 }
-*/
-$con->close();
-?>
+
+// Return the notifications as JSON
+header("Content-Type: application/json");
+echo json_encode($notifications);

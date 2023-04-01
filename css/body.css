@@ -47,3 +47,8 @@ body {
     width: 1em;
     vertical-align: middle;
   }
+
+.table1 {
+    position: relative;
+  z-index: 1;
+}
