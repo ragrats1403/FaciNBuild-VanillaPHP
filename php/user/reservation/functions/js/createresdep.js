@@ -43,7 +43,7 @@ $('#testtable').DataTable().clear().destroy();
 
         //removeChild();
 }
-
+//test container remove
 function removeChild(){
     const myNode =  document.getElementById('container1');
     while (myNode.firstChild) {
@@ -52,6 +52,8 @@ function removeChild(){
 
 }
 
+
+//remove [Equipments meant to be added to reservation]
 function removeAddedEq(){
     const myNode =  document.getElementById('container2');
     while (myNode.firstChild) {

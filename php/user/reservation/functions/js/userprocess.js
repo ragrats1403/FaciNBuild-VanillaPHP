@@ -38,7 +38,6 @@ $(document).on('click', '.editBtn', function(event){
     document.getElementById("_timein").disabled = true;
     document.getElementById("_timeout").disabled = true;
     document.getElementById("_reqparty").disabled = true;
-    document.getElementById("_collegeordepartment").disabled = true;
     document.getElementById("_purpose").disabled = true;
     document.getElementById("_numparticipants").disabled = true;
     document.getElementById("_stageperformers").disabled = true;
@@ -63,7 +62,6 @@ $(document).on('click', '.editBtn', function(event){
             $('#_timein').val(json.timestart);
             $('#_timeout').val(json.timeend);
             $('#_reqparty').val(json.requestingparty);
-            $('#_collegeordepartment').val(json.department);
             $('#_purpose').val(json.purposeofactivity);
             $('#_numparticipants').val(json.participants);
             $('#_stageperformers').val(json.stageperformers);
@@ -96,7 +94,6 @@ $(document).on('click', '.submitBtn', function(event) {
     var timein= $('#timein').val();
     var timeout= $('#timeout').val();
     var reqparty= $('#reqparty').val();
-    var department= $('#collegeordepartment').val();
     var purpose = $('#purpose').val();
     var numparticipants = $('#numparticipants').val();
     var stageperf = $('#stageperformers').val();
@@ -119,7 +116,6 @@ $(document).on('click', '.submitBtn', function(event) {
                 timein: timein,
                 timeout: timeout,
                 reqparty: reqparty,
-                department: department,
                 purpose: purpose,
                 numparticipants: numparticipants,
                 stageperf: stageperf,
@@ -146,7 +142,6 @@ $(document).on('click', '.submitBtn', function(event) {
                     $('#timein').val('');
                     $('#timeout').val('');
                     $('#reqparty').val('');
-                    $('#collegeordepartment').val('');
                     $('#purpose').val('');
                     $('#numparticipants').val('');
                     $('#stageperformers').val('');

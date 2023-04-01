@@ -215,10 +215,6 @@
                             <label class="fw-bold" for="date">Requesting Party:</label>
                             <input type="name" class="form-control input-sm col-xs-1" id="_reqparty" placeholder="Requesting Party">
                         </div>
-                        <div class="col-md-6 ">
-                            <label class="fw-bold" for="date">College/Department:</label>
-                            <input type="name" class="form-control input-sm col-xs-1" id="_collegeordepartment" placeholder="College/Department">
-                        </div>
                         <div class="justify-content-center">
                             <div class="col-md-12">
                                 <label class="fw-bold" for="date">Purpose of Activity:</label>
@@ -436,10 +432,6 @@
                         <div class="col-md-6 ">
                             <label class="fw-bold" for="date">Requesting Party:</label>
                             <input type="name" class="form-control input-sm col-xs-1" id="reqparty" placeholder="Requesting Party">
-                        </div>
-                        <div class="col-md-6 ">
-                            <label class="fw-bold" for="date">College/Department:</label>
-                            <input type="name" class="form-control input-sm col-xs-1" id="collegeordepartment" placeholder="College/Department">
                         </div>
                         <div class="justify-content-center">
                             <div class="col-md-12">
