@@ -518,7 +518,7 @@
                             var faci = e.options[e.selectedIndex].text;
                             $('#testtable').DataTable().clear().destroy();
                             $('#testtable').DataTable({
-                                'searchable':false,
+                                'searching':false,
                                 'autoWidth': false,
                                 'serverSide': true,
                                 'processing': true,
