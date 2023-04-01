@@ -143,7 +143,7 @@ $(document).on('click', '.addresBtn', function(event){
                 
     
             }
-        });
+        }); 
     }
     else{
         alert("This equipment is already added to the reservation form!");
