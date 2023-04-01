@@ -5,6 +5,10 @@
 
 //dynamic fetch data with drop down menu
 function dynamicEq(){
+    const myNode =  document.getElementById('container2');
+    while (myNode.firstChild) {
+    myNode.removeChild(myNode.lastChild);
+    }
 var e = document.getElementById("faci");
 var faci = e.options[e.selectedIndex].text;
 $('#testtable').DataTable().clear().destroy();
@@ -55,15 +59,6 @@ function removeAddedEq(){
     }
 }
 
-//eq quantity input width
-
-var input = document.querySelector('input'); // get the input element
-input.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
-resizeInput.call(input); // immediately call the function
-
-function resizeInput() {
-  this.style.width = this.value.length + "ch";
-}
 
 //dynamic add option inside div
 $(document).on('click', '.addresBtn', function(event){
@@ -72,6 +67,10 @@ $(document).on('click', '.addresBtn', function(event){
     //var quantitytxt = eq.value;
     var id = $(this).data('id');
     var nid = 'a'+id;
+    var hiddenid = 'h'+id;
+    var hiddeneqn = 'e'+id;
+    var hiddenval = 'v'+id;
+    var hiddenfaci = 'f'+id;
     var value = document.getElementById(nid).value;
     $.ajax({
         url: "functions/getequipment.php",
@@ -91,9 +90,27 @@ $(document).on('click', '.addresBtn', function(event){
             var heqname = document.createElement('input');
             var hvalue = document.createElement('input');
             var hfaci = document.createElement('input');
-
-            //assigning attributes to each variable
             
+            //assigning attributes and values to each variable[to get them for backend]
+        
+            hid.type = 'hidden';
+            hid.id = hiddenid;
+            hid.value = json.id;
+
+            heqname.type = 'hidden';
+            heqname.id = hiddeneqn;
+            heqname.value = json.equipmentname;
+
+            hvalue.type = 'hidden';
+            hvalue.id = hiddenval;
+            hvalue.value = value;
+
+            hfaci.type = 'hidden';
+            hfaci.id = hiddenfaci;
+            hfaci.value = json.facility;
+
+            
+
 
             divCol2 = document.createElement('div');
             newDiv.className = "row";
@@ -115,6 +132,11 @@ $(document).on('click', '.addresBtn', function(event){
             newDiv.appendChild(divCol);
             newDiv.appendChild(divCol2);
             container.appendChild(newDiv);
+            container.appendChild(hid);
+            container.appendChild(heqname);
+            container.appendChild(hvalue);
+            container.appendChild(hfaci);
+            
 
         }
     });
@@ -123,20 +145,7 @@ $(document).on('click', '.addresBtn', function(event){
 });
 
 
-
-function addOption(){
-/*
-    var container = document.getElementById('container');
-    var textbox = document.createElement('text');
-    textbox.className = "form-control input-sm col-xs-1 disabled";
-    //textbox.disabled = true;
-        //var option = document.createElement('option');
-    textbox.innerHTML = "test";
-        //select.appendChild(option);
   
-    container.appendChild(textbox);
-   */ 
-}   
 
 
 //date auto fill
@@ -156,3 +165,19 @@ function updateButtonState() {
         button.classList.add("disabled");
     }
 }
+
+
+
+//modal events
+
+
+
+
+$("#reserModal").on("hidden.bs.modal", function () {
+    const myNode =  document.getElementById('container2');
+    while (myNode.firstChild) {
+    myNode.removeChild(myNode.lastChild);
+    }
+    $('#testtable').DataTable().clear().destroy();
+    
+  });
