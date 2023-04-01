@@ -47,12 +47,7 @@ function removeChild(){
   }
 
 }
-$(document).on('click', '', function(event){
 
-
-
-
-});
 function removeAddedEq(){
     const myNode =  document.getElementById('container2');
     while (myNode.firstChild) {
@@ -60,7 +55,15 @@ function removeAddedEq(){
     }
 }
 
+//eq quantity input width
 
+var input = document.querySelector('input'); // get the input element
+input.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+resizeInput.call(input); // immediately call the function
+
+function resizeInput() {
+  this.style.width = this.value.length + "ch";
+}
 
 //dynamic add option inside div
 $(document).on('click', '.addresBtn', function(event){
@@ -70,7 +73,6 @@ $(document).on('click', '.addresBtn', function(event){
     var id = $(this).data('id');
     var nid = 'a'+id;
     var value = document.getElementById(nid).value;
-    alert(value);
     $.ajax({
         url: "functions/getequipment.php",
         data: {
@@ -83,8 +85,17 @@ $(document).on('click', '.addresBtn', function(event){
             var container = document.getElementById('container2');
             var newDiv = document.createElement('div');
             var divCol = document.createElement('div');
-            divCol2 = document.createElement('div');
+
+            //variables for hidden inputs for getting values
+            var hid = document.createElement('input');
+            var heqname = document.createElement('input');
+            var hvalue = document.createElement('input');
+            var hfaci = document.createElement('input');
+
+            //assigning attributes to each variable
             
+
+            divCol2 = document.createElement('div');
             newDiv.className = "row";
             divCol.className = "col-md-2";
             divCol2.className = "col-md-2";
@@ -97,6 +108,8 @@ $(document).on('click', '.addresBtn', function(event){
             //var joinedtxt = json.equipmentname + '';
             textbox.className = "form-control input-sm col-xs-1 disabled";
             textbox.innerHTML = eqname +' x '+ value;
+
+
             divCol.appendChild(textbox);
             divCol2.appendChild(btn);
             newDiv.appendChild(divCol);
