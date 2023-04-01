@@ -491,7 +491,7 @@
                 <div class="modal-footer">
                 <div class="tacbox">
                     <input id="termscond" type="checkbox" onchange="updateButtonState()" />
-                    <label for="termscond"> I agree to these <a href="termsandcondition.html/" target="_blank"> Terms and Conditions prior to Approval</a></label>
+                    <label for="termscond"> I agree to these <a href="termsandcondition.html" target="_blank"> Terms and Conditions prior to Approval</a></label>
                 </div>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <!--<button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>-->
