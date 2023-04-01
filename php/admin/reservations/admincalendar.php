@@ -49,6 +49,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="../../../../php/admin/accounts/admin_account.php">
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">Account</span>
+                    </a>
+                </li>
+                <li>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
                         <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
