@@ -475,25 +475,25 @@
                             <label class="fw-bold" for="date">CHAIRPERSON/DEAN/DEPARTMENT</label>
                             <input type="name" class="form-control input-sm col-xs-1" id="chairdeandep" placeholder="CHAIRPERSON/DEAN/DEPARTMENT">
                         </div>
+                        <br>
+                        <label class="fw-bold" for="date">Facility Equipments</label>
                         <div class="table-responsive">
                         <table id="testtable" class="table" width="100%" >
                             <thead>
                                 <th>Equipments Name</th>
-                                <th>Facility</th> 
                                 <th>Quantity</th>                                  
-                                <th>Options</th>
+                                <th>Quantity to Reserve</th>
                             </thead>
                         </table>
                         </div>
-                        
+                        <label class="fw-bold">Equipments Added To Reservation</label>
                             <div class="col-md-2 ">
-                            <div id="container">
-                            </div>
+                                <div id="container">
+                                </div>
                             </div>
 
                         
                         <div class="col-sm-12 d-flex justify-content-end">
-                        <button type="button" id="add" onclick="addOption()">Add a statement</button>
                             <a data-toggle="modal" href="#myModal2" class="btn btn-primary">Add-ons</a>
                         </div>
                     </form>
@@ -508,38 +508,8 @@
                     <a href= "javascript:void();" class ="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
                     
                 </div>
-                <script type="text/javascript" src="functions/js/createresdep.js"></script>                       
-                <script>
-                    function addOption(){
-                    var container = document.getElementById('container');
-                    var select = document.createElement('select');
-                    select.className = "form-control input-sm col-xs-1";
-                    for(i = 0, i<=5; i++;){
-                        var option = document.createElement('option');
-                        option.innerHTML = i;
-                        select.appendChild(option);
-                    }
-                    container.appendChild(select);
-                    
-                    }   
-                </script>
-                    <script>
-                    //date auto fill
-                    var now = new Date();
-                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                    document.getElementById('datefiled').value = now.toISOString().substring(0,10);
-                    //date end
-                    function updateButtonState() {
-                        var checkbox = document.getElementById("termscond");
-                        var button = document.getElementById("termscond-create");
-
-                        if (checkbox.checked) {
-                            button.classList.remove("disabled");
-                        } else {
-                            button.classList.add("disabled");
-                        }
-                    }
-                </script>
+                <script type="text/javascript" src="functions/js/createresdep.js" <?= time() ?>></script>                       
+                
             </div>
         </div>
     </div>
