@@ -173,6 +173,7 @@
                                 <!-- redacted
                                 <select class="form-control input-sm col-xs-1" name="sections" id="faci">
                                     select = document.getElementById("faci");
+                                    
                                     <?php include('../../connection/connection.php');
                                     $sql = "SELECT facilityname FROM facility";
                                     $query = mysqli_query($con,$sql);
@@ -392,6 +393,7 @@
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
                                 <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange ="dynamicEq()" >
+                                <option disabled selected value> -- Select Facility -- </option>
                                     select = document.getElementById("faci");
                                     <?php include('../../connection/connection.php');
                                     $sql = "SELECT facilityname FROM facility";
@@ -477,7 +479,8 @@
                         <table id="testtable" class="table" width="100%" >
                             <thead>
                                 <th>ID</th>
-                                <th>Equipments to Reserve</th>                                  
+                                <th>Equipments to Reserve</th>
+                                <th>Facility</th>                                   
                                 <th>Options</th>
                             </thead>
                         </table>
@@ -506,15 +509,20 @@
                     
                 </div>
                 <script>
-                            
+                            $("#reserModal").on('shown.bs.modal', function () {
+                                    alert('The modal is fully shown.');
+                            });
 
                         function dynamicEq(){
                             var e = document.getElementById("faci");
                             var faci = e.options[e.selectedIndex].text;
+                            $('#testtable').DataTable().clear().destroy();
                             $('#testtable').DataTable({
+                                'searchable':false,
                                 'autoWidth': false,
                                 'serverSide': true,
                                 'processing': true,
+                                "bJQueryUI": true,
                                 'paging': true,
                                 'order': [],
                                 'ajax': {
@@ -523,8 +531,6 @@
                                     'data':{
                                         faci:faci,
                                     },
-                                    
-
                                 },
                                 'fnCreatedRow': function(nRow, aData, iDataIndex) {
                                     $(nRow).attr('id', aData[0]);
@@ -538,12 +544,6 @@
                             paging: false 
 
                             });
-
-                            $(document).ready(function() {
-                            
-                                $("#testtable").ajax.reload();
-    
-                        });
                         }
 
                         </script>

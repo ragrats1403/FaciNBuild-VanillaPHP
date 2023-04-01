@@ -1,16 +1,17 @@
 <?php include('../../../connection/connection.php');
 $faci = $_POST['faci'];
-$sql = "select * FROM equipments where facility";
+$sql = "SELECT * FROM equipments WHERE facility='$faci'";
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
-
+//search
+/*
 if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
-    $sql .= " WHERE equipmentname like '%" . $search_value . "%' ";
-    $sql .= " OR quantity like '%" . $search_value . "%' ";
-    $sql .= " OR facility like '%" . $search_value . "%' ";
+    $sql .= " OR equipmentname like '%" . $search_value . "%' ";
+    $sql .= " AND quantity like '%" . $search_value . "%' ";
+    $sql .= " AND facility like '%" . $search_value . "%' ";
 }
-
+*/
 if (isset($_POST['order'])) {
     $column = $_POST['order'][0]['column'];
     $order = $_POST['order'][0]['dir'];
@@ -36,6 +37,7 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray = array();
     $subarray[] = $row['id'];
     $subarray[] = $row['equipmentname'];
+    $subarray[] = $row['facility'];
     $subarray[] = '<a href="javascript:void();" data-id="' . $row['id'] . '"  class="btn btn-info btn-sm editBtn" >Edit</a> 
                     <a href= "javascript:void();" data-id="' . $row['id'] . '" class ="btn btn-sm btn-danger btnDelete">Delete</a>';
     $data[] = $subarray;
