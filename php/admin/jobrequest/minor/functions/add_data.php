@@ -16,7 +16,7 @@ $dateconfirmed = $_POST['dateconfirmed'];*/
 
 
 
-$sql = "INSERT INTO `minorjreq` (`department`,`datesubmitted`, `quantity`, `item`,`item_desc`,`purpose`, `section`, `bdstatus`,`cadstatus`,`pcostatus`,`status`) VALUES ('$department','$date','$quantity','$itemname','$description',' $purpose', '$section','Pending', 'Pending', 'Pending', 'Pending')";
+$sql = "INSERT INTO `minorjreq` (`department`,`datesubmitted`, `quantity`, `item`,`item_desc`,`purpose`, `section`, `bdstatus`,`status`) VALUES ('$department','$date','$quantity','$itemname','$description',' $purpose', '$section','Pending', 'Pending')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
     $data = array(

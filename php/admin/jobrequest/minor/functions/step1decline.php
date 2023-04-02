@@ -9,7 +9,7 @@ bdstatus
 cadstatus
 pcostatus
 */
-$sql = "UPDATE `minorjreq` SET `bdstatus` = 'Declined' WHERE minorjobid = '$id'";
+$sql = "UPDATE `minorjreq` SET `bdstatus` = 'Declined', `status`='Declined' WHERE minorjobid = '$id'";
 $query = mysqli_query($con, $sql);
 
 if ($query == true) {

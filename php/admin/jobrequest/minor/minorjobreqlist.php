@@ -303,46 +303,6 @@
                                 <div class="col-md-2" style="margin-top:5px;">
                                     <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1">
                                 </div> 
-                                <div class="col-md-1">
-                                    <!--Id:step1approveBtn-->
-                                    <a href= "javascript:void();" class ="btn btn-success step1approveBtn">Approve</a>
-                                </div>
-                                <div class="col-md-1" style="padding-left:18px;">
-                                <!--Id:step1declineBtn-->
-                                    <a href= "javascript:void();" class ="btn btn-danger step1declineBtn">Decline</a>
-                                </div>
-                            </div>
-                            <div class="row" style="padding-top:6px;">     
-                                <div class="col-md-1" style="margin-top:5px;">  
-                                    <label class="fw-bold" for="inputName">Step 2 Status:</label>
-                                </div> 
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step2">
-                                </div> 
-                                <div class="col-md-1">
-                                    <!--Id:step2approveBtn-->
-                                    <a href= "javascript:void();" class ="btn btn-success step2approveBtn">Approve</a>
-                                </div>
-                                <div class="col-md-1" style="padding-left:18px;">
-                                <!--Id:step2declineBtn-->
-                                <a href= "javascript:void();" class ="btn btn-danger step2declineBtn">Decline</a>
-                                </div>
-                            </div>
-                            <div class="row" style="padding-top:6px;">     
-                                <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 3 Status:</label>
-                                </div> 
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step3">
-                                </div> 
-                                <div class="col-md-1">
-                                    <!--Id:step3approveBtn-->
-                                    <a href= "javascript:void();" class ="btn btn-success step3approveBtn">Approve</a>
-                                </div>
-                                <div class="col-md-1" style="padding-left:18px;">
-                                <!--Id:step3declineBtn-->
-                                <a href= "javascript:void();" class ="btn btn-danger step3declineBtn">Decline</a>
-                                </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6" >
@@ -380,8 +340,8 @@
                             </div>
                         <div>
                         <div class="modal-footer justify-content-md-center">
-                        <a href= "javascript:void();" class ="btn btn-primary approveBtn">Approve All</a>
-                        <a href= "javascript:void();" class ="btn btn-danger declineBtn">Decline All</a>
+                        <a href= "javascript:void();" class ="btn btn-primary step1approveBtn">Approve</a>
+                        <a href= "javascript:void();" class ="btn btn-danger step1declineBtn">Decline</a>
                         <a href= "javascript:void();" class ="btn btn-info text-white updateBtn">Update</a>
                               <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
                               <button type="button" class="btn btn-danger">Decline</button>
