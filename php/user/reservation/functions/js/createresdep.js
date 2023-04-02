@@ -62,7 +62,7 @@ function removeAddedEq(){
 }
 
 
-//dynamic add option inside div
+//dynamic add and list the equipment chosen to reservation the inside div
 $(document).on('click', '.addresBtn', function(event){
     //var value = document.getElementById("id").value;
     //alert("test");
@@ -152,9 +152,20 @@ $(document).on('click', '.addresBtn', function(event){
     
 
 });
+function testClick(){
+
+var childDivs = document.getElementById('container2').getElementsByTagName('input');
+
+for( i=0; i< childDivs.length; i++ )
+{
+ var childDiv = childDivs[i];
+ console.log(childDiv);
+}
 
 
-  
+}
+
+
 
 
 //date auto fill

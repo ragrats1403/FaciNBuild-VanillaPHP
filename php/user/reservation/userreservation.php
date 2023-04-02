@@ -477,6 +477,7 @@
                         </table>
                         </div>
                         <label class="fw-bold">Equipments Added To Reservation</label>
+                        <a href= "javascript:void();" class ="btn btn-primary testBtn" onclick = "testClick();">Test Console</a>
                                 <div id="container1">
                                     <div id="container2">
                                     
