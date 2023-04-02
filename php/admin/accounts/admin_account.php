@@ -87,26 +87,33 @@
             // Poll for new notifications every 5 seconds
             setInterval(fetchNotifications, 5000);
 
-            // Make an AJAX request to mark all notifications as read
-const xhr = new XMLHttpRequest();
-xhr.open("POST", "../../connection/update_notification.php");
-xhr.onload = function() {
-  if (xhr.status === 200) {
-    // Update the "is_read" property of each notification to 1
-    notifications.forEach(notification => {
-      notification.is_read = 1;
-    });
+            // Get the "Mark all as read" button
+            const markAsReadButton = document.querySelector(".mark-as-read");
 
-    // Update the badge count
-    notificationBadge.innerText = "0";
+            // Add a click event listener to the button
+            markAsReadButton.addEventListener("click", function(event) {
+                // Prevent the default behavior of the link
+                event.preventDefault();
 
-    // Clear the existing list
-    notificationList.innerHTML = "";
+                // Make an AJAX request to mark all notifications as read
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "../../connection/update_notification.php");
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        // Update the "is_read" property of each notification to 1
+                        notifications.forEach(notification => {
+                            notification.is_read = 1;
+                        });
 
-  }
-};
-xhr.send();
+                        // Update the badge count
+                        notificationBadge.innerText = "0";
 
+                        // Clear the existing list
+                        notificationList.innerHTML = "";
+                    }
+                }
+                xhr.send();
+            });
         </script>
 
         <p>Hello, Administrator</p>
