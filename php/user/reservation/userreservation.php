@@ -486,12 +486,15 @@
                             <a data-toggle="modal" href="#myModal2" class="btn btn-primary">Add-ons</a>
                         </div>-->
                         <!-- ADD ON SECTION-->
-                        <div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="myFunction()">
+                            <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
+                        </div>
+                        <div id="myDIV" style="display: none;">
                             <div class="col-sm-12 d-flex justify-content-center">
                                 <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
                             </div>
                             <form id="saveUserForm" action="javascript:void();" method="POST">
-                            <div class="modal-body">
                                 <!-- Form Controls-->
                                 <div class="row justify-content-center" style="padding-bottom:13px;">
                                     <div class="col-md-6 ">
@@ -543,8 +546,8 @@
                                     </div>
                                 </div>  
                                 <!-- Form Controls End-->
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                         <!-- ADD ON SECTION END-->
                     </form>
                 </div>
@@ -559,13 +562,21 @@
                     
                 </div>
                 <script type="text/javascript" src="functions/js/createresdep.js" <?= time() ?>></script>                       
-                
+                <script>
+                    function myFunction() {
+                        var x = document.getElementById("myDIV");
+                        if (x.style.display === "block") {
+                            x.style.display = "none";
+                        } else {
+                            x.style.display = "block";
+                        }
+                    }
+                </script>
             </div>
         </div>
     </div>
         <!-- create reservation end -->
-    
-   
+                                    
    
 
     
