@@ -490,20 +490,6 @@
                             <div class="col-sm-12 d-flex justify-content-center">
                                 <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
                             </div>
-                            <div class="row d-flex justify-content-center">
-                                <div class="form-check col-sm-3">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">Default checkbox</label>
-                                </div>
-                                <div class="form-check col-sm-3">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                    <label class="form-check-label" for="flexCheckChecked">Checked checkbox</label>
-                                </div>
-                                <div class="form-check col-sm-3">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                    <label class="form-check-label" for="flexCheckChecked">Checked checkbox</label>
-                                </div>
-                            </div>
                             <form id="saveUserForm" action="javascript:void();" method="POST">
                             <div class="modal-body">
                                 <!-- Form Controls-->
