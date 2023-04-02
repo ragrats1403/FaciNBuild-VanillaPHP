@@ -480,13 +480,72 @@
                         <a href= "javascript:void();" class ="btn btn-primary testBtn" onclick = "testClick();">Test Console</a>
                                 <div id="container1">
                                     <div id="container2">
-                                    
-
                                     </div>
                                 </div>
-                        <div class="col-sm-12 d-flex justify-content-end">
+                        <!--<div class="col-sm-12 d-flex justify-content-end">
                             <a data-toggle="modal" href="#myModal2" class="btn btn-primary">Add-ons</a>
-                        </div>
+                        </div>-->
+                        <!-- ADD ON SECTION-->
+                        <div>
+                            <div class="col-sm-12 d-flex justify-content-center">
+                                <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
+                            </div>
+                            <form id="saveUserForm" action="javascript:void();" method="POST">
+                            <div class="modal-body">
+                                <!-- Form Controls-->
+                                <div class="row justify-content-center" style="padding-bottom:13px;">
+                                    <div class="col-md-6 ">
+                                        <label class="fw-bold" for="date">Department:</label>
+                                        <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <label class="fw-bold" for="date">Date:</label>
+                                        <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled> 
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
+                                    <div class="row">
+                                        <div class="col-md-3" style="margin-top:5px; width:24%;">
+                                            <label class="fw-bold" for="date">Section:</label>
+                                            <select class="" style="width: 150px; Border: 5px;" name="sect" id="sect">
+                                                <option value="C">CARPENTRY</option>
+                                                <option value="P">PLUMBING</option>
+                                                <option value="A">AIRCON</option>
+                                                <option value="E">ELECTRICAL</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="width:20%">
+                                        <label class="fw-bold" for="date">Quantity:</label>
+                                        <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                        <label class="fw-bold" for="date">Item Name:</label>
+                                        <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
+                                    </div>
+                                </div>
+                                <div class="justify-content-center">
+                                    <div class="col-md-12" >
+                                        <label class="fw-bold" for="date">Description:</label>
+                                        <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="justify-content-center">
+                                    <div class="col-md-12" >
+                                        <label class="fw-bold" for="date">Purpose:</label>
+                                        <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
+                                    </div>
+                                </div>  
+                                <!-- Form Controls End-->
+                            </div>
+                        </form>
+                        <!-- ADD ON SECTION END-->
                     </form>
                 </div>
                 <div class="modal-footer">
