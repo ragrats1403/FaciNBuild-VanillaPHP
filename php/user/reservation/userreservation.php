@@ -499,7 +499,7 @@
                     <a href= "javascript:void();" class ="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
                     
                 </div>
-                <script type="text/javascript" src="functions/js/createresdep.js" <?= time() ?>></script>                       
+                <script type="text/javascript" src="functions/js/createresdep.js?$version"></script>                       
                 
             </div>
         </div>
