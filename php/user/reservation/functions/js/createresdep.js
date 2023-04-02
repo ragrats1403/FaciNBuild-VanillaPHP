@@ -69,10 +69,10 @@ $(document).on('click', '.addresBtn', function(event){
     //var quantitytxt = eq.value;
     var id = $(this).data('id');
     var nid = 'a'+id;
-    var hiddenid = 'h'+id;
-    var hiddeneqn = 'e'+id;
-    var hiddenval = 'v'+id;
-    var hiddenfaci = 'f'+id;
+    var hiddenid = 'fbh'+id;
+    var hiddeneqn = 'fbe'+id;
+    var hiddenval = 'fbv'+id;
+    var hiddenfaci = 'fbf'+id;
     var value = document.getElementById(nid).value;
     //var checkval = document.getElementById("hid").value;
     if(document.getElementById(hiddenid)==null){
@@ -153,7 +153,18 @@ $(document).on('click', '.addresBtn', function(event){
 
 });
 function testClick(){
-
+/*$('container2').each(function()
+{
+    console.log($(this).attr('id'))
+})
+//2nd test
+var list, href;
+list = document.getElementById('container2').getElementsByTagName('div');
+if (list.length > 0) {
+    href = list[0].href;
+    console.log(href);
+}  
+//3rd test
 var childDivs = document.getElementById('container2').getElementsByTagName('input');
 
 for( i=0; i< childDivs.length; i++ )
@@ -163,6 +174,45 @@ for( i=0; i< childDivs.length; i++ )
 }
 
 
+
+4th test
+var gettag = document.querySelectorAll('[id^="h"]');
+var test = document.getElementById(document.querySelectorAll('[id^="h"]')).value;
+if(test==null){
+
+    alert("Test: no element found!");
+
+}
+else{
+    alert(
+        [...document.querySelectorAll('[id^="h"]')]
+          .map(elm => elm.id)
+      );
+
+}
+*/ 
+var testarr = [...document.querySelectorAll('[id^="fbh"]')].map(elm => elm.id);
+var testarr2 = [...document.querySelectorAll('[id^="fbe"]')].map(elm => elm.id);
+//var childDivs = document.getElementById('container2').getElementsByTagName('input');
+/*
+for( i=0; i< childDivs.length; i++ )
+{
+ var childDiv = childDivs[i];
+ console.log(childDiv);
+}   */
+for(i = 0; i<=testarr.length-1; i++ ){
+
+    //alert(testarr[i]);
+    console.log(document.getElementById(testarr[i]).value);
+
+}
+for(k = 0; k<=testarr2.length-1; k++ ){
+
+    //alert(testarr[i]);
+    alert(document.getElementById(testarr2[k]).value);
+    
+}
+//alert(testarr.length);
 }
 
 
