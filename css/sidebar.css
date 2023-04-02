@@ -25,6 +25,7 @@ body {
     width: 260px;
     box-shadow: 5px 5px 5px 0px rgba(110, 110, 110, 0.3);
     filter: drop-shadow(5px 5px 5px rgba(110, 110, 110, 0.3));
+    z-index: 60;
 }
 
 .logo img {
@@ -256,3 +257,4 @@ body {
     border-radius: 12px;
     transition: all 0.4s ease;
 }
+

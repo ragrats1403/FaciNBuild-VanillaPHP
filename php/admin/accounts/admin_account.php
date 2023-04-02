@@ -23,33 +23,97 @@
 
     </div>
     <div class="navplace">
-        <div id="notif_bell">
-            <div class="dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="notification-dropdown" data-bs-toggle="dropdown" aria-expanded="false" style='color: #FFF'>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: transparent;
+  border: none;">
                 <i class='bx bxs-bell' style='color:#ffffff'></i>
-                    <span class="badge bg-danger" id="notif_red"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notification-dropdown">
-                    <!-- Display notification message here -->
-                </ul>
+                <span class="icon-button__badge"></span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="notification-dropdown">
+                <div class="dropdown-header">Notifications</div>
+                <div class="dropdown-divider"></div>
+                <div class="notification-list"></div>
+                <u><a class="dropdown-item text-center mark-as-read" href="#">Mark all as read</a></u>
             </div>
-</div>
-            <script>
-                setInterval(function() {
-                    var xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function() {
-                        if (this.readyState == 4 && this.status == 200) {
-                            document.getElementById("notif_red").innerHTML = this.responseText;
-                        }
-                    };
-                    xhttp.open("GET", "../../connection/notification.php", true);
-                    xhttp.send();
-                }, 3000);
-            </script>
-            <p>Hello, Administrator</p>
-            <nav class="gnav">
-            </nav>
         </div>
+        <script>
+            // Get the notification dropdown button and badge
+            const notificationDropdown = document.getElementById("notification-dropdown");
+            const notificationBadge = notificationDropdown.querySelector(".icon-button__badge");
+
+            // Get the notification list element
+            const notificationList = document.querySelector(".notification-list");
+
+            // Fetch the notifications and update the badge and list
+            function fetchNotifications() {
+                // Make an AJAX request to fetch the notifications
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", "../../connection/notification.php");
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        // Parse the response JSON
+                        const notifications = JSON.parse(xhr.responseText);
+
+                        // Update the badge count
+                        notificationBadge.innerText = notifications.length;
+
+                        // Clear the existing list
+                        notificationList.innerHTML = "";
+
+                        // Add each notification to the list
+                        notifications.forEach(notification => {
+                            const notificationItem = document.createElement("div");
+                            notificationItem.classList.add("dropdown-item");
+                            if (!notification.is_read) {
+                                notificationItem.classList.add("font-weight-bold");
+                            }
+                            notificationItem.innerHTML = `
+            <div class="d-flex align-items-center">
+              <div class="flex-grow-1">${notification.message}</div>
+              <div class="text-muted">${notification.created_at}</div>
+            </div>
+            <div class="dropdown-divider"></div>
+          `;
+                            notificationList.appendChild(notificationItem);
+                        });
+                    }
+                };
+                xhr.send();
+            }
+
+            // Call fetchNotifications() on page load
+            fetchNotifications();
+
+            // Poll for new notifications every 5 seconds
+            setInterval(fetchNotifications, 5000);
+
+            // Make an AJAX request to mark all notifications as read
+const xhr = new XMLHttpRequest();
+xhr.open("POST", "../../connection/update_notification.php");
+xhr.onload = function() {
+  if (xhr.status === 200) {
+    // Update the "is_read" property of each notification to 1
+    notifications.forEach(notification => {
+      notification.is_read = 1;
+    });
+
+    // Update the badge count
+    notificationBadge.innerText = "0";
+
+    // Clear the existing list
+    notificationList.innerHTML = "";
+
+  }
+};
+xhr.send();
+
+        </script>
+
+        <p>Hello, Administrator</p>
+    </div>
+    <nav class="gnav">
+    </nav>
+    </div>
 </header>
 
 <body>
@@ -337,7 +401,7 @@
                         var row = table.row("[id='" + trid + "']");
                         row.row("[id='" + trid + "']").data([id, department, username, password, rolelevel, roleid, button]);
                         $('#editUserModal').modal('hide');
-                        
+
                     } else {
                         alert('failed');
                     }

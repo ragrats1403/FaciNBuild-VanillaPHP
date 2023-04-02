@@ -19,7 +19,7 @@ header {
     display: flex;
     align-items: center;
     text-align: right;
-    right: 50px;
+    right: 30px;
     color:antiquewhite;
 
 }
@@ -74,3 +74,11 @@ header .gnav .menu li {
     align-items: center;
     border-radius: 50%;
   }
+
+  .dropdown-toggle::after {
+    display: none;
+  }
+
+  header {
+    z-index: 50;
+} 
