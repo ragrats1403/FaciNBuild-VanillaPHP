@@ -1,14 +1,13 @@
 <?php include('../../connection/connection.php');
 
 $requino = $_POST['requino'];
-$department = $_POST['department'];
 $date = $_POST['date'];
 $quantity = $_POST['quantity'];
 $item = $_POST['item'];
 $description = $_POST['description'];
 $purpose = $_POST['purpose'];
 
-$sql = "INSERT INTO `majoreq` (`requino`,`department`,`date`,`quantity`,`item`,`description`,`purpose`,`status`,`bdstatus`,`cadstatus`,`pcostatus`) VALUES ('$requino','$department','$date','$quantity','$item','$description','$purpose','Pending','Pending','Pending','Pending')";
+$sql = "INSERT INTO `majoreq` (`requino`,`department`,`date`,`quantity`,`item`,`description`,`purpose`,`status`,`bdstatus`,`cadstatus`,`pcostatus`) VALUES ('$requino','PCO','$date','$quantity','$item','$description','$purpose','Pending','Pending','Pending','Pending')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
     $data = array(

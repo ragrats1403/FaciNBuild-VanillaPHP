@@ -174,7 +174,7 @@
             var description = $('#desc').val();
             var purpose = $('#purp').val();
 
-            if (department != '' && date != '' && quantity != '' && item != ''  && description != '' && purpose != '' ) {
+            if (date != '' && quantity != '' && item != ''  && description != '' && purpose != '' ) {
             $.ajax({
                 url: "add_data.php",
                 data: {
@@ -464,7 +464,7 @@
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="Department">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="PCO" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
