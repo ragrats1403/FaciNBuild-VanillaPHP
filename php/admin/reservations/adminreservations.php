@@ -126,52 +126,49 @@
                 <img src="../../../images/Black_logo.png" />
             </div>
         </div>
-        <div class ="navdiv">
-        <ul class="nav_list">
-            <li>
-                <a href="../../../../php/admin/reservations/admincalendar.php">
-                    <i class='bx bx-calendar'></i>
-                    <span class="link_name">Calendar of Activities</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../../php/admin/accounts/admin_account.php">
-                    <i class='bx bx-user'></i>
-                    <span class="link_name">Account</span>
-                </a>
-            </li>
-            <li>
-                <div class="dropdown">
-                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
-                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Job Request
-                    </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <a href="../../../php/admin/equipments/adminequipment.php">
-                    <i class='bx bx-wrench'></i>
-                    <span class="link_name">Equipment</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../../php/admin/reservations/adminreservations.php">
-                    <i class='bx bx-check-square'></i>
-                    <span class="link_name">Reservation</span>
-                </a>
-            </li>
-        </ul>
-        <div class="profile_content">
+
+        <div class="navdiv">
+            <ul class="nav_list">
+                <li>
+                    <a href="../../../php/admin/reservations/admincalendar.php">
+                        <i class='bx bx-calendar'></i>
+                        <span class="link_name">Calendar of Activities</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../php/admin/accounts/admin_account.php">
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">Account</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <i class='bx bx-clipboard' style="margin-left:17px;"></i>
+                        <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Create/Manage Request
+                        </span>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="../../../php/admin/reservations/adminreservations.php">Reservations</a>  
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="../../../php/admin/equipments/adminequipment.php">
+                        <i class='bx bx-wrench'></i>
+                        <span class="link_name">Facilities Equipment</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                    <img src="../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                        <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                        <div class="name">Admin</div>
-                        <div class="role">System Administrator</div>
+                            <div class="name">Admin</div>
+                            <div class="role">System Administrator</div>
                         </div>
                     </div>
                     <a href="../../../logout.php">
