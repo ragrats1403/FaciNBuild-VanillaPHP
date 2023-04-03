@@ -200,6 +200,20 @@ function myFunction() {
 
 }
 
+
+function myFunction2() {
+    var x = document.getElementById("_myDIV");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+    var now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    document.getElementById('dateminor').value = now.toISOString().substring(0,10);
+
+}
+
 //modal events
 
 $("#reserModal").on("hidden.bs.modal", function () {

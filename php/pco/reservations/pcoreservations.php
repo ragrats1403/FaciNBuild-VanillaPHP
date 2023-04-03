@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Reservation</title>
+    <title>RESERVATION</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -23,65 +23,68 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
-<header class="shadow">
-    <div class="imgctrl">
-
+<header>
+    <div class= "imgctrl">
+        
     </div>
     <div class="navplace">
-        <div>
-            <button type="button" class="icon-button">
-                <span class='bx bxs-bell'></i>
-                    <span class="icon-button__badge"></span>
-        </div>
-        <?php
-        session_start();
-        ?>
-        <p>Hello, <?php echo $_SESSION['department'];?></p>
-        <nav class="gnav">
+     <div>
+        <button type="button" class="icon-button">    
+        <span class='bx bxs-bell'></i>
+        <span class="icon-button__badge"></span>
+     </div>  
+        <p>Hello, PCO</p>
+      <nav class="gnav">
         </nav>
     </div>
 </header>
 
-<body>
-    <div class="sidebar">
+<body style="padding-top: 0px;">
+
+<div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../images/Brown_logo_faci.png" />
+                <img src="../../../../images/Brown_logo_faci.png" />
             </div>
         </div>
-        <div class="navdiv">
-            <ul class="nav_list">
-                <li>
-                    <a href="../../../php/user/userdashboard.php">
-                        <i class='bx bx-calendar'></i>
-                        <span class="link_name">Calendar of Activities</span>
-                    </a>
-                </li>
-                <li>
-                    <div class="dropdown">
-                        <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                        <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Job Request
-                        </span>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../../php/user/minor/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../../php/user//major/majorjobreqlist.php">Major Job Request</a>
-                        </ul>
-                    </div>
-                <li>
-                    <a href="../../../php/user/reservation/userreservation.php">
-                        <i class='bx bx-check-square'></i>
-                        <span class="link_name">Reservation</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="profile_content">
+        <div class ="navdiv">
+        <ul class="nav_list">
+            <li>
+                <a href="../../../../php/pco/reservations/pcocalendar.php">
+                    <i class='bx bx-calendar'></i>
+                    <span class="link_name">Calendar of Activities</span>
+                </a>
+            </li>
+            <li>
+                <div class="dropdown">
+                    <i class='bx bx-notepad' style="margin-left:17px;" ></i>
+                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Manage Request
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                       <a class="dropdown-item" href="../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        View/Create Request
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../php/pco/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../php/pco/reservations/pcoreservations.php">Request Reservation</a>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                        <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                    <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name"><?php echo $_SESSION['department'];?></div>
-                            <div class="role">User</div>
+                            <div class="name">PCO Dept.</div>
+                            <div class="role">PCO Department</div>
                         </div>
                     </div>
                     <a href="../../../logout.php">
@@ -252,65 +255,23 @@
                             <label class="fw-bold" for="date">CHAIRPERSON/DEAN/DEPARTMENT</label>
                             <input type="name" class="form-control input-sm col-xs-1" id="_chairdeandep" placeholder="CHAIRPERSON/DEAN/DEPARTMENT">
                         </div>
+
+                        <label class="fw-bold" for="date">Facility Equipments</label>
+                            <div class="table-responsive">
+                            <table id="testtable" class="table" width="100%" >
+                                <thead>
+                                    <th>Equipments Name</th>
+                                    <th>Quantity</th>                                  
+                                    <th>Quantity to Reserve</th>
+                                </thead>
+                            </table>
+                            </div>
                             <label class="fw-bold">Equipments Added To Reservation</label>
-                                    <div id="container3">
-                                        <div id="container4">
+                            
+                                    <div id="container1">
+                                        <div id="container2">
                                         </div>
                                     </div>
-                                    <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" onclick="myFunction2()">
-                            <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
-                        </div>
-                        <div id="_myDIV" style="display: none;">
-                            <div class="col-sm-12 d-flex justify-content-center">
-                                <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
-                            </div>
-                            <form id="saveUserForm" action="javascript:void();" method="POST">
-                                <input type = "hidden" id="eventname" >
-                                <!-- Form Controls-->
-                                <div class="row justify-content-center" style="padding-bottom:13px;">
-                                    <div class="col-md-6 ">
-                                        <label class="fw-bold" for="date">Department:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_department" placeholder="Department">
-                                    </div>
-                                    <div class="col-md-6 ">
-                                        <label class="fw-bold" for="date">Date:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="dateminor" placeholder="Date" disabled> 
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                    
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2" style="width:20%">
-                                        <label class="fw-bold" for="date">Quantity:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                        <label class="fw-bold" for="date">Item Name:</label>
-                                        <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
-                                    </div>
-                                </div>
-                                <div class="justify-content-center">
-                                    <div class="col-md-12" >
-                                        <label class="fw-bold" for="date">Description:</label>
-                                        <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="justify-content-center">
-                                    <div class="col-md-12" >
-                                        <label class="fw-bold" for="date">Purpose:</label>
-                                        <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
-                                    </div>
-                                </div>  
-                                <!-- Form Controls End-->
-                            </form>
-                        </div>
-                        <!-- ADD ON SECTION END-->
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -336,6 +297,87 @@
     <br>
     <br>
         <!-- Modal Popup End -->
+        <!-- Add ons modal popup-->
+        <div class="modal shadow p-3 mb-5 bg-white rounded" tabindex="-1" id="myModal2" aria-labelledby="exampleModalLabel" data-backdrop="static">
+        <div class="modal-dialog" style="max-width:1100px;">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center" style="max-width:1100px;">
+                    <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Job Request</h5>
+                </div>
+                <div class="modal-body ">
+                    <form id="saveUserForm" action="javascript:void();" method="POST">
+                        <div class="modal-body">
+                            <!-- Form Controls-->
+                            <div class="row justify-content-center" style="padding-bottom:13px;">
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Department:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
+                                </div>
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Date:</label>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
+                                </div>
+                            </div>
+                            <div class="justify-content-center">
+                                <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
+                                <div class="col-md-2" style="padding-bottom:10px">
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Item Name:</label>
+                                    <input type="form-control" class="form-control" id="_item_" placeholder="Item">
+                                </div>
+                            </div>
+
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Description:</label>
+                                    <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Purpose:</label>
+                                    <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-6">
+                                    <label class="fw-bold" for="renderedby">Rendered by:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="renderedby">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="fw-bold" for="date">Date:</label>
+                                    <input type="date" class="form-control input-sm col-xs-1" id="daterendered">
+                                </div>
+                            </div>
+                            <div class="row justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-6">
+                                    <label class="fw-bold" for="renderedby">Confirmed by:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="confirmedby">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="fw-bold" for="date">Date:</label>
+                                    <input type="date" class="form-control input-sm col-xs-1" id="dateconfirmed">
+                                </div>
+                            </div>
+                            </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <a href="#" class="btn btn-primary">Save</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- Add ons modal popup end-->
 
         <!-- Create Reservation start-->
         <div class="modal " tabindex="-1" id="reserModal" aria-labelledby="exampleModalLabel">
@@ -361,7 +403,7 @@
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
                                 <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange ="dynamicEq()" >
-                                <option disabled selected value hidden> -- Select Facility -- </option>
+                                <option disabled selected value> -- Select Facility -- </option>
                                     select = document.getElementById("faci");
                                     <?php include('../../connection/connection.php');
                                     $sql = "SELECT facilityname FROM facility";
@@ -372,6 +414,8 @@
                                         $i++;
                                     }
                                     ?>
+                                                
+
                                                 
                                 </select>
                             </div>
@@ -446,8 +490,7 @@
                             </thead>
                         </table>
                         </div>
-                        <label class="fw-bold">Equipments Added To Reservation</label><br>
-                        <!--<a href= "javascript:void();" class ="btn btn-primary testBtn" onclick = "testClick();">Test Console</a>-->
+                        <label class="fw-bold">Equipments Added To Reservation</label>
                                 <div id="container1">
                                     <div id="container2">
                                     </div>
@@ -465,12 +508,11 @@
                                 <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
                             </div>
                             <form id="saveUserForm" action="javascript:void();" method="POST">
-                                <input type = "hidden" id="eventname" >
                                 <!-- Form Controls-->
                                 <div class="row justify-content-center" style="padding-bottom:13px;">
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Department:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_department" placeholder="Department">
+                                        <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
                                     </div>
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Date:</label>
@@ -513,10 +555,6 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                <div class="tacbox">
-                    <input id="termscond" type="checkbox" onchange="updateButtonState()" />
-                    <label for="termscond"> I agree to these <a href="termsandcondition.html" target="_blank"> Terms and Conditions prior to Approval</a></label>
-                </div>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <!--<button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>-->
                     <a href= "javascript:void();" class ="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>

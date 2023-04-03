@@ -50,7 +50,7 @@
                 </li>
                 <li>
                     <div class="dropdown">
-                        <i class='bx bx-clipboard' style="margin-left:17px;"></i>
+                        <i class='bx bx-notepad' style="margin-left:17px;"></i>
                         <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Manage Request
                         </span>
@@ -69,15 +69,15 @@
                          <a class="dropdown-item" href="../../../php/sao/reservation/saoreservation.php">Reservation</a>
                         </ul>
                     </div>
-            </li>
+                </li>
         </ul>
         <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
                     <img src="../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                        <div class="name">SAO</div>
-                        <div class="role">Hello SAO</div>
+                        <div class="name">SAO Dept.</div>
+                        <div class="role">SAO Department</div>
                         </div>
                     </div>
                     <a href="../../../logout.php">

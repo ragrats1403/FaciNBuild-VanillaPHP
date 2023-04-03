@@ -1,6 +1,13 @@
 <?php include('../../../connection/connection.php');
 $eventname = $_POST['eventname'];
 $actualdate = $_POST['actualdate'];
+$datesubmitted = $_POST['actualdate'];
+$timestart = $_POST['actualdate'];
+$timeend = $_POST['actualdate'];
+$quantity = $_POST['actualdate'];
+$facility = $_POST['actualdate'];
+$eqid = $_POST['actualdate'];
+$eqname = $_POST['actualdate'];
 $reqsource = $_POST['reqsource'];
 $sql = "SELECT * FROM minorjreq WHERE eventname='$eventname' AND reservationdateuse ='$actualdate' AND reqsource ='$reqsource' LIMIT 1";
 $query = mysqli_query($con,$sql);
