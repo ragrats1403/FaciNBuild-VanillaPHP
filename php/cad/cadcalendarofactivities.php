@@ -54,7 +54,7 @@
                         Manage Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/cad/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
                 <div class="dropdown">
@@ -63,9 +63,9 @@
                         View/Create Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/cad/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/cad/majorjobreqlist.php">Major Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/cad/cadreservation.php">Reservation</a>
+                        <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/cad/reservations/cadreservation.php">Reservation</a>
                     </ul>
                 </div>
             </li>

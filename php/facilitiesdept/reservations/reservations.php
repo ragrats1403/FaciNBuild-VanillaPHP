@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Calendar of Activities</title>
+    <title>Reservations</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -49,16 +49,14 @@
             </li>
             <li>
                 <div class="dropdown">
-                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+                    <i class='bx bx-notepad' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Manage Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="./../../../php/facilitiesdept/reservations/reservations.php">Reservation</a>
+                        <a class="dropdown-item" href="./../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
                     </ul>
                 </div>
-            </li>
-            <li>
                 <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -67,7 +65,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="./../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
                         <a class="dropdown-item" href="./../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
-                        <a class="dropdown-item" href="./../../../php/facilitiesdept/reservations/reservations.php">Reservation</a>
+                        <a class="dropdown-item" href="./../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
                     </ul>
                 </div>
             </li>

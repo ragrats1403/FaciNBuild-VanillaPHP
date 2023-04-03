@@ -48,17 +48,15 @@
                 </a>
             </li>
             <li>
-                <div class="dropdown">
-                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+               <div class="dropdown">
+                    <i class='bx bx-notepad' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Manage Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="./../../../php/facilitiesdept/reservations/reservations.php">Reservation</a>
+                        <a class="dropdown-item" href="./../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
                     </ul>
                 </div>
-            </li>
-            <li>
                 <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -67,7 +65,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="./../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
                         <a class="dropdown-item" href="./../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
-                        <a class="dropdown-item" href="./../../../php/facilitiesdept/reservations/reservations.php">Reservation</a>
+                        <a class="dropdown-item" href="./../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
                     </ul>
                 </div>
             </li>

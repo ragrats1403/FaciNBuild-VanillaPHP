@@ -78,12 +78,37 @@ $(document).on("click", ".editBtn", function (event) {
                 },
                 type: "POST",
                 success: function (data) {
+<<<<<<< Updated upstream
                 var jsonfaddon = JSON.parse(data);
                 
                     
             
                 },
             });
+=======
+                var jfa = JSON.parse(data);
+                document.getElementById("_flexCheckDefault").checked = true;
+                var x = document.getElementById("_myDIV");
+                x.style.display = "block";
+                },
+            });
+
+            $.ajax({
+              url: "functions/get_addon_details.php",
+              data: {
+                  eventname: en,
+                  actualdate: adu,
+                  reqsource: rp,
+              },
+              type: "POST",
+              success: function (data) {
+              var jfa = JSON.parse(data);
+              document.getElementById("_flexCheckDefault").checked = true;
+              var x = document.getElementById("_myDIV");
+              x.style.display = "block";
+              },
+          });
+>>>>>>> Stashed changes
 
 
     },
@@ -215,7 +240,7 @@ $(document).on("click", ".submitBtn", function (event) {
                         var status = addonjson.status;
 
                         if (status == "success") {
-                          console.log("Addons added to reservation!");
+                          console.log("Addons added to reservation!");                          
                         }
                       },
                     });
