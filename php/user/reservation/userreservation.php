@@ -27,7 +27,6 @@
         <div class="imgctrl">
         </div>
     <div class="navplace">
-<<<<<<< Updated upstream
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: transparent;
   border: none;">
@@ -123,18 +122,6 @@
                 xhr.send();
             });
         </script>
-=======
-        <div>
-            <button type="button" class="icon-button">
-                <span class='bx bxs-bell'></i>
-                    <span class="icon-button__badge">
-                    </span>
-                </span>
-        </div>
-            <?php
-                session_start();
-                ?>
->>>>>>> Stashed changes
         <p>Hello, <?php echo $_SESSION['department'];?></p>
         </div>
         <nav class="gnav">
