@@ -1,15 +1,13 @@
 <?php include('../../connection/connection.php');
 
-$sql = "select * FROM majoreq";
+$sql = "select * FROM majoreq WHERE department='CAD'";
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
 
 if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
-    $sql .= " WHERE jobreqno like '%" . $search_value . "%' ";
-    $sql .= " OR jobreqno like '%" . $search_value . "%' ";
-    $sql .= " OR requino like '%" . $search_value . "%' ";
-    $sql .= " OR department like '%" . $search_value . "%' ";
+    $sql .= " AND jobreqno like '%" . $search_value . "%' ";
+
 }
 
 if (isset($_POST['order'])) {

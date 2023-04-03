@@ -163,33 +163,22 @@
         $(document).on('submit', '#addUserModal', function(event) {
             event.preventDefault();
             var requino = $('#requi').val();
-            var department = $('#depart').val();
             var date = $('#deeto').val();
             var quantity = $('#quan').val();
             var item = $('#ite').val();
-
-            var e = document.getElementById("section");//dropdown
-            var section = e.options[e.selectedIndex].text;//end
-
             var description = $('#desc').val();
             var purpose = $('#purp').val();
 
-            var e = document.getElementById("mark");//dropdown
-            var outsource = e.options[e.selectedIndex].text;//end
-
-            if (department != '' && date != '' && quantity != '' && item != '' && section != '' && description != '' && purpose != '' && outsource != '') {
+            if ( requino !='' && date != '' && quantity != '' && item != '' && description != '' && purpose != '' ) {
             $.ajax({
                 url: "add_data.php",
                 data: {
                     requino: requino,
-                    department: department,
                     date: date,
                     quantity: quantity,
                     item: item,
-                    section: section,
                     description: description,
                     purpose: purpose,
-                    outsource: outsource
                 },
                 type: 'POST',
                 success: function(data) {
@@ -200,14 +189,11 @@
                         table.draw();
                         alert('Successfully Added User!');
                         $('#requi').val('');
-                        $('#depart').val('');
                         $('#deeto').val('');
                         $('#quan').val('');
                         $('#ite').val('');
-                        $('#section').val('');
                         $('#desc').val('');
                         $('#purp').val('');
-                        $('#mark').val('');
                         $('#addUserModal').modal('hide');
                         $('body').removeClass('modal-open');
                         $('.modal-backdrop').remove();
@@ -438,25 +424,11 @@
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="Department">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="CAD" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
                                     <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                    <label class="fw-bold" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: 5px;" name="section" id="section">
-                                        <option value="0">Select</option>
-                                        <option value="C">CARPENTRY</option>
-                                        <option value="P">PLUMBING</option>
-                                        <option value="A">AIRCON</option>
-                                        <option value="E">ELECTRICAL</option>
-
-                                    </select>
                                 </div>
                             </div>
                             <div>
@@ -482,16 +454,6 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="purp"></textarea>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
-                                    <select class="" style="width: 150px; Border: none;" name="cars" id="mark">
-                                        <option value="0">Select</option>
-                                        <option value="volvo">Outsource</option>
-                                        <option value="saab">Bill of materials</option>
-                                    </select>
                                 </div>
                             </div>
                         <div class="modal-footer justify-content-md-center">
@@ -563,13 +525,13 @@
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Description:</label>
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="description"></textarea>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="description" disabled></textarea>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose"></textarea>
+                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose" disabled></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -620,12 +582,7 @@
                             </div>
                         <div>
                             <div class="modal-footer justify-content-md-center">
-                                <a href= "javascript:void();" class ="btn btn-success step2approveBtn">Approve</a>
-                                <a href= "javascript:void();" class ="btn btn-danger step2declineBtn">Decline</a>
-                                <a href= "javascript:void();" class ="btn btn-info text-white updateBtn">Update</a>
-                                <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
-                                <button type="button" class="btn btn-danger">Decline</button>
-                                <button type="submit" class="btn btn-info text-white">Update</button>-->
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
