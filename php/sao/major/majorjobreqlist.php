@@ -261,17 +261,10 @@
             var date = $('#deeto').val();
             var quantity = $('#quan').val();
             var item = $('#ite').val();
-
-            var e = document.getElementById("section");//dropdown
-            var section = e.options[e.selectedIndex].text;//end
-
             var description = $('#desc').val();
             var purpose = $('#purp').val();
 
-            var e = document.getElementById("mark");//dropdown
-            var outsource = e.options[e.selectedIndex].text;//end
-
-            if (department != '' && date != '' && quantity != '' && item != '' && section != '' && description != '' && purpose != '' && outsource != '') {
+            if (department != '' && date != '' && quantity != '' && item != '' && description != '' && purpose != '') {
             $.ajax({
                 url: "add_data.php",
                 data: {
@@ -280,10 +273,8 @@
                     date: date,
                     quantity: quantity,
                     item: item,
-                    section: section,
                     description: description,
                     purpose: purpose,
-                    outsource: outsource
                 },
                 type: 'POST',
                 success: function(data) {
@@ -298,10 +289,8 @@
                         $('#deeto').val('');
                         $('#quan').val('');
                         $('#ite').val('');
-                        $('#section').val('');
                         $('#desc').val('');
                         $('#purp').val('');
-                        $('#mark').val('');
                         $('#addUserModal').modal('hide');
                         $('body').removeClass('modal-open');
                         $('.modal-backdrop').remove();
@@ -730,20 +719,6 @@ $(document).on('click', '.step3declineBtn', function(event){
                                     <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                    <label class="fw-bold" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: 5px;" name="section" id="section">
-                                        <option value="0">Select</option>
-                                        <option value="C">CARPENTRY</option>
-                                        <option value="P">PLUMBING</option>
-                                        <option value="A">AIRCON</option>
-                                        <option value="E">ELECTRICAL</option>
-
-                                    </select>
-                                </div>
-                            </div>
                             <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Quantity:</label>
@@ -767,16 +742,6 @@ $(document).on('click', '.step3declineBtn', function(event){
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="purp"></textarea>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
-                                    <select class="" style="width: 150px; Border: none;" name="cars" id="mark">
-                                        <option value="0">Select</option>
-                                        <option value="volvo">Outsource</option>
-                                        <option value="saab">Bill of materials</option>
-                                    </select>
                                 </div>
                             </div>
                         <div class="modal-footer justify-content-md-center">
@@ -875,14 +840,6 @@ $(document).on('click', '.step3declineBtn', function(event){
                                 <div class="col-md-2" style="margin-top:5px;">
                                     <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1" disabled>
                                 </div> 
-                                <div class="col-md-1">
-                                    <!--Id:step1approveBtn-->
-                                    <a href= "javascript:void();" class ="btn btn-success step1approveBtn">Approve</a>
-                                </div>
-                                <div class="col-md-1" style="padding-left:18px;">
-                                <!--Id:step1declineBtn-->
-                                    <a href= "javascript:void();" class ="btn btn-danger step1declineBtn">Decline</a>
-                                </div>
                             </div>
                             <div class="row" style="padding-top:6px;">     
                                 <div class="col-md-1" style="margin-top:5px;">  
@@ -891,14 +848,6 @@ $(document).on('click', '.step3declineBtn', function(event){
                                 <div class="col-md-2" style="margin-top:5px;">
                                     <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step2" disabled>
                                 </div> 
-                                <div class="col-md-1">
-                                    <!--Id:step2approveBtn-->
-                                    <a href= "javascript:void();" class ="btn btn-success step2approveBtn">Approve</a>
-                                </div>
-                                <div class="col-md-1" style="padding-left:18px;">
-                                <!--Id:step2declineBtn-->
-                                <a href= "javascript:void();" class ="btn btn-danger step2declineBtn">Decline</a>
-                                </div>
                             </div>
                             <div class="row" style="padding-top:6px;">     
                                 <div class="col-md-1" style="margin-top:5px;">
@@ -907,14 +856,6 @@ $(document).on('click', '.step3declineBtn', function(event){
                                 <div class="col-md-2" style="margin-top:5px;">
                                     <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step3" disabled>
                                 </div> 
-                                <div class="col-md-1">
-                                    <!--Id:step3approveBtn-->
-                                    <a href= "javascript:void();" class ="btn btn-success step3approveBtn">Approve</a>
-                                </div>
-                                <div class="col-md-1" style="padding-left:18px;">
-                                <!--Id:step3declineBtn-->
-                                <a href= "javascript:void();" class ="btn btn-danger step3declineBtn">Decline</a>
-                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -928,12 +869,7 @@ $(document).on('click', '.step3declineBtn', function(event){
                             </div>
                         <div>
                             <div class="modal-footer justify-content-md-center">
-                                <a href= "javascript:void();" class ="btn btn-primary approveBtn">Approve All</a>
-                                <a href= "javascript:void();" class ="btn btn-danger declineBtn">Decline All</a>
-                                <a href= "javascript:void();" class ="btn btn-info text-white updateBtn">Update</a>
-                                <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
-                                <button type="button" class="btn btn-danger">Decline</button>
-                                <button type="submit" class="btn btn-info text-white">Update</button>-->
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
