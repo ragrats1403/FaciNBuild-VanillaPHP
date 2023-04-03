@@ -153,70 +153,20 @@ $(document).on('click', '.addresBtn', function(event){
 
 });
 function testClick(){
-/*$('container2').each(function()
-{
-    console.log($(this).attr('id'))
-})
-//2nd test
-var list, href;
-list = document.getElementById('container2').getElementsByTagName('div');
-if (list.length > 0) {
-    href = list[0].href;
-    console.log(href);
-}  
-//3rd test
-var childDivs = document.getElementById('container2').getElementsByTagName('input');
 
-for( i=0; i< childDivs.length; i++ )
-{
- var childDiv = childDivs[i];
- console.log(childDiv);
-}
-
-
-
-4th test
-var gettag = document.querySelectorAll('[id^="h"]');
-var test = document.getElementById(document.querySelectorAll('[id^="h"]')).value;
-if(test==null){
-
-    alert("Test: no element found!");
-
-}
-else{
-    alert(
-        [...document.querySelectorAll('[id^="h"]')]
-          .map(elm => elm.id)
-      );
-
-}
-*/ 
 var testarr = [...document.querySelectorAll('[id^="fbh"]')].map(elm => elm.id);
 var testarr2 = [...document.querySelectorAll('[id^="fbe"]')].map(elm => elm.id);
-//var childDivs = document.getElementById('container2').getElementsByTagName('input');
-/*
-for( i=0; i< childDivs.length; i++ )
-{
- var childDiv = childDivs[i];
- console.log(childDiv);
-}   */
+var testarr3 = [...document.querySelectorAll('[id^="fbv"]')].map(elm => elm.id);
 for(i = 0; i<=testarr.length-1; i++ ){
 
-    //alert(testarr[i]);
-    console.log(document.getElementById(testarr[i]).value);
-
-}
-for(k = 0; k<=testarr2.length-1; k++ ){
-
-    //alert(testarr[i]);
-    alert(document.getElementById(testarr2[k]).value);
     
+    console.log(document.getElementById(testarr[i]).value);
+    console.log(document.getElementById(testarr2[i]).value);
+    console.log(document.getElementById(testarr3[i]).value);
+    
+
 }
-//alert(testarr.length);
 }
-
-
-
 
 //date auto fill
 var now = new Date();
@@ -237,12 +187,21 @@ function updateButtonState() {
     }
 }
 
+//add ons click
+function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+    var now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    document.getElementById('dateminor').value = now.toISOString().substring(0,10);
 
+}
 
 //modal events
-
-
-
 
 $("#reserModal").on("hidden.bs.modal", function () {
     const myNode =  document.getElementById('container2');
@@ -252,3 +211,6 @@ $("#reserModal").on("hidden.bs.modal", function () {
     $('#testtable').DataTable().clear().destroy();
     
   });
+
+
+

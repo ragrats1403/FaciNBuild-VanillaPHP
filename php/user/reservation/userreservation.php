@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
-    <link rel="stylesheet" type="text/css" href="../../../ccs/modal/modal.css<?= time() ?>" />
+    
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
@@ -33,7 +33,10 @@
                 <span class='bx bxs-bell'></i>
                     <span class="icon-button__badge"></span>
         </div>
-        <p>Hello, User</p>
+        <?php
+        session_start();
+        ?>
+        <p>Hello, <?php echo $_SESSION['department'];?></p>
         <nav class="gnav">
         </nav>
     </div>
@@ -77,7 +80,7 @@
                     <div class="profile_details">
                         <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">User</div>
+                            <div class="name"><?php echo $_SESSION['department'];?></div>
                             <div class="role">User</div>
                         </div>
                     </div>
@@ -132,7 +135,7 @@
      <!-- Script Process Start-- DO NOT MOVE THIS Script tags!!-->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
-    <script type="text/javascript" src="functions/js/userprocess.js"></script>
+    <script type="text/javascript" src="functions/js/userprocess.js?random=<?php echo uniqid(); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- Modal Popup for More Info button-->
     <div class="modal fade" id="test" aria-hidden="true">
@@ -250,20 +253,26 @@
                             <input type="name" class="form-control input-sm col-xs-1" id="_chairdeandep" placeholder="CHAIRPERSON/DEAN/DEPARTMENT">
                         </div>
 
-                        <table id="datatable" class="table">
-                            <thead>
-                                <th>Equipments to Reserve</th>
-                                <th>Available</th>
-                                <th>Quantity to Reserve</th>
-                            </thead>
-                        </table>
-                        <div class="col-sm-12 d-flex justify-content-end">
-                            <a data-toggle="modal" href="#myModal2" class="btn btn-primary">Add-ons</a>
-                        </div>
+                        <label class="fw-bold" for="date">Facility Equipments</label>
+                            <div class="table-responsive">
+                            <table id="testtable" class="table" width="100%" >
+                                <thead>
+                                    <th>Equipments Name</th>
+                                    <th>Quantity</th>                                  
+                                    <th>Quantity to Reserve</th>
+                                </thead>
+                            </table>
+                            </div>
+                            <label class="fw-bold">Equipments Added To Reservation</label>
+                            <a href= "javascript:void();" class ="btn btn-primary testBtn" onclick = "testClick();">Test Console</a>
+                                    <div id="container1">
+                                        <div id="container2">
+                                        </div>
+                                    </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <div class="tacbox">
+                    <div class="tacbox"></div>
                         <input id="termscond" type="checkbox"/>
                         <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>
                     </div>
@@ -282,6 +291,8 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
         <!-- Modal Popup End -->
         <!-- Add ons modal popup-->
         <div class="modal shadow p-3 mb-5 bg-white rounded" tabindex="-1" id="myModal2" aria-labelledby="exampleModalLabel" data-backdrop="static">
@@ -503,7 +514,7 @@
                                     </div>
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Date:</label>
-                                        <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled> 
+                                        <input type="date" class="form-control input-sm col-xs-1" id="dateminor" placeholder="Date" disabled> 
                                     </div>
                                 </div>
                                 <div class="row">
@@ -551,17 +562,8 @@
                     <a href= "javascript:void();" class ="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
                     
                 </div>
-                <script type="text/javascript" src="functions/js/createresdep.js" <?= time() ?>></script>                       
-                <script>
-                    function myFunction() {
-                        var x = document.getElementById("myDIV");
-                        if (x.style.display === "block") {
-                            x.style.display = "none";
-                        } else {
-                            x.style.display = "block";
-                        }
-                    }
-                </script>
+                <script type="text/javascript" src="functions/js/createresdep.js?random=<?php echo uniqid(); ?>"></script>                       
+                
             </div>
         </div>
     </div>

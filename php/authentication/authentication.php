@@ -3,9 +3,7 @@
 session_start();
 $username = $_POST['user'];
 $password_input = $_POST['pass'];
-
 $_SESSION['user'] = $username;
-
 //connect to database
 $host = "localhost";
 $user = "root";
@@ -17,17 +15,18 @@ if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 }
 
-$sql = "SELECT rolelevel, password FROM users WHERE username = ?";
+$sql = "SELECT rolelevel, department, password FROM users WHERE username = ?";
 if ($stmt = $con->prepare($sql)) {
     $stmt->bind_param("s", $param_username);
     $param_username = $_SESSION['user'];
     $stmt->execute();
     $stmt->store_result();
     if ($stmt->num_rows == 1) {
-        $stmt->bind_result($rolelevel, $password_db);
+        $stmt->bind_result($rolelevel, $department, $password_db);
         $stmt->fetch();
         if ($password_input == $password_db) {
             $_SESSION['rolelevel'] = $rolelevel;
+            $_SESSION['department'] = $department;
             switch ($rolelevel) {
                 case '1': //admin
                     $folder = '..\admin\accounts\admin_account.php';
@@ -36,16 +35,16 @@ if ($stmt = $con->prepare($sql)) {
                     $folder = '..\buildingdept\buildingdeptdashboard.php';
                     break;
                 case '3': //facilities department
-                    $folder = '..\facilitiesdept\facilitiesdashboard.php';
+                    $folder = '..\facilitiesdept\reservations\reservations.php';
                     break;
                 case '4': //user
                     $folder = '..\user\userdashboard.php';
                     break;
                 case '5': //cad
-                    $folder = '..\cad\majorjobreqlist.php';
+                    $folder = '..\cad\major\majorjobreqlist.php';
                     break;
                 case '6': //pco
-                    $folder = '..\pco\majorjobreqlist.php';
+                    $folder = '..\pco\major\majorjobreqlist.php';
                     break;
                 case '7': //sao
                     $folder = '..\sao\saodashboard.php';

@@ -25,7 +25,10 @@
         <span class='bx bxs-bell'></i>
         <span class="icon-button__badge"></span>
       </div>
-        <p>Hello, User</p>
+      <?php
+      session_start();
+      ?>
+        <p>Hello, <?php echo $_SESSION['department'];?></p>
       <nav class="gnav">
         </nav>
     </div>
@@ -48,22 +51,28 @@
                 </a>
             </li>
             <li>
+            <div class="dropdown">
+                    <i class='bx bx-package' style="margin-left:17px;"></i>
+                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Manage Request
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">             
+                        <a class="dropdown-item" href="../../../php/sao/reservation/saoreservation.php">Reservation</a>
+
+                    </ul>
+                </div>
                 <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Job Request
+                        View/Create Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/user/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/user/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../php/sao/major/majorjobreqlist.php">Major Request</a>
+                        <a class="dropdown-item" href="../../../php/sao/minor/minorjobreqlist.php">Minor Request</a>                                 
+                        <a class="dropdown-item" href="../../../php/sao/reservation/saoreservation.php">Reservation</a>
+
                     </ul>
                 </div>
-            </li>
-            <li>
-                <a href="../../../../php/user/reservation/userreservation.php">
-                    <i class='bx bx-check-square'></i>
-                    <span class="link_name">Reservation</span>
-                </a>
             </li>
         </ul>
         <div class="profile_content">
@@ -71,7 +80,7 @@
                     <div class="profile_details">
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">User</div>
+                            <div class="name"><?php echo $_SESSION['department'];?></div>
                             <div class="role">User</div>
                         </div>
                     </div>

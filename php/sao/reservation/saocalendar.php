@@ -43,7 +43,7 @@
         <div class="navdiv">
             <ul class="nav_list">
                 <li>
-                    <a href="">
+                    <a href="../../../php/sao/reservation/saocalendar.php">
                         <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
@@ -55,20 +55,20 @@
                             Manage Request
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                         <a class="dropdown-item" href="">Reservation</a>
+                         <a class="dropdown-item" href="../../../php/sao/reservation/saoreservation.php">Reservation</a>
                         </ul>
                         </div>
-                        <div class="dropdown">
+                    <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
                         <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Manage Request
+                            View/Create Request
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                         <a class="dropdown-item" href="">Major Request</a>  
-                         <a class="dropdown-item" href="">Minor Request</a>
-                         <a class="dropdown-item" href="">Reservation</a>
+                         <a class="dropdown-item" href="../../../php/sao/major/majorjobreqlist.php">Major Request</a>  
+                         <a class="dropdown-item" href="../../../php/sao/minor/minorjobreqlist.php">Minor Request</a>
+                         <a class="dropdown-item" href="../../../php/sao/reservation/saoreservation.php">Reservation</a>
                         </ul>
-                        </div>
+                    </div>
             </li>
         </ul>
         <div class="profile_content">

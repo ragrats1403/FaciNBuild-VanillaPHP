@@ -403,10 +403,10 @@
                     status = json.status;
                     if (status == 'success') {
                         alert('Updated Successfully!');
-                        table = $('#datatable').DataTable();
+                        /*table = $('#datatable').DataTable();
                         var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a> <a href="javascript:void();" class="btn btn-sm btn-danger" data-id="' + id + '" >Delete</a>';
                         var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([id, department, username, password, rolelevel, roleid, button]);
+                        row.row("[id='" + trid + "']").data([id, department, username, password, rolelevel, roleid, button]);*/
                         $('#editUserModal').modal('hide');
 
                     } else {

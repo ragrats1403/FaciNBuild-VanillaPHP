@@ -235,13 +235,13 @@
                             <div class="mb-3 row">
                                 <label for="inputFacility" class="col-sm-2 col-form-label">Facility</label>
                                 <div class="col-sm-10">
-                                    <!--<input type="text" class="form-control" id="inputFacility" name="inputFacility">-->
-                                    <select name="_inputFacility" id="_inputFacility" class="form-control" disabled>
+                                    <input type="text" class="form-control" id="_inputFacility" name="inputFacility" disabled>
+                                    <!--<select name="_inputFacility" id="_inputFacility" class="form-control">
                                         <option value="AVR">AVR</option>
                                         <option value="OLD AVR">OLD AVR</option>
                                         <option value="FUNCTION HALL">FUNCTION HALL</option>
                                         <option value="AUDITORIUM">AUDITORIUM</option>
-                                    </select>
+                                    </select>--?
                                 </div>
                             </div>
                             
@@ -373,7 +373,8 @@
                     $('#trid').val(trid);
                     $('#_inputEqname').val(json.equipmentname)
                     $('#_inputQty').val(json.quantity);
-                    $('#_inputFacility').val(json.facility);
+                    document.getElementById("_inputFacility").value = json.facility;
+                    //$('#_inputFacility').val(json.facility);
                     $('#editUserModal').modal('show');
                 }
             });

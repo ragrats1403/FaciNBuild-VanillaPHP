@@ -102,10 +102,13 @@ $(document).on('click', '.submitBtn', function(event) {
     var e = document.getElementById("faci");
     
     var faci = e.options[e.selectedIndex].text;
-    /*var renderedby = $('#renderedby').val();
-    var daterendered = $('#daterendered').val();
-    var confirmedby = $('#confirmedby').val();
-    var dateconfirmed = $('#dateconfirmed').val();*/
+
+
+
+
+
+
+//alert(testarr.length);
     if (eventname != '' && datefiled != '' && actualdate != '' && timein != '' && timeout != '' && reqparty != '' && department != '' && purpose != '' && numparticipants != '' && stageperf != '' && adviser != '' && chairman != '') {
         $.ajax({
             url: "functions/add_data.php",
@@ -131,8 +134,54 @@ $(document).on('click', '.submitBtn', function(event) {
                 var status = json.status;
                 
                 if (status = 'success') {
+                     //equipment additionals
+
+                    var testarr = [...document.querySelectorAll('[id^="fbh"]')].map(elm => elm.id);
+                    var testarr2 = [...document.querySelectorAll('[id^="fbe"]')].map(elm => elm.id);
+                    var testarr3 = [...document.querySelectorAll('[id^="fbv"]')].map(elm => elm.id);
+                        
+                    for(i = 0; i<=testarr.length-1; i++ ){
+                        var eid = document.getElementById(testarr[i]).value; //id
+                        var ename = document.getElementById(testarr2[i]).value; //name
+                        var eqval = document.getElementById(testarr3[i]).value; //value
+                        $.ajax({
+                            url: "functions/addeqreserve.php",
+                            data: {
+                                eventname: eventname,
+                                dateofusage: actualdate,
+                                datesubmitted: datefiled,
+                                timestart: timein,
+                                timeend: timeout,
+                                quantity: eqval,
+                                facility: faci,
+                                eqid: eid,
+                                eqname: ename,
+                                
+                                
+                            },
+                            type: 'POST',
+                            success: function(data) {
+                                var eqjson = JSON.parse(data);
+                                var status = json.status;
+
+                                if(status == 'success'){
+
+                                    console.log("equipment added to reservation!");
+                                }
+
+                            }
+                        });
+                        
                     
-                    alert('Successfully Created Request!');
+                    }
+                    var checkbox = document.getElementById("flexCheckDefault");
+                
+                    if (checkbox.checked == true) {
+                        
+                    }
+                    else {
+                        
+                    }
                     //$('#department').val('');
                     /*var now = new Date();
                     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
@@ -157,8 +206,10 @@ $(document).on('click', '.submitBtn', function(event) {
                     //update table list
                     table = $('#datatable').DataTable();
                     table.draw();
+                    alert('Successfully Created Request!'); 
                 }
             }
+            
         });
     } else {
         alert("Please fill all the Required fields");
