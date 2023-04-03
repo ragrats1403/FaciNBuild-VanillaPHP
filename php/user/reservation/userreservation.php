@@ -252,23 +252,65 @@
                             <label class="fw-bold" for="date">CHAIRPERSON/DEAN/DEPARTMENT</label>
                             <input type="name" class="form-control input-sm col-xs-1" id="_chairdeandep" placeholder="CHAIRPERSON/DEAN/DEPARTMENT">
                         </div>
-
-                        <label class="fw-bold" for="date">Facility Equipments</label>
-                            <div class="table-responsive">
-                            <table id="testtable" class="table" width="100%" >
-                                <thead>
-                                    <th>Equipments Name</th>
-                                    <th>Quantity</th>                                  
-                                    <th>Quantity to Reserve</th>
-                                </thead>
-                            </table>
-                            </div>
                             <label class="fw-bold">Equipments Added To Reservation</label>
-                            <a href= "javascript:void();" class ="btn btn-primary testBtn" onclick = "testClick();">Test Console</a>
-                                    <div id="container1">
-                                        <div id="container2">
+                                    <div id="container3">
+                                        <div id="container4">
                                         </div>
                                     </div>
+                                    <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="myFunction()">
+                            <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
+                        </div>
+                        <div id="myDIV" style="display: none;">
+                            <div class="col-sm-12 d-flex justify-content-center">
+                                <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
+                            </div>
+                            <form id="saveUserForm" action="javascript:void();" method="POST">
+                                <input type = "hidden" id="eventname" >
+                                <!-- Form Controls-->
+                                <div class="row justify-content-center" style="padding-bottom:13px;">
+                                    <div class="col-md-6 ">
+                                        <label class="fw-bold" for="date">Department:</label>
+                                        <input type="name" class="form-control input-sm col-xs-1" id="_department" placeholder="Department">
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <label class="fw-bold" for="date">Date:</label>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="dateminor" placeholder="Date" disabled> 
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="width:20%">
+                                        <label class="fw-bold" for="date">Quantity:</label>
+                                        <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                        <label class="fw-bold" for="date">Item Name:</label>
+                                        <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
+                                    </div>
+                                </div>
+                                <div class="justify-content-center">
+                                    <div class="col-md-12" >
+                                        <label class="fw-bold" for="date">Description:</label>
+                                        <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="justify-content-center">
+                                    <div class="col-md-12" >
+                                        <label class="fw-bold" for="date">Purpose:</label>
+                                        <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
+                                    </div>
+                                </div>  
+                                <!-- Form Controls End-->
+                            </form>
+                        </div>
+                        <!-- ADD ON SECTION END-->
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -294,87 +336,6 @@
     <br>
     <br>
         <!-- Modal Popup End -->
-        <!-- Add ons modal popup-->
-        <div class="modal shadow p-3 mb-5 bg-white rounded" tabindex="-1" id="myModal2" aria-labelledby="exampleModalLabel" data-backdrop="static">
-        <div class="modal-dialog" style="max-width:1100px;">
-            <div class="modal-content">
-                <div class="modal-header justify-content-center" style="max-width:1100px;">
-                    <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Job Request</h5>
-                </div>
-                <div class="modal-body ">
-                    <form id="saveUserForm" action="javascript:void();" method="POST">
-                        <div class="modal-body">
-                            <!-- Form Controls-->
-                            <div class="row justify-content-center" style="padding-bottom:13px;">
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Department:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
-                                </div>
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Date:</label>
-                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
-                                </div>
-                            </div>
-                            <div class="justify-content-center">
-                                <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
-                                <div class="col-md-2" style="padding-bottom:10px">
-                                    <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control" id="_item_" placeholder="Item">
-                                </div>
-                            </div>
-
-                            <div class="justify-content-center">
-                                <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
-                                    <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="justify-content-center">
-                                <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6">
-                                    <label class="fw-bold" for="renderedby">Rendered by:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="renderedby">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="fw-bold" for="date">Date:</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="daterendered">
-                                </div>
-                            </div>
-                            <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6">
-                                    <label class="fw-bold" for="renderedby">Confirmed by:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="confirmedby">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="fw-bold" for="date">Date:</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="dateconfirmed">
-                                </div>
-                            </div>
-                            </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" data-dismiss="modal" class="btn">Close</a>
-                    <a href="#" class="btn btn-primary">Save</a>
-                </div>
-            </div>
-        </div>
-    </div>
-        <!-- Add ons modal popup end-->
 
         <!-- Create Reservation start-->
         <div class="modal " tabindex="-1" id="reserModal" aria-labelledby="exampleModalLabel">
@@ -400,7 +361,7 @@
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
                                 <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange ="dynamicEq()" >
-                                <option disabled selected value> -- Select Facility -- </option>
+                                <option disabled selected value hidden> -- Select Facility -- </option>
                                     select = document.getElementById("faci");
                                     <?php include('../../connection/connection.php');
                                     $sql = "SELECT facilityname FROM facility";
@@ -411,8 +372,6 @@
                                         $i++;
                                     }
                                     ?>
-                                                
-
                                                 
                                 </select>
                             </div>
@@ -487,8 +446,8 @@
                             </thead>
                         </table>
                         </div>
-                        <label class="fw-bold">Equipments Added To Reservation</label>
-                        <a href= "javascript:void();" class ="btn btn-primary testBtn" onclick = "testClick();">Test Console</a>
+                        <label class="fw-bold">Equipments Added To Reservation</label><br>
+                        <!--<a href= "javascript:void();" class ="btn btn-primary testBtn" onclick = "testClick();">Test Console</a>-->
                                 <div id="container1">
                                     <div id="container2">
                                     </div>
@@ -506,11 +465,12 @@
                                 <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
                             </div>
                             <form id="saveUserForm" action="javascript:void();" method="POST">
+                                <input type = "hidden" id="eventname" >
                                 <!-- Form Controls-->
                                 <div class="row justify-content-center" style="padding-bottom:13px;">
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Department:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
+                                        <input type="name" class="form-control input-sm col-xs-1" id="_department" placeholder="Department">
                                     </div>
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Date:</label>

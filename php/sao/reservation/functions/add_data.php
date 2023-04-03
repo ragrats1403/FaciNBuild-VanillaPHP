@@ -19,18 +19,7 @@ $daterendered = $_POST['daterendered'];
 $confirmedby = $_POST['confirmedby'];
 $dateconfirmed = $_POST['dateconfirmed'];*/
 
-//notify to admin using notification
-$sql = "INSERT INTO reservation VALUES ('$eventname')";
-if(mysqli_query($con, $sql)){
-echo "New reservation request has arrived: " . $eventname;
-}
-else{
-echo "Error: ". $sql . "<br>" . mysqli_error($con); 
-}
-
-
 //conflict checking section start
-
 
 
 

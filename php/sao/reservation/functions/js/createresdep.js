@@ -2,6 +2,7 @@
     alert('The modal is fully shown.');
 });
 */
+
 //dynamic fetch data with drop down menu
 function dynamicEq(){
     const myNode =  document.getElementById('container2');
@@ -210,8 +211,6 @@ $("#reserModal").on("hidden.bs.modal", function () {
     $('#testtable').DataTable().clear().destroy();
     
   });
-
-  
 
 
 
