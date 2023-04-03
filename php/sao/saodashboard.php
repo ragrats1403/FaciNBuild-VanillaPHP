@@ -3,171 +3,88 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Job Request List</title>
+    <title>Celndar of Activities</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
+    <link rel="stylesheet" type="text/css" href="../../../css/sidebar.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/header.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/body.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/admin/adminaccount.css?<?=time()?>" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
 </head>
 
 <header class="shadow">
     <div class= "imgctrl">
         
-    </div>
+    </div>   
     <div class="navplace">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: transparent;
-  border: none;">
-                <i class='bx bxs-bell' style='color:#ffffff'></i>
-                <span class="icon-button__badge"></span>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="notification-dropdown">
-                <div class="dropdown-header">Notifications</div>
-                <div class="dropdown-divider"></div>
-                <div class="notification-list"></div>
-                <u><a class="dropdown-item text-center mark-as-read" href="#">Mark all as read</a></u>
-            </div>
-        </div>
-        <?php
-        session_start();
-        ?>
-        <script>
-            // Get the notification dropdown button and badge
-            const notificationDropdown = document.getElementById("notification-dropdown");
-            const notificationBadge = notificationDropdown.querySelector(".icon-button__badge");
-
-            // Get the notification list element
-            const notificationList = document.querySelector(".notification-list");
-
-            // Fetch the notifications and update the badge and list
-            function fetchNotifications() {
-                // Make an AJAX request to fetch the notifications
-                const xhr = new XMLHttpRequest();
-                xhr.open("GET", "../../../php/connection/notification.php");
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        // Parse the response JSON
-                        const notifications = JSON.parse(xhr.responseText);
-
-                        // Update the badge count
-                        notificationBadge.innerText = notifications.length;
-
-                        // Clear the existing list
-                        notificationList.innerHTML = "";
-
-                        // Add each notification to the list
-                        notifications.forEach(notification => {
-                            const notificationItem = document.createElement("div");
-                            notificationItem.classList.add("dropdown-item");
-                            if (!notification.is_read) {
-                                notificationItem.classList.add("font-weight-bold");
-                            }
-                            notificationItem.innerHTML = `
-            <div class="d-flex align-items-center">
-              <div class="flex-grow-1">${notification.message}</div>
-              <div class="text-muted">${notification.created_at}</div>
-            </div>
-            <div class="dropdown-divider"></div>
-          `;
-                            notificationList.appendChild(notificationItem);
-                        });
-                    }
-                };
-                xhr.send();
-            }
-
-            // Call fetchNotifications() on page load
-            fetchNotifications();
-
-            // Poll for new notifications every 5 seconds
-            setInterval(fetchNotifications, 5000);
-
-            // Get the "Mark all as read" button
-            const markAsReadButton = document.querySelector(".mark-as-read");
-
-            // Add a click event listener to the button
-            markAsReadButton.addEventListener("click", function(event) {
-                // Prevent the default behavior of the link
-                event.preventDefault();
-
-                // Make an AJAX request to mark all notifications as read
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", "../../../php/connection/update_notification.php");
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        // Update the "is_read" property of each notification to 1
-                        notifications.forEach(notification => {
-                            notification.is_read = 1;
-                        });
-
-                        // Update the badge count
-                        notificationBadge.innerText = "0";
-
-                        // Clear the existing list
-                        notificationList.innerHTML = "";
-                    }
-                }
-                xhr.send();
-            });
-        </script>
-        <p>Hello, <?php echo $_SESSION['department'];?></p>
-        </div>
+    <div>
+        <button type="button" class="icon-button">    
+        <span class='bx bxs-bell'></i>
+        <span class="icon-button__badge"></span>
+    </div> 
+        <p>Hello, SAO</p>
       <nav class="gnav">
         </nav>
     </div>
 </header>
 
-<body style="padding-top: 0px;">
-
-<div class="sidebar">
+<body>
+    <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../../images/Brown_logo_faci.png" />
+                <img src="../../../images/Brown_logo_faci.png" />
             </div>
         </div>
-        <div class ="navdiv">
-        <ul class="nav_list">
-            <li>
-                <a href="../../../../php/user/userdashboard.php">
-                    <i class='bx bx-user'></i>
-                    <span class="link_name">Calendar of Activities</span>
-                </a>
-            </li>
-            <li>
+
+        <div class="navdiv">
+            <ul class="nav_list">
+                <li>
+                    <a href="../../../php/sao/reservation/saocalendar.php">
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">Calendar of Activities</span>
+                    </a>
+                </li>
+                <li>
                 <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Job Request
+                        Manage Request
                     </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/user/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/user/major/majorjobreqlist.php">Major Job Request</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">             
+                        <a class="dropdown-item" href="../../../php/sao/reservation/saoreservation.php">Reservation</a>
+
                     </ul>
                 </div>
-            </li>
-            <li>
-            <li>
-                <a href="../../../../php/user/reservation/userreservation.php">
-                    <i class='bx bx-check-square'></i>
-                    <span class="link_name">Reservation</span>
-                </a>
-            </li>
-        </ul>
-        <div class="profile_content">
+                <div class="dropdown">
+                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        View/Create Request
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="../../../php/sao/major/majorjobreqlist.php">Major Request</a>
+                        <a class="dropdown-item" href="../../../php/sao/minor/minorjobreqlist.php">Minor Request</a>                                 
+                        <a class="dropdown-item" href="../../../php/sao/reservation/saoreservation.php">Reservation</a>
+
+                    </ul>
+                </div>
+                
+            </li> 
+            </ul>
+            
+            <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                    <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                    <img src="../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name"><?php echo $_SESSION['department'];?></div>
-                            <div class="role">User</div>
+                            <div class="name">SAO Dept</div>
+                            <div class="role">SAO Department</div>
                         </div>
                     </div>
-                    <a href="../../../../logout.php">
+                    <a href="../../../logout.php">
                         <i class='bx bx-log-out' id="log_out"></i>
                     </a>
                 </div>
@@ -182,35 +99,63 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
+    <!--<script>
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
+
+        btn.onclick = function() {
+            sidebar.classList.toggle("active");
+        }
+    </script>-->
+    <!-- Data Table Start-->
+    <!--<h1 class="text-center">Faci N Build Test table control</h1>-->
     <div class="table1">
 
         <div class="container-fluid">
             <div class="row">
                 <div class="container">
-                    <div class="row">   
+                    <div class="row">
                         <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
-                            <table id="datatable" class="table" >
+                            <table id="datatable" class="table">
                                 <thead>
                                     <th>ID</th>
-                                    <th>Department</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Role Level</th>
+                                    <th>Role ID</th>
                                     <th>Options</th>
+
                                 </thead>
+                                <tbody>
+                                    <tr>
+                                        <!---
+                                    <td>1</td>
+                                    <td>Rajesh</td>
+                                    <td>raj@gmail.com</td>
+                                    <td>131131231</td>
+                                    <td>Mumbai</td>
+                                    <td><a class="btn ">Edit</a><a href="">Delete</a></td>
+                                    -->
+
+                                    </tr>
+                                </tbody>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Major Job Request</button>
+                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Account</button>
                             </div>
+                        
                         </div>
+                        <div class="col-md-2"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-      <!-- Optional JavaScript; choose one of the two! -->
-  <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Data Table End-->
+
+    <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- Script Process Start-->
@@ -232,7 +177,7 @@
                 $(nRow).attr('id', aData[0]);
             },
             'columnDefs': [{
-                'target': [0, 4],
+                'target': [0, 5],
                 'orderable': false,
             }],
         scrollY: 200,
@@ -365,7 +310,7 @@
                         var row = table.row("[id='" + trid + "']");
                         row.row("[id='" + trid + "']").data([id, name, username, password, rolelevel, roleid, button]);
                         $('#editUserModal').modal('hide');
-                    } else { 
+                    } else {
                         alert('failed');
                     }
                 }
@@ -376,71 +321,53 @@
     <!-- add user modal-->
     <!-- Modal Popup -->
     <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="max-width:1000px;">
+        <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header justify-content-center" style="max-width:1100px;">
-                    <div class="col-md-2" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
-                    </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body ">
+                <div class="modal-body">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
                             <!-- Form Controls-->
 
-                            <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Job Request no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="Namemajorjr" placeholder="Job request no.">
-                                </div>
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Requisition no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="numbermajorjr" placeholder="Requisition no.">
+                            <div class="mb-3 row">
+                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="inputName" class="form-control" id="inputName">
                                 </div>
                             </div>
-                            <div class="row justify-content-center" style="padding-bottom:13px;">
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="departmentmajorjr" placeholder="Department">
-                                </div>
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Date</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date">
+                            <div class="mb-3 row">
+                                <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="inputUsername" class="form-control" id="inputUsername">
                                 </div>
                             </div>
-                            <div class="justify-content-center">
-                                <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                <div class="col-md-2" style="padding-bottom:10px">
-                                    <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
+                            <div class="mb-3 row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputPassword" name="inputPassword">
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
+                            <div class="mb-3 row">
+                                <label for="inputRolelevel" class="col-sm-2 col-form-label">RoleLevel</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputRolelevel" name="inputRolelevel">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="inputRoleID" class="col-sm-2 col-form-label">RoleID</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputRoleID" name="inputRoleID">
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Description:</label>
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="majorjrdesc"></textarea>
-                                </div>
-                            </div>
-                            <div class="justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp"></textarea>
-                                </div>
-                            </div>
                             <!-- Form Controls End-->
                         </div>
-                        <div class="modal-footer justify-content-md-center">
-                            <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
                 </div>
@@ -453,18 +380,8 @@
     <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header justify-content-center" style="max-width:1100px;">
-                    <div class="col-md-2" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
-                    </div>
-                    <div class="col-md-2" style="width:15%">
-                        <label class=""  for="inputName">Status:</label>
-                        <input type="text" style="width:20%" class="col-sm-2" name="_ID" class="form-control" id="_ID">
-                    </div>
-                    <div class="col-md-2" style="width:30%">
-                        <label class=""  for="inputName">ID:</label>
-                        <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
-                    </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -515,6 +432,10 @@
         </div>
     </div>
     <!-- edit user modalPopup end-->
+
+
+
+
 </body>
 
 </html>

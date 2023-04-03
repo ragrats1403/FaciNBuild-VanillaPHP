@@ -141,7 +141,7 @@
             <ul class="nav_list">
                 <li>
                     <a href="../../../php/user/userdashboard.php">
-                        <i class='bx bx-calendar'></i>
+                        <i class='bx bx-user'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
                 </li>
@@ -346,10 +346,10 @@
                                         </div>
                                     </div>
                                     <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" onclick="myFunction2()">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="myFunction()">
                             <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
                         </div>
-                        <div id="_myDIV" style="display: none;">
+                        <div id="myDIV" style="display: none;">
                             <div class="col-sm-12 d-flex justify-content-center">
                                 <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
                             </div>

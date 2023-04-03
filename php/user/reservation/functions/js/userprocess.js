@@ -40,7 +40,6 @@ $(document).on("click", ".editBtn", function (event) {
   document.getElementById("_stageperformers").disabled = true;
   document.getElementById("_adviser").disabled = true;
   document.getElementById("_chairdeandep").disabled = true;
-  document.getElementById("_flexCheckDefault").disabled = true;
 
   $.ajax({
     url: "functions/get_reservation_details.php",
@@ -73,41 +72,18 @@ $(document).on("click", ".editBtn", function (event) {
             $.ajax({
                 url: "functions/get_addon_details.php",
                 data: {
-                    eventname: en,
-                    actualdate: adu,
-                    reqsource: rp,
+                eventname: en,
+                actualdate: adu,
+                reqsource: rp,
                 },
                 type: "POST",
                 success: function (data) {
-                var jfa = JSON.parse(data);
-                document.getElementById("_flexCheckDefault").checked = true;
-                var x = document.getElementById("_myDIV");
-                x.style.display = "block";
-
-                    
+                var jsonfaddon = JSON.parse(data);
+                
                     
             
                 },
             });
-            $.ajax({
-              url: "functions/get_addon_details.php",
-              data: {
-                  eventname: en,
-                  actualdate: adu,
-                  reqsource: rp,
-              },
-              type: "POST",
-              success: function (data) {
-              var jfa = JSON.parse(data);
-              document.getElementById("_flexCheckDefault").checked = true;
-              var x = document.getElementById("_myDIV");
-              x.style.display = "block";
-              
-                  
-                  
-          
-              },
-          });
 
 
     },
