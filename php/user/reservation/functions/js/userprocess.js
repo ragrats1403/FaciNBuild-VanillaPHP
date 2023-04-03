@@ -107,6 +107,7 @@ $(document).on("click", ".editBtn", function (event) {
   //$('#test').modal('show');
 });
 
+
 //closeinfomodal
 $("#closemodal").click(function () {
   $("#myModal").modal("hide");
