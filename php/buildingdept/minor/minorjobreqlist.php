@@ -25,72 +25,76 @@
 <header class="shadow">
     <div class= "imgctrl">
         
-    </div>   
+    </div>
     <div class="navplace">
-    <div>
+      <div>
         <button type="button" class="icon-button">    
         <span class='bx bxs-bell'></i>
         <span class="icon-button__badge"></span>
-    </div> 
-        <p>Hello, Building Department</p>
+      </div>
+        <p>Hello, Administrator</p>
       <nav class="gnav">
         </nav>
     </div>
 </header>
 
-<body>
-    <div class="sidebar">
+<body style="padding-top: 0px;">
+
+<div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../images/Brown_logo_faci.png" />
+                <img src="../../../../images/Black_logo.png" />
             </div>
         </div>
-
-        <div class="navdiv">
-            <ul class="nav_list">
-                <li>
-                    <a href="../../../php/buildingdept/buildingdeptdashboard.php">
+        <div class ="navdiv">
+        <ul class="nav_list">
+            <li>
+                    <a href="../../../admin/reservations/admincalendar.php">
                         <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
-                </li>
-                <li>
+            </li>
+            <li>
+                <a href="../../../../php/admin/accounts/admin_account.php">
+                    <i class='bx bx-user'></i>
+                    <span class="link_name">Account</span>
+                </a>
+            </li>
+            <li>
                 <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Manage Request
-                    </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../php/buildingdept/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
+                        Job Request
+                    </span >
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+                        <a class="dropdown-item" href="../../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
-                </li>
-                <li>
-                <div class="dropdown">
-                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
-                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        View/Create Request
-                    </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../php/buildingdept/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
-                        <a class="dropdown-item" href="../../../php/buildingdept/reservation/buildingdeptreservation.php">Reservation</a>
-                    </ul>
-                </div>
-                </li>
-            </ul>
-            
-            <div class="profile_content">
+            </li>
+            <li>
+                <a href="../../../../php/admin/equipments/adminequipment.php">
+                    <i class='bx bx-wrench'></i>
+                    <span class="link_name">Equipment</span>
+                </a>
+            </li>
+            <li>
+                <a href="../../../../php/admin/reservations/adminreservations.php">
+                    <i class='bx bx-check-square'></i>
+                    <span class="link_name">Reservation</span>
+                </a>
+            </li>
+        </ul>
+        <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                    <img src="../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                    <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">Building Dept</div>
-                            <div class="role">Building Department</div>
+                            <div class="name">Admin</div>
+                            <div class="role">System Administrator</div>
                         </div>
                     </div>
-                    <a href="../../../logout.php">
+                    <a href="../../../../logout.php">
                         <i class='bx bx-log-out' id="log_out"></i>
                     </a>
                 </div>
@@ -105,6 +109,7 @@
             <div class="row">
                 <div class="container">
                     <div class="row">
+                        <div class="col-md-2" style="width: 15%;"></div>
                         <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <table id="datatable" class="table" >
@@ -133,7 +138,7 @@
     <!-- Script Process Start-- DO NOT MOVE THIS Script tags!!-->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
-    <script type="text/javascript" src="functions/js/process.js"></script>
+    <script type="text/javascript" src="functions/js/process.js?random=<?php echo uniqid(); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
                         
@@ -175,33 +180,14 @@
                                             <option value="E">ELECTRICAL</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-1">
-                                        <button type="submit" class="btn btn-success">Approve</button>
-                                    </div>
-                                    <div class="col-md-1" style="padding-left:20px;">
-                                        <button type="button" class="btn btn-danger">Decline</button>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="row" style="padding-top:6px;">     
-                                <div class="col-md-1">
-                                    <label class="fw-bold" for="inputName">Status:</label>
-                                </div> 
-                                <div class="col-md-1">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "">
-                                </div> 
-                                <div class="col-md-1" style="margin-left: 72px;">
-                                    <button type="submit" class="btn btn-success">Approve</button>
-                                </div>
-                                <div class="col-md-1" style="padding-left:18px;">
-                                    <button type="button" class="btn btn-danger">Decline</button>
+                            <div class="row">
+                                <div class="col-md-2" style="width:20%">
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                 </div>
                             </div>
-                            <div class="col-md-2" style="padding-bottom:10px">
-                                <label class="fw-bold" for="date">Quantity:</label>
-                                <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
-                            </div>
-                            
                             <div class="row">
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                     <label class="fw-bold" for="date">Item Name:</label>
@@ -244,11 +230,11 @@
                     <div class="col-md-2" style="width:17%;">
                         <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
                     </div>
-                    <div class="col-md-2" style="width:15%">
+                    <div class="col-md-12" style="width:15%">
                         <label class=""  for="inputName">Status:</label>
-                        <input type="text" style="width:100%" class="col-sm-1" name="_ID" class="form-control" id= "_statustext">
+                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id= "_statustext">
                     </div>
-                    <div class="col-md-2" style="width:30%">
+                    <div class="col-md-1" style="width:10%">
                         <label class=""  for="inputName">ID:</label>
                         <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
                     </div>
@@ -285,18 +271,16 @@
                                     <input type="form-control" class="form-control" id ="_item"placeholder="Item" disabled>
                                 </div>
                             </div>
-
                             <div class="justify-content-center">
                                 <div class="col-md-12" >
                                     <label class="fw-bold" for="date">Description:</label>
-                                    <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description"></textarea>
+                                    <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description" disabled></textarea>
                                 </div>
                             </div>
-
                             <div class="justify-content-center">
                                 <div class="col-md-12" >
                                     <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose"></textarea>
+                                    <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose" disabled></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -308,13 +292,16 @@
                                         <option value="A">AIRCON</option>
                                         <option value="E">ELECTRICAL</option>
                                     </select>
-                                </div>  
-                                <div class="justify-content-md-center" style="padding-bottom:5px;">
-                                    <button type="submit" class="btn btn-success">Approve</button>
-                                    <button type="button" class="btn btn-danger">Decline</button>
                                 </div>
                             </div>
-                            <br>
+                            <div class="row" style="padding-top:6px;">     
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                </div> 
+                                <div class="col-md-2" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1">
+                                </div> 
+                            </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6" >
                                     <label class="fw-bold" for="renderedby">Rendered by:</label>
@@ -351,11 +338,12 @@
                             </div>
                         <div>
                         <div class="modal-footer justify-content-md-center">
-                        <a href= "javascript:void();" class ="btn btn-primary approveBtn">Approve All</a>
-                        <a href= "javascript:void();" class ="btn btn-danger declineBtn">Decline All</a>
-                              <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
-                              <button type="button" class="btn btn-danger">Decline</button>-->
-                              <button type="submit" class="btn btn-info text-white">Update</button>
+                            <a href= "javascript:void();" class ="btn btn-primary step1approveBtn">Approve</a>
+                            <a href= "javascript:void();" class ="btn btn-danger step1declineBtn">Decline</a>
+                            <a href= "javascript:void();" class ="btn btn-info text-white updateBtn">Update</a>
+                            <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
+                            <button type="button" class="btn btn-danger">Decline</button>
+                            <button type="submit" class="btn btn-info text-white">Update</button>-->
                          </div>
                         </div>
                             <!-- Form Controls End-->

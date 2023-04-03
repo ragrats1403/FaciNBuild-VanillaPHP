@@ -1,4 +1,4 @@
-<?php include('../../../../connection/connection.php');
+<?php include('../../../connection/connection.php');
 
 
 $department = $_POST['department'];

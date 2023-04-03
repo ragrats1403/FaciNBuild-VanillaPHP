@@ -51,8 +51,6 @@ paging: false
                 description: description,
                 purpose: purpose,
                 section: section
-                
-                
             },
             type: 'POST',
             success: function(data) {
@@ -193,6 +191,7 @@ $(document).on('click', '.editBtn', function(event) {
     document.getElementById("_dateconfirmed").value = null;
     document.getElementById("_sect").disabled = true;
     document.getElementById("_statustext").disabled = true;
+    document.getElementById("_step1").disabled = true;
     $.ajax({
         url: "functions/get_request_details.php",
         data: {
@@ -212,6 +211,7 @@ $(document).on('click', '.editBtn', function(event) {
             $('#_item').val(json.item);
             $('#_purpose').val(json.purpose);
             $('#_statustext').val(json.status);
+            $('#_step1').val(json.bdstatus);
             var e = document.getElementById("_sect");
             var section = e.options[e.selectedIndex].text;
 
@@ -220,12 +220,6 @@ $(document).on('click', '.editBtn', function(event) {
             $('#editMinorjreqmodal').modal('show');
 
             //$('#_datemajorjr').val(json.datesubmitted);
-            $('').val();
-            $('').val();
-            $('').val();
-            $('').val();
-            $('').val();
-
             /*$('#_inputName').val(json.name)
             $('#_inputUsername').val(json.username);
             $('#_inputPassword').val(json.password);
@@ -236,15 +230,15 @@ $(document).on('click', '.editBtn', function(event) {
     });
 });
 
-$(document).on('submit', '#updateUserForm', function() {
-    var id = $('#id').val();
+$(document).on('click', '.updateBtn', function() {
+    var id = $('#_ID').val();
     var trid = $('#trid').val();
-    var department = $('#department').val();
-    var date = $('#datemajorjr').val();
-    var quantity = $('#_quantity_').val();
-    var itemname = $('#_item_').val();
-    var description = $('#_itemdesc_').val();
-    var purpose = $('#_purpose_').val();
+    var department = $('#_department').val();
+    var date = $('#_datemajorjr').val();
+    var quantity = $('#_quantity').val();
+    var itemname = $('#_item').val();
+    var description = $('#_itemdesc').val();
+    var purpose = $('#_purpose').val();
     var feedback = $('#_inputFeedback').val();
     $.ajax({
         url: "functions/update_data.php",
@@ -264,6 +258,8 @@ $(document).on('submit', '#updateUserForm', function() {
             var status = json.status;
             if (status == 'success') {
                 alert('Updated Successfully!');
+                table = $('#datatable').DataTable();
+                table.draw();
                 /*table = $('#datatable').DataTable();
                 var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
                 var row = table.row("[id='" + trid + "']");
@@ -275,3 +271,86 @@ $(document).on('submit', '#updateUserForm', function() {
         }
     });
 });
+
+
+
+//steps approval javascript
+
+
+//step 1
+$(document).on('click', '.step1approveBtn', function(event){
+
+    //var status = "Approved";
+    var id = $('#_ID').val();
+    var trid = $('#trid').val();
+    $.ajax({
+        url: "functions/step1approve.php",
+        data: {
+            id: id,
+            
+        },
+        type: 'POST',
+        success: function(data) {
+            var json = JSON.parse(data);
+            var status = json.status;
+            if (status == 'success') {
+                table = $('#datatable').DataTable();
+                table.draw();
+                alert('Approved Successfully!');
+               
+                /*table = $('#datatable').DataTable();
+                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                var row = table.row("[id='" + trid + "']");
+                row.row("[id='" + trid + "']").data([department, date, button]);*/
+                $('#_step1').val('Approved');
+                $('#editMinorjreqmodal').modal('hide');
+            } else { 
+                alert('failed');
+            }
+        }
+    });
+    //alert('test');
+
+
+});
+//step 3
+//alert('test');
+//steps approval end
+
+//steps decline start
+$(document).on('click', '.step1declineBtn', function(event){
+    var id = $('#_ID').val();
+    var trid = $('#trid').val();
+    $.ajax({
+        url: "functions/step1decline.php",
+        data: {
+            id: id,
+            
+        },
+        type: 'POST',
+        success: function(data) {
+            var json = JSON.parse(data);
+            var status = json.status;
+            if (status == 'success') {
+                table = $('#datatable').DataTable();
+                table.draw();
+                alert('Step 1 Declined Successfully!');
+
+            
+                /*table = $('#datatable').DataTable();
+                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                var row = table.row("[id='" + trid + "']");
+                row.row("[id='" + trid + "']").data([department, date, button]);*/
+                //$('#_itemdesc_').text('');
+                $('#_step1').val('Declined');
+                $('#editMinorjreqmodal').modal('hide');
+            } else { 
+                alert('failed');
+            }
+        }
+        });
+});
+
+//steps decline end
+
+
