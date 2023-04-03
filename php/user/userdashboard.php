@@ -20,10 +20,7 @@
     <div class="imgctrl">
 
     </div>
-        
-        <nav class="gnav">
-        </nav>
-        <div class="navplace">
+    <div class="navplace">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: transparent;
   border: none;">
@@ -37,6 +34,9 @@
                 <u><a class="dropdown-item text-center mark-as-read" href="#">Mark all as read</a></u>
             </div>
         </div>
+        <?php
+        session_start();
+        ?>
         <script>
             // Get the notification dropdown button and badge
             const notificationDropdown = document.getElementById("notification-dropdown");
@@ -98,7 +98,7 @@
 
                 // Make an AJAX request to mark all notifications as read
                 const xhr = new XMLHttpRequest();
-                xhr.open("POST", "../../connection/update_notification.php");
+                xhr.open("POST", "../../../php/connection/update_notification.php");
                 xhr.onload = function() {
                     if (xhr.status === 200) {
                         // Update the "is_read" property of each notification to 1
@@ -116,7 +116,10 @@
                 xhr.send();
             });
         </script>
-    </div>
+        <p>Hello, <?php echo $_SESSION['department'];?></p>
+        </div>
+        <nav class="gnav">
+        </nav>
 </header>
 
 <body>
