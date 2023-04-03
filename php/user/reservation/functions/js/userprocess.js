@@ -78,14 +78,7 @@ $(document).on("click", ".editBtn", function (event) {
                 },
                 type: "POST",
                 success: function (data) {
-<<<<<<< Updated upstream
-                var jsonfaddon = JSON.parse(data);
-                
-                    
-            
-                },
-            });
-=======
+                var jsonfaddon = JSON.parse(data);           
                 var jfa = JSON.parse(data);
                 document.getElementById("_flexCheckDefault").checked = true;
                 var x = document.getElementById("_myDIV");
@@ -108,8 +101,6 @@ $(document).on("click", ".editBtn", function (event) {
               x.style.display = "block";
               },
           });
->>>>>>> Stashed changes
-
 
     },
   });
