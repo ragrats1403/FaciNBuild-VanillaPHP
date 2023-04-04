@@ -156,7 +156,7 @@
                         </ul>
                     </div>
                 <li>
-                    <a href="../../../php/user/reservation/userreservation.php">
+                    <a href="../../../php/buildingdept/reservation/buildingdeptreservation.php">
                         <i class='bx bx-clipboard'></i>
                         <span class="link_name">Reservation</span>
                     </a>
