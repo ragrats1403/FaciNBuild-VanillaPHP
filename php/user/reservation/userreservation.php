@@ -349,7 +349,7 @@
                             <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled>
                             <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
                         </div>
-                        <div id="_myDIV" style="display: none;">
+                        <div id="_myDIV1" style="display: none;">
                             <div class="col-sm-12 d-flex justify-content-center">
                                 <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
                             </div>
@@ -545,10 +545,10 @@
                         </div>-->
                         <!-- ADD ON SECTION-->
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="myFunction()">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="myFunction('_myDIV2')">
                             <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
                         </div>
-                        <div id="myDIV" style="display: none;">
+                        <div id="_myDIV2" style="display: none;">
                             <div class="col-sm-12 d-flex justify-content-center">
                                 <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
                             </div>

@@ -178,8 +178,8 @@ function updateButtonState() {
 }
 
 //add ons click
-function myFunction() {
-    var x = document.getElementById("myDIV");
+function myFunction(divID) {
+    var x = document.getElementById(divID);
     if (x.style.display === "block") {
         x.style.display = "none";
     } else {
