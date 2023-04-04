@@ -50,7 +50,7 @@
                 </li>
                 <li>
                     <div class="dropdown">
-                        <i class='bx bx-clipboard' style="margin-left:17px;"></i>
+                        <i class='bx bx-notepad' style="margin-left:17px;"></i>
                         <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Manage Request
                         </span>

@@ -149,24 +149,19 @@
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
                         <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Job Request
+                            Create/Manage Request
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
                             <a class="dropdown-item" href="../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="../../../php/admin/reservations/adminreservations.php">Reservations</a>  
                         </ul>
                     </div>
                 </li>
                 <li>
                     <a href="../../../php/admin/equipments/adminequipment.php">
                         <i class='bx bx-wrench'></i>
-                        <span class="link_name">Equipment</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../../php/admin/reservations/adminreservations.php">
-                        <i class='bx bx-check-square'></i>
-                        <span class="link_name">Reservation</span>
+                        <span class="link_name">Facilities Equipment</span>
                     </a>
                 </li>
             </ul>
