@@ -152,7 +152,7 @@
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="../../../../php/user/minor/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../../php/user//major/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="../../../../php/user/major/majorjobreqlist.php">Major Job Request</a>
                         </ul>
                     </div>
                 <li>
