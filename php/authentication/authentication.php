@@ -29,25 +29,25 @@ if ($stmt = $con->prepare($sql)) {
             $_SESSION['department'] = $department;
             switch ($rolelevel) {
                 case '1': //admin
-                    $folder = '..\admin\reservations/admincalendar.php';
+                    $folder = '../admin/reservations/admincalendar.php';
                     break;
                 case '2': //building department
-                    $folder = '..\buildingdept\buildingdeptdashboard.php';
+                    $folder = '../buildingdept/buildingdeptdashboard.php';
                     break;
                 case '3': //facilities department
-                    $folder = '..\facilitiesdept\reservations\reservations.php';
+                    $folder = '../facilitiesdept/reservations/reservations.php';
                     break;
                 case '4': //user
-                    $folder = '..\user\userdashboard.php';
+                    $folder = '../user/userdashboard.php';
                     break;
                 case '5': //cad
-                    $folder = '..\cad\major\majorjobreqlist.php';
+                    $folder = '../cad/major/majorjobreqlist.php';
                     break;
                 case '6': //pco
-                    $folder = '..\pco\major\majorjobreqlist.php';
+                    $folder = '../pco/major/majorjobreqlist.php';
                     break;
                 case '7': //sao
-                    $folder = '..\sao\saodashboard.php';
+                    $folder = '../sao/saodashboard.php';
                     break;
                 default:
                     session_destroy();
