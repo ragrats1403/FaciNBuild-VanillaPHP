@@ -140,13 +140,13 @@
             <ul class="nav_list">
                 <li>
                     <a href="../../../php/user/userdashboard.php">
-                        <i class='bx bx-user'></i>
+                        <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
                 </li>
                 <li>
                     <div class="dropdown">
-                        <i class='bx bx-clipboard' style="margin-left:17px;"></i>
+                        <i class='bx bx-notepad' style="margin-left:17px;"></i>
                         <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Manage Request
                         </span>
@@ -157,7 +157,7 @@
                     </div>
                 <li>
                     <a href="../../../php/user/reservation/userreservation.php">
-                        <i class='bx bx-check-square'></i>
+                        <i class='bx bx-clipboard'></i>
                         <span class="link_name">Reservation</span>
                     </a>
                 </li>
