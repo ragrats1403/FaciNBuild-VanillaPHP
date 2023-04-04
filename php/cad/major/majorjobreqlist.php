@@ -20,7 +20,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <header>
@@ -33,7 +32,7 @@
         <span class='bx bxs-bell'></i>
         <span class="icon-button__badge"></span>
      </div>  
-        <p>Hello, PCO</p>
+        <p>Hello, CAD</p>
       <nav class="gnav">
         </nav>
     </div>
@@ -50,7 +49,7 @@
         <div class ="navdiv">
         <ul class="nav_list">
             <li>
-                <a href="../../../../php/facilitiesdept/reservations/facilitiescalendar.php">
+                <a href="../../../../php/cad/cadcalendarofactivities.php">
                     <i class='bx bx-calendar'></i>
                     <span class="link_name">Calendar of Activities</span>
                 </a>
@@ -62,20 +61,16 @@
                         Manage Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="./../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="./../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="./../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
-                <div class="dropdown">
-                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
-                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        View/Create Request
-                    </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="">Major Job Request</a>
-                        <a class="dropdown-item" href="">Minor Job Request</a>
-                        <a class="dropdown-item" href="">Request Reservation</a>
-                    </ul>
-                </div>
+            </li>
+            <li>
+                <a href="../../../../php/cad/reservations/cadreservation.php">
+                    <i class='bx bx-calendar'></i>
+                    <span class="link_name">Reservation</span>
+                </a>
             </li>
         </ul>
         <div class="profile_content">
@@ -83,8 +78,8 @@
                     <div class="profile_details">
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">PCO Dept.</div>
-                            <div class="role">PCO Department</div>
+                            <div class="name">CAD Dept.</div>
+                            <div class="role">CAD Department</div>
                         </div>
                     </div>
                     <a href="../../../logout.php">
@@ -464,7 +459,7 @@
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="CAD" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="PCO" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
