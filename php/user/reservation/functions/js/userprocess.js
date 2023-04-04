@@ -40,6 +40,8 @@ $(document).on("click", ".editBtn", function (event) {
   document.getElementById("_stageperformers").disabled = true;
   document.getElementById("_adviser").disabled = true;
   document.getElementById("_chairdeandep").disabled = true;
+  var x = document.getElementById("_myDIV");
+  x.style.display = "none";
 
   $.ajax({
     url: "functions/get_reservation_details.php",
@@ -79,26 +81,75 @@ $(document).on("click", ".editBtn", function (event) {
                 type: "POST",
                 success: function (data) {
                 var jsonfaddon = JSON.parse(data);           
-                var jfa = JSON.parse(data);
-                document.getElementById("_flexCheckDefault").checked = true;
-                var x = document.getElementById("_myDIV");
-                x.style.display = "block";
+                  if(jsonfaddon!=null){ 
+                    document.getElementById("_flexCheckDefault").checked = true;
+                    var x = document.getElementById("_myDIV");
+                    x.style.display = "block";
+                    document.getElementById("_dept").disabled = true //department
+                    document.getElementById("_dateresm").disabled = true //date
+                    document.getElementById("_minorqres").disabled = true //quantity
+                    document.getElementById("_minoritemres").disabled = true//itemname
+                    document.getElementById("_minoritemdesc").disabled = true//itemdescription
+                    document.getElementById("_minorpurpose").disabled = true//purpose
+                    $("#_dept").val(jsonfaddon.department);
+                    $("#_dateresm").val(jsonfaddon.datesubmitted);
+                    $("#_minorqres").val(jsonfaddon.quantity);
+                    $("#_minoritemres").val(jsonfaddon.item);
+                    $("#_minoritemdesc").val(jsonfaddon.item_desc);
+                    $("#_minorpurpose").val(jsonfaddon.purpose);
+                  }
                 },
             });
+          var eqdatesubmit = json.datefiled;
+          var tstart = json.timestart;
+          var tend = json.timeend;
+          var dateuse = json.actualdateofuse;  
+
+
 
             $.ajax({
-              url: "functions/get_addon_details.php",
+              url: "functions/getequipment.php",
               data: {
                   eventname: en,
-                  actualdate: adu,
-                  reqsource: rp,
+                  actualdate: dateuse,
+                  datesubmitted: eqdatesubmit,
+                  timestart: tstart,
+                  timeend: tend,
               },
               type: "POST",
-              success: function (data) {
-              var jfa = JSON.parse(data);
-              document.getElementById("_flexCheckDefault").checked = true;
-              var x = document.getElementById("_myDIV");
-              x.style.display = "block";
+              success: function(data) {
+              var jsonreseq = JSON.parse(data);
+              var len = data.length;
+              //console.log(jsonreseq);
+              //console.log(data[0].eqid);
+                
+                for(var i = 0; i<len-1; i++)
+                {
+                  var equipn = jsonreseq[i][0];
+                  var equipq = jsonreseq[i][1];
+                  var container = document.getElementById('container4');
+                  var newDiv = document.createElement('div');
+                  var divCol = document.createElement('div');
+                  var nid = jsonreseq[i][1];
+                  divCol2 = document.createElement('div');
+                  newDiv.className = "row";
+                  divCol.className = "col-md-2";
+                  divCol2.className = "col-md-2";
+                  var btn = document.createElement('button');
+                  btn.className = "btn btn-sm btn-danger disabled removeEq"+nid;
+                  btn.setAttribute("onclick","removeAddedEq2();");
+                  btn.style.marginTop = '3px';
+                  btn.innerHTML = "Remove";
+                  var textbox = document.createElement('text');
+                  textbox.className = "form-control input-sm col-xs-1 disabled";
+                  textbox.innerHTML = equipn +' x '+ equipq;
+
+                  divCol.appendChild(textbox);
+                  divCol2.appendChild(btn);
+                  newDiv.appendChild(divCol);
+                  newDiv.appendChild(divCol2);
+                  container.appendChild(newDiv);
+                }
               },
           });
 

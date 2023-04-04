@@ -346,10 +346,10 @@
                                         </div>
                                     </div>
                                     <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="myFunction()">
+                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled>
                             <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
                         </div>
-                        <div id="myDIV" style="display: none;">
+                        <div id="_myDIV" style="display: none;">
                             <div class="col-sm-12 d-flex justify-content-center">
                                 <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
                             </div>
@@ -359,11 +359,11 @@
                                 <div class="row justify-content-center" style="padding-bottom:13px;">
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Department:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_department" placeholder="Department">
+                                        <input type="name" class="form-control input-sm col-xs-1" id="_dept" placeholder="Department">
                                     </div>
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Date:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="dateminor" placeholder="Date" disabled> 
+                                        <input type="date" class="form-control input-sm col-xs-1" id="_dateresm" placeholder="Date" disabled> 
                                     </div>
                                 </div>
                                 <div class="row">
@@ -373,26 +373,26 @@
                                 <div class="row">
                                     <div class="col-md-2" style="width:20%">
                                         <label class="fw-bold" for="date">Quantity:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
+                                        <input type="name" class="form-control input-sm col-xs-1" id="_minorqres" placeholder="Quantity">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                         <label class="fw-bold" for="date">Item Name:</label>
-                                        <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
+                                        <input type="form-control" class="form-control" id ="_minoritemres"placeholder="Item">
                                     </div>
                                 </div>
                                 <div class="justify-content-center">
                                     <div class="col-md-12" >
                                         <label class="fw-bold" for="date">Description:</label>
-                                        <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
+                                        <textarea class="form-control" rows="2" id="_minoritemdesc" placeholder="Description"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="justify-content-center">
                                     <div class="col-md-12" >
                                         <label class="fw-bold" for="date">Purpose:</label>
-                                        <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
+                                        <textarea class="form-control" rows="2" id="_minorpurpose" placeholder="Purpose"></textarea>
                                     </div>
                                 </div>  
                                 <!-- Form Controls End-->
