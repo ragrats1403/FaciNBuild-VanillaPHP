@@ -145,6 +145,17 @@
                     </a>
                 </li>
                 <li>
+                    <div class="dropdown">
+                        <i class='bx bx-clipboard' style="margin-left:17px;"></i>
+                        <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Job Request
+                        </span>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="../../../../php/user/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../../php/user//major/majorjobreqlist.php">Major Job Request</a>
+                        </ul>
+                    </div>
+                <li>
                     <a href="../../../php/user/reservation/userreservation.php">
                         <i class='bx bx-check-square'></i>
                         <span class="link_name">Reservation</span>
