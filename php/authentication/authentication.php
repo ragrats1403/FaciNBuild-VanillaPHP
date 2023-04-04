@@ -29,7 +29,7 @@ if ($stmt = $con->prepare($sql)) {
             $_SESSION['department'] = $department;
             switch ($rolelevel) {
                 case '1': //admin
-                    $folder = '..\admin\accounts\admin_account.php';
+                    $folder = '..\admin\reservations/admincalendar.php';
                     break;
                 case '2': //building department
                     $folder = '..\buildingdept\buildingdeptdashboard.php';
