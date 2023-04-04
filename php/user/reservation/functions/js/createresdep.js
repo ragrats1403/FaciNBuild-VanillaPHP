@@ -59,6 +59,12 @@ function removeAddedEq(){
     myNode.removeChild(myNode.lastChild);
     }
 }
+function removeAddedEq2(){
+    const myNode =  document.getElementById('container4');
+    while (myNode.firstChild) {
+    myNode.removeChild(myNode.lastChild);
+    }
+}
 
 
 //dynamic add and list the equipment chosen to reservation the inside div
@@ -76,7 +82,7 @@ $(document).on('click', '.addresBtn', function(event){
     //var checkval = document.getElementById("hid").value;
     if(document.getElementById(hiddenid)==null){
         $.ajax({
-            url: "functions/getequipment.php",
+            url: "functions/addselectedeq.php",
             data: {
                 id:id,
             },
@@ -151,21 +157,6 @@ $(document).on('click', '.addresBtn', function(event){
     
 
 });
-function testClick(){
-
-var testarr = [...document.querySelectorAll('[id^="fbh"]')].map(elm => elm.id);
-var testarr2 = [...document.querySelectorAll('[id^="fbe"]')].map(elm => elm.id);
-var testarr3 = [...document.querySelectorAll('[id^="fbv"]')].map(elm => elm.id);
-for(i = 0; i<=testarr.length-1; i++ ){
-
-    
-    console.log(document.getElementById(testarr[i]).value);
-    console.log(document.getElementById(testarr2[i]).value);
-    console.log(document.getElementById(testarr3[i]).value);
-    
-
-}
-}
 
 //date auto fill
 var now = new Date();
@@ -210,6 +201,33 @@ $("#reserModal").on("hidden.bs.modal", function () {
     $('#testtable').DataTable().clear().destroy();
     
   });
+  
+  
+  $("#test").on("hidden.bs.modal", function () {
+    const myNode =  document.getElementById('container4');
+    while (myNode.firstChild) {
+    myNode.removeChild(myNode.lastChild);
+
+            var x = document.getElementById("_myDIV");
+            x.style.display = "none";
+            document.getElementById("_dept").disabled = true //department
+            document.getElementById("_dateresm").disabled = true //date
+            document.getElementById("_minorqres").disabled = true //quantity
+            document.getElementById("_minoritemres").disabled = true//itemname
+            document.getElementById("_minoritemdesc").disabled = true//itemdescription
+            document.getElementById("_minorpurpose").disabled = true//purpose
+            $("#_dept").val('');
+            $("#_dateresm").val('');
+            $("#_minorqres").val('');
+            $("#_minoritemres").val('');
+            $("#_minoritemdesc").val('');
+            $("#_minorpurpose").val('');
+            document.getElementById("_flexCheckDefault").checked = true;
+    }
+    
+  });
+
+
 
   
 
