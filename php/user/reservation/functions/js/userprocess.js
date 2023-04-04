@@ -83,7 +83,7 @@ $(document).on("click", ".editBtn", function (event) {
                 var jsonfaddon = JSON.parse(data);           
                   if(jsonfaddon!=null){ 
                     document.getElementById("_flexCheckDefault").checked = true;
-                    var x = document.getElementById("_myDIV");
+                    var x = document.getElementById("_myDIV1");
                     x.style.display = "block";
                     document.getElementById("_dept").disabled = true //department
                     document.getElementById("_dateresm").disabled = true //date
