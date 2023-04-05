@@ -32,7 +32,7 @@
         <span class='bx bxs-bell'></i>
         <span class="icon-button__badge"></span>
       </div>
-        <p>Hello, Building</p>
+        <p>Hello, PCO</p>
       <nav class="gnav">
         </nav>
     </div>
@@ -49,28 +49,32 @@
         <div class ="navdiv">
         <ul class="nav_list">
             <li>
-                <a href="../../../php/buildingdept/buildingcalendar.php">
+                <a href="../../../../php/pco/pcocalendar.php">
                     <i class='bx bx-calendar'></i>
                     <span class="link_name">Calendar of Activities</span>
                 </a>
             </li>
             <li>
                 <div class="dropdown">
-                    <i class='bx bx-notepad' style="margin-left:17px;" ></i>
+                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Manage Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../php/buildingdept/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="./../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
-            </li>
-            <li>
-                <a href="../../../php/buildingdept/reservation/buildingdeptreservation.php">
-                    <i class='bx bx-clipboard'></i>
-                    <span class="link_name">Reservation</span>
-                </a>
+                <div class="dropdown">
+                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        View/Create Request
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="./../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="./../../../php/pco/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="">Request Reservation</a>
+                    </ul>
+                </div>
             </li>
         </ul>
         <div class="profile_content">
@@ -78,8 +82,8 @@
                     <div class="profile_details">
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">Building Dept.</div>
-                            <div class="role">Building Department</div>
+                            <div class="name">PCO Dept.</div>
+                            <div class="role">PCO Department</div>
                         </div>
                     </div>
                     <a href="../../../../logout.php">
