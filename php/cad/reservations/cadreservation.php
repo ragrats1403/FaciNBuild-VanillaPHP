@@ -42,7 +42,8 @@
     </div>
 </header>
 
-<body>
+<body style="padding-top: 0px;">
+
 <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -59,20 +60,25 @@
             </li>
             <li>
                 <div class="dropdown">
-                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+                    <i class='bx bx-notepad' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Manage Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="./../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
-            </li>
-            <li>
-                <a href="../../../../php/cad/reservations/cadreservation.php">
-                    <i class='bx bx-calendar'></i>
-                    <span class="link_name">Reservation</span>
-                </a>
+                <div class="dropdown">
+                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        View/Create Request
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/cad/reservations/cadreservation.php">Reservation</a>
+                    </ul>
+                </div>
             </li>
         </ul>
         <div class="profile_content">
@@ -80,8 +86,8 @@
                     <div class="profile_details">
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">CAD Dept.</div>
-                            <div class="role">CAD Department</div>
+                            <div class="name">CAD</div>
+                            <div class="role">CAD</div>
                         </div>
                     </div>
                     <a href="../../../logout.php">
