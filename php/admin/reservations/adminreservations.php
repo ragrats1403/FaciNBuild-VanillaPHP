@@ -402,13 +402,19 @@
                         <!-- ADD ON SECTION END-->
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <div class="tacbox"></div>
+                <div class="modal-footer justify-content-between">
+                    <div class="mr-auto">           
                         <input id="termscond" type="checkbox"/>
                         <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>
+                                
                     </div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+                    <div class="mr">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-info text-white" data-bs-dismiss="modal">Update</button> 
+                    </div>
+                    
+                    
+                </div>     
                 <script>
                     document.getElementById("termscond").checked = true;
                         document.getElementById("termscond").disabled = true;
