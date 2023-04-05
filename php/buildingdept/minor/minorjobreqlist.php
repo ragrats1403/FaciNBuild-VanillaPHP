@@ -48,13 +48,13 @@
         </div>
         <div class ="navdiv">
         <ul class="nav_list">
-            <li>
-                <a href="../../../php/buildingdept/buildingcalendar.php">
-                    <i class='bx bx-calendar'></i>
-                    <span class="link_name">Calendar of Activities</span>
-                </a>
-            </li>
-            <li>
+                <li>
+                    <a href="../../../php/buildingdept/buildingcalendar.php">
+                        <i class='bx bx-calendar'></i>
+                        <span class="link_name">Calendar of Activities</span>
+                    </a>
+                </li>
+                <li>
                 <div class="dropdown">
                     <i class='bx bx-notepad' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,14 +65,22 @@
                         <a class="dropdown-item" href="../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
-            </li>
-            <li>
-                <a href="../../../php/buildingdept/reservation/buildingdeptreservation.php">
-                    <i class='bx bx-clipboard'></i>
-                    <span class="link_name">Reservation</span>
-                </a>
-            </li>
-        </ul>
+                </li>
+                <li>
+                <div class="dropdown">
+                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        View/Create Request
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="../../../php/buildingdept/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../php/buildingdept/reservation/buildingdeptreservation.php">Reservation</a>
+                    </ul>
+                </div>
+                </li>
+            </ul>
+            
         <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">

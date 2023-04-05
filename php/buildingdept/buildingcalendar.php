@@ -83,7 +83,7 @@
                     <div class="profile_details">
                     <img src="../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">Building Dept</div>
+                            <div class="name">Building Dept.</div>
                             <div class="role">Building Department</div>
                         </div>
                     </div>
