@@ -129,7 +129,6 @@
 </header>
 
 <body style="padding-top: 0px;">
-
 <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -139,13 +138,13 @@
         <div class="navdiv">
             <ul class="nav_list">
                 <li>
-                    <a href="../../../php/admin/reservations/admincalendar.php">
+                    <a href="../../../../php/admin/reservations/admincalendar.php">
                         <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../../php/admin/accounts/admin_account.php">
+                    <a href="../../../../php/admin/accounts/admin_account.php">
                         <i class='bx bx-user'></i>
                         <span class="link_name">Account</span>
                     </a>
@@ -164,7 +163,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="../../../php/admin/equipments/adminequipment.php">
+                    <a href="../../../../php/admin/equipments/adminequipment.php">
                         <i class='bx bx-wrench'></i>
                         <span class="link_name">Facilities Equipment</span>
                     </a>

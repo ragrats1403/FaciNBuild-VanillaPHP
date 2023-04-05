@@ -3,28 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Reservation</title>
-    
+    <title>Reservations</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?= time() ?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?= time() ?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/modal.css/modal.css?<?= time() ?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/autofill.js"></script>
 </head>
 
 <header class="shadow">
-    <div class= "imgctrl">
-        
+    <div class="imgctrl">
+
     </div>
     <div class="navplace">
         <div class="dropdown">
@@ -121,7 +116,7 @@
         </script>
 
         <p>Hello, Administrator</p>
-      <nav class="gnav">
+        <nav class="gnav">
         </nav>
     </div>
 </header>
@@ -616,14 +611,8 @@
             </div>
         </div>
     </div>
-        <!-- create reservation end -->
-                                    
-   
-
-    
-    
- 
-    <!-- BODY END-->
+        <!-- create reservation end --
 
 </body>
+
 </html>
