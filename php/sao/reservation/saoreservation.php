@@ -52,7 +52,7 @@
         <div class="navdiv">
             <ul class="nav_list">
                 <li>
-                    <a href="../../../php/user/userdashboard.php">
+                    <a href="../../../php/sao/reservation/saocalendar.php">
                         <i class='bx bx-user'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>

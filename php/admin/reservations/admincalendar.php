@@ -169,7 +169,7 @@
                     <div class="profile_details">
                         <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name">Admin</div>
+                            <div class="name">Admin.</div>
                             <div class="role">System Administrator</div>
                         </div>
                     </div>

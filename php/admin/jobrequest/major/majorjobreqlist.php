@@ -129,7 +129,6 @@
 </header>
 
 <body style="padding-top: 0px;">
-
 <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -139,13 +138,13 @@
         <div class="navdiv">
             <ul class="nav_list">
                 <li>
-                    <a href="../../../php/admin/reservations/admincalendar.php">
+                    <a href="../../../../php/admin/reservations/admincalendar.php">
                         <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../../php/admin/accounts/admin_account.php">
+                    <a href="../../../../php/admin/accounts/admin_account.php">
                         <i class='bx bx-user'></i>
                         <span class="link_name">Account</span>
                     </a>
@@ -157,14 +156,14 @@
                             Create/Manage Request
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
-                            <a class="dropdown-item" href="../../../php/admin/reservations/adminreservations.php">Reservations</a>  
+                            <a class="dropdown-item" href="../../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="../../../../php/admin/reservations/adminreservations.php">Reservations</a>  
                         </ul>
                     </div>
                 </li>
                 <li>
-                    <a href="../../../php/admin/equipments/adminequipment.php">
+                    <a href="../../../../php/admin/equipments/adminequipment.php">
                         <i class='bx bx-wrench'></i>
                         <span class="link_name">Facilities Equipment</span>
                     </a>
