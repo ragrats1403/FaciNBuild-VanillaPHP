@@ -213,8 +213,11 @@
                             <table id="datatable" class="table" >
                                 <thead>
                                     <th>ID</th>
-                                    <th>Department</th>
-                                    <th>Date</th>
+                                    <th>Event Name</th>
+                                    <th>Requesting party</th>
+                                    <th>Facility</th>
+                                    <th>Date Filed</th>
+                                    <th>Actual Date of Use</th>
                                     <th>Status</th>
                                     <th>Options</th>
                                 </thead>
