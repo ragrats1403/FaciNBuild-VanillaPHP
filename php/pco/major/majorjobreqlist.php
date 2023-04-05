@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Job Request List</title>
+    <title>Major Job Request List</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -50,7 +50,7 @@
         <div class ="navdiv">
         <ul class="nav_list">
             <li>
-                <a href="../../../../php/facilitiesdept/reservations/facilitiescalendar.php">
+                <a href="../../../../php/pco/pcocalendar.php">
                     <i class='bx bx-calendar'></i>
                     <span class="link_name">Calendar of Activities</span>
                 </a>
@@ -62,7 +62,7 @@
                         Manage Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="./../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="./../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
                 <div class="dropdown">
@@ -71,8 +71,8 @@
                         View/Create Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="">Major Job Request</a>
-                        <a class="dropdown-item" href="">Minor Job Request</a>
+                        <a class="dropdown-item" href="./../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="./../../../php/pco/minor/minorjobreqlist.php">Minor Job Request</a>
                         <a class="dropdown-item" href="">Request Reservation</a>
                     </ul>
                 </div>
@@ -100,8 +100,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
     
     <div class="table1">
 
