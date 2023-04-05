@@ -42,14 +42,8 @@ $('#testtable').DataTable().clear().destroy();
 
         //removeChild();
 }
-//test container remove
-function removeChild(){
-    const myNode =  document.getElementById('container1');
-    while (myNode.firstChild) {
-    myNode.removeChild(myNode.lastChild);
-  }
 
-}
+
 
 
 //remove [Equipments meant to be added to reservation]
@@ -191,22 +185,15 @@ function myFunction(divID) {
 
 }
 
-//modal events
 
-$("#reserModal").on("hidden.bs.modal", function () {
-    const myNode =  document.getElementById('container2');
-    while (myNode.firstChild) {
-    myNode.removeChild(myNode.lastChild);
-    }
-    $('#testtable').DataTable().clear().destroy();
-    
-  });
-  
-  
-  $("#test").on("hidden.bs.modal", function () {
+//cleanvalues when closed
+function closeModalforInfo(){
     const myNode =  document.getElementById('container4');
-    while (myNode.firstChild) {
-    myNode.removeChild(myNode.lastChild);
+    const len = myNode.childElementCount;
+    //console.log(myNode.childElementCount);
+    for(var i = 0;  i < len; i++){
+        removeAddedEq2();
+        }
 
             var x = document.getElementById("_myDIV");
             x.style.display = "none";
@@ -223,7 +210,43 @@ $("#reserModal").on("hidden.bs.modal", function () {
             $("#_minoritemdesc").val('');
             $("#_minorpurpose").val('');
             document.getElementById("_flexCheckDefault").checked = true;
+            $("#test").trigger("reset");
+}
+
+//modal events
+
+$("#reserModal").on("hidden.bs.modal", function () {
+    const myNode =  document.getElementById('container2');
+    while (myNode.firstChild) {
+    myNode.removeChild(myNode.lastChild);
     }
+    $('#testtable').DataTable().clear().destroy();
+    
+  });
+  
+  
+  $("#test").on("hidden.bs.modal", function () {
+    const myNode =  document.getElementById('container4');
+    const len = myNode.childElementCount;
+    for(var i = 0; i<len; i++){
+        removeAddedEq2();
+    }
+
+            var x = document.getElementById("_myDIV1");
+            x.style.display = "none";
+            document.getElementById("_dept").disabled = true //department
+            document.getElementById("_dateresm").disabled = true //date
+            document.getElementById("_minorqres").disabled = true //quantity
+            document.getElementById("_minoritemres").disabled = true//itemname
+            document.getElementById("_minoritemdesc").disabled = true//itemdescription
+            document.getElementById("_minorpurpose").disabled = true//purpose
+            $("#_dept").val('');
+            $("#_dateresm").val('');
+            $("#_minorqres").val('');
+            $("#_minoritemres").val('');
+            $("#_minoritemdesc").val('');
+            $("#_minorpurpose").val('');
+            document.getElementById("_flexCheckDefault").checked = true;
     
   });
 

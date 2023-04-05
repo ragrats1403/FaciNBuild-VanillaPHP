@@ -222,7 +222,7 @@
                                 </thead>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Reservation</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reserModal">Create Reservation</button>
                             </div>
                         </div>
                     </div>
@@ -251,7 +251,7 @@
                         <label class=""  for="inputName">ID:</label>
                         <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModalforInfo()"></button>
                     
             </div>
             
@@ -427,7 +427,7 @@
                     <a href= "javascript:void();" class ="btn btn-info text-white submitBtn disabled" id='termscond-create'>Save Changes</a>
                     <a href= "javascript:void();" class ="btn btn-primary editResBtn">Edit</a>
                     <a href= "javascript:void();" class ="btn btn-danger updateResBtn disabled">Update</a>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>
                     </div>
                     
                     
@@ -629,7 +629,7 @@
                     <input id="termscond" type="checkbox" onchange="updateButtonState()" />
                     <label for="termscond"> I agree to these <a href="termsandcondition.html" target="_blank"> Terms and Conditions prior to Approval</a></label>
                 </div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>
                     <!--<button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>-->
                     <a href= "javascript:void();" class ="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
                     
