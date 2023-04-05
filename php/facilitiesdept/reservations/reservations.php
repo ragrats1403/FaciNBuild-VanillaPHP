@@ -48,6 +48,12 @@
                 </a>
             </li>
             <li>
+                    <a href="../../../php/facilitiesdept/equipments/departmentheadeq.php">
+                        <i class='bx bx-wrench'></i>
+                        <span class="link_name">Equipment</span>
+                    </a>
+            </li>
+            <li>
                 <div class="dropdown">
                     <i class='bx bx-notepad' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
