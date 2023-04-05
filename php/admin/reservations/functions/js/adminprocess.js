@@ -23,6 +23,75 @@ $("#datatable").DataTable({
 });
 
 //table display end
+//minorjobaddon admin approval
+$(document).on('click', '.aoapproveBtn', function(event){
+
+  //var status = "Approved";
+  //var id = $('#_addonID').val();
+  var id = document.getElementById("_addonID").value;
+  var trid = $('#trid').val();
+  $.ajax({
+      url: "functions/step1approve.php",
+      data: {
+          id: id,
+          
+      },
+      type: 'POST',
+      success: function(data) {
+          var json = JSON.parse(data);
+          var status = json.status;
+          if (status == 'success') {
+              table = $('#datatable').DataTable();
+              table.draw();
+              alert('Add-on Approved Successfully!');
+             
+              /*table = $('#datatable').DataTable();
+              var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+              var row = table.row("[id='" + trid + "']");
+              row.row("[id='" + trid + "']").data([department, date, button]);*/
+              $('#_addonstat').val('Approved');
+              //$('#test').modal('hide');
+          } else { 
+              alert('failed');
+          }
+      }
+  });
+});
+
+//minorjobaddon admin decline
+$(document).on('click', '.aodeclineBtn', function(event){
+  var id = document.getElementById("_addonID").value;
+  var trid = $('#trid').val();
+  $.ajax({
+      url: "functions/step1decline.php",
+      data: {
+          id: id,
+          
+      },
+      type: 'POST',
+      success: function(data) {
+          var json = JSON.parse(data);
+          var status = json.status;
+          if (status == 'success') {
+              table = $('#datatable').DataTable();
+              table.draw();
+              alert('Successfully Declined Add-on!');
+
+          
+              /*table = $('#datatable').DataTable();
+              var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+              var row = table.row("[id='" + trid + "']");
+              row.row("[id='" + trid + "']").data([department, date, button]);*/
+              //$('#_itemdesc_').text('');
+              $('#_addonstat').val('Declined');
+              //$('#test').modal('hide');
+          } else { 
+              alert('failed');
+          }
+      }
+      });
+});
+
 
 //edit button control
 $(document).on("click", ".editBtn", function (event) {
@@ -97,6 +166,8 @@ $(document).on("click", ".editBtn", function (event) {
                     $("#_minoritemres").val(jsonfaddon.item);
                     $("#_minoritemdesc").val(jsonfaddon.item_desc);
                     $("#_minorpurpose").val(jsonfaddon.purpose);
+                    $("#_addonstat").val(jsonfaddon.bdstatus);
+                    $("#_addonID").val(jsonfaddon.minorjobid);
                   }
                 },
             });

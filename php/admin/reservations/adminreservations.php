@@ -3,23 +3,28 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Reservations</title>
-
+    <title>Reservation</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?= time() ?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?= time() ?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
-    <link rel="stylesheet" type="text/css" href="../../../../css/modal.css/modal.css?<?= time() ?>" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script type="text/javascript" src="js/autofill.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <header class="shadow">
-    <div class="imgctrl">
-
+    <div class= "imgctrl">
+        
     </div>
     <div class="navplace">
         <div class="dropdown">
@@ -116,7 +121,7 @@
         </script>
 
         <p>Hello, Administrator</p>
-        <nav class="gnav">
+      <nav class="gnav">
         </nav>
     </div>
 </header>
@@ -191,7 +196,6 @@
     <!--<script>
         let btn = document.querySelector("#btn");
         let sidebar = document.querySelector(".sidebar");
-
         btn.onclick = function() {
             sidebar.classList.toggle("active");
         }
@@ -237,11 +241,11 @@
             <div class="modal-content">
             <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:27%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Manage Job Request</h5>
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Manage Reservations</h5>
                     </div>
                     <div class="col-md-12" style="width:15%">
                         <label class=""  for="inputName">Status:</label>
-                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id= "_statustext">
+                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id= "_statustext" disabled>
                     </div>
                     <div class="col-md-1" style="width:10%">
                         <label class=""  for="inputName">ID:</label>
@@ -316,13 +320,10 @@
                             <input type="name" class="form-control input-sm col-xs-1" id="_stageperformers" placeholder="Stage Performers (if any)">
                         </div>
                         <br><br><br>
-                        <label>NB: All other equipment (e.g. Backdrop, chairs, etc.,) shall be the responsibility of the requesting party.
+                        <label>1. NB: All other equipment (e.g. Backdrop, chairs, etc.,) shall be the responsibility of the requesting party.
                             Technician’s, Electrical, Janitor’s and security guards overtime fees/excess fees are subject to the terms an condition provided at the bank thereof.<br>
                             Secure Reservation from the AVR (filled up by the AVR personnel only)
-                            <div class="col-md-6 ">
-                                <label class="fw-bold" for="date">Date and Time</label>
-                                <input type="datetime-local" class="form-control input-sm col-xs-1" id="_date_avr" placeholder="Date"><br>
-                            </div>
+                              <br>
                             2. The activity is officially endorsed and approved by the adviser, Chairperson/Dean, Department Head,
                             and the SAO/ Cultural Directory. (if “disapproved”, it must be so stated, citing briefly the reason thereof)<br><br>
                         </label>
@@ -346,9 +347,28 @@
                             <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
                         </div>
                         <div id="_myDIV1" style="display: none;">
-                            <div class="col-sm-12 d-flex justify-content-center">
-                                <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
+                            <div class="col-sm-12 d-flex justify-content-between">
+                                    <h5 class="modal-title text-uppercase fw-bold mr-auto" id="exampleModalLabel">Add-ons</h5>
+                                
+                                    
                             </div>
+                            <div class="row" style="padding-top:6px;">
+                            <input type="hidden" id="_addonID" disabled>     
+                                        <div class="col-md-1" style="margin-top:5px;">
+                                            <label class="fw-bold" for="inputName">Add-on Status:</label>
+                                        </div> 
+                                        <div class="col-md-2" style="margin-top:5px;">
+                                            <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_addonstat" disabled>
+                                        </div> 
+                                        <div class="col-md-1">
+                                            <!--Id:step1approveBtn-->
+                                            <a href= "javascript:void();" class ="btn btn-success aoapproveBtn">Approve</a>
+                                        </div>
+                                        <div class="col-md-1" style="padding-left:18px;">
+                                        <!--Id:step1declineBtn-->
+                                            <a href= "javascript:void();" class ="btn btn-danger aodeclineBtn">Decline</a>
+                                        </div>
+                                    </div>
                             <form id="saveUserForm" action="javascript:void();" method="POST">
                                 <input type = "hidden" id="eventname" >
                                 <!-- Form Controls-->
@@ -404,8 +424,10 @@
                                 
                     </div>
                     <div class="mr">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-info text-white" data-bs-dismiss="modal">Update</button> 
+                    <a href= "javascript:void();" class ="btn btn-info text-white submitBtn disabled" id='termscond-create'>Save Changes</a>
+                    <a href= "javascript:void();" class ="btn btn-primary editResBtn">Edit</a>
+                    <a href= "javascript:void();" class ="btn btn-danger updateResBtn disabled">Update</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                     
                     
@@ -611,14 +633,21 @@
                     <!--<button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>-->
                     <a href= "javascript:void();" class ="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
                     
+                    
                 </div>
                 <script type="text/javascript" src="functions/js/resdep.js?random=<?php echo uniqid(); ?>"></script>                       
                 
             </div>
         </div>
     </div>
-        <!-- create reservation end --
+        <!-- create reservation end -->
+                                    
+   
+
+    
+    
+ 
+    <!-- BODY END-->
 
 </body>
-
 </html>
