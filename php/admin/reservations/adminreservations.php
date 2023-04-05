@@ -241,8 +241,8 @@
     <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
             <div class="modal-header justify-content-center" style="max-width:1100px;">
-                    <div class="col-md-2" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
+                    <div class="col-md-2" style="width:27%;">
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Manage Job Request</h5>
                     </div>
                     <div class="col-md-12" style="width:15%">
                         <label class=""  for="inputName">Status:</label>
@@ -259,21 +259,10 @@
                 <div class="modal-body ">
                     <form action="">
                         Please select the facilities you would like to request.
-                        <!--
-                        <input type="checkbox" id="annex_avr" name="Annex AVR" value="annex_avr">
-                        <label for="annex_avr"> Annex AVR</label>
-                        <input type="checkbox" id="new_avr" name="New AVR" value="new_avr">
-                        <label for="new_avr"> New AVR</label>
-                        <input type="checkbox" id="cbe_functionhall" name="CBE Function Hall" value="cbe_functionhall">
-                        <label for="cbe_functionhall"> CBE Function Hall</label>
-                        <input type="checkbox" id="auditorium" name="Auditorium" value="auditorium">
-                        <label for="auditorium"> Auditorium</label>
-                        <input type="checkbox" id="be_functionhall" name="BE Function Hall" value="be_functionhall">
-                        <label for="be_functionhall"> BE Function Hall</label><br><br>-->
+
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
-                                <!-- redacted
-                                <select class="form-control input-sm col-xs-1" name="sections" id="faci">
+                                <!--<select class="form-control input-sm col-xs-1" name="sections" id="faci">
                                     select = document.getElementById("faci");
                                     
                                     <?php include('../../connection/connection.php');
