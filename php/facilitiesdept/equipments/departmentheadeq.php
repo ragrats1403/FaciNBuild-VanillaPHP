@@ -42,7 +42,7 @@
         <div class="navdiv">
             <ul class="nav_list">
                 <li>
-                    <a href="../../../php/facilitiesdept/reservations/facilitiescalendar.php">
+                    <a href="../../../../php/facilitiesdept/reservations/facilitiescalendar.php">
                         <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
@@ -53,26 +53,28 @@
                         <span class="link_name">Equipment</span>
                     </a>
                 </li>
-                <div class="dropdown">
-                    <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Manage Request
-                    </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        View/Create Request
-                    </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
-                        <a class="dropdown-item" href="../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
-                    </ul>
-                </div>
+                <li>
+                    <div class="dropdown">
+                        <i class='bx bx-notepad' style="margin-left:17px;"></i>
+                        <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Manage Request
+                        </span>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <i class='bx bx-clipboard' style="margin-left:17px;"></i>
+                        <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            View/Create Request
+                        </span>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
+                        </ul>
+                    </div>
+                </li>
             </ul>
             <div class="profile_content">
                 <div class="profile">
@@ -90,17 +92,14 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
-    <!--<script>
-        let btn = document.querySelector("#btn");
-        let sidebar = document.querySelector(".sidebar");
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        btn.onclick = function() {
-            sidebar.classList.toggle("active");
-        }
-    </script>-->
-    <!-- Data Table Start-->
-    <!--<h1 class="text-center">Faci N Build Test table control</h1>-->
     <div class="table1">
 
         <div class="container-fluid">

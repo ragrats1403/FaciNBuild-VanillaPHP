@@ -65,14 +65,14 @@
                     </ul>
                 </div>
                 <div class="dropdown">
-                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+                    <i class='bx bx-notepad' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         View/Create Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="./../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
-                        <a class="dropdown-item" href="./../../../php/pco/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="">Request Reservation</a>
+                        <a class="dropdown-item" href="../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../php/pco/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../php/pco/reservation/pcoreservation.php">Request Reservation</a>
                     </ul>
                 </div>
             </li>
