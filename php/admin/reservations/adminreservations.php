@@ -261,21 +261,20 @@
 
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
-                                <!--<select class="form-control input-sm col-xs-1" name="sections" id="faci">
-                                    select = document.getElementById("faci");
-                                    
+                                <select class="form-control input-sm col-xs-1" name="sections" id="_facility">
+
                                     <?php include('../../connection/connection.php');
                                     $sql = "SELECT facilityname FROM facility";
                                     $query = mysqli_query($con,$sql);
                                     $i=1;
                                     while($row = mysqli_fetch_assoc($query)){
-                                        echo "<option value=$i>".$row["facilityname"]."</option>";
+                                        $fcn = $row["facilityname"];
+                                        echo "<option value=$fcn>".$row["facilityname"]."</option>";
                                         $i++;
                                     }
                                     ?>               
-                                </select>-->
-                                <input type="text" class="form-control input-sm col-xs-1" id="_facility" placeholder="Facility">           
-
+                                </select>
+                                
                             </div>
                             <div class="col-md-6 ">
                             <input type="text" class="form-control input-sm col-xs-1" id="_eventname" placeholder="Event Name">
@@ -507,7 +506,7 @@
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
                                 <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange ="dynamicEq()" >
-                                <option disabled selected value hidden> -- Select Facility -- </option>
+                                <option id ="selectedfaci" disabled selected value hidden> -- Select Facility -- </option>
                                     select = document.getElementById("faci");
                                     <?php include('../../connection/connection.php');
                                     $sql = "SELECT facilityname FROM facility";

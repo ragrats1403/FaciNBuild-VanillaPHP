@@ -51,10 +51,16 @@ $(document).on("click", ".editBtn", function (event) {
     type: "POST",
     success: function (data) {
       var json = JSON.parse(data);
-      //var itemwdesc = json.item + json.item_desc;
+      var x = document.getElementById("_facility");
+      var option = document.createElement("option");
+      option.text = json.facility;
+      option.hidden = true;
+      option.disabled = true;
+      option.selected = true;
+      x.add(option);
       $("#trid").val(trid);
       $("#_ID").val(id);
-      $("#_facility").val(json.facility);
+      //$("#_facility").val(json.facility);
       $("#_eventname").val(json.eventname);
       $("#_datefiled").val(json.datefiled);
       $("#_actualdate").val(json.actualdateofuse);

@@ -71,7 +71,7 @@ $(document).on('click', '.editResBtn', function(event){
             eqbtn.classList.remove("disabled");
             eqbtn.classList.remove("disabled");
     }
-
+    document.getElementById("_facility").disabled = false;
     document.getElementById("_eventname").disabled = false;
     document.getElementById("_datefiled").disabled = false;
     document.getElementById("_actualdate").disabled = false;
@@ -153,8 +153,9 @@ $(document).on('click', '.addresBtn', function(event){
                 divCol.className = "col-md-2";
                 divCol2.className = "col-md-2";
                 var btn = document.createElement('button');
-                btn.className = "btn btn-sm btn-danger removeEq"+value;
-                btn.setAttribute("onclick","removeAddedEq();");
+                btn.className = "btn btn-sm btn-danger removeEq";
+                btn.setAttribute("onclick","removeAddedEq(this);");
+                btn.id = value;
                 btn.style.marginTop = '3px';
                 btn.innerHTML = "Remove";
                 var textbox = document.createElement('text');
