@@ -402,8 +402,4 @@
     <!-- edit user modalPopup end-->
 
 </body>
-<footer>
-    <p>Copyright (C) All Right Reserved.</p>
-</footer>
-
 </html>
