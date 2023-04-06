@@ -142,7 +142,7 @@ $(document).on("click", ".editBtn", function (event) {
                   var btn = document.createElement('button');
                   btn.className = "btn btn-sm btn-danger disabled removeEq";
                   btn.id = "fbe"+nid;
-                  btn.setAttribute("onclick","removeAddedEq2();");
+                  btn.setAttribute("onclick","removeAddedEq2(this);");
                   btn.style.marginTop = '3px';
                   btn.innerHTML = "Remove";
                   var textbox = document.createElement('text');

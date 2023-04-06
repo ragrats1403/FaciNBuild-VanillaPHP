@@ -47,18 +47,12 @@ $('#testtable').DataTable().clear().destroy();
 
 
 //remove [Equipments meant to be added to reservation]
-function removeAddedEq(){
-    const myNode =  document.getElementById('container2');
-    while (myNode.firstChild) {
-    myNode.removeChild(myNode.lastChild);
+function removeAddedEq(e){
+    e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
     }
-}
 //more info eq
-function removeAddedEq2(){
-    const myNode =  document.getElementById('container4');
-    while (myNode.firstChild) {
-    myNode.removeChild(myNode.lastChild);
-    }
+function removeAddedEq2(e){
+    e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
 }
 
 $(document).on('click', '.editResBtn', function(event){

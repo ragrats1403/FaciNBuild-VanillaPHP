@@ -59,12 +59,7 @@ function removeAddedEq(e){
 }
 
 function removeAddedEq2(){
-    const myNode =  document.getElementById('container4');
-    while (myNode.firstChild) {
-    myNode.removeChild(myNode.lastChild);
-    }
-
-    
+    e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode); 
 }
 
 
