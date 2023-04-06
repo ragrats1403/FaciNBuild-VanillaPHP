@@ -8,77 +8,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>  
+    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?= time() ?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?= time() ?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <header class="shadow">
-    <div class= "imgctrl">
-        
+    <div class="imgctrl">
+
     </div>
     <div class="navplace">
-     <div>
-        <button type="button" class="icon-button">    
-        <span class='bx bxs-bell'></i>
-        <span class="icon-button__badge"></span>
-     </div>
-        <p>Hello, Department Head</p>
-      <nav class="gnav">
+        <div>
+            <button type="button" class="icon-button">
+                <span class='bx bxs-bell'></i>
+                    <span class="icon-button__badge"></span>
+        </div>
+        <p>Hello, Facilities Department</p>
+        <nav class="gnav">
         </nav>
     </div>
 </header>
 
-<body>
-     <div class="sidebar">
+<body style="padding-top: 0px;">
+
+    <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../../images/Brown_logo_faci.png" />
             </div>
         </div>
-        <div class ="navdiv">
-        <ul class="nav_list">
-            <li>
-                <a href="../../../../php/facilitiesdept/reservations/facilitiescalendar.php">
-                    <i class='bx bx-calendar'></i>
-                    <span class="link_name">Calendar of Activities</span>
-                </a>
-            </li>
-            <li>
+        <div class="navdiv">
+            <ul class="nav_list">
+                <li>
+                    <a href="../../../php/facilitiesdept/reservations/facilitiescalendar.php">
+                        <i class='bx bx-calendar'></i>
+                        <span class="link_name">Calendar of Activities</span>
+                    </a>
+                </li>
+                <li>
                     <a href="../../../php/facilitiesdept/equipments/departmentheadeq.php">
                         <i class='bx bx-wrench'></i>
                         <span class="link_name">Equipment</span>
                     </a>
-            </li>
-            <li>
-               <div class="dropdown">
-                    <i class='bx bx-notepad' style="margin-left:17px;" ></i>
+                </li>
+                <div class="dropdown">
+                    <i class='bx bx-notepad' style="margin-left:17px;"></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Manage Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="./../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
+                        <a class="dropdown-item" href="../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
                     </ul>
                 </div>
                 <div class="dropdown">
-                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
+                    <i class='bx bx-clipboard' style="margin-left:17px;"></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         View/Create Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="./../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="./../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
-                        <a class="dropdown-item" href="./../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
+                        <a class="dropdown-item" href="../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
                     </ul>
                 </div>
-            </li>
-        </ul>
-        <div class="profile_content">
+            </ul>
+            <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                    <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                        <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
                             <div class="name">Facilities Dept.</div>
                             <div class="role">Facilities Department</div>
@@ -90,7 +89,7 @@
                 </div>
             </div>
         </div>
-     </div>
+    </div>
 
     <!--<script>
         let btn = document.querySelector("#btn");
@@ -100,7 +99,7 @@
             sidebar.classList.toggle("active");
         }
     </script>-->
-     <!-- Data Table Start-->
+    <!-- Data Table Start-->
     <!--<h1 class="text-center">Faci N Build Test table control</h1>-->
     <div class="table1">
 
@@ -115,7 +114,7 @@
                                     <th>ID</th>
                                     <th>Equipment Name</th>
                                     <th>Quantity</th>
-                                    <th>Facility Stored</th>                                    
+                                    <th>Facility Stored</th>
                                     <th>Options</th>
 
                                 </thead>
@@ -149,6 +148,7 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- Script Process Start-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -170,9 +170,9 @@
                 'target': [0, 4],
                 'orderable': false,
             }],
-        scrollY: 200,
-        scrollCollapse: true,
-        paging: false 
+            scrollY: 200,
+            scrollCollapse: true,
+            paging: false
 
         });
     </script>
@@ -325,7 +325,7 @@
                                 <label for="inputFacility" class="col-sm-2 col-form-label">Facility</label>
                                 <div class="col-sm-10">
                                     <!--<input type="text" class="form-control" id="inputFacility" name="inputFacility">-->
-                                    
+
                                     <select name="inputFacility" id="inputFacility" class="form-control">
                                         <option value="AVR">AVR</option>
                                         <option value="OLD AVR">OLD AVR</option>
@@ -334,7 +334,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
 
                             <!-- Form Controls End-->
                         </div>
@@ -387,7 +387,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <!-- Form Controls End-->
                         </div>
                         <div class="modal-footer">
@@ -403,8 +403,7 @@
 
 </body>
 <footer>
-<p>Copyright (C) All Right Reserved.</p>
+    <p>Copyright (C) All Right Reserved.</p>
 </footer>
+
 </html>
-
-
