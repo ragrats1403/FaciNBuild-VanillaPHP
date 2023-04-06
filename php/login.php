@@ -1,9 +1,8 @@
 <html>
-<title>Faci N' Build - Login Page</title>
+<title>Faci N' Build.Mgt - Login Page</title>
 
 <head>
     <link rel="stylesheet" type="text/css" href="../css/loginpage/Loginform.css?<?= time() ?>" />
-    <script type="text/javascript"></script>
     <script type="text/javascript" src="../js/validiation.js"></script>
 </head>
 
