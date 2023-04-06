@@ -32,7 +32,7 @@
         <span class='bx bxs-bell'></i>
         <span class="icon-button__badge"></span>
       </div>
-        <p>Hello, Building</p>
+        <p>Hello, Building Department</p>
       <nav class="gnav">
         </nav>
     </div>
