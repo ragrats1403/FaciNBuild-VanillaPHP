@@ -458,7 +458,7 @@
                     </div>
                     <div class="mr">
                     <a href= "javascript:void();" class ="btn btn-primary editResBtn">Edit</a>
-                    <a href= "javascript:void();" class ="btn btn-warning updateResBtn disabled">Save Changes</a>
+                    <a href= "javascript:void();" class ="btn btn-warning updateResBtn disabled" id= "uResBtn">Save Changes</a>
                     <a href= "javascript:void();" class ="btn btn-info approveAll">Approve All</a>
                     <a href= "javascript:void();" class ="btn btn-danger declineAll">Decline All</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>

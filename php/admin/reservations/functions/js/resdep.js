@@ -53,12 +53,51 @@ function removeAddedEq(){
     myNode.removeChild(myNode.lastChild);
     }
 }
+//more info eq
 function removeAddedEq2(){
     const myNode =  document.getElementById('container4');
     while (myNode.firstChild) {
     myNode.removeChild(myNode.lastChild);
     }
 }
+
+$(document).on('click', '.editResBtn', function(event){
+
+    var updatebtn = document.getElementById("uResBtn");
+    updatebtn.classList.remove("disabled");
+    var testarr = [...document.querySelectorAll('[id^="fbe"]')].map(
+        (elm) => elm.id
+      );
+
+
+      for (i = 0; i <= testarr.length - 1; i++) {
+        var val = document.getElementById(testarr[i]).value;//eq
+        //document.getElementById(val).disabled = false;
+        var eqbtn = document.getElementById(testarr[i]);
+            eqbtn.classList.remove("disabled");
+            eqbtn.classList.remove("disabled");
+    }
+
+    document.getElementById("_eventname").disabled = false;
+    document.getElementById("_datefiled").disabled = false;
+    document.getElementById("_actualdate").disabled = false;
+    document.getElementById("_timein").disabled = false;
+    document.getElementById("_timeout").disabled = false;
+    document.getElementById("_reqparty").disabled = false;
+    document.getElementById("_purpose").disabled = false;
+    document.getElementById("_numparticipants").disabled = false;
+    document.getElementById("_stageperformers").disabled = false;
+    document.getElementById("_adviser").disabled = false;
+    document.getElementById("_chairdeandep").disabled = false;
+
+    document.getElementById("_dept").disabled = false //department
+    document.getElementById("_dateresm").disabled = false //date
+    document.getElementById("_minorqres").disabled = false //quantity
+    document.getElementById("_minoritemres").disabled = false//itemname
+    document.getElementById("_minoritemdesc").disabled = false//itemdescription
+    document.getElementById("_minorpurpose").disabled = false//purpose
+
+});
 
 
 //dynamic add and list the equipment chosen to reservation the inside div

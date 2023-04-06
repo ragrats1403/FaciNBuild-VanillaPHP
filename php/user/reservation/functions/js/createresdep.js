@@ -53,17 +53,18 @@ function removeChild(){
 
 
 //remove [Equipments meant to be added to reservation]
-function removeAddedEq(){
-    const myNode =  document.getElementById('container2');
-    while (myNode.firstChild) {
-    myNode.removeChild(myNode.lastChild);
-    }
+function removeAddedEq(e){
+
+    e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
 }
+
 function removeAddedEq2(){
     const myNode =  document.getElementById('container4');
     while (myNode.firstChild) {
     myNode.removeChild(myNode.lastChild);
     }
+
+    
 }
 
 
@@ -126,8 +127,9 @@ $(document).on('click', '.addresBtn', function(event){
                 divCol.className = "col-md-2";
                 divCol2.className = "col-md-2";
                 var btn = document.createElement('button');
-                btn.className = "btn btn-sm btn-danger removeEq"+value;
-                btn.setAttribute("onclick","removeAddedEq();");
+                btn.className = "btn btn-sm btn-danger removeEq";
+                btn.id = "btn"+value;
+                btn.setAttribute("onClick","removeAddedEq(this);");
                 btn.style.marginTop = '3px';
                 btn.innerHTML = "Remove";
                 var textbox = document.createElement('text');
@@ -140,11 +142,12 @@ $(document).on('click', '.addresBtn', function(event){
                 divCol2.appendChild(btn);
                 newDiv.appendChild(divCol);
                 newDiv.appendChild(divCol2);
+                newDiv.appendChild(hid);
+                newDiv.appendChild(heqname);
+                newDiv.appendChild(hvalue);
+                newDiv.appendChild(hfaci);
                 container.appendChild(newDiv);
-                container.appendChild(hid);
-                container.appendChild(heqname);
-                container.appendChild(hvalue);
-                container.appendChild(hfaci);
+
                 
     
             }

@@ -140,7 +140,8 @@ $(document).on("click", ".editBtn", function (event) {
                   divCol.className = "col-md-2";
                   divCol2.className = "col-md-2";
                   var btn = document.createElement('button');
-                  btn.className = "btn btn-sm btn-danger disabled removeEq"+nid;
+                  btn.className = "btn btn-sm btn-danger disabled removeEq";
+                  btn.id = "fbe"+nid;
                   btn.setAttribute("onclick","removeAddedEq2();");
                   btn.style.marginTop = '3px';
                   btn.innerHTML = "Remove";
