@@ -3,13 +3,13 @@
 
 $id = $_POST['id'];
 
-$preqcheck = "SELECT * from reservation where saostatus = 'Approved' AND reservationid = '$id'";
+$preqcheck = "SELECT * from reservation where fdstatus = 'Approved' AND reservationid = '$id'";
 $checkresult = mysqli_query($con, $preqcheck);
 
 
 if($row = mysqli_num_rows($checkresult) > 0)
 {
-    $sql = "UPDATE `reservation` SET `fdstatus` = 'Approved', `status` = 'Approved' WHERE reservationid = '$id'";
+    $sql = "UPDATE `reservation` SET `saostatus` = 'Approved', `status` = 'Approved' WHERE reservationid = '$id'";
     $query = mysqli_query($con, $sql);
 
     if ($query == true) {
@@ -25,7 +25,7 @@ if($row = mysqli_num_rows($checkresult) > 0)
     }
 }
 else{
-    $sql = "UPDATE `reservation` SET `fdstatus` = 'Approved' WHERE reservationid = '$id'";
+    $sql = "UPDATE `reservation` SET `saostatus` = 'Approved' WHERE reservationid = '$id'";
     $query = mysqli_query($con, $sql);
 
     if ($query == true) {
@@ -40,4 +40,11 @@ else{
         echo json_encode($data);
     }
 }
+
+
+/*
+bdstatus
+cadstatus
+pcostatus
+*/
 

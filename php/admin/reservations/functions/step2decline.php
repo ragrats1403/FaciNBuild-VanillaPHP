@@ -9,7 +9,7 @@ bdstatus
 cadstatus
 pcostatus
 */
-$sql = "UPDATE `reservation` SET `fdstatus` = 'Declined', `status` = 'Pending' WHERE reservationid = '$id'";
+$sql = "UPDATE `reservation` SET `saostatus` = 'Declined', `status` = 'Pending' WHERE reservationid = '$id'";
 $query = mysqli_query($con, $sql);
 
 if ($query == true) {

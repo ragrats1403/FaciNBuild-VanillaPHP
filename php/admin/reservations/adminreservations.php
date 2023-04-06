@@ -342,6 +342,39 @@
 
                                         </div>
                                     </div>
+
+                                    <div class="row" style="padding-top:6px;">     
+                                        <div class="col-md-1" style="margin-top:5px;">
+                                            <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                        </div> 
+                                        <div class="col-md-2" style="margin-top:5px;">
+                                            <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1" disabled>
+                                        </div> 
+                                        <div class="col-md-1">
+                                            <!--Id:step1approveBtn-->
+                                            <a href= "javascript:void();" class ="btn btn-success step1approveBtn">Approve</a>
+                                        </div>
+                                        <div class="col-md-1" style="padding-left:18px;">
+                                        <!--Id:step1declineBtn-->
+                                            <a href= "javascript:void();" class ="btn btn-danger step1declineBtn">Decline</a>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding-top:6px;">     
+                                        <div class="col-md-1" style="margin-top:5px;">
+                                            <label class="fw-bold" for="inputName">Step 2 Status:</label>
+                                        </div> 
+                                        <div class="col-md-2" style="margin-top:5px;">
+                                            <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step2" disabled>
+                                        </div> 
+                                        <div class="col-md-1">
+                                            <!--Id:step1approveBtn-->
+                                            <a href= "javascript:void();" class ="btn btn-success step2approveBtn">Approve</a>
+                                        </div>
+                                        <div class="col-md-1" style="padding-left:18px;">
+                                        <!--Id:step1declineBtn-->
+                                            <a href= "javascript:void();" class ="btn btn-danger step2declineBtn">Decline</a>
+                                        </div>
+                                    </div>
                                     <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled>
                             <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
@@ -424,9 +457,10 @@
                                 
                     </div>
                     <div class="mr">
-                    <a href= "javascript:void();" class ="btn btn-info text-white submitBtn disabled" id='termscond-create'>Save Changes</a>
                     <a href= "javascript:void();" class ="btn btn-primary editResBtn">Edit</a>
-                    <a href= "javascript:void();" class ="btn btn-danger updateResBtn disabled">Update</a>
+                    <a href= "javascript:void();" class ="btn btn-warning updateResBtn disabled">Save Changes</a>
+                    <a href= "javascript:void();" class ="btn btn-info approveAll">Approve All</a>
+                    <a href= "javascript:void();" class ="btn btn-danger declineAll">Decline All</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>
                     </div>
                     
