@@ -297,28 +297,7 @@ $(document).on("click", ".submitBtn", function (event) {
       },
     });
   } else {
-    var eventname = $("#eventname").val();
-    var datefiled = $("#datefiled").val();
-    var actualdate = $("#actualdate").val();
-    var timein = $("#timein").val();
-    var timeout = $("#timeout").val();
-    var reqparty = $("#reqparty").val();
-    var purpose = $("#purpose").val();
-    var numparticipants = $("#numparticipants").val();
-    var stageperf = $("#stageperformers").val();
-    var adviser = $("#adviser").val();
-    var chairman = $("#chairdeandep").val();
-    console.log(eventname);
-    console.log(datefiled);
-    console.log(actualdate);
-    console.log(timein);
-    console.log(timeout);
-    console.log(reqparty);
-    console.log(purpose);
-    console.log(numparticipants);
-    console.log(stageperf);
-    console.log(adviser);
-    console.log(chairman);
+
 
     alert("Please fill all the Required fields");
   }
