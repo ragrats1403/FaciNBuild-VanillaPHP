@@ -126,6 +126,7 @@
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Major Job Request</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#printmodal">print</button>
                             </div>
                         </div>
                     </div>
@@ -294,6 +295,38 @@
             });
         });
 
+        $(document).on('click', '.btnprint', function(event) {
+            var id = $(this).data('id');
+            var trid = $(this).closest('trid').attr('majoreq');
+            $.ajax({
+                url: "get_single_user.php",
+                data: {
+                    id: id
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    $('#id').val(json.id);
+                    $('#trid').val(trid);
+                    $('#jobrequestno1').val(json.jobreqno);
+                    $('#requino1').val(json.requino);
+                    $('#department1').val(json.department);
+                    $('#date1').val(json.date);
+                    $('#sections1').val(json.date);
+                    document.getElementById("sections1").value = json.section
+                    /*$('#sections').val(json.section);*/
+                    $('#quantity1').val(json.quantity);
+                    $('#item1').val(json.item);
+                    $('#description1').val(json.description);
+                    $('#purpose1').val(json.purpose);
+                    $('#remark1').val(json.outsource);
+                    document.getElementById("remark1").value = json.outsource
+                    /*$('#remark').val(json.outsource);*/
+                    $('#printmodal').modal('show');
+                }
+            });
+        });
+
         $(document).on('click', '.updateBtn', function() {
 
             var id = $('#id').val();
@@ -417,6 +450,14 @@
             });
     });
 
+    /*function printDiv() {
+        var printContents = document.getElementById("printmodal").innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+      }*/
+    
     </script>
     <!-- Script Process End-->
     <!-- add user modal-->
@@ -645,6 +686,77 @@
         </div>
     </div>
     <!-- edit user modalPopup end-->
+    <div class="modal fade" id="printmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog "style="max-width:1100px;">
+            <div class="modal-content ">
+                <div class="modal-header justify-content-md-center" style="max-width:1100px;">
+                    <div class="col-md-5">
+                        <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel" >Major Job Request</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form id="saveUserForm" action="javascript:void();" method="POST">
+                        <div class="modal-body">
+                            <input type="hidden" id="id" name="id" value="">
+                            <input type="hidden" id="trid" name="trid" value="">
+                            <!-- Form Controls-->
+                            <div id="print-section" *ngIf="propertyLedger">
+                            <div class="logo">
+                                <img src="../../../images/uclogo.png"/>
+                            </div>
+                                <table class="table borderless">
+                                    <tr>
+                                        <th class="col-md-3">JOB REQUEST NO.</th>
+                                        <td><input style="border: none; border-color: transparent;" type="text"id= "jobrequestno1"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="col-md-2" style="text-align: left;">REQUISITION NO.</th>
+                                        <td><input style="border: none; border-color: transparent;" type="text"id= "requino1"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="col-md-2" style="text-align: left;">DEPARTMENT</th>
+                                        <td><input style="border: none; border-color: transparent;" type="text"id= "department1"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="col-md-2" style="text-align: left;">DATE</th>
+                                        <td><input style="border: none; border-color: transparent;" type="text"id= "date1"></td>
+                                    </tr>
+                                </table>
+                                <hr>
+                                <table class="table borderless">
+                                    <tr>
+                                        <th>QUANTITY</th>
+                                        <th>ITEMS WITH COMPLETE DESCRIPTION</th>
+                                        <th>SECTION</th>
+                                        <th>REMARKS</th>
+                                    </tr>
+                                    <tr>
+                                        <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity1"></textarea></td>
+                                        <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="description1"></textarea></td>
+                                        <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="sections1"></textarea></td>
+                                        <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="remarks1"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
+                                        <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1"></textarea></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table> 
+                        <div>
+                            <div class="modal-footer justify-content-md-center">
+                                <a href= "javascript:void();" class ="btn btn-secondary printbtn">Print</a>
+                                <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
+                                <button type="button" class="btn btn-danger">Decline</button>
+                                <button type="submit" class="btn btn-info text-white">Update</button>-->
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-
 </html>
