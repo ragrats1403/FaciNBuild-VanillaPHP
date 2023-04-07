@@ -328,13 +328,20 @@
                             <div class="mb-3 row">
                                 <label for="inputFacility" class="col-sm-2 col-form-label">Facility</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="_inputFacility" name="inputFacility" disabled>
-                                    <!--<select name="_inputFacility" id="_inputFacility" class="form-control">
-                                        <option value="AVR">AVR</option>
-                                        <option value="OLD AVR">OLD AVR</option>
-                                        <option value="FUNCTION HALL">FUNCTION HALL</option>
-                                        <option value="AUDITORIUM">AUDITORIUM</option>
-                                    </select>--?
+                                    <select class="form-control input-sm col-xs-1" name="sections" id="_facility" >
+                                        <option disabled selected value hidden> -- Select Facility -- </option>
+                                            select = document.getElementById("faci");
+                                            <?php include('../../connection/connection.php');
+                                            $sql = "SELECT facilityname FROM facility";
+                                            $query = mysqli_query($con,$sql);
+                                            $i=1;
+                                            while($row = mysqli_fetch_assoc($query)){
+                                                echo "<option value=$i>".$row["facilityname"]."</option>";
+                                                $i++;
+                                            }
+                                            ?>
+                                                
+                                    </select>
                                 </div>
                             </div>
                             
@@ -466,7 +473,13 @@
                     $('#trid').val(trid);
                     $('#_inputEqname').val(json.equipmentname)
                     $('#_inputQty').val(json.quantity);
-                    document.getElementById("_inputFacility").value = json.facility;
+                    var x = document.getElementById("_facility");
+                    var option = document.createElement("option");
+                    option.text = json.facility;
+                    option.hidden = true;
+                    option.disabled = true;
+                    option.selected = true;
+                    x.add(option);                    
                     //$('#_inputFacility').val(json.facility);
                     $('#editUserModal').modal('show');
                 }

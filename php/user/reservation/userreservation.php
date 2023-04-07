@@ -459,8 +459,7 @@
                                         echo "<option value=$i>".$row["facilityname"]."</option>";
                                         $i++;
                                     }
-                                    ?>
-                                                
+                                    ?>       
                                 </select>
                             </div>
                             <div class="col-md-6 ">
