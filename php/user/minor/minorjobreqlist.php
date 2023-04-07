@@ -248,7 +248,6 @@
         
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
-            event.preventDefault();
             var department = $('#department').val();
             var date = $('#datemajorjr').val();
             var quantity = $('#_quantity_').val();
@@ -294,6 +293,8 @@
                             $('#confirmedby').val('');
                             $('#dateconfirmed').val('');
                             $('#addUserModal').modal('hide');
+                            $("body").removeClass("modal-open");
+                            $(".modal-backdrop").remove();
                         }
                     }
                 });
