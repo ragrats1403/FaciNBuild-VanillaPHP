@@ -129,7 +129,6 @@
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Major Job Request</button>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#printmodal">print</button>
                             </div>
                         </div>
                     </div>
@@ -315,16 +314,12 @@
                     $('#requino1').val(json.requino);
                     $('#department1').val(json.department);
                     $('#date1').val(json.date);
-                    $('#sections1').val(json.date);
-                    document.getElementById("sections1").value = json.section
-                    /*$('#sections').val(json.section);*/
+                    $('#sections1').val(json.section);
                     $('#quantity1').val(json.quantity);
                     $('#item1').val(json.item);
                     $('#description1').val(json.description);
                     $('#purpose1').val(json.purpose);
-                    $('#remark1').val(json.outsource);
-                    document.getElementById("remark1").value = json.outsource
-                    /*$('#remark').val(json.outsource);*/
+                    $('#remarks1').val(json.outsource);
                     $('#printmodal').modal('show');
                 }
             });
@@ -700,53 +695,99 @@
                 </div>
                 <div class="modal-body">
                 <form id="saveUserForm" action="javascript:void();" method="POST">
-                        <div class="modal-body">
-                            <input type="hidden" id="id" name="id" value="">
-                            <input type="hidden" id="trid" name="trid" value="">
-                            <!-- Form Controls-->
-                            <div id="print-section" *ngIf="propertyLedger">
-                            <div class="logo">
-                                <img src="../../../images/uclogo.png"/>
-                            </div>
-                                <table class="table borderless">
-                                    <tr>
-                                        <th class="col-md-3">JOB REQUEST NO.</th>
-                                        <td><input style="border: none; border-color: transparent;" type="text"id= "jobrequestno1"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="col-md-2" style="text-align: left;">REQUISITION NO.</th>
-                                        <td><input style="border: none; border-color: transparent;" type="text"id= "requino1"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="col-md-2" style="text-align: left;">DEPARTMENT</th>
-                                        <td><input style="border: none; border-color: transparent;" type="text"id= "department1"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="col-md-2" style="text-align: left;">DATE</th>
-                                        <td><input style="border: none; border-color: transparent;" type="text"id= "date1"></td>
-                                    </tr>
-                                </table>
-                                <hr>
-                                <table class="table borderless">
-                                    <tr>
-                                        <th>QUANTITY</th>
-                                        <th>ITEMS WITH COMPLETE DESCRIPTION</th>
-                                        <th>SECTION</th>
-                                        <th>REMARKS</th>
-                                    </tr>
-                                    <tr>
-                                        <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity1"></textarea></td>
-                                        <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="description1"></textarea></td>
-                                        <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="sections1"></textarea></td>
-                                        <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="remarks1"></textarea></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
-                                        <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1"></textarea></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </table> 
+                    <div class="modal-body">
+                        <input type="hidden" id="id" name="id" value="">
+                        <input type="hidden" id="trid" name="trid" value="">
+                        <!-- Form Controls-->
+                        <div id="print-section" *ngIf="propertyLedger">
+                        <div class="logo">
+                            <img src="../../../images/uclogo.png"/>
+                        </div>
+                            <table class="table borderless">
+                                <tr>
+                                    <th class="col-md-3">JOB REQUEST NO.</th>
+                                    <td><input style="border: none; border-color: transparent;" type="text"id= "jobrequestno1"></td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-2" style="text-align: left;">REQUISITION NO.</th>
+                                    <td><input style="border: none; border-color: transparent;" type="text"id= "requino1"></td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-2" style="text-align: left;">DEPARTMENT</th>
+                                    <td><input style="border: none; border-color: transparent;" type="text"id= "department1"></td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-2" style="text-align: left;">DATE</th>
+                                    <td><input style="border: none; border-color: transparent;" type="text"id= "date1"></td>
+                                </tr>
+                            </table>
+                            <hr>
+                            <table class="table borderless">
+                                <tr>
+                                    <th>QUANTITY</th>
+                                    <th>ITEMS WITH COMPLETE DESCRIPTION</th>
+                                    <th>SECTION</th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity1"></textarea></td>
+                                    <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="description1"></textarea></td>
+                                    <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="sections1"></textarea></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
+                                    <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1"></textarea></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-3">B.1. RECOMMENDATION</th>
+                                    <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id=""></textarea></td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                For Canvass
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                For ordering
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-3">B.2. ESTIMATED COST</th>
+                                    <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id=""></textarea></td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                For PO approval
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                For delivery
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-3">B.3. RECOMMENDED BY</th>
+                                    <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id=""></textarea></td>
+                                    <th>REMARKS:</th>
+                                    <th><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="remarks1"></textarea></th>
+                                </tr>
+                            </table> 
                         <div>
                             <div class="modal-footer justify-content-md-center">
                                 <a href= "javascript:void();" class ="btn btn-secondary printbtn">Print</a>
