@@ -210,13 +210,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script>
             $("#calendar").DataTable({
-                serverSide: true,
-                processing: true,
-                paging: true,
-                order: [],
-                ajax: {
-                url: "dfunctions/fetch_data.php",
-                type: "post",
+                'searching':false,
+                'autoWidth': false,
+                'bJQueryUI': true,
+                'info': false,
+                'serverSide': true,
+                'processing': true,
+                'paging': true,
+                'order': [],
+                'ajax': {
+                    'url': "dfunctions/fetch_data.php",
+                    'type': "post",
                 },
                 fnCreatedRow: function (nRow, aData, iDataIndex) {
                 $(nRow).attr("id", aData[0]);
