@@ -163,7 +163,7 @@
                     <div class="profile_details">
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
+                            <div class="name"><?php echo $_SESSION['department'];?></div>
                             <div class="role">User</div>
                         </div>
                     </div>
@@ -217,15 +217,18 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
+        var dpt = "<?php echo $_SESSION['department'];?>";
         $('#datatable').DataTable({
             'serverSide': true,
             'processing': true,
             'paging': true,
             'order': [],
             'ajax': {
-                'url': 'fetch_data.php',
+                'url': 'functions/fetch_data.php',
                 'type': 'post',
-
+                'data':{
+                        dpt:dpt,
+                },
             },
             'fnCreatedRow': function(nRow, aData, iDataIndex) {
                 $(nRow).attr('id', aData[0]);
@@ -241,6 +244,8 @@
         });
     </script>
     <script type="text/javascript">
+
+        
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
             event.preventDefault();
@@ -256,7 +261,7 @@
             var dateconfirmed = $('#dateconfirmed').val();
             if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '' && renderedby != '' && daterendered != '' && confirmedby != '' && dateconfirmed != '') {
                 $.ajax({
-                    url: "add_data.php",
+                    url: "functions/add_data.php",
                     data: {
                         department: department,
                         date: date,
@@ -332,7 +337,7 @@
             var id = $(this).data('id');
             var trid = $(this).closest('tr').attr('minorjobid');
             $.ajax({
-                url: "get_request_details.php",
+                url: "functions/get_request_details.php",
                 data: {
                     id: id
                 },
@@ -343,6 +348,7 @@
                     $('#minorjobid').val(json.minorjobid);
                     $('#trid').val(trid);
                     $('#_ID').val(id);
+                    $('#_status').val(json.status);
                     $('#_datemajorjr').val(json.datesubmitted);
                     $('#_department').val(json.department);
                     $('#_quantity').val(json.quantity);
@@ -423,11 +429,11 @@
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" value = "<?php echo mb_strimwidth($_SESSION['department'], 0, 30, '…');?>" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
-                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
+                                    <input type="date" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
                                     
                                 </div>
                             </div>
@@ -485,7 +491,7 @@
                     </div>
                     <div class="col-md-2" style="width:15%">
                         <label class=""  for="inputName">Status:</label>
-                        <input type="text" style="width:20%" class="col-sm-2" name="_ID" class="form-control" id="_ID">
+                        <input type="text" style="width:50%" class="col-sm-2" name="_ID" class="form-control" id="_status" disabled>
                     </div>
                     <div class="col-md-2" style="width:30%">
                         <label class=""  for="inputName">ID:</label>
@@ -574,5 +580,12 @@
             </div>
         </div>
     </div>
+    <script>
+        //date auto fill
+        var now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        document.getElementById('datemajorjr').value = now.toISOString().substring(0,10);
+        //date end
+    </script>
 </body>
 </html>

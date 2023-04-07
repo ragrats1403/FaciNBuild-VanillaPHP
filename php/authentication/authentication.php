@@ -32,22 +32,22 @@ if ($stmt = $con->prepare($sql)) {
                     $folder = '../admin/reservations/admincalendar.php';
                     break;
                 case '2': //building department
-                    $folder = '../buildingdept/buildingdeptdashboard.php';
+                    $folder = '../buildingdept/buildingcalendar.php';
                     break;
                 case '3': //facilities department
-                    $folder = '../facilitiesdept/reservations/reservations.php';
+                    $folder = '../facilitiesdept/reservations/facilitiescalendar.php';
                     break;
                 case '4': //user
                     $folder = '../user/userdashboard.php';
                     break;
                 case '5': //cad
-                    $folder = '../cad/major/majorjobreqlist.php';
+                    $folder = '../cad/cadcalendarofactivities.php';
                     break;
                 case '6': //pco
-                    $folder = '../pco/major/majorjobreqlist.php';
+                    $folder = '../pco/pcocalendar.php';
                     break;
                 case '7': //sao
-                    $folder = '../sao/saodashboard.php';
+                    $folder = '../sao/reservation/saocalendar.php';
                     break;
                 default:
                     session_destroy();
