@@ -35,9 +35,6 @@
                 <u><a class="dropdown-item text-center mark-as-read" href="#">Mark all as read</a></u>
             </div>
         </div>
-        <?php
-        session_start();
-        ?>
         <script>
             // Get the notification dropdown button and badge
             const notificationDropdown = document.getElementById("notification-dropdown");
@@ -118,7 +115,7 @@
             });
         </script>
 
-        <p>Hello, <?php echo $_SESSION['department'];?></p>
+        <p>Hello, Administrator</p>
         <nav class="gnav">
         </nav>
     </div>
@@ -172,7 +169,7 @@
                     <div class="profile_details">
                         <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                        <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
+                            <div class="name">Admin.</div>
                             <div class="role">System Administrator</div>
                         </div>
                     </div>
@@ -201,13 +198,14 @@
                         <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF;  padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <h2 style= "text-align: center">CALENDAR OF ACTIVITIES</h2>
-                            <table id="calendar" class="table">
+                            <table id="datatable" class="table">
                                 <thead>
                                     <th>Event Name</th>
                                     <th>Date</th>
                                     <th>Time Start</th>
                                     <th>Time End</th>
                                     <th>Venue</th>
+                                    <th>Option</th>
                                 </thead>
                         </div>
                     </div>
@@ -215,37 +213,6 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script>
-            $("#calendar").DataTable({
-                'searching':false,
-                'autoWidth': false,
-                'bJQueryUI': true,
-                'info': false,
-                'serverSide': true,
-                'processing': true,
-                'paging': true,
-                'order': [],
-                'ajax': {
-                    'url': "../dfunctions/fetch_data.php",
-                    'type': "post",
-                },
-                fnCreatedRow: function (nRow, aData, iDataIndex) {
-                $(nRow).attr("id", aData[0]);
-                },
-                columnDefs: [
-                {
-                    target: [0, 3],
-                    orderable: false,
-                },
-                ],
-                scrollY: 200,
-                scrollCollapse: true,
-                paging: false,
-            });
-        </script>
 </body>
 
 </html>

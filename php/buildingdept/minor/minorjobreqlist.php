@@ -32,10 +32,7 @@
         <span class='bx bxs-bell'></i>
         <span class="icon-button__badge"></span>
       </div>
-      <?php
-        session_start();
-        ?>
-        <p>Hello, <?php echo $_SESSION['department'];?></p>
+        <p>Hello, Building Department</p>
       <nav class="gnav">
         </nav>
     </div>
@@ -89,7 +86,7 @@
                     <div class="profile_details">
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                        <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
+                            <div class="name">Building Dept.</div>
                             <div class="role">Building Department</div>
                         </div>
                     </div>

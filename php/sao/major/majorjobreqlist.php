@@ -41,9 +41,6 @@
                 <u><a class="dropdown-item text-center mark-as-read" href="#">Mark all as read</a></u>
             </div>
         </div>
-        <?php
-        session_start();
-        ?>
         <script>
             // Get the notification dropdown button and badge
             const notificationDropdown = document.getElementById("notification-dropdown");
@@ -123,7 +120,8 @@
                 xhr.send();
             });
         </script>
-        <p>Hello, <?php echo $_SESSION['department'];?></p>
+
+        <p>Hello, SAO</p>
     </div>
       <nav class="gnav">
         </nav>
@@ -174,8 +172,8 @@
                     <div class="profile_details">
                     <img src="../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                        <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
-                        <div class="role">SAO</div>
+                        <div class="name">SAO Dept.</div>
+                        <div class="role">SAO Department</div>
                         </div>
                     </div>
                     <a href="../../../logout.php">

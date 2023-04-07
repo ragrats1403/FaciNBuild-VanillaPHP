@@ -13,7 +13,13 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <header class="shadow">
@@ -34,9 +40,6 @@
                 <u><a class="dropdown-item text-center mark-as-read" href="#">Mark all as read</a></u>
             </div>
         </div>
-        <?php
-        session_start();
-        ?>
         <script>
             // Get the notification dropdown button and badge
             const notificationDropdown = document.getElementById("notification-dropdown");
@@ -117,7 +120,7 @@
             });
         </script>
 
-        <p>Hello, <?php echo $_SESSION['department'];?></p>
+        <p>Hello, Administrator</p>
       <nav class="gnav">
         </nav>
     </div>
@@ -171,7 +174,7 @@
                     <div class="profile_details">
                         <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                        <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
+                            <div class="name">Admin</div>
                             <div class="role">System Administrator</div>
                         </div>
                     </div>
@@ -190,8 +193,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    
     <!--<script>
         let btn = document.querySelector("#btn");
         let sidebar = document.querySelector(".sidebar");

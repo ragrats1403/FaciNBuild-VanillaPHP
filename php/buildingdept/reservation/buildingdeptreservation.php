@@ -176,7 +176,7 @@
                     <div class="profile_details">
                         <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                        <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
+                            <div class="name"><?php echo $_SESSION['department'];?></div>
                             <div class="role">User</div>
                         </div>
                     </div>

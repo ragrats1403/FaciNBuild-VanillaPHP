@@ -40,9 +40,6 @@
                 <u><a class="dropdown-item text-center mark-as-read" href="#">Mark all as read</a></u>
             </div>
         </div>
-        <?php
-        session_start();
-        ?>
         <script>
             // Get the notification dropdown button and badge
             const notificationDropdown = document.getElementById("notification-dropdown");
@@ -123,7 +120,7 @@
             });
         </script>
 
-        <p>Hello, <?php echo $_SESSION['department'];?></p>
+        <p>Hello, Administrator</p>
       <nav class="gnav">
         </nav>
     </div>
@@ -140,13 +137,13 @@
         <div class="navdiv">
             <ul class="nav_list">
                 <li>
-                    <a href="../../../../php/admin/reservations/admincalendar.php">
+                    <a href="../../../php/admin/reservations/admincalendar.php">
                         <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../../../php/admin/accounts/admin_account.php">
+                    <a href="../../../php/admin/accounts/admin_account.php">
                         <i class='bx bx-user'></i>
                         <span class="link_name">Account</span>
                     </a>
@@ -165,7 +162,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="../../../../php/admin/equipments/adminequipment.php">
+                    <a href="../../../php/admin/equipments/adminequipment.php">
                         <i class='bx bx-wrench'></i>
                         <span class="link_name">Facilities Equipment</span>
                     </a>
@@ -177,7 +174,7 @@
                     <div class="profile_details">
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                        <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
+                            <div class="name">Admin</div>
                             <div class="role">System Administrator</div>
                         </div>
                     </div>
