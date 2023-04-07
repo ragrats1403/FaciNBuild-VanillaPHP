@@ -248,7 +248,6 @@
         
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
-            event.preventDefault();
             var department = $('#department').val();
             var date = $('#datemajorjr').val();
             var quantity = $('#_quantity_').val();
@@ -294,6 +293,8 @@
                             $('#confirmedby').val('');
                             $('#dateconfirmed').val('');
                             $('#addUserModal').modal('hide');
+                            $("body").removeClass("modal-open");
+                            $(".modal-backdrop").remove();
                         }
                     }
                 });
@@ -336,6 +337,15 @@
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('tr').attr('minorjobid');
+            document.getElementById("_renderedby").disabled = true;
+            document.getElementById("_daterendered").disabled = true;
+            document.getElementById("_purpose").disabled = true;
+            document.getElementById("_itemdesc").disabled = true;
+            document.getElementById("_daterendered").disabled = true;
+            document.getElementById("_dateconfirmed").disabled = true;
+            document.getElementById("_step1").disabled = true;
+            document.getElementById("_sect").disabled = true;
+            document.getElementById("_inputFeedback").disabled = true;
             $.ajax({
                 url: "functions/get_request_details.php",
                 data: {
@@ -355,6 +365,16 @@
                     $('#_itemdesc').val(json.item_desc);
                     $('#_item').val(json.item);
                     $('#_purpose').val(json.purpose);
+                    $('#_step1').val(json.bdstatus);
+                    $('#_renderedby').val(json.renderedby);
+                    $('#_confirmedby').val(json.confirmedby);
+                    $('#_daterendered').val(json.daterendered);
+                    $('#_dateconfirmed').val(json.dateconfirmed);
+                    $('#_inputFeedback').val(json.feedback);
+                    var e = document.getElementById("_sect");
+                    var section = e.options[e.selectedIndex].text;
+
+                    e.options[e.selectedIndex].text = json.section;
                     $('#editMinorjreqmodal').modal('show');
                     //$('#_datemajorjr').val(json.datesubmitted);
                     $('').val();
@@ -371,6 +391,9 @@
                     
                 }
             });
+
+
+            
         });
 
         $(document).on('submit', '#updateUserForm', function() {
@@ -544,7 +567,26 @@
                                     <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose"></textarea>
                                 </div>
                             </div>
-                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
+                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="_sect">
+                                    <option disabled selected value hidden></option>
+                                        <option value="C">CARPENTRY</option>
+                                        <option value="P">PLUMBING</option>
+                                        <option value="A">AIRCON</option>
+                                        <option value="E">ELECTRICAL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top:6px;">     
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                </div> 
+                                <div class="col-md-2" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1">
+                                </div> 
+                            </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6" >
                                     <label class="fw-bold" for="renderedby">Rendered by:</label>
@@ -555,10 +597,7 @@
                                     <input type="date" class="form-control input-sm col-xs-1" id="_daterendered" disabled>
                                 </div>
                             </div>
-                            <div class="modal-footer justify-content-md-right">
-                                <button type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                            <button type="submit" class="btn btn-success col-md-1" id="end-editing">Update</button>
-                        </div>
+
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6" >
                                     <label class="fw-bold" for="renderedby">Confirmed by:</label>
@@ -569,10 +608,12 @@
                                     <input type="date" class="form-control input-sm col-xs-1" id="_dateconfirmed" disabled>
                                 </div>
                             </div>
-                            <div class="modal-footer justify-content-md-right">
-                            <button type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                            <button type="submit" class="btn btn-success col-md-1" id="end-editing">Update</button>
-                        </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Feedback:</label>
+                                    <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
+                                </div>
+                            </div>
                             <!-- Form Controls End-->
                         </div>
                     </form>
