@@ -18,7 +18,7 @@ $('#testtable').DataTable().clear().destroy();
         'processing': true,
         'bJQueryUI': true,
         'info': false,
-        'paging': true,
+        "bPaginate": false,
         'order': [],
         'ajax': {
             'url': 'functions/fetch_eq.php',

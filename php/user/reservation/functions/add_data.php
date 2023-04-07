@@ -1,7 +1,6 @@
 <?php include('../../../connection/connection.php');
 
 //variables
-
 $eventname = $_POST['eventname'];
 $datefiled = $_POST['datefiled'];
 $actualdate = $_POST['actualdate'];
@@ -20,13 +19,14 @@ $confirmedby = $_POST['confirmedby'];
 $dateconfirmed = $_POST['dateconfirmed'];*/
 
 //notify to admin using notification
-$sql = "INSERT INTO reservation VALUES ('$eventname')";
-if(mysqli_query($con, $sql)){
+/*
+$psql = "INSERT INTO reservation VALUES ('$eventname')";
+if(mysqli_query($con, $psql)){
 echo "New reservation request has arrived: " . $eventname;
 }
 else{
-echo "Error: ". $sql . "<br>" . mysqli_error($con); 
-}
+echo "Error: ". $psql . "<br>" . mysqli_error($con); 
+}*/
 
 
 //conflict checking section start

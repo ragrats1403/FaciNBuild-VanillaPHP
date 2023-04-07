@@ -1,18 +1,18 @@
 <?php include('../../../connection/connection.php');
-
-$sql = "select * FROM reservation";
+$dpt = $_POST['dpt'];
+$sql = "select * FROM reservation WHERE requestingparty = '$dpt'";
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
 
 if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
-    $sql .= " WHERE reservationid like '%" . $search_value . "%' ";
-    $sql .= " OR requestingparty like '%" . $search_value . "%' ";
-    $sql .= " OR facility like '%" . $search_value . "%' ";
-    $sql .= " OR eventname like '%" . $search_value . "%' ";
-    $sql .= " OR datefiled like '%" . $search_value . "%' ";
-    $sql .= " OR actualdateofuse like '%" . $search_value . "%' ";
-    $sql .= " OR status like '%" . $search_value . "%' ";
+    $sql .= " OR reservationid like '%" . $search_value . "%' AND requestingparty = '$dpt'";
+    $sql .= " OR requestingparty like '%" . $search_value . "%' AND requestingparty = '$dpt'";
+    $sql .= " OR facility like '%" . $search_value . "%' AND requestingparty = '$dpt'";
+    $sql .= " OR eventname like '%" . $search_value . "%' AND requestingparty = '$dpt'";
+    $sql .= " OR datefiled like '%" . $search_value . "%' AND requestingparty = '$dpt'";
+    $sql .= " OR actualdateofuse like '%" . $search_value . "%' AND requestingparty = '$dpt'";
+    $sql .= " OR status like '%" . $search_value . "%' AND requestingparty = '$dpt'";
 }
 
 if (isset($_POST['order'])) {

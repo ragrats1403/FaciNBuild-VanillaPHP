@@ -1,28 +1,4 @@
-//table display start
-$("#datatable").DataTable({
-  serverSide: true,
-  processing: true,
-  paging: true,
-  order: [],
-  ajax: {
-    url: "functions/fetch_data.php",
-    type: "post",
-  },
-  fnCreatedRow: function (nRow, aData, iDataIndex) {
-    $(nRow).attr("id", aData[0]);
-  },
-  columnDefs: [
-    {
-      target: [0, 3],
-      orderable: false,
-    },
-  ],
-  scrollY: 200,
-  scrollCollapse: true,
-  paging: false,
-});
 
-//table display end
 
 //edit button control
 $(document).on("click", ".editBtn", function (event) {
@@ -168,7 +144,7 @@ $("#closemodal").click(function () {
 
 $(document).on("click", ".submitBtn", function (event) {
   event.preventDefault();
-  var eventname = $("#eventname").val();
+  var eventname = $("#eventname_").val();
   var datefiled = $("#datefiled").val();
   var actualdate = $("#actualdate").val();
   var timein = $("#timein").val();
@@ -191,7 +167,6 @@ $(document).on("click", ".submitBtn", function (event) {
     timein != "" &&
     timeout != "" &&
     reqparty != "" &&
-    department != "" &&
     purpose != "" &&
     numparticipants != "" &&
     stageperf != "" &&
@@ -322,6 +297,29 @@ $(document).on("click", ".submitBtn", function (event) {
       },
     });
   } else {
+    var eventname = $("#eventname").val();
+    var datefiled = $("#datefiled").val();
+    var actualdate = $("#actualdate").val();
+    var timein = $("#timein").val();
+    var timeout = $("#timeout").val();
+    var reqparty = $("#reqparty").val();
+    var purpose = $("#purpose").val();
+    var numparticipants = $("#numparticipants").val();
+    var stageperf = $("#stageperformers").val();
+    var adviser = $("#adviser").val();
+    var chairman = $("#chairdeandep").val();
+    console.log(eventname);
+    console.log(datefiled);
+    console.log(actualdate);
+    console.log(timein);
+    console.log(timeout);
+    console.log(reqparty);
+    console.log(purpose);
+    console.log(numparticipants);
+    console.log(stageperf);
+    console.log(adviser);
+    console.log(chairman);
+
     alert("Please fill all the Required fields");
   }
 });
