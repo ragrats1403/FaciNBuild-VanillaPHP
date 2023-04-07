@@ -280,6 +280,7 @@
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
             event.preventDefault();
+            $('body').removeClass('modal-open');
             var name = $('#inputName').val();
             var username = $('#inputUsername').val();
             var password = $('#inputPassword').val();
