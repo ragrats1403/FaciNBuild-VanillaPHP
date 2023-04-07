@@ -279,7 +279,6 @@
     <script type="text/javascript">
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
-            event.preventDefault();
             $('body').removeClass('modal-open');
             var name = $('#inputName').val();
             var username = $('#inputUsername').val();
@@ -300,6 +299,8 @@
                         var json = JSON.parse(data);
                         status = json.status;
                         if (status = 'success') {
+                            $('.modal-backdrop').remove();
+                            $('#addUserModal').modal('hide');
                             table = $('#datatable').DataTable();
                             table.draw();
                             alert('Successfully Added User!');
@@ -307,7 +308,7 @@
                             $('#inputUsername').val('');
                             $('#inputPassword').val('');
                             $('#inputRolelevel').val('');
-                            $('#addUserModal').modal('hide');
+                            
                             $('body').removeClass('modal-open');
                             $('.modal-backdrop').remove();
                         }
