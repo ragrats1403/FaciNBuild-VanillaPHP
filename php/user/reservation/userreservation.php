@@ -230,7 +230,7 @@
             <div class="modal-content">
             <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >View Reservation</h5>
                     </div>
                     <div class="col-md-12" style="width:15%">
                         <label class=""  for="inputName">Status:</label>
@@ -489,7 +489,7 @@
 
                         <div class="col-md-6 ">
                             <label class="fw-bold" for="date">Requesting Party:</label>
-                            <input type="name" class="form-control input-sm col-xs-1" id="reqparty" placeholder="Requesting Party">
+                            <input type="name" class="form-control input-sm col-xs-1" id="reqparty" placeholder="Requesting Party" value = "<?php echo $_SESSION['department'];?>" disabled>
                         </div>
                         <div class="justify-content-center">
                             <div class="col-md-12">
