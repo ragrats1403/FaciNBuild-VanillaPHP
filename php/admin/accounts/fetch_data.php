@@ -40,7 +40,6 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = $row['username'];
     $subarray[] = $row['password'];
     $subarray[] = $row['rolelevel'];
-    $subarray[] = $row['roleid'];  
     $subarray[] = '<a href="javascript:void();" data-id="' . $row['id'] . '"  class="btn btn-info btn-sm editBtn" >Edit</a> 
                     <a href= "javascript:void();" data-id="' . $row['id'] . '" class ="btn btn-sm btn-danger btnDelete">Delete</a>';
     $data[] = $subarray;

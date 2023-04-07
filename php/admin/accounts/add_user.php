@@ -4,11 +4,11 @@ $name = $_POST['name'];
 $username = $_POST['username'];
 $password = $_POST['password'];
 $rolelevel = $_POST['rolelevel'];
-$roleid = $_POST['roleid'];
 
 
 
-$sql = "INSERT INTO `users` (`username`,`password`,`rolelevel`,`roleid`,`department`) VALUES ('$username','$password','$rolelevel','$roleid','$name')";
+
+$sql = "INSERT INTO `users` (`username`,`password`,`rolelevel`,`department`) VALUES ('$username','$password','$rolelevel','$name')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
     $data = array(

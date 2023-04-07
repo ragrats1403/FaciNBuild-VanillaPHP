@@ -215,7 +215,6 @@
                                     <th>Username</th>
                                     <th>Password</th>
                                     <th>Role Level</th>
-                                    <th>Role ID</th>
                                     <th>Options</th>
 
                                 </thead>
@@ -285,7 +284,6 @@
             var username = $('#inputUsername').val();
             var password = $('#inputPassword').val();
             var rolelevel = $('#inputRolelevel').val();
-            var roleid = $('#inputRoleID').val();
             if (username != '' && password != '' && rolelevel != '' && roleid != '') {
                 $.ajax({
                     url: "add_user.php",
@@ -294,7 +292,7 @@
                         username: username,
                         password: password,
                         rolelevel: rolelevel,
-                        roleid: roleid
+
                     },
                     type: 'POST',
                     success: function(data) {
@@ -308,7 +306,6 @@
                             $('#inputUsername').val('');
                             $('#inputPassword').val('');
                             $('#inputRolelevel').val('');
-                            $('#inputRoleID').val('');
                             $('#addUserModal').modal('hide');
                             $('body').removeClass('modal-open');
                             $('.modal-backdrop').remove();
@@ -368,7 +365,6 @@
                     $('#_inputUsername').val(json.username);
                     $('#_inputPassword').val(json.password);
                     $('#_inputRoleLevel').val(json.rolelevel);
-                    $('#_inputRoleID').val(json.roleid);
                     $('#editUserModal').modal('show');
                 }
             });
@@ -381,7 +377,6 @@
             var username = $('#_inputUsername').val();
             var password = $('#_inputPassword').val();
             var rolelevel = $('#_inputRoleLevel').val();
-            var roleid = $('#_inputRoleID').val();
             $.ajax({
                 url: "update_user.php",
                 data: {
@@ -390,7 +385,6 @@
                     username: username,
                     password: password,
                     rolelevel: rolelevel,
-                    roleid: roleid
                 },
                 type: 'POST',
                 success: function(data) {
@@ -427,7 +421,7 @@
                             <!-- Form Controls-->
 
                             <div class="mb-3 row">
-                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                <label for="inputName" class="col-sm-2 col-form-label">Department</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="inputName" class="form-control" id="inputName">
                                 </div>
@@ -448,12 +442,6 @@
                                 <label for="inputRolelevel" class="col-sm-2 col-form-label">RoleLevel</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="inputRolelevel" name="inputRolelevel">
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="inputRoleID" class="col-sm-2 col-form-label">RoleID</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputRoleID" name="inputRoleID">
                                 </div>
                             </div>
 
@@ -485,7 +473,7 @@
                             <input type="hidden" id="trid" name="trid" value="">
                             <!-- Form Controls-->
                             <div class="mb-3 row">
-                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                <label for="inputName" class="col-sm-2 col-form-label">Department</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="_inputName" class="form-control" id="_inputName">
                                 </div>
@@ -506,12 +494,6 @@
                                 <label for="inputRoleLevel" class="col-sm-2 col-form-label">RoleLevel</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="_inputRoleLevel" name="_inputRoleLevel">
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="inputRoleID" class="col-sm-2 col-form-label">RoleID</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="_inputRoleID" name="_inputRoleID">
                                 </div>
                             </div>
                             <!-- Form Controls End-->
