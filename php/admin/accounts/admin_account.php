@@ -284,7 +284,7 @@
             var username = $('#inputUsername').val();
             var password = $('#inputPassword').val();
             var rolelevel = $('#inputRolelevel').val();
-            if (username != '' && password != '' && rolelevel != '' && roleid != '') {
+            if (name != '' && password != '' && rolelevel != '' && username != '') {
                 $.ajax({
                     url: "add_user.php",
                     data: {
