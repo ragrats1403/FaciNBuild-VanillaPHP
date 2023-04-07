@@ -266,7 +266,7 @@
                                 <div class="col-sm-10">
                                     <!--<input type="text" class="form-control" id="inputFacility" name="inputFacility">-->
                                     
-                                    <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange ="dynamicEq()" >
+                                    <select class="form-control input-sm col-xs-1" name="sections" id="faci">
                                     <option id = "selected" disabled selected value hidden> -- Select Facility -- </option>
                                     select = document.getElementById("faci");
                                     <?php include('../../connection/connection.php');
@@ -396,7 +396,9 @@
             event.preventDefault();
             var equipmentname = $('#inputEqname').val();
             var qty = $('#inputQty').val();
-            var facility = $('#inputFacility').val();
+            var e = document.getElementById("faci");
+            var facility = e.options[e.selectedIndex].text;
+            
             if (equipmentname != '' && qty != '' && facility != '') {
                 $.ajax({
                     url: "add_equipments.php",
@@ -491,7 +493,8 @@
             var trid = $('#trid').val();
             var equipmentname = $('#_inputEqname').val();
             var qty = $('#_inputQty').val();
-            var facility = $('#_inputFacility').val();
+            var e = document.getElementById("_facility");
+            var facility = e.options[e.selectedIndex].text;
             $.ajax({
                 url: "update_equipments.php",
                 data: {
