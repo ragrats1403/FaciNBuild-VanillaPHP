@@ -176,7 +176,7 @@ $("#closemodal").click(function () {
 });
 
 //create reservation
-
+ 
 $(document).on("click", ".submitBtn", function (event) {
   event.preventDefault();
   var eventname = $("#eventname").val();
