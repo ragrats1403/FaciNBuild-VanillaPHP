@@ -991,19 +991,19 @@
                                     <table class="table borderless">
                                         <tr>
                                             <th class="col-md-3">JOB REQUEST NO.</th>
-                                            <td><input style="border: none; border-color: transparent;" type="text" id="jobrequestno1"></td>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="jobrequestno1" disabled></td>
                                         </tr>
                                         <tr>
                                             <th class="col-md-2" style="text-align: left;">REQUISITION NO.</th>
-                                            <td><input style="border: none; border-color: transparent;" type="text" id="requino1"></td>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="requino1" disabled></td>
                                         </tr>
                                         <tr>
                                             <th class="col-md-2" style="text-align: left;">DEPARTMENT</th>
-                                            <td><input style="border: none; border-color: transparent;" type="text" id="department1"></td>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="department1" disabled></td>
                                         </tr>
                                         <tr>
                                             <th class="col-md-2" style="text-align: left;">DATE</th>
-                                            <td><input style="border: none; border-color: transparent;" type="text" id="date1"></td>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="date1" disabled></td>
                                         </tr>
                                     </table>
                                     <hr>
@@ -1015,14 +1015,14 @@
                                             <th></th>
                                         </tr>
                                         <tr>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity1"></textarea></td>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="description1"></textarea></td>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="sections1"></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity1" disabled></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="description1" disabled></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="sections1" disabled></textarea></td>
                                             <td></td>
                                         </tr>
                                         <tr>
                                             <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1"></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1" disabled></textarea></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
@@ -1070,7 +1070,7 @@
                                             <th class="col-md-3">B.3. RECOMMENDED BY</th>
                                             <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id=""></textarea></td>
                                             <th>REMARKS:</th>
-                                            <th><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="remarks1"></textarea></th>
+                                            <th><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="remarks1" disabled></textarea></th>
                                         </tr>
                                     </table>
                                     <div class="no-print-area">

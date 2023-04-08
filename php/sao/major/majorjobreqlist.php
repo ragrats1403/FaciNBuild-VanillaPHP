@@ -24,9 +24,8 @@
 </head>
  
 <header class="shadow">
-    <div class= "imgctrl">
-        
-    </div>
+        <div class="imgctrl">
+        </div>
     <div class="navplace">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: transparent;
@@ -51,86 +50,81 @@
 
             // Get the notification list element
             const notificationList = document.querySelector(".notification-list");
-
+            
             // Fetch the notifications and update the badge and list
             function fetchNotifications() {
                 // Make an AJAX request to fetch the notifications
-                const xhr = new XMLHttpRequest();
-                xhr.open("GET", "../../../connection/notification.php");
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        // Parse the response JSON
-                        const notifications = JSON.parse(xhr.responseText);
+                $.ajax({
+                url: "../reservation/functions/notification.php",
+                type: 'GET',
+                success: function(data) {
+                    
+                    var notifications = JSON.parse(data);
+                    var len = data.length;
+                    // Update the badge count
+                    notificationBadge.innerText = notifications.length;
 
-                        // Update the badge count
-                        notificationBadge.innerText = notifications.length;
+                    // Clear the existing list
+                    notificationList.innerHTML = "";
 
-                        // Clear the existing list
-                        notificationList.innerHTML = "";
-
-                        // Add each notification to the list
-                        notifications.forEach(notification => {
-                            const notificationItem = document.createElement("div");
-                            notificationItem.classList.add("dropdown-item");
-                            if (!notification.is_read) {
-                                notificationItem.classList.add("font-weight-bold");
-                            }
-                            notificationItem.innerHTML = `
-            <div class="d-flex align-items-center">
-              <div class="flex-grow-1">${notification.message}</div>
-              <div class="text-muted">${notification.created_at}</div>
-            </div>
-            <div class="dropdown-divider"></div>
-          `;
-                            notificationList.appendChild(notificationItem);
-                        });
-                    }
-                };
-                xhr.send();
-            }
-
-            // Call fetchNotifications() on page load
-            fetchNotifications();
-
-            // Poll for new notifications every 5 seconds
-            setInterval(fetchNotifications, 5000);
-
-            // Get the "Mark all as read" button
-            const markAsReadButton = document.querySelector(".mark-as-read");
-
-            // Add a click event listener to the button
-            markAsReadButton.addEventListener("click", function(event) {
-                // Prevent the default behavior of the link
-                event.preventDefault();
-
-                // Make an AJAX request to mark all notifications as read
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", "../../../connection/update_notification.php");
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        // Update the "is_read" property of each notification to 1
-                        notifications.forEach(notification => {
-                            notification.is_read = 1;
-                        });
-
-                        // Update the badge count
-                        notificationBadge.innerText = "0";
-
-                        // Clear the existing list
-                        notificationList.innerHTML = "";
-                    }
+                    // Add each notification to the list
+                    for (let i = 0; i < notifications.length; i++) {
+                        const notification = notifications[i];
+                        const notificationItem = document.createElement("div");
+                        notificationItem.classList.add("dropdown-item");
+                        if (!notification.is_read) {
+                            notificationItem.classList.add("font-weight-bold");
+                        }
+                        notificationItem.innerHTML = `
+                            <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">${notification.message}</div>
+                            <div class="text-muted">${notification.created_at}</div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                        `;
+                        notificationList.appendChild(notificationItem);
+                        }
                 }
-                xhr.send();
+                
+
             });
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                fetchNotifications();
+                setInterval(fetchNotifications, 5000);
+                });
+                const markAsReadButton = document.querySelector(".mark-as-read");
+                markAsReadButton.addEventListener("click", function(event) {   
+                    $.ajax({
+                        url: "../reservation/functions/update_notification.php",
+                        type: 'POST',
+                        success: function(data) {
+                            var json = JSON.parse(data);
+                            var len = json.length;
+                            for(let i = 0; i<notifications.length; i++){
+                                const notification = notifications[i];
+                                notification.is_read = 1;
+                            }
+                             // Update the badge count
+                            notificationBadge.innerText = "0";
+
+                            // Clear the existing list
+                            notificationList.innerHTML = "";
+                        }
+                    });
+
+
+                });
+ 
         </script>
         <p>Hello, <?php echo $_SESSION['department'];?></p>
-    </div>
-      <nav class="gnav">
+        </div>
+        <nav class="gnav">
         </nav>
     </div>
 </header>
 
-<body style="padding-top: 0px;">
+<body onload="fetchNotifications();">
 
 <div class="sidebar">
         <div class="logo_content">
