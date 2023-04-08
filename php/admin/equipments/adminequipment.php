@@ -507,9 +507,7 @@
                     if (status == 'success') {
                         alert('Updated Successfully!');
                         table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([id, equipmentname, qty, facility, button]);
+                        table.draw();
                         $('#editUserModal').modal('hide');
                     } else {
                         alert('failed');
