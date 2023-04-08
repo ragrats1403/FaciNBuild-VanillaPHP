@@ -243,6 +243,35 @@
         });
     </script>
     <script type="text/javascript">
+        //print button event
+        $(document).on('click', '.btnprint', function(event) {
+            var id = $(this).data('id');
+            var trid = $(this).closest('trid').attr('majoreq');
+            $.ajax({
+                url: "functions/get_single_user.php",
+                data: {
+                    id: id
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    $('#id').val(json.id);
+                    $('#trid').val(trid);
+                    $('#jobrequestno1').val(json.jobreqno);
+                    $('#requino1').val(json.requino);
+                    $('#department1').val(json.department);
+                    $('#date1').val(json.date);
+                    $('#sections1').val(json.section);
+                    $('#quantity1').val(json.quantity);
+                    $('#item1').val(json.item);
+                    $('#description1').val(json.description);
+                    $('#purpose1').val(json.purpose);
+                    $('#remarks1').val(json.outsource);
+                    $('#printmodal').modal('show');
+                }
+            });
+        });
+
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
             event.preventDefault();
@@ -326,6 +355,18 @@
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
+            document.getElementById("jobrequestno").disabled = true;
+            document.getElementById("requino").disabled = true;
+            document.getElementById("department").disabled = true;
+            document.getElementById("date").disabled = true;
+            document.getElementById("sections").disabled = true;
+            document.getElementById("quantity").disabled = true;
+            document.getElementById("item").disabled = true;
+            document.getElementById("description").disabled = true;
+            document.getElementById("purpose").disabled = true;
+            document.getElementById("remark").disabled = true;
+            document.getElementById("_statustext").disabled = true;
+            document.getElementById("_inputFeedback").disabled = true;
             $.ajax({
                 url: "functions/get_single_user.php",
                 data: {
@@ -340,23 +381,31 @@
                     $('#requino').val(json.requino);
                     $('#department').val(json.department);
                     $('#date').val(json.date);
-                    var e = document.getElementById("sections");
-                    var section = e.options[e.selectedIndex].text;
-                    e.options[e.selectedIndex].text = json.section;
-                    /*$('#sections').val(json.section);*/
                     $('#quantity').val(json.quantity);
                     $('#item').val(json.item);
                     $('#description').val(json.description);
                     $('#purpose').val(json.purpose);
-                    var e = document.getElementById("remark");
-                    var outsource = e.options[e.selectedIndex].text;
-                    e.options[e.selectedIndex].text = json.outsource;
-
                     $('#_statustext').val(json.status);
                     $('#_step1').val(json.bdstatus);
                     $('#_step2').val(json.pcostatus);
                     $('#_step3').val(json.cadstatus);
-                    /*$('#remark').val(json.outsource);*/
+                    //drop down auto remove when clicking more info fix
+                    var x = document.getElementById("sections");
+                    var option = document.createElement("option");
+                    option.text = json.section;
+                    option.hidden = true;
+                    option.disabled = true;
+                    option.selected = true;
+                    x.add(option); 
+                    var a = document.getElementById("remark");
+                    var option2 = document.createElement("option");
+                    option2.text = json.outsource;
+                    option2.hidden = true;
+                    option2.disabled = true;
+                    option2.selected = true;
+                    a.add(option2);
+                    $('#_inputFeedback').val(json.feedback);
+                    //drop down fix end
                     $('#editUserModal').modal('show');
                 }
             });
@@ -443,7 +492,7 @@
         var purpose = $('#purpose').val();
         var e = document.getElementById("remark");
         var outsource = e.options[e.selectedIndex].text;
-
+        var feedback = $("#_inputFeedback").val();
         $.ajax({
             url: "functions/update_user.php",
             data: {
@@ -456,7 +505,8 @@
                 item: item,
                 description: description,
                 purpose: purpose,
-                outsource: outsource
+                outsource: outsource,
+                feedback: feedback,
             },
             type: 'POST',
             success: function(data) {
@@ -464,10 +514,6 @@
                 status = json.status;
                 if (status == 'success') {
                     alert('Updated Successfully!');
-                    var e = document.getElementById("sections");
-                    e.options[e.selectedIndex].text = json.section;
-                    var e = document.getElementById("remark");
-                    e.options[e.selectedIndex].text = json.outsource;
                     table = $('#datatable').DataTable();
                     /*var button = '<a href= "javascript:void();" data-id="'+jobreqno+'" class ="btn btn-sm btn-info editBtn">More Info</a>';
                     var row = table.row("[id='" + trid + "']");
@@ -565,17 +611,10 @@
                             <!-- Form Controls-->
                             <input type="hidden" id="id" name="id" value="">
                             <input type="hidden" id="trid" name="trid" value="">
-<<<<<<< Updated upstream
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Job Request no.</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="jobrequestno" placeholder="Job request no." disabled>
-=======
-                            <!-- Form Controls-->
-                            <div id="print-section" *ngIf="propertyLedger">
-                                <div class="logo">
-                                    <img src="../../../images/uclogo.png" alt="" width="75" height="50"/>
->>>>>>> Stashed changes
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Requisition no.</label>
@@ -657,19 +696,42 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
                                     <select class="" style="width: 150px; Border: none;" id="remark">
-                                        <option value="1">Select</option>
                                         <option value="Outsource">Outsource</option>
                                         <option value="Bill of materials">Bill of materials</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Feedback:</label>
+                                    <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback" disabled></textarea>
                                 </div>
                             </div>
                             <div>
                                 <div class="modal-footer justify-content-md-center">
                                     <a href="javascript:void();" class="btn btn-primary step1approveBtn">Approve</a>
                                     <a href="javascript:void();" class="btn btn-danger step1declineBtn">Decline</a>
-                                    <a href="javascript:void();" class="btn btn-info updateBtn">Update</a>
+                                    <a href="javascript:void();" class="btn btn-info text-white updateBtn disabled" id="updbtn">Update</a>
+                                    <a href="javascript:void();" class="btn btn-secondary editfieldBtn">Edit</a>
                                 </div>
                             </div>
+                            <script>
+                                $(document).on('click', '.editfieldBtn', function(event) {
+                                        var updtbtn = document.getElementById("updbtn");
+                                        document.getElementById("quantity").disabled = false;
+                                        document.getElementById("item").disabled = false;
+                                        document.getElementById("description").disabled = false;
+                                        document.getElementById("purpose").disabled = false;
+                                        document.getElementById("remark").disabled = false;
+                                        document.getElementById("sections").disabled = false;
+                                        document.getElementById("_inputFeedback").disabled = false;
+
+
+                                            updtbtn.classList.remove("disabled");  
+                                            updtbtn.classList.remove("text-white");
+
+                                    });
+                            </script>
                         </div>
                     </form>
                 </div>
@@ -677,6 +739,149 @@
         </div>
     </div>
     <!-- edit user modalPopup end-->
+      <!--Print section-->
+      <div class="print-area">
+        <div class="modal fade" id="printmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog " style="max-width:1100px;">
+                <div class="modal-content" style="border: none; border-color: transparent;">
+                    <div class="modal-header" style="max-width:1100px;">
+                        <div class="col-md-5">
+                            <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Major Job Request</h5>
+                        </div>
+                        <div class="no-print-area">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <form id="saveUserForm" action="javascript:void();" method="POST">
+                            <div class="modal-body">
+                                <input type="hidden" id="id" name="id" value="">
+                                <input type="hidden" id="trid" name="trid" value="">
+                                <!-- Form Controls-->
+                                <div id="print-section" *ngIf="propertyLedger">
+                                    <div class="logo">
+                                        <img src="../../../../images/uclogo.png" alt="" width="75" height="50"/>
+                                    </div>
+                                    <table class="table borderless">
+                                        <tr>
+                                            <th class="col-md-3">JOB REQUEST NO.</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="jobrequestno1" disabled></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-2" style="text-align: left;">REQUISITION NO.</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="requino1" disabled></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-2" style="text-align: left;">DEPARTMENT</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="department1" disabled></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-2" style="text-align: left;">DATE</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="date1" disabled></td>
+                                        </tr>
+                                    </table>
+                                    <hr>
+                                    <table class="table borderless">
+                                        <tr>
+                                            <th>QUANTITY</th>
+                                            <th>ITEMS WITH COMPLETE DESCRIPTION</th>
+                                            <th>SECTION</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity1" disabled></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="description1" disabled></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="sections1" disabled></textarea></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1" disabled></textarea></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-3">B.1. RECOMMENDATION</th>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control"  id=""></textarea></td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        For Canvass
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        For ordering
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-3">B.2. ESTIMATED COST</th>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control"  id=""></textarea></td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        For PO approval
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        For delivery
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-3">B.3. RECOMMENDED BY</th>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control"  id=""></textarea></td>
+                                            <th>REMARKS:</th>
+                                            <th><textarea style="border: none; border-color: transparent;" class="form-control"  id="remarks1" disabled></textarea></th>
+                                        </tr>
+                                        <tr>
+                                          <th class="col-md-4">APPROVED BY:MS.CANDICE GOTIANUY</th>
+                                        </tr>
+                                        <tr>
+                                         <td class="col-md-2"; style= "text-align:center">UC - CHANCELLOR</td>
+                                        </tr>
+                                    </table>
+                                    <div class="no-print-area">
+                                        <div class="modal-footer justify-content-md-center">
+                                            <a href="#" class="btn btn-secondary printbtn" onclick="printContent()">Print</a>
+                                           
+                                        </div>
+                                    </div>
+                                    <script>
+                                        function printContent() {
+                                            var printReport = document.getElementsByClassName("print-area");
+
+                                            $('body').append('<div id="print" class="printBc"></div>');
+                                            $(printReport).clone().appendTo('#print');
+
+                                            $('body').css('background-color', 'white');
+                                            $('body > :not(#print)').addClass('no-print-area');
+                                            window.print();
+
+                                            $('#print').remove();
+                                            $('body').css('background-color', '');
+                                            $('body > :not(#print)').removeClass('no-print-area');
+                                        };
+                                    </script>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         //date auto fill
         var now = new Date();

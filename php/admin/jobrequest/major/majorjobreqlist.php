@@ -247,7 +247,6 @@
     <script type="text/javascript">
         //add button control
         $(document).on('submit', '#addUserModal', function(event) {
-            event.preventDefault();
             var requino = $('#requi').val();
             var department = $('#depart').val();
             var date = $('#deeto').val();
@@ -334,6 +333,19 @@
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
+            document.getElementById("jobrequestno").disabled = true;
+            document.getElementById("requino").disabled = true;
+            document.getElementById("department").disabled = true;
+            document.getElementById("date").disabled = true;
+            document.getElementById("sections").disabled = true;
+            document.getElementById("quantity").disabled = true;
+            document.getElementById("item").disabled = true;
+            document.getElementById("description").disabled = true;
+            document.getElementById("purpose").disabled = true;
+            document.getElementById("remark").disabled = true;
+            document.getElementById("_statustext").disabled = true;
+            document.getElementById("_inputFeedback").disabled = true;
+
             $.ajax({
                 url: "get_single_user.php",
                 data: {
@@ -348,21 +360,33 @@
                     $('#requino').val(json.requino);
                     $('#department').val(json.department);
                     $('#date').val(json.date);
-                    var e = document.getElementById("sections");
-                    var section = e.options[e.selectedIndex].text;
-                    e.options[e.selectedIndex].text = json.section;
                     /*$('#sections').val(json.section);*/
                     $('#quantity').val(json.quantity);
                     $('#item').val(json.item);
                     $('#description').val(json.description);
                     $('#purpose').val(json.purpose);
-                    var e = document.getElementById("remark");
-                    var outsource = e.options[e.selectedIndex].text;
-                    e.options[e.selectedIndex].text = json.outsource;
+
+                    //drop down auto remove when clicking more info fix
+                    var x = document.getElementById("sections");
+                    var option = document.createElement("option");
+                    option.text = json.section;
+                    option.hidden = true;
+                    option.disabled = true;
+                    option.selected = true;
+                    x.add(option); 
+                    var a = document.getElementById("remark");
+                    var option2 = document.createElement("option");
+                    option2.text = json.section;
+                    option2.hidden = true;
+                    option2.disabled = true;
+                    option2.selected = true;
+                    a.add(option2);
+                    //drop down fix end
                     $('#_statustext').val(json.status);
                     $('#_step1').val(json.bdstatus);
                     $('#_step2').val(json.pcostatus);
                     $('#_step3').val(json.cadstatus);
+                    $('#_inputFeedback').val(json.feedback);
                     /*$('#remark').val(json.outsource);*/
                     $('#editUserModal').modal('show');
                 }
@@ -411,6 +435,7 @@
             var description = $('#description').val();
             var purpose = $('#purpose').val();
             var outsource = $('#remark').val();
+            var feedback = $('#_inputFeedback').val();
 
             $.ajax({
                 url: "update_user.php",
@@ -424,7 +449,8 @@
                     item: item,
                     description: description,
                     purpose: purpose,
-                    outsource: outsource
+                    outsource: outsource,
+                    feedback: feedback
                 },
                 type: 'POST',
                 success: function(data) {
@@ -432,11 +458,9 @@
                     status = json.status;
                     if (status == 'success') {
                         alert('Updated Successfully!');
-                        table = $('#datatable').DataTable();
-                        var button = '<a href= "javascript:void();" data-id="' + jobreqno + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([jobreqno, requino, department, date, section, quantity, item, description, purpose, outsource]);
                         $('#editUserModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
                     } else {
                         alert('failed');
                     }
@@ -673,6 +697,7 @@
                 }
             });
         });
+       
 
         $(document).on('click', '.step3declineBtn', function(event) {
             var id = $('#jobrequestno').val();
@@ -876,6 +901,7 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Section:</label>
                                     <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections" disabled>
+                                    <option disabled selected value hidden></option>
                                         <option value="CARPENTRY">CARPENTRY</option>
                                         <option value="PLUMBING">PLUMBING</option>
                                         <option value="AIRCON">AIRCON</option>
@@ -935,7 +961,7 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
                                     <select class="" style="width: 150px; Border: none;" id="remark" disabled>
-                                        <option value="1">Select</option>
+                                    <option disabled selected value hidden></option>
                                         <option value="Outsource">Outsource</option>
                                         <option value="Bill of materials">Bill of materials</option>
                                     </select>
@@ -944,7 +970,7 @@
                             <div class="justify-content-center">
                                 <div class="col-md-12" >
                                     <label class="fw-bold" for="date">Feedback:</label>
-                                    <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
+                                    <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback" disabled></textarea>
                                 </div>
                             </div>
                             <div>
@@ -959,8 +985,18 @@
                                 <script>
                                     $(document).on('click', '.editfieldBtn', function(event) {
                                         var updtbtn = document.getElementById("updbtn");
+                                        document.getElementById("quantity").disabled = false;
+                                        document.getElementById("item").disabled = false;
+                                        document.getElementById("description").disabled = false;
+                                        document.getElementById("purpose").disabled = false;
+                                        document.getElementById("remark").disabled = false;
+                                        document.getElementById("sections").disabled = false;
+                                        document.getElementById("_inputFeedback").disabled = false;
+
+
                                             updtbtn.classList.remove("disabled");  
                                             updtbtn.classList.remove("text-white");
+
                                     });
                                 </script>
                                 </div>

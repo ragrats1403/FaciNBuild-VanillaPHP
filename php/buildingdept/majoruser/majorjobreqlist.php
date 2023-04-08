@@ -307,18 +307,25 @@
                     $('#requino').val(json.requino);
                     $('#department').val(json.department);
                     $('#date').val(json.date);
-                    var e = document.getElementById("sections");
-                    var section = e.options[e.selectedIndex].text;
-                    e.options[e.selectedIndex].text = json.section;
                     /*$('#sections').val(json.section);*/
                     $('#quantity').val(json.quantity);
                     $('#item').val(json.item);
                     $('#description').val(json.description);
                     $('#purpose').val(json.purpose);
-                    var e = document.getElementById("remark");
-                    var outsource = e.options[e.selectedIndex].text;
-                    e.options[e.selectedIndex].text = json.outsource;
-
+                    var x = document.getElementById("sections");
+                    var option = document.createElement("option");
+                    option.text = json.section;
+                    option.hidden = true;
+                    option.disabled = true;
+                    option.selected = true;
+                    x.add(option); 
+                    var a = document.getElementById("remark");
+                    var option2 = document.createElement("option");
+                    option2.text = json.section;
+                    option2.hidden = true;
+                    option2.disabled = true;
+                    option2.selected = true;
+                    a.add(option);
                     $('#_statustext').val(json.status);
                     $('#_step1').val(json.bdstatus);
                     $('#_step2').val(json.pcostatus);
@@ -509,12 +516,7 @@
                             </div>
                             <div>
                                 <div class="modal-footer justify-content-md-center">
-                                    <!--<a href="javascript:void();" class="btn btn-primary approveBtn">Approve All</a>
-                                    <a href="javascript:void();" class="btn btn-danger declineBtn">Decline All</a>
-                                    <a href="javascript:void();" class="btn btn-info text-white updateBtn">Update</a>
-                                   <button type="" class="btn btn-primary approveBtn">Approve</button>
-                                <button type="button" class="btn btn-danger">Decline</button>
-                                <button type="submit" class="btn btn-info text-white">Update</button>-->
+                                    
                                 </div>
                             </div>
                         </div>
