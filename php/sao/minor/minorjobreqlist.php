@@ -192,7 +192,6 @@
                                 <thead>
                                     <th>ID</th>
                                     <th>Department</th>
-                                    <th>Section</th>
                                     <th>Date</th>
                                     <th>Status</th>
                                     <th>Options</th>
@@ -216,7 +215,33 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script type="text/javascript" src="functions/js/process.js?random=<?php echo uniqid(); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
+    <script>
+        var dpt = "<?php echo $_SESSION['department'];?>";
+        $('#datatable').DataTable({
+            'serverSide': true,
+            'processing': true,
+            'paging': true,
+            'order': [],
+            'ajax': {
+                'url': 'functions/fetch_data.php',
+                'type': 'post',
+                'data':{
+                        dpt:dpt,
+                },
+            },
+            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                $(nRow).attr('id', aData[0]);
+            },
+            'columnDefs': [{
+                'target': [0, 4],
+                'orderable': false,
+            }],
+        scrollY: 200,
+        scrollCollapse: true,
+        paging: false 
+
+        });
+    </script>
                         
     <!-- Script Process End-->
     <!-- add user modal-->
@@ -237,7 +262,7 @@
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="CAD" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" value = "<?php echo $_SESSION['department'];?>" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>

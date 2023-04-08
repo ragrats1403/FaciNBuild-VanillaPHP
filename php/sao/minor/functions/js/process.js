@@ -1,44 +1,19 @@
 //table display start
-$('#datatable').DataTable({
-    'serverSide': true,
-    'processing': true,
-    'paging': true,
-    'order': [],
-    'ajax': {
-        'url': 'functions/fetch_data.php',
-        'type': 'post',
-
-    },
-    'fnCreatedRow': function(nRow, aData, iDataIndex) {
-        $(nRow).attr('id', aData[0]);
-    },
-    'columnDefs': [{
-        'target': [0, 4],
-        'orderable': false,
-    }],
-scrollY: 200,
-scrollCollapse: true,
-paging: false 
-
-});
-
 //table display end
 
  //add button control
  $(document).on('submit', '#saveUserForm', function(event) {
-    event.preventDefault();
     var department = $('#department').val();
     var date = $('#datemajorjr').val();
     var quantity = $('#_quantity_').val();
     var itemname = $('#_item_').val();
     var description = $('#_itemdesc_').val();
     var purpose = $('#_purpose_').val();
-
-    /*var renderedby = $('#renderedby').val();
+    var renderedby = $('#renderedby').val();
     var daterendered = $('#daterendered').val();
     var confirmedby = $('#confirmedby').val();
-    var dateconfirmed = $('#dateconfirmed').val();*/
-    if (date != '' && quantity != '' && itemname != '' && description != '' && purpose != '') {
+    var dateconfirmed = $('#dateconfirmed').val();
+    if (quantity != '' && itemname != '' && description != '' && purpose != '' && renderedby != '' && daterendered != '' && confirmedby != '' && dateconfirmed != '') {
         $.ajax({
             url: "functions/add_data.php",
             data: {
@@ -48,30 +23,33 @@ paging: false
                 itemname: itemname,
                 description: description,
                 purpose: purpose,
+                renderedby: renderedby,
+                daterendered: daterendered,
+                confirmedby: confirmedby,
+                dateconfirmed: dateconfirmed,
+                
             },
             type: 'POST',
             success: function(data) {
                 var json = JSON.parse(data);
-                var status = json.status;
+                status = json.status;
                 if (status = 'success') {
-                    $('body').removeClass('modal-open');
-                    $('.modal-backdrop').remove();
                     table = $('#datatable').DataTable();
                     table.draw();
-                    alert('Successfully Created Request!');
+                    alert('Successfully Added User!');
                     $('#department').val('');
-                    var now = new Date();
-                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                    document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
+                    $('#datemajorjr').val('');
                     $('#_quantity_').val('');
                     $('#_item_').val('');
                     $('#_itemdesc_').val('');
                     $('#_purpose_').val('');
+                    $('#renderedby').val('');
+                    $('#daterendered').val('');
+                    $('#confirmedby').val('');
+                    $('#dateconfirmed').val('');
                     $('#addUserModal').modal('hide');
-                    //force remove faded background  -Ragrats
-                    $('body').removeClass('modal-open');
-                    $('.modal-backdrop').remove();
-                    //force remove end
+                    $("body").removeClass("modal-open");
+                    $(".modal-backdrop").remove();
                 }
             }
         });

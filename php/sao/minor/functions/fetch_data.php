@@ -1,12 +1,16 @@
 <?php include('../../../connection/connection.php');
-
-$sql = "select * FROM minorjreq WHERE department='CAD'";
+$dpt = $_POST['dpt'];
+$sql = "select * FROM minorjreq where department = '$dpt'";
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
 
 if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
-    $sql .= " AND minorjobid like '%" . $search_value . "%' ";
+    $sql .= " OR minorjobid like '%" . $search_value . "%' AND department = '$dpt' ";
+    $sql .= " OR department like '%" . $search_value . "%' AND department = '$dpt' ";
+    $sql .= " OR section like '%" . $search_value . "%' AND department = '$dpt' ";
+    $sql .= " OR datesubmitted like '%" . $search_value . "%' AND department = '$dpt' ";
+    $sql .= " OR status like '%" . $search_value . "%' AND department = '$dpt' ";
 }
 
 if (isset($_POST['order'])) {
@@ -16,7 +20,6 @@ if (isset($_POST['order'])) {
 } else {
     $sql .= "ORDER BY minorjobid ASC";
 }
-
 
 
 if ($_POST['length'] != -1) {
@@ -34,7 +37,6 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray = array();
     $subarray[] = $row['minorjobid'];
     $subarray[] = $row['department'];
-    $subarray[] = $row['section'];
     $subarray[] = $row['datesubmitted'];
     $subarray[] = $row['status']; 
     $subarray[] = '<a href= "javascript:void();" data-id="' . $row['minorjobid'] . '" class ="btn btn-sm btn-info editBtn">More Info</a>';
