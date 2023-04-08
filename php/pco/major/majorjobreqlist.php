@@ -216,7 +216,6 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
-        var dpt = "<?php echo $_SESSION['department'];?>";
         $('#datatable').DataTable({
             'serverSide': true,
             'processing': true,
@@ -225,9 +224,7 @@
             'ajax': {
                 'url': 'functions/fetch_data.php',
                 'type': 'post',
-                'data':{
-                        dpt:dpt,
-                },
+                
             },
             'fnCreatedRow': function(nRow, aData, iDataIndex) {
                 $(nRow).attr('id', aData[0]);
@@ -293,6 +290,7 @@
 
         //edit button control 
         $(document).on('click', '.editBtn', function(event) {
+            
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
             $.ajax({
@@ -325,6 +323,22 @@
                     $('#_step1').val(json.bdstatus);
                     $('#_step2').val(json.pcostatus);
                     $('#_step3').val(json.cadstatus);
+                    var aprbtn = document.getElementById("step2a");
+                    var dclbtn = document.getElementById("step2d");
+                    if(json.pcostatus != 'Approved')
+                    {
+                        
+                        aprbtn.classList.remove("disabled");
+                        dclbtn.classList.remove("disabled");
+                    }
+                    else
+                    {
+                        aprbtn.classList.add("disabled");
+                        dclbtn.classList.add("disabled");
+                    }
+                    
+                    
+                    
                     /*$('#remark').val(json.outsource);*/
                     $('#editUserModal').modal('show');
                 }
@@ -333,12 +347,12 @@
 
 
 
-    $(document).on('click', '.step3approveBtn', function(event){
+    $(document).on('click', '.step2approveBtn', function(event){
         //var status = "Approved";
         var id = $('#jobrequestno').val();
         var trid = $('#trid').val();
         $.ajax({
-        url: "functions/step3approve.php",
+        url: "functions/step2approve.php",
         data: {
             id: id,
             
@@ -350,14 +364,13 @@
             if (status == 'success') {
                 table = $('#datatable').DataTable();
                 table.draw();
-                alert('Step 3 Approved Successfully!');
+                alert('Step 2 Approved Successfully!');
                 /*table = $('#datatable').DataTable();
                 var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
                 var row = table.row("[id='" + trid + "']");
                 row.row("[id='" + trid + "']").data([department, date, button]);*/
                 //$('#_itemdesc_').text('');
-                $('#_step3').val('Approved');
-                $('#_statustext').val('Approved');
+                $('#_step2').val('Approved');
             } else { 
                 alert('failed');
             }
@@ -365,11 +378,11 @@
         });
     });
 
-    $(document).on('click', '.step3declineBtn', function(event){
+    $(document).on('click', '.step2declineBtn', function(event){
         var id = $('#jobrequestno').val();
         var trid = $('#trid').val();
         $.ajax({
-            url: "functions/step3decline.php",
+            url: "functions/step2decline.php",
             data: {
                 id: id,
                 
@@ -389,7 +402,7 @@
                     var row = table.row("[id='" + trid + "']");
                     row.row("[id='" + trid + "']").data([department, date, button]);*/
                     //$('#_itemdesc_').text('');
-                    $('#_step3').val('Declined');
+                    $('#_step2').val('Declined');
                     $('#_statustext').val('Declined');
                     
                 } else { 
@@ -578,8 +591,8 @@
                             </div>
                             <div>
                                 <div class="modal-footer justify-content-md-center">
-                                    <a href="javascript:void();" class="btn btn-primary step3approveBtn">Approve</a>
-                                    <a href="javascript:void();" class="btn btn-danger step3declineBtn">Decline</a>
+                                    <a href="javascript:void();" class="btn btn-primary step2approveBtn disabled" id="step2a">Approve</a>
+                                    <a href="javascript:void();" class="btn btn-danger step2declineBtn disabled" id="step2d">Decline</a>
                                 </div>
                             </div>
                         </div>
