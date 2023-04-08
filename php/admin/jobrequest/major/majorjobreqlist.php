@@ -359,7 +359,6 @@
                     var e = document.getElementById("remark");
                     var outsource = e.options[e.selectedIndex].text;
                     e.options[e.selectedIndex].text = json.outsource;
-
                     $('#_statustext').val(json.status);
                     $('#_step1').val(json.bdstatus);
                     $('#_step2').val(json.pcostatus);
@@ -952,10 +951,18 @@
                                 <div class="modal-footer justify-content-md-center">
                                     <a href="javascript:void();" class="btn btn-primary approveBtn">Approve All</a>
                                     <a href="javascript:void();" class="btn btn-danger declineBtn">Decline All</a>
-                                    <a href="javascript:void();" class="btn btn-info text-white updateBtn">Update</a>
+                                    <a href="javascript:void();" class="btn btn-info text-white updateBtn disabled" id="updbtn">Update</a>
+                                    <a href="javascript:void();" class="btn btn-secondary editfieldBtn">Edit</a>
                                     <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
                                 <button type="button" class="btn btn-danger">Decline</button>
                                 <button type="submit" class="btn btn-info text-white">Update</button>-->
+                                <script>
+                                    $(document).on('click', '.editfieldBtn', function(event) {
+                                        var updtbtn = document.getElementById("updbtn");
+                                            updtbtn.classList.remove("disabled");  
+                                            updtbtn.classList.remove("text-white");
+                                    });
+                                </script>
                                 </div>
                             </div>
                         </div>
@@ -965,6 +972,7 @@
         </div>
     </div>
     <!-- edit user modalPopup end-->
+    <!--Print section-->
     <div class="print-area">
         <div class="modal fade" id="printmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog " style="max-width:1100px;">
