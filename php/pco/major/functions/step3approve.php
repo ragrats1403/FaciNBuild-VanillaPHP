@@ -1,4 +1,4 @@
-<?php include('../../connection/connection.php');
+<?php include('../../../connection/connection.php');
 
 
 $id = $_POST['id'];
@@ -9,7 +9,7 @@ bdstatus
 cadstatus
 pcostatus
 */
-$sql = "UPDATE `majoreq` SET `cadstatus`='Declined', `status`='Declined' WHERE jobreqno = '$id'";
+$sql = "UPDATE `majoreq` SET `cadstatus`='Approved', `status`='Approved' WHERE jobreqno = '$id'";
 $query = mysqli_query($con, $sql);
 
 if ($query == true) {
