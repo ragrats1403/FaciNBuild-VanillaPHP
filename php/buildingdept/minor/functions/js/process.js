@@ -26,21 +26,17 @@ paging: false
 
  //add button control
  $(document).on('submit', '#saveUserForm', function(event) {
-    event.preventDefault();
     var department = $('#department').val();
     var date = $('#datemajorjr').val();
     var quantity = $('#_quantity_').val();
     var itemname = $('#_item_').val();
     var description = $('#_itemdesc_').val();
     var purpose = $('#_purpose_').val();
-
-    var e = document.getElementById("sect");
-    var section = e.options[e.selectedIndex].text;
-    /*var renderedby = $('#renderedby').val();
+    var renderedby = $('#renderedby').val();
     var daterendered = $('#daterendered').val();
     var confirmedby = $('#confirmedby').val();
-    var dateconfirmed = $('#dateconfirmed').val();*/
-    if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '' && section != '') {
+    var dateconfirmed = $('#dateconfirmed').val();
+    if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '' && renderedby != '' && daterendered != '' && confirmedby != '' && dateconfirmed != '') {
         $.ajax({
             url: "functions/add_data.php",
             data: {
@@ -50,31 +46,33 @@ paging: false
                 itemname: itemname,
                 description: description,
                 purpose: purpose,
-                section: section
+                renderedby: renderedby,
+                daterendered: daterendered,
+                confirmedby: confirmedby,
+                dateconfirmed: dateconfirmed,
+                
             },
             type: 'POST',
             success: function(data) {
                 var json = JSON.parse(data);
-                var status = json.status;
+                status = json.status;
                 if (status = 'success') {
-                    $('body').removeClass('modal-open');
-                    $('.modal-backdrop').remove();
                     table = $('#datatable').DataTable();
                     table.draw();
-                    alert('Successfully Created Request!');
+                    alert('Successfully Added User!');
                     $('#department').val('');
-                    var now = new Date();
-                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                    document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
+                    $('#datemajorjr').val('');
                     $('#_quantity_').val('');
                     $('#_item_').val('');
                     $('#_itemdesc_').val('');
                     $('#_purpose_').val('');
+                    $('#renderedby').val('');
+                    $('#daterendered').val('');
+                    $('#confirmedby').val('');
+                    $('#dateconfirmed').val('');
                     $('#addUserModal').modal('hide');
-                    //force remove faded background  -Ragrats
-                    $('body').removeClass('modal-open');
-                    $('.modal-backdrop').remove();
-                    //force remove end
+                    $("body").removeClass("modal-open");
+                    $(".modal-backdrop").remove();
                 }
             }
         });
@@ -180,55 +178,7 @@ $(document).on('click', '.declineBtn', function(event){
 
 
 //edit button control 
-$(document).on('click', '.editBtn', function(event) {
-    var id = $(this).data('id');
-    var trid = $(this).closest('tr').attr('minorjobid');
-    document.getElementById("_renderedby").disabled = true;
-    document.getElementById("_daterendered").disabled = true;
-    document.getElementById("_confirmedby").disabled = true;
-    document.getElementById("_dateconfirmed").disabled = true;
-    document.getElementById("_daterendered").value = null;
-    document.getElementById("_dateconfirmed").value = null;
-    document.getElementById("_sect").disabled = true;
-    document.getElementById("_statustext").disabled = true;
-    document.getElementById("_step1").disabled = true;
-    $.ajax({
-        url: "functions/get_request_details.php",
-        data: {
-            id: id
-        },
-        type: 'POST',
-        success: function(data) {
-            var json = JSON.parse(data);
-            //var itemwdesc = json.item + json.item_desc;
-            $('#minorjobid').val(json.minorjobid);
-            $('#trid').val(trid);
-            $('#_ID').val(id);
-            $('#_datemajorjr').val(json.datesubmitted);
-            $('#_department').val(json.department);
-            $('#_quantity').val(json.quantity);
-            $('#_itemdesc').val(json.item_desc);
-            $('#_item').val(json.item);
-            $('#_purpose').val(json.purpose);
-            $('#_statustext').val(json.status);
-            $('#_step1').val(json.bdstatus);
-            var e = document.getElementById("_sect");
-            var section = e.options[e.selectedIndex].text;
 
-            e.options[e.selectedIndex].text = json.section;
-            $('#_inputFeedback').val(json.feedback);
-            $('#editMinorjreqmodal').modal('show');
-
-            //$('#_datemajorjr').val(json.datesubmitted);
-            /*$('#_inputName').val(json.name)
-            $('#_inputUsername').val(json.username);
-            $('#_inputPassword').val(json.password);
-            $('#_inputRoleLevel').val(json.rolelevel);
-            $('#_inputRoleID').val(json.roleid);*/
-            
-        }
-    });
-});
 
 $(document).on('click', '.updateBtn', function() {
     var id = $('#_ID').val();
@@ -238,6 +188,8 @@ $(document).on('click', '.updateBtn', function() {
     var quantity = $('#_quantity').val();
     var itemname = $('#_item').val();
     var description = $('#_itemdesc').val();
+    var e = document.getElementById("_sect");
+    var section = e.options[e.selectedIndex].text;
     var purpose = $('#_purpose').val();
     var feedback = $('#_inputFeedback').val();
     $.ajax({
@@ -248,6 +200,7 @@ $(document).on('click', '.updateBtn', function() {
             date: date,
             quantity: quantity,
             itemname: itemname,
+            section:section,
             description: description,
             purpose: purpose,
             feedback: feedback
@@ -272,7 +225,41 @@ $(document).on('click', '.updateBtn', function() {
     });
 });
 
-
+    $(document).on('click', '.editBtn', function(event) {
+            var id = $(this).data('id');
+            var trid = $(this).closest('tr').attr('minorjobid');
+            $('#_renderedby, #_daterendered, #_confirmedby, #_dateconfirmed, #_statustext, #_step1').prop('disabled', true);
+            $('#_daterendered, #_dateconfirmed').val('');
+            $.ajax({
+            url: "functions/get_request_details.php",
+            data: {
+            id: id
+            },
+            type: 'POST',
+            success: function(data) {
+            var json = JSON.parse(data);
+            $('#minorjobid').val(json.minorjobid);
+            $('#trid').val(trid);
+            $('#_ID').val(id);
+            $('#_datemajorjr').val(json.datesubmitted);
+            $('#_department').val(json.department);
+            $('#_quantity').val(json.quantity);
+            $('#_itemdesc').val(json.item_desc);
+            $('#_item').val(json.item);
+            $('#_purpose').val(json.purpose);
+            $('#_statustext').val(json.status);
+            $('#_step1').val(json.bdstatus);
+            var e = document.getElementById("_sect");
+            var section = e.options[e.selectedIndex].text;
+            e.options[e.selectedIndex].text = json.section;
+            $('#_inputFeedback').val(json.feedback);
+            $('#editMinorjreqmodal').modal('show');
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+            }
+        });
+    });
 
 //steps approval javascript
 

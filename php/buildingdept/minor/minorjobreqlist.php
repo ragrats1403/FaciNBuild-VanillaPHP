@@ -250,20 +250,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                <div class="row">
-                                    <div class="col-md-3" style="margin-top:5px; width:24%;">
-                                        <label class="fw-bold" for="date">Section:</label>
-                                        <select class="" style="width: 150px; Border: 5px;" name="sect" id="sect">
-                                            <option value="C">CARPENTRY</option>
-                                            <option value="P">PLUMBING</option>
-                                            <option value="A">AIRCON</option>
-                                            <option value="E">ELECTRICAL</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-2" style="width:20%">
                                     <label class="fw-bold" for="date">Quantity:</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
@@ -368,6 +354,7 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
                                     <select class="" style="width: 150px; Border: 5px;" name="sections" id="_sect">
+                                        <option value="P">Select</option>
                                         <option value="C">CARPENTRY</option>
                                         <option value="P">PLUMBING</option>
                                         <option value="A">AIRCON</option>
