@@ -1,15 +1,15 @@
-<?php include('../../connection/connection.php');
-
-$sql = "select * FROM majoreq";
+<?php include('../../../connection/connection.php');
+$dpt = $_POST['dpt'];
+$sql = "select * FROM majoreq where department = '$dpt'";
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
 
 if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
-    $sql .= " WHERE jobreqno like '%" . $search_value . "%' ";
-    $sql .= " OR jobreqno like '%" . $search_value . "%' ";
-    $sql .= " OR requino like '%" . $search_value . "%' ";
-    $sql .= " OR department like '%" . $search_value . "%' ";
+    $sql .= " OR jobreqno like '%" . $search_value . "%' AND department = '$dpt' ";
+    $sql .= " OR requino like '%" . $search_value . "%' AND department = '$dpt' ";
+    $sql .= " OR status like '%" . $search_value . "%' AND department = '$dpt' ";
+    $sql .= " OR department like '%" . $search_value . "%' AND department = '$dpt' ";
 }
 
 if (isset($_POST['order'])) {
@@ -45,8 +45,7 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = $row['quantity']; 
     $subarray[] = $row['status']; 
     $subarray[] = '<a href= "javascript:void();" data-id="' . $row['jobreqno'] . '" class ="btn btn-sm btn-info editBtn">More Info</a> 
-    <a href= "javascript:void();" data-id="' . $row['jobreqno'] . '" class ="btn btn-sm btn-danger btnDelete">Delete</a>
-    <a href= "javascript:void();" onclick="printDiv()" data-id="' . $row['jobreqno'] . '" class ="btn btn-sm btn-secondary btnprint">Print</a>';
+    <a href= "javascript:void();" data-id="' . $row['jobreqno'] . '" class ="btn btn-sm btn-danger btnDelete">Delete</a>';
 
     $data[] = $subarray;
 }
