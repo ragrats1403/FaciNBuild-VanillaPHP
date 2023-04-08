@@ -514,10 +514,6 @@
                 status = json.status;
                 if (status == 'success') {
                     alert('Updated Successfully!');
-                    var e = document.getElementById("sections");
-                    e.options[e.selectedIndex].text = json.section;
-                    var e = document.getElementById("remark");
-                    e.options[e.selectedIndex].text = json.outsource;
                     table = $('#datatable').DataTable();
                     /*var button = '<a href= "javascript:void();" data-id="'+jobreqno+'" class ="btn btn-sm btn-info editBtn">More Info</a>';
                     var row = table.row("[id='" + trid + "']");
@@ -665,7 +661,6 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Section:</label>
                                     <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections">
-                                    <option disabled selected value hidden></option>
                                         <option value="CARPENTRY">CARPENTRY</option>
                                         <option value="PLUMBING">PLUMBING</option>
                                         <option value="AIRCON">AIRCON</option>
@@ -701,7 +696,6 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
                                     <select class="" style="width: 150px; Border: none;" id="remark">
-                                    <option disabled selected value hidden></option>
                                         <option value="Outsource">Outsource</option>
                                         <option value="Bill of materials">Bill of materials</option>
                                     </select>
