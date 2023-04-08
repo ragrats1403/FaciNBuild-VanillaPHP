@@ -876,7 +876,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections" disabled>
+                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections" >
                                         <option value="CARPENTRY">CARPENTRY</option>
                                         <option value="PLUMBING">PLUMBING</option>
                                         <option value="AIRCON">AIRCON</option>
@@ -935,7 +935,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
-                                    <select class="" style="width: 150px; Border: none;" id="remark" disabled>
+                                    <select class="" style="width: 150px; Border: none;" id="remark" >
                                         <option value="1">Select</option>
                                         <option value="Outsource">Outsource</option>
                                         <option value="Bill of materials">Bill of materials</option>
