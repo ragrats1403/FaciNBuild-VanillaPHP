@@ -236,7 +236,7 @@
                                 </tbody>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Account</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">Add New Account</button>
                             </div>
 
                         </div>
@@ -275,7 +275,7 @@
             }],
             scrollY: 200,
             scrollCollapse: true,
-            paging: false
+            paging: false 
 
         });
     </script>
@@ -309,8 +309,8 @@
                             $('#inputPassword').val('');
                             $('#inputRolelevel').val('');
                             $('#addUserModal').modal('hide');
-                                $('body').removeClass('modal-open');
-                                $('.modal-backdrop').remove();
+                            $('body').removeClass('modal-open');
+                            $('.modal-backdrop').remove();
                         }
                     }
                 });
