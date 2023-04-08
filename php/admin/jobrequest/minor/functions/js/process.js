@@ -192,6 +192,11 @@ $(document).on('click', '.editBtn', function(event) {
     document.getElementById("_sect").disabled = true;
     document.getElementById("_statustext").disabled = true;
     document.getElementById("_step1").disabled = true;
+    document.getElementById("_inputFeedback").disabled = true;
+    document.getElementById("_quantity").disabled = true;
+    document.getElementById("_itemdesc").disabled = true;
+    document.getElementById("_item").disabled = true;
+    document.getElementById("_purpose").disabled = true;
     $.ajax({
         url: "functions/get_request_details.php",
         data: {
@@ -212,10 +217,13 @@ $(document).on('click', '.editBtn', function(event) {
             $('#_purpose').val(json.purpose);
             $('#_statustext').val(json.status);
             $('#_step1').val(json.bdstatus);
-            var e = document.getElementById("_sect");
-            var section = e.options[e.selectedIndex].text;
-
-            e.options[e.selectedIndex].text = json.section;
+            var x = document.getElementById("_sect");
+            var option = document.createElement("option");
+            option.text = json.section;
+            option.hidden = true;
+            option.disabled = true;
+            option.selected = true;
+            x.add(option); 
             $('#_inputFeedback').val(json.feedback);
             $('#editMinorjreqmodal').modal('show');
 
@@ -239,6 +247,8 @@ $(document).on('click', '.updateBtn', function() {
     var itemname = $('#_item').val();
     var description = $('#_itemdesc').val();
     var purpose = $('#_purpose').val();
+    var s = document.getElementById("_sect"); //dropdown
+    var sect = s.options[s.selectedIndex].text; //end
     var feedback = $('#_inputFeedback').val();
     $.ajax({
         url: "functions/update_data.php",
@@ -250,6 +260,7 @@ $(document).on('click', '.updateBtn', function() {
             itemname: itemname,
             description: description,
             purpose: purpose,
+            sect: sect,
             feedback: feedback
         },
         type: 'POST',
@@ -353,4 +364,29 @@ $(document).on('click', '.step1declineBtn', function(event){
 
 //steps decline end
 
+//edit button keypress event
+$(document).on('click', '.editfieldBtn', function(event) {
+    var updtbtn = document.getElementById("updbtn");
 
+    document.getElementById("_quantity").disabled = false;
+    document.getElementById("_itemdesc").disabled = false;
+    document.getElementById("_item").disabled = false;
+    document.getElementById("_purpose").disabled = false;
+    //document.getElementById("_dateconfirmed").disabled = false;
+    //document.getElementById("_daterendered").disabled = false;
+    //document.getElementById("_dateconfirmed").disabled = false;
+    document.getElementById("_sect").disabled = false;
+    document.getElementById("_statustext").disabled = false;
+    document.getElementById("_inputFeedback").disabled = false;
+
+
+        updtbtn.classList.remove("disabled");  
+        updtbtn.classList.remove("text-white");
+
+});
+//edit button keypress event end
+
+$(document).on('click', '.editfieldBtn', function(event) {
+
+
+});

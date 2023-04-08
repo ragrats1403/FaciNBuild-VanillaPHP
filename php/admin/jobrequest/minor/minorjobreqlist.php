@@ -219,7 +219,7 @@
     <!-- Script Process Start-- DO NOT MOVE THIS Script tags!!-->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
-    <script type="text/javascript" src="functions/js/process.js"></script>
+    <script type="text/javascript" src="functions/js/process.js?random=<?php echo uniqid(); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
                         
@@ -370,6 +370,7 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
                                     <select class="" style="width: 150px; Border: 5px;" name="sections" id="_sect">
+                                    <option disabled selected value hidden></option>
                                         <option value="C">CARPENTRY</option>
                                         <option value="P">PLUMBING</option>
                                         <option value="A">AIRCON</option>
@@ -397,7 +398,7 @@
                             </div>
                             <div class="modal-footer justify-content-md-right">
                                 <button onclick = "enableFields()" type="button" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                            <button type="button" class="btn btn-success col-md-1" id="end-editing">Update</button>
+                            <button type="button" class="btn btn-success col-md-1 updateRender" id="end-editing">Update</button>
                         </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6" >
@@ -411,7 +412,7 @@
                             </div>
                             <div class="modal-footer justify-content-md-right">
                             <button onclick = "enableFields2()" type="button" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                            <button type="button" class="btn btn-success col-md-1" id="end-editing">Update</button>
+                            <button type="button" class="btn btn-success col-md-1 updateConfirmed" id="end-editing">Update</button>
                         </div>
                         <div class="justify-content-center">
                                 <div class="col-md-12" >
@@ -421,14 +422,16 @@
                             </div>
                         <div>
                         <div class="modal-footer justify-content-md-center">
-                        <a href= "javascript:void();" class ="btn btn-primary step1approveBtn">Approve</a>
-                        <a href= "javascript:void();" class ="btn btn-danger step1declineBtn">Decline</a>
-                        <a href= "javascript:void();" class ="btn btn-info text-white updateBtn">Update</a>
-                              <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
-                              <button type="button" class="btn btn-danger">Decline</button>
-                              <button type="submit" class="btn btn-info text-white">Update</button>-->
+                            <a href= "javascript:void();" class ="btn btn-primary step1approveBtn">Approve</a>
+                            <a href= "javascript:void();" class ="btn btn-danger step1declineBtn">Decline</a>
+                            <a href="javascript:void();" class="btn btn-info text-white updateBtn disabled" id="updbtn">Update</a>
+                            <a href="javascript:void();" class="btn btn-secondary editfieldBtn">Edit</a>
+                                <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
+                                <button type="button" class="btn btn-danger">Decline</button>
+                                <button type="submit" class="btn btn-info text-white">Update</button>-->
                          </div>
                         </div>
+                        
                             <!-- Form Controls End-->
                         </div>
                     </form>

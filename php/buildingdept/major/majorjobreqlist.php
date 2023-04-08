@@ -399,7 +399,7 @@
                     x.add(option); 
                     var a = document.getElementById("remark");
                     var option2 = document.createElement("option");
-                    option2.text = json.section;
+                    option2.text = json.outsource;
                     option2.hidden = true;
                     option2.disabled = true;
                     option2.selected = true;
