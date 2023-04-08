@@ -687,7 +687,7 @@
 <div class="print-area">
     <div class="modal fade" id="printmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog " style="max-width:1100px;">
-            <div class="modal-content ">
+            <div class="modal-content" style="border: none; border-color: transparent;">
                 <div class="modal-header" style="max-width:1100px;">
                     <div class="col-md-5">
                         <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Major Job Request</h5>
