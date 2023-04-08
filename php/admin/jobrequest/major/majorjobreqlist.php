@@ -985,7 +985,7 @@
                                 <!-- Form Controls-->
                                 <div id="print-section" *ngIf="propertyLedger">
                                     <div class="logo">
-                                        <img src="../../../../images/uclogo.png" />
+                                        <img src="../../../../images/uclogo.png" alt="" width="75" height="50"/>
                                     </div>
                                     <table class="table borderless">
                                         <tr>
@@ -1027,7 +1027,7 @@
                                         </tr>
                                         <tr>
                                             <th class="col-md-3">B.1. RECOMMENDATION</th>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id=""></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control"  id=""></textarea></td>
                                             <td>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -1047,7 +1047,7 @@
                                         </tr>
                                         <tr>
                                             <th class="col-md-3">B.2. ESTIMATED COST</th>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id=""></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control"  id=""></textarea></td>
                                             <td>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -1067,9 +1067,9 @@
                                         </tr>
                                         <tr>
                                             <th class="col-md-3">B.3. RECOMMENDED BY</th>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id=""></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control"  id=""></textarea></td>
                                             <th>REMARKS:</th>
-                                            <th><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="remarks1" disabled></textarea></th>
+                                            <th><textarea style="border: none; border-color: transparent;" class="form-control"  id="remarks1" disabled></textarea></th>
                                         </tr>
                                         <tr>
                                           <th class="col-md-4">APPROVED BY:MS.CANDICE GOTIANUY</th>

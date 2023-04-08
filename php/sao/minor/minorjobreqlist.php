@@ -134,7 +134,7 @@
         <div class ="navdiv">
         <ul class="nav_list">
             <li>
-                <a href="../../../../php/cad/cadcalendarofactivities.php">
+                <a href="../../../../php/sao/reservation/saocalendar.php">
                     <i class='bx bx-calendar'></i>
                     <span class="link_name">Calendar of Activities</span>
                 </a>
@@ -146,7 +146,7 @@
                         Manage Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/sao/major/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
                 <div class="dropdown">
@@ -155,9 +155,9 @@
                         View/Create Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/cad/reservations/cadreservation.php">Reservation</a>
+                        <a class="dropdown-item" href="../../../../php/sao/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/sao/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/sao/reservation/saoreservation.php">Reservation</a>
                     </ul>
                 </div>
             </li>
@@ -168,7 +168,7 @@
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
                         <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
-                            <div class="role">CAD</div>
+                            <div class="role">SAO</div>
                         </div>
                     </div>
                     <a href="../../../logout.php">
