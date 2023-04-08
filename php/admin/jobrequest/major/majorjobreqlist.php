@@ -260,13 +260,10 @@
             var date = $('#deeto').val();
             var quantity = $('#quan').val();
             var item = $('#ite').val();
-
             var e = document.getElementById("section"); //dropdown
             var section = e.options[e.selectedIndex].text; //end
-
             var description = $('#desc').val();
             var purpose = $('#purp').val();
-
             var e = document.getElementById("mark"); //dropdown
             var outsource = e.options[e.selectedIndex].text; //end
 

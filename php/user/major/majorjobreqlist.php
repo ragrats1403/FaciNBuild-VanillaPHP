@@ -187,9 +187,10 @@
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <table id="datatable" class="table" >
                                 <thead>
-                                    <th>ID</th>
+                                    <th>Job Request no.</th>
+                                    <th>Requisition no.</th>
                                     <th>Department</th>
-                                    <th>Date</th>
+                                    <th>Quantity</th>
                                     <th>Status</th>
                                     <th>Options</th>
                                 </thead>
@@ -212,15 +213,18 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
+        var dpt = "<?php echo $_SESSION['department'];?>";
         $('#datatable').DataTable({
             'serverSide': true,
             'processing': true,
             'paging': true,
             'order': [],
             'ajax': {
-                'url': 'fetch_data.php',
+                'url': 'functions/fetch_data.php',
                 'type': 'post',
-
+                'data':{
+                        dpt:dpt,
+                },
             },
             'fnCreatedRow': function(nRow, aData, iDataIndex) {
                 $(nRow).attr('id', aData[0]);
@@ -239,20 +243,25 @@
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
             event.preventDefault();
-            var name = $('#inputName').val();
-            var username = $('#inputUsername').val();
-            var password = $('#inputPassword').val();
-            var rolelevel = $('#inputRolelevel').val();
-            var roleid = $('#inputRoleID').val();
-            if (username != '' && password != '' && rolelevel != '' && roleid != '') {
+            var requino = $('#requi').val();
+            var department = $('#depart').val();
+            var date = $('#deeto').val();
+            var quantity = $('#quan').val();
+            var item = $('#ite').val();
+            var description = $('#desc').val();
+            var purpose = $('#purp').val();
+
+            if (department != '' && date != '' && quantity != '' && item != '' && description != '' && purpose != '') {
                 $.ajax({
-                    url: "add_user.php",
+                    url: "functions/add_data.php",
                     data: {
-                        name: name,
-                        username: username,
-                        password: password,
-                        rolelevel: rolelevel,
-                        roleid: roleid
+                        requino: requino,
+                        department: department,
+                        date: date,
+                        quantity: quantity,
+                        item: item,
+                        description: description,
+                        purpose: purpose,
                     },
                     type: 'POST',
                     success: function(data) {
@@ -262,12 +271,16 @@
                             table = $('#datatable').DataTable();
                             table.draw();
                             alert('Successfully Added User!');
-                            $('#inputName').val('');
-                            $('#inputUsername').val('');
-                            $('#inputPassword').val('');
-                            $('#inputRolelevel').val('');
-                            $('#inputRoleID').val('');
+                            $('#requi').val('');
+                            $('#depart').val('');
+                            $('#deeto').val('');
+                            $('#quan').val('');
+                            $('#ite').val('');
+                            $('#desc').val('');
+                            $('#purp').val('');
                             $('#addUserModal').modal('hide');
+                            $('body').removeClass('modal-open');
+                            $('.modal-backdrop').remove();
                         }
                     }
                 });
@@ -275,43 +288,13 @@
                 alert("Please fill all the Required fields");
             }
         });
-        //delete user button control
-        $(document).on('click', '.btnDelete', function(event) {
-            var table = $('#datatable').DataTable();
-            event.preventDefault();
-            var id = $(this).data('id');
-            if (confirm('Are you sure to delete this user?')) {
 
-
-                $.ajax({
-                    url: "delete_user.php",
-                    data: {
-                        id: id
-                    },
-                    type: 'POST',
-                    success: function(data) {
-                        var json = JSON.parse(data);
-                        status = json.status;
-
-                        if (status == 'success') {
-                            $('#' + id).closest('tr').remove();
-
-                        } else {
-                            alart('failed');
-                            return;
-                        }
-                    }
-                });
-            } else {
-                return null;
-            }
-        });
         //edit button control 
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
-            var trid = $(this).closest('tr').attr('id');
+            var trid = $(this).closest('trid').attr('majoreq');
             $.ajax({
-                url: "get_single_user.php",
+                url: "functions/get_single_user.php",
                 data: {
                     id: id
                 },
@@ -320,51 +303,33 @@
                     var json = JSON.parse(data);
                     $('#id').val(json.id);
                     $('#trid').val(trid);
-                    $('#_inputName').val(json.name)
-                    $('#_inputUsername').val(json.username);
-                    $('#_inputPassword').val(json.password);
-                    $('#_inputRoleLevel').val(json.rolelevel);
-                    $('#_inputRoleID').val(json.roleid);
+                    $('#jobrequestno').val(json.jobreqno);
+                    $('#requino').val(json.requino);
+                    $('#department').val(json.department);
+                    $('#date').val(json.date);
+                    var e = document.getElementById("sections");
+                    var section = e.options[e.selectedIndex].text;
+                    e.options[e.selectedIndex].text = json.section;
+                    /*$('#sections').val(json.section);*/
+                    $('#quantity').val(json.quantity);
+                    $('#item').val(json.item);
+                    $('#description').val(json.description);
+                    $('#purpose').val(json.purpose);
+                    var e = document.getElementById("remark");
+                    var outsource = e.options[e.selectedIndex].text;
+                    e.options[e.selectedIndex].text = json.outsource;
+
+                    $('#_statustext').val(json.status);
+                    $('#_step1').val(json.bdstatus);
+                    $('#_step2').val(json.pcostatus);
+                    $('#_step3').val(json.cadstatus);
+                    /*$('#remark').val(json.outsource);*/
                     $('#editUserModal').modal('show');
                 }
             });
         });
 
-        $(document).on('submit', '#updateUserForm', function() {
-            var id = $('#id').val();
-            var trid = $('#trid').val();
-            var name = $('#_inputName').val();
-            var username = $('#_inputUsername').val();
-            var password = $('#_inputPassword').val();
-            var rolelevel = $('#_inputRoleLevel').val();
-            var roleid = $('#_inputRoleID').val();
-            $.ajax({
-                url: "update_user.php",
-                data: {
-                    id: id,
-                    name: name,
-                    username: username,
-                    password: password,
-                    rolelevel: rolelevel,
-                    roleid: roleid
-                },
-                type: 'POST',
-                success: function(data) {
-                    var json = JSON.parse(data);
-                    status = json.status;
-                    if (status == 'success') {
-                        alert('Updated Successfully!');
-                        table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a> <a href="javascript:void();" class="btn btn-sm btn-danger" data-id="' + id + '" >Delete</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([id, name, username, password, rolelevel, roleid, button]);
-                        $('#editUserModal').modal('hide');
-                    } else { 
-                        alert('failed');
-                    }
-                }
-            });
-        });
+        
     </script>
     <!-- Script Process End-->
     <!-- add user modal-->
@@ -378,130 +343,180 @@
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body ">
+                    <div class="modal-body ">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
-                        <div class="modal-body">
-                            <!-- Form Controls-->
-
-                            <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Job Request no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="Namemajorjr" placeholder="Job request no.">
-                                </div>
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Requisition no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="numbermajorjr" placeholder="Requisition no.">
-                                </div>
-                            </div>
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="departmentmajorjr" placeholder="Department">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="Department" value = "<?php echo $_SESSION['department'];?>" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date">
+                                    <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date" disabled>
                                 </div>
                             </div>
-                            <div class="justify-content-center">
-                                <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                <div class="col-md-2" style="padding-bottom:10px">
-                                    <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
-                                </div>
-                            </div>
-
                             <div class="row">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Description:</label>
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="majorjrdesc"></textarea>
+                                    <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id="quan" placeholder="Quantity">
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Item Name:</label>
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id="ite" placeholder="Item">
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Description:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="desc"></textarea>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="majorjrpurp"></textarea>
+                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="purp"></textarea>
                                 </div>
                             </div>
-                            <!-- Form Controls End-->
-                        </div>
-                        <div class="modal-footer justify-content-md-center">
-                            <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
-                        </div>
-                    </form>
+                            <div class="modal-footer justify-content-md-center">
+                                <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     <!-- add user modal end-->
     <!-- edit user modal-->
     <!-- Modal -->
-    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog " style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Job Request</h5>
                     </div>
-                    <div class="col-md-2" style="width:15%">
-                        <label class=""  for="inputName">Status:</label>
-                        <input type="text" style="width:20%" class="col-sm-2" name="_ID" class="form-control" id="_ID">
-                    </div>
-                    <div class="col-md-2" style="width:30%">
-                        <label class=""  for="inputName">ID:</label>
-                        <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
+                    <div class="col-md-12" style="width:15%">
+                        <label class="" for="inputName">Status:</label>
+                        <input type="text" style="width:60%" class="col-sm-1" name="id" class="form-control" id="_statustext" disabled>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="updateUserForm" action="javascript:void();" method="POST">
+                    <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
+                            <!-- Form Controls-->
                             <input type="hidden" id="id" name="id" value="">
                             <input type="hidden" id="trid" name="trid" value="">
-                            <!-- Form Controls-->
-                            <div class="mb-3 row">
-                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="_inputName" class="form-control" id="_inputName">
+                            <div class="row justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Job Request no.</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="jobrequestno" placeholder="Job request no." disabled>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Requisition no.</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="requino" placeholder="Requisition no." disabled>
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="_inputUsername" class="form-control" id="_inputUsername">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Department</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" disabled>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <label class="fw-bold" for="date">Date</label>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="date" placeholder="Date" disabled>
+                                </div>
+                                <h5 class="text-uppercase fw-bold " style="padding-top:13px;">A. Requisition(To be filled up by the requesting party)</h5>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2" style="width:22%">
+                                    <label class="fw-bold" for="date">Quantity:</label>
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id="quantity" placeholder="Quantity" disabled>
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="_inputPassword" name="_inputPassword">
+
+                            <div>
+                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
+                                    <label class="fw-bold" for="date">Item Name:</label>
+                                    <input type="form-control" class="form-control input-sm col-xs-1" id="item" placeholder="Item" disabled>
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="inputRoleLevel" class="col-sm-2 col-form-label">RoleLevel</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="_inputRoleLevel" name="_inputRoleLevel">
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Description:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="description" disabled></textarea>
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label for="inputRoleID" class="col-sm-2 col-form-label">RoleID</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="_inputRoleID" name="_inputRoleID">
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Purpose:</label>
+                                    <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose" disabled></textarea>
                                 </div>
                             </div>
-                            <!-- Form Controls End-->
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Section:</label>
+                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections" disabled>
+                                        <option value="CARPENTRY">CARPENTRY</option>
+                                        <option value="PLUMBING">PLUMBING</option>
+                                        <option value="AIRCON">AIRCON</option>
+                                        <option value="ELECTRICAL">ELECTRICAL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top:6px;">
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                </div>
+                                <div class="col-md-2" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step1" disabled>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top:6px;">
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Step 2 Status:</label>
+                                </div>
+                                <div class="col-md-2" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step2" disabled>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top:6px;">
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Step 3 Status:</label>
+                                </div>
+                                <div class="col-md-2" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step3" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
+                                    <select class="" style="width: 150px; Border: none;" id="remark" disabled>
+                                        <option value="1">Select</option>
+                                        <option value="Outsource">Outsource</option>
+                                        <option value="Bill of materials">Bill of materials</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="modal-footer justify-content-md-center">
+                                    <!--<a href="javascript:void();" class="btn btn-primary approveBtn">Approve All</a>
+                                    <a href="javascript:void();" class="btn btn-danger declineBtn">Decline All</a>
+                                    <a href="javascript:void();" class="btn btn-info text-white updateBtn">Update</a>
+                                   <button type="" class="btn btn-primary approveBtn">Approve</button>
+                                <button type="button" class="btn btn-danger">Decline</button>
+                                <button type="submit" class="btn btn-info text-white">Update</button>-->
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -509,6 +524,13 @@
         </div>
     </div>
     <!-- edit user modalPopup end-->
+    <script>
+        //date auto fill
+        var now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        document.getElementById('deeto').value = now.toISOString().substring(0,10);
+        //date end
+    </script>
 </body>
 
 </html>
