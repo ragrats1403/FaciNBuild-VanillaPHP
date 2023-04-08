@@ -380,7 +380,7 @@
                     option2.hidden = true;
                     option2.disabled = true;
                     option2.selected = true;
-                    a.add(option);
+                    a.add(option2);
                     //drop down fix end
                     $('#_statustext').val(json.status);
                     $('#_step1').val(json.bdstatus);

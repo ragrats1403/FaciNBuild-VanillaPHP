@@ -403,10 +403,9 @@
                     option2.hidden = true;
                     option2.disabled = true;
                     option2.selected = true;
-                    a.add(option);
+                    a.add(option2);
                     $('#_inputFeedback').val(json.feedback);
                     //drop down fix end
-                    /*$('#remark').val(json.outsource);*/
                     $('#editUserModal').modal('show');
                 }
             });
@@ -666,6 +665,7 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Section:</label>
                                     <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections">
+                                    <option disabled selected value hidden></option>
                                         <option value="CARPENTRY">CARPENTRY</option>
                                         <option value="PLUMBING">PLUMBING</option>
                                         <option value="AIRCON">AIRCON</option>
@@ -701,7 +701,7 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
                                     <select class="" style="width: 150px; Border: none;" id="remark">
-                                        <option value="1">Select</option>
+                                    <option disabled selected value hidden></option>
                                         <option value="Outsource">Outsource</option>
                                         <option value="Bill of materials">Bill of materials</option>
                                     </select>
