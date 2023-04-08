@@ -872,6 +872,13 @@
                                         <th>REMARKS:</th>
                                         <th><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="remarks1" disabled></textarea></th>
                                     </tr>
+                                    <tr>
+                                        <th class="col-md-4">APPROVED BY:MS.CANDICE GOTIANUY</th>
+                                    </tr>
+                                    <tr>
+                                         <td class="col-md-2"; style= "text-align:center">UC - CHANCELLOR</td>
+                                    </tr>
+ 
                                 </table>
                                 <div class="no-print-area">
                                     <div class="modal-footer justify-content-md-center">
