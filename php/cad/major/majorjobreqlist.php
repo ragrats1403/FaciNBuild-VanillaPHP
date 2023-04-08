@@ -199,9 +199,6 @@
                                     <th>Options</th>
                                 </thead>
                             </table>
-                            <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Major Job Request</button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -217,7 +214,6 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
-        var dpt = "<?php echo $_SESSION['department'];?>";
         $('#datatable').DataTable({
             'serverSide': true,
             'processing': true,
@@ -226,9 +222,6 @@
             'ajax': {
                 'url': 'functions/fetch_data.php',
                 'type': 'post',
-                'data':{
-                        dpt:dpt,
-                },
             },
             'fnCreatedRow': function(nRow, aData, iDataIndex) {
                 $(nRow).attr('id', aData[0]);
@@ -245,7 +238,6 @@
     <script type="text/javascript">
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
-            event.preventDefault();
             var requino = $('#requi').val();
             var department = $('#depart').val();
             var date = $('#deeto').val();
@@ -292,6 +284,8 @@
             }
         });
 
+        
+
         //edit button control 
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
@@ -326,6 +320,22 @@
                     $('#_step1').val(json.bdstatus);
                     $('#_step2').val(json.pcostatus);
                     $('#_step3').val(json.cadstatus);
+                    var aprbtn = document.getElementById("step3a");
+                    var dclbtn = document.getElementById("step3d");
+                    var fback = document.getElementById("_inputFeedback");
+                    if(json.cadstatus != 'Approved')
+                        {
+                                        
+                            aprbtn.classList.remove("disabled");
+                            dclbtn.classList.remove("disabled");
+                            fback.disabled = false;
+                        }
+                        else
+                        {
+                            aprbtn.classList.add("disabled");
+                            dclbtn.classList.add("disabled");
+                            fback.disabled = true;
+                        }
                     /*$('#remark').val(json.outsource);*/
                     $('#editUserModal').modal('show');
                 }
@@ -334,12 +344,12 @@
 
 
 
-    $(document).on('click', '.step2approveBtn', function(event){
+    $(document).on('click', '.step3approveBtn', function(event){
         //var status = "Approved";
         var id = $('#jobrequestno').val();
         var trid = $('#trid').val();
         $.ajax({
-        url: "functions/step2approve.php",
+        url: "functions/step3approve.php",
         data: {
             id: id,
             
@@ -351,13 +361,13 @@
             if (status == 'success') {
                 table = $('#datatable').DataTable();
                 table.draw();
-                alert('Step 2 Approved Successfully!');
+                alert('Step 3 Approved Successfully!');
                 /*table = $('#datatable').DataTable();
                 var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
                 var row = table.row("[id='" + trid + "']");
                 row.row("[id='" + trid + "']").data([department, date, button]);*/
                 //$('#_itemdesc_').text('');
-                $('#_step2').val('Approved');
+                $('#_step3').val('Approved');
                 $('#_statustext').val('Approved');
             } else { 
                 alert('failed');
@@ -366,11 +376,11 @@
         });
     });
 
-    $(document).on('click', '.step2declineBtn', function(event){
+    $(document).on('click', '.step3declineBtn', function(event){
         var id = $('#jobrequestno').val();
         var trid = $('#trid').val();
         $.ajax({
-            url: "functions/step2decline.php",
+            url: "functions/step3decline.php",
             data: {
                 id: id,
                 
@@ -382,7 +392,7 @@
                 if (status == 'success') {
                     table = $('#datatable').DataTable();
                     table.draw();
-                    alert('Step 2 Declined Successfully!');
+                    alert('Step 3 Declined Successfully!');
 
                 
                     /*table = $('#datatable').DataTable();
@@ -390,7 +400,7 @@
                     var row = table.row("[id='" + trid + "']");
                     row.row("[id='" + trid + "']").data([department, date, button]);*/
                     //$('#_itemdesc_').text('');
-                    $('#_step2').val('Declined');
+                    $('#_step3').val('Declined');
                     $('#_statustext').val('Declined');
                     
                 } else { 
@@ -536,6 +546,7 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Section:</label>
                                     <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections" disabled>
+                                    <option disabled selected value hidden></option>
                                         <option value="CARPENTRY">CARPENTRY</option>
                                         <option value="PLUMBING">PLUMBING</option>
                                         <option value="AIRCON">AIRCON</option>
@@ -571,18 +582,26 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
                                     <select class="" style="width: 150px; Border: none;" id="remark" disabled>
+                                    <option disabled selected value hidden></option>
                                         <option value="1">Select</option>
                                         <option value="Outsource">Outsource</option>
                                         <option value="Bill of materials">Bill of materials</option>
                                     </select>
                                 </div>
                             </div>
-                            <div>
-                                <div class="modal-footer justify-content-md-center">
-                                    <a href="javascript:void();" class="btn btn-primary step2approveBtn">Approve</a>
-                                    <a href="javascript:void();" class="btn btn-danger step2declineBtn">Decline</a>
+                            <div class="justify-content-center">
+                                <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Feedback:</label>
+                                    <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
                                 </div>
                             </div>
+                            <div>
+                                <div class="modal-footer justify-content-md-center">
+                                    <a href="javascript:void();" class="btn btn-primary step3approveBtn" id= "step3a">Approve</a>
+                                    <a href="javascript:void();" class="btn btn-danger step3declineBtn" id= "step3d">Decline</a>
+                                </div>
+                            </div>
+
                         </div>
                     </form>
                 </div>

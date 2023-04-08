@@ -1,5 +1,5 @@
 <?php include('../../../connection/connection.php');
-$sql = "select * FROM majoreq WHERE bdstatus = 'Approved'";
+$sql = "select * FROM majoreq WHERE cadstatus = 'Approved'";
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
 
