@@ -243,6 +243,35 @@
         });
     </script>
     <script type="text/javascript">
+        //print button event
+        $(document).on('click', '.btnprint', function(event) {
+            var id = $(this).data('id');
+            var trid = $(this).closest('trid').attr('majoreq');
+            $.ajax({
+                url: "functions/get_single_user.php",
+                data: {
+                    id: id
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    $('#id').val(json.id);
+                    $('#trid').val(trid);
+                    $('#jobrequestno1').val(json.jobreqno);
+                    $('#requino1').val(json.requino);
+                    $('#department1').val(json.department);
+                    $('#date1').val(json.date);
+                    $('#sections1').val(json.section);
+                    $('#quantity1').val(json.quantity);
+                    $('#item1').val(json.item);
+                    $('#description1').val(json.description);
+                    $('#purpose1').val(json.purpose);
+                    $('#remarks1').val(json.outsource);
+                    $('#printmodal').modal('show');
+                }
+            });
+        });
+
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
             event.preventDefault();
@@ -670,6 +699,151 @@
         </div>
     </div>
     <!-- edit user modalPopup end-->
+      <!--Print section-->
+      <div class="print-area">
+        <div class="modal fade" id="printmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog " style="max-width:1100px;">
+                <div class="modal-content" style="border: none; border-color: transparent;">
+                    <div class="modal-header" style="max-width:1100px;">
+                        <div class="col-md-5">
+                            <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Major Job Request</h5>
+                        </div>
+                        <div class="no-print-area">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <form id="saveUserForm" action="javascript:void();" method="POST">
+                            <div class="modal-body">
+                                <input type="hidden" id="id" name="id" value="">
+                                <input type="hidden" id="trid" name="trid" value="">
+                                <!-- Form Controls-->
+                                <div id="print-section" *ngIf="propertyLedger">
+                                    <div class="logo">
+                                        <img src="../../../../images/uclogo.png" alt="" width="75" height="50"/>
+                                    </div>
+                                    <table class="table borderless">
+                                        <tr>
+                                            <th class="col-md-3">JOB REQUEST NO.</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="jobrequestno1" disabled></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-2" style="text-align: left;">REQUISITION NO.</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="requino1" disabled></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-2" style="text-align: left;">DEPARTMENT</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="department1" disabled></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-2" style="text-align: left;">DATE</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="date1" disabled></td>
+                                        </tr>
+                                    </table>
+                                    <hr>
+                                    <table class="table borderless">
+                                        <tr>
+                                            <th>QUANTITY</th>
+                                            <th>ITEMS WITH COMPLETE DESCRIPTION</th>
+                                            <th>SECTION</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity1" disabled></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="description1" disabled></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="sections1" disabled></textarea></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1" disabled></textarea></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-3">B.1. RECOMMENDATION</th>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control"  id=""></textarea></td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        For Canvass
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        For ordering
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-3">B.2. ESTIMATED COST</th>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control"  id=""></textarea></td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        For PO approval
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        For delivery
+                                                    </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-3">B.3. RECOMMENDED BY</th>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control"  id=""></textarea></td>
+                                            <th>REMARKS:</th>
+                                            <th><textarea style="border: none; border-color: transparent;" class="form-control"  id="remarks1" disabled></textarea></th>
+                                        </tr>
+                                        <tr>
+                                          <th class="col-md-4">APPROVED BY:MS.CANDICE GOTIANUY</th>
+                                        </tr>
+                                        <tr>
+                                         <td class="col-md-2"; style= "text-align:center">UC - CHANCELLOR</td>
+                                        </tr>
+                                    </table>
+                                    <div class="no-print-area">
+                                        <div class="modal-footer justify-content-md-center">
+                                            <a href="#" class="btn btn-secondary printbtn" onclick="printContent()">Print</a>
+                                            <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
+                                <button type="button" class="btn btn-danger">Decline</button>
+                                <button type="submit" class="btn btn-info text-white">Update</button>-->
+                                        </div>
+                                    </div>
+                                    <script>
+                                        function printContent() {
+                                            var printReport = document.getElementsByClassName("print-area");
+
+                                            $('body').append('<div id="print" class="printBc"></div>');
+                                            $(printReport).clone().appendTo('#print');
+
+                                            $('body').css('background-color', 'white');
+                                            $('body > :not(#print)').addClass('no-print-area');
+                                            window.print();
+
+                                            $('#print').remove();
+                                            $('body').css('background-color', '');
+                                            $('body > :not(#print)').removeClass('no-print-area');
+                                        };
+                                    </script>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         //date auto fill
         var now = new Date();

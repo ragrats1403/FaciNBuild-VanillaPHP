@@ -247,7 +247,6 @@
     <script type="text/javascript">
         //add button control
         $(document).on('submit', '#addUserModal', function(event) {
-            event.preventDefault();
             var requino = $('#requi').val();
             var department = $('#depart').val();
             var date = $('#deeto').val();
@@ -959,8 +958,20 @@
                                 <script>
                                     $(document).on('click', '.editfieldBtn', function(event) {
                                         var updtbtn = document.getElementById("updbtn");
+                                        document.getElementById("updbtn");
+                                        document.getElementById("updbtn");
+                                        document.getElementById("updbtn");
+                                        document.getElementById("updbtn");
+                                        document.getElementById("updbtn");
+                                        document.getElementById("updbtn");
+                                        document.getElementById("updbtn");
+                                        document.getElementById("updbtn");
+                                        document.getElementById("updbtn");
+
+
                                             updtbtn.classList.remove("disabled");  
                                             updtbtn.classList.remove("text-white");
+
                                     });
                                 </script>
                                 </div>
