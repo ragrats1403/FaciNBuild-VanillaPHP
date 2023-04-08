@@ -126,30 +126,34 @@
         </div>
         <div class ="navdiv">
         <ul class="nav_list">
+        <ul class="nav_list">
             <li>
                 <a href="../../../../php/user/userdashboard.php">
-                    <i class='bx bx-user'></i>
+                    <i class='bx bx-calendar'></i>
                     <span class="link_name">Calendar of Activities</span>
                 </a>
             </li>
             <li>
                 <div class="dropdown">
+                    <i class='bx bx-notepad' style="margin-left:17px;" ></i>
+                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Manage Request
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="../../../../php/user/major/majorjobreqlist.php">Major Job Request</a>
+                    </ul>
+                </div>
+                <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Job Request
+                        View/Create Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="../../../../php/user/minor/minorjobreqlist.php">Minor Job Request</a>
                         <a class="dropdown-item" href="../../../../php/user/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/user/reservation/userreservation.php">Reservation</a>
                     </ul>
                 </div>
-            </li>
-            <li>
-            <li>
-                <a href="../../../../php/user/reservation/userreservation.php">
-                    <i class='bx bx-check-square'></i>
-                    <span class="link_name">Reservation</span>
-                </a>
             </li>
         </ul>
         <div class="profile_content">
