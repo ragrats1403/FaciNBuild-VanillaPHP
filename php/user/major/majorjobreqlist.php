@@ -20,7 +20,8 @@
         </div>
     <div class="navplace">
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: transparent; border: none;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: transparent;
+  border: none;">
                 <i class='bx bxs-bell' style='color:#ffffff'></i>
                 <span class="icon-button__badge"></span>
             </button>
@@ -125,34 +126,30 @@
         </div>
         <div class ="navdiv">
         <ul class="nav_list">
-        <ul class="nav_list">
             <li>
                 <a href="../../../../php/user/userdashboard.php">
-                    <i class='bx bx-calendar'></i>
+                    <i class='bx bx-user'></i>
                     <span class="link_name">Calendar of Activities</span>
                 </a>
             </li>
             <li>
                 <div class="dropdown">
-                    <i class='bx bx-notepad' style="margin-left:17px;" ></i>
-                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Manage Request
-                    </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/user/major/majorjobreqlist.php">Major Job Request</a>
-                    </ul>
-                </div>
-                <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        View/Create Request
+                        Job Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="../../../../php/user/minor/minorjobreqlist.php">Minor Job Request</a>
                         <a class="dropdown-item" href="../../../../php/user/major/majorjobreqlist.php">Major Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/user/reservation/userreservation.php">Reservation</a>
                     </ul>
                 </div>
+            </li>
+            <li>
+            <li>
+                <a href="../../../../php/user/reservation/userreservation.php">
+                    <i class='bx bx-check-square'></i>
+                    <span class="link_name">Reservation</span>
+                </a>
             </li>
         </ul>
         <div class="profile_content">
@@ -239,6 +236,7 @@
         scrollY: 200,
         scrollCollapse: true,
         paging: false 
+
         });
     </script>
     <script type="text/javascript">
@@ -331,73 +329,6 @@
             });
         });
 
-
-
-    $(document).on('click', '.step2approveBtn', function(event){
-        //var status = "Approved";
-        var id = $('#jobrequestno').val();
-        var trid = $('#trid').val();
-        $.ajax({
-        url: "functions/step2approve.php",
-        data: {
-            id: id,
-            
-        },
-        type: 'POST',
-        success: function(data) {
-            var json = JSON.parse(data);
-            var status = json.status;
-            if (status == 'success') {
-                table = $('#datatable').DataTable();
-                table.draw();
-                alert('Step 2 Approved Successfully!');
-                /*table = $('#datatable').DataTable();
-                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                var row = table.row("[id='" + trid + "']");
-                row.row("[id='" + trid + "']").data([department, date, button]);*/
-                //$('#_itemdesc_').text('');
-                $('#_step2').val('Approved');
-                $('#_statustext').val('Approved');
-            } else { 
-                alert('failed');
-            }
-        }
-        });
-    });
-
-    $(document).on('click', '.step2declineBtn', function(event){
-        var id = $('#jobrequestno').val();
-        var trid = $('#trid').val();
-        $.ajax({
-            url: "functions/step2decline.php",
-            data: {
-                id: id,
-                
-            },
-            type: 'POST',
-            success: function(data) {
-                var json = JSON.parse(data);
-                var status = json.status;
-                if (status == 'success') {
-                    table = $('#datatable').DataTable();
-                    table.draw();
-                    alert('Step 2 Declined Successfully!');
-
-                
-                    /*table = $('#datatable').DataTable();
-                    var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                    var row = table.row("[id='" + trid + "']");
-                    row.row("[id='" + trid + "']").data([department, date, button]);*/
-                    //$('#_itemdesc_').text('');
-                    $('#_step2').val('Declined');
-                    $('#_statustext').val('Declined');
-                    
-                } else { 
-                    alert('failed');
-                }
-            }
-        });
-    }); 
         
     </script>
     <!-- Script Process End-->
@@ -578,8 +509,12 @@
                             </div>
                             <div>
                                 <div class="modal-footer justify-content-md-center">
-                                    <a href="javascript:void();" class="btn btn-primary step2approveBtn">Approve</a>
-                                    <a href="javascript:void();" class="btn btn-danger step2declineBtn">Decline</a>
+                                    <!--<a href="javascript:void();" class="btn btn-primary approveBtn">Approve All</a>
+                                    <a href="javascript:void();" class="btn btn-danger declineBtn">Decline All</a>
+                                    <a href="javascript:void();" class="btn btn-info text-white updateBtn">Update</a>
+                                   <button type="" class="btn btn-primary approveBtn">Approve</button>
+                                <button type="button" class="btn btn-danger">Decline</button>
+                                <button type="submit" class="btn btn-info text-white">Update</button>-->
                                 </div>
                             </div>
                         </div>
