@@ -15,26 +15,108 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
-<header>
-    <div class="imgctrl">
-
-    </div>
+<header class="shadow">
+        <div class="imgctrl">
+        </div>
     <div class="navplace">
-        <div>
-            <button type="button" class="icon-button">
-                <span class='bx bxs-bell'></i>
-                    <span class="icon-button__badge"></span>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: transparent;
+  border: none;">
+                <i class='bx bxs-bell' style='color:#ffffff'></i>
+                <span class="icon-button__badge"></span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="notification-dropdown">
+                <div class="dropdown-header">Notifications</div>
+                <div class="dropdown-divider"></div>
+                <div class="notification-list"></div>
+                <u><a class="dropdown-item text-center mark-as-read" href="#">Mark all as read</a></u>
+            </div>
         </div>
         <?php
         session_start();
         ?>
+        <script>
+            // Get the notification dropdown button and badge
+            const notificationDropdown = document.getElementById("notification-dropdown");
+            const notificationBadge = notificationDropdown.querySelector(".icon-button__badge");
+
+            // Get the notification list element
+            const notificationList = document.querySelector(".notification-list");
+            
+            // Fetch the notifications and update the badge and list
+            function fetchNotifications() {
+                // Make an AJAX request to fetch the notifications
+                $.ajax({
+                url: "../reservations/functions/notification.php",
+                type: 'GET',
+                success: function(data) {
+                    
+                    var notifications = JSON.parse(data);
+                    var len = data.length;
+                    // Update the badge count
+                    notificationBadge.innerText = notifications.length;
+
+                    // Clear the existing list
+                    notificationList.innerHTML = "";
+
+                    // Add each notification to the list
+                    for (let i = 0; i < notifications.length; i++) {
+                        const notification = notifications[i];
+                        const notificationItem = document.createElement("div");
+                        notificationItem.classList.add("dropdown-item");
+                        if (!notification.is_read) {
+                            notificationItem.classList.add("font-weight-bold");
+                        }
+                        notificationItem.innerHTML = `
+                            <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">${notification.message}</div>
+                            <div class="text-muted">${notification.created_at}</div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                        `;
+                        notificationList.appendChild(notificationItem);
+                        }
+                }
+                
+
+            });
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                fetchNotifications();
+                setInterval(fetchNotifications, 5000);
+                });
+                const markAsReadButton = document.querySelector(".mark-as-read");
+                markAsReadButton.addEventListener("click", function(event) {   
+                    $.ajax({
+                        url: "../reservations/functions/update_notification.php",
+                        type: 'POST',
+                        success: function(data) {
+                            var json = JSON.parse(data);
+                            var len = json.length;
+                            for(let i = 0; i<notifications.length; i++){
+                                const notification = notifications[i];
+                                notification.is_read = 1;
+                            }
+                             // Update the badge count
+                            notificationBadge.innerText = "0";
+
+                            // Clear the existing list
+                            notificationList.innerHTML = "";
+                        }
+                    });
+
+
+                });
+ 
+        </script>
         <p>Hello, <?php echo $_SESSION['department'];?></p>
+        </div>
         <nav class="gnav">
         </nav>
     </div>
 </header>
 
-<body style="padding-top: 0px;">
+<body onload="fetchNotifications();">
 
     <div class="sidebar">
         <div class="logo_content">
