@@ -68,12 +68,12 @@
                                 notificationItem.classList.add("font-weight-bold");
                             }
                             notificationItem.innerHTML = `
-            <div class="d-flex align-items-center">
-              <div class="flex-grow-1">${notification.message}</div>
-              <div class="text-muted">${notification.created_at}</div>
-            </div>
-            <div class="dropdown-divider"></div>
-          `;
+                            <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">${notification.message}</div>
+                            <div class="text-muted">${notification.created_at}</div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                        `;
                             notificationList.appendChild(notificationItem);
                         });
                     }
