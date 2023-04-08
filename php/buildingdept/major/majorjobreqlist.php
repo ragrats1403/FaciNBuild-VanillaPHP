@@ -565,17 +565,10 @@
                             <!-- Form Controls-->
                             <input type="hidden" id="id" name="id" value="">
                             <input type="hidden" id="trid" name="trid" value="">
-<<<<<<< Updated upstream
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Job Request no.</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="jobrequestno" placeholder="Job request no." disabled>
-=======
-                            <!-- Form Controls-->
-                            <div id="print-section" *ngIf="propertyLedger">
-                                <div class="logo">
-                                    <img src="../../../images/uclogo.png" alt="" width="75" height="50"/>
->>>>>>> Stashed changes
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Requisition no.</label>
