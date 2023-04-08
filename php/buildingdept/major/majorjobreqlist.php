@@ -355,6 +355,18 @@
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
+            document.getElementById("jobrequestno").disabled = true;
+            document.getElementById("requino").disabled = true;
+            document.getElementById("department").disabled = true;
+            document.getElementById("date").disabled = true;
+            document.getElementById("sections").disabled = true;
+            document.getElementById("quantity").disabled = true;
+            document.getElementById("item").disabled = true;
+            document.getElementById("description").disabled = true;
+            document.getElementById("purpose").disabled = true;
+            document.getElementById("remark").disabled = true;
+            document.getElementById("_statustext").disabled = true;
+            document.getElementById("_inputFeedback").disabled = true;
             $.ajax({
                 url: "functions/get_single_user.php",
                 data: {
@@ -369,22 +381,31 @@
                     $('#requino').val(json.requino);
                     $('#department').val(json.department);
                     $('#date').val(json.date);
-                    var e = document.getElementById("sections");
-                    var section = e.options[e.selectedIndex].text;
-                    e.options[e.selectedIndex].text = json.section;
-                    /*$('#sections').val(json.section);*/
                     $('#quantity').val(json.quantity);
                     $('#item').val(json.item);
                     $('#description').val(json.description);
                     $('#purpose').val(json.purpose);
-                    var e = document.getElementById("remark");
-                    var outsource = e.options[e.selectedIndex].text;
-                    e.options[e.selectedIndex].text = json.outsource;
-
                     $('#_statustext').val(json.status);
                     $('#_step1').val(json.bdstatus);
                     $('#_step2').val(json.pcostatus);
                     $('#_step3').val(json.cadstatus);
+                    //drop down auto remove when clicking more info fix
+                    var x = document.getElementById("sections");
+                    var option = document.createElement("option");
+                    option.text = json.section;
+                    option.hidden = true;
+                    option.disabled = true;
+                    option.selected = true;
+                    x.add(option); 
+                    var a = document.getElementById("remark");
+                    var option2 = document.createElement("option");
+                    option2.text = json.section;
+                    option2.hidden = true;
+                    option2.disabled = true;
+                    option2.selected = true;
+                    a.add(option);
+                    $('#_inputFeedback').val(json.feedback);
+                    //drop down fix end
                     /*$('#remark').val(json.outsource);*/
                     $('#editUserModal').modal('show');
                 }
@@ -472,7 +493,7 @@
         var purpose = $('#purpose').val();
         var e = document.getElementById("remark");
         var outsource = e.options[e.selectedIndex].text;
-
+        var feedback = $("#_inputFeedback").val();
         $.ajax({
             url: "functions/update_user.php",
             data: {
@@ -485,7 +506,8 @@
                 item: item,
                 description: description,
                 purpose: purpose,
-                outsource: outsource
+                outsource: outsource,
+                feedback: feedback,
             },
             type: 'POST',
             success: function(data) {
@@ -685,13 +707,37 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Feedback:</label>
+                                    <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback" disabled></textarea>
+                                </div>
+                            </div>
                             <div>
                                 <div class="modal-footer justify-content-md-center">
                                     <a href="javascript:void();" class="btn btn-primary step1approveBtn">Approve</a>
                                     <a href="javascript:void();" class="btn btn-danger step1declineBtn">Decline</a>
-                                    <a href="javascript:void();" class="btn btn-info updateBtn">Update</a>
+                                    <a href="javascript:void();" class="btn btn-info text-white updateBtn disabled" id="updbtn">Update</a>
+                                    <a href="javascript:void();" class="btn btn-secondary editfieldBtn">Edit</a>
                                 </div>
                             </div>
+                            <script>
+                                $(document).on('click', '.editfieldBtn', function(event) {
+                                        var updtbtn = document.getElementById("updbtn");
+                                        document.getElementById("quantity").disabled = false;
+                                        document.getElementById("item").disabled = false;
+                                        document.getElementById("description").disabled = false;
+                                        document.getElementById("purpose").disabled = false;
+                                        document.getElementById("remark").disabled = false;
+                                        document.getElementById("sections").disabled = false;
+                                        document.getElementById("_inputFeedback").disabled = false;
+
+
+                                            updtbtn.classList.remove("disabled");  
+                                            updtbtn.classList.remove("text-white");
+
+                                    });
+                            </script>
                         </div>
                     </form>
                 </div>
@@ -816,9 +862,7 @@
                                     <div class="no-print-area">
                                         <div class="modal-footer justify-content-md-center">
                                             <a href="#" class="btn btn-secondary printbtn" onclick="printContent()">Print</a>
-                                            <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
-                                <button type="button" class="btn btn-danger">Decline</button>
-                                <button type="submit" class="btn btn-info text-white">Update</button>-->
+                                           
                                         </div>
                                     </div>
                                     <script>
