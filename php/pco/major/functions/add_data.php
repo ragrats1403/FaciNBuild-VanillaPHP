@@ -6,8 +6,9 @@ $quantity = $_POST['quantity'];
 $item = $_POST['item'];
 $description = $_POST['description'];
 $purpose = $_POST['purpose'];
+$feedback = $_POST['feedback'];
 
-$sql = "INSERT INTO `majoreq` (`department`,`date`,`quantity`,`item`,`description`,`purpose`,`status`,`bdstatus`,`cadstatus`,`pcostatus`) VALUES ('$department','$date','$quantity','$item','$description','$purpose','Pending','Pending','Pending','Pending')";
+$sql = "INSERT INTO `majoreq` (`department`,`date`,`quantity`,`item`,`description`,`purpose`,`status`,`bdstatus`,`cadstatus`,`pcostatus`,`feedback`) VALUES ('$department','$date','$quantity','$item','$description','$purpose','Pending','Pending','Pending','Pending','$feedback')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
     $data = array(

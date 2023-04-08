@@ -942,6 +942,12 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Feedback:</label>
+                                    <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
+                                </div>
+                            </div>
                             <div>
                                 <div class="modal-footer justify-content-md-center">
                                     <a href="javascript:void();" class="btn btn-primary approveBtn">Approve All</a>

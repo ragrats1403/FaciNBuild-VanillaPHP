@@ -249,6 +249,7 @@
             var item = $('#ite').val();
             var description = $('#desc').val();
             var purpose = $('#purp').val();
+            var feedback = $('#_inputFeedback').val();
 
             if (department != '' && date != '' && quantity != '' && item != '' && description != '' && purpose != '') {
                 $.ajax({
@@ -261,6 +262,7 @@
                         item: item,
                         description: description,
                         purpose: purpose,
+                        feedback: feedback,
                     },
                     type: 'POST',
                     success: function(data) {
@@ -277,6 +279,7 @@
                             $('#ite').val('');
                             $('#desc').val('');
                             $('#purp').val('');
+                            $('#_inputFeedback').val('');
                             $('#addUserModal').modal('hide');
                             $('body').removeClass('modal-open');
                             $('.modal-backdrop').remove();
@@ -467,6 +470,7 @@
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="purp"></textarea>
                                 </div>
                             </div>
+                            
                             <div class="modal-footer justify-content-md-center">
                                 <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
@@ -548,6 +552,7 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Section:</label>
                                     <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections" disabled>
+                                    <option disabled selected value hidden></option>
                                         <option value="CARPENTRY">CARPENTRY</option>
                                         <option value="PLUMBING">PLUMBING</option>
                                         <option value="AIRCON">AIRCON</option>
@@ -583,10 +588,17 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
                                     <select class="" style="width: 150px; Border: none;" id="remark" disabled>
+                                    <option disabled selected value hidden></option>
                                         <option value="1">Select</option>
                                         <option value="Outsource">Outsource</option>
                                         <option value="Bill of materials">Bill of materials</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12" >
+                                    <label class="fw-bold" for="date">Feedback:</label>
+                                    <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
                                 </div>
                             </div>
                             <div>
