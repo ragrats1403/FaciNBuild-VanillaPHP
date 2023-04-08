@@ -1,16 +1,17 @@
-<?php include('../../connection/connection.php');
+<?php include('../../../connection/connection.php');
 
+$jobreqno = $_POST['jobreqno'];
 $requino = $_POST['requino'];
 $department = $_POST['department'];
-$date = $_POST['date'];
+$section = $_POST['section'];
 $quantity = $_POST['quantity'];
 $item = $_POST['item'];
-$section = $_POST['section'];
 $description = $_POST['description'];
 $purpose = $_POST['purpose'];
 $outsource = $_POST['outsource'];
 
-$sql = "INSERT INTO `majoreq` (`requino`,`department`,`date`,`quantity`,`item`,`section`,`description`,`purpose`,`outsource`,`status`,`bdstatus`,`cadstatus`,`pcostatus`) VALUES ('$requino','$department','$date','$quantity','$item','$section','$description','$purpose','$outsource','Pending','Pending','Pending','Pending')";
+
+$sql = "UPDATE `majoreq` SET `requino`='$requino', `department`= '$department', `section`= '$section' , `quantity`='$quantity',`item` = '$item' ,`description` = '$description' ,`purpose` = '$purpose' ,`outsource` = '$outsource' WHERE jobreqno = '$jobreqno'";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
     $data = array(
