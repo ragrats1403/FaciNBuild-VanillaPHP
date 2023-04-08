@@ -242,7 +242,6 @@
     <script type="text/javascript">
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
-            alert("test");
             event.preventDefault();
             var requino = $('#requi').val();
             var department = $('#depart').val();
