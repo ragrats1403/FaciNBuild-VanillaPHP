@@ -1,0 +1,9 @@
+<?php include('../../connection/connection.php');
+$facility = $_POST['facility'];
+$actualdate = $_POST['actualdate'];
+$timestart = $_POST['timestart'];
+$timeend = $_POST['timeend'];
+$sql = "SELECT COUNT(actualdateofuse) AS countval FROM `reservation` WHERE actualdateofuse = '2023-04-03' AND status = 'Pending' AND facility = 'New AVR' AND timestart = '08:00:00' AND timeend = '11:00:00'";
+$query = mysqli_query($con,$sql);
+$row = mysqli_fetch_assoc($query);
+echo json_encode($row);

@@ -2,6 +2,53 @@
     alert('The modal is fully shown.');
 });
 */
+
+function computedaysdiff(d1, d2){
+    var date1 = new Date(d1);
+    var date2 = new Date(d2);
+
+    var diffInMilliseconds = Math.abs(date2 - date1);
+    var diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
+
+    //console.log(diffInDays);
+
+    return diffInDays;
+}
+
+
+function checkdateconflict(adate, timestart, timeend, facility)
+{
+    var count = 0;
+    var confirm = false;
+    var actualdate = new Date(adate);
+    var tstart = timestart;
+    var tend = timeend;
+    var faci = facility;
+
+    $.ajax({
+        url: "functions/checkdateconflict.php",
+        data: {
+            facility:faci,
+            actualdate: actualdate,
+            timestart: tstart,
+            timeend: tend,
+        },
+        type: 'POST',
+        success: function(data) {
+            var json = JSON.parse(data);
+            var val = json.countval;
+
+            if(val == 0)
+            {
+                confirm = false;
+            }
+            else{
+                confirm = true;
+            }
+        }
+    });
+    return confirm;    
+}
 //dynamic fetch data with drop down menu
 function dynamicEq(){
     const myNode =  document.getElementById('container2');

@@ -51,9 +51,7 @@ function removeAddedEq(e){
     e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
     }
 //more info eq
-function removeAddedEq2(e){
-    e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
-}
+
 
 $(document).on('click', '.editResBtn', function(event){
 
@@ -251,8 +249,9 @@ function closeModalforInfo(){
 
 $("#reserModal").on("hidden.bs.modal", function () {
     const myNode =  document.getElementById('container2');
-    while (myNode.firstChild) {
-    myNode.removeChild(myNode.lastChild);
+    const len = myNode.childElementCount;
+    for(var i = 0; i<len+1; i++){
+        myNode.removeChild(myNode.firstChild);
     }
     $('#testtable').DataTable().clear().destroy();
     
@@ -262,8 +261,8 @@ $("#reserModal").on("hidden.bs.modal", function () {
   $("#test").on("hidden.bs.modal", function () {
     const myNode =  document.getElementById('container4');
     const len = myNode.childElementCount;
-    for(var i = 0; i<len; i++){
-        removeAddedEq2();
+    for(var i = 0; i<len+1; i++){
+        myNode.removeChild(myNode.firstChild);
     }
 
             var x = document.getElementById("_myDIV1");
