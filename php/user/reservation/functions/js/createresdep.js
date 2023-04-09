@@ -234,6 +234,14 @@ now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
 document.getElementById('datefiled').value = now.toISOString().substring(0,10);
 //date end
 
+function bodyonload(){
+        //date auto fill
+    var now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    document.getElementById('datefiled').value = now.toISOString().substring(0,10);
+    //date end
+
+}
 //terms and conditions checkbox
 function updateButtonState() {
     var checkbox = document.getElementById("termscond");

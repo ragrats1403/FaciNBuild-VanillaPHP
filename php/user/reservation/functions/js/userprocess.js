@@ -171,7 +171,6 @@ $(document).on("click", ".submitBtn", function (event) {
     checkdateconflict(actualdate, timein, timeout, faci, function(confirm) {
       if (confirm) {
           // do something if there is a conflict
-          alert("true test");
             checkReservationConflict(timein, timeout, actualdate, faci, function(result) {
               // Do something with the result, which will be a boolean value
               if (result) {
@@ -179,7 +178,6 @@ $(document).on("click", ".submitBtn", function (event) {
                   alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
               } else {
                   // Handle case where there is no conflict
-                  alert("no conflicts");
                   if (
                     eventname != "" &&
                     datefiled != "" &&
@@ -316,7 +314,6 @@ $(document).on("click", ".submitBtn", function (event) {
           });
       } else {
           // do something if there is no conflict
-          alert("false test");
           checkReservationConflict(timein, timeout, actualdate, faci, function(result) {
             // Do something with the result, which will be a boolean value
             if (result) {
@@ -324,7 +321,6 @@ $(document).on("click", ".submitBtn", function (event) {
                 alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
             } else {
                 // Handle case where there is no conflict
-                alert("no conflicts");
                 if (
                   eventname != "" &&
                   datefiled != "" &&
