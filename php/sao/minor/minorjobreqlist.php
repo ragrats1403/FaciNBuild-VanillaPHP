@@ -13,13 +13,6 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <header class="shadow">
@@ -123,7 +116,7 @@
     </div>
 </header>
 
-<body onload="fetchNotifications();">
+<body onload="bodyonload();">
 
 <div class="sidebar">
         <div class="logo_content">
@@ -266,7 +259,7 @@
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
-                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled> 
+                                    <input type="date" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled> 
                                 </div>
                             </div>
                             <div class="row">
@@ -436,11 +429,13 @@
         </div>
     </div>
     <script>
-        //datetime auto fill up
-        var now = new Date();
-        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
-        //Requesting department auto fill up
+        function bodyonload(){
+            //date auto fill
+            var now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('datemajorjr').value = now.toISOString().substring(0,10);
+            //date end
+        }
         
         /*  var deptname;
         document.getElementById('inputRoleID').value = deptname;*/
