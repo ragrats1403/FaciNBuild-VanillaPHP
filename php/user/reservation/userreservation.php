@@ -118,7 +118,7 @@
     </div>
 </header>
 
-<body onload="fetchNotifications();">
+<body>
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -177,9 +177,6 @@
             sidebar.classList.toggle("active");
         }
     </script>-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -321,11 +318,11 @@
                         
                         <div class="col-md-2">
                             <label class="fw-bold" for="date">Time In:</label>
-                            <input type="time" class="form-control input-sm col-xs-1" id="_timein" placeholder="Time In">
+                            <input type="time" class="form-control input-sm col-xs-1" id="_timein" placeholder="Time In" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}">
                         </div>
                         <div class="col-md-2">
                             <label class="fw-bold" for="date">Time Out:</label>
-                            <input type="time" class="form-control input-sm col-xs-1" id="_timeout" placeholder="Time Out">
+                            <input type="time" class="form-control input-sm col-xs-1" id="_timeout" placeholder="Time Out" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}">
                         </div>
 
                         <div class="col-md-6 ">
@@ -350,10 +347,7 @@
                         <label>NB: All other equipment (e.g. Backdrop, chairs, etc.,) shall be the responsibility of the requesting party.
                             Technician’s, Electrical, Janitor’s and security guards overtime fees/excess fees are subject to the terms an condition provided at the bank thereof.<br>
                             Secure Reservation from the AVR (filled up by the AVR personnel only)
-                            <div class="col-md-6 ">
-                                <label class="fw-bold" for="date">Date and Time</label>
-                                <input type="datetime-local" class="form-control input-sm col-xs-1" id="_date_avr" placeholder="Date"><br>
-                            </div>
+                            <br>
                             2. The activity is officially endorsed and approved by the adviser, Chairperson/Dean, Department Head,
                             and the SAO/ Cultural Directory. (if “disapproved”, it must be so stated, citing briefly the reason thereof)<br><br>
                         </label>
@@ -436,6 +430,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
                 <script>
+
                     document.getElementById("termscond").checked = true;
                         document.getElementById("termscond").disabled = true;
                     //date auto fill
@@ -444,6 +439,7 @@
                     document.getElementById('datefiled').value = now.toISOString().substring(0,10);
                     //date end
                     
+
                 </script>
             </div>
         </div>
