@@ -121,7 +121,7 @@
     </div>
 </header>
 
-<body onload="fetchNotifications();">
+<body onload="bodyonload();">
 
 <div class="sidebar">
         <div class="logo_content">
@@ -264,7 +264,7 @@
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
-                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled> 
+                                    <input type="date" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled> 
                                 </div>
                             </div>
                             <div class="row">
@@ -435,11 +435,13 @@
         </div>
     </div>
     <script>
-        //datetime auto fill up
-        var now = new Date();
-        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
-        //Requesting department auto fill up
+        function bodyonload(){
+            //date auto fill
+            var now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('datemajorjr').value = now.toISOString().substring(0,10);
+            //date end
+        }
         
         /*  var deptname;
         document.getElementById('inputRoleID').value = deptname;*/
