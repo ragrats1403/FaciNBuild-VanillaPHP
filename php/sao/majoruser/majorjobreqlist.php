@@ -117,11 +117,10 @@
 
 <body onload="fetchNotifications();">
 
-    <div class="sidebar">
+<div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../images/Brown_logo_faci.png" />
-                <img src="../../../../images/Brown_logo_faci.png" />
             </div>
         </div>
         <div class="navdiv">
