@@ -184,6 +184,7 @@
                                     <th>ID</th>
                                     <th>Department</th>
                                     <th>Date</th>
+                                    <th>Section</th>
                                     <th>Status</th>
                                     <th>Options</th>
                                 </thead>
