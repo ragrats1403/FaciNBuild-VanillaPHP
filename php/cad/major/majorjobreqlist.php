@@ -150,7 +150,7 @@
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/cad/majoruser/majorjobreqlist.php">Major Job Request</a>
                         <a class="dropdown-item" href="../../../../php/cad/reservations/cadreservation.php">Reservation</a>
                     </ul>
                 </div>
@@ -162,7 +162,7 @@
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
                             <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
-                            <div class="role">User</div>
+                            <div class="role">CAD</div>
                         </div>
                     </div>
                     <a href="../../../../logout.php">

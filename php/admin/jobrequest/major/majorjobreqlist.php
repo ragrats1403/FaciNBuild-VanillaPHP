@@ -1050,28 +1050,28 @@
                                         </tr>
                                     </table>
                                     <hr>
-                                    <table class="table borderless">
+                                    <table class="table-borderless table-sm">
                                         <tr>
                                             <th>QUANTITY</th>
-                                            <th>ITEMS WITH COMPLETE DESCRIPTION</th>
-                                            <th>SECTION</th>
+                                            <th style="white-space: nowrap;">ITEMS WITH COMPLETE DESCRIPTION</th>
                                             <th></th>
+                                            <th>SECTION</th>
                                         </tr>
                                         <tr>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity1" disabled></textarea></td>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="description1" disabled></textarea></td>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="sections1" disabled></textarea></td>
-                                            <td></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="1" id="quantity1" disabled></textarea></td>
+                                            <td colspan=2><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="description1" disabled></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="1" id="sections1" disabled></textarea></td>
+                                           
                                         </tr>
                                         <tr>
-                                            <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1" disabled></textarea></td>
+                                            <th>PURPOSE:</th>
+                                            <td colspan=2><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1" disabled></textarea></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
                                         <tr>
                                             <th class="col-md-3">B.1. RECOMMENDATION</th>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control"  id=""></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" id=""></textarea></td>
                                             <td>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -1116,7 +1116,7 @@
                                             <th><textarea style="border: none; border-color: transparent;" class="form-control"  id="remarks1" disabled></textarea></th>
                                         </tr>
                                         <tr>
-                                          <th class="col-md-4">APPROVED BY:MS.CANDICE GOTIANUY</th>
+                                          <th class="col-md-4" style="white-space: nowrap; ">APPROVED BY: MS.CANDICE GOTIANUY</th>
                                         </tr>
                                         <tr>
                                          <td class="col-md-2"; style= "text-align:center">UC - CHANCELLOR</td>
