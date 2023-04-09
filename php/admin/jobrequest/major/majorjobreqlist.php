@@ -1015,16 +1015,7 @@
                 <div class="modal-content" style="border: none; border-color: transparent;">
                     <div class="modal-header" style="max-width:1100px;">
                         <div class="col-md-5">
-                                    <div class="logo">
-                                        <img src="../../../../images/uclogo.png" alt="" width="75" height="50"/>
-                                    </div>
-                                    <div>
-                                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Major Job Request</h5>
-                                        <p>
-                                          <h5>SECTION: <textarea style="border: none; border-color: transparent" class="form-control" id="sections1" disabled></textarea></h5>
-                                        </p>
-                                    </div>
-                           
+                            <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Major Job Request</h5>
                         </div>
                         <div class="no-print-area">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1037,6 +1028,9 @@
                                 <input type="hidden" id="trid" name="trid" value="">
                                 <!-- Form Controls-->
                                 <div id="print-section" *ngIf="propertyLedger">
+                                    <div class="logo">
+                                        <img src="../../../../images/uclogo.png" alt="" width="75" height="50"/>
+                                    </div>
                                     <table class="table borderless">
                                         <tr>
                                             <th class="col-md-3">JOB REQUEST NO.</th>
@@ -1060,14 +1054,20 @@
                                         <tr>
                                             <th>QUANTITY</th>
                                             <th>ITEMS WITH COMPLETE DESCRIPTION</th>
+                                            <th>SECTION</th>
+                                            <th></th>
                                         </tr>
                                         <tr>
                                             <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity1" disabled></textarea></td>
                                             <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="description1" disabled></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="sections1" disabled></textarea></td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
                                             <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1" disabled></textarea></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <th class="col-md-3">B.1. RECOMMENDATION</th>
@@ -1116,7 +1116,7 @@
                                             <th><textarea style="border: none; border-color: transparent;" class="form-control"  id="remarks1" disabled></textarea></th>
                                         </tr>
                                         <tr>
-                                          <th class="col-md-2">APPROVED BY:MS.CANDICE GOTIANUY</th>
+                                          <th class="col-md-4">APPROVED BY:MS.CANDICE GOTIANUY</th>
                                         </tr>
                                         <tr>
                                          <td class="col-md-2"; style= "text-align:center">UC - CHANCELLOR</td>
