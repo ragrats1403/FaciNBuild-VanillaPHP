@@ -16,11 +16,8 @@ function computedaysdiff(d1, d2){
 }
 
 
-function checkdateconflict(adate, timestart, timeend, facility)
-{
-    var count = 0;
-    var confirm = false;
-    var actualdate = new Date(adate);
+function checkdateconflict(adate, timestart, timeend, facility, callback) {
+    var actualdate = adate;
     var tstart = timestart;
     var tend = timeend;
     var faci = facility;
@@ -28,7 +25,7 @@ function checkdateconflict(adate, timestart, timeend, facility)
     $.ajax({
         url: "functions/checkdateconflict.php",
         data: {
-            facility:faci,
+            facility: faci,
             actualdate: actualdate,
             timestart: tstart,
             timeend: tend,
@@ -36,18 +33,45 @@ function checkdateconflict(adate, timestart, timeend, facility)
         type: 'POST',
         success: function(data) {
             var json = JSON.parse(data);
-            var val = json.countval;
 
-            if(val == 0)
-            {
-                confirm = false;
-            }
-            else{
-                confirm = true;
+            if (json.countval > 0) {
+                callback(true);
+            } else {
+                callback(false);
             }
         }
     });
-    return confirm;    
+}
+function checkReservationConflict(timestart, timeend, adate, rfacility, callback) {
+    var tstart = timestart;
+var tend = timeend;
+const date = new Date(adate);
+var actualdate = adate;
+var facility = rfacility;
+
+// convert date and time values to strings
+const datestartString = `${date.toISOString().substr(0, 10)}T${tstart}`;
+const dateendString = `${date.toISOString().substr(0, 10)}T${tend}`;
+
+$.ajax({
+    url: "functions/checkresconflict.php",
+    data: {
+        datestart: datestartString,
+        dateend: dateendString,
+        actualdate: actualdate,
+        facility: facility,
+    },
+    type: 'POST',
+    success: function(data) {
+        var json = JSON.parse(data);
+        console.log(json.tcount);
+        if (json.tcount > 0) {
+            callback(true);
+        } else {
+            callback(false);
+        }
+    }
+});
 }
 //dynamic fetch data with drop down menu
 function dynamicEq(){
@@ -202,6 +226,7 @@ $(document).on('click', '.addresBtn', function(event){
     
 
 });
+
 
 //date auto fill
 var now = new Date();
