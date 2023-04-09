@@ -277,8 +277,6 @@
                             table = $('#datatable').DataTable();
                             table.draw();
                             alert('Successfully Added User!');
-                            $('#department').val('');
-                            $('#datemajorjr').val('');
                             $('#_quantity_').val('');
                             $('#_item_').val('');
                             $('#_itemdesc_').val('');
