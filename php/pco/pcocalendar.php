@@ -139,7 +139,7 @@
                             Manage Request
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/pco/majoruser/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
                         </ul>
                     </div>
                     <div class="dropdown">
