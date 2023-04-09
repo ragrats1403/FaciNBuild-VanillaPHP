@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/print.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
 </head>
