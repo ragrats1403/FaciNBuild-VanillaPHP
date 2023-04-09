@@ -127,7 +127,7 @@
         <div class ="navdiv">
         <ul class="nav_list">
             <li>
-                <a href="../../../../php/user/userdashboard.php">
+                <a href="../../../../php/sao/reservation/saocalendar.php">
                     <i class='bx bx-calendar'></i>
                     <span class="link_name">Calendar of Activities</span>
                 </a>
@@ -139,14 +139,14 @@
                         Job Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/user/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/user/major/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/sao/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/sao/majoruser/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
             </li>
             <li>
             <li>
-                <a href="../../../../php/user/reservation/userreservation.php">
+                <a href="../../../../php/sao/reservation/saoreservation.php">
                     <i class='bx bx-check-square'></i>
                     <span class="link_name">Reservation</span>
                 </a>

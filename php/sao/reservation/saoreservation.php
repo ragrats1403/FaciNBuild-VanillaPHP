@@ -14,12 +14,12 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+
 </head>
 
 <header class="shadow">
-        <div class="imgctrl">
-        </div>
+    <div class="imgctrl">
+    </div>
     <div class="navplace">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: transparent;
@@ -44,126 +44,120 @@
 
             // Get the notification list element
             const notificationList = document.querySelector(".notification-list");
-            
+
             // Fetch the notifications and update the badge and list
             function fetchNotifications() {
                 // Make an AJAX request to fetch the notifications
                 $.ajax({
-                url: "functions/notification.php",
-                type: 'GET',
-                success: function(data) {
-                    
-                    var notifications = JSON.parse(data);
-                    var len = data.length;
-                    // Update the badge count
-                    notificationBadge.innerText = notifications.length;
+                    url: "functions/notification.php",
+                    type: 'GET',
+                    success: function(data) {
 
-                    // Clear the existing list
-                    notificationList.innerHTML = "";
+                        var notifications = JSON.parse(data);
+                        var len = data.length;
+                        // Update the badge count
+                        notificationBadge.innerText = notifications.length;
 
-                    // Add each notification to the list
-                    for (let i = 0; i < notifications.length; i++) {
-                        const notification = notifications[i];
-                        const notificationItem = document.createElement("div");
-                        notificationItem.classList.add("dropdown-item");
-                        if (!notification.is_read) {
-                            notificationItem.classList.add("font-weight-bold");
-                        }
-                        notificationItem.innerHTML = `
+                        // Clear the existing list
+                        notificationList.innerHTML = "";
+
+                        // Add each notification to the list
+                        for (let i = 0; i < notifications.length; i++) {
+                            const notification = notifications[i];
+                            const notificationItem = document.createElement("div");
+                            notificationItem.classList.add("dropdown-item");
+                            if (!notification.is_read) {
+                                notificationItem.classList.add("font-weight-bold");
+                            }
+                            notificationItem.innerHTML = `
                             <div class="d-flex align-items-center">
                             <div class="flex-grow-1">${notification.message}</div>
                             <div class="text-muted">${notification.created_at}</div>
                             </div>
                             <div class="dropdown-divider"></div>
                         `;
-                        notificationList.appendChild(notificationItem);
+                            notificationList.appendChild(notificationItem);
                         }
-                }
-                
+                    }
 
-            });
+
+                });
             }
             document.addEventListener("DOMContentLoaded", function() {
                 fetchNotifications();
                 setInterval(fetchNotifications, 5000);
-                });
-                const markAsReadButton = document.querySelector(".mark-as-read");
-                markAsReadButton.addEventListener("click", function(event) {   
-                    $.ajax({
-                        url: "functions/update_notification.php",
-                        type: 'POST',
-                        success: function(data) {
-                            var json = JSON.parse(data);
-                            var len = json.length;
-                            for(let i = 0; i<notifications.length; i++){
-                                const notification = notifications[i];
-                                notification.is_read = 1;
-                            }
-                             // Update the badge count
-                            notificationBadge.innerText = "0";
-
-                            // Clear the existing list
-                            notificationList.innerHTML = "";
+            });
+            const markAsReadButton = document.querySelector(".mark-as-read");
+            markAsReadButton.addEventListener("click", function(event) {
+                $.ajax({
+                    url: "functions/update_notification.php",
+                    type: 'POST',
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        var len = json.length;
+                        for (let i = 0; i < notifications.length; i++) {
+                            const notification = notifications[i];
+                            notification.is_read = 1;
                         }
-                    });
+                        // Update the badge count
+                        notificationBadge.innerText = "0";
 
-
+                        // Clear the existing list
+                        notificationList.innerHTML = "";
+                    }
                 });
- 
+
+
+            });
         </script>
-        <p>Hello, <?php echo $_SESSION['department'];?></p>
-        </div>
-        <nav class="gnav">
-        </nav>
+        <p>Hello, <?php echo $_SESSION['department']; ?></p>
+    </div>
+    <nav class="gnav">
+    </nav>
     </div>
 </header>
 
 <body onload="fetchNotifications();">
-    <div class="sidebar">
+<div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../images/Brown_logo_faci.png" />
+                <img src="../../../../images/Brown_logo_faci.png" />
             </div>
         </div>
-        <div class="navdiv">
-            <ul class="nav_list">
-                <li>
-                    <a href="../../../php/sao/reservation/saocalendar.php">
-                        <i class='bx bx-user'></i>
-                        <span class="link_name">Calendar of Activities</span>
-                    </a>
-                </li>
-                <li>
-                <div class="dropdown">
-                    <i class='bx bx-notepad'style="margin-left:17px;"></i> 
-                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Manage Request
-                    </span>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">             
-                        <a class="dropdown-item" href="../../../php/sao/reservation/saoreservation.php">Reservation</a>
-
-                    </ul>
-                </div>
+        <div class ="navdiv">
+        <ul class="nav_list">
+            <li>
+                <a href="../../../../php/sao/reservation/saocalendar.php">
+                    <i class='bx bx-calendar'></i>
+                    <span class="link_name">Calendar of Activities</span>
+                </a>
+            </li>
+            <li>
                 <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        View/Create Request
+                        Job Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../php/sao/major/majorjobreqlist.php">Major Request</a>
-                        <a class="dropdown-item" href="../../../php/sao/minor/minorjobreqlist.php">Minor Request</a>                                 
-                        <a class="dropdown-item" href="../../../php/sao/reservation/saoreservation.php">Reservation</a>
-
+                        <a class="dropdown-item" href="../../../../php/sao/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../../php/sao/majoruser/majorjobreqlist.php">Major Job Request</a>
                     </ul>
                 </div>
-            </li> 
-            </ul>
+            </li>
+            <li>
+            <li>
+                <a href="../../../../php/sao/reservation/saoreservation.php">
+                    <i class='bx bx-check-square'></i>
+                    <span class="link_name">Reservation</span>
+                </a>
+            </li>
+        </ul>
             <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
                         <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                        <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
+                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
                             <div class="role">SAO</div>
                         </div>
                     </div>
@@ -190,7 +184,7 @@
             sidebar.classList.toggle("active");
         }
     </script>-->
-        
+
     <div class="table1">
         <div class="container-fluid">
             <div class="row">
@@ -211,8 +205,8 @@
                                 </thead>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reserModal">Create reservation</button>
-                            
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reserModal">Create reservation</button>
+
                             </div>
                         </div>
                     </div>
@@ -220,32 +214,32 @@
             </div>
         </div>
     </div>
-    
-     <!-- Script Process Start-- DO NOT MOVE THIS Script tags!!-->
+
+    <!-- Script Process Start-- DO NOT MOVE THIS Script tags!!-->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script type="text/javascript" src="functions/js/userprocess.js?random=<?php echo uniqid(); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- Modal Popup for More Info button-->
     <div class="modal fade" id="test" aria-hidden="true">
-    <div class="modal-dialog" style="max-width:1100px;">
+        <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
-            <div class="modal-header justify-content-center" style="max-width:1100px;">
+                <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Job Request</h5>
                     </div>
                     <div class="col-md-12" style="width:15%">
-                        <label class=""  for="inputName">Status:</label>
-                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id= "_statustext">
+                        <label class="" for="inputName">Status:</label>
+                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id="_statustext">
                     </div>
                     <div class="col-md-1" style="width:10%">
-                        <label class=""  for="inputName">ID:</label>
+                        <label class="" for="inputName">ID:</label>
                         <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    
-            </div>
-            
+
+                </div>
+
                 <div class="modal-body ">
                     <form action="">
                         Please select the facilities you would like to request.
@@ -268,20 +262,20 @@
                                     
                                     <?php include('../../connection/connection.php');
                                     $sql = "SELECT facilityname FROM facility";
-                                    $query = mysqli_query($con,$sql);
-                                    $i=1;
-                                    while($row = mysqli_fetch_assoc($query)){
-                                        echo "<option value=$i>".$row["facilityname"]."</option>";
+                                    $query = mysqli_query($con, $sql);
+                                    $i = 1;
+                                    while ($row = mysqli_fetch_assoc($query)) {
+                                        echo "<option value=$i>" . $row["facilityname"] . "</option>";
                                         $i++;
                                     }
                                     ?>               
                                 </select>-->
-                                <input type="text" class="form-control input-sm col-xs-1" id="_facility" placeholder="Facility">           
+                                <input type="text" class="form-control input-sm col-xs-1" id="_facility" placeholder="Facility">
 
                             </div>
                             <div class="col-md-6 ">
-                            <input type="text" class="form-control input-sm col-xs-1" id="_eventname" placeholder="Event Name">
-                            </div>        
+                                <input type="text" class="form-control input-sm col-xs-1" id="_eventname" placeholder="Event Name">
+                            </div>
                         </div>
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
@@ -293,7 +287,7 @@
                                 <input type="date" class="form-control input-sm col-xs-1" id="_actualdate" placeholder="Actual Date of Use">
                             </div>
                         </div>
-                        
+
                         <div class="col-md-2">
                             <label class="fw-bold" for="date">Time In:</label>
                             <input type="time" class="form-control input-sm col-xs-1" id="_timein" placeholder="Time In">
@@ -343,48 +337,47 @@
                         </div>
 
                         <label class="fw-bold" for="date">Facility Equipments</label>
-                            <div class="table-responsive">
-                            <table id="testtable" class="table" width="100%" >
+                        <div class="table-responsive">
+                            <table id="testtable" class="table" width="100%">
                                 <thead>
                                     <th>Equipments Name</th>
-                                    <th>Quantity</th>                                  
+                                    <th>Quantity</th>
                                     <th>Quantity to Reserve</th>
                                 </thead>
                             </table>
+                        </div>
+                        <label class="fw-bold">Equipments Added To Reservation</label>
+
+                        <div id="container1">
+                            <div id="container2">
                             </div>
-                            <label class="fw-bold">Equipments Added To Reservation</label>
-                            
-                                    <div id="container1">
-                                        <div id="container2">
-                                        </div>
-                                    </div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <div class="tacbox"></div>
-                        <input id="termscond" type="checkbox"/>
-                        <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>
-                    </div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input id="termscond" type="checkbox" />
+                    <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>
                 </div>
-                <script>
-                    document.getElementById("termscond").checked = true;
-                        document.getElementById("termscond").disabled = true;
-                    //date auto fill
-                    var now = new Date();
-                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                    document.getElementById('datefiled').value = now.toISOString().substring(0,10);
-                    //date end
-                    
-                </script>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
+            <script>
+                document.getElementById("termscond").checked = true;
+                document.getElementById("termscond").disabled = true;
+                //date auto fill
+                var now = new Date();
+                now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                document.getElementById('datefiled').value = now.toISOString().substring(0, 10);
+                //date end
+            </script>
         </div>
+    </div>
     </div>
     <br>
     <br>
-        <!-- Modal Popup End -->
-        <!-- Add ons modal popup-->
-        <div class="modal shadow p-3 mb-5 bg-white rounded" tabindex="-1" id="myModal2" aria-labelledby="exampleModalLabel" data-backdrop="static">
+    <!-- Modal Popup End -->
+    <!-- Add ons modal popup-->
+    <div class="modal shadow p-3 mb-5 bg-white rounded" tabindex="-1" id="myModal2" aria-labelledby="exampleModalLabel" data-backdrop="static">
         <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
@@ -453,7 +446,7 @@
                                     <input type="date" class="form-control input-sm col-xs-1" id="dateconfirmed">
                                 </div>
                             </div>
-                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -463,10 +456,10 @@
             </div>
         </div>
     </div>
-        <!-- Add ons modal popup end-->
+    <!-- Add ons modal popup end-->
 
-        <!-- Create Reservation start-->
-        <div class="modal " tabindex="-1" id="reserModal" aria-labelledby="exampleModalLabel">
+    <!-- Create Reservation start-->
+    <div class="modal " tabindex="-1" id="reserModal" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
@@ -488,26 +481,26 @@
                         <label for="be_functionhall"> BE Function Hall</label><br><br>-->
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
-                                <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange ="dynamicEq()" >
-                                <option disabled selected value> -- Select Facility -- </option>
+                                <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange="dynamicEq()">
+                                    <option disabled selected value> -- Select Facility -- </option>
                                     select = document.getElementById("faci");
                                     <?php include('../../connection/connection.php');
                                     $sql = "SELECT facilityname FROM facility";
-                                    $query = mysqli_query($con,$sql);
-                                    $i=1;
-                                    while($row = mysqli_fetch_assoc($query)){
-                                        echo "<option value=$i>".$row["facilityname"]."</option>";
+                                    $query = mysqli_query($con, $sql);
+                                    $i = 1;
+                                    while ($row = mysqli_fetch_assoc($query)) {
+                                        echo "<option value=$i>" . $row["facilityname"] . "</option>";
                                         $i++;
                                     }
                                     ?>
-                                                
 
-                                                
+
+
                                 </select>
                             </div>
                             <div class="col-md-6 ">
-                            <input type="text" class="form-control input-sm col-xs-1" id="eventname" placeholder="Event Name">
-                            </div>        
+                                <input type="text" class="form-control input-sm col-xs-1" id="eventname" placeholder="Event Name">
+                            </div>
                         </div>
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
@@ -519,7 +512,7 @@
                                 <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use">
                             </div>
                         </div>
-                        
+
                         <div class="col-md-2">
                             <label class="fw-bold" for="date">Time In:</label>
                             <input type="time" class="form-control input-sm col-xs-1" id="timein" placeholder="Time In">
@@ -568,19 +561,19 @@
                         <br>
                         <label class="fw-bold" for="date">Facility Equipments</label>
                         <div class="table-responsive">
-                        <table id="testtable" class="table" width="100%" >
-                            <thead>
-                                <th>Equipments Name</th>
-                                <th>Quantity</th>                                  
-                                <th>Quantity to Reserve</th>
-                            </thead>
-                        </table>
+                            <table id="testtable" class="table" width="100%">
+                                <thead>
+                                    <th>Equipments Name</th>
+                                    <th>Quantity</th>
+                                    <th>Quantity to Reserve</th>
+                                </thead>
+                            </table>
                         </div>
                         <label class="fw-bold">Equipments Added To Reservation</label>
-                                <div id="container1">
-                                    <div id="container2">
-                                    </div>
-                                </div>
+                        <div id="container1">
+                            <div id="container2">
+                            </div>
+                        </div>
                         <!--<div class="col-sm-12 d-flex justify-content-end">
                             <a data-toggle="modal" href="#myModal2" class="btn btn-primary">Add-ons</a>
                         </div>-->
@@ -602,12 +595,12 @@
                                     </div>
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Date:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="dateminor" placeholder="Date" disabled> 
+                                        <input type="date" class="form-control input-sm col-xs-1" id="dateminor" placeholder="Date" disabled>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                    
+                                    <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
+
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2" style="width:20%">
@@ -618,22 +611,22 @@
                                 <div class="row">
                                     <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                         <label class="fw-bold" for="date">Item Name:</label>
-                                        <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
+                                        <input type="form-control" class="form-control" id="_item_" placeholder="Item">
                                     </div>
                                 </div>
                                 <div class="justify-content-center">
-                                    <div class="col-md-12" >
+                                    <div class="col-md-12">
                                         <label class="fw-bold" for="date">Description:</label>
                                         <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="justify-content-center">
-                                    <div class="col-md-12" >
+                                    <div class="col-md-12">
                                         <label class="fw-bold" for="date">Purpose:</label>
                                         <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
                                     </div>
-                                </div>  
+                                </div>
                                 <!-- Form Controls End-->
                             </form>
                         </div>
@@ -643,21 +636,21 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <!--<button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>-->
-                    <a href= "javascript:void();" class ="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
-                    
+                    <a href="javascript:void();" class="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
+
                 </div>
-                <script type="text/javascript" src="functions/js/createresdep.js?random=<?php echo uniqid(); ?>"></script>                       
-                
+                <script type="text/javascript" src="functions/js/createresdep.js?random=<?php echo uniqid(); ?>"></script>
+
             </div>
         </div>
     </div>
-        <!-- create reservation end -->
-                                    
-   
+    <!-- create reservation end -->
 
-    
-    
- 
+
+
+
+
+
     <!-- BODY END-->
 </body>
 

@@ -13,13 +13,6 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <header class="shadow">
@@ -128,47 +121,54 @@
 <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../../images/Brown_logo_faci.png" />
+                <img src="../../../images/Brown_logo_faci.png" />
             </div>
         </div>
         <div class ="navdiv">
         <ul class="nav_list">
-            <li>
-                <a href="../../../../php/sao/reservation/saocalendar.php">
-                    <i class='bx bx-calendar'></i>
-                    <span class="link_name">Calendar of Activities</span>
-                </a>
-            </li>
-            <li>
+                <li>
+                    <a href="../../../php/buildingdept/buildingcalendar.php">
+                        <i class='bx bx-calendar'></i>
+                        <span class="link_name">Calendar of Activities</span>
+                    </a>
+                </li>
+                <li>
+                <div class="dropdown">
+                    <i class='bx bx-notepad' style="margin-left:17px;" ></i>
+                    <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Manage Request
+                    </span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="../../../php/buildingdept/minor/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
+                    </ul>
+                </div>
+                </li>
+                <li>
                 <div class="dropdown">
                     <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
                     <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Job Request
+                        View/Create Request
                     </span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/sao/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/sao/majoruser/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../php/buildingdept/minoruser/minorjobreqlist.php">Minor Job Request</a>
+                        <a class="dropdown-item" href="../../../php/buildingdept/majoruser/majorjobreqlist.php">Major Job Request</a>
+                        <a class="dropdown-item" href="../../../php/buildingdept/reservation/buildingdeptreservation.php">Reservation</a>
                     </ul>
                 </div>
-            </li>
-            <li>
-            <li>
-                <a href="../../../../php/sao/reservation/saoreservation.php">
-                    <i class='bx bx-check-square'></i>
-                    <span class="link_name">Reservation</span>
-                </a>
-            </li>
-        </ul>
+                </li>
+            </ul>
+            
         <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
                         <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
-                            <div class="role">SAO</div>
+                            <div class="role">Building Department</div>
                         </div>
                     </div>
-                    <a href="../../../logout.php">
+                    <a href="../../../../logout.php">
                         <i class='bx bx-log-out' id="log_out"></i>
                     </a>
                 </div>
@@ -177,6 +177,10 @@
     </div>
 
     
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
    <div class="table1">
         <div class="container-fluid">
             <div class="row">
@@ -189,6 +193,7 @@
                                 <thead>
                                     <th>ID</th>
                                     <th>Department</th>
+                                    <th>Section</th>
                                     <th>Date</th>
                                     <th>Status</th>
                                     <th>Options</th>
@@ -212,33 +217,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script type="text/javascript" src="functions/js/process.js?random=<?php echo uniqid(); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script>
-        var dpt = "<?php echo $_SESSION['department'];?>";
-        $('#datatable').DataTable({
-            'serverSide': true,
-            'processing': true,
-            'paging': true,
-            'order': [],
-            'ajax': {
-                'url': 'functions/fetch_data.php',
-                'type': 'post',
-                'data':{
-                        dpt:dpt,
-                },
-            },
-            'fnCreatedRow': function(nRow, aData, iDataIndex) {
-                $(nRow).attr('id', aData[0]);
-            },
-            'columnDefs': [{
-                'target': [0, 4],
-                'orderable': false,
-            }],
-        scrollY: 200,
-        scrollCollapse: true,
-        paging: false 
-
-        });
-    </script>
+    
                         
     <!-- Script Process End-->
     <!-- add user modal-->
@@ -259,7 +238,7 @@
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="department" value = "<?php echo $_SESSION['department'];?>" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" value = "<?php echo $_SESSION['department'];?>" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
@@ -371,6 +350,7 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
                                     <select class="" style="width: 150px; Border: 5px;" name="sections" id="_sect">
+                                        <option value="P">Select</option>
                                         <option value="C">CARPENTRY</option>
                                         <option value="P">PLUMBING</option>
                                         <option value="A">AIRCON</option>
@@ -422,7 +402,12 @@
                             </div>
                         <div>
                         <div class="modal-footer justify-content-md-center">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <a href= "javascript:void();" class ="btn btn-primary step1approveBtn">Approve</a>
+                            <a href= "javascript:void();" class ="btn btn-danger step1declineBtn">Decline</a>
+                            <a href= "javascript:void();" class ="btn btn-info text-white updateBtn">Update</a>
+                            <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
+                            <button type="button" class="btn btn-danger">Decline</button>
+                            <button type="submit" class="btn btn-info text-white">Update</button>-->
                          </div>
                         </div>
                             <!-- Form Controls End-->
