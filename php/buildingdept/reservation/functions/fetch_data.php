@@ -1,12 +1,18 @@
 <?php include('../../../connection/connection.php');
-
-$sql = "select * FROM reservation WHERE requestingparty='Building Department'";
+$dpt = $_POST['dpt'];
+$sql = "select * FROM reservation WHERE requestingparty = '$dpt'";
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
 
 if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
-    $sql .= " AND reservationid like '%" . $search_value . "%' ";
+    $sql .= " OR reservationid like '%" . $search_value . "%' AND requestingparty = '$dpt'";
+    $sql .= " OR requestingparty like '%" . $search_value . "%' AND requestingparty = '$dpt'";
+    $sql .= " OR facility like '%" . $search_value . "%' AND requestingparty = '$dpt'";
+    $sql .= " OR eventname like '%" . $search_value . "%' AND requestingparty = '$dpt'";
+    $sql .= " OR datefiled like '%" . $search_value . "%' AND requestingparty = '$dpt'";
+    $sql .= " OR actualdateofuse like '%" . $search_value . "%' AND requestingparty = '$dpt'";
+    $sql .= " OR status like '%" . $search_value . "%' AND requestingparty = '$dpt'";
 }
 
 if (isset($_POST['order'])) {
@@ -38,7 +44,7 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = $row['datefiled'];
     $subarray[] = $row['actualdateofuse'];
     $subarray[] = $row['status'];
-    $subarray[] = '<a href= "javascript:void();" data-id="' . $row['reservationid'] . '" class ="btn btn-sm btn-info editBtn" >More Info</a>';
+    $subarray[] = '<a href= "javascript:void();" data-id="' . $row['reservationid'] . '" class ="btn btn-sm btn-info editBtn" >More Info</a> <a href= "javascript:void();" data-id="' . $row['reservationid'] . '" class ="btn btn-sm btn-danger deleteBtn">Delete</a>';
     $data[] = $subarray;
     
 }
