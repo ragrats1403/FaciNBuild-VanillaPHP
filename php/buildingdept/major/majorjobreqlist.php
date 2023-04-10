@@ -381,12 +381,12 @@
             document.getElementById("requino").disabled = true;
             document.getElementById("department").disabled = true;
             document.getElementById("date").disabled = true;
-            document.getElementById("sections").disabled = true;
+            document.getElementById("sections").disabled = false;
             document.getElementById("quantity").disabled = true;
             document.getElementById("item").disabled = true;
             document.getElementById("description").disabled = true;
             document.getElementById("purpose").disabled = true;
-            document.getElementById("remark").disabled = true;
+            document.getElementById("remark").disabled = false;
             document.getElementById("_statustext").disabled = true;
             document.getElementById("_inputFeedback").disabled = true;
             $.ajax({
@@ -441,12 +441,20 @@
             var trid = $('#trid').val();
             var dept = $('#department').val();
             var feedb = $('#_inputFeedback').val();
+            
+            var e = document.getElementById("sections");
+            var section = e.options[e.selectedIndex].text;
+            var e = document.getElementById("remark");
+            var remark = e.options[e.selectedIndex].text;
             $.ajax({
                 url: "functions/step1approve.php",
                 data: {
                     id: id,
                     dept: dept,
                     feedb: feedb,
+                    section: section,
+                    remark: remark,
+
 
                 },
                 type: 'POST',
@@ -495,11 +503,6 @@
                         table = $('#datatable').DataTable();
                         table.draw();
                         alert('Step 1 Declined Successfully!');
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        //$('#_itemdesc_').text('');
                         $('#_step1').val('Declined');
                         $('#_statustext').val('Declined');
                         $('#editUserModal').modal('hide');

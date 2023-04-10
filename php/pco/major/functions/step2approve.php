@@ -22,6 +22,7 @@ $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
 
 // Format the date in your local timezone
 $formatted_date = $date->format('Y-m-d H:i:s');
+
 $sql = "UPDATE `majoreq` SET `pcostatus`= 'Approved', `requino` = '$reqno', `feedback` = '$feedb'  WHERE jobreqno = '$id'";
 $query = mysqli_query($con, $sql);
 
