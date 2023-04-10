@@ -468,7 +468,6 @@ $(document).on("click", ".submitBtn", function (event) {
       else{
         alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
       }
-
     }
     else{
       alert("false test");
@@ -494,7 +493,6 @@ $(document).on("click", ".deleteBtn", function (event) {
         var json = JSON.parse(data);
         var status = json.status;
         //var table = $('#datatable').DataTable();
-
         if (status == "success") {
           $("#" + id)
             .closest("tr")
