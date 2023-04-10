@@ -25,8 +25,8 @@
 </head>
 
 <header class="shadow">
-        <div class="imgctrl">
-        </div>
+    <div class="imgctrl">
+    </div>
     <div class="navplace">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: transparent;
@@ -137,10 +137,10 @@
                 });
             });
         </script>
-        <p>Hello, <?php echo $_SESSION['department'];?></p>
-        </div>
-        <nav class="gnav">
-        </nav>
+        <p>Hello, <?php echo $_SESSION['department']; ?></p>
+    </div>
+    <nav class="gnav">
+    </nav>
     </div>
 </header>
 
@@ -392,7 +392,7 @@
                     option.hidden = true;
                     option.disabled = true;
                     option.selected = true;
-                    x.add(option); 
+                    x.add(option);
                     var a = document.getElementById("remark");
                     var option2 = document.createElement("option");
                     option2.text = json.section;
@@ -716,7 +716,7 @@
                 }
             });
         });
-       
+
 
         $(document).on('click', '.step3declineBtn', function(event) {
             var id = $('#jobrequestno').val();
@@ -920,7 +920,7 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Section:</label>
                                     <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections" disabled>
-                                    <option disabled selected value hidden></option>
+                                        <option disabled selected value hidden></option>
                                         <option value="CARPENTRY">CARPENTRY</option>
                                         <option value="PLUMBING">PLUMBING</option>
                                         <option value="AIRCON">AIRCON</option>
@@ -980,14 +980,14 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
                                     <select class="" style="width: 150px; Border: none;" id="remark" disabled>
-                                    <option disabled selected value hidden></option>
+                                        <option disabled selected value hidden></option>
                                         <option value="Outsource">Outsource</option>
                                         <option value="Bill of materials">Bill of materials</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="justify-content-center">
-                                <div class="col-md-12" >
+                                <div class="col-md-12">
                                     <label class="fw-bold" for="date">Feedback:</label>
                                     <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback" disabled></textarea>
                                 </div>
@@ -1001,23 +1001,23 @@
                                     <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
                                 <button type="button" class="btn btn-danger">Decline</button>
                                 <button type="submit" class="btn btn-info text-white">Update</button>-->
-                                <script>
-                                    $(document).on('click', '.editfieldBtn', function(event) {
-                                        var updtbtn = document.getElementById("updbtn");
-                                        document.getElementById("quantity").disabled = false;
-                                        document.getElementById("item").disabled = false;
-                                        document.getElementById("description").disabled = false;
-                                        document.getElementById("purpose").disabled = false;
-                                        document.getElementById("remark").disabled = false;
-                                        document.getElementById("sections").disabled = false;
-                                        document.getElementById("_inputFeedback").disabled = false;
+                                    <script>
+                                        $(document).on('click', '.editfieldBtn', function(event) {
+                                            var updtbtn = document.getElementById("updbtn");
+                                            document.getElementById("quantity").disabled = false;
+                                            document.getElementById("item").disabled = false;
+                                            document.getElementById("description").disabled = false;
+                                            document.getElementById("purpose").disabled = false;
+                                            document.getElementById("remark").disabled = false;
+                                            document.getElementById("sections").disabled = false;
+                                            document.getElementById("_inputFeedback").disabled = false;
 
 
-                                            updtbtn.classList.remove("disabled");  
+                                            updtbtn.classList.remove("disabled");
                                             updtbtn.classList.remove("text-white");
 
-                                    });
-                                </script>
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -1048,7 +1048,7 @@
                                 <!-- Form Controls-->
                                 <div id="print-section" *ngIf="propertyLedger">
                                     <div class="logo">
-                                        <img src="../../../../images/uclogo.png" alt="" width="75" height="50"/>
+                                        <img src="../../../../images/uclogo.png" alt="" width="75" height="50" />
                                     </div>
                                     <table class="table borderless">
                                         <tr>
@@ -1069,22 +1069,22 @@
                                         </tr>
                                     </table>
                                     <hr>
-                                    <table class="table-borderless table-sm">
+                                    <table class="table borderless">
                                         <tr>
                                             <th>QUANTITY</th>
-                                            <th style="white-space: nowrap;">ITEMS WITH COMPLETE DESCRIPTION</th>
-                                            <th></th>
+                                            <th>ITEMS WITH COMPLETE DESCRIPTION</th>
                                             <th>SECTION</th>
+                                            <th></th>
                                         </tr>
                                         <tr>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="1" id="quantity1" disabled></textarea></td>
-                                            <td colspan=2><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="description1" disabled></textarea></td>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="1" id="sections1" disabled></textarea></td>
-                                           
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity1" disabled></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="description1" disabled></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="sections1" disabled></textarea></td>
+                                            <td></td>
                                         </tr>
                                         <tr>
-                                            <th>PURPOSE:</th>
-                                            <td colspan=2><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1" disabled></textarea></td>
+                                            <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1" disabled></textarea></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
@@ -1110,7 +1110,7 @@
                                         </tr>
                                         <tr>
                                             <th class="col-md-3">B.2. ESTIMATED COST</th>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control"  id=""></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" id=""></textarea></td>
                                             <td>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -1130,23 +1130,21 @@
                                         </tr>
                                         <tr>
                                             <th class="col-md-3">B.3. RECOMMENDED BY</th>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control"  id=""></textarea></td>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" id=""></textarea></td>
                                             <th>REMARKS:</th>
-                                            <th><textarea style="border: none; border-color: transparent;" class="form-control"  id="remarks1" disabled></textarea></th>
+                                            <th><textarea style="border: none; border-color: transparent;" class="form-control" id="remarks1" disabled></textarea></th>
                                         </tr>
                                         <tr>
-                                          <th class="col-md-4" style="white-space: nowrap; ">APPROVED BY: MS.CANDICE GOTIANUY</th>
+                                            <th class="col-md-4">APPROVED BY:MS.CANDICE GOTIANUY</th>
                                         </tr>
                                         <tr>
-                                         <td class="col-md-2"; style= "text-align:center">UC - CHANCELLOR</td>
+                                            <td class="col-md-2" ; style="text-align:center">UC - CHANCELLOR</td>
                                         </tr>
                                     </table>
                                     <div class="no-print-area">
                                         <div class="modal-footer justify-content-md-center">
                                             <a href="#" class="btn btn-secondary printbtn" onclick="printContent()">Print</a>
-                                            <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
-                                <button type="button" class="btn btn-danger">Decline</button>
-                                <button type="submit" class="btn btn-info text-white">Update</button>-->
+
                                         </div>
                                     </div>
                                     <script>
