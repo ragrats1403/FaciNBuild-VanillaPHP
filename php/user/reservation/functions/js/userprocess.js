@@ -4,6 +4,10 @@
 $(document).on("click", ".editBtn", function (event) {
   var id = $(this).data("id");
   var trid = $(this).closest("tr").attr("reservationid");
+  const myNode =  document.getElementById('container4');
+    while (myNode.firstChild ) {
+    myNode.removeChild(myNode.lastChild);
+  } 
   document.getElementById("_facility").disabled = true;
   document.getElementById("_eventname").disabled = true;
   document.getElementById("_datefiled").disabled = true;
@@ -213,73 +217,73 @@ $(document).on("click", ".submitBtn", function (event) {
                         var status = json.status;
                         if ((status = "success")) {
                           //equipment additionals
-                          var testarr = [...document.querySelectorAll('[id^="fbh"]')].map(
-                            (elm) => elm.id
-                          );
-                          var testarr2 = [...document.querySelectorAll('[id^="fbe"]')].map(
-                            (elm) => elm.id
-                          );
-                          var testarr3 = [...document.querySelectorAll('[id^="fbv"]')].map(
-                            (elm) => elm.id
-                          );
-                          for (i = 0; i <= testarr.length - 1; i++) {
-                            var eid = document.getElementById(testarr[i]).value; //id
-                            var ename = document.getElementById(testarr2[i]).value; //name
-                            var eqval = document.getElementById(testarr3[i]).value; //value
-                            $.ajax({
-                              url: "functions/addeqreserve.php",
-                              data: {
-                                eventname: eventname,
-                                dateofusage: actualdate,
-                                datesubmitted: datefiled,
-                                timestart: timein,
-                                timeend: timeout,
-                                quantity: eqval,
-                                facility: faci,
-                                eqid: eid,
-                                eqname: ename,
-                              },
-                              type: "POST",
-                              success: function (data) {
-                                var eqjson = JSON.parse(data);
-                                var status = eqjson.status;
-                                if (status == "success") {
-                                  console.log("equipment added to reservation!");
-                                  var checkbox = document.getElementById("flexCheckDefault");
-                                  if (checkbox.checked == true) {
-                                    var department = $("#_department").val();
-                                    var date = $("#dateminor").val();
-                                    var quantity = $("#_quantity_").val();
-                                    var itemname = $("#_item_").val();
-                                    var description = $("#_itemdesc_").val();
-                                    var purpose = $("#_purpose_").val();
-                                    $.ajax({
-                                      url: "functions/addons.php",
-                                      data: {
-                                        department: department,
-                                        date: date,
-                                        quantity: quantity,
-                                        itemname: itemname,
-                                        description: description,
-                                        purpose: purpose,
-                                        eventname: eventname,
-                                        actualdate: actualdate,
-                                        reqparty: reqparty,
-                                      },
-                                      type: "POST",
-                                      success: function (data) {
-                                        var addonjson = JSON.parse(data);
-                                        var status = addonjson.status;
-                                        if (status == "success") {
-                                          console.log("Addons added to reservation!");                          
-                                        }
-                                      },
-                                    });
-                                  } else {
+                            var testarr = [...document.querySelectorAll('[id^="fbh"]')].map(
+                              (elm) => elm.id
+                            );
+                            var testarr2 = [...document.querySelectorAll('[id^="fbe"]')].map(
+                              (elm) => elm.id
+                            );
+                            var testarr3 = [...document.querySelectorAll('[id^="fbv"]')].map(
+                              (elm) => elm.id
+                            );
+                            for (i = 0; i <= testarr.length - 1; i++) {
+                              var eid = document.getElementById(testarr[i]).value; //id
+                              var ename = document.getElementById(testarr2[i]).value; //name
+                              var eqval = document.getElementById(testarr3[i]).value; //value
+                              $.ajax({
+                                url: "functions/addeqreserve.php",
+                                data: {
+                                  eventname: eventname,
+                                  dateofusage: actualdate,
+                                  datesubmitted: datefiled,
+                                  timestart: timein,
+                                  timeend: timeout,
+                                  quantity: eqval,
+                                  facility: faci,
+                                  eqid: eid,
+                                  eqname: ename,
+                                },
+                                type: "POST",
+                                success: function (data) {
+                                  var eqjson = JSON.parse(data);
+                                  var status = eqjson.status;
+                                  if (status == "success") {
+                                    console.log("equipment added to reservation!");
+                                    var checkbox = document.getElementById("flexCheckDefault");
+                                    if (checkbox.checked == true) {
+                                      var department = $("#_department").val();
+                                      var date = $("#dateminor").val();
+                                      var quantity = $("#_quantity_").val();
+                                      var itemname = $("#_item_").val();
+                                      var description = $("#_itemdesc_").val();
+                                      var purpose = $("#_purpose_").val();
+                                      $.ajax({
+                                        url: "functions/addons.php",
+                                        data: {
+                                          department: department,
+                                          date: date,
+                                          quantity: quantity,
+                                          itemname: itemname,
+                                          description: description,
+                                          purpose: purpose,
+                                          eventname: eventname,
+                                          actualdate: actualdate,
+                                          reqparty: reqparty,
+                                        },
+                                        type: "POST",
+                                        success: function (data) {
+                                          var addonjson = JSON.parse(data);
+                                          var status = addonjson.status;
+                                          if (status == "success") {
+                                            console.log("Addons added to reservation!");                          
+                                          }
+                                        },
+                                      });
+                                    } else {
+                                    }
                                   }
-                                }
-                              },
-                            });
+                                },
+                              });
                           }
                           //$('#department').val('');
                           /*var now = new Date();

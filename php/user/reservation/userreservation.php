@@ -46,7 +46,8 @@ const notificationBadge = notificationDropdown.querySelector(".icon-button__badg
 const notificationList = document.querySelector(".notification-list");
 notificationList.style.height = "300px"; // Set a fixed height for the notification
 notificationList.style.overflowY = "auto"; // Enable vertical scrolling
-
+notificationList.style.width = "500px";
+notificationList.style.position = "relative";
 // Fetch the notifications and update the badge and list
 function fetchNotifications() {
   // Make an AJAX request to fetch the notifications

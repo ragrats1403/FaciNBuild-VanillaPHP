@@ -283,9 +283,9 @@ $("#reserModal").on("hidden.bs.modal", function () {
   
   $("#test").on("hidden.bs.modal", function () {
     const myNode =  document.getElementById('container4');
-    while (myNode.firstChild) {
+    while (myNode.firstChild ) {
     myNode.removeChild(myNode.lastChild);
-
+        
             var x = document.getElementById("_myDIV");
             x.style.display = "none";
             document.getElementById("_dept").disabled = true //department

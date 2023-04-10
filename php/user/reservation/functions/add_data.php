@@ -38,9 +38,10 @@ $actualdatestr = date($actualdate);
 $adate = new DateTime($actualdatestr);
 $aformatted_date = $adate->format('F d, Y');
 
-$message = "You have submitted your facility reservation to use on \n".$aformatted_date."";
-
-
+$message = "You have submitted your facility reservation to use on \n".$aformatted_date." and is now Pending for approval!";
+$facilitiesDeptmesg = "".$reqparty." submitted a facility reservation request at ".$formatted_date." to use on ".$aformatted_date." and is waiting for Approval\nCheck them in Manage Reservations";
+$saoDeptmesg = "".$reqparty." submitted a facility reservation request at ".$formatted_date." to use on ".$aformatted_date." and is waiting for Approval\nCheck them in Manage Reservations!";
+$adminDeptmesg = "".$reqparty." submitted a facility reservation request at ".$formatted_date." to use on ".$aformatted_date."and is waiting for Approval\nCheck them in Manage Reservations!";
 //notification message construct end
 
 
@@ -49,6 +50,12 @@ $query = mysqli_query($con, $sql);
 if ($query == true) {
     $sqlnotif = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$message', '$reqparty', '$datestr','0')";
     $notifquery = mysqli_query($con, $sqlnotif);
+    $sqlnotiffaci = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$facilitiesDeptmesg', 'Facilities Department', '$datestr','0')";
+    $facinotifquery = mysqli_query($con, $sqlnotiffaci);
+    $sqlnotifsao = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$saoDeptmesg', 'Student Affairs Office', '$datestr','0')";
+    $saonotifquery = mysqli_query($con, $sqlnotifsao);
+    $sqlnotifadmin = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$adminDeptmesg', 'Administrator', '$datestr','0')";
+    $adminnotifquery = mysqli_query($con, $sqlnotifadmin);
     $data = array(
         'status' => 'success',
     );
