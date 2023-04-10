@@ -39,9 +39,10 @@
         ?>
         <script>
             // Get the notification dropdown button and badge
-            const notificationDropdown = document.getElementById("notification-dropdown");
-            const notificationBadge = notificationDropdown.querySelector(".icon-button__badge");
+const notificationDropdown = document.getElementById("notification-dropdown");
+const notificationBadge = notificationDropdown.querySelector(".icon-button__badge");
 
+<<<<<<< Updated upstream
             // Get the notification list element
             const notificationList = document.querySelector(".notification-list");
             notificationList.style.height = "300px"; // Set a fixed height for the notification
@@ -77,11 +78,48 @@
                                 notificationItem.classList.add("unread"); // Add "unread" class if the notification is unread
                             }
                             notificationItem.innerHTML = `
+=======
+// Get the notification list element
+const notificationList = document.querySelector(".notification-list");
+notificationList.style.height = "300px"; // Set a fixed height for the notification
+notificationList.style.overflowY = "auto"; // Enable vertical scrolling
+notificationList.style.width = "500px";
+notificationList.style.position = "relative";   
+// Fetch the notifications and update the badge and list
+function fetchNotifications() {
+  // Make an AJAX request to fetch the notifications
+  var department = "<?php echo $_SESSION['department'];?>";
+  $.ajax({
+    url: "functions/notification.php",
+    data: {
+        department: department,
+    },
+    type: 'POST',
+    success: function(data) {
+      var notifications = JSON.parse(data);
+      var len = notifications.length;
+      // Update the badge count
+      notificationBadge.innerText = notifications.length;
+
+      // Clear the existing list
+      notificationList.innerHTML = "";
+
+      // Add each notification to the list
+      for (let i = 0; i < notifications.length; i++) {
+        const notification = notifications[i];
+        const notificationItem = document.createElement("div");
+        notificationItem.classList.add("dropdown-item");
+        if (!notification.is_read) {
+            notificationItem.classList.add("unread"); // Add "unread" class if the notification is unread
+        }
+        notificationItem.innerHTML = `
+>>>>>>> Stashed changes
             <div class="d-flex align-items-center">
             <div class="flex-grow-1 notification-message">${notification.message}</div>
             <div class="text-muted notification-date">${new Date(notification.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} ${new Date(notification.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</div>
             </div>
         `;
+<<<<<<< Updated upstream
                             notificationList.appendChild(notificationItem);
                             if (i < notifications.length - 1) {
                                 // Add a divider after each item except the last one
@@ -129,6 +167,55 @@
                     }
                 });
             });
+=======
+        notificationList.appendChild(notificationItem);
+        if (i < notifications.length - 1) {
+            // Add a divider after each item except the last one
+            const divider = document.createElement("div");
+            divider.classList.add("dropdown-divider");
+            notificationList.appendChild(divider);
+        }
+      }
+
+      // Add event listeners to the notification items
+      const notificationItems = notificationList.querySelectorAll(".dropdown-item");
+      notificationItems.forEach(item => {
+        item.addEventListener("click", function() {
+          // Remove the "unread" class when the notification is clicked
+          item.classList.remove("unread");
+        });
+      });
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  fetchNotifications();
+  setInterval(fetchNotifications, 5000);
+});
+
+const markAsReadButton = document.querySelector(".mark-as-read");
+
+markAsReadButton.addEventListener("click", function(event) {
+  $.ajax({
+    url: "functions/update_notification.php",
+    type: 'POST',
+    success: function(data) {
+      var json = JSON.parse(data);
+      var len = json.length;
+      const notificationItems = notificationList.querySelectorAll(".dropdown-item");
+      notificationItems.forEach(item => {
+        item.classList.remove("unread"); // Remove the "unread" class when the notifications are marked as read
+        item.classList.add("read"); // Add the "read" class to mark the notification as read
+      });
+      notificationBadge.innerText = "0";
+    },
+    error: function() {
+      console.log("Error marking notifications as read");
+    }
+  });
+});
+>>>>>>> Stashed changes
         </script>
         <p>Hello, <?php echo $_SESSION['department']; ?></p>
     </div>
@@ -222,6 +309,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<<<<<<< Updated upstream
     <script>
         $("#calendar").DataTable({
             'searching': false,
@@ -237,6 +325,23 @@
                 'type': "post",
             },
             fnCreatedRow: function(nRow, aData, iDataIndex) {
+=======
+        <script>
+            $("#calendar").DataTable({
+                'searching':false,
+                'autoWidth': false,
+                'bJQueryUI': true,
+                'info': false,
+                'serverSide': true,
+                'processing': true,
+                'paging': true,
+                'order': [],
+                'ajax': {
+                    'url': "functions/fetch_data.php",
+                    'type': "post",
+                },
+                fnCreatedRow: function (nRow, aData, iDataIndex) {
+>>>>>>> Stashed changes
                 $(nRow).attr("id", aData[0]);
             },
             columnDefs: [{
