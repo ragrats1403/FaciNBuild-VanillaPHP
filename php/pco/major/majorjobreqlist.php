@@ -356,14 +356,18 @@
                     else{
                         reqNbtn.classList.add("disabled");
                     }
-                    if (json.pcostatus != 'Approved') {
 
+                    if (json.pcostatus == 'Pending') {
                         aprbtn.classList.remove("disabled");
                         dclbtn.classList.remove("disabled");
-                    } else {
+                        reqNbtn.classList.remove("disabled");
+                    } 
+                    else
+                    {
                         aprbtn.classList.add("disabled");
                         dclbtn.classList.add("disabled");
                     }
+
 
 
 
