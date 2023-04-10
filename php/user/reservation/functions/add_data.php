@@ -30,13 +30,30 @@ echo "Error: ". $psql . "<br>" . mysqli_error($con);
 
 
 //notification message construct start
-$datestr = date('Y-m-d H:i:s');
-$date = new DateTime($datestr);
+// Set the default timezone of the server
+// Set the default timezone of the server
+date_default_timezone_set('Asia/Manila');
+
+// Get the current datetime in the server timezone
+$date = new DateTime('now', new DateTimeZone(date_default_timezone_get()));
+// Set the timezone to your local timezone
+$date->setTimezone(new DateTimeZone(date_default_timezone_get()));
+// Format the date in your local timezone
+$newdate = $date->format('Y-m-d H:i:s');
+// Format the date in your local timezone
 $formatted_date = $date->format('F d, Y g:iA');
 
-$actualdatestr = date($actualdate);
+
+
+
+// Get the actual date in the default timezone of the server
+$actualdatestr = date('Y-m-d H:i:s', $actualdate);
 $adate = new DateTime($actualdatestr);
+
+// Format the actual date in the default timezone of the server
 $aformatted_date = $adate->format('F d, Y');
+
+
 
 $message = "You have submitted your facility reservation to use on \n".$aformatted_date." and is now Pending for approval!";
 $facilitiesDeptmesg = "".$reqparty." submitted a facility reservation request to use on ".$aformatted_date." and is waiting for Approval\nCheck them in Manage Reservations";
@@ -48,13 +65,13 @@ $adminDeptmesg = "".$reqparty." submitted a facility reservation request to use 
 $sql = "INSERT INTO `reservation` (`eventname`, `facility`, `requestingparty`, `purposeofactivity`, `datefiled`, `actualdateofuse`, `timestart`, `timeend`, `participants`, `stageperformers`, `adviser`, `chairperson`, `status`, `fdstatus`, `saostatus`) VALUES ('$eventname','$faci','$reqparty',' $purpose', '$datefiled', '$actualdate', '$timein', '$timeout', '$numparticipants', '$stageperf', '$adviser', '$chairman', 'Pending', 'Pending', 'Pending')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
-    $sqlnotif = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$message', '$reqparty', '$datestr','0')";
+    $sqlnotif = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$message', '$reqparty', '$newdate','0')";
     $notifquery = mysqli_query($con, $sqlnotif);
-    $sqlnotiffaci = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$facilitiesDeptmesg', 'Facilities Department', '$datestr','0')";
+    $sqlnotiffaci = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$facilitiesDeptmesg', 'Facilities Department', '$newdate','0')";
     $facinotifquery = mysqli_query($con, $sqlnotiffaci);
-    $sqlnotifsao = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$saoDeptmesg', 'Student Affairs Office', '$datestr','0')";
+    $sqlnotifsao = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$saoDeptmesg', 'Student Affairs Office', '$newdate','0')";
     $saonotifquery = mysqli_query($con, $sqlnotifsao);
-    $sqlnotifadmin = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$adminDeptmesg', 'Administrator', '$datestr','0')";
+    $sqlnotifadmin = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$adminDeptmesg', 'Administrator', '$newdate','0')";
     $adminnotifquery = mysqli_query($con, $sqlnotifadmin);
     $data = array(
         'status' => 'success',

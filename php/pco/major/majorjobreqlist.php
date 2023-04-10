@@ -345,8 +345,17 @@
                     $('#_step1').val(json.bdstatus);
                     $('#_step2').val(json.pcostatus);
                     $('#_step3').val(json.cadstatus);
+                    $('#_inputFeedback').val(json.feedback);
                     var aprbtn = document.getElementById("step2a");
                     var dclbtn = document.getElementById("step2d");
+                    var reqNbtn = document.getElementById("reqnobtn");
+                    if(json.requino == null)
+                    {
+                        reqNbtn.classList.remove("disabled");
+                    }
+                    else{
+                        reqNbtn.classList.add("disabled");
+                    }
                     if (json.pcostatus != 'Approved') {
 
                         aprbtn.classList.remove("disabled");
@@ -367,13 +376,21 @@
 
 
         $(document).on('click', '.step2approveBtn', function(event) {
-            //var status = "Approved";
+            //var status = "Approved";\
+            
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
+            var reqno = $('#requino').val();
+            var dept = $('#department').val();
+            var feedb = $('#_inputFeedback').val();
+            alert("line executed");
             $.ajax({
                 url: "functions/step2approve.php",
                 data: {
                     id: id,
+                    reqno: reqno,
+                    dept: dept,
+                    feedb: feedb,
 
                 },
                 type: 'POST',
@@ -390,6 +407,9 @@
                         row.row("[id='" + trid + "']").data([department, date, button]);*/
                         //$('#_itemdesc_').text('');
                         $('#_step2').val('Approved');
+                        $('#editUserModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
                     } else {
                         alert('failed');
                     }
@@ -400,10 +420,14 @@
         $(document).on('click', '.step2declineBtn', function(event) {
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
+            var dept = $('#department').val();
+            var feedb = $('#_inputFeedback').val();
             $.ajax({
                 url: "functions/step2decline.php",
                 data: {
                     id: id,
+                    dept: dept,
+                    feedb: feedb,
 
                 },
                 type: 'POST',
@@ -413,7 +437,7 @@
                     if (status == 'success') {
                         table = $('#datatable').DataTable();
                         table.draw();
-                        alert('Step 3 Declined Successfully!');
+                        alert('Step 2 Declined Successfully!');
 
 
                         /*table = $('#datatable').DataTable();
@@ -430,6 +454,26 @@
                 }
             });
         });
+
+        $(document).on('click', '.assignReqnoBtn', function(event) {
+            var id = $('#jobrequestno').val();
+            var trid = $('#trid').val();
+            $.ajax({
+                url: "functions/setrequisition.php",
+                type: 'GET',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    var addReqno = parseInt(json.totalno) + 1;
+                    if(json.totalno == null){
+                        $('#requino').val(addReqno);
+                    }
+                    else
+                    {
+                        $('#requino').val(addReqno);
+                    }
+                }
+        });
+    });
     </script>
     <!-- Script Process End-->
     <!-- add user modal-->
@@ -524,7 +568,7 @@
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Requisition no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="requino" placeholder="Requisition no." disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="requino" disabled>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -620,6 +664,7 @@
                                 <div class="modal-footer justify-content-md-center">
                                     <a href="javascript:void();" class="btn btn-primary step2approveBtn disabled" id="step2a">Approve</a>
                                     <a href="javascript:void();" class="btn btn-danger step2declineBtn disabled" id="step2d">Decline</a>
+                                    <a href="javascript:void();" class="btn btn-warning assignReqnoBtn" id="reqnobtn">Add Requisition No.</a>
                                 </div>
                             </div>
                         </div>
