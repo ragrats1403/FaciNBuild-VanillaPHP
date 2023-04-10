@@ -5,7 +5,6 @@ $reqno = $_POST['reqno'];
 $dept = $_POST['dept'];
 $feedb = $_POST['feedb'];
 
-
 /*
 bdstatus
 cadstatus
