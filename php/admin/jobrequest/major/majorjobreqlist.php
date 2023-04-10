@@ -15,13 +15,6 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
     <link rel="stylesheet" type="text/css" href="../../../../css/print.css?<?= time() ?>">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <header class="shadow">
@@ -1067,24 +1060,26 @@
                                             <th class="col-md-2" style="text-align: left;">DATE</th>
                                             <td><input style="border: none; border-color: transparent;" type="text" id="date1" disabled></td>
                                         </tr>
+                                        <tr>
+                                            <th class="col-md-2" style="text-align: left;">SECTIONS</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="sections1" disabled></td>
+                                        </tr>
                                     </table>
                                     <hr>
                                     <table class="table borderless">
                                         <tr>
                                             <th>QUANTITY</th>
-                                            <th>ITEMS WITH COMPLETE DESCRIPTION</th>
-                                            <th>SECTION</th>
+                                            <th colspan="3">ITEMS WITH COMPLETE DESCRIPTION</th>
+                                            <th></th>
                                             <th></th>
                                         </tr>
                                         <tr>
                                             <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity1" disabled></textarea></td>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="description1" disabled></textarea></td>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="sections1" disabled></textarea></td>
-                                            <td></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="description1" disabled></textarea></td>
                                         </tr>
                                         <tr>
                                             <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
-                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1" disabled></textarea></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
@@ -1134,11 +1129,17 @@
                                             <th>REMARKS:</th>
                                             <th><textarea style="border: none; border-color: transparent;" class="form-control" id="remarks1" disabled></textarea></th>
                                         </tr>
-                                        <tr>
-                                            <th class="col-md-4">APPROVED BY:MS.CANDICE GOTIANUY</th>
+                                        <tr style="border: 0px; border: none">
+                                            <th colspan="4" style="text-align:center ; border: 0px; border: none">APPROVED BY:MS.CANDICE GOTIANUY</th>
+                                            <td style="border: 0px; border: none "></td>
+                                            <td style="border: 0px; border: none "></td>
+                                            <td style="border: 0px; border: none "></td>
                                         </tr>
-                                        <tr>
-                                            <td class="col-md-2" ; style="text-align:center">UC - CHANCELLOR</td>
+                                        <tr style="border: 0px; border: none ">
+                                            <th colspan="4" style="text-align:center ; border: 0px; border: none">UC - CHANCELLOR</th>
+                                            <td style="border: 0px; border: none "></td>
+                                            <td style="border: 0px; border: none "></td>
+                                            <td style="border: 0px; border: none "></td>
                                         </tr>
                                     </table>
                                     <div class="no-print-area">

@@ -1,5 +1,3 @@
-@media print {
-  .no-print-area {
+::-webkit-scrollbar {
     display: none;
-  }
 }
