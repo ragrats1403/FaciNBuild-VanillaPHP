@@ -233,7 +233,7 @@
             'paging': true,
             'order': [],
             'ajax': {
-                'url': "dfunctions/fetch_data.php",
+                'url': "functions/fetch_data.php",
                 'type': "post",
             },
             fnCreatedRow: function(nRow, aData, iDataIndex) {
