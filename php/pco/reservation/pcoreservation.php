@@ -42,27 +42,12 @@
             const notificationDropdown = document.getElementById("notification-dropdown");
             const notificationBadge = notificationDropdown.querySelector(".icon-button__badge");
 
-// Get the notification list element
-const notificationList = document.querySelector(".notification-list");
-notificationList.style.height = "300px"; // Set a fixed height for the notification
-notificationList.style.overflowY = "auto"; // Enable vertical scrolling
-notificationList.style.width = "500px";
-notificationList.style.position = "relative";   
-// Fetch the notifications and update the badge and list
-function fetchNotifications() {
-  // Make an AJAX request to fetch the notifications
-  var department = "<?php echo $_SESSION['department'];?>";
-  $.ajax({
-    url: "functions/notification.php",
-    data: {
-        department: department,
-    },
-    type: 'POST',
-    success: function(data) {
-      var notifications = JSON.parse(data);
-      var len = notifications.length;
-      // Update the badge count
-      notificationBadge.innerText = notifications.length;
+            // Get the notification list element
+            const notificationList = document.querySelector(".notification-list");
+            notificationList.style.height = "300px"; // Set a fixed height for the notification
+            notificationList.style.overflowY = "auto"; // Enable vertical scrolling
+            notificationList.style.width = "500px";
+            notificationList.style.position = "relative";
 
             // Fetch the notifications and update the badge and list
             function fetchNotifications() {
@@ -117,9 +102,7 @@ function fetchNotifications() {
                     }
                 });
             }
-        }
-    });
-}
+
             document.addEventListener("DOMContentLoaded", function() {
                 fetchNotifications();
                 setInterval(fetchNotifications, 5000);
@@ -155,7 +138,7 @@ function fetchNotifications() {
 </header>
 
 <body onload="bodyonload();">
-<div class="sidebar">
+    <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../images/Brown_logo_faci.png" />
