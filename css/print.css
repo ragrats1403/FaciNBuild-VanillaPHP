@@ -1,5 +1,9 @@
-@media print {
-  .no-print-area {
+::-webkit-scrollbar {
     display: none;
-  }
+}
+
+@media print {
+    .no-print-area{
+        display: none;
+    }
 }
