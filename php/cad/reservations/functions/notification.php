@@ -1,20 +1,14 @@
 <?php
+include('../../../connection/connection.php');
 
-$host = "localhost";
-$user = "root";
-$password = "";
-$db_name = "testdb";
-
-// Connect to the database
-$con = mysqli_connect($host, $user, $password, $db_name);
-
+$department = $_POST['department'];
 // Check for errors
 if (mysqli_connect_errno()) {
     die("Failed to connect to MySQL: " . mysqli_connect_error());
 }
 
 // Query the database for unread notifications
-$sql = "SELECT * FROM notif_data WHERE is_read = 0 ORDER BY created_at DESC";
+$sql = "SELECT * FROM notif_data WHERE is_read = 0 and department = '$department' ORDER BY created_at DESC";
 $result = mysqli_query($con, $sql);
 // Fetch the results as an array of associative arrays
 
