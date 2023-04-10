@@ -1,9 +1,9 @@
-::-webkit-scrollbar {
-    display: none;
-}
-
 @media print {
     .no-print-area{
+        display: none;
+    }
+
+    ::-webkit-scrollbar {
         display: none;
     }
 }
