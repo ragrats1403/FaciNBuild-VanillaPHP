@@ -39,9 +39,9 @@ $adate = new DateTime($actualdatestr);
 $aformatted_date = $adate->format('F d, Y');
 
 $message = "You have submitted your facility reservation to use on \n".$aformatted_date." and is now Pending for approval!";
-$facilitiesDeptmesg = "".$reqparty." submitted a facility reservation request at ".$formatted_date." to use on ".$aformatted_date." and is waiting for Approval\nCheck them in Manage Reservations";
-$saoDeptmesg = "".$reqparty." submitted a facility reservation request at ".$formatted_date." to use on ".$aformatted_date." and is waiting for Approval\nCheck them in Manage Reservations!";
-$adminDeptmesg = "".$reqparty." submitted a facility reservation request at ".$formatted_date." to use on ".$aformatted_date."and is waiting for Approval\nCheck them in Manage Reservations!";
+$facilitiesDeptmesg = "".$reqparty." submitted a facility reservation request to use on ".$aformatted_date." and is waiting for Approval\nCheck them in Manage Reservations";
+$saoDeptmesg = "".$reqparty." submitted a facility reservation request to use on ".$aformatted_date." and is waiting for Approval\nCheck them in Manage Reservations!";
+$adminDeptmesg = "".$reqparty." submitted a facility reservation request to use on ".$aformatted_date." and is waiting for Approval\nCheck them in Manage Reservations!";
 //notification message construct end
 
 

@@ -169,7 +169,6 @@ $(document).on("click", ".submitBtn", function (event) {
     }
     else
     {
-      alert("Schedule is open!");
     }
 
     checkdateconflict(actualdate, timein, timeout, faci, function(confirm) {

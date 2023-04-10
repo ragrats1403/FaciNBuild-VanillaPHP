@@ -28,6 +28,10 @@ $("#datatable").DataTable({
 $(document).on("click", ".editBtn", function (event) {
   var id = $(this).data("id");
   var trid = $(this).closest("tr").attr("reservationid");
+  const myNode =  document.getElementById('container4');
+    while (myNode.firstChild ) {
+    myNode.removeChild(myNode.lastChild);
+  } 
   document.getElementById("_flexCheckDefault").checked = false;
   document.getElementById("_facility").disabled = true;
   document.getElementById("_eventname").disabled = true;
