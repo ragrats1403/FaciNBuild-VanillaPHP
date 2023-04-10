@@ -48,12 +48,13 @@
             notificationList.style.overflowY = "auto"; // Enable vertical scrolling
             notificationList.style.width = "500px";
             notificationList.style.position = "relative";
+
             // Fetch the notifications and update the badge and list
             function fetchNotifications() {
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "functions/notification.php",
+                    url: "../reservation/functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -64,62 +65,44 @@
                         // Update the badge count
                         notificationBadge.innerText = notifications.length;
 
-                        // Fetch the notifications and update the badge and list
-                        function fetchNotifications() {
-                            // Make an AJAX request to fetch the notifications
-                            var department = "<?php echo $_SESSION['department']; ?>";
-                            $.ajax({
-                                url: "../reservation/functions/notification.php",
-                                data: {
-                                    department: department,
-                                },
-                                type: 'POST',
-                                success: function(data) {
-                                    var notifications = JSON.parse(data);
-                                    var len = notifications.length;
-                                    // Update the badge count
-                                    notificationBadge.innerText = notifications.length;
+                        // Clear the existing list
+                        notificationList.innerHTML = "";
 
-                                    // Clear the existing list
-                                    notificationList.innerHTML = "";
-
-                                    // Add each notification to the list
-                                    for (let i = 0; i < notifications.length; i++) {
-                                        const notification = notifications[i];
-                                        const notificationItem = document.createElement("div");
-                                        notificationItem.classList.add("dropdown-item");
-                                        if (!notification.is_read) {
-                                            notificationItem.classList.add("unread"); // Add "unread" class if the notification is unread
-                                        }
-                                        notificationItem.innerHTML = `
+                        // Add each notification to the list
+                        for (let i = 0; i < notifications.length; i++) {
+                            const notification = notifications[i];
+                            const notificationItem = document.createElement("div");
+                            notificationItem.classList.add("dropdown-item");
+                            if (!notification.is_read) {
+                                notificationItem.classList.add("unread"); // Add "unread" class if the notification is unread
+                            }
+                            notificationItem.innerHTML = `
             <div class="d-flex align-items-center">
             <div class="flex-grow-1 notification-message">${notification.message}</div>
             <div class="text-muted notification-date">${new Date(notification.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} ${new Date(notification.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</div>
             </div>
         `;
-                                        notificationList.appendChild(notificationItem);
-                                        if (i < notifications.length - 1) {
-                                            // Add a divider after each item except the last one
-                                            const divider = document.createElement("div");
-                                            divider.classList.add("dropdown-divider");
-                                            notificationList.appendChild(divider);
-                                        }
-                                    }
-
-                                    // Add event listeners to the notification items
-                                    const notificationItems = notificationList.querySelectorAll(".dropdown-item");
-                                    notificationItems.forEach(item => {
-                                        item.addEventListener("click", function() {
-                                            // Remove the "unread" class when the notification is clicked
-                                            item.classList.remove("unread");
-                                        });
-                                    });
-                                }
-                            });
+                            notificationList.appendChild(notificationItem);
+                            if (i < notifications.length - 1) {
+                                // Add a divider after each item except the last one
+                                const divider = document.createElement("div");
+                                divider.classList.add("dropdown-divider");
+                                notificationList.appendChild(divider);
+                            }
                         }
+
+                        // Add event listeners to the notification items
+                        const notificationItems = notificationList.querySelectorAll(".dropdown-item");
+                        notificationItems.forEach(item => {
+                            item.addEventListener("click", function() {
+                                // Remove the "unread" class when the notification is clicked
+                                item.classList.remove("unread");
+                            });
+                        });
                     }
                 });
             }
+
             document.addEventListener("DOMContentLoaded", function() {
                 fetchNotifications();
                 setInterval(fetchNotifications, 5000);

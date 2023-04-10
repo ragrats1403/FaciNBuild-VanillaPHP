@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Reservations</title>
+    <title>Reservation</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -14,13 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <header class="shadow">
@@ -60,7 +54,7 @@
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservations/functions/notification.php",
+                    url: "functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -118,7 +112,7 @@
 
             markAsReadButton.addEventListener("click", function(event) {
                 $.ajax({
-                    url: "../reservations/functions/update_notification.php",
+                    url: "functions/update_notification.php",
                     type: 'POST',
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -143,8 +137,7 @@
     </div>
 </header>
 
-<body onload="fetchNotifications();">
-
+<body onload="bodyonload();">
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -185,7 +178,7 @@
             <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                        <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                        <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
                             <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
                             <div class="role">CAD</div>
@@ -209,6 +202,9 @@
         }
     </script>-->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <div class="table1">
         <div class="container-fluid">
             <div class="row">
@@ -244,13 +240,43 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script type="text/javascript" src="functions/js/userprocess.js?random=<?php echo uniqid(); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        //table display start
+        var dpt = "<?php echo $_SESSION['department']; ?>";
+        $("#datatable").DataTable({
+            serverSide: true,
+            processing: true,
+            'autoWidth': false,
+            paging: true,
+            order: [],
+            ajax: {
+                url: "functions/fetch_data.php",
+                type: "post",
+                data: {
+                    dpt: dpt,
+                },
+                fnCreatedRow: function(nRow, aData, iDataIndex) {
+                    $(nRow).attr("id", aData[0]);
+                },
+                columnDefs: [{
+                    target: [0, 3],
+                    orderable: false,
+                }, ],
+                scrollY: 200,
+                scrollCollapse: true,
+                paging: false,
+            }
+        });
+
+        //table display end
+    </script>
     <!-- Modal Popup for More Info button-->
     <div class="modal fade" id="test" aria-hidden="true">
         <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Job Request</h5>
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">View Reservation</h5>
                     </div>
                     <div class="col-md-12" style="width:15%">
                         <label class="" for="inputName">Status:</label>
@@ -314,11 +340,11 @@
 
                         <div class="col-md-2">
                             <label class="fw-bold" for="date">Time In:</label>
-                            <input type="time" class="form-control input-sm col-xs-1" id="_timein" placeholder="Time In">
+                            <input type="time" class="form-control input-sm col-xs-1" id="_timein" placeholder="Time In" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}">
                         </div>
                         <div class="col-md-2">
                             <label class="fw-bold" for="date">Time Out:</label>
-                            <input type="time" class="form-control input-sm col-xs-1" id="_timeout" placeholder="Time Out">
+                            <input type="time" class="form-control input-sm col-xs-1" id="_timeout" placeholder="Time Out" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}">
                         </div>
 
                         <div class="col-md-6 ">
@@ -343,10 +369,7 @@
                         <label>NB: All other equipment (e.g. Backdrop, chairs, etc.,) shall be the responsibility of the requesting party.
                             Technician’s, Electrical, Janitor’s and security guards overtime fees/excess fees are subject to the terms an condition provided at the bank thereof.<br>
                             Secure Reservation from the AVR (filled up by the AVR personnel only)
-                            <div class="col-md-6 ">
-                                <label class="fw-bold" for="date">Date and Time</label>
-                                <input type="datetime-local" class="form-control input-sm col-xs-1" id="_date_avr" placeholder="Date"><br>
-                            </div>
+                            <br>
                             2. The activity is officially endorsed and approved by the adviser, Chairperson/Dean, Department Head,
                             and the SAO/ Cultural Directory. (if “disapproved”, it must be so stated, citing briefly the reason thereof)<br><br>
                         </label>
@@ -362,13 +385,14 @@
                         <label class="fw-bold">Equipments Added To Reservation</label>
                         <div id="container3">
                             <div id="container4">
+
                             </div>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" onclick="myFunction2()">
+                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled>
                             <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
                         </div>
-                        <div id="_myDIV" style="display: none;">
+                        <div id="_myDIV1" style="display: none;">
                             <div class="col-sm-12 d-flex justify-content-center">
                                 <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
                             </div>
@@ -378,11 +402,11 @@
                                 <div class="row justify-content-center" style="padding-bottom:13px;">
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Department:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_department" placeholder="Department">
+                                        <input type="name" class="form-control input-sm col-xs-1" id="_dept" placeholder="Department">
                                     </div>
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Date:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="dateminor" placeholder="Date" disabled>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="_dateresm" placeholder="Date" disabled>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -392,26 +416,26 @@
                                 <div class="row">
                                     <div class="col-md-2" style="width:20%">
                                         <label class="fw-bold" for="date">Quantity:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
+                                        <input type="name" class="form-control input-sm col-xs-1" id="_minorqres" placeholder="Quantity">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                         <label class="fw-bold" for="date">Item Name:</label>
-                                        <input type="form-control" class="form-control" id="_item_" placeholder="Item">
+                                        <input type="form-control" class="form-control" id="_minoritemres" placeholder="Item">
                                     </div>
                                 </div>
                                 <div class="justify-content-center">
                                     <div class="col-md-12">
                                         <label class="fw-bold" for="date">Description:</label>
-                                        <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
+                                        <textarea class="form-control" rows="2" id="_minoritemdesc" placeholder="Description"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="justify-content-center">
                                     <div class="col-md-12">
                                         <label class="fw-bold" for="date">Purpose:</label>
-                                        <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
+                                        <textarea class="form-control" rows="2" id="_minorpurpose" placeholder="Purpose"></textarea>
                                     </div>
                                 </div>
                                 <!-- Form Controls End-->
@@ -478,11 +502,10 @@
                                         $i++;
                                     }
                                     ?>
-
                                 </select>
                             </div>
                             <div class="col-md-6 ">
-                                <input type="text" class="form-control input-sm col-xs-1" id="eventname" placeholder="Event Name">
+                                <input type="text" class="form-control input-sm col-xs-1" id="eventname_" placeholder="Event Name">
                             </div>
                         </div>
                         <div class="row justify-content-center" style="padding-bottom:13px;">
@@ -507,7 +530,7 @@
 
                         <div class="col-md-6 ">
                             <label class="fw-bold" for="date">Requesting Party:</label>
-                            <input type="name" class="form-control input-sm col-xs-1" id="reqparty" placeholder="Requesting Party">
+                            <input type="name" class="form-control input-sm col-xs-1" id="reqparty" placeholder="Requesting Party" value="<?php echo $_SESSION['department']; ?>" disabled>
                         </div>
                         <div class="justify-content-center">
                             <div class="col-md-12">
@@ -563,10 +586,10 @@
                         </div>-->
                         <!-- ADD ON SECTION-->
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="myFunction()">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="myFunction('_myDIV2')">
                             <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
                         </div>
-                        <div id="myDIV" style="display: none;">
+                        <div id="_myDIV2" style="display: none;">
                             <div class="col-sm-12 d-flex justify-content-center">
                                 <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
                             </div>
