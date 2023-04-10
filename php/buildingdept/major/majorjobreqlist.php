@@ -439,10 +439,14 @@
             //var status = "Approved";
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
+            var dept = $('#department').val();
+            var feedb = $('#_inputFeedback').val();
             $.ajax({
                 url: "functions/step1approve.php",
                 data: {
                     id: id,
+                    dept: dept,
+                    feedb: feedb,
 
                 },
                 type: 'POST',
@@ -460,6 +464,9 @@
                         //$('#_itemdesc_').text('');
                         $('#_step1').val('Approved');
                         $('#_statustext').val('Approved');
+                        $('#editUserModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
                     } else {
                         alert('failed');
                     }
@@ -470,10 +477,14 @@
         $(document).on('click', '.step1declineBtn', function(event) {
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
+            var dept = $('#department').val();
+            var feedb = $('#_inputFeedback').val();
             $.ajax({
                 url: "functions/step1decline.php",
                 data: {
                     id: id,
+                    dept: dept,
+                    feedb: feedb,
 
                 },
                 type: 'POST',
@@ -491,6 +502,9 @@
                         //$('#_itemdesc_').text('');
                         $('#_step1').val('Declined');
                         $('#_statustext').val('Declined');
+                        $('#editUserModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
 
                     } else {
                         alert('failed');

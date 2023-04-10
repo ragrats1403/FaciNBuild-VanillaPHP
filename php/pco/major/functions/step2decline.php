@@ -12,7 +12,7 @@ bdstatus
 cadstatus
 pcostatus
 */
-// Set the default timezone of the server
+
 // Set the default timezone of the server
 date_default_timezone_set('Asia/Manila');
 

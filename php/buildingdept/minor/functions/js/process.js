@@ -36,6 +36,7 @@ paging: false
     var daterendered = $('#daterendered').val();
     var confirmedby = $('#confirmedby').val();
     var dateconfirmed = $('#dateconfirmed').val();
+    var feedback = $('#_inputFeedback').val();
     if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '' && renderedby != '' && daterendered != '' && confirmedby != '' && dateconfirmed != '') {
         $.ajax({
             url: "functions/add_data.php",
@@ -50,6 +51,7 @@ paging: false
                 daterendered: daterendered,
                 confirmedby: confirmedby,
                 dateconfirmed: dateconfirmed,
+                feedback: feedback,
                 
             },
             type: 'POST',
@@ -68,6 +70,7 @@ paging: false
                     $('#daterendered').val('');
                     $('#confirmedby').val('');
                     $('#dateconfirmed').val('');
+                    $('#_inputFeedback').val('');
                     $('#addUserModal').modal('hide');
                     $("body").removeClass("modal-open");
                     $(".modal-backdrop").remove();
@@ -268,10 +271,14 @@ $(document).on('click', '.step1approveBtn', function(event){
     //var status = "Approved";
     var id = $('#_ID').val();
     var trid = $('#trid').val();
+    var dept = $('#_department').val();
+    var feedb = $('#_inputFeedback').val();
     $.ajax({
         url: "functions/step1approve.php",
         data: {
             id: id,
+            dept: dept,
+            feedb: feedb,
             
         },
         type: 'POST',
@@ -306,10 +313,14 @@ $(document).on('click', '.step1approveBtn', function(event){
 $(document).on('click', '.step1declineBtn', function(event){
     var id = $('#_ID').val();
     var trid = $('#trid').val();
+    var dept = $('#_department').val();
+    var feedb = $('#_inputFeedback').val();
     $.ajax({
         url: "functions/step1decline.php",
         data: {
             id: id,
+            dept: dept,
+            feedb: feedb,
             
         },
         type: 'POST',
@@ -328,6 +339,7 @@ $(document).on('click', '.step1declineBtn', function(event){
                 row.row("[id='" + trid + "']").data([department, date, button]);*/
                 //$('#_itemdesc_').text('');
                 $('#_step1').val('Declined');
+                $('#_statustext').val('Declined');
                 $('#editMinorjreqmodal').modal('hide');
             } else { 
                 alert('failed');

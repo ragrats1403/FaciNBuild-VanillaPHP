@@ -387,7 +387,6 @@
             var reqno = $('#requino').val();
             var dept = $('#department').val();
             var feedb = $('#_inputFeedback').val();
-            alert("line executed");
             $.ajax({
                 url: "functions/step2approve.php",
                 data: {
@@ -451,6 +450,9 @@
                         //$('#_itemdesc_').text('');
                         $('#_step2').val('Declined');
                         $('#_statustext').val('Declined');
+                        $('#editUserModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
 
                     } else {
                         alert('failed');

@@ -421,8 +421,8 @@
                             </div>
                             <div>
                                 <div class="modal-footer justify-content-md-center">
-                                    <a href="javascript:void();" class="btn btn-primary step1approveBtn">Approve</a>
-                                    <a href="javascript:void();" class="btn btn-danger step1declineBtn">Decline</a>
+                                    <a href="javascript:void();" class="btn btn-primary step1approveBtn" id= "step1a">Approve</a>
+                                    <a href="javascript:void();" class="btn btn-danger step1declineBtn"id= "step1d">Decline</a>
                                     <a href="javascript:void();" class="btn btn-info text-white updateBtn">Update</a>
                                     <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
                             <button type="button" class="btn btn-danger">Decline</button>
