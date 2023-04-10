@@ -455,7 +455,6 @@
                     section: section,
                     remark: remark,
 
-
                 },
                 type: 'POST',
                 success: function(data) {
@@ -465,11 +464,6 @@
                         table = $('#datatable').DataTable();
                         table.draw();
                         alert('Step 1 Approved Successfully!');
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        //$('#_itemdesc_').text('');
                         $('#_step1').val('Approved');
                         $('#_statustext').val('Approved');
                         $('#editUserModal').modal('hide');

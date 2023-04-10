@@ -441,13 +441,6 @@
                         table = $('#datatable').DataTable();
                         table.draw();
                         alert('Step 2 Declined Successfully!');
-
-
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        //$('#_itemdesc_').text('');
                         $('#_step2').val('Declined');
                         $('#_statustext').val('Declined');
                         $('#editUserModal').modal('hide');

@@ -364,10 +364,16 @@
             //var status = "Approved";
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
+            var dept = $('#department').val();
+            var feedb = $('#_inputFeedback').val();
+            
             $.ajax({
                 url: "functions/step3approve.php",
                 data: {
                     id: id,
+                    dept: dept,
+                    feedb: feedb,
+
 
                 },
                 type: 'POST',
@@ -378,13 +384,11 @@
                         table = $('#datatable').DataTable();
                         table.draw();
                         alert('Step 3 Approved Successfully!');
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        //$('#_itemdesc_').text('');
                         $('#_step3').val('Approved');
                         $('#_statustext').val('Approved');
+                        $('#editUserModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
                     } else {
                         alert('failed');
                     }
@@ -395,10 +399,15 @@
         $(document).on('click', '.step3declineBtn', function(event) {
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
+            var dept = $('#department').val();
+            var feedb = $('#_inputFeedback').val();
+            
             $.ajax({
                 url: "functions/step3decline.php",
                 data: {
                     id: id,
+                    dept: dept,
+                    feedb: feedb,
 
                 },
                 type: 'POST',
@@ -409,15 +418,11 @@
                         table = $('#datatable').DataTable();
                         table.draw();
                         alert('Step 3 Declined Successfully!');
-
-
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        //$('#_itemdesc_').text('');
                         $('#_step3').val('Declined');
                         $('#_statustext').val('Declined');
+                        $('#editUserModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
 
                     } else {
                         alert('failed');
