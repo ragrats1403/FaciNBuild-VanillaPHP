@@ -3,6 +3,76 @@
 });
 */
 
+function computedaysdiff(d1, d2){
+    var date1 = new Date(d1);
+    var date2 = new Date(d2);
+
+    var diffInMilliseconds = Math.abs(date2 - date1);
+    var diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
+
+    //console.log(diffInDays);
+
+    return diffInDays;
+}
+
+
+function checkdateconflict(adate, timestart, timeend, facility, callback) {
+    var actualdate = adate;
+    var tstart = timestart;
+    var tend = timeend;
+    var faci = facility;
+
+    $.ajax({
+        url: "functions/checkdateconflict.php",
+        data: {
+            facility: faci,
+            actualdate: actualdate,
+            timestart: tstart,
+            timeend: tend,
+        },
+        type: 'POST',
+        success: function(data) {
+            var json = JSON.parse(data);
+
+            if (json.countval > 0) {
+                callback(true);
+            } else {
+                callback(false);
+            }
+        }
+    });
+}
+function checkReservationConflict(timestart, timeend, adate, rfacility, callback) {
+    var tstart = timestart;
+var tend = timeend;
+const date = new Date(adate);
+var actualdate = adate;
+var facility = rfacility;
+
+// convert date and time values to strings
+const datestartString = `${date.toISOString().substr(0, 10)}T${tstart}`;
+const dateendString = `${date.toISOString().substr(0, 10)}T${tend}`;
+
+$.ajax({
+    url: "functions/checkresconflict.php",
+    data: {
+        datestart: datestartString,
+        dateend: dateendString,
+        actualdate: actualdate,
+        facility: facility,
+    },
+    type: 'POST',
+    success: function(data) {
+        var json = JSON.parse(data);
+        console.log(json.tcount);
+        if (json.tcount > 0) {
+            callback(true);
+        } else {
+            callback(false);
+        }
+    }
+});
+}
 //dynamic fetch data with drop down menu
 function dynamicEq(){
     const myNode =  document.getElementById('container2');
@@ -19,7 +89,7 @@ $('#testtable').DataTable().clear().destroy();
         'processing': true,
         'bJQueryUI': true,
         'info': false,
-        'paging': true,
+        "bPaginate": false,
         'order': [],
         'ajax': {
             'url': 'functions/fetch_eq.php',
@@ -54,11 +124,13 @@ function removeChild(){
 
 
 //remove [Equipments meant to be added to reservation]
-function removeAddedEq(){
-    const myNode =  document.getElementById('container2');
-    while (myNode.firstChild) {
-    myNode.removeChild(myNode.lastChild);
-    }
+function removeAddedEq(e){
+
+    e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
+}
+
+function removeAddedEq2(){
+    e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode); 
 }
 
 
@@ -77,7 +149,7 @@ $(document).on('click', '.addresBtn', function(event){
     //var checkval = document.getElementById("hid").value;
     if(document.getElementById(hiddenid)==null){
         $.ajax({
-            url: "functions/getequipment.php",
+            url: "functions/addselectedeq.php",
             data: {
                 id:id,
             },
@@ -121,8 +193,9 @@ $(document).on('click', '.addresBtn', function(event){
                 divCol.className = "col-md-2";
                 divCol2.className = "col-md-2";
                 var btn = document.createElement('button');
-                btn.className = "btn btn-sm btn-danger removeEq"+value;
-                btn.setAttribute("onclick","removeAddedEq();");
+                btn.className = "btn btn-sm btn-danger removeEq";
+                btn.id = "btn"+value;
+                btn.setAttribute("onClick","removeAddedEq(this);");
                 btn.style.marginTop = '3px';
                 btn.innerHTML = "Remove";
                 var textbox = document.createElement('text');
@@ -135,11 +208,12 @@ $(document).on('click', '.addresBtn', function(event){
                 divCol2.appendChild(btn);
                 newDiv.appendChild(divCol);
                 newDiv.appendChild(divCol2);
+                newDiv.appendChild(hid);
+                newDiv.appendChild(heqname);
+                newDiv.appendChild(hvalue);
+                newDiv.appendChild(hfaci);
                 container.appendChild(newDiv);
-                container.appendChild(hid);
-                container.appendChild(heqname);
-                container.appendChild(hvalue);
-                container.appendChild(hfaci);
+
                 
     
             }
@@ -152,21 +226,7 @@ $(document).on('click', '.addresBtn', function(event){
     
 
 });
-function testClick(){
 
-var testarr = [...document.querySelectorAll('[id^="fbh"]')].map(elm => elm.id);
-var testarr2 = [...document.querySelectorAll('[id^="fbe"]')].map(elm => elm.id);
-var testarr3 = [...document.querySelectorAll('[id^="fbv"]')].map(elm => elm.id);
-for(i = 0; i<=testarr.length-1; i++ ){
-
-    
-    console.log(document.getElementById(testarr[i]).value);
-    console.log(document.getElementById(testarr2[i]).value);
-    console.log(document.getElementById(testarr3[i]).value);
-    
-
-}
-}
 
 //date auto fill
 var now = new Date();
@@ -174,6 +234,14 @@ now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
 document.getElementById('datefiled').value = now.toISOString().substring(0,10);
 //date end
 
+function bodyonload(){
+        //date auto fill
+    var now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    document.getElementById('datefiled').value = now.toISOString().substring(0,10);
+    //date end
+
+}
 //terms and conditions checkbox
 function updateButtonState() {
     var checkbox = document.getElementById("termscond");
@@ -188,8 +256,8 @@ function updateButtonState() {
 }
 
 //add ons click
-function myFunction() {
-    var x = document.getElementById("myDIV");
+function myFunction(divID) {
+    var x = document.getElementById(divID);
     if (x.style.display === "block") {
         x.style.display = "none";
     } else {
@@ -211,6 +279,35 @@ $("#reserModal").on("hidden.bs.modal", function () {
     $('#testtable').DataTable().clear().destroy();
     
   });
+  
+  
+  $("#test").on("hidden.bs.modal", function () {
+    const myNode =  document.getElementById('container4');
+    while (myNode.firstChild ) {
+    myNode.removeChild(myNode.lastChild);
+        
+            var x = document.getElementById("_myDIV");
+            x.style.display = "none";
+            document.getElementById("_dept").disabled = true //department
+            document.getElementById("_dateresm").disabled = true //date
+            document.getElementById("_minorqres").disabled = true //quantity
+            document.getElementById("_minoritemres").disabled = true//itemname
+            document.getElementById("_minoritemdesc").disabled = true//itemdescription
+            document.getElementById("_minorpurpose").disabled = true//purpose
+            $("#_dept").val('');
+            $("#_dateresm").val('');
+            $("#_minorqres").val('');
+            $("#_minoritemres").val('');
+            $("#_minoritemdesc").val('');
+            $("#_minorpurpose").val('');
+            document.getElementById("_flexCheckDefault").checked = true;
+    }
+    
+  });
+
+
+
+  
 
 
 

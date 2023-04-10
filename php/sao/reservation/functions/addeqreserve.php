@@ -24,7 +24,7 @@ $dateconfirmed = $_POST['dateconfirmed'];*/
 //conflict checking section end
 
 
-$sql = "INSERT INTO `eqreservation` (`eventname`, `datesubmitted`, `dateofusage`, `timestart`, `timeend`, `quantity`, `facility`, `eqid`, `eqname`) VALUES ('$eventname','$dateofusage','$datesubmitted',' $timestart', '$timeend', '$quantity', '$facility', '$eqid', '$eqname')";
+$sql = "INSERT INTO `eqreservation` (`eventname`, `datesubmitted`, `dateofusage`, `timestart`, `timeend`, `quantity`, `facility`, `eqid`, `eqname`) VALUES ('$eventname','$datesubmitted','$dateofusage',' $timestart', '$timeend', '$quantity', '$facility', '$eqid', '$eqname')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
     $data = array(
