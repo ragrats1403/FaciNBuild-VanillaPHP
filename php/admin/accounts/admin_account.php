@@ -19,8 +19,8 @@
 
 </head>
 <header class="shadow">
-        <div class="imgctrl">
-        </div>
+    <div class="imgctrl">
+    </div>
     <div class="navplace">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: transparent;
@@ -45,77 +45,96 @@
 
             // Get the notification list element
             const notificationList = document.querySelector(".notification-list");
-            
+            notificationList.style.height = "300px"; // Set a fixed height for the notification
+            notificationList.style.overflowY = "auto"; // Enable vertical scrolling
+            notificationList.style.width = "500px";
+            notificationList.style.position = "relative";
+
             // Fetch the notifications and update the badge and list
             function fetchNotifications() {
                 // Make an AJAX request to fetch the notifications
+                var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                url: "../reservations/functions/notification.php",
-                type: 'GET',
-                success: function(data) {
-                    
-                    var notifications = JSON.parse(data);
-                    var len = data.length;
-                    // Update the badge count
-                    notificationBadge.innerText = notifications.length;
+                    url: "../reservations/functions/notification.php",
+                    data: {
+                        department: department,
+                    },
+                    type: 'POST',
+                    success: function(data) {
+                        var notifications = JSON.parse(data);
+                        var len = notifications.length;
+                        // Update the badge count
+                        notificationBadge.innerText = notifications.length;
 
-                    // Clear the existing list
-                    notificationList.innerHTML = "";
+                        // Clear the existing list
+                        notificationList.innerHTML = "";
 
-                    // Add each notification to the list
-                    for (let i = 0; i < notifications.length; i++) {
-                        const notification = notifications[i];
-                        const notificationItem = document.createElement("div");
-                        notificationItem.classList.add("dropdown-item");
-                        if (!notification.is_read) {
-                            notificationItem.classList.add("font-weight-bold");
+                        // Add each notification to the list
+                        for (let i = 0; i < notifications.length; i++) {
+                            const notification = notifications[i];
+                            const notificationItem = document.createElement("div");
+                            notificationItem.classList.add("dropdown-item");
+                            if (!notification.is_read) {
+                                notificationItem.classList.add("unread"); // Add "unread" class if the notification is unread
+                            }
+                            notificationItem.innerHTML = `
+            <div class="d-flex align-items-center">
+            <div class="flex-grow-1 notification-message">${notification.message}</div>
+            <div class="text-muted notification-date">${new Date(notification.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} ${new Date(notification.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</div>
+            </div>
+        `;
+                            notificationList.appendChild(notificationItem);
+                            if (i < notifications.length - 1) {
+                                // Add a divider after each item except the last one
+                                const divider = document.createElement("div");
+                                divider.classList.add("dropdown-divider");
+                                notificationList.appendChild(divider);
+                            }
                         }
-                        notificationItem.innerHTML = `
-                            <div class="d-flex align-items-center">
-                            <div class="flex-grow-1">${notification.message}</div>
-                            <div class="text-muted">${notification.created_at}</div>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                        `;
-                        notificationList.appendChild(notificationItem);
-                        }
-                }
-                
 
-            });
+                        // Add event listeners to the notification items
+                        const notificationItems = notificationList.querySelectorAll(".dropdown-item");
+                        notificationItems.forEach(item => {
+                            item.addEventListener("click", function() {
+                                // Remove the "unread" class when the notification is clicked
+                                item.classList.remove("unread");
+                            });
+                        });
+                    }
+                });
             }
+
             document.addEventListener("DOMContentLoaded", function() {
                 fetchNotifications();
                 setInterval(fetchNotifications, 5000);
+            });
+
+            const markAsReadButton = document.querySelector(".mark-as-read");
+
+            markAsReadButton.addEventListener("click", function(event) {
+                $.ajax({
+                    url: "../reservations/functions/update_notification.php",
+                    type: 'POST',
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        var len = json.length;
+                        const notificationItems = notificationList.querySelectorAll(".dropdown-item");
+                        notificationItems.forEach(item => {
+                            item.classList.remove("unread"); // Remove the "unread" class when the notifications are marked as read
+                            item.classList.add("read"); // Add the "read" class to mark the notification as read
+                        });
+                        notificationBadge.innerText = "0";
+                    },
+                    error: function() {
+                        console.log("Error marking notifications as read");
+                    }
                 });
-                const markAsReadButton = document.querySelector(".mark-as-read");
-                markAsReadButton.addEventListener("click", function(event) {   
-                    $.ajax({
-                        url: "../reservations/functions/update_notification.php",
-                        type: 'POST',
-                        success: function(data) {
-                            var json = JSON.parse(data);
-                            var len = json.length;
-                            for(let i = 0; i<notifications.length; i++){
-                                const notification = notifications[i];
-                                notification.is_read = 1;
-                            }
-                             // Update the badge count
-                            notificationBadge.innerText = "0";
-
-                            // Clear the existing list
-                            notificationList.innerHTML = "";
-                        }
-                    });
-
-
-                });
- 
+            });
         </script>
-        <p>Hello, <?php echo $_SESSION['department'];?></p>
-        </div>
-        <nav class="gnav">
-        </nav>
+        <p>Hello, <?php echo $_SESSION['department']; ?></p>
+    </div>
+    <nav class="gnav">
+    </nav>
     </div>
 </header>
 
@@ -150,7 +169,7 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
                             <a class="dropdown-item" href="../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
-                            <a class="dropdown-item" href="../../../php/admin/reservations/adminreservations.php">Reservations</a>  
+                            <a class="dropdown-item" href="../../../php/admin/reservations/adminreservations.php">Reservations</a>
                         </ul>
                     </div>
                 </li>
@@ -167,7 +186,7 @@
                     <div class="profile_details">
                         <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                        <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
+                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
                             <div class="role">System Administrator</div>
                         </div>
                     </div>
@@ -268,7 +287,7 @@
             }],
             scrollY: 200,
             scrollCollapse: true,
-            paging: false 
+            paging: false
 
         });
     </script>
