@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Minor Job Request</title>
+    <title>Minor Job Request List</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
 </head>
 
 <header class="shadow">
@@ -52,7 +53,7 @@
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservations/functions/notification.php",
+                    url: "../reservation/functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -110,7 +111,7 @@
 
             markAsReadButton.addEventListener("click", function(event) {
                 $.ajax({
-                    url: "../reservations/functions/update_notification.php",
+                    url: "../reservation/functions/update_notification.php",
                     type: 'POST',
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -143,12 +144,6 @@
                 <img src="../../../../images/Brown_logo_faci.png" />
             </div>
         </div>
-        <div class="sidebar">
-        <div class="logo_content">
-            <div class="logo">
-                <img src="../../../../images/Brown_logo_faci.png" />
-            </div>
-        </div>
         <div class="navdiv">
             <ul class="nav_list">
                 <li>
@@ -158,32 +153,23 @@
                     </a>
                 </li>
                 <li>
-                    <a href="../../../php/facilitiesdept/equipments/departmentheadeq.php">
-                        <i class='bx bx-wrench'></i>
-                        <span class="link_name">Equipment</span>
-                    </a>
-                </li>
-                <li>
-                    <div class="dropdown">
-                        <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                        <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Manage Request
-                        </span>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/facilitiesdept/managereserve/managereservation.php">Reservations</a>
-                        </ul>
-                    </div>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
                         <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            View/Create Request
+                            Job Request
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
-                            <a class="dropdown-item" href="../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
+                            <a class="dropdown-item" href="../../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
                         </ul>
                     </div>
+                </li>
+                <li>
+                <li>
+                    <a href="../../../../php/facilitiesdept/reservations/reservations.php">
+                        <i class='bx bx-check-square'></i>
+                        <span class="link_name">Reservation</span>
+                    </a>
                 </li>
             </ul>
             <div class="profile_content">
@@ -191,17 +177,18 @@
                     <div class="profile_details">
                         <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
+                            <div class="name"><?php echo $_SESSION['department']; ?></div>
                             <div class="role">Facilities Department</div>
                         </div>
                     </div>
-                    <a href="../../../logout.php">
+                    <a href="../../../../logout.php">
                         <i class='bx bx-log-out' id="log_out"></i>
                     </a>
                 </div>
             </div>
         </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
@@ -222,6 +209,7 @@
                                     <th>ID</th>
                                     <th>Department</th>
                                     <th>Date</th>
+                                    <th>Section</th>
                                     <th>Status</th>
                                     <th>Options</th>
                                 </thead>
@@ -244,15 +232,18 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
+        var dpt = "<?php echo $_SESSION['department']; ?>";
         $('#datatable').DataTable({
             'serverSide': true,
             'processing': true,
             'paging': true,
             'order': [],
             'ajax': {
-                'url': 'fetch_data.php',
+                'url': 'functions/fetch_data.php',
                 'type': 'post',
-
+                'data': {
+                    dpt: dpt,
+                },
             },
             'fnCreatedRow': function(nRow, aData, iDataIndex) {
                 $(nRow).attr('id', aData[0]);
@@ -270,7 +261,6 @@
     <script type="text/javascript">
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
-            event.preventDefault();
             var department = $('#department').val();
             var date = $('#datemajorjr').val();
             var quantity = $('#_quantity_').val();
@@ -283,7 +273,7 @@
             var dateconfirmed = $('#dateconfirmed').val();
             if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '' && renderedby != '' && daterendered != '' && confirmedby != '' && dateconfirmed != '') {
                 $.ajax({
-                    url: "add_data.php",
+                    url: "functions/add_data.php",
                     data: {
                         department: department,
                         date: date,
@@ -305,8 +295,6 @@
                             table = $('#datatable').DataTable();
                             table.draw();
                             alert('Successfully Added User!');
-                            $('#department').val('');
-                            $('#datemajorjr').val('');
                             $('#_quantity_').val('');
                             $('#_item_').val('');
                             $('#_itemdesc_').val('');
@@ -316,6 +304,8 @@
                             $('#confirmedby').val('');
                             $('#dateconfirmed').val('');
                             $('#addUserModal').modal('hide');
+                            $("body").removeClass("modal-open");
+                            $(".modal-backdrop").remove();
                         }
                     }
                 });
@@ -358,8 +348,17 @@
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('tr').attr('minorjobid');
+            document.getElementById("_renderedby").disabled = true;
+            document.getElementById("_daterendered").disabled = true;
+            document.getElementById("_purpose").disabled = true;
+            document.getElementById("_itemdesc").disabled = true;
+            document.getElementById("_daterendered").disabled = true;
+            document.getElementById("_dateconfirmed").disabled = true;
+            document.getElementById("_step1").disabled = true;
+            document.getElementById("_sect").disabled = true;
+            document.getElementById("_inputFeedback").disabled = true;
             $.ajax({
-                url: "get_request_details.php",
+                url: "functions/get_request_details.php",
                 data: {
                     id: id
                 },
@@ -370,12 +369,23 @@
                     $('#minorjobid').val(json.minorjobid);
                     $('#trid').val(trid);
                     $('#_ID').val(id);
+                    $('#_status').val(json.status);
                     $('#_datemajorjr').val(json.datesubmitted);
                     $('#_department').val(json.department);
                     $('#_quantity').val(json.quantity);
                     $('#_itemdesc').val(json.item_desc);
                     $('#_item').val(json.item);
                     $('#_purpose').val(json.purpose);
+                    $('#_step1').val(json.bdstatus);
+                    $('#_renderedby').val(json.renderedby);
+                    $('#_confirmedby').val(json.confirmedby);
+                    $('#_daterendered').val(json.daterendered);
+                    $('#_dateconfirmed').val(json.dateconfirmed);
+                    $('#_inputFeedback').val(json.feedback);
+                    var e = document.getElementById("_sect");
+                    var section = e.options[e.selectedIndex].text;
+
+                    e.options[e.selectedIndex].text = json.section;
                     $('#editMinorjreqmodal').modal('show');
                     //$('#_datemajorjr').val(json.datesubmitted);
                     $('').val();
@@ -392,6 +402,9 @@
 
                 }
             });
+
+
+
         });
 
         $(document).on('submit', '#updateUserForm', function() {
@@ -450,11 +463,11 @@
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" value="<?php echo mb_strimwidth($_SESSION['department'], 0, 30, '…'); ?>" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
-                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
+                                    <input type="date" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
 
                                 </div>
                             </div>
@@ -512,7 +525,7 @@
                     </div>
                     <div class="col-md-2" style="width:15%">
                         <label class="" for="inputName">Status:</label>
-                        <input type="text" style="width:20%" class="col-sm-2" name="_ID" class="form-control" id="_ID">
+                        <input type="text" style="width:50%" class="col-sm-2" name="_ID" class="form-control" id="_status" disabled>
                     </div>
                     <div class="col-md-2" style="width:30%">
                         <label class="" for="inputName">ID:</label>
@@ -565,7 +578,26 @@
                                     <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose"></textarea>
                                 </div>
                             </div>
-
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
+                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="_sect">
+                                        <option disabled selected value hidden></option>
+                                        <option value="C">CARPENTRY</option>
+                                        <option value="P">PLUMBING</option>
+                                        <option value="A">AIRCON</option>
+                                        <option value="E">ELECTRICAL</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top:6px;">
+                                <div class="col-md-1" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                </div>
+                                <div class="col-md-2" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step1">
+                                </div>
+                            </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6">
                                     <label class="fw-bold" for="renderedby">Rendered by:</label>
@@ -576,10 +608,7 @@
                                     <input type="date" class="form-control input-sm col-xs-1" id="_daterendered" disabled>
                                 </div>
                             </div>
-                            <div class="modal-footer justify-content-md-right">
-                                <button type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                                <button type="submit" class="btn btn-success col-md-1" id="end-editing">Update</button>
-                            </div>
+
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6">
                                     <label class="fw-bold" for="renderedby">Confirmed by:</label>
@@ -590,9 +619,11 @@
                                     <input type="date" class="form-control input-sm col-xs-1" id="_dateconfirmed" disabled>
                                 </div>
                             </div>
-                            <div class="modal-footer justify-content-md-right">
-                                <button type="submit" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                                <button type="submit" class="btn btn-success col-md-1" id="end-editing">Update</button>
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Feedback:</label>
+                                    <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
+                                </div>
                             </div>
                             <!-- Form Controls End-->
                         </div>
@@ -601,6 +632,13 @@
             </div>
         </div>
     </div>
+    <script>
+        //date auto fill
+        var now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        document.getElementById('datemajorjr').value = now.toISOString().substring(0, 10);
+        //date end
+    </script>
 </body>
 
 </html>
