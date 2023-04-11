@@ -17,7 +17,7 @@ $adate = new DateTime('now', new DateTimeZone(date_default_timezone_get()));
 $adate->setTimezone(new DateTimeZone(date_default_timezone_get()));
 
 // Format the date in your local timezone
-$formatted_date = $daate->format('Y-m-d H:i:s');
+$formatted_date = $adate->format('Y-m-d H:i:s');
 
 $message = "You have submitted a Minor Job Request and is now Pending for approval.";
 $facilitiesDeptmesg = "".$department." submitted a Minor Job Request and is waiting for Approval\nCheck them in Manage Job Requests1";
