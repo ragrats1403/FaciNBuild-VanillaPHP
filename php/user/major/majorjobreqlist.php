@@ -164,7 +164,6 @@
                 </div>
             </li>
             <li>
-            <li>
                 <a href="../../../../php/user/reservation/userreservation.php">
                     <i class='bx bx-check-square'></i>
                     <span class="link_name">Reservation</span>
