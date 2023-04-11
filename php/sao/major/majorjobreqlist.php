@@ -159,7 +159,7 @@
                                 Manage Request
                             </span>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="../../../php/sao/reservation/saoreservation.php">Reservation</a>
+                                <a class="dropdown-item" href="../../../php/sao/managereserve/managereservation.php">Reservation</a>
                             </ul>
                         </div>
                         <div class="dropdown">

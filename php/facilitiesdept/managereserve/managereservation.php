@@ -137,45 +137,47 @@
 </header>
 
 <body onload="fetchNotifications();">
-    <div class="sidebar">
+<div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../images/Black_logo.png" />
+                <img src="../../../../images/Brown_logo_faci.png" />
             </div>
         </div>
-
         <div class="navdiv">
             <ul class="nav_list">
                 <li>
-                    <a href="../../../php/admin/reservations/admincalendar.php">
+                    <a href="../../../../php/facilitiesdept/reservations/facilitiescalendar.php">
                         <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../../php/admin/accounts/admin_account.php">
-                        <i class='bx bx-user'></i>
-                        <span class="link_name">Account</span>
+                    <a href="../../../php/facilitiesdept/equipments/departmentheadeq.php">
+                        <i class='bx bx-wrench'></i>
+                        <span class="link_name">Equipment</span>
                     </a>
                 </li>
                 <li>
                     <div class="dropdown">
-                        <i class='bx bx-clipboard' style="margin-left:17px;"></i>
+                        <i class='bx bx-notepad' style="margin-left:17px;"></i>
                         <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Create/Manage Request
+                            Manage Request
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
-                            <a class="dropdown-item" href="../../../php/admin/reservations/adminreservations.php">Reservations</a>  
+                            <a class="dropdown-item" href="../../../php/facilitiesdept/managereserve/managereservation.php">Reservations</a>
                         </ul>
                     </div>
-                </li>
-                <li>
-                    <a href="../../../php/admin/equipments/adminequipment.php">
-                        <i class='bx bx-wrench'></i>
-                        <span class="link_name">Facilities Equipment</span>
-                    </a>
+                    <div class="dropdown">
+                        <i class='bx bx-clipboard' style="margin-left:17px;"></i>
+                        <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            View/Create Request
+                        </span>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
+                        </ul>
+                    </div>
                 </li>
             </ul>
 
@@ -185,7 +187,7 @@
                         <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
                         <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
-                            <div class="role">System Administrator</div>
+                            <div class="role">Facilities Department</div>
                         </div>
                     </div>
                     <a href="../../../logout.php">
