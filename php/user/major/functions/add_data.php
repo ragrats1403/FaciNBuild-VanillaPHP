@@ -10,13 +10,13 @@ $purpose = $_POST['purpose'];
 date_default_timezone_set('Asia/Manila');
 
 // Get the current datetime in the server timezone
-$date = new DateTime('now', new DateTimeZone(date_default_timezone_get()));
+$adate = new DateTime('now', new DateTimeZone(date_default_timezone_get()));
 
 // Set the timezone to your local timezone
-$date->setTimezone(new DateTimeZone(date_default_timezone_get()));
+$adate->setTimezone(new DateTimeZone(date_default_timezone_get()));
 
 // Format the date in your local timezone
-$formatted_date = $date->format('Y-m-d H:i:s');
+$formatted_date = $adate->format('Y-m-d H:i:s');
 
 $message = "You have submitted a Major Job Request and is now Pending for approval.";
 $facilitiesDeptmesg = "".$department." submitted a Major Job Request and is waiting for Approval\nCheck them in Manage Job Requests1";
