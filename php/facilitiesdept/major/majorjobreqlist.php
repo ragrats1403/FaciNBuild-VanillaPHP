@@ -137,7 +137,7 @@
 
 <body onload="fetchNotifications();">
 
-    <div class="sidebar">
+<div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../../images/Brown_logo_faci.png" />
@@ -164,7 +164,7 @@
                             Manage Request
                         </span>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
+                            <a class="dropdown-item" href="../../../php/facilitiesdept/managereserve/managereservation.php">Reservations</a>
                         </ul>
                     </div>
                     <div class="dropdown">
