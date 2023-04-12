@@ -13,7 +13,6 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
 </head>
 
 <header class="shadow">
@@ -159,9 +158,9 @@
                 <li>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                        <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Job Request
-                        </span>
+                        </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="../../../../php/user/minor/minorjobreqlist.php">Minor Job Request</a>
                             <a class="dropdown-item" href="../../../../php/user/major/majorjobreqlist.php">Major Job Request</a>
@@ -192,12 +191,6 @@
             </div>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
-
-
     <div class="table1">
         <div class="container-fluid">
             <div class="row">
