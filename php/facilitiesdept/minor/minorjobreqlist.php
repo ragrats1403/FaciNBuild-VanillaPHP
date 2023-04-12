@@ -20,9 +20,8 @@
     <div class="imgctrl">
     </div>
     <div class="navplace">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: transparent;
-  border: none;">
+    <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;">
                 <i class='bx bxs-bell' style='color:#ffffff'></i>
                 <span class="icon-button__badge"></span>
             </button>
@@ -30,7 +29,7 @@
                 <div class="dropdown-header">Notifications</div>
                 <div class="dropdown-divider"></div>
                 <div class="notification-list"></div>
-                <u><a class="dropdown-item text-center mark-as-read" href="#">Mark all as read</a></u>
+                <a class="dropdown-item py-1 px-2 text-center mark-as-read" href="#">Mark all as read</a>
             </div>
         </div>
         <?php
@@ -53,7 +52,7 @@
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservation/functions/notification.php",
+                    url: "../reservations/functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -112,7 +111,7 @@
             markAsReadButton.addEventListener("click", function(event) {
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservation/functions/update_notification.php",
+                    url: "../reservations/functions/update_notification.php",
                     type: 'POST',
                     data: {
                         department: department,
@@ -165,18 +164,18 @@
                 <li>
                     <div class="dropdown">
                         <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                        <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Manage Request
-                        </span>
+                        </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="../../../php/facilitiesdept/managereserve/managereservation.php">Reservations</a>
                         </ul>
                     </div>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                        <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             View/Create Request
-                        </span>
+                        </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
                             <a class="dropdown-item" href="../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
@@ -201,15 +200,6 @@
             </div>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <div class="table1">
         <div class="container-fluid">
             <div class="row">
