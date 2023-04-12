@@ -36,7 +36,7 @@
                 if (status = 'success') {
                     table = $('#datatable').DataTable();
                     table.draw();
-                    alert('Successfully Added User!');
+                    alert('Successfully Created Request!');
                     $('#_quantity_').val('');
                     $('#_item_').val('');
                     $('#_itemdesc_').val('');
