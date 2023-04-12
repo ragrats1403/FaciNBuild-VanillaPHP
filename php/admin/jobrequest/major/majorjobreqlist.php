@@ -15,11 +15,6 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
     <link rel="stylesheet" type="text/css" href="../../../../css/print.css?<?= time() ?>">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-<<<<<<< Updated upstream
-    
-=======
-
->>>>>>> Stashed changes
 </head>
 
 <header class="shadow">
@@ -285,19 +280,16 @@
             var description = $('#desc').val();
             var purpose = $('#purp').val();
 
-            if (department != '' && date != '' && quantity != '' && item != '' && section != '' && description != '' && purpose != '' && outsource != '') {
+            if (department != '' && date != '' && quantity != '' && item != '' && description != '' && purpose != '') {
                 $.ajax({
                     url: "add_data.php",
                     data: {
-                        requino: requino,
                         department: department,
                         date: date,
                         quantity: quantity,
                         item: item,
-                        section: section,
                         description: description,
                         purpose: purpose,
-                        outsource: outsource
                     },
                     type: 'POST',
                     success: function(data) {
@@ -816,16 +808,6 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="purp"></textarea>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
-                                    <select class="" style="width: 150px; Border: none;" name="cars" id="mark">
-                                        <option value="0">Select</option>
-                                        <option value="volvo">Outsource</option>
-                                        <option value="saab">Bill of materials</option>
-                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-md-center">

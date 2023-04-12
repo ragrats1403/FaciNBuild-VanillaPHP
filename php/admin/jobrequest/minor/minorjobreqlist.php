@@ -257,7 +257,7 @@
                 <div class="modal-body ">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                     <script>
-                //datetime auto fill up
+                    //datetime auto fill up
                     var now = new Date();
                     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
                     document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
@@ -440,9 +440,6 @@
                             <a href= "javascript:void();" class ="btn btn-danger step1declineBtn">Decline</a>
                             <a href="javascript:void();" class="btn btn-info text-white updateBtn disabled" id="updbtn">Update</a>
                             <a href="javascript:void();" class="btn btn-secondary editfieldBtn">Edit</a>
-                                <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
-                                <button type="button" class="btn btn-danger">Decline</button>
-                                <button type="submit" class="btn btn-info text-white">Update</button>-->
                          </div>
                         </div>
                         
@@ -474,34 +471,20 @@
         } )
         //Onclick event for enabling button
         function autofilldate(filldate) {
-
-            //document.getElementById("_daterendered").valueAsDate = today;
-            //document.getElementById('_daterendered').value = new Date().toISOString();
-            /*var now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            document.getElementById('_daterendered').value = now.toISOString().substring(0, 10);
-            
-            */
             var now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
             document.getElementById(filldate).value = now.toISOString().substring(0, 10);
-            
         }
         function enableFields() {
             document.getElementById("_renderedby").disabled = false;
             document.getElementById("_daterendered").disabled = false;
-           
             autofilldate("_daterendered");
-            
         }
         function enableFields2() {
             document.getElementById("_confirmedby").disabled = false;
             document.getElementById("_dateconfirmed").disabled = false;
             autofilldate("_dateconfirmed");
         }
-                    var now = new Date();
-                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                    document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
 
     </script>
     <!-- edit user modalPopup end-->
