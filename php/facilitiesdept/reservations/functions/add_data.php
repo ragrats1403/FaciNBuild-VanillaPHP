@@ -22,13 +22,13 @@ $faci = $_POST['faci'];
 date_default_timezone_set('Asia/Manila');
 
 // Get the current datetime in the server timezone
-$date = new DateTime('now', new DateTimeZone(date_default_timezone_get()));
+$adate = new DateTime('now', new DateTimeZone(date_default_timezone_get()));
 // Set the timezone to your local timezone
-$date->setTimezone(new DateTimeZone(date_default_timezone_get()));
+$adate->setTimezone(new DateTimeZone(date_default_timezone_get()));
 // Format the date in your local timezone
-$newdate = $date->format('Y-m-d H:i:s');
+$newdate = $adate->format('Y-m-d H:i:s');
 // Format the date in your local timezone
-$formatted_date = $date->format('F d, Y g:iA');
+$formatted_date = $adate->format('F d, Y g:iA');
 
 
 
