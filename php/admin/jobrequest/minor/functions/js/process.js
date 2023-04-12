@@ -82,6 +82,69 @@ paging: false
         alert("Please fill all the Required fields");
     }
 });
+
+$(document).on('click', '.renderUpdate', function(event){
+    //var status = "Approved";
+    var id = $('#_ID').val();
+    var trid = $('#trid').val();
+    var renderedby = $('#_renderedby').val();
+    var renderdate = $('#_daterendered').val();
+    $.ajax({
+        url: "functions/updaterender.php",
+        data: {
+            id: id,
+            renderdate: renderdate,
+            renderedby: renderedby,
+            
+        },
+        type: 'POST',
+        success: function(data) {
+            var json = JSON.parse(data);
+            var status = json.status;
+            if (status == 'success') {
+                alert('Updated Successfully!');
+                document.getElementById("_renderedby").disabled = false;
+                document.getElementById("_daterendered").disabled = false;
+            } else { 
+                alert('failed');
+            }
+        }
+    });
+    //alert('test');
+});
+$(document).on('click', '.confirmUpdate', function(event){
+    //var status = "Approved";
+    var id = $('#_ID').val();
+    var trid = $('#trid').val();
+    var confirmby = $('#_confirmedby').val();
+    var confirmdate = $('#_dateconfirmed').val();
+    $.ajax({
+        url: "functions/updateconfirmby.php",
+        data: {
+            id: id,
+            confirmdate: confirmdate,
+            confirmby: confirmby,
+            
+        },
+        type: 'POST',
+        success: function(data) {
+            var json = JSON.parse(data);
+            var status = json.status;
+            if (status == 'success') {
+                alert('Updated Successfully!');
+                document.getElementById("_confirmedby").disabled = false;
+                document.getElementById("_dateconfirmed").disabled = false;
+                /*table = $('#datatable').DataTable();
+                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                var row = table.row("[id='" + trid + "']");
+                row.row("[id='" + trid + "']").data([department, date, button]);*/
+            } else { 
+                alert('failed');
+            }
+        }
+    });
+    //alert('test');
+});
 //delete user button control
 $(document).on('click', '.btnDelete', function(event) {
     var table = $('#datatable').DataTable();
