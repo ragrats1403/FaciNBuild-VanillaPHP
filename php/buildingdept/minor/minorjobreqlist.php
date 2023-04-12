@@ -258,7 +258,7 @@
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" value="<?php echo $_SESSION['department']; ?>" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" value="<?php echo $_SESSION['department'];?>" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
@@ -296,11 +296,21 @@
                             <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
                         </div>
+                        <script>
+                            var now = new Date();
+                        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                        document.getElementById("datemajorjr").value = now.toISOString().substring(0,10);
+                        document.getElementById("datemajorjr").value = now.toISOString().substring(0,10);
+                        document.getElementById("datemajorjr").value = now.toISOString().substring(0,10);
+
+                        
+                        </script>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- add user modal end-->
     <!-- edit user modal-->
     <!-- Modal -->

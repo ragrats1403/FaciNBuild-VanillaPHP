@@ -15,7 +15,11 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
     <link rel="stylesheet" type="text/css" href="../../../../css/print.css?<?= time() ?>">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
 </head>
 
 <header class="shadow">
@@ -134,6 +138,8 @@
                     }
                 });
             });
+
+    
         </script>
         <p>Hello, <?php echo $_SESSION['department']; ?></p>
     </div>
@@ -142,7 +148,7 @@
     </div>
 </header>
 
-<body onload="fetchNotifications();">
+<body onload="autofilltime();">
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -201,6 +207,14 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <div class="table1">
 
         <div class="container-fluid">
@@ -220,7 +234,7 @@
                                 </thead>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Major Job Request</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal" onclick="autofilltime();">Create Major Job Request</button>
                             </div>
 
                         </div>
@@ -264,17 +278,12 @@
     <script type="text/javascript">
         //add button control
         $(document).on('submit', '#addUserModal', function(event) {
-            var requino = $('#requi').val();
             var department = $('#depart').val();
             var date = $('#deeto').val();
             var quantity = $('#quan').val();
             var item = $('#ite').val();
-            var e = document.getElementById("section"); //dropdown
-            var section = e.options[e.selectedIndex].text; //end
             var description = $('#desc').val();
             var purpose = $('#purp').val();
-            var e = document.getElementById("mark"); //dropdown
-            var outsource = e.options[e.selectedIndex].text; //end
 
             if (department != '' && date != '' && quantity != '' && item != '' && section != '' && description != '' && purpose != '' && outsource != '') {
                 $.ajax({
@@ -346,6 +355,8 @@
                 return null;
             }
         });
+
+   
         //edit button control 
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
@@ -583,7 +594,11 @@
             });
             //alert('test');
         });
-
+             //datetime auto fill up
+             var now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('deeto').value = now.toISOString().slice(0,16);
+      
         $(document).on('click', '.step2approveBtn', function(event) {
 
             //var status = "Approved";
@@ -749,6 +764,7 @@
                 }
             });
         });
+        
     </script>
     <!-- Script Process End-->
     <!-- add user modal-->
@@ -767,38 +783,14 @@
                         <div class="modal-body">
                             <!-- Form Controls-->
 
-                            <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Job Request no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="no" placeholder="Job request no." disabled>
-                                </div>
-                                <div class="col-md-6 ">
-                                    <label class="fw-bold" for="date">Requisition no.</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="requi" placeholder="Requisition no.">
-                                </div>
-                            </div>
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="Department">
+                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="Department" value= "<?php echo $_SESSION['department']; ?>" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
-                                    <label class="fw-bold" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: 5px;" name="section" id="section">
-                                        <option value="0">Select</option>
-                                        <option value="C">CARPENTRY</option>
-                                        <option value="P">PLUMBING</option>
-                                        <option value="A">AIRCON</option>
-                                        <option value="E">ELECTRICAL</option>
-
-                                    </select>
+                                    <input type="date" class="form-control input-sm col-xs-1" id="deeto" disabled>
                                 </div>
                             </div>
                             <div>
@@ -838,7 +830,7 @@
                             </div>
                             <div class="modal-footer justify-content-md-center">
                                 <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
+                                <button type="submit" class="btn btn-primary col-md-2">Create Request</button>
                             </div>
                         </div>
                     </form>
@@ -846,6 +838,15 @@
             </div>
         </div>
     </div>
+    <script>
+                    var now = new Date();
+                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
+                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
+                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
+                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
+                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
+    </script>
     <!-- add user modal end-->
     <!-- edit user modal-->
     <!-- Modal -->

@@ -21,7 +21,6 @@ scrollCollapse: true,
 paging: false 
 
 });
-
 //table display end
 
  //add button control
@@ -428,6 +427,7 @@ $(document).on('click', '.step1declineBtn', function(event){
 });
 
 //steps decline end
+
 
 //edit button keypress event
 $(document).on('click', '.editfieldBtn', function(event) {
