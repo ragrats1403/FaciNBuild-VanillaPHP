@@ -109,9 +109,13 @@
             const markAsReadButton = document.querySelector(".mark-as-read");
 
             markAsReadButton.addEventListener("click", function(event) {
+                var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
                     url: "../reservation/functions/update_notification.php",
                     type: 'POST',
+                    data: {
+                        department: department,
+                    },
                     success: function(data) {
                         var json = JSON.parse(data);
                         var len = json.length;
@@ -179,7 +183,7 @@
                             <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                             <div class="name_role">
                                 <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
-                                <div class="role">User</div>
+                                <div class="role">SAO</div>
                             </div>
                         </div>
                         <a href="../../../../logout.php">
