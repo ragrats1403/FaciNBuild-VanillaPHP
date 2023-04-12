@@ -151,7 +151,7 @@ $(document).on('click', '.confirmUpdate', function(event){
     var confirmby = $('#_confirmedby').val();
     var confirmdate = $('#_dateconfirmed').val();
     $.ajax({
-        url: "functions/updaterender.php",
+        url: "functions/updateconfirmby.php",
         data: {
             id: id,
             confirmdate: confirmdate,
