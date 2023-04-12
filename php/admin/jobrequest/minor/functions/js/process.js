@@ -32,14 +32,11 @@ paging: false
     var itemname = $('#_item_').val();
     var description = $('#_itemdesc_').val();
     var purpose = $('#_purpose_').val();
-
-    var e = document.getElementById("sect");
-    var section = e.options[e.selectedIndex].text;
     /*var renderedby = $('#renderedby').val();
     var daterendered = $('#daterendered').val();
     var confirmedby = $('#confirmedby').val();
     var dateconfirmed = $('#dateconfirmed').val();*/
-    if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '' && section != '') {
+    if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '') {
         $.ajax({
             url: "functions/add_data.php",
             data: {
@@ -49,7 +46,6 @@ paging: false
                 itemname: itemname,
                 description: description,
                 purpose: purpose,
-                section: section
             },
             type: 'POST',
             success: function(data) {
