@@ -38,8 +38,8 @@
         session_start();
         ?>
         <script>
-            // Get the notification dropdown button and badge
-            const notificationDropdown = document.getElementById("notification-dropdown");
+           // Get the notification dropdown button and badge
+           const notificationDropdown = document.getElementById("notification-dropdown");
             const notificationBadge = notificationDropdown.querySelector(".icon-button__badge");
 
             // Get the notification list element

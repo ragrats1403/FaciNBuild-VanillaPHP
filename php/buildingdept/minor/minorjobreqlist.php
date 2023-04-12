@@ -218,9 +218,6 @@
                                     <th>Options</th>
                                 </thead>
                             </table>
-                            <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Minor Job Request</button>
-                            </div>
                         </div>
                     </div>
                 </div>
