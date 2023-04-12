@@ -158,18 +158,18 @@
                     <li>
                         <div class="dropdown">
                             <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                            <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 Manage Request
-                            </span>
+                            </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="../../../php/sao/managereserve/managereservation.php">Reservation</a>
                             </ul>
                         </div>
                         <div class="dropdown">
                             <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                            <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 View/Create Request
-                            </span>
+                            </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="../../../php/sao/major/majorjobreqlist.php">Major Request</a>
                                 <a class="dropdown-item" href="../../../php/sao/minor/minorjobreqlist.php">Minor Request</a>
@@ -192,15 +192,6 @@
             </div>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <div class="table1">
 
         <div class="container-fluid">
