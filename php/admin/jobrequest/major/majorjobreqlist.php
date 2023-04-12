@@ -1137,14 +1137,14 @@
                                             <th><textarea style="border: none; border-color: transparent;" class="form-control" id="remarks1" disabled></textarea></th>
                                         </tr>
                                         <tr style="border: 0px; border: none">
-                                            <th colspan="4" style="text-align:center ; border: 0px; border: none">APPROVED BY:MS.CANDICE GOTIANUY</th>
-                                            <td style="border: 0px; border: none "></td>
+                                            <th colspan="2" style="text-align:center ; border: 0px; border: none">NOTED BY:_______________________________</th>
+                                            <th colspan="2" style="text-align:center ; border: 0px; border: none">APPROVED BY:MS.CANDICE GOTIANUY</th>
                                             <td style="border: 0px; border: none "></td>
                                             <td style="border: 0px; border: none "></td>
                                         </tr>
                                         <tr style="border: 0px; border: none ">
-                                            <th colspan="4" style="text-align:center ; border: 0px; border: none">UC - CHANCELLOR</th>
-                                            <td style="border: 0px; border: none "></td>
+                                            <th colspan="2" style="text-align:center ; border: 0px; border: none">PROPERTY CUSTODIAN</th>
+                                            <th colspan="2" style="text-align:center ; border: 0px; border: none">UC - CHANCELLOR</th>
                                             <td style="border: 0px; border: none "></td>
                                             <td style="border: 0px; border: none "></td>
                                         </tr>
