@@ -119,6 +119,11 @@ $(document).on('click', '.renderUpdate', function(event){
     var trid = $('#trid').val();
     var renderedby = $('#_renderedby').val();
     var renderdate = $('#_daterendered').val();
+    document.getElementById("_renderedby").disabled = true;
+    document.getElementById("_daterendered").disabled = true;
+    document.getElementById("_confirmedby").disabled = true;
+    document.getElementById("_dateconfirmed").disabled = true;
+    document.getElementById("_step1").disabled = true;
     $.ajax({
         url: "functions/updaterender.php",
         data: {
@@ -133,8 +138,6 @@ $(document).on('click', '.renderUpdate', function(event){
             var status = json.status;
             if (status == 'success') {
                 alert('Updated Successfully!');
-                document.getElementById("_renderedby").disabled = false;
-                document.getElementById("_daterendered").disabled = false;
             } else { 
                 alert('failed');
             }
@@ -148,6 +151,11 @@ $(document).on('click', '.confirmUpdate', function(event){
     var trid = $('#trid').val();
     var confirmby = $('#_confirmedby').val();
     var confirmdate = $('#_dateconfirmed').val();
+    document.getElementById("_renderedby").disabled = true;
+    document.getElementById("_daterendered").disabled = true;
+    document.getElementById("_confirmedby").disabled = true;
+    document.getElementById("_dateconfirmed").disabled = true;
+    document.getElementById("_step1").disabled = true;
     $.ajax({
         url: "functions/updateconfirmby.php",
         data: {
@@ -162,8 +170,6 @@ $(document).on('click', '.confirmUpdate', function(event){
             var status = json.status;
             if (status == 'success') {
                 alert('Updated Successfully!');
-                document.getElementById("_confirmedby").disabled = false;
-                document.getElementById("_dateconfirmed").disabled = false;
                 /*table = $('#datatable').DataTable();
                 var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
                 var row = table.row("[id='" + trid + "']");
@@ -271,6 +277,11 @@ $(document).on('click', '.updateBtn', function() {
             var status = json.status;
             if (status == 'success') {
                 alert('Updated Successfully!');
+                document.getElementById("_renderedby").disabled = true;
+                document.getElementById("_daterendered").disabled = true;
+                document.getElementById("_confirmedby").disabled = true;
+                document.getElementById("_dateconfirmed").disabled = true;
+                document.getElementById("_step1").disabled = true;
                 table = $('#datatable').DataTable();
                 table.draw();
                 /*table = $('#datatable').DataTable();
