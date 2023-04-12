@@ -288,8 +288,7 @@ $(document).on('click', '.updateBtn', function() {
     $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('tr').attr('minorjobid');
-            $('#_renderedby, #_daterendered, #_confirmedby, #_dateconfirmed, #_statustext, #_step1').prop('disabled', true);
-            $('#_daterendered, #_dateconfirmed').val('');
+            $('#_renderedby, #_daterendered, #_confirmedby, #_dateconfirmed, #_statustext, #_step1','#_renderedby','#_daterendered','#_confirmedby','#_dateconfirmed').prop('disabled', true);
             $.ajax({
             url: "functions/get_request_details.php",
             data: {
@@ -309,6 +308,10 @@ $(document).on('click', '.updateBtn', function() {
             $('#_purpose').val(json.purpose);
             $('#_statustext').val(json.status);
             $('#_step1').val(json.bdstatus);
+            $('#_renderedby').val(json.renderedby);
+            $('#_daterendered').val(json.daterendered);
+            $('#_confirmedby').val(json.confirmedby);
+            $('#_dateconfirmed').val(json.dateconfirmed);
             var e = document.getElementById("_sect");
             var section = e.options[e.selectedIndex].text;
             e.options[e.selectedIndex].text = json.section;
