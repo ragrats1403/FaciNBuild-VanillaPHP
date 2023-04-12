@@ -292,7 +292,7 @@ $(document).on("click", ".submitBtn", function (event) {
                           $("#actualdate").val("");
                           $("#timein").val("");
                           $("#timeout").val("");
-                          $("#reqparty").val("");
+                          $("#eventname_").val("");
                           $("#purpose").val("");
                           $("#numparticipants").val("");
                           $("#stageperformers").val("");
