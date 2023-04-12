@@ -133,10 +133,8 @@ $(document).on('click', '.renderUpdate', function(event){
             var status = json.status;
             if (status == 'success') {
                 alert('Updated Successfully!');
-                /*table = $('#datatable').DataTable();
-                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                var row = table.row("[id='" + trid + "']");
-                row.row("[id='" + trid + "']").data([department, date, button]);*/
+                document.getElementById("_renderedby").disabled = false;
+                document.getElementById("_daterendered").disabled = false;
             } else { 
                 alert('failed');
             }
@@ -164,6 +162,8 @@ $(document).on('click', '.confirmUpdate', function(event){
             var status = json.status;
             if (status == 'success') {
                 alert('Updated Successfully!');
+                document.getElementById("_confirmedby").disabled = false;
+                document.getElementById("_dateconfirmed").disabled = false;
                 /*table = $('#datatable').DataTable();
                 var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
                 var row = table.row("[id='" + trid + "']");
@@ -195,11 +195,6 @@ $(document).on('click', '.approveBtn', function(event){
                 table = $('#datatable').DataTable();
                 table.draw();
                 alert('Approved Successfully!');
-               
-                /*table = $('#datatable').DataTable();
-                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                var row = table.row("[id='" + trid + "']");
-                row.row("[id='" + trid + "']").data([department, date, button]);*/
                 $('#editMinorjreqmodal').modal('hide');
             } else { 
                 alert('failed');
