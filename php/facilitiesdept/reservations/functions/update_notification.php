@@ -4,6 +4,7 @@ $user = "root";
 $password = "";
 $db_name = "testdb";
 
+$department = $_POST['department'];
 // Connect to the database
 $con = mysqli_connect($host, $user, $password, $db_name);
 
@@ -15,7 +16,7 @@ if (mysqli_connect_errno()) {
 // POSTリクエストを受け取る
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // is_readカラムを1に更新するSQL文を作成する
-  $sql = "UPDATE notif_data SET is_read = 1";
+  $sql = "UPDATE notif_data SET is_read = 1 where department = '$department'";
   
   // SQL文を実行する
   if (mysqli_query($con, $sql)) {
