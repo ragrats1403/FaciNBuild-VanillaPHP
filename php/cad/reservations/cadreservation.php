@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
-
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
@@ -159,18 +158,18 @@
                 <li>
                     <div class="dropdown">
                         <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                        <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Manage Request
-                        </span>
+                        </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
                         </ul>
                     </div>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                        <span class="jobrequestdr btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             View/Create Request
-                        </span>
+                        </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
                             <a class="dropdown-item" href="../../../../php/cad/majoruser/majorjobreqlist.php">Major Job Request</a>
@@ -195,8 +194,6 @@
             </div>
         </div>
     </div>
-
-
     <!--<script>
         let btn = document.querySelector("#btn");
         let sidebar = document.querySelector(".sidebar");
@@ -205,10 +202,6 @@
             sidebar.classList.toggle("active");
         }
     </script>-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <div class="table1">
         <div class="container-fluid">
             <div class="row">
