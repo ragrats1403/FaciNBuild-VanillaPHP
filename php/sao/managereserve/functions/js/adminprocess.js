@@ -83,7 +83,7 @@ $(document).on("click", ".editBtn", function (event) {
       $("#_step2").val(json.saostatus);
       var aprbtn = document.getElementById("step2a");
       var dclbtn = document.getElementById("step2d");
-      if(json.saostatus == 'Pending')
+      if(json.fdstatus == 'Approved' || json.fdstatus != 'Declined')
       {
         document.getElementById("_inputFeedback").disabled = false;
         aprbtn.classList.remove("disabled");
