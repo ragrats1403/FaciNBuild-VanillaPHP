@@ -4,6 +4,8 @@ $user = "root";
 $password = "";
 $db_name = "testdb";
 
+$department = $_POST['department'];
+
 // Connect to the database
 $con = mysqli_connect($host, $user, $password, $db_name);
 
@@ -15,7 +17,7 @@ if (mysqli_connect_errno()) {
 // Receive request
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // make is_read column to 1
-  $sql = "UPDATE notif_data SET is_read = 1";
+  $sql = "UPDATE notif_data SET is_read = 1 where department = '$department'";
   
   // Execute sql statement
   if (mysqli_query($con, $sql)) {
