@@ -285,10 +285,8 @@
                         if (status = 'success') {
                             table = $('#datatable').DataTable();
                             table.draw();
-                            alert('Successfully Added User!');
+                            alert('Successfully Created Request!');
                             $('#requi').val('');
-                            $('#depart').val('');
-                            $('#deeto').val('');
                             $('#quan').val('');
                             $('#ite').val('');
                             $('#desc').val('');
