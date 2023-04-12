@@ -292,6 +292,7 @@ $(document).on('click', '.updateBtn', function() {
             document.getElementById("_daterendered").disabled = true;
             document.getElementById("_confirmedby").disabled = true;
             document.getElementById("_dateconfirmed").disabled = true;
+            document.getElementById("_step1").disabled = true;
             $('#_renderedby, #_daterendered, #_confirmedby, #_dateconfirmed, #_statustext, #_step1','#_renderedby','#_daterendered','#_confirmedby','#_dateconfirmed').prop('disabled', true);
             
             $.ajax({
