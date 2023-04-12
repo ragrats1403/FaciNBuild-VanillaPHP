@@ -19,7 +19,7 @@ $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
 $formatted_date = $date->format('Y-m-d H:i:s');
 
 $message = "You have submitted a Major Job Request and is now Pending for approval.";
-$facilitiesDeptmesg = "".$department." submitted a Major Job Request and is waiting for Approval\nCheck them in Manage Job Requests1";
+$facilitiesDeptmesg = "".$department." submitted a Major Job Request and is waiting for Approval\nCheck them in Manage Job Requests!";
 $saoDeptmesg = "".$department." submitted a Major Job Request and is waiting for Approval\nCheck them in Manage Job Requests!";
 $adminDeptmesg = "".$department." submitted a Major Job Request and is waiting for Approval\nCheck them in Manage Job Requests!";
 $caddeptmsg = "".$department." submitted a Major Job Request and is waiting for Approval\nCheck them in Manage Job Requests!";
