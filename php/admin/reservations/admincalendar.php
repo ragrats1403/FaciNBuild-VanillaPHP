@@ -20,8 +20,7 @@
     </div>
     <div class="navplace">
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: transparent;
-  border: none;">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;">
                 <i class='bx bxs-bell' style='color:#ffffff'></i>
                 <span class="icon-button__badge"></span>
             </button>
@@ -29,7 +28,7 @@
                 <div class="dropdown-header">Notifications</div>
                 <div class="dropdown-divider"></div>
                 <div class="notification-list"></div>
-                <u><a class="dropdown-item text-center mark-as-read" href="#">Mark all as read</a></u>
+                <a class="dropdown-item py-1 px-2 text-center mark-as-read" href="#">Mark all as read</a>
             </div>
         </div>
         <?php
@@ -164,7 +163,7 @@
                 <li>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Create/Manage Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
