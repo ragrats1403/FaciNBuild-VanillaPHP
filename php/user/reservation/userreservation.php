@@ -592,7 +592,7 @@
                                 <div class="row justify-content-center" style="padding-bottom:13px;">
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Department:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_department" placeholder="Department">
+                                        <input type="name" class="form-control input-sm col-xs-1" id="_department" placeholder="Department" value = "<?php echo $_SESSION['department']; ?>">
                                     </div>
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Date:</label>
