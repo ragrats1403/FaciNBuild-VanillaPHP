@@ -378,12 +378,12 @@
             document.getElementById("requino").disabled = true;
             document.getElementById("department").disabled = true;
             document.getElementById("date").disabled = true;
-            document.getElementById("sections").disabled = false;
             document.getElementById("quantity").disabled = true;
             document.getElementById("item").disabled = true;
             document.getElementById("description").disabled = true;
             document.getElementById("purpose").disabled = true;
-            document.getElementById("remark").disabled = false;
+            document.getElementById("remark").disabled = true;
+            document.getElementById("sections").disabled = true;
             document.getElementById("_statustext").disabled = true;
             document.getElementById("_inputFeedback").disabled = true;
             $.ajax({
@@ -690,7 +690,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Section:</label>
-                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections">
+                                    <select class="" style="width: 150px; Border: 5px;" name="sections" id="sections" disabled>
                                         <option value="CARPENTRY">CARPENTRY</option>
                                         <option value="PLUMBING">PLUMBING</option>
                                         <option value="AIRCON">AIRCON</option>
@@ -725,7 +725,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
-                                    <select class="" style="width: 150px; Border: none;" id="remark">
+                                    <select class="" style="width: 150px; Border: none;" id="remark" disabled>
                                         <option value="Outsource">Outsource</option>
                                         <option value="Bill of materials">Bill of materials</option>
                                     </select>

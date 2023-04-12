@@ -394,7 +394,7 @@
                             </div>
                             <div class="modal-footer justify-content-md-right">
                                 <button onclick="enableFields()" type="button" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                                <button type="button" class="btn btn-success col-md-1" id="end-editing">Update</button>
+                                <button type="button" class="btn btn-success col-md-1 renderUpdate" id="end-editing">Update</button>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6">
@@ -408,7 +408,7 @@
                             </div>
                             <div class="modal-footer justify-content-md-right">
                                 <button onclick="enableFields2()" type="button" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                                <button type="button" class="btn btn-success col-md-1" id="end-editing">Update</button>
+                                <button type="button" class="btn btn-success col-md-1 confirmUpdate" id="end-editing">Update</button>
                             </div>
                             <div class="justify-content-center">
                                 <div class="col-md-12">

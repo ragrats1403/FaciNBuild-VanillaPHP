@@ -361,10 +361,10 @@
             document.getElementById("item").disabled = true;
             document.getElementById("description").disabled = true;
             document.getElementById("purpose").disabled = true;
-            document.getElementById("remark").disabled = true;
             document.getElementById("_statustext").disabled = true;
             document.getElementById("_inputFeedback").disabled = true;
-
+            document.getElementById("remark").disabled = true;
+            document.getElementById("sections").disabled = true;
             $.ajax({
                 url: "get_single_user.php",
                 data: {

@@ -197,6 +197,8 @@ $(document).on('click', '.editBtn', function(event) {
     document.getElementById("_itemdesc").disabled = true;
     document.getElementById("_item").disabled = true;
     document.getElementById("_purpose").disabled = true;
+    document.getElementById("_sect").disabled = true;
+    document.getElementById("_purpose").disabled = true;
     $.ajax({
         url: "functions/get_request_details.php",
         data: {
