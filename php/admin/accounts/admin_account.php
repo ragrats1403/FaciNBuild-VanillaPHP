@@ -243,7 +243,7 @@
                                 </tbody>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">Add New Account</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New Account</button>
                             </div>
 
                         </div>
