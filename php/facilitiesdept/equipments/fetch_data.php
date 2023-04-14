@@ -38,8 +38,8 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = $row['equipmentname'];
     $subarray[] = $row['quantity'];
     $subarray[] = $row['facility'];  
-    $subarray[] = '<a href="javascript:void();" data-id="' . $row['id'] . '"  class="btn btn-info btn-sm editBtn" >Edit</a>';
-    //<a href= "javascript:void();" data-id="' . $row['id'] . '" class ="btn btn-sm btn-danger btnDelete">Delete</a>
+    $subarray[] = '<a href="javascript:void();" data-id="' . $row['id'] . '"  class="btn btn-info btn-sm editBtn" >Edit</a>
+    <a href= "javascript:void();" data-id="' . $row['id'] . '" class ="btn btn-sm btn-danger btnDelete">Delete</a>';
     $data[] = $subarray;
 }
 
