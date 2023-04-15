@@ -396,6 +396,19 @@
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="purp"></textarea>
                                 </div>
                             </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="req"></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Department Head:</label>
+                                    <textarea placeholder="Department Head" class="form-control" rows="2" id="dephead"></textarea>
+                                </div>
+                            </div>
+
                             <div class="modal-footer justify-content-md-center">
                                 <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
@@ -471,6 +484,18 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="req"></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Department Head:</label>
+                                    <textarea placeholder="Department Head" class="form-control" rows="2" id="dephead"></textarea>
                                 </div>
                             </div>
                             <div class="row">

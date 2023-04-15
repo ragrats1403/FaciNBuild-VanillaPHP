@@ -492,6 +492,12 @@
                                     <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
                                 </div>
                             </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea class="form-control" rows="2" id="_requestedby" placeholder="Requested by"></textarea>
+                                </div>
+                            </div>
 
                             <!-- Form Controls End-->
                         </div>
@@ -569,6 +575,12 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose"></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea class="form-control" rows="2" id="_requestedby" placeholder="Requested by"></textarea>
                                 </div>
                             </div>
                             <div class="row">
