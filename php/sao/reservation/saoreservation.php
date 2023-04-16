@@ -20,7 +20,7 @@
     <div class="imgctrl">
     </div>
     <div class="navplace">
-    <div class="dropdown">
+        <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;">
                 <i class='bx bxs-bell' style='color:#ffffff'></i>
                 <span class="icon-button__badge"></span>
@@ -140,7 +140,7 @@
 </header>
 
 <body onload="bodyonload();">
-<div class="sidebar">
+    <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../../images/Brown_logo_faci.png" />
@@ -158,7 +158,7 @@
                     <li>
                         <div class="dropdown">
                             <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                            <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 Manage Request
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -167,7 +167,7 @@
                         </div>
                         <div class="dropdown">
                             <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                            <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 View/Create Request
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -175,21 +175,27 @@
                                 <a class="dropdown-item" href="../../../php/sao/minor/minorjobreqlist.php">Minor Request</a>
                                 <a class="dropdown-item" href="../../../php/sao/reservation/saoreservation.php">Reservation</a>
                             </ul>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-printer'></i>
+                            <span class="link_name">Generate Report</span>
+                        </a>
+                    </li>
                 </ul>
-            <div class="profile_content">
-                <div class="profile">
-                    <div class="profile_details">
-                        <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
-                        <div class="name_role">
-                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
-                            <div class="role">SAO</div>
+                <div class="profile_content">
+                    <div class="profile">
+                        <div class="profile_details">
+                            <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                            <div class="name_role">
+                                <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
+                                <div class="role">SAO</div>
+                            </div>
                         </div>
+                        <a href="../../../logout.php">
+                            <i class='bx bx-log-out' id="log_out"></i>
+                        </a>
                     </div>
-                    <a href="../../../logout.php">
-                        <i class='bx bx-log-out' id="log_out"></i>
-                    </a>
                 </div>
-            </div>
         </div>
     </div>
 
