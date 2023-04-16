@@ -140,7 +140,7 @@
 
 <body onload="fetchNotifications();">
 
-    <div class="sidebar">
+<div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../../images/Brown_logo_faci.png" />
@@ -175,6 +175,14 @@
                                 <a class="dropdown-item" href="../../../php/sao/minor/minorjobreqlist.php">Minor Request</a>
                                 <a class="dropdown-item" href="../../../php/sao/reservation/saoreservation.php">Reservation</a>
                             </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../../../php/sao/generatereports/generatereports.php">
+                            <i class='bx bx-food-menu'></i>
+                            <span class="link_name">Generate Report</span>
+                        </a>
+                    </li>
                 </ul>
                 <div class="profile_content">
                     <div class="profile">
