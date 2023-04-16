@@ -175,6 +175,12 @@
                             <a class="dropdown-item" href="../../../php/pco/majoruser/majorjobreqlist.php">Major Job Request</a>
                             <a class="dropdown-item" href="../../../php/pco/reservation/pcoreservation.php">Request Reservation</a>
                         </ul>
+                        <li>
+                    <a href="#">
+                        <i class='bx bx-printer'></i>
+                        <span class="link_name">Generate Report</span>
+                    </a>
+                </li>
                     </div>
                 </li>
             </ul>
