@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="../../../../css/print.css?<?= time() ?>">
 </head>
 
 <header class="shadow">
@@ -436,6 +437,117 @@
                             <!-- Form Controls End-->
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="print-area">
+        <div class="modal fade" id="printmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog " style="max-width:1100px;">
+                <div class="modal-content" style="border: none; border-color: transparent;">
+                    <div class="modal-header" style="max-width:1100px;">
+                        <div class="col-md-5">
+                            <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">MINOR JOB REQUEST</h5>
+                        </div>
+                        <div class="no-print-area">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <form id="saveUserForm" action="javascript:void();" method="POST">
+                            <div class="modal-body">
+                                <input type="hidden" id="id" name="id" value="">
+                                <input type="hidden" id="trid" name="trid" value="">
+                                <!-- Form Controls-->
+                                <div id="print-section" *ngIf="propertyLedger">
+                                    <div class="logo">
+                                        <img src="../../../images/uclogo.png" alt="" width="75" height="50" />
+                                    </div>
+                                    <table class="table borderless">
+                                        <tr>
+                                            <th class="col-md-3">Department:</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="_department1" disabled></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-2" style="text-align: left;">Date</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="_datemajorjr1" disabled></td>
+                                        </tr>
+                                    </table>
+                                    <hr>
+                                    <table class="table borderless">
+                                        <tr>
+                                            <th>QUANTITY</th>
+                                            <th colspan="3">ITEMS WITH COMPLETE DESCRIPTION</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="_quantity1" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="_itemdesc1" disabled></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="_purpose1" disabled></textarea></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr style="border: 0px; border: none">
+                                            <th style="border: 0px; border: none">Requested by:</th>
+                                            <th colspan="2" style="border: 0px; border: none ">__________________________________</th>
+                                            <td style="border: 0px; border: none "></td>
+                                            <td style="border: 0px; border: none "></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="border: 0px; border: none">Noted By:</th>
+                                            <th colspan="2" style="border: 0px; border: none ">__________________________________</th>
+                                            <td style="border: 0px; border: none "></td>
+                                            <td style="border: 0px; border: none "></td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="4" style="border: 0px; border: none">B. ACCOMPLISHMENT REPORT (to be filled up by the MAINTENANCE representative) PROECT / SERVICE RENDERED AND ATTESTED BY:</th>
+                                            <td style="border: 0px; border: none "></td>
+                                            <td style="border: 0px; border: none "></td>
+                                            <td style="border: 0px; border: none "></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="border: 0px; border: none">Noted By:</th>
+                                            <td style="border: 0px; border: none"><input style="border: none; border-color: transparent;" type="text" id="_renderedby1" disabled></td>
+                                            <th style="border: 0px; border: none ">Date:</th>
+                                            <td style="border: 0px; border: none"><input style="border: none; border-color: transparent;" type="text" id="_daterendered1" disabled></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="border: 0px; border: none">Confirmed By:</th>
+                                            <td style="border: 0px; border: none"><input style="border: none; border-color: transparent;" type="text" id="_confirmedby1" disabled></td>
+                                            <th style="border: 0px; border: none ">Date:</th>
+                                            <td style="border: 0px; border: none"><input style="border: none; border-color: transparent;" type="text" id="_dateconfirmed1" disabled></td>
+                                        </tr>
+                                        
+                                    </table>
+                                    <div class="no-print-area">
+                                        <div class="modal-footer justify-content-md-center">
+                                            <a href="#" class="btn btn-secondary printbtn" onclick="printContent()">Print</a>
+
+                                        </div>
+                                    </div>
+                                    <script>
+                                        function printContent() {
+                                            var printReport = document.getElementsByClassName("print-area");
+
+                                            $('body').append('<div id="print" class="printBc"></div>');
+                                            $(printReport).clone().appendTo('#print');
+
+                                            $('body').css('background-color', 'white');
+                                            $('body > :not(#print)').addClass('no-print-area');
+                                            window.print();
+
+                                            $('#print').remove();
+                                            $('body').css('background-color', '');
+                                            $('body > :not(#print)').removeClass('no-print-area');
+                                        };
+                                    </script>
+                                </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
