@@ -175,12 +175,6 @@
                                 <a class="dropdown-item" href="../../../php/sao/minor/minorjobreqlist.php">Minor Request</a>
                                 <a class="dropdown-item" href="../../../php/sao/reservation/saoreservation.php">Reservation</a>
                             </ul>
-                            <li>
-                    <a href="#">
-                        <i class='bx bx-printer'></i>
-                        <span class="link_name">Generate Report</span>
-                    </a>
-                </li>
                 </ul>
             <div class="profile_content">
                 <div class="profile">
