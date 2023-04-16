@@ -1,3 +1,6 @@
+<?php
+//require_once('../authentication/anti_pagetrans.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,11 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?= time() ?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?= time() ?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
+    <link rel="stylesheet" type="text/css" href="../../../css/sidebar.css?<?= time() ?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/header.css?<?= time() ?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/body.css?<?= time() ?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/admin/adminaccount.css?<?= time() ?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+
 </head>
 
 <header class="shadow">
@@ -51,7 +56,7 @@
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "reservations/functions/notification.php",
+                    url: "reservation/functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -110,7 +115,7 @@
             markAsReadButton.addEventListener("click", function(event) {
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "reservations/functions/update_notification.php",
+                    url: "reservation/functions/update_notification.php",
                     type: 'POST',
                     data: {
                         department: department,
@@ -139,8 +144,7 @@
 </header>
 
 <body onload="fetchNotifications();">
-
-    <div class="sidebar">
+<div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../../images/Brown_logo_faci.png" />
@@ -148,80 +152,119 @@
         </div>
         <div class="navdiv">
             <ul class="nav_list">
-                <li>
-                    <a href="../../../../php/cad/cadcalendarofactivities.php">
-                        <i class='bx bx-calendar'></i>
-                        <span class="link_name">Calendar of Activities</span>
-                    </a>
-                </li>
-                <li>
-                    <div class="dropdown">
-                        <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Manage Request
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            View/Create Request
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../../php/cad/majoruser/majorjobreqlist.php">Major Job Request</a>
-                            <a class="dropdown-item" href="../../../../php/cad/reservations/cadreservation.php">Reservation</a>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="../../../php/cad/generatereports/generatereports.php">
-                        <i class='bx bx-food-menu'></i>
-                        <span class="link_name">Generate Report</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="profile_content">
-                <div class="profile">
-                    <div class="profile_details">
-                        <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
-                        <div class="name_role">
-                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
-                            <div class="role">CAD</div>
+                <ul class="nav_list">
+                    <li>
+                        <a href="../../../../php/cad/cadcalendarofactivities.php">
+                            <i class='bx bx-calendar'></i>
+                            <span class="link_name">Calendar of Activities</span>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <i class='bx bx-notepad' style="margin-left:17px;"></i>
+                            <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Manage Request
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
+                            </ul>
                         </div>
+                        <div class="dropdown">
+                            <i class='bx bx-clipboard' style="margin-left:17px;"></i>
+                            <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                View/Create Request
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
+                                <a class="dropdown-item" href="../../../../php/cad/majoruser/majorjobreqlist.php">Major Job Request</a>
+                                <a class="dropdown-item" href="../../../../php/cad/reservations/cadreservation.php">Reservation</a>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="../../../php/cad/generatereports/generatereports.php">
+                            <i class='bx bx-food-menu'></i>
+                            <span class="link_name">Generate Report</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="profile_content">
+                    <div class="profile">
+                        <div class="profile_details">
+                            <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                            <div class="name_role">
+                                <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
+                                <div class="role">CAD</div>
+                            </div>
+                        </div>
+                        <a href="../../../../logout.php">
+                            <i class='bx bx-log-out' id="log_out"></i>
+                        </a>
                     </div>
-                    <a href="../../../logout.php">
-                        <i class='bx bx-log-out' id="log_out"></i>
-                    </a>
                 </div>
-            </div>
         </div>
     </div>
-    <div class="table1">
+    <!--<script>
+        let btn = document.querySelector("#btn");
+        let sidebar = document.querySelector(".sidebar");
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF;  padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
-                            <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
-                            <h2 style="text-align: center">CALENDAR OF ACTIVITIES</h2>
-                            <table id="calendar" class="table">
-                                <thead>
-                                    <th>Event Name</th>
-                                    <th>Date</th>
-                                    <th>Time Start</th>
-                                    <th>Time End</th>
-                                    <th>Venue</th>
-                                </thead>
+        btn.onclick = function() {
+            sidebar.classList.toggle("active");
+        }
+    </script>-->
+    <!-- Data Table Start-->
+    <!--<h1 class="text-center">Faci N Build Test table control</h1>-->
+    <div class="table1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px;">
+                        <div class="row col-md-12 mb-3">
+                            <div class="col-md-1 d-flex align-items-center" style="margin-left:10px">
+                                <p class="fw-bold mb-0">Department</p>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <div class="dropdown">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Dropdown button
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="#">Minor Job Request</a></li>
+                                        <li><a class="dropdown-item" href="#">Major Job Request</a></li>
+                                        <li><a class="dropdown-item" href="#">Reservation</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
+                        <table id="calendar" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Quantity</th>
+                                    <th>Item with complete description</th>
+                                    <th>Purpose</th>
+                                    <th>Requested by</th>
+                                    <th>Noted by</th>
+                                    <th>Rendered by</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+    <!-- Data Table End-->
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <!-- Script Process Start-->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -236,7 +279,7 @@
             'paging': true,
             'order': [],
             'ajax': {
-                'url': "dfunctions/fetch_data.php",
+                'url': "fetch_data.php",
                 'type': "post",
             },
             fnCreatedRow: function(nRow, aData, iDataIndex) {
@@ -252,5 +295,4 @@
         });
     </script>
 </body>
-
 </html>
