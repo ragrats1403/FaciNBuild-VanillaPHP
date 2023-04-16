@@ -179,6 +179,12 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <a href="../../../php/buildingdept/generatereports/generatereports.php">
+                        <i class='bx bx-food-menu'></i>
+                        <span class="link_name">Generate Report</span>
+                    </a>
+                </li>
             </ul>
 
             <div class="profile_content">
