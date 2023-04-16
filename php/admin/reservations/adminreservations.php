@@ -139,7 +139,7 @@
     </div>
 </header>
 
-<body onload="fetchNotifications();">
+<body onload="bodyonload();">
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -458,8 +458,7 @@
                 <div class="modal-footer justify-content-between">
                     <div class="mr-auto">           
                         <input id="termscond" type="checkbox"/>
-                        <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>
-                                
+                        <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>           
                     </div>
                     <div class="mr">
                     <a href= "javascript:void();" class ="btn btn-primary editResBtn">Edit</a>
@@ -468,8 +467,6 @@
                     <a href= "javascript:void();" class ="btn btn-danger declineAll" id ="decAllBtn">Decline All</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>
                     </div>
-                    
-                    
                 </div>     
                 <script>
                     document.getElementById("termscond").checked = true;
@@ -511,36 +508,40 @@
                         <label for="be_functionhall"> BE Function Hall</label><br><br>-->
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
-                                <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange ="dynamicEq()" >
-                                <option id ="selectedfaci" disabled selected value hidden> -- Select Facility -- </option>
+                                <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange="dynamicEq()">
+                                    <option disabled selected value hidden> -- Select Facility -- </option>
                                     select = document.getElementById("faci");
                                     <?php include('../../connection/connection.php');
                                     $sql = "SELECT facilityname FROM facility";
-                                    $query = mysqli_query($con,$sql);
-                                    $i=1;
-                                    while($row = mysqli_fetch_assoc($query)){
-                                        echo "<option value=$i>".$row["facilityname"]."</option>";
+                                    $query = mysqli_query($con, $sql);
+                                    $i = 1;
+                                    while ($row = mysqli_fetch_assoc($query)) {
+                                        echo "<option value=$i>" . $row["facilityname"] . "</option>";
                                         $i++;
                                     }
                                     ?>
-                                                
                                 </select>
                             </div>
                             <div class="col-md-6 ">
-                            <input type="text" class="form-control input-sm col-xs-1" id="ename" placeholder="Event Name">
-                            </div>        
+                                <input type="text" class="form-control input-sm col-xs-1" id="eventname_" placeholder="Event Name">
+                            </div>
                         </div>
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Date Filed:</label>
                                 <input type="date" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
                             </div>
+                            <script>
+                                var now = new Date();
+                                now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                                document.getElementById('datefiled').value = now.toISOString().substring(0,10);
+                            </script>
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Actual Date of Use:</label>
                                 <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use">
                             </div>
                         </div>
-                        
+
                         <div class="col-md-2">
                             <label class="fw-bold" for="date">Time In:</label>
                             <input type="time" class="form-control input-sm col-xs-1" id="timein" placeholder="Time In">
@@ -552,7 +553,7 @@
 
                         <div class="col-md-6 ">
                             <label class="fw-bold" for="date">Requesting Party:</label>
-                            <input type="name" class="form-control input-sm col-xs-1" id="reqparty" placeholder="Requesting Party">
+                            <input type="name" class="form-control input-sm col-xs-1" id="reqparty" placeholder="Requesting Party" value="<?php echo $_SESSION['department']; ?>" disabled>
                         </div>
                         <div class="justify-content-center">
                             <div class="col-md-12">
@@ -589,20 +590,20 @@
                         <br>
                         <label class="fw-bold" for="date">Facility Equipments</label>
                         <div class="table-responsive">
-                        <table id="testtable" class="table" width="100%" >
-                            <thead>
-                                <th>Equipments Name</th>
-                                <th>Quantity</th>                                  
-                                <th>Quantity to Reserve</th>
-                            </thead>
-                        </table>
+                            <table id="testtable" class="table" width="100%">
+                                <thead>
+                                    <th>Equipments Name</th>
+                                    <th>Quantity</th>
+                                    <th>Quantity to Reserve</th>
+                                </thead>
+                            </table>
                         </div>
                         <label class="fw-bold">Equipments Added To Reservation</label><br>
                         <!--<a href= "javascript:void();" class ="btn btn-primary testBtn" onclick = "testClick();">Test Console</a>-->
-                                <div id="container1">
-                                    <div id="container2">
-                                    </div>
-                                </div>
+                        <div id="container1">
+                            <div id="container2">
+                            </div>
+                        </div>
                         <!--<div class="col-sm-12 d-flex justify-content-end">
                             <a data-toggle="modal" href="#myModal2" class="btn btn-primary">Add-ons</a>
                         </div>-->
@@ -616,21 +617,21 @@
                                 <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
                             </div>
                             <form id="saveUserForm" action="javascript:void();" method="POST">
-                                <input type = "hidden" id="eventname" >
+                                <input type="hidden" id="eventname">
                                 <!-- Form Controls-->
                                 <div class="row justify-content-center" style="padding-bottom:13px;">
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Department:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_department" placeholder="Department">
+                                        <input type="name" class="form-control input-sm col-xs-1" id="_department" placeholder="Department" value = "<?php echo $_SESSION['department']; ?>" disabled>
                                     </div>
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Date:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="dateminor" placeholder="Date" disabled> 
+                                        <input type="date" class="form-control input-sm col-xs-1" id="dateminor" placeholder="Date" disabled>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                    
+                                    <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
+
                                 </div>
                                 <div class="row">
                                     <div class="col-md-2" style="width:20%">
@@ -641,22 +642,22 @@
                                 <div class="row">
                                     <div class="col-md-2" style="padding-bottom:10px; width:20%">
                                         <label class="fw-bold" for="date">Item Name:</label>
-                                        <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
+                                        <input type="form-control" class="form-control" id="_item_" placeholder="Item">
                                     </div>
                                 </div>
                                 <div class="justify-content-center">
-                                    <div class="col-md-12" >
+                                    <div class="col-md-12">
                                         <label class="fw-bold" for="date">Description:</label>
                                         <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="justify-content-center">
-                                    <div class="col-md-12" >
+                                    <div class="col-md-12">
                                         <label class="fw-bold" for="date">Purpose:</label>
                                         <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
                                     </div>
-                                </div>  
+                                </div>
                                 <!-- Form Controls End-->
                             </form>
                         </div>
@@ -664,21 +665,34 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                <div class="tacbox">
-                    <input id="termscond" type="checkbox" onchange="updateButtonState()" />
-                    <label for="termscond"> I agree to these <a href="termsandcondition.html" target="_blank"> Terms and Conditions prior to Approval</a></label>
-                </div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>
+                    <div class="tacbox">
+                        <input id="termscond" type="checkbox" onchange="updateButtonState()" />
+                        <label for="termscond"> I agree to these <a href="termsandcondition.html" target="_blank"> Terms and Conditions prior to Approval</a></label>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <!--<button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>-->
-                    <a href= "javascript:void();" class ="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
-                    
-                    
+                    <a href="javascript:void();" class="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
+
                 </div>
-                <script type="text/javascript" src="functions/js/resdep.js?random=<?php echo uniqid(); ?>"></script>                       
-                
+                <script type="text/javascript" src="functions/js/createresdep.js?random=<?php echo uniqid(); ?>"></script>
+
             </div>
         </div>
     </div>
+
+
+
+    <script>
+
+function bodyonload(){
+    //date auto fill
+var now = new Date();
+now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+document.getElementById('datefiled').value = now.toISOString().substring(0,10);
+//date end
+
+}
+    </script>
         <!-- create reservation end -->
                                     
    
