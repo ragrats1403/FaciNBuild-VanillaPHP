@@ -131,52 +131,50 @@ $(document).on("click", ".editBtn", function (event) {
 
 
 
-            $.ajax({
-              url: "functions/getequipment.php",
-              data: {
-                  eventname: en,
-                  actualdate: dateuse,
-                  datesubmitted: eqdatesubmit,
-                  timestart: tstart,
-                  timeend: tend,
-              },
-              type: "POST",
-              success: function(data) {
-              var jsonreseq = JSON.parse(data);
-              var len = data.length;
-              //console.log(jsonreseq);
-              //console.log(data[0].eqid);
-                
-                for(var i = 0; i<len-1; i++)
-                {
-                  var equipn = jsonreseq[i][0];
-                  var equipq = jsonreseq[i][1];
-                  var container = document.getElementById('container4');
-                  var newDiv = document.createElement('div');
-                  var divCol = document.createElement('div');
-                  var nid = jsonreseq[i][1];
-                  divCol2 = document.createElement('div');
-                  newDiv.className = "row";
-                  divCol.className = "col-md-2";
-                  divCol2.className = "col-md-2";
-                  var btn = document.createElement('button');
-                  btn.className = "btn btn-sm btn-danger disabled removeEq";
-                  btn.id = "fbe"+nid;
-                  btn.setAttribute("onclick","removeAddedEq2(this);");
-                  btn.style.marginTop = '3px';
-                  btn.innerHTML = "Remove";
-                  var textbox = document.createElement('text');
-                  textbox.className = "form-control input-sm col-xs-1 disabled";
-                  textbox.innerHTML = equipn +' x '+ equipq;
-
-                  divCol.appendChild(textbox);
-                  divCol2.appendChild(btn);
-                  newDiv.appendChild(divCol);
-                  newDiv.appendChild(divCol2);
-                  container.appendChild(newDiv);
+          $.ajax({
+            url: "functions/getequipment.php",
+            data: {
+                eventname: en,
+                actualdate: dateuse,
+                datesubmitted: eqdatesubmit,
+                timestart: tstart,
+                timeend: tend,
+            },
+            type: "POST",
+            success: function(data) {
+                var jsonreseq = JSON.parse(data);
+                var len = data.length;
+        
+                for (var i = 0; i < len - 1; i++) {
+                    var equipn = jsonreseq[i][0];
+                    var equipq = jsonreseq[i][1];
+                    var container = document.getElementById('container4');
+                    var newDiv = document.createElement('div');
+                    var divCol = document.createElement('div');
+                    var nid = jsonreseq[i][1];
+                    divCol2 = document.createElement('div');
+                    newDiv.className = "row";
+                    divCol.className = "col-md-2";
+                    divCol2.className = "col-md-2";
+                    var btn = document.createElement('button');
+                    var uniqueID = "fbe" + i + "_" + nid;
+                    btn.className = "btn btn-sm btn-danger disabled removeEq";
+                    btn.id = uniqueID;
+                    btn.setAttribute("onclick","removeAddedEq2(this);");
+                    btn.style.marginTop = '3px';
+                    btn.innerHTML = "Remove";
+                    var textbox = document.createElement('text');
+                    textbox.className = "form-control input-sm col-xs-1 disabled";
+                    textbox.innerHTML = equipn + ' x ' + equipq;
+        
+                    divCol.appendChild(textbox);
+                    divCol2.appendChild(btn);
+                    newDiv.appendChild(divCol);
+                    newDiv.appendChild(divCol2);
+                    container.appendChild(newDiv);
                 }
-              },
-          });
+            },
+        });
 
     },
   });

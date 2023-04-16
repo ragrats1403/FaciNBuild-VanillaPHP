@@ -52,17 +52,15 @@ function removeAddedEq(e){
     }
 //more info eq
 
-
+var testarr = [];
 $(document).on('click', '.editResBtn', function(event){
-
     var updatebtn = document.getElementById("uResBtn");
     updatebtn.classList.remove("disabled");
-    var testarr = [...document.querySelectorAll('[id^="fbe"]')].map(
-        (elm) => elm.id
-      );
-
+    var testarr = [...document.querySelectorAll('#container4 button[id^="fbe"]')].map(elm => elm.id);
+    console.log(testarr);
 
       for (i = 0; i <= testarr.length; i++) {
+        console.log(testarr[i]);
         var val = document.getElementById(testarr[i]).value;//eq
         //document.getElementById(val).disabled = false;
         var eqbtn = document.getElementById(testarr[i]);
