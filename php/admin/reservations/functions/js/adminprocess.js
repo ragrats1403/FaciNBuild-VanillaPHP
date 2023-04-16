@@ -80,6 +80,15 @@ $(document).on("click", ".editBtn", function (event) {
       $("#_statustext").val(json.status);
       $("#_step1").val(json.fdstatus);
       $("#_step2").val(json.saostatus);
+      if(json.status = "Approved")
+      {
+        document.getElementById("appAllBtn").hidden = true;
+        document.getElementById("decAllBtn").hidden = true;
+        document.getElementById("step1a").hidden = true;
+        document.getElementById("step1d").hidden = true;
+        document.getElementById("step2a").hidden = true;
+        document.getElementById("step2d").hidden = true;
+      }
       $("#test").modal("show");
         var en = json.eventname;
         var adu = json.actualdateofuse; 
@@ -182,8 +191,7 @@ $("#closemodal").click(function () {
 
 //create reservation
 $(document).on("click", ".submitBtn", function (event) {
-  event.preventDefault();
-  var eventname = $("#eventname").val();
+  var ename = $("#ename").val();
   var datefiled = $("#datefiled").val();
   var actualdate = $("#actualdate").val();
   var timein = $("#timein").val();
@@ -197,16 +205,25 @@ $(document).on("click", ".submitBtn", function (event) {
   var e = document.getElementById("faci");
 
   var faci = e.options[e.selectedIndex].text;
-
+  console.log(ename);
+  console.log(datefiled);
+  console.log(actualdate);
+  console.log(timein);
+  console.log(timeout);
+  console.log(reqparty);
+  console.log(purpose);
+  console.log(numparticipants);
+  console.log(stageperf);
+  console.log(adviser);
+  console.log(chairman);
   //alert(testarr.length);
   if (
-    eventname != "" &&
+    ename != "" &&
     datefiled != "" &&
     actualdate != "" &&
     timein != "" &&
     timeout != "" &&
     reqparty != "" &&
-    department != "" &&
     purpose != "" &&
     numparticipants != "" &&
     stageperf != "" &&
@@ -216,7 +233,7 @@ $(document).on("click", ".submitBtn", function (event) {
     $.ajax({
       url: "functions/add_data.php", 
       data: {
-        eventname: eventname,
+        eventname: ename,
         datefiled: datefiled,
         actualdate: actualdate,
         timein: timein,
@@ -312,7 +329,7 @@ $(document).on("click", ".submitBtn", function (event) {
           /*var now = new Date();
                     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
                     document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);*/
-          $("#eventname").val("");
+          $("#ename").val("");
           $("#actualdate").val("");
           $("#timein").val("");
           $("#timeout").val("");

@@ -419,7 +419,9 @@
                     a.add(option2);
                     $('#_inputFeedback').val(json.feedback);
                     //drop down fix end
+                    
                     $('#editUserModal').modal('show');
+                    
                 }
             });
         });
@@ -465,6 +467,29 @@
                     }
                 }
             });
+        });
+        $(document).on('click', '.loadImage', function(event) {
+            $.ajax({
+                    url: "functions/testfetchimage.php",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(response) {
+                        var status = response.status;
+                        if (status === "success") {
+                            var imageData = response.image;
+                            var imageSource = "data:image/jpg;base64," + imageData;
+                            $("#testimage").attr("src", imageSource);
+                        } else {
+                            console.log("Failed to fetch image");
+                            alert("Failed to fetch image");
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("AJAX error:", textStatus, errorThrown);
+                    }
+                });
+
+                            
         });
 
         $(document).on('click', '.step1declineBtn', function(event) {
@@ -731,6 +756,34 @@
                                     <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback" disabled></textarea>
                                 </div>
                             </div>
+                            <div class="image-container">
+                                <img id="testimage" />
+                                <p>Test loooooooong text</p>
+                                <a href="javascript:void();" class="btn btn-secondary loadImage">Load Image</a>
+                            </div>
+                            <style>
+                                .image-container {
+                                    position: relative;
+                                    display: inline-block;
+                                }
+
+                                #testimage {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 50%;
+                                    transform: translate(-50%, 0%);
+                                    margin-right: 10px;
+                                    height: 100px; /* adjust height to desired size */
+                                }
+
+                                p {
+                                    position: relative;
+                                    z-index: 1;
+                                    text-align: center;
+                                    margin-top: 0; /* remove margin-top to have text touch the image */
+                                }
+
+                            </style>
                             <div>
                                 <div class="modal-footer justify-content-md-center">
                                     <a href="javascript:void();" class="btn btn-primary step1approveBtn">Approve</a>

@@ -62,7 +62,7 @@ $(document).on('click', '.editResBtn', function(event){
       );
 
 
-      for (i = 0; i <= testarr.length - 1; i++) {
+      for (i = 0; i <= testarr.length; i++) {
         var val = document.getElementById(testarr[i]).value;//eq
         //document.getElementById(val).disabled = false;
         var eqbtn = document.getElementById(testarr[i]);

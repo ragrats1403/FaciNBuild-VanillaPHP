@@ -357,11 +357,11 @@
                                         </div> 
                                         <div class="col-md-1">
                                             <!--Id:step1approveBtn-->
-                                            <a href= "javascript:void();" class ="btn btn-success step1approveBtn">Approve</a>
+                                            <a href= "javascript:void();" class ="btn btn-success step1approveBtn" id="step1a">Approve</a>
                                         </div>
                                         <div class="col-md-1" style="padding-left:18px;">
                                         <!--Id:step1declineBtn-->
-                                            <a href= "javascript:void();" class ="btn btn-danger step1declineBtn">Decline</a>
+                                            <a href= "javascript:void();" class ="btn btn-danger step1declineBtn" id="step1d">Decline</a>
                                         </div>
                                     </div>
                                     <div class="row" style="padding-top:6px;">     
@@ -373,11 +373,11 @@
                                         </div> 
                                         <div class="col-md-1">
                                             <!--Id:step1approveBtn-->
-                                            <a href= "javascript:void();" class ="btn btn-success step2approveBtn">Approve</a>
+                                            <a href= "javascript:void();" class ="btn btn-success step2approveBtn" id="step2a">Approve</a>
                                         </div>
                                         <div class="col-md-1" style="padding-left:18px;">
                                         <!--Id:step1declineBtn-->
-                                            <a href= "javascript:void();" class ="btn btn-danger step2declineBtn">Decline</a>
+                                            <a href= "javascript:void();" class ="btn btn-danger step2declineBtn" id="step2d">Decline</a>
                                         </div>
                                     </div>
                                     <div class="form-check">
@@ -464,8 +464,8 @@
                     <div class="mr">
                     <a href= "javascript:void();" class ="btn btn-primary editResBtn">Edit</a>
                     <a href= "javascript:void();" class ="btn btn-warning updateResBtn disabled" id= "uResBtn">Save Changes</a>
-                    <a href= "javascript:void();" class ="btn btn-info approveAll">Approve All</a>
-                    <a href= "javascript:void();" class ="btn btn-danger declineAll">Decline All</a>
+                    <a href= "javascript:void();" class ="btn btn-info approveAll" id ="appAllBtn">Approve All</a>
+                    <a href= "javascript:void();" class ="btn btn-danger declineAll" id ="decAllBtn">Decline All</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>
                     </div>
                     
@@ -527,7 +527,7 @@
                                 </select>
                             </div>
                             <div class="col-md-6 ">
-                            <input type="text" class="form-control input-sm col-xs-1" id="eventname" placeholder="Event Name">
+                            <input type="text" class="form-control input-sm col-xs-1" id="ename" placeholder="Event Name">
                             </div>        
                         </div>
                         <div class="row justify-content-center" style="padding-bottom:13px;">
