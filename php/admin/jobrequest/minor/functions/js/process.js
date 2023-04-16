@@ -236,6 +236,30 @@ $(document).on('click', '.declineBtn', function(event){
     //alert('test');
 });
 
+$(document).on('click', '.btnprint', function(event) {
+    var id = $(this).data('id');
+    var trid = $(this).closest('trid').attr('majoreq');
+    $.ajax({
+        url: "functions/get_request_details.php",
+        data: {
+            id: id
+        },
+        type: 'POST',
+        success: function(data) {
+            var json = JSON.parse(data);
+            $('#id').val(json.id);
+            $('#trid').val(trid);
+            $('#_department1').val(json.department);
+            $('#_datemajorjr1').val(json.datesubmitted);
+            $('#_quantity1').val(json.quantity);
+            $('#_itemdesc1').val(json.item_desc);
+            $('#_purpose1').val(json.purpose);
+            $('#_renderedby1').val(json.renderedby);
+            $('#_confirmedby1').val(json.confirmby);
+            $('#printmodal').modal('show');
+        }
+    });
+});
 
 //edit button control 
 $(document).on('click', '.editBtn', function(event) {
