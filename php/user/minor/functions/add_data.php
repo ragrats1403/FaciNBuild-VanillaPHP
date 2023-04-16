@@ -4,7 +4,7 @@
 $department = $_POST['department'];
 $date = $_POST['date'];
 $quantity = $_POST['quantity'];
-$itemname = $_POST['itemname'];
+$requestedby = $_POST['requestedby'];
 $description = $_POST['description'];
 $purpose = $_POST['purpose'];
 
@@ -24,7 +24,7 @@ $facilitiesDeptmesg = "".$department." submitted a Minor Job Request and is wait
 $adminDeptmesg = "".$department." submitted a Minor Job Request and is waiting for Approval\nCheck them in Manage Job Requests!";
 
 
-$sql = "INSERT INTO `minorjreq` (`department`,`datesubmitted`, `quantity`, `item`,`item_desc`,`purpose`, `bdstatus`,`status`) VALUES ('$department','$date','$quantity','$itemname','$description',' $purpose','Pending', 'Pending')";
+$sql = "INSERT INTO `minorjreq` (`department`,`datesubmitted`, `quantity`, `requestedby`,`item_desc`,`purpose`, `bdstatus`,`status`) VALUES ('$department','$date','$quantity','$requestedby','$description',' $purpose','Pending', 'Pending')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
     $sqlnotif = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$message', '$department', '$formatted_date','0')";

@@ -381,14 +381,12 @@
                                         </div>
                                     </div>
                                     <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled>
-                            <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
+                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled hidden>
+                            <label class="form-check-label" for="flexCheckDefault" hidden> Add-on </label>
                         </div>
                         <div id="_myDIV1" style="display: none;">
                             <div class="col-sm-12 d-flex justify-content-between">
                                     <h5 class="modal-title text-uppercase fw-bold mr-auto" id="exampleModalLabel">Add-ons</h5>
-                                
-                                    
                             </div>
                             <div class="row" style="padding-top:6px;">
                             <input type="hidden" id="_addonID" disabled>     

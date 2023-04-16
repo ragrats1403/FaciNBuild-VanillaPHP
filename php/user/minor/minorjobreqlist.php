@@ -257,21 +257,21 @@
             var department = $('#department').val();
             var date = $('#datemajorjr').val();
             var quantity = $('#_quantity_').val();
-            var itemname = $('#_item_').val();
             var description = $('#_itemdesc_').val();
             var purpose = $('#_purpose_').val();
             var renderedby = $('#renderedby').val();
             var daterendered = $('#daterendered').val();
             var confirmedby = $('#confirmedby').val();
             var dateconfirmed = $('#dateconfirmed').val();
-            if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '' && renderedby != '' && daterendered != '' && confirmedby != '' && dateconfirmed != '') {
+            var requestedby = $('#requestedby').val();
+            if (department != '' && date != '' && quantity != '' && requestedby != '' && description != '' && purpose != '' && renderedby != '' && daterendered != '' && confirmedby != '' && dateconfirmed != '') {
                 $.ajax({
                     url: "functions/add_data.php",
                     data: {
                         department: department,
                         date: date,
                         quantity: quantity,
-                        itemname: itemname,
+                        requestedby: requestedby,
                         description: description,
                         purpose: purpose,
                         renderedby: renderedby,
@@ -306,37 +306,6 @@
                 alert("Please fill all the Required fields");
             }
         });
-        //delete user button control
-        $(document).on('click', '.btnDelete', function(event) {
-            var table = $('#datatable').DataTable();
-            event.preventDefault();
-            var id = $(this).data('id');
-            if (confirm('Are you sure to delete this user?')) {
-
-
-                $.ajax({
-                    url: "delete_user.php",
-                    data: {
-                        id: id
-                    },
-                    type: 'POST',
-                    success: function(data) {
-                        var json = JSON.parse(data);
-                        status = json.status;
-
-                        if (status == 'success') {
-                            $('#' + id).closest('tr').remove();
-
-                        } else {
-                            alart('failed');
-                            return;
-                        }
-                    }
-                });
-            } else {
-                return null;
-            }
-        });
         //edit button control 
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
@@ -350,6 +319,7 @@
             document.getElementById("_step1").disabled = true;
             document.getElementById("_sect").disabled = true;
             document.getElementById("_inputFeedback").disabled = true;
+            document.getElementById("_requestedby").disabled = true;
             $.ajax({
                 url: "functions/get_request_details.php",
                 data: {
@@ -367,7 +337,7 @@
                     $('#_department').val(json.department);
                     $('#_quantity').val(json.quantity);
                     $('#_itemdesc').val(json.item_desc);
-                    $('#_item').val(json.item);
+                    $('#_requestedby').val(json.requestedby);
                     $('#_purpose').val(json.purpose);
                     $('#_step1').val(json.bdstatus);
                     $('#_renderedby').val(json.renderedby);
@@ -400,41 +370,6 @@
 
         });
 
-        $(document).on('submit', '#updateUserForm', function() {
-            var id = $('#id').val();
-            var trid = $('#trid').val();
-            var name = $('#_inputName').val();
-            var username = $('#_inputUsername').val();
-            var password = $('#_inputPassword').val();
-            var rolelevel = $('#_inputRoleLevel').val();
-            var roleid = $('#_inputRoleID').val();
-            $.ajax({
-                url: "update_user.php",
-                data: {
-                    id: id,
-                    name: name,
-                    username: username,
-                    password: password,
-                    rolelevel: rolelevel,
-                    roleid: roleid
-                },
-                type: 'POST',
-                success: function(data) {
-                    var json = JSON.parse(data);
-                    status = json.status;
-                    if (status == 'success') {
-                        alert('Updated Successfully!');
-                        table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a> <a href="javascript:void();" class="btn btn-sm btn-danger" data-id="' + id + '" >Delete</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([id, name, username, password, rolelevel, roleid, button]);
-                        $('#editUserModal').modal('hide');
-                    } else {
-                        alert('failed');
-                    }
-                }
-            });
-        });
     </script>
 
     <!-- Script Process End-->
@@ -471,17 +406,9 @@
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control" id="_item_" placeholder="Item">
-                                </div>
-                            </div>
-
                             <div class="justify-content-center">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
                                 </div>
                             </div>
@@ -495,7 +422,7 @@
                             <div class="justify-content-center">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Requested by:</label>
-                                    <textarea class="form-control" rows="2" id="_requestedby" placeholder="Requested by"></textarea>
+                                    <textarea class="form-control" rows="2" id="requestedby" placeholder="Requested by"></textarea>
                                 </div>
                             </div>
 
@@ -556,17 +483,9 @@
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity" placeholder="Quantity" disabled>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control" id="_item" placeholder="Item" disabled>
-                                </div>
-                            </div>
-
                             <div class="justify-content-center">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description"></textarea>
                                 </div>
                             </div>
