@@ -172,12 +172,6 @@
                     <span class="link_name">Reservation</span>
                 </a>
             </li>
-            <li>
-                    <a href="#">
-                        <i class='bx bx-printer'></i>
-                        <span class="link_name">Generate Report</span>
-                    </a>
-                </li>
         </ul>
         <div class="profile_content">
                 <div class="profile">
