@@ -260,11 +260,13 @@
             var department = $('#depart').val();
             var date = $('#deeto').val();
             var quantity = $('#quan').val();
-            var item = $('#ite').val();
             var description = $('#desc').val();
             var purpose = $('#purp').val();
+            var requestby = $('#req').val();
+            var departmenthead = $('#dephead').val();
 
-            if (department != '' && date != '' && quantity != '' && item != '' && description != '' && purpose != '') {
+
+            if (department != '' && date != '' && quantity != '' && requestby != '' && description != '' && purpose != '' && departmenthead != '') {
                 $.ajax({
                     url: "functions/add_data.php",
                     data: {
@@ -272,9 +274,10 @@
                         department: department,
                         date: date,
                         quantity: quantity,
-                        item: item,
                         description: description,
                         purpose: purpose,
+                        requestby: requestby,
+                        departmenthead: departmenthead,
                     },
                     type: 'POST',
                     success: function(data) {
@@ -286,9 +289,10 @@
                             alert('Requested Successfully!');
                             $('#requi').val('');
                             $('#quan').val('');
-                            $('#ite').val('');
                             $('#desc').val('');
                             $('#purp').val('');
+                            $('#req').val('');
+                            $('#dephead').val('');
                             $('#addUserModal').modal('hide');
                             $('body').removeClass('modal-open');
                             $('.modal-backdrop').remove();
@@ -323,7 +327,8 @@
                     e.options[e.selectedIndex].text = json.section;
                     /*$('#sections').val(json.section);*/
                     $('#quantity').val(json.quantity);
-                    $('#item').val(json.item);
+                    $('#_req').val(json.requestedby);
+                    $('#_dephead').val(json.departmenthead);
                     $('#description').val(json.description);
                     $('#purpose').val(json.purpose);
                     var e = document.getElementById("remark");
@@ -377,16 +382,9 @@
                                     <input type="form-control" class="form-control input-sm col-xs-1" id="quan" placeholder="Quantity">
                                 </div>
                             </div>
-
-                            <div>
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="ite" placeholder="Item">
-                                </div>
-                            </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea placeholder="Description" class="form-control" rows="2" id="desc"></textarea>
                                 </div>
                             </div>
@@ -467,16 +465,9 @@
                                     <input type="form-control" class="form-control input-sm col-xs-1" id="quantity" placeholder="Quantity" disabled>
                                 </div>
                             </div>
-
-                            <div>
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="item" placeholder="Item" disabled>
-                                </div>
-                            </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea placeholder="Description" class="form-control" rows="2" id="description" disabled></textarea>
                                 </div>
                             </div>
@@ -489,13 +480,13 @@
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Requested by:</label>
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="req"></textarea>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="_req" disabled></textarea>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Department Head:</label>
-                                    <textarea placeholder="Department Head" class="form-control" rows="2" id="dephead"></textarea>
+                                    <textarea placeholder="Department Head" class="form-control" rows="2" id="_dephead" disabled></textarea>
                                 </div>
                             </div>
                             <div class="row">
