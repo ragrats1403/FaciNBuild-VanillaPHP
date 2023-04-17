@@ -141,7 +141,7 @@ require_once('../../authentication/anti_pagetrans.php');
 </header>
 
 <body onload="bodyonload();">
-    <div class="sidebar">
+<div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../../images/Brown_logo_faci.png" />
@@ -162,6 +162,7 @@ require_once('../../authentication/anti_pagetrans.php');
                             Manage Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
                             <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
                         </ul>
                     </div>
@@ -171,18 +172,18 @@ require_once('../../authentication/anti_pagetrans.php');
                             View/Create Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../../php/cad/minoruser/minorjobreqlist.php">Minor Job Request</a>
                             <a class="dropdown-item" href="../../../../php/cad/majoruser/majorjobreqlist.php">Major Job Request</a>
                             <a class="dropdown-item" href="../../../../php/cad/reservations/cadreservation.php">Reservation</a>
                         </ul>
                     </div>
                 </li>
                 <li>
-                    <a href="../../../php/cad/generatereports/generatereports.php">
-                        <i class='bx bx-food-menu'></i>
-                        <span class="link_name">Generate Report</span>
-                    </a>
-                </li>
+                        <a href="../../../php/cad/generatereports/generatereports.php">
+                            <i class='bx bx-food-menu'></i>
+                            <span class="link_name">Generate Report</span>
+                        </a>
+                    </li>
             </ul>
             <div class="profile_content">
                 <div class="profile">
