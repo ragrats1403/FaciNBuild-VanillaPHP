@@ -75,11 +75,11 @@ require_once('../../authentication/anti_pagetrans.php');
                                 notificationItem.classList.add("unread"); // Add "unread" class if the notification is unread
                             }
                             notificationItem.innerHTML = `
-            <div class="d-flex align-items-center">
-            <div class="flex-grow-1 notification-message">${notification.message}</div>
-            <div class="text-muted notification-date">${new Date(notification.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} ${new Date(notification.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</div>
-            </div>
-        `;
+                            <div class="d-flex align-items-center">
+                            <div class="flex-grow-1 notification-message">${notification.message}</div>
+                            <div class="text-muted notification-date">${new Date(notification.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} ${new Date(notification.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</div>
+                            </div>
+                        `;
                             notificationList.appendChild(notificationItem);
                             if (i < notifications.length - 1) {
                                 // Add a divider after each item except the last one
@@ -244,6 +244,15 @@ require_once('../../authentication/anti_pagetrans.php');
             },
             'fnCreatedRow': function(nRow, aData, iDataIndex) {
                 $(nRow).attr('id', aData[0]);
+                if (aData[4] === 'Approved') {
+                    $(nRow).css('background-color', '#a7d9ae');
+                }
+                if (aData[4] === 'Declined') {
+                    $(nRow).css('background-color', '#e09b8d');
+                }
+                if (aData[4] === 'Pending') {
+                    $(nRow).css('background-color', '#d9d2a7');
+                }
             },
             'columnDefs': [{
                 'target': [0, 4],
@@ -255,56 +264,7 @@ require_once('../../authentication/anti_pagetrans.php');
         });
     </script>
     <script type="text/javascript">
-        //add button control
-        $(document).on('submit', '#saveUserForm', function(event) {
-            var requino = $('#requi').val();
-            var department = $('#depart').val();
-            var date = $('#deeto').val();
-            var quantity = $('#quan').val();
-            var item = $('#ite').val();
-            var description = $('#desc').val();
-            var purpose = $('#purp').val();
-
-            if (department != '' && date != '' && quantity != '' && item != '' && description != '' && purpose != '') {
-                $.ajax({
-                    url: "functions/add_data.php",
-                    data: {
-                        requino: requino,
-                        department: department,
-                        date: date,
-                        quantity: quantity,
-                        item: item,
-                        description: description,
-                        purpose: purpose,
-                    },
-                    type: 'POST',
-                    success: function(data) {
-                        var json = JSON.parse(data);
-                        status = json.status;
-                        if (status = 'success') {
-                            table = $('#datatable').DataTable();
-                            table.draw();
-                            alert('Successfully Added User!');
-                            $('#requi').val('');
-                            $('#depart').val('');
-                            $('#deeto').val('');
-                            $('#quan').val('');
-                            $('#ite').val('');
-                            $('#desc').val('');
-                            $('#purp').val('');
-                            $('#addUserModal').modal('hide');
-                            $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
-                        }
-                    }
-                });
-            } else {
-                alert("Please fill all the Required fields");
-            }
-        });
-
-
-
+        
         //edit button control 
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
@@ -323,34 +283,50 @@ require_once('../../authentication/anti_pagetrans.php');
                     $('#requino').val(json.requino);
                     $('#department').val(json.department);
                     $('#date').val(json.date);
-                    var e = document.getElementById("sections");
-                    var section = e.options[e.selectedIndex].text;
-                    e.options[e.selectedIndex].text = json.section;
-                    /*$('#sections').val(json.section);*/
+                    var x = document.getElementById("sections");
+                    var option = document.createElement("option");
+                    option.text = json.section;
+                    option.hidden = true;
+                    option.disabled = true;
+                    option.selected = true;
+                    x.add(option);
+
                     $('#quantity').val(json.quantity);
-                    $('#item').val(json.item);
-                    $('#description').val(json.description);
+                    $('#_itemdesc').val(json.description);
                     $('#purpose').val(json.purpose);
-                    var e = document.getElementById("remark");
-                    var outsource = e.options[e.selectedIndex].text;
-                    e.options[e.selectedIndex].text = json.outsource;
+                    $('#_req').val(json.requestedby);
+                    $('#_dephead').val(json.departmenthead);
+                    var a = document.getElementById("remark");
+                    var option2 = document.createElement("option");
+                    option2.text = json.outsource;
+                    option2.hidden = true;
+                    option2.disabled = true;
+                    option2.selected = true;
+                    a.add(option2);
 
                     $('#_statustext').val(json.status);
                     $('#_step1').val(json.bdstatus);
                     $('#_step2').val(json.pcostatus);
                     $('#_step3').val(json.cadstatus);
-                    var aprbtn = document.getElementById("step3a");
-                    var dclbtn = document.getElementById("step3d");
-                    var fback = document.getElementById("_inputFeedback");
-                    if (json.cadstatus != 'Approved') {
-
-                        aprbtn.classList.remove("disabled");
-                        dclbtn.classList.remove("disabled");
-                        fback.disabled = false;
-                    } else {
-                        aprbtn.classList.add("disabled");
-                        dclbtn.classList.add("disabled");
-                        fback.disabled = true;
+                    $('#_bdapprovedby').val(json.bdapprovedby);
+                    $('#_pcoapprovedby').val(json.pcoapprovedby);
+                    $('#_cadapprovedby').val(json.cadapprovedby);
+                    $('#_inputFeedback').val(json.feedback);
+                    if(json.cadstatus != 'Pending')
+                    {
+                        document.getElementById("_cadapprovedby").disabled = true;
+                        document.getElementById("sections").disabled = true;
+                        document.getElementById("_inputFeedback").disabled = true;
+                        document.getElementById("step3a").hidden = true;
+                        document.getElementById("step3d").hidden = true;
+                    }
+                    else
+                    {
+                        document.getElementById("_cadapprovedby").disabled = false;
+                        document.getElementById("sections").disabled = false;
+                        document.getElementById("_inputFeedback").disabled = false;
+                        document.getElementById("step3a").hidden = false;
+                        document.getElementById("step3d").hidden = false;
                     }
                     /*$('#remark').val(json.outsource);*/
                     $('#editUserModal').modal('show');
@@ -366,15 +342,14 @@ require_once('../../authentication/anti_pagetrans.php');
             var trid = $('#trid').val();
             var dept = $('#department').val();
             var feedb = $('#_inputFeedback').val();
-            
+            var cadapprovedby = $('#_cadapprovedby').val();
             $.ajax({
                 url: "functions/step3approve.php",
                 data: {
                     id: id,
                     dept: dept,
                     feedb: feedb,
-
-
+                    cadapprovedby: cadapprovedby,
                 },
                 type: 'POST',
                 success: function(data) {
@@ -527,11 +502,11 @@ require_once('../../authentication/anti_pagetrans.php');
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-md-6 ">
+                                <div class="col-md-6">
                                     <label class="fw-bold" for="date">Department</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" disabled>
                                 </div>
-                                <div class="col-md-6 ">
+                                <div class="col-md-6">
                                     <label class="fw-bold" for="date">Date</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="date" placeholder="Date" disabled>
                                 </div>
@@ -543,23 +518,28 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <input type="form-control" class="form-control input-sm col-xs-1" id="quantity" placeholder="Quantity" disabled>
                                 </div>
                             </div>
-
-                            <div>
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="item" placeholder="Item" disabled>
-                                </div>
-                            </div>
-                            <div class="justify-content-center" style="padding-bottom:10px;">
+                            <div class="justify-content-center">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="description" disabled></textarea>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                    <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description" disabled></textarea>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="_req" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Department Head:</label>
+                                    <textarea placeholder="Department Head" class="form-control" rows="2" id="_dephead" disabled></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -574,30 +554,52 @@ require_once('../../authentication/anti_pagetrans.php');
                                     </select>
                                 </div>
                             </div>
+                            <!--step 1-->
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Building Department Approval Status:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step1" disabled>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step1" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_bdapprovedby" disabled>
                                 </div>
                             </div>
+                            <!--step 2-->
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 2 Status:</label>
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Property Custodian Approval Status:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step2" disabled>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step2" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_pcoapprovedby" disabled>
                                 </div>
                             </div>
+                            <!--step 3-->
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 3 Status:</label>
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Campus Academic Director Approval Status:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step3" disabled>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step3" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_cadapprovedby" disabled>
                                 </div>
                             </div>
+                            <br>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>

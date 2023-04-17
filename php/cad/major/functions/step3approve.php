@@ -4,13 +4,8 @@
 $id = $_POST['id'];
 $dept = $_POST['dept'];
 $feedb = $_POST['feedb'];
+$cadapprovedby = $_POST['cadapprovedby'];
 
-
-/*
-bdstatus
-cadstatus
-pcostatus
-*/
 date_default_timezone_set('Asia/Manila');
 
 // Get the current datetime in the server timezone
@@ -21,7 +16,7 @@ $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
 
 // Format the date in your local timezone
 $formatted_date = $date->format('Y-m-d H:i:s');
-$sql = "UPDATE `majoreq` SET `cadstatus`='Approved', `status`='Approved', `feedback` = '$feedb' WHERE jobreqno = '$id'";
+$sql = "UPDATE `majoreq` SET `cadstatus`='Approved', `cadapprovedby` = '$cadapprovedby', `status`='Approved', `feedback` = '$feedb' WHERE jobreqno = '$id'";
 $query = mysqli_query($con, $sql);
 $message = "Campus Academic Directors Office approved your Job Request with Job Request no: ".$id."!\nYou can check your request status at Major Job Request Section.";
 $message2 = "You successfully approved a Major Job Request from ".$dept." with Job Request No. ".$id."";
