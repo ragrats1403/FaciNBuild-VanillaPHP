@@ -366,7 +366,6 @@ require_once('../../authentication/anti_pagetrans.php');
                     $('').val();
                     $('').val();
                     $('').val();
-
                     /*$('#_inputName').val(json.name)
                     $('#_inputUsername').val(json.username);
                     $('#_inputPassword').val(json.password);

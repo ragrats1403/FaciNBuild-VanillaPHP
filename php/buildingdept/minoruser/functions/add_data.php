@@ -23,7 +23,6 @@ $message = "You have submitted a Minor Job Request and is now Pending for approv
 $facilitiesDeptmesg = "".$department." submitted a Minor Job Request and is waiting for Approval\nCheck them in Manage Job Requests1";
 $adminDeptmesg = "".$department." submitted a Minor Job Request and is waiting for Approval\nCheck them in Manage Job Requests!";
 
-
 $sql = "INSERT INTO `minorjreq` (`department`,`datesubmitted`, `quantity`, `requestedby`,`item_desc`,`purpose`, `bdstatus`,`status`) VALUES ('$department','$date','$quantity','$requestedby','$description',' $purpose','Pending', 'Pending')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
@@ -33,7 +32,6 @@ if ($query == true) {
     $facinotifquery = mysqli_query($con, $sqlnotiffaci);
     $sqlnotifadmin = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$adminDeptmesg', 'Administrator', '$formatted_date','0')";
     $adminnotifquery = mysqli_query($con, $sqlnotifadmin);
-
     $data = array(
         'status' => 'success',
     );
