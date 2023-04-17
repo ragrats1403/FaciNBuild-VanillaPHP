@@ -1,5 +1,5 @@
 <?php
-//require_once('../authentication/anti_pagetrans.php');
+require_once('../../authentication/anti_pagetrans.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,9 +36,7 @@
                 <a class="dropdown-item py-1 px-2 text-center mark-as-read" href="#">Mark all as read</a>
             </div>
         </div>
-        <?php
-        session_start();
-        ?>
+
         <script>
             // Get the notification dropdown button and badge
             const notificationDropdown = document.getElementById("notification-dropdown");
@@ -56,7 +54,7 @@
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "reservation/functions/notification.php",
+                    url: "../reservation/functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -115,7 +113,7 @@
             markAsReadButton.addEventListener("click", function(event) {
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "reservation/functions/update_notification.php",
+                    url: "../reservation/functions/update_notification.php",
                     type: 'POST',
                     data: {
                         department: department,
