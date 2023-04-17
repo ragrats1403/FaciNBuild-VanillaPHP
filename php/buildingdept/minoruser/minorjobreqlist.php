@@ -230,16 +230,170 @@
             </div>
         </div>
     </div>
-    <!-- Optional JavaScript; choose one of the two! -->
+      <!-- Optional JavaScript; choose one of the two! -->
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <!-- Script Process Start-- DO NOT MOVE THIS Script tags!!-->
+    <!-- Script Process Start-->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
-    <script type="text/javascript" src="functions/js/process.js?random=<?php echo uniqid(); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        var dpt = "<?php echo $_SESSION['department']; ?>";
+        $('#datatable').DataTable({
+            'serverSide': true,
+            'processing': true,
+            'paging': true,
+            'order': [],
+            'ajax': {
+                'url': 'functions/fetch_data.php',
+                'type': 'post',
+                'data': {
+                    dpt: dpt,
+                },
+            },
+            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                $(nRow).attr('id', aData[0]);
+                if (aData[4] === 'Approved') {
+                    $(nRow).css('background-color', '#a7d9ae');
+                }
+                if (aData[4] === 'Declined') {
+                    $(nRow).css('background-color', '#e09b8d');
+                }
+                if (aData[4] === 'Pending') {
+                    $(nRow).css('background-color', '#d9d2a7');
+                }
+            },
+            'columnDefs': [{
+                'target': [0, 4],
+                'orderable': false,
+            }],
+            scrollY: 200,
+            scrollCollapse: true,
+            paging: false
 
+        });
+    </script>
+    <script type="text/javascript">
+        //add button control
+        $(document).on('submit', '#saveUserForm', function(event) {
+            var department = $('#department').val();
+            var date = $('#datemajorjr').val();
+            var quantity = $('#_quantity_').val();
+            var description = $('#_itemdesc_').val();
+            var purpose = $('#_purpose_').val();
+            var renderedby = $('#renderedby').val();
+            var daterendered = $('#daterendered').val();
+            var confirmedby = $('#confirmedby').val();
+            var dateconfirmed = $('#dateconfirmed').val();
+            var requestedby = $('#requestedby').val();
+            if (department != '' && date != '' && quantity != '' && requestedby != '' && description != '' && purpose != '' && renderedby != '' && daterendered != '' && confirmedby != '' && dateconfirmed != '') {
+                $.ajax({
+                    url: "functions/add_data.php",
+                    data: {
+                        department: department,
+                        date: date,
+                        quantity: quantity,
+                        requestedby: requestedby,
+                        description: description,
+                        purpose: purpose,
+                        renderedby: renderedby,
+                        daterendered: daterendered,
+                        confirmedby: confirmedby,
+                        dateconfirmed: dateconfirmed,
+
+                    },
+                    type: 'POST',
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        status = json.status;
+                        if (status = 'success') {
+                            table = $('#datatable').DataTable();
+                            table.draw();
+                            alert('Requested Successfully!');
+                            $('#_quantity_').val('');
+                            $('#_item_').val('');
+                            $('#_itemdesc_').val('');
+                            $('#_purpose_').val('');
+                            $('#renderedby').val('');
+                            $('#daterendered').val('');
+                            $('#confirmedby').val('');
+                            $('#dateconfirmed').val('');
+                            $('#addUserModal').modal('hide');
+                            $("body").removeClass("modal-open");
+                            $(".modal-backdrop").remove();
+                        }
+                    }
+                });
+            } else {
+                alert("Please fill all the Required fields");
+            }
+        });
+        //edit button control 
+        $(document).on('click', '.editBtn', function(event) {
+            var id = $(this).data('id');
+            var trid = $(this).closest('tr').attr('minorjobid');
+            document.getElementById("_renderedby").disabled = true;
+            document.getElementById("_daterendered").disabled = true;
+            document.getElementById("_purpose").disabled = true;
+            document.getElementById("_itemdesc").disabled = true;
+            document.getElementById("_daterendered").disabled = true;
+            document.getElementById("_dateconfirmed").disabled = true;
+            document.getElementById("_step1").disabled = true;
+            document.getElementById("_sect").disabled = true;
+            document.getElementById("_inputFeedback").disabled = true;
+            document.getElementById("_requestedby").disabled = true;
+            $.ajax({
+                url: "functions/get_request_details.php",
+                data: {
+                    id: id
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    //var itemwdesc = json.item + json.item_desc;
+                    $('#minorjobid').val(json.minorjobid);
+                    $('#trid').val(trid);
+                    $('#_ID').val(id);
+                    $('#_status').val(json.status);
+                    $('#_datemajorjr').val(json.datesubmitted);
+                    $('#_department').val(json.department);
+                    $('#_quantity').val(json.quantity);
+                    $('#_itemdesc').val(json.item_desc);
+                    $('#_requestedby').val(json.requestedby);
+                    $('#_purpose').val(json.purpose);
+                    $('#_step1').val(json.bdstatus);
+                    $('#_renderedby').val(json.renderedby);
+                    $('#_confirmedby').val(json.confirmedby);
+                    $('#_daterendered').val(json.daterendered);
+                    $('#_dateconfirmed').val(json.dateconfirmed);
+                    $('#_inputFeedback').val(json.feedback);
+                    var e = document.getElementById("_sect");
+                    var section = e.options[e.selectedIndex].text;
+
+                    e.options[e.selectedIndex].text = json.section;
+                    $('#editMinorjreqmodal').modal('show');
+                    //$('#_datemajorjr').val(json.datesubmitted);
+                    $('').val();
+                    $('').val();
+                    $('').val();
+                    $('').val();
+                    $('').val();
+
+                    /*$('#_inputName').val(json.name)
+                    $('#_inputUsername').val(json.username);
+                    $('#_inputPassword').val(json.password);
+                    $('#_inputRoleLevel').val(json.rolelevel);
+                    $('#_inputRoleID').val(json.roleid);*/
+
+                }
+            });
+
+
+
+        });
+
+    </script>
 
     <!-- Script Process End-->
     <!-- add user modal-->
@@ -260,28 +414,24 @@
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" value="<?php echo $_SESSION['department']; ?>" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" value="<?php echo mb_strimwidth($_SESSION['department'], 0, 30, '…'); ?>" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
                                     <input type="date" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
+
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-2" style="width:20%">
+                            <div class="justify-content-center">
+                                <h5 class="text-uppercase fw-bold">Requisition(To be filled up by the requesting party)</h5>
+                                <div class="col-md-2" style="padding-bottom:10px">
                                     <label class="fw-bold" for="date">Quantity:</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control" id="_item_" placeholder="Item">
-                                </div>
-                            </div>
                             <div class="justify-content-center">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
                                 </div>
                             </div>
@@ -292,6 +442,13 @@
                                     <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
                                 </div>
                             </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea class="form-control" rows="2" id="requestedby" placeholder="Requested by"></textarea>
+                                </div>
+                            </div>
+
                             <!-- Form Controls End-->
                         </div>
                         <div class="modal-footer justify-content-md-center">
@@ -315,11 +472,11 @@
                     <div class="col-md-2" style="width:17%;">
                         <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Job Request</h5>
                     </div>
-                    <div class="col-md-12" style="width:15%">
+                    <div class="col-md-2" style="width:15%">
                         <label class="" for="inputName">Status:</label>
-                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id="_statustext">
+                        <input type="text" style="width:50%" class="col-sm-2" name="_ID" class="form-control" id="_status" disabled>
                     </div>
-                    <div class="col-md-1" style="width:10%">
+                    <div class="col-md-2" style="width:30%">
                         <label class="" for="inputName">ID:</label>
                         <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
                     </div>
@@ -331,6 +488,7 @@
                             <input type="hidden" id="id" name="id" value="">
                             <input type="hidden" id="trid" name="trid" value="">
                             <!-- Form Controls-->
+
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
@@ -348,30 +506,30 @@
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity" placeholder="Quantity" disabled>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control" id="_item" placeholder="Item" disabled>
-                                </div>
-                            </div>
                             <div class="justify-content-center">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
-                                    <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description" disabled></textarea>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                    <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description"></textarea>
                                 </div>
                             </div>
+
                             <div class="justify-content-center">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
-                                    <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose" disabled></textarea>
+                                    <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose"></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea class="form-control" rows="2" id="_requestedby" placeholder="Requested by"></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
                                     <select class="" style="width: 150px; Border: 5px;" name="sections" id="_sect">
-                                        <option value="P">Select</option>
+                                        <option disabled selected value hidden></option>
                                         <option value="C">CARPENTRY</option>
                                         <option value="P">PLUMBING</option>
                                         <option value="A">AIRCON</option>
@@ -397,10 +555,7 @@
                                     <input type="date" class="form-control input-sm col-xs-1" id="_daterendered" disabled>
                                 </div>
                             </div>
-                            <div class="modal-footer justify-content-md-right">
-                                <button onclick="enableFields()" type="button" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                                <button type="button" class="btn btn-success col-md-1" id="end-editing">Update</button>
-                            </div>
+
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6">
                                     <label class="fw-bold" for="renderedby">Confirmed by:</label>
@@ -411,24 +566,10 @@
                                     <input type="date" class="form-control input-sm col-xs-1" id="_dateconfirmed" disabled>
                                 </div>
                             </div>
-                            <div class="modal-footer justify-content-md-right">
-                                <button onclick="enableFields2()" type="button" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                                <button type="button" class="btn btn-success col-md-1" id="end-editing">Update</button>
-                            </div>
                             <div class="justify-content-center">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Feedback:</label>
                                     <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="modal-footer justify-content-md-center">
-                                    <a href="javascript:void();" class="btn btn-primary step1approveBtn">Approve</a>
-                                    <a href="javascript:void();" class="btn btn-danger step1declineBtn">Decline</a>
-                                    <a href="javascript:void();" class="btn btn-info text-white updateBtn">Update</a>
-                                    <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
-                            <button type="button" class="btn btn-danger">Decline</button>
-                            <button type="submit" class="btn btn-info text-white">Update</button>-->
                                 </div>
                             </div>
                             <!-- Form Controls End-->
@@ -439,58 +580,12 @@
         </div>
     </div>
     <script>
-        //datetime auto fill up
+        //date auto fill
         var now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        document.getElementById('datemajorjr').value = now.toISOString().slice(0, 16);
-        //Requesting department auto fill up
-
-        /*  var deptname;
-        document.getElementById('inputRoleID').value = deptname;*/
-
-        /*toggle edit and update buttons*/
-        const paragraph = document.getElementById(""); //NOT DONE YET!
-        const edit_button = document.getElementById("edit-button");
-        const end_button = document.getElementById("end-editing");
-
-        edit_button.addEventListener("click", function() {
-            paragraph.contentEditable = true;
-        });
-
-        end_button.addEventListener("click", function() {
-            paragraph.contentEditable = false;
-        })
-        //Onclick event for enabling button
-        function autofilldate(filldate) {
-
-            //document.getElementById("_daterendered").valueAsDate = today;
-            //document.getElementById('_daterendered').value = new Date().toISOString();
-            /*var now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            document.getElementById('_daterendered').value = now.toISOString().substring(0, 10);
-            
-            */
-            var now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            document.getElementById(filldate).value = now.toISOString().substring(0, 10);
-
-        }
-
-        function enableFields() {
-            document.getElementById("_renderedby").disabled = false;
-            document.getElementById("_daterendered").disabled = false;
-
-            autofilldate("_daterendered");
-
-        }
-
-        function enableFields2() {
-            document.getElementById("_confirmedby").disabled = false;
-            document.getElementById("_dateconfirmed").disabled = false;
-            autofilldate("_dateconfirmed");
-        }
+        document.getElementById('datemajorjr').value = now.toISOString().substring(0, 10);
+        //date end
     </script>
-    <!-- edit user modalPopup end-->
 </body>
 
 </html>
