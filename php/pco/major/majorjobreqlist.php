@@ -343,7 +343,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     option.disabled = true;
                     option.selected = true;
                     x.add(option);
-                    /*$('#sections').val(json.section);*/
+                    
                     $('#quantity').val(json.quantity);
                     $('#_itemdesc').val(json.description);
                     $('#purpose').val(json.purpose);
