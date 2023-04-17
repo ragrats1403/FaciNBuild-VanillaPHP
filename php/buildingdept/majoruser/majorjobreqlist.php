@@ -253,6 +253,15 @@
             },
             'fnCreatedRow': function(nRow, aData, iDataIndex) {
                 $(nRow).attr('id', aData[0]);
+                if (aData[4] === 'Approved') {
+                    $(nRow).css('background-color', '#a7d9ae');
+                }
+                if (aData[4] === 'Declined') {
+                    $(nRow).css('background-color', '#e09b8d');
+                }
+                if (aData[4] === 'Pending') {
+                    $(nRow).css('background-color', '#d9d2a7');
+                }
             },
             'columnDefs': [{
                 'target': [0, 4],
@@ -265,18 +274,20 @@
         });
     </script>
     <script type="text/javascript">
-        //add button control
-        $(document).on('submit', '#saveUserForm', function(event) {
+       //add button control
+       $(document).on('submit', '#saveUserForm', function(event) {
             event.preventDefault();
             var requino = $('#requi').val();
             var department = $('#depart').val();
             var date = $('#deeto').val();
             var quantity = $('#quan').val();
-            var item = $('#ite').val();
             var description = $('#desc').val();
             var purpose = $('#purp').val();
+            var requestby = $('#req').val();
+            var departmenthead = $('#dephead').val();
 
-            if (department != '' && date != '' && quantity != '' && item != '' && description != '' && purpose != '') {
+
+            if (department != '' && date != '' && quantity != '' && requestby != '' && description != '' && purpose != '' && departmenthead != '') {
                 $.ajax({
                     url: "functions/add_data.php",
                     data: {
@@ -284,9 +295,10 @@
                         department: department,
                         date: date,
                         quantity: quantity,
-                        item: item,
                         description: description,
                         purpose: purpose,
+                        requestby: requestby,
+                        departmenthead: departmenthead,
                     },
                     type: 'POST',
                     success: function(data) {
@@ -295,14 +307,13 @@
                         if (status = 'success') {
                             table = $('#datatable').DataTable();
                             table.draw();
-                            alert('Successfully Added User!');
+                            alert('Requested Successfully!');
                             $('#requi').val('');
-                            $('#depart').val('');
-                            $('#deeto').val('');
                             $('#quan').val('');
-                            $('#ite').val('');
                             $('#desc').val('');
                             $('#purp').val('');
+                            $('#req').val('');
+                            $('#dephead').val('');
                             $('#addUserModal').modal('hide');
                             $('body').removeClass('modal-open');
                             $('.modal-backdrop').remove();
@@ -332,25 +343,19 @@
                     $('#requino').val(json.requino);
                     $('#department').val(json.department);
                     $('#date').val(json.date);
+                    var e = document.getElementById("sections");
+                    var section = e.options[e.selectedIndex].text;
+                    e.options[e.selectedIndex].text = json.section;
                     /*$('#sections').val(json.section);*/
                     $('#quantity').val(json.quantity);
-                    $('#item').val(json.item);
+                    $('#_req').val(json.requestedby);
+                    $('#_dephead').val(json.departmenthead);
                     $('#description').val(json.description);
                     $('#purpose').val(json.purpose);
-                    var x = document.getElementById("sections");
-                    var option = document.createElement("option");
-                    option.text = json.section;
-                    option.hidden = true;
-                    option.disabled = true;
-                    option.selected = true;
-                    x.add(option);
-                    var a = document.getElementById("remark");
-                    var option2 = document.createElement("option");
-                    option2.text = json.section;
-                    option2.hidden = true;
-                    option2.disabled = true;
-                    option2.selected = true;
-                    a.add(option);
+                    var e = document.getElementById("remark");
+                    var outsource = e.options[e.selectedIndex].text;
+                    e.options[e.selectedIndex].text = json.outsource;
+
                     $('#_statustext').val(json.status);
                     $('#_step1').val(json.bdstatus);
                     $('#_step2').val(json.pcostatus);
@@ -360,6 +365,8 @@
                 }
             });
         });
+
+    
     </script>
     <!-- Script Process End-->
     <!-- add user modal-->
@@ -396,25 +403,30 @@
                                 <input type="form-control" class="form-control input-sm col-xs-1" id="quan" placeholder="Quantity">
                             </div>
                         </div>
-
-                        <div>
-                            <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                <label class="fw-bold" for="date">Item Name:</label>
-                                <input type="form-control" class="form-control input-sm col-xs-1" id="ite" placeholder="Item">
-                            </div>
-                        </div>
                         <div class="justify-content-center" style="padding-bottom:10px;">
-                            <div class="col-md-12">
-                                <label class="fw-bold" for="date">Description:</label>
-                                <textarea placeholder="Description" class="form-control" rows="2" id="desc"></textarea>
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="desc"></textarea>
+                                </div>
                             </div>
-                        </div>
                         <div class="justify-content-center" style="padding-bottom:10px;">
                             <div class="col-md-12">
                                 <label class="fw-bold" for="date">Purpose:</label>
                                 <textarea placeholder="Purpose" class="form-control" rows="2" id="purp"></textarea>
                             </div>
                         </div>
+                        <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="req"></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Department Head:</label>
+                                    <textarea placeholder="Department Head" class="form-control" rows="2" id="dephead"></textarea>
+                                </div>
+                            </div>
                         <div class="modal-footer justify-content-md-center">
                             <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
@@ -473,16 +485,9 @@
                                     <input type="form-control" class="form-control input-sm col-xs-1" id="quantity" placeholder="Quantity" disabled>
                                 </div>
                             </div>
-
-                            <div>
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="item" placeholder="Item" disabled>
-                                </div>
-                            </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea placeholder="Description" class="form-control" rows="2" id="description" disabled></textarea>
                                 </div>
                             </div>
@@ -490,6 +495,18 @@
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="_req"></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Department Head:</label>
+                                    <textarea placeholder="Department Head" class="form-control" rows="2" id="_dephead"></textarea>
                                 </div>
                             </div>
                             <div class="row">

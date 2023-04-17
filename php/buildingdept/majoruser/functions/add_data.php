@@ -3,9 +3,10 @@
 $department = $_POST['department'];
 $date = $_POST['date'];
 $quantity = $_POST['quantity'];
-$item = $_POST['item'];
+$requestby = $_POST['requestby'];
 $description = $_POST['description'];
 $purpose = $_POST['purpose'];
+$departmenthead = $_POST['departmenthead'];
 
 date_default_timezone_set('Asia/Manila');
 
@@ -24,7 +25,7 @@ $saoDeptmesg = "".$department." submitted a Major Job Request and is waiting for
 $adminDeptmesg = "".$department." submitted a Major Job Request and is waiting for Approval\nCheck them in Manage Job Requests!";
 $caddeptmsg = "".$department." submitted a Major Job Request and is waiting for Approval\nCheck them in Manage Job Requests!";
 
-$sql = "INSERT INTO `majoreq` (`department`,`date`,`quantity`,`item`,`description`,`purpose`,`status`,`bdstatus`,`cadstatus`,`pcostatus`) VALUES ('$department','$date','$quantity','$item','$description','$purpose','Pending','Pending','Pending','Pending')";
+$sql = "INSERT INTO `majoreq` (`department`,`date`,`quantity`,`requestedby`,`description`,`purpose`,`status`,`bdstatus`,`cadstatus`,`pcostatus`,`departmenthead`) VALUES ('$department','$date','$quantity','$requestby','$description','$purpose','Pending','Pending','Pending','Pending','$departmenthead')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
     $sqlnotif = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$message', '$department', '$formatted_date','0')";
