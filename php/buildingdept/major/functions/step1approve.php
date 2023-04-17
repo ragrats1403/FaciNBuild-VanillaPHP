@@ -6,6 +6,7 @@ $dept = $_POST['dept'];
 $feedb = $_POST['feedb'];
 $section = $_POST['section'];
 $remark = $_POST['remark'];
+$bdapprovedby = $_POST['bdapprovedby'];
 
 
 // Set the default timezone of the server
@@ -19,7 +20,7 @@ $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
 
 // Format the date in your local timezone
 $formatted_date = $date->format('Y-m-d H:i:s');
-$sql = "UPDATE `majoreq` SET `bdstatus`= 'Approved', `feedback` = '$feedb', `outsource`= '$remark', `section` = '$section'  WHERE jobreqno = '$id'";
+$sql = "UPDATE `majoreq` SET `bdstatus`= 'Approved', `feedback` = '$feedb', `outsource`= '$remark', `section` = '$section', `bdapprovedby` = '$bdapprovedby' WHERE jobreqno = '$id'";
 $query = mysqli_query($con, $sql);
 
 $message = "Building Department approved your Job Request with Job Request no: ".$id."!\nYou can check your request status at Major Job Request Section.";
