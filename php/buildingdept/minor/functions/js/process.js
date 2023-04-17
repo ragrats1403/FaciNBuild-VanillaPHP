@@ -11,6 +11,15 @@ $('#datatable').DataTable({
     },
     'fnCreatedRow': function(nRow, aData, iDataIndex) {
         $(nRow).attr('id', aData[0]);
+        if (aData[4] === 'Approved') {
+            $(nRow).css('background-color', '#a7d9ae');
+        }
+        if (aData[4] === 'Declined') {
+            $(nRow).css('background-color', '#e09b8d');
+        }
+        if (aData[4] === 'Pending') {
+            $(nRow).css('background-color', '#d9d2a7');
+        }
     },
     'columnDefs': [{
         'target': [0, 4],
@@ -328,8 +337,8 @@ $(document).on('click', '.updateBtn', function() {
             document.getElementById("_confirmedby").disabled = true;
             document.getElementById("_dateconfirmed").disabled = true;
             document.getElementById("_step1").disabled = true;
-            $('#_renderedby, #_daterendered, #_confirmedby, #_dateconfirmed, #_statustext, #_step1','#_renderedby','#_daterendered','#_confirmedby','#_dateconfirmed').prop('disabled', true);
-            
+            document.getElementById("_itemdesc").disabled = true;
+            $('#_renderedby, #_daterendered, #_confirmedby, #_dateconfirmed, #_statustext, #_step1','#_renderedby','#_daterendered','#_confirmedby','#_dateconfirmed').prop('disabled', true);            
             $.ajax({
             url: "functions/get_request_details.php",
             data: {
@@ -353,10 +362,30 @@ $(document).on('click', '.updateBtn', function() {
             $('#_daterendered').val(json.daterendered);
             $('#_confirmedby').val(json.confirmedby);
             $('#_dateconfirmed').val(json.dateconfirmed);
+            $('#_notedby').val(json.notedby);
+            $('#_bdapprovedby').val(json.approvedby);
             var e = document.getElementById("_sect");
             var section = e.options[e.selectedIndex].text;
             e.options[e.selectedIndex].text = json.section;
             $('#_inputFeedback').val(json.feedback);
+            if(json.bdstatus != 'Pending')
+            {
+                document.getElementById("_bdapprovedby").disabled = true;
+                document.getElementById("_sect").disabled = true;
+                document.getElementById("_inputFeedback").disabled = true;
+                document.getElementById("_notedby").disabled = true;
+                document.getElementById("step1a").hidden = true;
+                document.getElementById("step1d").hidden = true;
+            }
+            else
+            {
+                document.getElementById("_bdapprovedby").disabled = false;
+                document.getElementById("_sect").disabled = false;
+                document.getElementById("_notedby").disabled = false;
+                document.getElementById("_inputFeedback").disabled = false;
+                document.getElementById("step1a").hidden = false;
+                document.getElementById("step1d").hidden = false;
+            }
             $('#editMinorjreqmodal').modal('show');
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -376,12 +405,20 @@ $(document).on('click', '.step1approveBtn', function(event){
     var trid = $('#trid').val();
     var dept = $('#_department').val();
     var feedb = $('#_inputFeedback').val();
+    var notedby = $('#_notedby').val();
+    var approvedby = $('#_bdapprovedby').val();
+    var e = document.getElementById("_sect");
+    var section = e.options[e.selectedIndex].text;
     $.ajax({
         url: "functions/step1approve.php",
         data: {
             id: id,
             dept: dept,
             feedb: feedb,
+            notedby: notedby,
+            approvedby: approvedby,
+            section: section,
+
             
         },
         type: 'POST',

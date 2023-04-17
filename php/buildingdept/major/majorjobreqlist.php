@@ -330,7 +330,7 @@
                         if (status = 'success') {
                             table = $('#datatable').DataTable();
                             table.draw();
-                            alert('Successfully Added User!');
+                            alert('Successfully Added Request!');
                             $('#requi').val('');
                             $('#depart').val('');
                             $('#deeto').val('');
@@ -354,7 +354,7 @@
             var table = $('#datatable').DataTable();
             event.preventDefault();
             var id = $(this).data('id');
-            if (confirm('Are you sure to delete this user?')) {
+            if (confirm('Are you sure to delete this request?')) {
                 $.ajax({
                     url: "functions/delete_user.php",
                     data: {

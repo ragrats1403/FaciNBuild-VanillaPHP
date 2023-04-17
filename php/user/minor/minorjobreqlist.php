@@ -449,8 +449,6 @@ require_once('../../authentication/anti_pagetrans.php');
     <!-- add user modal end-->
     <!-- edit user modal-->
     <!-- Modal -->
-
-
     <div class="modal fade" id="editMinorjreqmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog " style="max-width:1100px;">
             <div class="modal-content ">
@@ -474,7 +472,6 @@ require_once('../../authentication/anti_pagetrans.php');
                             <input type="hidden" id="id" name="id" value="">
                             <input type="hidden" id="trid" name="trid" value="">
                             <!-- Form Controls-->
-
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
@@ -489,7 +486,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
                                 <div class="col-md-2" style="padding-bottom:10px">
                                     <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity" placeholder="Quantity" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity" disabled>
                                 </div>
                             </div>
                             <div class="justify-content-center">
@@ -541,7 +538,6 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <input type="date" class="form-control input-sm col-xs-1" id="_daterendered" disabled>
                                 </div>
                             </div>
-
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6">
                                     <label class="fw-bold" for="renderedby">Confirmed by:</label>

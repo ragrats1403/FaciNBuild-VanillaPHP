@@ -4,8 +4,9 @@
 $id = $_POST['id'];
 $dept = $_POST['dept'];
 $feedb = $_POST['feedb'];
-
-
+$approvedby = $_POST['approvedby'];
+$section = $_POST['section'];
+$notedby = $_POST['notedby'];
 /*
 bdstatus
 cadstatus
@@ -24,7 +25,7 @@ $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
 $formatted_date = $date->format('Y-m-d H:i:s');
 
 
-$sql = "UPDATE `minorjreq` SET `bdstatus` = 'Approved', `status`='Approved', `feedback` = '$feedb' WHERE minorjobid = '$id'";
+$sql = "UPDATE `minorjreq` SET `notedby` = '$notedby', `section` = '$section', `approvedby` = '$approvedby', `bdstatus` = 'Approved', `status`='Approved', `feedback` = '$feedb' WHERE minorjobid = '$id'";
 $query = mysqli_query($con, $sql);
 $message = "Building Department approved your Job Request with Job Request no: ".$id."!\nYou can check your request status at Minor Job Request Section.";
 $message2 = "You successfully approved a Minor Job Request from ".$dept." with Job Request No. ".$id."";
