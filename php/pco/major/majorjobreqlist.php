@@ -245,6 +245,15 @@ require_once('../../authentication/anti_pagetrans.php');
             },
             'fnCreatedRow': function(nRow, aData, iDataIndex) {
                 $(nRow).attr('id', aData[0]);
+                if (aData[4] === 'Approved') {
+                    $(nRow).css('background-color', '#a7d9ae');
+                }
+                if (aData[4] === 'Declined') {
+                    $(nRow).css('background-color', '#e09b8d');
+                }
+                if (aData[4] === 'Pending') {
+                    $(nRow).css('background-color', '#d9d2a7');
+                }
             },
             'columnDefs': [{
                 'target': [0, 4],
@@ -327,45 +336,53 @@ require_once('../../authentication/anti_pagetrans.php');
                     $('#requino').val(json.requino);
                     $('#department').val(json.department);
                     $('#date').val(json.date);
-                    var e = document.getElementById("sections");
-                    var section = e.options[e.selectedIndex].text;
-                    e.options[e.selectedIndex].text = json.section;
+                    var x = document.getElementById("sections");
+                    var option = document.createElement("option");
+                    option.text = json.section;
+                    option.hidden = true;
+                    option.disabled = true;
+                    option.selected = true;
+                    x.add(option);
                     /*$('#sections').val(json.section);*/
                     $('#quantity').val(json.quantity);
-                    $('#item').val(json.item);
-                    $('#description').val(json.description);
+                    $('#_itemdesc').val(json.description);
                     $('#purpose').val(json.purpose);
-                    var e = document.getElementById("remark");
-                    var outsource = e.options[e.selectedIndex].text;
-                    e.options[e.selectedIndex].text = json.outsource;
+                    $('#_req').val(json.requestedby);
+                    $('#_dephead').val(json.departmenthead);
+                    var a = document.getElementById("remark");
+                    var option2 = document.createElement("option");
+                    option2.text = json.outsource;
+                    option2.hidden = true;
+                    option2.disabled = true;
+                    option2.selected = true;
+                    a.add(option2);
 
                     $('#_statustext').val(json.status);
                     $('#_step1').val(json.bdstatus);
                     $('#_step2').val(json.pcostatus);
                     $('#_step3').val(json.cadstatus);
+                    $('#_bdapprovedby').val(json.bdapprovedby);
+                    $('#_pcoapprovedby').val(json.pcoapprovedby);
+                    $('#_cadapprovedby').val(json.cadapprovedby);
                     $('#_inputFeedback').val(json.feedback);
-                    var aprbtn = document.getElementById("step2a");
-                    var dclbtn = document.getElementById("step2d");
-                    var reqNbtn = document.getElementById("reqnobtn");
-                    if(json.requino == null)
+                    if(json.pcostatus != 'Pending')
                     {
-                        reqNbtn.classList.remove("disabled");
+                        document.getElementById("_pcoapprovedby").disabled = true;
+                        document.getElementById("sections").disabled = true;
+                        document.getElementById("_inputFeedback").disabled = true;
+                        document.getElementById("step2a").hidden = true;
+                        document.getElementById("step2d").hidden = true;
+                        document.getElementById("reqnobtn").hidden = true;
                     }
-                    else{
-                        reqNbtn.classList.add("disabled");
-                    }
-
-                    if (json.pcostatus == 'Pending') {
-                        aprbtn.classList.remove("disabled");
-                        dclbtn.classList.remove("disabled");
-                        reqNbtn.classList.remove("disabled");
-                    } 
                     else
                     {
-                        aprbtn.classList.add("disabled");
-                        dclbtn.classList.add("disabled");
+                        document.getElementById("_pcoapprovedby").disabled = false;
+                        document.getElementById("sections").disabled = false;
+                        document.getElementById("_inputFeedback").disabled = false;
+                        document.getElementById("step2a").hidden = false;
+                        document.getElementById("step2d").hidden = false;
+                        document.getElementById("reqnobtn").hidden = false;
                     }
-
 
 
 
@@ -385,6 +402,8 @@ require_once('../../authentication/anti_pagetrans.php');
             var reqno = $('#requino').val();
             var dept = $('#department').val();
             var feedb = $('#_inputFeedback').val();
+            var pcoapprovedby = $('#_pcoapprovedby').val();
+
             $.ajax({
                 url: "functions/step2approve.php",
                 data: {
@@ -392,6 +411,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     reqno: reqno,
                     dept: dept,
                     feedb: feedb,
+                    pcoapprovedby: pcoapprovedby,
 
                 },
                 type: 'POST',
@@ -473,70 +493,6 @@ require_once('../../authentication/anti_pagetrans.php');
     });
     </script>
     <!-- Script Process End-->
-    <!-- add user modal-->
-    <!-- Modal Popup -->
-    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="max-width:1000px;">
-            <div class="modal-content">
-                <div class="modal-header justify-content-center" style="max-width:1100px;">
-                    <div class="col-md-2" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Job Request</h5>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body ">
-                    <form id="saveUserForm" action="javascript:void();" method="POST">
-                        <div class="row justify-content-center" style="padding-bottom:13px;">
-                            <div class="col-md-6 ">
-                                <label class="fw-bold" for="date">Department</label>
-                                <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="Department" value="<?php echo $_SESSION['department']; ?>" disabled>
-                            </div>
-                            <div class="col-md-6 ">
-                                <label class="fw-bold" for="date">Date</label>
-                                <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date" disabled>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                <label class="fw-bold" for="date">Quantity:</label>
-                                <input type="form-control" class="form-control input-sm col-xs-1" id="quan" placeholder="Quantity">
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                <label class="fw-bold" for="date">Item Name:</label>
-                                <input type="form-control" class="form-control input-sm col-xs-1" id="ite" placeholder="Item">
-                            </div>
-                        </div>
-                        <div class="justify-content-center" style="padding-bottom:10px;">
-                            <div class="col-md-12">
-                                <label class="fw-bold" for="date">Description:</label>
-                                <textarea placeholder="Description" class="form-control" rows="2" id="desc"></textarea>
-                            </div>
-                        </div>
-                        <div class="justify-content-center" style="padding-bottom:10px;">
-                            <div class="col-md-12">
-                                <label class="fw-bold" for="date">Purpose:</label>
-                                <textarea placeholder="Purpose" class="form-control" rows="2" id="purp"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer justify-content-md-center">
-                            <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- add user modal end-->
     <!-- edit user modal-->
     <!-- Modal -->
     <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
@@ -585,23 +541,28 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <input type="form-control" class="form-control input-sm col-xs-1" id="quantity" placeholder="Quantity" disabled>
                                 </div>
                             </div>
-
-                            <div>
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="item" placeholder="Item" disabled>
-                                </div>
-                            </div>
-                            <div class="justify-content-center" style="padding-bottom:10px;">
+                            <div class="justify-content-center">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="description" disabled></textarea>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                    <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description" disabled></textarea>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="_req" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Department Head:</label>
+                                    <textarea placeholder="Department Head" class="form-control" rows="2" id="_dephead" disabled></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -616,30 +577,52 @@ require_once('../../authentication/anti_pagetrans.php');
                                     </select>
                                 </div>
                             </div>
+                            <!--step 1-->
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Building Department Approval Status:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step1" disabled>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step1" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_bdapprovedby" disabled>
                                 </div>
                             </div>
+                            <!--step 2-->
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 2 Status:</label>
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Property Custodian Approval Status:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step2" disabled>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step2" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_pcoapprovedby" disabled>
                                 </div>
                             </div>
+                            <!--step 3-->
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 3 Status:</label>
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Campus Academic Director Approval Status:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step3" disabled>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step3" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_cadapprovedby" disabled>
                                 </div>
                             </div>
+                            <br>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
@@ -659,8 +642,8 @@ require_once('../../authentication/anti_pagetrans.php');
                             </div>
                             <div>
                                 <div class="modal-footer justify-content-md-center">
-                                    <a href="javascript:void();" class="btn btn-primary step2approveBtn disabled" id="step2a">Approve</a>
-                                    <a href="javascript:void();" class="btn btn-danger step2declineBtn disabled" id="step2d">Decline</a>
+                                    <a href="javascript:void();" class="btn btn-primary step2approveBtn" id="step2a">Approve</a>
+                                    <a href="javascript:void();" class="btn btn-danger step2declineBtn" id="step2d">Decline</a>
                                     <a href="javascript:void();" class="btn btn-warning assignReqnoBtn" id="reqnobtn">Add Requisition No.</a>
                                 </div>
                             </div>

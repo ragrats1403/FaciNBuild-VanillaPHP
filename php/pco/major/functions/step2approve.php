@@ -4,7 +4,7 @@ $id = $_POST['id'];
 $reqno = $_POST['reqno'];
 $dept = $_POST['dept'];
 $feedb = $_POST['feedb'];
-
+$pcoapprovedby = $_POST['pcoapprovedby'];
 /*
 bdstatus
 cadstatus
@@ -22,7 +22,7 @@ $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
 // Format the date in your local timezone
 $formatted_date = $date->format('Y-m-d H:i:s');
 
-$sql = "UPDATE `majoreq` SET `pcostatus`= 'Approved', `requino` = '$reqno', `feedback` = '$feedb'  WHERE jobreqno = '$id'";
+$sql = "UPDATE `majoreq` SET `pcoapprovedby` = '$pcoapprovedby', `pcostatus`= 'Approved', `requino` = '$reqno', `feedback` = '$feedb'  WHERE jobreqno = '$id'";
 $query = mysqli_query($con, $sql);
 
 
