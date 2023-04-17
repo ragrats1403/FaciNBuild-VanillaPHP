@@ -501,13 +501,13 @@ require_once('../../authentication/anti_pagetrans.php');
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Requested by:</label>
-                                    <textarea placeholder="Description" class="form-control" rows="2" id="_req"></textarea>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="_req" disabled></textarea>
                                 </div>
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Department Head:</label>
-                                    <textarea placeholder="Department Head" class="form-control" rows="2" id="_dephead"></textarea>
+                                    <textarea placeholder="Department Head" class="form-control" rows="2" id="_dephead" disabled></textarea>
                                 </div>
                             </div>
                             <div class="row">

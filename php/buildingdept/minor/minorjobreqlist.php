@@ -76,11 +76,11 @@ require_once('../../authentication/anti_pagetrans.php');
                                 notificationItem.classList.add("unread"); // Add "unread" class if the notification is unread
                             }
                             notificationItem.innerHTML = `
-            <div class="d-flex align-items-center">
-            <div class="flex-grow-1 notification-message">${notification.message}</div>
-            <div class="text-muted notification-date">${new Date(notification.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} ${new Date(notification.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</div>
-            </div>
-        `;
+                                <div class="d-flex align-items-center">
+                                <div class="flex-grow-1 notification-message">${notification.message}</div>
+                                <div class="text-muted notification-date">${new Date(notification.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} ${new Date(notification.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</div>
+                                </div>
+                            `;
                             notificationList.appendChild(notificationItem);
                             if (i < notifications.length - 1) {
                                 // Add a divider after each item except the last one
@@ -299,12 +299,10 @@ require_once('../../authentication/anti_pagetrans.php');
                         </div>
                         <script>
                             var now = new Date();
-                        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                        document.getElementById("datemajorjr").value = now.toISOString().substring(0,10);
-                        document.getElementById("datemajorjr").value = now.toISOString().substring(0,10);
-                        document.getElementById("datemajorjr").value = now.toISOString().substring(0,10);
-
-                        
+                            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                            document.getElementById("datemajorjr").value = now.toISOString().substring(0,10);
+                            document.getElementById("datemajorjr").value = now.toISOString().substring(0,10);
+                            document.getElementById("datemajorjr").value = now.toISOString().substring(0,10);
                         </script>
                     </form>
                 </div>
