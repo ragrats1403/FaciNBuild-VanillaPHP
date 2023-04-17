@@ -1,3 +1,6 @@
+<?php
+require_once('../../../authentication/anti_pagetrans.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
