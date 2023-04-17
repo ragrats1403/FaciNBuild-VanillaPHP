@@ -234,7 +234,7 @@ require_once('../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
-      <!-- Optional JavaScript; choose one of the two! -->
+     <!-- Optional JavaScript; choose one of the two! -->
   <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -245,29 +245,37 @@ require_once('../../authentication/anti_pagetrans.php');
     <script>
         var dpt = "<?php echo $_SESSION['department'];?>";
         $('#datatable').DataTable({
-            'serverSide': true,
-            'processing': true,
-            'paging': true,
-            'order': [],
-            'ajax': {
-                'url': 'functions/fetch_data.php',
-                'type': 'post',
-                'data':{
-                        dpt:dpt,
-                },
-            },
-            'fnCreatedRow': function(nRow, aData, iDataIndex) {
-                $(nRow).attr('id', aData[0]);
-            },
-            'columnDefs': [{
-                'target': [0, 4],
-                'orderable': false,
-            }],
-        scrollY: 200,
-        scrollCollapse: true,
-        paging: false 
-
-        });
+    'serverSide': true,
+    'processing': true,
+    'paging': true,
+    'order': [],
+    'ajax': {
+        'url': 'functions/fetch_data.php',
+        'type': 'post',
+        'data': {
+            dpt: dpt,
+        },
+    },
+    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+        $(nRow).attr('id', aData[0]);
+        if (aData[4] === 'Approved') {
+            $(nRow).css('background-color', '#a7d9ae');
+        }
+        if (aData[4] === 'Declined') {
+            $(nRow).css('background-color', '#e09b8d');
+        }
+        if (aData[4] === 'Pending') {
+            $(nRow).css('background-color', '#d9d2a7');
+        }
+    },
+    'columnDefs': [{
+        'targets': [0, 4],
+        'orderable': false,
+    }],
+    scrollY: 200,
+    scrollCollapse: true,
+    paging: false,
+});
     </script>
     <script type="text/javascript">
         //add button control
@@ -277,11 +285,13 @@ require_once('../../authentication/anti_pagetrans.php');
             var department = $('#depart').val();
             var date = $('#deeto').val();
             var quantity = $('#quan').val();
-            var item = $('#ite').val();
             var description = $('#desc').val();
             var purpose = $('#purp').val();
+            var requestby = $('#req').val();
+            var departmenthead = $('#dephead').val();
 
-            if (department != '' && date != '' && quantity != '' && item != '' && description != '' && purpose != '') {
+
+            if (department != '' && date != '' && quantity != '' && requestby != '' && description != '' && purpose != '' && departmenthead != '') {
                 $.ajax({
                     url: "functions/add_data.php",
                     data: {
@@ -289,9 +299,10 @@ require_once('../../authentication/anti_pagetrans.php');
                         department: department,
                         date: date,
                         quantity: quantity,
-                        item: item,
                         description: description,
                         purpose: purpose,
+                        requestby: requestby,
+                        departmenthead: departmenthead,
                     },
                     type: 'POST',
                     success: function(data) {
@@ -300,12 +311,13 @@ require_once('../../authentication/anti_pagetrans.php');
                         if (status = 'success') {
                             table = $('#datatable').DataTable();
                             table.draw();
-                            alert('Successfully Added User!');
+                            alert('Requested Successfully!');
                             $('#requi').val('');
                             $('#quan').val('');
-                            $('#ite').val('');
                             $('#desc').val('');
                             $('#purp').val('');
+                            $('#req').val('');
+                            $('#dephead').val('');
                             $('#addUserModal').modal('hide');
                             $('body').removeClass('modal-open');
                             $('.modal-backdrop').remove();
@@ -340,7 +352,8 @@ require_once('../../authentication/anti_pagetrans.php');
                     e.options[e.selectedIndex].text = json.section;
                     /*$('#sections').val(json.section);*/
                     $('#quantity').val(json.quantity);
-                    $('#item').val(json.item);
+                    $('#_req').val(json.requestedby);
+                    $('#_dephead').val(json.departmenthead);
                     $('#description').val(json.description);
                     $('#purpose').val(json.purpose);
                     var e = document.getElementById("remark");
@@ -394,16 +407,9 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <input type="form-control" class="form-control input-sm col-xs-1" id="quan" placeholder="Quantity">
                                 </div>
                             </div>
-
-                            <div>
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="ite" placeholder="Item">
-                                </div>
-                            </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea placeholder="Description" class="form-control" rows="2" id="desc"></textarea>
                                 </div>
                             </div>
@@ -413,6 +419,19 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="purp"></textarea>
                                 </div>
                             </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="req"></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Department Head:</label>
+                                    <textarea placeholder="Department Head" class="form-control" rows="2" id="dephead"></textarea>
+                                </div>
+                            </div>
+
                             <div class="modal-footer justify-content-md-center">
                                 <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
@@ -471,16 +490,9 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <input type="form-control" class="form-control input-sm col-xs-1" id="quantity" placeholder="Quantity" disabled>
                                 </div>
                             </div>
-
-                            <div>
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="item" placeholder="Item" disabled>
-                                </div>
-                            </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea placeholder="Description" class="form-control" rows="2" id="description" disabled></textarea>
                                 </div>
                             </div>
@@ -488,6 +500,18 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="purpose" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="_req" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Department Head:</label>
+                                    <textarea placeholder="Department Head" class="form-control" rows="2" id="_dephead" disabled></textarea>
                                 </div>
                             </div>
                             <div class="row">
