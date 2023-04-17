@@ -33,7 +33,7 @@ function checkRoleLevel($rolelevel, $url)
         case 4:
             return preg_match("/^\/php\/user\/(major|minor|reservation)\/.*$|^\/php\/user\/userdashboard\.php$/", $url);
         case 5:
-            return preg_match("/^\/php\/cad\/(major|majoruser|minor|reservations|generatereports)\/.*$|^\/php\/cad\/cadcalendarofactivities\.php$/", $url);
+            return preg_match("/^\/php\/cad\/(major|majoruser|minor|minoruser|reservations|generatereports)\/.*$|^\/php\/cad\/cadcalendarofactivities\.php$/", $url);
         case 6:
             return preg_match("/^\/php\/pco\/(major|majoruser|minor|reservation|generatereports)\/.*$|^\/php\/pco\/pcocalendar\.php$/", $url);
         case 7:
