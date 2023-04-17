@@ -233,7 +233,7 @@ require_once('../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
-    <!-- Optional JavaScript; choose one of the two! -->
+      <!-- Optional JavaScript; choose one of the two! -->
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -257,6 +257,15 @@ require_once('../../authentication/anti_pagetrans.php');
             },
             'fnCreatedRow': function(nRow, aData, iDataIndex) {
                 $(nRow).attr('id', aData[0]);
+                if (aData[4] === 'Approved') {
+                    $(nRow).css('background-color', '#a7d9ae');
+                }
+                if (aData[4] === 'Declined') {
+                    $(nRow).css('background-color', '#e09b8d');
+                }
+                if (aData[4] === 'Pending') {
+                    $(nRow).css('background-color', '#d9d2a7');
+                }
             },
             'columnDefs': [{
                 'target': [0, 4],
@@ -274,21 +283,21 @@ require_once('../../authentication/anti_pagetrans.php');
             var department = $('#department').val();
             var date = $('#datemajorjr').val();
             var quantity = $('#_quantity_').val();
-            var itemname = $('#_item_').val();
             var description = $('#_itemdesc_').val();
             var purpose = $('#_purpose_').val();
             var renderedby = $('#renderedby').val();
             var daterendered = $('#daterendered').val();
             var confirmedby = $('#confirmedby').val();
             var dateconfirmed = $('#dateconfirmed').val();
-            if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '' && renderedby != '' && daterendered != '' && confirmedby != '' && dateconfirmed != '') {
+            var requestedby = $('#requestedby').val();
+            if (department != '' && date != '' && quantity != '' && requestedby != '' && description != '' && purpose != '' && renderedby != '' && daterendered != '' && confirmedby != '' && dateconfirmed != '') {
                 $.ajax({
                     url: "functions/add_data.php",
                     data: {
                         department: department,
                         date: date,
                         quantity: quantity,
-                        itemname: itemname,
+                        requestedby: requestedby,
                         description: description,
                         purpose: purpose,
                         renderedby: renderedby,
@@ -304,7 +313,7 @@ require_once('../../authentication/anti_pagetrans.php');
                         if (status = 'success') {
                             table = $('#datatable').DataTable();
                             table.draw();
-                            alert('Successfully Added User!');
+                            alert('Requested Successfully!');
                             $('#_quantity_').val('');
                             $('#_item_').val('');
                             $('#_itemdesc_').val('');
@@ -323,37 +332,6 @@ require_once('../../authentication/anti_pagetrans.php');
                 alert("Please fill all the Required fields");
             }
         });
-        //delete user button control
-        $(document).on('click', '.btnDelete', function(event) {
-            var table = $('#datatable').DataTable();
-            event.preventDefault();
-            var id = $(this).data('id');
-            if (confirm('Are you sure to delete this user?')) {
-
-
-                $.ajax({
-                    url: "delete_user.php",
-                    data: {
-                        id: id
-                    },
-                    type: 'POST',
-                    success: function(data) {
-                        var json = JSON.parse(data);
-                        status = json.status;
-
-                        if (status == 'success') {
-                            $('#' + id).closest('tr').remove();
-
-                        } else {
-                            alart('failed');
-                            return;
-                        }
-                    }
-                });
-            } else {
-                return null;
-            }
-        });
         //edit button control 
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
@@ -367,6 +345,7 @@ require_once('../../authentication/anti_pagetrans.php');
             document.getElementById("_step1").disabled = true;
             document.getElementById("_sect").disabled = true;
             document.getElementById("_inputFeedback").disabled = true;
+            document.getElementById("_requestedby").disabled = true;
             $.ajax({
                 url: "functions/get_request_details.php",
                 data: {
@@ -384,7 +363,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     $('#_department').val(json.department);
                     $('#_quantity').val(json.quantity);
                     $('#_itemdesc').val(json.item_desc);
-                    $('#_item').val(json.item);
+                    $('#_requestedby').val(json.requestedby);
                     $('#_purpose').val(json.purpose);
                     $('#_step1').val(json.bdstatus);
                     $('#_renderedby').val(json.renderedby);
@@ -403,7 +382,6 @@ require_once('../../authentication/anti_pagetrans.php');
                     $('').val();
                     $('').val();
                     $('').val();
-
                     /*$('#_inputName').val(json.name)
                     $('#_inputUsername').val(json.username);
                     $('#_inputPassword').val(json.password);
@@ -417,41 +395,6 @@ require_once('../../authentication/anti_pagetrans.php');
 
         });
 
-        $(document).on('submit', '#updateUserForm', function() {
-            var id = $('#id').val();
-            var trid = $('#trid').val();
-            var name = $('#_inputName').val();
-            var username = $('#_inputUsername').val();
-            var password = $('#_inputPassword').val();
-            var rolelevel = $('#_inputRoleLevel').val();
-            var roleid = $('#_inputRoleID').val();
-            $.ajax({
-                url: "update_user.php",
-                data: {
-                    id: id,
-                    name: name,
-                    username: username,
-                    password: password,
-                    rolelevel: rolelevel,
-                    roleid: roleid
-                },
-                type: 'POST',
-                success: function(data) {
-                    var json = JSON.parse(data);
-                    status = json.status;
-                    if (status == 'success') {
-                        alert('Updated Successfully!');
-                        table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a> <a href="javascript:void();" class="btn btn-sm btn-danger" data-id="' + id + '" >Delete</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([id, name, username, password, rolelevel, roleid, button]);
-                        $('#editUserModal').modal('hide');
-                    } else {
-                        alert('failed');
-                    }
-                }
-            });
-        });
     </script>
 
     <!-- Script Process End-->
@@ -488,17 +431,9 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control" id="_item_" placeholder="Item">
-                                </div>
-                            </div>
-
                             <div class="justify-content-center">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
                                 </div>
                             </div>
@@ -507,6 +442,12 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea class="form-control" rows="2" id="requestedby" placeholder="Requested by"></textarea>
                                 </div>
                             </div>
 
@@ -524,8 +465,6 @@ require_once('../../authentication/anti_pagetrans.php');
     <!-- add user modal end-->
     <!-- edit user modal-->
     <!-- Modal -->
-
-
     <div class="modal fade" id="editMinorjreqmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog " style="max-width:1100px;">
             <div class="modal-content ">
@@ -549,7 +488,6 @@ require_once('../../authentication/anti_pagetrans.php');
                             <input type="hidden" id="id" name="id" value="">
                             <input type="hidden" id="trid" name="trid" value="">
                             <!-- Form Controls-->
-
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
@@ -564,20 +502,12 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
                                 <div class="col-md-2" style="padding-bottom:10px">
                                     <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity" placeholder="Quantity" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity" disabled>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control" id="_item" placeholder="Item" disabled>
-                                </div>
-                            </div>
-
                             <div class="justify-content-center">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description"></textarea>
                                 </div>
                             </div>
@@ -586,6 +516,12 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose"></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea class="form-control" rows="2" id="_requestedby" placeholder="Requested by"></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -618,7 +554,6 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <input type="date" class="form-control input-sm col-xs-1" id="_daterendered" disabled>
                                 </div>
                             </div>
-
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6">
                                     <label class="fw-bold" for="renderedby">Confirmed by:</label>
