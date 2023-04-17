@@ -237,41 +237,39 @@ require_once('../../authentication/anti_pagetrans.php');
     <script>
         //table display start
         var dpt = "<?php echo $_SESSION['department']; ?>";
-        $("#datatable").DataTable({
-            serverSide: true,
-            processing: true,
-            'autoWidth': false,
-            paging: true,
-            order: [],
-            ajax: {
-                url: "functions/fetch_data.php",
-                type: "post",
-                data: {
+        $('#datatable').DataTable({
+            'serverSide': true,
+            'processing': true,
+            'paging': true,
+            'order': [],
+            'ajax': {
+                'url': 'functions/fetch_data.php',
+                'type': 'post',
+                'data': {
                     dpt: dpt,
                 },
-                'fnCreatedRow': function(nRow, aData, iDataIndex) {
-        $(nRow).attr('id', aData[0]);
-        if (aData[4] === 'Approved') {
-            $(nRow).css('background-color', '#a7d9ae');
-        }
-        if (aData[4] === 'Declined') {
-            $(nRow).css('background-color', '#e09b8d');
-        }
-        if (aData[4] === 'Pending') {
-            $(nRow).css('background-color', '#d9d2a7');
-        }
-    },
-                columnDefs: [{
-                    target: [0, 3],
-                    orderable: false,
-                }, ],
-                scrollY: 200,
-                scrollCollapse: true,
-                paging: false,
-            }
-        });
+            },
+            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                $(nRow).attr('id', aData[0]);
+                if (aData[6] === 'Approved') {
+                    $(nRow).css('background-color', '#a7d9ae');
+                }
+                if (aData[6] === 'Declined') {
+                    $(nRow).css('background-color', '#e09b8d');
+                }
+                if (aData[6] === 'Pending') {
+                    $(nRow).css('background-color', '#d9d2a7');
+                }
+            },
+            'columnDefs': [{
+                'target': [0, 4],
+                'orderable': false,
+            }],
+            scrollY: 200,
+            scrollCollapse: true,
+            paging: false
 
-        //table display end
+        });
     </script>
     <!-- Modal Popup for More Info button-->
     <div class="modal fade" id="test" aria-hidden="true">
