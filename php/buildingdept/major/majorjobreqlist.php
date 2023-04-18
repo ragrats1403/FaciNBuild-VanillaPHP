@@ -420,6 +420,7 @@
                     $('#_bdapprovedby').val(json.bdapprovedby);
                     $('#_pcoapprovedby').val(json.pcoapprovedby);
                     $('#_cadapprovedby').val(json.cadapprovedby);
+                    $('#_inputFeedback').val(json.feedback);
                     //auto enable fields when designated approval is set to pending
                     if(json.bdstatus != 'Pending')
                     {
@@ -455,7 +456,7 @@
                     option2.disabled = true;
                     option2.selected = true;
                     a.add(option2);
-                    $('#_inputFeedback').val(json.feedback);
+
                     //drop down fix end
                     
                     $('#editUserModal').modal('show');

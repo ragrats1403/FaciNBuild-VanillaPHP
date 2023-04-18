@@ -341,7 +341,8 @@ function myFunction(divID, tableid, fetchdataid) {
             'serverSide': true,
             'processing': true,
             'autoWidth': true,
-            'paging': true,
+            'paging': false,
+            'info': false,
             'order': [],
             'ajax': {
                 'url':  fdid,
@@ -361,7 +362,7 @@ function myFunction(divID, tableid, fetchdataid) {
             { 'width': '5%', 'targets': 7 },
             ],
             scrollCollapse: false,
-            paging: false
+            paging: false   
         });
     }
     if(divID == "majorDiv")
@@ -372,7 +373,8 @@ function myFunction(divID, tableid, fetchdataid) {
             'serverSide': true,
             'processing': true,
             'autoWidth': true,
-            'paging': true,
+            'paging': false,
+            'info': false,
             'order': [],
             'ajax': {
                 'url':  fdid,
@@ -390,9 +392,8 @@ function myFunction(divID, tableid, fetchdataid) {
             { 'width': '7%', 'targets': 3 },
             { 'width': '7%', 'targets': 4 },
             ],
-
-            scrollCollapse: false,
-            paging: false
+            paging: false,
+            scrollCollapse: false
         });
 
     }
