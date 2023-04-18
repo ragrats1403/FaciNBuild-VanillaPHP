@@ -22,7 +22,7 @@ require_once('../authentication/anti_pagetrans.php');
     <div class="imgctrl">
     </div>
     <div class="navplace">
-    <div class="dropdown">
+        <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;">
                 <i class='bx bxs-bell' style='color:#ffffff'></i>
                 <span class="icon-button__badge"></span>
@@ -158,17 +158,17 @@ require_once('../authentication/anti_pagetrans.php');
                 <li>
                     <div class="dropdown">
                         <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Manage Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
                             <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
                         </ul>
                     </div>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             View/Create Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -218,6 +218,7 @@ require_once('../authentication/anti_pagetrans.php');
                                     <th>Time End</th>
                                     <th>Venue</th>
                                 </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
