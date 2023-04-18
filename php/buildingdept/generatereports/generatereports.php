@@ -14,6 +14,7 @@ require_once('../../authentication/anti_pagetrans.php');
     <link rel="stylesheet" type="text/css" href="../../../css/sidebar.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../css/header.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../css/body.css?<?= time() ?>">
+    <link rel="stylesheet" type="text/css" href="../../../css/print.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../css/admin/adminaccount.css?<?= time() ?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
@@ -223,7 +224,6 @@ require_once('../../authentication/anti_pagetrans.php');
                         <div class="row col-md-12 mb-3">
                             <div class="col-md-4 d-flex align-items-center" style="margin-left:10px">
                                 <p class="fw-bold" style = "font-size: 2rem;">Generate Reports</p>
-                                
                             </div>
                             
                         </div>
@@ -243,6 +243,9 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <label class="form-check-label" for="weeklyCheckDefault">Weekly</label>
                             </div>
                         </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-info" onclick="printDiv()">Print</button>
+                        </div>
                     <div id="minorDiv" style="display: none;">   
                         <table id="minortable" class="table">
                             <thead>
@@ -254,8 +257,8 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <th>Date</th>
                                     <th>Description</th>
                                     <th>Purpose</th>
-                                    <th>daterendered</th>
-                                    <th>dateconfirmed</th>
+                                    <th>Date Rendered</th>
+                                    <th>Date Confirmed</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -288,6 +291,25 @@ require_once('../../authentication/anti_pagetrans.php');
         </div>
     </div>
 </div>
+<script>
+    function printDiv() {
+        if(document.getElementById("minorDivCheckdefault").checked || document.getElementById("majorDivCheckDefault").checked) {
+            var printContents = "";
+            if(document.getElementById("minorDivCheckdefault").checked) {
+                printContents += document.getElementById("minorDiv").innerHTML;
+            }
+            if(document.getElementById("majorDivCheckDefault").checked) {
+                printContents += document.getElementById("majorDiv").innerHTML;
+            }
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        } else {
+            alert("Please select at least one checkbox before printing.");
+		}
+	}
+</script>
     <!-- Data Table End-->
 
     <!-- Optional JavaScript; choose one of the two! -->
