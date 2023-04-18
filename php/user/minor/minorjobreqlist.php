@@ -355,6 +355,8 @@ require_once('../../authentication/anti_pagetrans.php');
                     $('#_daterendered').val(json.daterendered);
                     $('#_dateconfirmed').val(json.dateconfirmed);
                     $('#_inputFeedback').val(json.feedback);
+                    $('#_notedby').val(json.notedby);
+                    $('#_bdapprovedby').val(json.approvedby);
                     var e = document.getElementById("_sect");
                     var section = e.options[e.selectedIndex].text;
 
@@ -508,6 +510,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <textarea class="form-control" rows="2" id="_requestedby" placeholder="Requested by"></textarea>
                                 </div>
                             </div>
+                            
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
@@ -521,11 +524,25 @@ require_once('../../authentication/anti_pagetrans.php');
                                 </div>
                             </div>
                             <div class="row" style="padding-top:6px;">
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Building Department Approval Status:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step1" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_bdapprovedby" disabled>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top:6px;">
                                 <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                    <label class="fw-bold" for="inputName">Noted By:</label>
                                 </div>
                                 <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step1">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_notedby" disabled>
                                 </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
