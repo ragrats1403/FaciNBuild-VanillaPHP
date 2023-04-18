@@ -15,7 +15,7 @@ $rolelevel = $_SESSION['rolelevel'];
 if (!checkRoleLevel($rolelevel, $_SERVER['REQUEST_URI'])) {
     logError("Unauthorized access attempt by user with role level $rolelevel to URL " . $_SERVER['REQUEST_URI']);
     // Redirect to error page
-    header("Location: ../../authentication/error.php");
+    header("Location: ../../../../../error.php");
     exit;
 }
 
