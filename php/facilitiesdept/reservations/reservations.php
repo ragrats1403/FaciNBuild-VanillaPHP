@@ -399,9 +399,15 @@ require_once('../../authentication/anti_pagetrans.php');
 
                             </div>
                         </div>
+                        <div class="justify-content-center">
+                                    <div class="col-md-12">
+                                        <label class="fw-bold" for="date">Feedback:</label>
+                                        <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
+                                    </div>
+                                </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled>
-                            <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
+                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled hidden>
+                            <label class="form-check-label" for="flexCheckDefault" hidden> Add-on </label>
                         </div>
                         <div id="_myDIV1" style="display: none;">
                             <div class="col-sm-12 d-flex justify-content-center">
@@ -449,6 +455,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                         <textarea class="form-control" rows="2" id="_minorpurpose" placeholder="Purpose"></textarea>
                                     </div>
                                 </div>
+
                                 <!-- Form Controls End-->
                             </form>
                         </div>

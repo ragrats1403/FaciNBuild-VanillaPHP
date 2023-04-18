@@ -442,8 +442,8 @@ require_once('../../authentication/anti_pagetrans.php');
                                 
                     </div>
                     <div class="mr">
-                    <a href= "javascript:void();" class ="btn btn-success step1approveBtn disabled" id="step1a">Approve</a>
-                    <a href= "javascript:void();" class ="btn btn-danger step1declineBtn disabled"id="step1d">Decline</a>
+                    <a href= "javascript:void();" class ="btn btn-success step1approveBtn" id="step1a">Approve</a>
+                    <a href= "javascript:void();" class ="btn btn-danger step1declineBtn"id="step1d">Decline</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>
                     </div>
                     
