@@ -252,6 +252,10 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <th>Department</th>
                                     <th>Section</th>
                                     <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Purpose</th>
+                                    <th>daterendered</th>
+                                    <th>dateconfirmed</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -268,6 +272,11 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <th>Requisition no.</th>
                                     <th>Department</th>
                                     <th>Quantity</th>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Section</th>
+                                    <th>Purpose</th>
+                                    <th>Outsource</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -306,8 +315,10 @@ function myFunction(divID, tableid, fetchdataid) {
     {
         $('#'+tid).DataTable().clear().destroy();
         $('#'+tid).DataTable({
+            'searching': false,
             'serverSide': true,
             'processing': true,
+            'autoWidth': true,
             'paging': true,
             'order': [],
             'ajax': {
@@ -320,7 +331,13 @@ function myFunction(divID, tableid, fetchdataid) {
             'columnDefs': [{
                 'target': [0, 4],
                 'orderable': false,
-            }],
+            },
+            { 'width': '5%', 'targets': 0 }, // set 30% width for first column
+            { 'width': '5%', 'targets': 2 },
+            { 'width': '7%', 'targets': 3 },
+            { 'width': '5%', 'targets': 6 },
+            { 'width': '5%', 'targets': 7 },
+            ],
             scrollCollapse: false,
             paging: false
         });
@@ -329,8 +346,10 @@ function myFunction(divID, tableid, fetchdataid) {
     {
         $('#'+tid).DataTable().clear().destroy();
         $('#'+tid).DataTable({
+            'searching': false,
             'serverSide': true,
             'processing': true,
+            'autoWidth': true,
             'paging': true,
             'order': [],
             'ajax': {
@@ -343,7 +362,12 @@ function myFunction(divID, tableid, fetchdataid) {
             'columnDefs': [{
                 'target': [0, 4],
                 'orderable': false,
-            }],
+            },
+            { 'width': '5%', 'targets': 0 }, // set 30% width for first column
+            { 'width': '5%', 'targets': 1 },
+            { 'width': '7%', 'targets': 3 },
+            { 'width': '7%', 'targets': 4 },
+            ],
 
             scrollCollapse: false,
             paging: false
