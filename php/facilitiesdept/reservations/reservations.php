@@ -252,34 +252,39 @@ require_once('../../authentication/anti_pagetrans.php');
     <script type="text/javascript" src="functions/js/userprocess.js?random=<?php echo uniqid(); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
-        //table display start
-        var dpt = "<?php echo $_SESSION['department']; ?>";
-        $("#datatable").DataTable({
-            serverSide: true,
-            processing: true,
-            'autoWidth': false,
-            paging: true,
-            order: [],
-            ajax: {
-                url: "functions/fetch_data.php",
-                type: "post",
-                data: {
-                    dpt: dpt,
-                },
-                fnCreatedRow: function(nRow, aData, iDataIndex) {
-                    $(nRow).attr("id", aData[0]);
-                },
-                columnDefs: [{
-                    target: [0, 3],
-                    orderable: false,
-                }, ],
-                scrollY: 200,
-                scrollCollapse: true,
-                paging: false,
-            }
-        });
-
-        //table display end
+        var dpt = "<?php echo $_SESSION['department'];?>";
+        $('#datatable').DataTable({
+    'serverSide': true,
+    'processing': true,
+    'paging': true,
+    'order': [],
+    'ajax': {
+        'url': 'functions/fetch_data.php',
+        'type': 'post',
+        'data': {
+            dpt: dpt,
+        },
+    },
+    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+        $(nRow).attr('id', aData[0]);
+        if (aData[6] === 'Approved') {
+            $(nRow).css('background-color', '#a7d9ae');
+        }
+        if (aData[6] === 'Declined') {
+            $(nRow).css('background-color', '#e09b8d');
+        }
+        if (aData[6] === 'Pending') {
+            $(nRow).css('background-color', '#d9d2a7');
+        }
+    },
+    'columnDefs': [{
+        'targets': [0, 4],
+        'orderable': false,
+    }],
+    scrollY: 200,
+    scrollCollapse: true,
+    paging: false,
+});
     </script>
     <!-- Modal Popup for More Info button-->
     <div class="modal fade" id="test" aria-hidden="true">
@@ -399,9 +404,15 @@ require_once('../../authentication/anti_pagetrans.php');
 
                             </div>
                         </div>
+                        <div class="justify-content-center">
+                                    <div class="col-md-12">
+                                        <label class="fw-bold" for="date">Feedback:</label>
+                                        <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
+                                    </div>
+                                </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled>
-                            <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
+                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled hidden>
+                            <label class="form-check-label" for="flexCheckDefault" hidden> Add-on </label>
                         </div>
                         <div id="_myDIV1" style="display: none;">
                             <div class="col-sm-12 d-flex justify-content-center">
@@ -449,6 +460,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                         <textarea class="form-control" rows="2" id="_minorpurpose" placeholder="Purpose"></textarea>
                                     </div>
                                 </div>
+
                                 <!-- Form Controls End-->
                             </form>
                         </div>

@@ -46,40 +46,11 @@ $(document).on("click", ".editBtn", function (event) {
       $("#_stageperformers").val(json.stageperformers);
       $("#_adviser").val(json.adviser);
       $("#_chairdeandep").val(json.chairperson);
+      $("#_inputFeedback").val(json.feedback);
+
       $("#_statustext").val(json.status);
       $("#test").modal("show");
-        var en = json.eventname;
-        var adu = json.actualdateofuse; 
-        var rp = json.requestingparty;
-            $.ajax({
-                url: "functions/get_addon_details.php",
-                data: {
-                eventname: en,
-                actualdate: adu,
-                reqsource: rp,
-                },
-                type: "POST",
-                success: function (data) {
-                var jsonfaddon = JSON.parse(data);           
-                  if(jsonfaddon!=null){ 
-                    document.getElementById("_flexCheckDefault").checked = true;
-                    var x = document.getElementById("_myDIV1");
-                    x.style.display = "block";
-                    document.getElementById("_dept").disabled = true //department
-                    document.getElementById("_dateresm").disabled = true //date
-                    document.getElementById("_minorqres").disabled = true //quantity
-                    document.getElementById("_minoritemres").disabled = true//itemname
-                    document.getElementById("_minoritemdesc").disabled = true//itemdescription
-                    document.getElementById("_minorpurpose").disabled = true//purpose
-                    $("#_dept").val(jsonfaddon.department);
-                    $("#_dateresm").val(jsonfaddon.datesubmitted);
-                    $("#_minorqres").val(jsonfaddon.quantity);
-                    $("#_minoritemres").val(jsonfaddon.item);
-                    $("#_minoritemdesc").val(jsonfaddon.item_desc);
-                    $("#_minorpurpose").val(jsonfaddon.purpose);
-                  }
-                },
-            });
+        var en = json.eventname; 
           var eqdatesubmit = json.datefiled;
           var tstart = json.timestart;
           var tend = json.timeend;
