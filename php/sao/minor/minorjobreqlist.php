@@ -366,6 +366,8 @@ require_once('../../authentication/anti_pagetrans.php');
                     $('#_daterendered').val(json.daterendered);
                     $('#_dateconfirmed').val(json.dateconfirmed);
                     $('#_inputFeedback').val(json.feedback);
+                    $('#_notedby').val(json.notedby);
+                    $('#_bdapprovedby').val(json.approvedby);
                     var e = document.getElementById("_sect");
                     var section = e.options[e.selectedIndex].text;
 
@@ -460,8 +462,6 @@ require_once('../../authentication/anti_pagetrans.php');
     <!-- add user modal end-->
     <!-- edit user modal-->
     <!-- Modal -->
-
-
     <div class="modal fade" id="editMinorjreqmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog " style="max-width:1100px;">
             <div class="modal-content ">
@@ -485,7 +485,6 @@ require_once('../../authentication/anti_pagetrans.php');
                             <input type="hidden" id="id" name="id" value="">
                             <input type="hidden" id="trid" name="trid" value="">
                             <!-- Form Controls-->
-
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
@@ -500,7 +499,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
                                 <div class="col-md-2" style="padding-bottom:10px">
                                     <label class="fw-bold" for="date">Quantity:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity" placeholder="Quantity" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_quantity" disabled>
                                 </div>
                             </div>
                             <div class="justify-content-center">
@@ -522,6 +521,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <textarea class="form-control" rows="2" id="_requestedby" placeholder="Requested by"></textarea>
                                 </div>
                             </div>
+                            
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
@@ -535,11 +535,25 @@ require_once('../../authentication/anti_pagetrans.php');
                                 </div>
                             </div>
                             <div class="row" style="padding-top:6px;">
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Building Department Approval Status:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step1" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_bdapprovedby" disabled>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top:6px;">
                                 <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                    <label class="fw-bold" for="inputName">Noted By:</label>
                                 </div>
                                 <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step1">
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_notedby" disabled>
                                 </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
@@ -552,7 +566,6 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <input type="date" class="form-control input-sm col-xs-1" id="_daterendered" disabled>
                                 </div>
                             </div>
-
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6">
                                     <label class="fw-bold" for="renderedby">Confirmed by:</label>
