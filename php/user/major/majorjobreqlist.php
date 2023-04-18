@@ -348,6 +348,10 @@ require_once('../../authentication/anti_pagetrans.php');
                     $('#_step1').val(json.bdstatus);
                     $('#_step2').val(json.pcostatus);
                     $('#_step3').val(json.cadstatus);
+                    $('#_bdapprovedby').val(json.bdapprovedby);
+                    $('#_pcoapprovedby').val(json.pcoapprovedby);
+                    $('#_cadapprovedby').val(json.cadapprovedby);
+                    $('#_inputFeedback').val(json.feedback);
                     /*$('#remark').val(json.outsource);*/
                     $('#editUserModal').modal('show');
                 }
@@ -509,30 +513,52 @@ require_once('../../authentication/anti_pagetrans.php');
                                     </select>
                                 </div>
                             </div>
+                            <!--step 1-->
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Building Department Approval Status:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step1" disabled>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step1" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_bdapprovedby" disabled>
                                 </div>
                             </div>
+                            <!--step 2-->
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 2 Status:</label>
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Property Custodian Approval Status:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step2" disabled>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step2" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_pcoapprovedby" disabled>
                                 </div>
                             </div>
+                            <!--step 3-->
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 3 Status:</label>
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Campus Academic Director Approval Status:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step3" disabled>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step3" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_cadapprovedby" disabled>
                                 </div>
                             </div>
+                            <br>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
@@ -541,6 +567,12 @@ require_once('../../authentication/anti_pagetrans.php');
                                         <option value="Outsource">Outsource</option>
                                         <option value="Bill of materials">Bill of materials</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Feedback:</label>
+                                    <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback" disabled></textarea>
                                 </div>
                             </div>
                             <div>
