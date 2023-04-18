@@ -219,7 +219,7 @@ require_once('../../authentication/anti_pagetrans.php');
         <div class="row">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px;">
+                    <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; overflow-y: scroll; height: 960px;">
                         <div class="row col-md-12 mb-3">
                             <div class="col-md-4 d-flex align-items-center" style="margin-left:10px">
                                 <p class="fw-bold" style = "font-size: 2rem;">Generate Reports</p>
