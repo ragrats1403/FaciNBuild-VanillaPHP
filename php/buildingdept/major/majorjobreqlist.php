@@ -482,7 +482,6 @@
             if(
                 id != '' &&
                 dept != '' &&
-                feedb != '' &&
                 section != '' &&
                 remark != '' &&
                 bdapprovedby != ''
