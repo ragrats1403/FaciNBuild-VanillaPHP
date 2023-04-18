@@ -221,38 +221,58 @@ require_once('../../authentication/anti_pagetrans.php');
                 <div class="row">
                     <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px;">
                         <div class="row col-md-12 mb-3">
-                            <div class="col-md-1 d-flex align-items-center" style="margin-left:10px">
-                                <p class="fw-bold mb-0">Department</p>
+                            <div class="col-md-4 d-flex align-items-center" style="margin-left:10px">
+                                <p class="fw-bold" style = "font-size: 2rem;">Generate Reports</p>
+                                
                             </div>
-                            <div class="col-md-2">
-                                <input type="text" class="form-control">
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input class="form-check-input" type="checkbox" id="minorDivCheckdefault" onchange = "myFunction('minorDiv', 'minortable', 'minorfetch.php')">
+                                <label class="form-check-label" for="minorDivCheckdefault"> Minor Job Request </label>
+
+                                <input class="form-check-input" type="checkbox" value="" id="majorDivCheckDefault" onchange = "myFunction('majorDiv', 'majortable', 'majorfetch.php')">
+                                <label class="form-check-label" for="majorDivCheckDefault"> Major Job Request </label>
                             </div>
-                            <div class="col-md-2">
-                                <div class="dropdown">
-                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Dropdown button
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#">Minor Job Request</a></li>
-                                        <li><a class="dropdown-item" href="#">Major Job Request</a></li>
-                                        <li><a class="dropdown-item" href="#">Reservation</a></li>
-                                    </ul>
-                                </div>
+                            <div class="col-md-3">
+                                <input class="form-check-input" type="checkbox" id="monthlyCheckDefault">
+                                <label class="form-check-label" for="monthlyCheckDefault"> Monthly </label>
+
+                                <input class="form-check-input" type="checkbox" value="" id="weeklyCheckDefault">
+                                <label class="form-check-label" for="weeklyCheckDefault">Weekly</label>
                             </div>
                         </div>
-                        <table id="calendar" class="table">
+                    <div id="minorDiv" style="display: none;">   
+                        <table id="minortable" class="table">
                             <thead>
+                            <h5 class="fw-bold"> Minor Job Request </h5>
                                 <tr>
+                                    <th>ID</th>
+                                    <th>Department</th>
+                                    <th>Section</th>
                                     <th>Date</th>
-                                    <th>Quantity</th>
-                                    <th>Item with complete description</th>
-                                    <th>Purpose</th>
-                                    <th>Requested by</th>
-                                    <th>Noted by</th>
-                                    <th>Rendered by</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                         </table>
+                    </div>
+                    <br>
+                    <br>
+                    <div id="majorDiv" style="display: none;">
+                        <table id="majortable" class="table">
+                            <thead>
+                            <h5 class="fw-bold"> Major Job Request </h5>
+                                <tr>
+                                    <th>Job Request no.</th>
+                                    <th>Requisition no.</th>
+                                    <th>Department</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -269,30 +289,74 @@ require_once('../../authentication/anti_pagetrans.php');
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
-        $("#calendar").DataTable({
-            'searching': false,
-            'autoWidth': false,
-            'bJQueryUI': true,
-            'info': false,
+
+
+
+function myFunction(divID, tableid, fetchdataid) {
+  var x = document.getElementById(divID);
+  var tid = tableid;
+  var fdid = fetchdataid;
+  
+
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+    if(divID == "minorDiv")
+    {
+        $('#'+tid).DataTable().clear().destroy();
+        $('#'+tid).DataTable({
             'serverSide': true,
             'processing': true,
             'paging': true,
             'order': [],
             'ajax': {
-                'url': "fetch_data.php",
-                'type': "post",
+                'url':  fdid,
+                'type': 'post',
             },
-            fnCreatedRow: function(nRow, aData, iDataIndex) {
-                $(nRow).attr("id", aData[0]);
+            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                $(nRow).attr('id', aData[0]);
             },
-            columnDefs: [{
-                target: [0, 3],
-                orderable: false,
-            }, ],
-            scrollY: 200,
-            scrollCollapse: true,
-            paging: false,
+            'columnDefs': [{
+                'target': [0, 4],
+                'orderable': false,
+            }],
+            scrollCollapse: false,
+            paging: false
         });
+    }
+    if(divID == "majorDiv")
+    {
+        $('#'+tid).DataTable().clear().destroy();
+        $('#'+tid).DataTable({
+            'serverSide': true,
+            'processing': true,
+            'paging': true,
+            'order': [],
+            'ajax': {
+                'url':  fdid,
+                'type': 'post',
+            },
+            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                $(nRow).attr('id', aData[0]);
+            },
+            'columnDefs': [{
+                'target': [0, 4],
+                'orderable': false,
+            }],
+
+            scrollCollapse: false,
+            paging: false
+        });
+
+    }
+    
+    
+  }
+
+}
+
+
     </script>
 </body>
 </html>
