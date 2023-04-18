@@ -227,9 +227,14 @@ require_once('../../authentication/anti_pagetrans.php');
                             </div>
                             <div class="col-md-2">
                                 <div class="dropdown">
-                                    <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange="dynamicEq()">
-                                        
-                                    </select>
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Dropdown button
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="#">Minor Job Request</a></li>
+                                        <li><a class="dropdown-item" href="#">Major Job Request</a></li>
+                                        <li><a class="dropdown-item" href="#">Reservation</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
