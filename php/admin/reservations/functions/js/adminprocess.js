@@ -1,27 +1,37 @@
 //table display start
-$("#datatable").DataTable({
-  serverSide: true,
-  processing: true,
-  paging: true,
-  order: [],
-  ajax: {
-    url: "functions/fetch_data.php",
-    type: "post",
-  },
-  fnCreatedRow: function (nRow, aData, iDataIndex) {
-    $(nRow).attr("id", aData[0]);
-  },
-  columnDefs: [
-    {
-      target: [0, 3],
-      orderable: false,
+        var dpt = "<?php echo $_SESSION['department'];?>";
+        $('#datatable').DataTable({
+    'serverSide': true,
+    'processing': true,
+    'paging': true,
+    'order': [],
+    'ajax': {
+        'url': 'functions/fetch_data.php',
+        'type': 'post',
+        'data': {
+            dpt: dpt,
+        },
     },
-  ],
-  scrollY: 200,
-  scrollCollapse: true,
-  paging: false,
+    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+        $(nRow).attr('id', aData[0]);
+        if (aData[6] === 'Approved') {
+            $(nRow).css('background-color', '#a7d9ae');
+        }
+        if (aData[6] === 'Declined') {
+            $(nRow).css('background-color', '#e09b8d');
+        }
+        if (aData[6] === 'Pending') {
+            $(nRow).css('background-color', '#d9d2a7');
+        }
+    },
+    'columnDefs': [{
+        'targets': [0, 4],
+        'orderable': false,
+    }],
+    scrollY: 200,
+    scrollCollapse: true,
+    paging: false,
 });
-
 //table display end
 
 //edit button control

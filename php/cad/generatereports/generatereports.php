@@ -164,6 +164,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 Manage Request
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
                                 <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
                             </ul>
                         </div>
@@ -173,7 +174,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 View/Create Request
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
+                                <a class="dropdown-item" href="../../../../php/cad/minoruser/minorjobreqlist.php">Minor Job Request</a>
                                 <a class="dropdown-item" href="../../../../php/cad/majoruser/majorjobreqlist.php">Major Job Request</a>
                                 <a class="dropdown-item" href="../../../../php/cad/reservations/cadreservation.php">Reservation</a>
                             </ul>
@@ -227,14 +228,9 @@ require_once('../../authentication/anti_pagetrans.php');
                             </div>
                             <div class="col-md-2">
                                 <div class="dropdown">
-                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Dropdown button
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#">Minor Job Request</a></li>
-                                        <li><a class="dropdown-item" href="#">Major Job Request</a></li>
-                                        <li><a class="dropdown-item" href="#">Reservation</a></li>
-                                    </ul>
+                                    <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange="dynamicEq()">
+                                        
+                                    </select>
                                 </div>
                             </div>
                         </div>
