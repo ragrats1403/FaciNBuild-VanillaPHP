@@ -264,12 +264,6 @@ require_once('../../authentication/anti_pagetrans.php');
                                     </thead>
                                 </table>
                             </div>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
                             <div id="majorDiv" style="display: none;">
                                 <table id="majortable" class="table">
                                     <thead>
@@ -300,10 +294,10 @@ require_once('../../authentication/anti_pagetrans.php');
   if (document.getElementById("minorDivCheckdefault").checked || document.getElementById("majorDivCheckDefault").checked) {
     var printContents = "";
     if (document.getElementById("minorDivCheckdefault").checked) {
-      printContents += "<div style='position: relative; left: -200px'>" + document.getElementById("minorDiv").innerHTML + "</div>";
+      printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + document.getElementById("minorDiv").innerHTML + "</div>";
     }
     if (document.getElementById("majorDivCheckDefault").checked) {
-      printContents += "<div style='position: relative; left: -200px'>" + document.getElementById("majorDiv").innerHTML + "</div>";
+      printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + document.getElementById("majorDiv").innerHTML + "</div>";
     }
     var originalContents = document.body.innerHTML;
     document.body.innerHTML = printContents;
