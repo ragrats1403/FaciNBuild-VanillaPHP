@@ -303,6 +303,7 @@ require_once('../../authentication/anti_pagetrans.php');
     document.body.innerHTML = printContents;
     window.print();
     document.body.innerHTML = originalContents;
+    window.location.reload();
   } else {
     alert("Please select at least one checkbox before printing.");
   }
