@@ -4,8 +4,10 @@
 $id = $_POST['id'];
 $dept = $_POST['dept'];
 $feedb = $_POST['feedb'];
+$saoapprovedby = $_POST['saoapprovedby'];
 
-$sql = "UPDATE `reservation` SET `saostatus` = 'Approved', `status` = 'Approved', `feedback` = '$feedb' WHERE reservationid = '$id'";
+
+$sql = "UPDATE `reservation` SET `saostatus` = 'Approved', `status` = 'Approved', `feedback` = '$feedb', `saoapprovedby` = '$saoapprovedby' WHERE reservationid = '$id'";
 $query = mysqli_query($con, $sql);
 
 

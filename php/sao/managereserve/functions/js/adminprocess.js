@@ -19,6 +19,7 @@ $(document).on("click", ".editBtn", function (event) {
   document.getElementById("_stageperformers").disabled = true;
   document.getElementById("_adviser").disabled = true;
   document.getElementById("_chairdeandep").disabled = true;
+  $("#_saoapprovedby").val('');
   var x = document.getElementById("_myDIV1");
   x.style.display = "none";
 
@@ -55,54 +56,23 @@ $(document).on("click", ".editBtn", function (event) {
       $("#_inputFeedback").val(json.feedback);
       $("#_step1").val(json.fdstatus);
       $("#_step2").val(json.saostatus);
-      var aprbtn = document.getElementById("step2a");
-      var dclbtn = document.getElementById("step2d");
-      if(json.fdstatus == 'Approved' || json.fdstatus != 'Declined')
+      $("#_fdapprovedby").val(json.fdapprovedby);
+      $("#_saoapprovedby").val(json.saoapprovedby);
+      if(json.saostatus != 'Pending')
       {
-        document.getElementById("_inputFeedback").disabled = false;
-        aprbtn.classList.remove("disabled");
-        dclbtn.classList.remove("disabled");
+        document.getElementById("_inputFeedback").disabled = true;
+        document.getElementById("step2a").hidden = true;
+        document.getElementById("step2d").hidden = true;
+        document.getElementById("_saoapprovedby").disabled = true;
       }
       else{
-        document.getElementById("_inputFeedback").disabled = true;
-        aprbtn.classList.add("disabled");
-        dclbtn.classList.add("disabled");
+        document.getElementById("_inputFeedback").disabled = false;
+        document.getElementById("step2a").hidden = false;
+        document.getElementById("step2d").hidden = false;
+        document.getElementById("_saoapprovedby").disabled = false;
       }
       $("#test").modal("show"); 
         var en = json.eventname;
-        var adu = json.actualdateofuse; 
-        var rp = json.requestingparty;
-            $.ajax({
-                url: "functions/get_addon_details.php",
-                data: {
-                eventname: en,
-                actualdate: adu,
-                reqsource: rp,
-                },
-                type: "POST",
-                success: function (data) {
-                var jsonfaddon = JSON.parse(data);           
-                  if(jsonfaddon!=null){ 
-                    document.getElementById("_flexCheckDefault").checked = true;
-                    var x = document.getElementById("_myDIV1");
-                    x.style.display = "block";
-                    document.getElementById("_dept").disabled = true //department
-                    document.getElementById("_dateresm").disabled = true //date
-                    document.getElementById("_minorqres").disabled = true //quantity
-                    document.getElementById("_minoritemres").disabled = true//itemname
-                    document.getElementById("_minoritemdesc").disabled = true//itemdescription
-                    document.getElementById("_minorpurpose").disabled = true//purpose
-                    $("#_dept").val(jsonfaddon.department);
-                    $("#_dateresm").val(jsonfaddon.datesubmitted);
-                    $("#_minorqres").val(jsonfaddon.quantity);
-                    $("#_minoritemres").val(jsonfaddon.item);
-                    $("#_minoritemdesc").val(jsonfaddon.item_desc);
-                    $("#_minorpurpose").val(jsonfaddon.purpose);
-                    $("#_addonstat").val(jsonfaddon.bdstatus);
-                    $("#_addonID").val(jsonfaddon.minorjobid);
-                  }
-                },
-            });
           var eqdatesubmit = json.datefiled;
           var tstart = json.timestart;
           var tend = json.timeend;
@@ -480,12 +450,15 @@ $(document).on('click', '.step2approveBtn', function(event){
   var trid = $('#trid').val();
   var dept = $("#_reqparty").val();
   var feedb = $("#_inputFeedback").val();
+  var saoapprovedby = $("#_saoapprovedby").val();
+
   $.ajax({
       url: "functions/step2approve.php",
       data: {
           id: id,
           dept: dept,
           feedb: feedb,
+          saoapprovedby: saoapprovedby,
           
       },
       type: 'POST',

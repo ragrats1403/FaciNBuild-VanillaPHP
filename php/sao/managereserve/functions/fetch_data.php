@@ -1,18 +1,21 @@
 <?php include('../../../connection/connection.php');
 
-$sql = "select * FROM reservation";
+$sql = "SELECT * FROM reservation 
+        WHERE saostatus IN ('Pending', 'Approved', 'Declined') 
+        AND fdstatus NOT IN ('Pending', 'Declined')";
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
 
 if (isset($_POST['search']['value'])) {
     $search_value = $_POST['search']['value'];
-    $sql .= " WHERE reservationid like '%" . $search_value . "%' ";
-    $sql .= " OR requestingparty like '%" . $search_value . "%' ";
-    $sql .= " OR facility like '%" . $search_value . "%' ";
-    $sql .= " OR eventname like '%" . $search_value . "%' ";
-    $sql .= " OR datefiled like '%" . $search_value . "%' ";
-    $sql .= " OR actualdateofuse like '%" . $search_value . "%' ";
-    $sql .= " OR status like '%" . $search_value . "%' ";
+    $sql .= " AND (reservationid = '" . $search_value . "' ";
+    $sql .= " OR requestingparty LIKE '%" . $search_value . "%' ";
+    $sql .= " OR facility LIKE '%" . $search_value . "%' ";
+    $sql .= " OR eventname LIKE '%" . $search_value . "%' ";
+    $sql .= " OR datefiled LIKE '%" . $search_value . "%' ";
+    $sql .= " OR actualdateofuse LIKE '%" . $search_value . "%' ";
+    $sql .= " OR saostatus LIKE '%" . $search_value . "%')";
+
 }
 
 if (isset($_POST['order'])) {

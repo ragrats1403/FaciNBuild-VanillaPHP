@@ -376,19 +376,31 @@ require_once('../../authentication/anti_pagetrans.php');
                                     </div>
 
                                     <div class="row" style="padding-top:6px;">     
-                                        <div class="col-md-1" style="margin-top:5px;">
-                                            <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                        <div class="col-md-4" style="margin-top:5px;">
+                                            <label class="fw-bold" for="inputName">Facilities Department Approval Status:</label>
                                         </div> 
                                         <div class="col-md-2" style="margin-top:5px;">
                                             <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1" disabled>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="fw-bold">Approved By</label>
+                                        </div>
+                                        <div class="col-md-4 "> 
+                                            <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_fdapprovedby" disabled>
                                         </div> 
                                     </div>
                                     <div class="row" style="padding-top:6px;">     
-                                        <div class="col-md-1" style="margin-top:5px;">
-                                            <label class="fw-bold" for="inputName">Step 2 Status:</label>
+                                        <div class="col-md-4" style="margin-top:5px;">
+                                            <label class="fw-bold" for="inputName">Student Affairs Office Approval Status:</label>
                                         </div> 
                                         <div class="col-md-2" style="margin-top:5px;">
                                             <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step2" disabled>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="fw-bold" >Approved By</label>
+                                        </div>
+                                        <div class="col-md-4 "> 
+                                            <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_saoapprovedby" disabled>
                                         </div>
                                     </div>
                                     <div class="justify-content-center">
@@ -398,8 +410,8 @@ require_once('../../authentication/anti_pagetrans.php');
                                         </div>
                                     </div>
                                     <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled>
-                            <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
+                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled hidden>
+                            <label class="form-check-label" for="flexCheckDefault" hidden> Add-on </label>
                         </div>
                         <div id="_myDIV1" style="display: none;">
                             <div class="col-sm-12 d-flex justify-content-between">
@@ -407,61 +419,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 
                                     
                             </div>
-                            <div class="row" style="padding-top:6px;">
-                            <input type="hidden" id="_addonID" disabled>     
-                                        <div class="col-md-1" style="margin-top:5px;">
-                                            <label class="fw-bold" for="inputName">Add-on Status:</label>
-                                        </div> 
-                                        <div class="col-md-2" style="margin-top:5px;">
-                                            <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_addonstat" disabled>
-                                        </div> 
-                            </div>
-                            <form id="saveUserForm" action="javascript:void();" method="POST">
-                                <input type = "hidden" id="eventname" >
-                                <!-- Form Controls-->
-                                <div class="row justify-content-center" style="padding-bottom:13px;">
-                                    <div class="col-md-6 ">
-                                        <label class="fw-bold" for="date">Department:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_dept" placeholder="Department">
-                                    </div>
-                                    <div class="col-md-6 ">
-                                        <label class="fw-bold" for="date">Date:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="_dateresm" placeholder="Date" disabled> 
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                    
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2" style="width:20%">
-                                        <label class="fw-bold" for="date">Quantity:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_minorqres" placeholder="Quantity">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                        <label class="fw-bold" for="date">Item Name:</label>
-                                        <input type="form-control" class="form-control" id ="_minoritemres"placeholder="Item">
-                                    </div>
-                                </div>
-                                <div class="justify-content-center">
-                                    <div class="col-md-12" >
-                                        <label class="fw-bold" for="date">Description:</label>
-                                        <textarea class="form-control" rows="2" id="_minoritemdesc" placeholder="Description"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="justify-content-center">
-                                    <div class="col-md-12" >
-                                        <label class="fw-bold" for="date">Purpose:</label>
-                                        <textarea class="form-control" rows="2" id="_minorpurpose" placeholder="Purpose"></textarea>
-                                    </div>
-                                </div>  
-                                
-                                <!-- Form Controls End-->
-                            </form>
-                        </div>
+                           
                         <!-- ADD ON SECTION END-->
                     </form>
                 </div>
@@ -472,8 +430,8 @@ require_once('../../authentication/anti_pagetrans.php');
                                 
                     </div>
                     <div class="mr">
-                    <a href= "javascript:void();" class ="btn btn-success step2approveBtn disabled" id="step2a">Approve</a>
-                    <a href= "javascript:void();" class ="btn btn-danger step2declineBtn disabled"id="step2d">Decline</a>
+                    <a href= "javascript:void();" class ="btn btn-success step2approveBtn" id="step2a">Approve</a>
+                    <a href= "javascript:void();" class ="btn btn-danger step2declineBtn"id="step2d">Decline</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>
                     </div>
                     
