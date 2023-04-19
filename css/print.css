@@ -1,9 +1,17 @@
-@media print {
-    .no-print-area{
-        display: none;
-    }
+#minorDiv {
+  margin-bottom: 50px;
+}
 
-    ::-webkit-scrollbar {
-        display: none;
-    }
+#majorDiv {
+  margin-bottom: 50px;
+}
+
+@media print {
+  .no-print-area {
+    display: none;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }

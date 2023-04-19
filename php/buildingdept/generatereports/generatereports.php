@@ -228,19 +228,19 @@ require_once('../../authentication/anti_pagetrans.php');
 
                             </div>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3" onMouseDown="return false;" onSelectStart="return false;">
                                     <input class="form-check-input" type="checkbox" id="minorDivCheckdefault" onchange="myFunction('minorDiv', 'minortable', 'minorfetch.php')">
                                     <label class="form-check-label" for="minorDivCheckdefault"> Minor Job Request </label>
 
                                     <input class="form-check-input" type="checkbox" value="" id="majorDivCheckDefault" onchange="myFunction('majorDiv', 'majortable', 'majorfetch.php')">
                                     <label class="form-check-label" for="majorDivCheckDefault"> Major Job Request </label>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3" onMouseDown="return false;" onSelectStart="return false;">
                                     <input class="form-check-input" type="checkbox" id="monthlyCheckDefault">
                                     <label class="form-check-label" for="monthlyCheckDefault"> Monthly </label>
 
                                     <input class="form-check-input" type="checkbox" value="" id="weeklyCheckDefault">
-                                    <label class="form-check-label" for="weeklyCheckDefault">Weekly</label>
+                                    <label class="form-check-label" for="weeklyCheckDefault"> Weekly </label>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -264,12 +264,6 @@ require_once('../../authentication/anti_pagetrans.php');
                                     </thead>
                                 </table>
                             </div>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
                             <div id="majorDiv" style="display: none;">
                                 <table id="majortable" class="table">
                                     <thead>
@@ -300,15 +294,16 @@ require_once('../../authentication/anti_pagetrans.php');
   if (document.getElementById("minorDivCheckdefault").checked || document.getElementById("majorDivCheckDefault").checked) {
     var printContents = "";
     if (document.getElementById("minorDivCheckdefault").checked) {
-      printContents += "<div style='position: relative; left: -200px'>" + document.getElementById("minorDiv").innerHTML + "</div>";
+      printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + document.getElementById("minorDiv").innerHTML + "</div>";
     }
     if (document.getElementById("majorDivCheckDefault").checked) {
-      printContents += "<div style='position: relative; left: -200px'>" + document.getElementById("majorDiv").innerHTML + "</div>";
+      printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + document.getElementById("majorDiv").innerHTML + "</div>";
     }
     var originalContents = document.body.innerHTML;
     document.body.innerHTML = printContents;
     window.print();
     document.body.innerHTML = originalContents;
+    window.location.reload();
   } else {
     alert("Please select at least one checkbox before printing.");
   }
