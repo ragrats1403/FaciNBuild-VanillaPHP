@@ -240,8 +240,8 @@ require_once('../authentication/anti_pagetrans.php');
                 target: [0, 3],
                 orderable: false,
             }, ],
-            scrollY: 200,
-            scrollCollapse: true,
+            scrollY: 670,
+            scrollCollapse: false,
             paging: false,
         });
     </script>

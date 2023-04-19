@@ -207,32 +207,44 @@ require_once('../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
-    <div class="table1">
+    <style>
+.table1 {
+  position: relative;
+  width: 100%;
+  max-height: calc(120vh - 150px); /* adjust the value as needed */
+  overflow-y: auto;
+}
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px;">
-                            <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
-                            <table id="datatable" class="table" >
-                                <thead>
-                                    <th>ID</th>
-                                    <th>Event Name</th>
-                                    <th>Requesting party</th>
-                                    <th>Facility</th>
-                                    <th>Date Filed</th>
-                                    <th>Actual Date of Use</th>
-                                    <th>Status</th>
-                                    <th>Options</th>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+.table-container table {
+  width: 100%;
+}
+</style>
+<div class="table1">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px;">
+            <div class="table-container">
+              <table id="datatable" class="table">
+                <thead>
+                  <th>ID</th>
+                  <th>Event Name</th>
+                  <th>Requesting party</th>
+                  <th>Facility</th>
+                  <th>Date Filed</th>
+                  <th>Actual Date of Use</th>
+                  <th>Status</th>
+                  <th>Options</th>
+                </thead>
+              </table>
             </div>
+          </div>
         </div>
-    </div> 
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Script Process Start-- DO NOT MOVE THIS Script tags!!-->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
@@ -240,40 +252,40 @@ require_once('../../authentication/anti_pagetrans.php');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- Modal Popup for More Info button-->
     <script>
-        var dpt = "<?php echo $_SESSION['department'];?>";
-        $('#datatable').DataTable({
+  var dpt = "<?php echo $_SESSION['department'];?>";
+  $('#datatable').DataTable({
     'serverSide': true,
     'processing': true,
-    'paging': true,
+    'responsive': true,
     'order': [],
     'ajax': {
-        'url': 'functions/fetch_data.php',
-        'type': 'post',
-        'data': {
-            dpt: dpt,
-        },
+      'url': 'functions/fetch_data.php',
+      'type': 'post',
+      'data': {
+        dpt: dpt,
+      },
     },
     'fnCreatedRow': function(nRow, aData, iDataIndex) {
-        $(nRow).attr('id', aData[0]);
-        if (aData[6] === 'Approved') {
-            $(nRow).css('background-color', '#a7d9ae');
-        }
-        if (aData[6] === 'Declined') {
-            $(nRow).css('background-color', '#e09b8d');
-        }
-        if (aData[6] === 'Pending') {
-            $(nRow).css('background-color', '#d9d2a7');
-        }
+      $(nRow).attr('id', aData[0]);
+      if (aData[6] === 'Approved') {
+        $(nRow).css('background-color', '#a7d9ae');
+      }
+      if (aData[6] === 'Declined') {
+        $(nRow).css('background-color', '#e09b8d');
+      }
+      if (aData[6] === 'Pending') {
+        $(nRow).css('background-color', '#d9d2a7');
+      }
     },
     'columnDefs': [{
-        'targets': [0, 4],
-        'orderable': false,
+      'targets': [0, 4],
+      'orderable': false,
     }],
     scrollY: 670,
-    scrollCollapse: true,
-    paging: false,
-});
-    </script>
+    'scrollCollapse': false,
+    'paging': false,
+  });
+</script>
     <div class="modal fade" id="test" aria-hidden="true">
     <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">

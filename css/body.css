@@ -1,7 +1,16 @@
 body {
     background: #DEEFF5;
 }
-
+.table1 {
+    position: relative;
+    width: 100%;
+    max-height: calc(120vh - 150px); /* adjust the value as needed */
+    overflow-y: auto;
+  }
+  
+  .table-container table {
+    width: 100%;
+  }
 #datatable thead td{
     padding-top: 2px;
     padding-bottom: 2px;
