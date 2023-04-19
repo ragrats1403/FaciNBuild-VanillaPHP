@@ -269,7 +269,7 @@ require_once('../../authentication/anti_pagetrans.php');
         'targets': [0, 4],
         'orderable': false,
     }],
-    scrollY: 200,
+    scrollY: 670,
     scrollCollapse: true,
     paging: false,
 });
