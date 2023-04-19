@@ -17,7 +17,7 @@ require_once('../../authentication/anti_pagetrans.php');
     <link rel="stylesheet" type="text/css" href="../../../css/print.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../css/admin/adminaccount.css?<?= time() ?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+
 
 </head>
 
@@ -25,7 +25,7 @@ require_once('../../authentication/anti_pagetrans.php');
     <div class="imgctrl">
     </div>
     <div class="navplace">
-    <div class="dropdown">
+        <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;">
                 <i class='bx bxs-bell' style='color:#ffffff'></i>
                 <span class="icon-button__badge"></span>
@@ -143,7 +143,7 @@ require_once('../../authentication/anti_pagetrans.php');
 </header>
 
 <body onload="fetchNotifications();">
-<div class="sidebar">
+    <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../../images/Brown_logo_faci.png" />
@@ -160,7 +160,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 <li>
                     <div class="dropdown">
                         <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Manage Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -172,7 +172,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 <li>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             View/Create Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -216,100 +216,100 @@ require_once('../../authentication/anti_pagetrans.php');
     <!-- Data Table Start-->
     <!--<h1 class="text-center">Faci N Build Test table control</h1>-->
     <div class="table1">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; overflow-y: scroll; height: 960px;">
-                        <div class="row col-md-12 mb-3">
-                            <div class="col-md-4 d-flex align-items-center" style="margin-left:10px">
-                                <p class="fw-bold" style = "font-size: 2rem;">Generate Reports</p>
-                            </div>
-                            
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <input class="form-check-input" type="checkbox" id="minorDivCheckdefault" onchange = "myFunction('minorDiv', 'minortable', 'minorfetch.php')">
-                                <label class="form-check-label" for="minorDivCheckdefault"> Minor Job Request </label>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; overflow-y: scroll; height: 960px;">
+                            <div class="row col-md-12 mb-3">
+                                <div class="col-md-4 d-flex align-items-center" style="margin-left:10px">
+                                    <p class="fw-bold" style="font-size: 2rem;">Generate Reports</p>
+                                </div>
 
-                                <input class="form-check-input" type="checkbox" value="" id="majorDivCheckDefault" onchange = "myFunction('majorDiv', 'majortable', 'majorfetch.php')">
-                                <label class="form-check-label" for="majorDivCheckDefault"> Major Job Request </label>
                             </div>
-                            <div class="col-md-3">
-                                <input class="form-check-input" type="checkbox" id="monthlyCheckDefault">
-                                <label class="form-check-label" for="monthlyCheckDefault"> Monthly </label>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <input class="form-check-input" type="checkbox" id="minorDivCheckdefault" onchange="myFunction('minorDiv', 'minortable', 'minorfetch.php')">
+                                    <label class="form-check-label" for="minorDivCheckdefault"> Minor Job Request </label>
 
-                                <input class="form-check-input" type="checkbox" value="" id="weeklyCheckDefault">
-                                <label class="form-check-label" for="weeklyCheckDefault">Weekly</label>
+                                    <input class="form-check-input" type="checkbox" value="" id="majorDivCheckDefault" onchange="myFunction('majorDiv', 'majortable', 'majorfetch.php')">
+                                    <label class="form-check-label" for="majorDivCheckDefault"> Major Job Request </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-check-input" type="checkbox" id="monthlyCheckDefault">
+                                    <label class="form-check-label" for="monthlyCheckDefault"> Monthly </label>
+
+                                    <input class="form-check-input" type="checkbox" value="" id="weeklyCheckDefault">
+                                    <label class="form-check-label" for="weeklyCheckDefault">Weekly</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-info" onclick="printDiv()">Print</button>
+                            </div>
+                            <div id="minorDiv" style="display: none;">
+                                <table id="minortable" class="table">
+                                    <thead>
+                                        <h5 class="fw-bold"> Minor Job Request </h5>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Department</th>
+                                            <th>Section</th>
+                                            <th>Date</th>
+                                            <th>Description</th>
+                                            <th>Purpose</th>
+                                            <th>Date Rendered</th>
+                                            <th>Date Confirmed</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <br>
+                            <br>
+                            <div id="majorDiv" style="display: none;">
+                                <table id="majortable" class="table">
+                                    <thead>
+                                        <h5 class="fw-bold"> Major Job Request </h5>
+                                        <tr>
+                                            <th>Job Request no.</th>
+                                            <th>Requisition no.</th>
+                                            <th>Department</th>
+                                            <th>Quantity</th>
+                                            <th>Date</th>
+                                            <th>Description</th>
+                                            <th>Section</th>
+                                            <th>Purpose</th>
+                                            <th>Outsource</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-info" onclick="printDiv()">Print</button>
-                        </div>
-                    <div id="minorDiv" style="display: none;">   
-                        <table id="minortable" class="table">
-                            <thead>
-                            <h5 class="fw-bold"> Minor Job Request </h5>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Department</th>
-                                    <th>Section</th>
-                                    <th>Date</th>
-                                    <th>Description</th>
-                                    <th>Purpose</th>
-                                    <th>Date Rendered</th>
-                                    <th>Date Confirmed</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <br>
-                    <br>
-                    <div id="majorDiv" style="display: none;">
-                        <table id="majortable" class="table">
-                            <thead>
-                            <h5 class="fw-bold"> Major Job Request </h5>
-                                <tr>
-                                    <th>Job Request no.</th>
-                                    <th>Requisition no.</th>
-                                    <th>Department</th>
-                                    <th>Quantity</th>
-                                    <th>Date</th>
-                                    <th>Description</th>
-                                    <th>Section</th>
-                                    <th>Purpose</th>
-                                    <th>Outsource</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script>
-    function printDiv() {
-        if(document.getElementById("minorDivCheckdefault").checked || document.getElementById("majorDivCheckDefault").checked) {
-            var printContents = "";
-            if(document.getElementById("minorDivCheckdefault").checked) {
-                printContents += document.getElementById("minorDiv").innerHTML;
-            }
-            if(document.getElementById("majorDivCheckDefault").checked) {
-                printContents += document.getElementById("majorDiv").innerHTML;
-            }
-            var originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
-        } else {
-            alert("Please select at least one checkbox before printing.");
-		}
-	}
-</script>
+    <script>
+        function printDiv() {
+  if (document.getElementById("minorDivCheckdefault").checked || document.getElementById("majorDivCheckDefault").checked) {
+    var printContents = "";
+    if (document.getElementById("minorDivCheckdefault").checked) {
+      printContents += "<div style='position: relative; left: -200px'>" + document.getElementById("minorDiv").innerHTML + "</div>";
+    }
+    if (document.getElementById("majorDivCheckDefault").checked) {
+      printContents += "<div style='position: relative; left: -200px'>" + document.getElementById("majorDiv").innerHTML + "</div>";
+    }
+    var originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+  } else {
+    alert("Please select at least one checkbox before printing.");
+  }
+}
+    </script>
     <!-- Data Table End-->
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -320,90 +320,111 @@ require_once('../../authentication/anti_pagetrans.php');
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
+        function myFunction(divID, tableid, fetchdataid) {
+            var x = document.getElementById(divID);
+            var tid = tableid;
+            var fdid = fetchdataid;
 
 
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+                if (divID == "minorDiv") {
+                    $('#' + tid).DataTable().clear().destroy();
+                    $('#' + tid).DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                            'url': fdid,
+                            'type': 'post',
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                            $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                                'target': [0, 4],
+                                'orderable': false,
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 0
+                            }, // set 30% width for first column
+                            {
+                                'width': '5%',
+                                'targets': 2
+                            },
+                            {
+                                'width': '7%',
+                                'targets': 3
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 6
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 7
+                            },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                    });
+                }
+                if (divID == "majorDiv") {
+                    $('#' + tid).DataTable().clear().destroy();
+                    $('#' + tid).DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                            'url': fdid,
+                            'type': 'post',
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                            $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                                'target': [0, 4],
+                                'orderable': false,
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 0
+                            }, // set 30% width for first column
+                            {
+                                'width': '5%',
+                                'targets': 1
+                            },
+                            {
+                                'width': '7%',
+                                'targets': 3
+                            },
+                            {
+                                'width': '7%',
+                                'targets': 4
+                            },
+                        ],
+                        paging: false,
+                        scrollCollapse: false
+                    });
 
-function myFunction(divID, tableid, fetchdataid) {
-  var x = document.getElementById(divID);
-  var tid = tableid;
-  var fdid = fetchdataid;
-  
-
-  if (x.style.display === "block") {
-    x.style.display = "none";
-  } else {
-    x.style.display = "block";
-    if(divID == "minorDiv")
-    {
-        $('#'+tid).DataTable().clear().destroy();
-        $('#'+tid).DataTable({
-            'searching': false,
-            'serverSide': true,
-            'processing': true,
-            'autoWidth': true,
-            'paging': false,
-            'info': false,
-            'order': [],
-            'ajax': {
-                'url':  fdid,
-                'type': 'post',
-            },
-            'fnCreatedRow': function(nRow, aData, iDataIndex) {
-                $(nRow).attr('id', aData[0]);
-            },
-            'columnDefs': [{
-                'target': [0, 4],
-                'orderable': false,
-            },
-            { 'width': '5%', 'targets': 0 }, // set 30% width for first column
-            { 'width': '5%', 'targets': 2 },
-            { 'width': '7%', 'targets': 3 },
-            { 'width': '5%', 'targets': 6 },
-            { 'width': '5%', 'targets': 7 },
-            ],
-            scrollCollapse: false,
-            paging: false   
-        });
-    }
-    if(divID == "majorDiv")
-    {
-        $('#'+tid).DataTable().clear().destroy();
-        $('#'+tid).DataTable({
-            'searching': false,
-            'serverSide': true,
-            'processing': true,
-            'autoWidth': true,
-            'paging': false,
-            'info': false,
-            'order': [],
-            'ajax': {
-                'url':  fdid,
-                'type': 'post',
-            },
-            'fnCreatedRow': function(nRow, aData, iDataIndex) {
-                $(nRow).attr('id', aData[0]);
-            },
-            'columnDefs': [{
-                'target': [0, 4],
-                'orderable': false,
-            },
-            { 'width': '5%', 'targets': 0 }, // set 5% width for first column
-            { 'width': '5%', 'targets': 1 },
-            { 'width': '7%', 'targets': 3 },
-            { 'width': '7%', 'targets': 4 },
-            ],
-            paging: false,
-            scrollCollapse: false
-        });
-
-    }
-    
-    
-  }
-
-}
+                }
 
 
+            }
+
+        }
     </script>
 </body>
+
 </html>
