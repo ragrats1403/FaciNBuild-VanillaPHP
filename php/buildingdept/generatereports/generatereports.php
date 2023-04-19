@@ -266,6 +266,10 @@ require_once('../../authentication/anti_pagetrans.php');
                             </div>
                             <br>
                             <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
                             <div id="majorDiv" style="display: none;">
                                 <table id="majortable" class="table">
                                     <thead>
