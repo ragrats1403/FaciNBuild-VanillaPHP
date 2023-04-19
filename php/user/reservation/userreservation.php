@@ -243,6 +243,7 @@ require_once('../../authentication/anti_pagetrans.php');
             'paging': false,
             'responsive': true,
             'order': [],
+            'responsive': true,
             'ajax': {
                 'url': 'functions/fetch_data.php',
                 'type': 'post',
