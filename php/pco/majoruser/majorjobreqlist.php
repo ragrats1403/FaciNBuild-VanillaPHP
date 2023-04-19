@@ -241,6 +241,7 @@ require_once('../../authentication/anti_pagetrans.php');
     'processing': true,
     'paging': true,
     'order': [],
+    'responsive': true,
     'ajax': {
         'url': 'functions/fetch_data.php',
         'type': 'post',
@@ -264,9 +265,9 @@ require_once('../../authentication/anti_pagetrans.php');
         'targets': [0, 4],
         'orderable': false,
     }],
-    scrollY: 200,
-    scrollCollapse: true,
-    paging: false,
+    scrollY: 670,
+    'scrollCollapse': true,
+    'paging': false,
 });
     </script>
     <script type="text/javascript">
