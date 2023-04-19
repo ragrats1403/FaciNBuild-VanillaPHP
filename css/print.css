@@ -1,7 +1,17 @@
 #minorDiv {
-    margin-bottom: 50px;
-  }
-  
+  margin-bottom: 50px;
+}
+
 #majorDiv {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
+}
+
+@media print {
+  .no-print-area {
+    display: none;
   }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -228,19 +228,19 @@ require_once('../../authentication/anti_pagetrans.php');
 
                             </div>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3" onMouseDown="return false;" onSelectStart="return false;">
                                     <input class="form-check-input" type="checkbox" id="minorDivCheckdefault" onchange="myFunction('minorDiv', 'minortable', 'minorfetch.php')">
                                     <label class="form-check-label" for="minorDivCheckdefault"> Minor Job Request </label>
 
                                     <input class="form-check-input" type="checkbox" value="" id="majorDivCheckDefault" onchange="myFunction('majorDiv', 'majortable', 'majorfetch.php')">
                                     <label class="form-check-label" for="majorDivCheckDefault"> Major Job Request </label>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3" onMouseDown="return false;" onSelectStart="return false;">
                                     <input class="form-check-input" type="checkbox" id="monthlyCheckDefault">
                                     <label class="form-check-label" for="monthlyCheckDefault"> Monthly </label>
 
                                     <input class="form-check-input" type="checkbox" value="" id="weeklyCheckDefault">
-                                    <label class="form-check-label" for="weeklyCheckDefault">Weekly</label>
+                                    <label class="form-check-label" for="weeklyCheckDefault"> Weekly </label>
                                 </div>
                             </div>
                             <div class="col-md-2">
