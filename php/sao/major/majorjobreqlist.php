@@ -248,7 +248,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 'url': 'functions/fetch_data.php',
                 'type': 'post',
                 'data': {
-                    dpt: dpt,
+                    'dpt': dpt,
                 },
             },
             'fnCreatedRow': function(nRow, aData, iDataIndex) {
