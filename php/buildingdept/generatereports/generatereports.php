@@ -232,17 +232,26 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <input class="form-check-input" type="checkbox" id="minorDivCheckdefault" onchange="myFunction('minorDiv', 'minortable', 'minorfetch.php')">
                                     <label class="form-check-label" for="minorDivCheckdefault"> Minor Job Request </label>
 
-                                    <input class="form-check-input" type="checkbox" value="" id="majorDivCheckDefault" onchange="myFunction('majorDiv', 'majortable', 'majorfetch.php')">
-                                    <label class="form-check-label" for="majorDivCheckDefault"> Major Job Request </label>
+                                    <br>
+                                        <label class="fw-bold" for="date">Date Start:</label>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
+                                    
+                                    
+                                        <label class="fw-bold" for="date">Date End:</label>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
+                                    
                                 </div>
                                 <div class="col-md-3" onMouseDown="return false;" onSelectStart="return false;">
-                                    <input class="form-check-input" type="checkbox" id="monthlyCheckDefault">
-                                    <label class="form-check-label" for="monthlyCheckDefault"> Monthly </label>
-
-                                    <input class="form-check-input" type="checkbox" value="" id="weeklyCheckDefault">
-                                    <label class="form-check-label" for="weeklyCheckDefault"> Weekly </label>
+                                    <input class="form-check-input" type="checkbox" value="" id="majorDivCheckDefault" onchange="myFunction('majorDiv', 'majortable', 'majorfetch.php')">
+                                    <label class="form-check-label" for="majorDivCheckDefault"> Major Job Request </label>
+                                    <br>
+                                        <label class="fw-bold" for="date">Date Start:</label>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
+                                        <label class="fw-bold" for="date">Date End:</label>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
                                 </div>
                             </div>
+                            <br>
                             <div class="col-md-2">
                                 <button class="btn btn-info" onclick="printDiv()">Print</button>
                             </div>

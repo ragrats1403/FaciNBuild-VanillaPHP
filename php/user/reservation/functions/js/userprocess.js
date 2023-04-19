@@ -60,8 +60,6 @@ $(document).on("click", ".editBtn", function (event) {
           var tend = json.timeend;
           var dateuse = json.actualdateofuse;  
 
-
-
             $.ajax({
               url: "functions/getequipment.php",
               data: {
