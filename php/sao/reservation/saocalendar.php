@@ -237,6 +237,7 @@ require_once('../../authentication/anti_pagetrans.php');
             'processing': true,
             'paging': true,
             'order': [],
+            'responsive': true,
             'ajax': {
                 'url': "../dfunctions/fetch_data.php",
                 'type': "post",
@@ -244,13 +245,13 @@ require_once('../../authentication/anti_pagetrans.php');
             fnCreatedRow: function(nRow, aData, iDataIndex) {
                 $(nRow).attr("id", aData[0]);
             },
-            columnDefs: [{
-                target: [0, 3],
-                orderable: false,
+            'columnDefs': [{
+                'target': [0, 3],
+                'orderable': false,
             }, ],
-            scrollY: 200,
-            scrollCollapse: true,
-            paging: false,
+            scrollY: 670,
+            'scrollCollapse': true,
+            'paging': false,
         });
     </script>
 </body>

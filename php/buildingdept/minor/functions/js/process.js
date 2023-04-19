@@ -4,6 +4,7 @@ $('#datatable').DataTable({
     'processing': true,
     'paging': true,
     'order': [],
+    'responsive': true,
     'ajax': {
         'url': 'functions/fetch_data.php',
         'type': 'post',
@@ -25,9 +26,9 @@ $('#datatable').DataTable({
         'target': [0, 4],
         'orderable': false,
     }],
-scrollY: 200,
-scrollCollapse: true,
-paging: false 
+scrollY: 670,
+'scrollCollapse': true,
+'paging': false 
 
 });
 

@@ -237,9 +237,9 @@ require_once('../authentication/anti_pagetrans.php');
             fnCreatedRow: function(nRow, aData, iDataIndex) {
                 $(nRow).attr("id", aData[0]);
             },
-            columnDefs: [{
-                target: [0, 3],
-                orderable: false,
+            'columnDefs': [{
+                'target': [0, 3],
+                'orderable': false,
             }, ],
             scrollY: 670,
             'scrollCollapse': false,

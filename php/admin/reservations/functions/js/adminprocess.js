@@ -5,11 +5,12 @@
     'processing': true,
     'paging': true,
     'order': [],
+    'responsive': true,
     'ajax': {
         'url': 'functions/fetch_data.php',
         'type': 'post',
         'data': {
-            dpt: dpt,
+            'dpt': dpt,
         },
     },
     'fnCreatedRow': function(nRow, aData, iDataIndex) {
@@ -28,9 +29,9 @@
         'targets': [0, 4],
         'orderable': false,
     }],
-    scrollY: 200,
-    scrollCollapse: true,
-    paging: false,
+    scrollY: 670,
+    'scrollCollapse': true,
+    'paging': false,
 });
 //table display end
 
