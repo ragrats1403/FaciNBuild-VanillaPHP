@@ -229,26 +229,26 @@ require_once('../../authentication/anti_pagetrans.php');
                             </div>
                             <div class="row">
                                 <div class="col-md-3" onMouseDown="return false;" onSelectStart="return false;">
-                                    <input class="form-check-input" type="checkbox" id="minorDivCheckdefault" onchange="myFunction('minorDiv', 'minortable', 'minorfetch.php')">
+                                    <input class="form-check-input" type="checkbox" id="minorDivCheckdefault" onclick="myFunction('minorDiv', 'minortable', 'minorfetch.php')" onchange = "onchangeval('minorDiv', 'minordatestart', 'minordateend');">
                                     <label class="form-check-label" for="minorDivCheckdefault"> Minor Job Request </label>
 
                                     <br>
                                         <label class="fw-bold" for="date">Date Start:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="minordatestart" placeholder="Date Filed" onchange="myFunction('minorDiv', 'minortable', 'minorfetchdate.php')" disabled>
                                     
                                     
                                         <label class="fw-bold" for="date">Date End:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="minordateend" placeholder="Date Filed" onchange="myFunction('minorDiv', 'minortable', 'minorfetchdate.php')" disabled>
                                     
                                 </div>
                                 <div class="col-md-3" onMouseDown="return false;" onSelectStart="return false;">
-                                    <input class="form-check-input" type="checkbox" value="" id="majorDivCheckDefault" onchange="myFunction('majorDiv', 'majortable', 'majorfetch.php')">
+                                    <input class="form-check-input" type="checkbox" value="" id="majorDivCheckDefault" onclick="myFunction('majorDiv', 'majortable', 'majorfetch.php')" onchange = "onchangeval('majorDiv', 'majordatestart', 'majordateend');">
                                     <label class="form-check-label" for="majorDivCheckDefault"> Major Job Request </label>
                                     <br>
                                         <label class="fw-bold" for="date">Date Start:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="majordatestart" placeholder="Date Filed" onchange="myFunction('majorDiv', 'majortable', 'majorfetchdate.php')" disabled>
                                         <label class="fw-bold" for="date">Date End:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="majordateend" placeholder="Date Filed" onchange="myFunction('majorDiv', 'majortable', 'majorfetchdate.php')" disabled>
                                 </div>
                             </div>
                             <br>
@@ -328,17 +328,36 @@ require_once('../../authentication/anti_pagetrans.php');
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
+        function onchangeval(divID, datestart, dateend)
+        {   
+            var dates = document.getElementById(datestart);
+            var datee = document.getElementById(dateend);
+            var x = document.getElementById(divID);
+            if (x.style.display === "block") {
+                    x.style.display = "none";
+                    dates.disabled = true;
+                    datee.disabled = true;
+                    dates.value = null;
+                    datee.value = null;
+                } else {
+                    x.style.display = "block";
+                    dates.disabled = false;
+                    datee.disabled = false;
+                  
+                    
+            }
+        }
+
         function myFunction(divID, tableid, fetchdataid) {
             var x = document.getElementById(divID);
             var tid = tableid;
             var fdid = fetchdataid;
+            var dates = document.getElementById("minordatestart").value;
+            var datee = document.getElementById("minordateend").value;
 
-
-            if (x.style.display === "block") {
-                x.style.display = "none";
-            } else {
-                x.style.display = "block";
-                if (divID == "minorDiv") {
+            if(dates == null || datee == null)
+            {
+                    if (divID == "minorDiv") {
                     $('#' + tid).DataTable().clear().destroy();
                     $('#' + tid).DataTable({
                         'searching': false,
@@ -427,11 +446,120 @@ require_once('../../authentication/anti_pagetrans.php');
                     });
 
                 }
+                
+                
 
 
+            
+            }
+            else
+            {
+
+                    if (divID == "minorDiv") {
+                        $('#' + tid).DataTable().clear().destroy();
+                        $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': fdid,
+                                'type': 'post',
+                                    'data': {
+                                    datestart: dates,
+                                    dateend: datee,
+                                },
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                    }
+                    if (divID == "majorDiv") {
+                        $('#' + tid).DataTable().clear().destroy();
+                        $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': fdid,
+                                'type': 'post',
+                                'data': {
+                                    datestart: dates,
+                                    dateend: datee,
+                                },
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 1
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 4
+                                },
+                            ],
+                            paging: false,
+                            scrollCollapse: false
+                        });
+
+                    }
+
+
+                }
             }
 
-        }
+
+         
+
     </script>
 </body>
 
