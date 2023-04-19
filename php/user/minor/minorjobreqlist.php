@@ -237,7 +237,7 @@ $('#datatable').DataTable({
         'url': 'functions/fetch_data.php',
         'type': 'post',
         'data': {
-            dpt: dpt,
+            'dpt': dpt,
         },
     },
     'fnCreatedRow': function(nRow, aData, iDataIndex) {
