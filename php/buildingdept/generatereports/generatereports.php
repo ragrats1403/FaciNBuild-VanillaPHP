@@ -256,7 +256,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <button class="btn btn-info" onclick="printDiv()">Print</button>
                             </div>
                             <div id="minorDiv" style="display: none;">
-                                <table id="minortable" class="table">
+                                <table id="minortable" class="table" width="100%">
                                     <thead>
                                         <h5 class="fw-bold"> Minor Job Request </h5>
                                         <tr>
@@ -274,7 +274,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 </table>
                             </div>
                             <div id="majorDiv" style="display: none;">
-                                <table id="majortable" class="table">
+                                <table id="majortable" class="table" width="100%">
                                     <thead>
                                         <h5 class="fw-bold"> Major Job Request </h5>
                                         <tr>
@@ -356,8 +356,7 @@ require_once('../../authentication/anti_pagetrans.php');
             var datee = document.getElementById("minordateend").value;
             var ndates = document.getElementById("majordatestart").value;
             var ndatee = document.getElementById("majordateend").value;
-
-
+            
             if(dates == null || datee == null)
             {
                     if (divID == "minorDiv") {
@@ -405,6 +404,8 @@ require_once('../../authentication/anti_pagetrans.php');
                         scrollCollapse: false,
                         paging: false
                     });
+
+
                 }
                 if (divID == "majorDiv") {
                     $('#' + tid).DataTable().clear().destroy();
