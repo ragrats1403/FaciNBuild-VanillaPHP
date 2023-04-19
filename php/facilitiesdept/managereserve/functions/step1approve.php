@@ -4,8 +4,9 @@
 $id = $_POST['id'];
 $dept = $_POST['dept'];
 $feedb = $_POST['feedb'];
+$fdapprove = $_POST['fdapprove'];
 
-$sql = "UPDATE `reservation` SET `fdstatus` = 'Approved', `feedback` = '$feedb' WHERE reservationid = '$id'";
+$sql = "UPDATE `reservation` SET `fdstatus` = 'Approved', `feedback` = '$feedb', `fdapprovedby` = '$fdapprove' WHERE reservationid = '$id'";
 $query = mysqli_query($con, $sql);
 
 

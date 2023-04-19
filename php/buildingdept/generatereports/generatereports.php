@@ -387,7 +387,7 @@ function myFunction(divID, tableid, fetchdataid) {
                 'target': [0, 4],
                 'orderable': false,
             },
-            { 'width': '5%', 'targets': 0 }, // set 30% width for first column
+            { 'width': '5%', 'targets': 0 }, // set 5% width for first column
             { 'width': '5%', 'targets': 1 },
             { 'width': '7%', 'targets': 3 },
             { 'width': '7%', 'targets': 4 },

@@ -381,19 +381,31 @@ require_once('../../authentication/anti_pagetrans.php');
                                     </div>
 
                                     <div class="row" style="padding-top:6px;">     
-                                        <div class="col-md-1" style="margin-top:5px;">
-                                            <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                        <div class="col-md-4" style="margin-top:5px;">
+                                            <label class="fw-bold" for="inputName">Facilities Department Approval Status:</label>
                                         </div> 
                                         <div class="col-md-2" style="margin-top:5px;">
                                             <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1" disabled>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="fw-bold">Approved By</label>
+                                        </div>
+                                        <div class="col-md-4 "> 
+                                            <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_fdapprovedby" disabled>
                                         </div> 
                                     </div>
                                     <div class="row" style="padding-top:6px;">     
-                                        <div class="col-md-1" style="margin-top:5px;">
-                                            <label class="fw-bold" for="inputName">Step 2 Status:</label>
+                                        <div class="col-md-4" style="margin-top:5px;">
+                                            <label class="fw-bold" for="inputName">Student Affairs Office Approval Status:</label>
                                         </div> 
                                         <div class="col-md-2" style="margin-top:5px;">
                                             <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step2" disabled>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="fw-bold" >Approved By</label>
+                                        </div>
+                                        <div class="col-md-4 "> 
+                                            <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_saoapprovedby" disabled>
                                         </div>
                                     </div>
                                     <div class="justify-content-center">
@@ -403,8 +415,8 @@ require_once('../../authentication/anti_pagetrans.php');
                                         </div>
                                     </div>
                                     <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled>
-                            <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
+                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled hidden>
+                            <label class="form-check-label" for="flexCheckDefault" hidden> Add-on </label>
                         </div>
                         <div id="_myDIV1" style="display: none;">
                             <div class="col-sm-12 d-flex justify-content-between">

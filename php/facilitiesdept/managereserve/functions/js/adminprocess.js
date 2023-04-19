@@ -52,21 +52,23 @@ $(document).on("click", ".editBtn", function (event) {
       $("#_adviser").val(json.adviser);
       $("#_chairdeandep").val(json.chairperson);
       $("#_statustext").val(json.status);
-      $("#_inputFeedback").val(json.feedback);
       $("#_step1").val(json.fdstatus);
       $("#_step2").val(json.saostatus);
-      var aprbtn = document.getElementById("step1a");
-      var dclbtn = document.getElementById("step1d");
+      $("#_inputFeedback").val(json.feedback);
+      $("#_fdapprovedby").val(json.fdapprovedby);
+      $("#_saoapprovedby").val(json.saoapprovedby);
       if(json.fdstatus != 'Pending')
       {
         document.getElementById("_inputFeedback").disabled = true;
         document.getElementById("step1a").hidden = true;
         document.getElementById("step1d").hidden = true;
+        document.getElementById("_fdapprovedby").disabled = true;
       }
       else{
         document.getElementById("_inputFeedback").disabled = false;
         document.getElementById("step1a").hidden = false;
         document.getElementById("step1d").hidden = false;
+        document.getElementById("_fdapprovedby").disabled = false;
       }
       $("#test").modal("show"); 
         var en = json.eventname;
@@ -343,10 +345,12 @@ $(document).on('click', '.aoapproveBtn', function(event){
   //var id = $('#_addonID').val();
   var id = document.getElementById("_addonID").value;
   var trid = $('#trid').val();
+
   $.ajax({
       url: "functions/aoapprove.php",
       data: {
           id: id,
+
           
       },
       type: 'POST',
@@ -416,12 +420,14 @@ $(document).on('click', '.step1approveBtn', function(event){
   var trid = $('#trid').val();
   var dept = $("#_reqparty").val();
   var feedb = $("#_inputFeedback").val();
+  var fdapprove = $("#_fdapprovedby").val();
   $.ajax({
       url: "functions/step1approve.php",
       data: {
         id: id,
         dept: dept,
         feedb: feedb,
+        fdapprove: fdapprove,
           
       },
       type: 'POST',
