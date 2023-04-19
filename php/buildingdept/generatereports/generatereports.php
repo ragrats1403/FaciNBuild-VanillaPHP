@@ -354,6 +354,9 @@ require_once('../../authentication/anti_pagetrans.php');
             var fdid = fetchdataid;
             var dates = document.getElementById("minordatestart").value;
             var datee = document.getElementById("minordateend").value;
+            var ndates = document.getElementById("majordatestart").value;
+            var ndatee = document.getElementById("majordateend").value;
+
 
             if(dates == null || datee == null)
             {
@@ -446,11 +449,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     });
 
                 }
-                
-                
-
-
-            
+ 
             }
             else
             {
@@ -519,8 +518,8 @@ require_once('../../authentication/anti_pagetrans.php');
                                 'url': fdid,
                                 'type': 'post',
                                 'data': {
-                                    datestart: dates,
-                                    dateend: datee,
+                                    datestart: ndates,
+                                    dateend: ndatee,
                                 },
                             },
                             'fnCreatedRow': function(nRow, aData, iDataIndex) {
