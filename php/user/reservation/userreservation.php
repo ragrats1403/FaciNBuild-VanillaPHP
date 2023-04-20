@@ -608,23 +608,22 @@ require_once('../../authentication/anti_pagetrans.php');
                                         <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                        <label class="fw-bold" for="date">Item Name:</label>
-                                        <input type="form-control" class="form-control" id="_item_" placeholder="Item">
-                                    </div>
-                                </div>
                                 <div class="justify-content-center">
                                     <div class="col-md-12">
-                                        <label class="fw-bold" for="date">Description:</label>
+                                        <label class="fw-bold" for="date">Item with Complete Description:</label>
                                         <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
                                     </div>
                                 </div>
-
                                 <div class="justify-content-center">
                                     <div class="col-md-12">
                                         <label class="fw-bold" for="date">Purpose:</label>
                                         <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
+                                    </div>
+                                </div>
+                                <div class="justify-content-center">
+                                    <div class="col-md-12">
+                                        <label class="fw-bold" for="date">Requested by:</label>
+                                        <textarea class="form-control" rows="2" id="requestedby" placeholder="Requested by"></textarea>
                                     </div>
                                 </div>
                                 <!-- Form Controls End-->

@@ -533,6 +533,7 @@ $(document).on("click", ".submitBtn", function (event) {
   var stageperf = $("#stageperformers").val();
   var adviser = $("#adviser").val();
   var chairman = $("#chairdeandep").val();
+  var requestedby = $("#requestedby").val();
   var e = document.getElementById("faci");
 
   var faci = e.options[e.selectedIndex].text;
@@ -627,7 +628,6 @@ $(document).on("click", ".submitBtn", function (event) {
                                       var department = $("#_department").val();
                                       var date = $("#dateminor").val();
                                       var quantity = $("#_quantity_").val();
-                                      var itemname = $("#_item_").val();
                                       var description = $("#_itemdesc_").val();
                                       var purpose = $("#_purpose_").val();
                                       $.ajax({
@@ -636,12 +636,12 @@ $(document).on("click", ".submitBtn", function (event) {
                                           department: department,
                                           date: date,
                                           quantity: quantity,
-                                          itemname: itemname,
                                           description: description,
                                           purpose: purpose,
                                           eventname: eventname,
                                           actualdate: actualdate,
                                           reqparty: reqparty,
+                                          requestedby: requestedby,
                                         },
                                         type: "POST",
                                         success: function (data) {
@@ -770,7 +770,6 @@ $(document).on("click", ".submitBtn", function (event) {
                                   var department = $("#_department").val();
                                   var date = $("#dateminor").val();
                                   var quantity = $("#_quantity_").val();
-                                  var itemname = $("#_item_").val();
                                   var description = $("#_itemdesc_").val();
                                   var purpose = $("#_purpose_").val();
                                   $.ajax({
@@ -779,12 +778,12 @@ $(document).on("click", ".submitBtn", function (event) {
                                       department: department,
                                       date: date,
                                       quantity: quantity,
-                                      itemname: itemname,
                                       description: description,
                                       purpose: purpose,
                                       eventname: eventname,
                                       actualdate: actualdate,
                                       reqparty: reqparty,
+                                      requestedby: requestedby,
                                     },
                                     type: "POST",
                                     success: function (data) {
