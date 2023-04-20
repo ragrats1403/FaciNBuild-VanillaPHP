@@ -205,12 +205,6 @@ require_once('../../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
    <div class="table1">
         <div class="container-fluid">
@@ -258,7 +252,7 @@ require_once('../../../authentication/anti_pagetrans.php');
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Job Request</h5>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -269,52 +263,41 @@ require_once('../../../authentication/anti_pagetrans.php');
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="department" value = "<?php echo $_SESSION['department']; ?>" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" value="<?php echo mb_strimwidth($_SESSION['department'], 0, 30, '…'); ?>" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled> 
+                                    <input type="date" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
+
                                 </div>
                             </div>
-                            <div class="row">
-                                <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                <div class="row">
-                                    <div class="col-md-3" style="margin-top:5px; width:24%;">
-                                        <label class="fw-bold" for="date">Section:</label>
-                                        <select class="" style="width: 150px; Border: 5px;" name="sect" id="sect">
-                                            <option value="C">CARPENTRY</option>
-                                            <option value="P">PLUMBING</option>
-                                            <option value="A">AIRCON</option>
-                                            <option value="E">ELECTRICAL</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2" style="width:20%">
+                            <div class="justify-content-center">
+                                <h5 class="text-uppercase fw-bold">Requisition(To be filled up by the requesting party)</h5>
+                                <div class="col-md-2" style="padding-bottom:10px">
                                     <label class="fw-bold" for="date">Quantity:</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
-                                </div>
-                            </div>
                             <div class="justify-content-center">
-                                <div class="col-md-12" >
-                                    <label class="fw-bold" for="date">Description:</label>
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
                                 </div>
                             </div>
 
                             <div class="justify-content-center">
-                                <div class="col-md-12" >
+                                <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
                                 </div>
-                            </div>  
+                            </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea class="form-control" rows="2" id="requestedby" placeholder="Requested by"></textarea>
+                                </div>
+                            </div>
+
                             <!-- Form Controls End-->
                         </div>
                         <div class="modal-footer justify-content-md-center">
