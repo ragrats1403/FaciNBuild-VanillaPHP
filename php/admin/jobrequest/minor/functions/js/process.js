@@ -37,7 +37,7 @@
 //table display end
 
  //add button control
- $(document).on('submit', '#saveUserForm', function(event) {
+ /*$(document).on('submit', '#saveUserForm', function(event) {
     event.preventDefault();
     var department = $('#department').val();
     var date = $('#datemajorjr').val();
@@ -48,7 +48,7 @@
     /*var renderedby = $('#renderedby').val();
     var daterendered = $('#daterendered').val();
     var confirmedby = $('#confirmedby').val();
-    var dateconfirmed = $('#dateconfirmed').val();*/
+    var dateconfirmed = $('#dateconfirmed').val();
     if (department != '' && date != '' && quantity != '' && itemname != '' && description != '' && purpose != '') {
         $.ajax({
             url: "functions/add_data.php",
@@ -83,6 +83,60 @@
                     $('body').removeClass('modal-open');
                     $('.modal-backdrop').remove();
                     //force remove end
+                }
+            }
+        });
+    } else {
+        alert("Please fill all the Required fields");
+    }
+});*/
+
+$(document).on('submit', '#saveUserForm', function(event) {
+    var department = $('#department').val();
+    var date = $('#datemajorjr').val();
+    var quantity = $('#_quantity_').val();
+    var description = $('#_itemdesc_').val();
+    var purpose = $('#_purpose_').val();
+    var renderedby = $('#renderedby').val();
+    var daterendered = $('#daterendered').val();
+    var confirmedby = $('#confirmedby').val();
+    var dateconfirmed = $('#dateconfirmed').val();
+    var requestedby = $('#requestedby').val();
+    if (department != '' && date != '' && quantity != '' && requestedby != '' && description != '' && purpose != '' && renderedby != '' && daterendered != '' && confirmedby != '' && dateconfirmed != '') {
+        $.ajax({
+            url: "functions/add_data.php",
+            data: {
+                department: department,
+                date: date,
+                quantity: quantity,
+                requestedby: requestedby,
+                description: description,
+                purpose: purpose,
+                renderedby: renderedby,
+                daterendered: daterendered,
+                confirmedby: confirmedby,
+                dateconfirmed: dateconfirmed,
+
+            },
+            type: 'POST',
+            success: function(data) {
+                var json = JSON.parse(data);
+                status = json.status;
+                if (status = 'success') {
+                    table = $('#datatable').DataTable();
+                    table.draw();
+                    alert('Requested Successfully!');
+                    $('#_quantity_').val('');
+                    $('#_item_').val('');
+                    $('#_itemdesc_').val('');
+                    $('#_purpose_').val('');
+                    $('#renderedby').val('');
+                    $('#daterendered').val('');
+                    $('#confirmedby').val('');
+                    $('#dateconfirmed').val('');
+                    $('#addUserModal').modal('hide');
+                    $("body").removeClass("modal-open");
+                    $(".modal-backdrop").remove();
                 }
             }
         });
