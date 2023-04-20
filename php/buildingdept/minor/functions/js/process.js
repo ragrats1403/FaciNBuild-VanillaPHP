@@ -364,6 +364,7 @@ $(document).on('click', '.updateBtn', function() {
             $('#_confirmedby').val(json.confirmedby);
             $('#_dateconfirmed').val(json.dateconfirmed);
             $('#_notedby').val(json.notedby);
+            $('#requestedby').val(json.requestedby);
             $('#_bdapprovedby').val(json.approvedby);
             var e = document.getElementById("_sect");
             var section = e.options[e.selectedIndex].text;

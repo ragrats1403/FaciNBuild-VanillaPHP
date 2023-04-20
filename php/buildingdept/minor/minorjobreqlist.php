@@ -296,6 +296,12 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose" disabled></textarea>
                                 </div>
                             </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea class="form-control" rows="2" id="requestedby" placeholder="Requested by" disabled></textarea>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
