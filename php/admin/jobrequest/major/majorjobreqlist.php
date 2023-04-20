@@ -582,9 +582,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                         alert('Step 3 Approved Successfully!');
                         $('#_step3').val('Approved');
                         $('#_statustext').val('Approved');
-                        document.getElementById("_inputFeedback").disabled = true;
                         document.getElementById("step3a").hidden = true;
                         document.getElementById("step3d").hidden = true;
+                        document.getElementById("_cadapprovedby").disabled = true;
                     } else {
                         alert('failed');
                     }
@@ -615,18 +615,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                         alert('Step 1 Declined Successfully!');
                         $('#_step1').val('Declined');
                         $('#_statustext').val('Declined');
-                        if(json.bdstatus )
-                        document.getElementById("_cadapprovedby").disabled = true;
-                        document.getElementById("_inputFeedback").disabled = true;
-                        document.getElementById("step3a").hidden = true;
-                        document.getElementById("step3d").hidden = true;
-                        document.getElementById("_pcoapprovedby").disabled = true;
-                        document.getElementById("step2a").hidden = true;
-                        document.getElementById("step2d").hidden = true;
                         document.getElementById("step1a").hidden = true;
                         document.getElementById("step1d").hidden = true;
-                        document.getElementById("_bdapprovedby").disabled = true;
-
+                        document.getElementById("_bdapprovedby").disabled = true;                        
                     } else {
                         alert('failed');
                         
@@ -662,11 +653,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                         table = $('#datatable').DataTable();
                         table.draw();
                         alert('Step 2 Approved Successfully!');
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        //$('#_itemdesc_').text('');
+                        document.getElementById("step2a").hidden = true;
+                        document.getElementById("step2d").hidden = true;
+                        document.getElementById("_pcoapprovedby").disabled = true;
                         $('#_step2').val('Approved');
 
                     } else {
@@ -698,6 +687,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                         alert('Step 2 Declined Successfully!');
                         $('#_step2').val('Declined');
                         $('#_statustext').val('Declined');
+                        document.getElementById("step2a").hidden = true;
+                        document.getElementById("step2d").hidden = true;
+                        document.getElementById("_pcoapprovedby").disabled = true;
 
                     } else {
                         alert('failed');
@@ -731,6 +723,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                         alert('Step 3 Declined Successfully!');
                         $('#_step3').val('Declined');
                         $('#_statustext').val('Declined');
+                        document.getElementById("step3a").hidden = true;
+                        document.getElementById("step3d").hidden = true;
+                        document.getElementById("_cadapprovedby").disabled = true;
 
 
                     } else {
@@ -780,6 +775,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                         table.draw();
                         alert('Step 1 Approved Successfully!');
                         $('#_step1').val('Approved');
+                        document.getElementById("step1a").hidden = true;
+                        document.getElementById("step1d").hidden = true;
+                        document.getElementById("_bdapprovedby").disabled = true;  
 
                     } else {
                         alert('failed');
