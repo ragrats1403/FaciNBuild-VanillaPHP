@@ -282,50 +282,55 @@ require_once('../../../authentication/anti_pagetrans.php');
 
     <script type="text/javascript">
         //add button control
-        $(document).on('submit', '#addUserModal', function(event) {
+        $(document).on('submit', '#saveUserForm', function(event) {
+            event.preventDefault();
+            var requino = $('#requi').val();
             var department = $('#depart').val();
             var date = $('#deeto').val();
             var quantity = $('#quan').val();
-            var item = $('#ite').val();
             var description = $('#desc').val();
             var purpose = $('#purp').val();
+            var requestby = $('#req').val();
+            var departmenthead = $('#dephead').val();
 
-            if (department != '' && date != '' && quantity != '' && item != '' && description != '' && purpose != '') {
-                $.ajax({
-                    url: "add_data.php",
-                    data: {
+            if (department != '' && date != '' && quantity != '' && requestby != '' && description != '' && purpose != '' && departmenthead != '') {
+        $.ajax({
+                url: "add_data.php",
+                data: {
+                        requino: requino,
                         department: department,
                         date: date,
                         quantity: quantity,
-                        item: item,
                         description: description,
                         purpose: purpose,
-                    },
-                    type: 'POST',
-                    success: function(data) {
-                        var json = JSON.parse(data);
-                        status = json.status;
-                        if (status = 'success') {
-                            table = $('#datatable').DataTable();
-                            table.draw();
-                            alert('Successfully Added User!');
+                        requestby: requestby,
+                        departmenthead: departmenthead,
+                
+            },
+            type: 'POST',
+            success: function(data) {
+                var json = JSON.parse(data);
+                status = json.status;
+                if (status = 'success') {
+                    table = $('#datatable').DataTable();
+                    table.draw();
+                    alert('Successfully Requested Job Request!');
                             $('#requi').val('');
                             $('#quan').val('');
-                            $('#ite').val('');
-                            $('#section').val('');
                             $('#desc').val('');
                             $('#purp').val('');
-                            $('#mark').val('');
-                            $('#addUserModal').modal('hide');
-                            $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
-                        }
-                    }
-                });
-            } else {
-                alert("Please fill all the Required fields");
+                            $('#req').val('');
+                            $('#dephead').val('');
+                    $('#addUserModal').modal('hide');
+                    $("body").removeClass("modal-open");
+                    $(".modal-backdrop").remove();
+                }
             }
         });
+    } else {
+        alert("Please fill all the Required fields");
+    }
+});
         //delete user button control
         $(document).on('click', '.btnDelete', function(event) {
             var table = $('#datatable').DataTable();
@@ -770,27 +775,29 @@ require_once('../../../authentication/anti_pagetrans.php');
     <!-- add user modal-->
     <!-- Modal Popup -->
     <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="max-width:1100px;">
+        <div class="modal-dialog" style="max-width:1000px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Job Request</h5>
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body ">
+                    <div class="modal-body ">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
-                        <div class="modal-body">
-                            <!-- Form Controls-->
-
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="Department" value= "<?php echo $_SESSION['department']; ?>" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="depart" placeholder="Department" value = "<?php echo $_SESSION['department'];?>" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="deeto" disabled>
+                                    <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
                                 </div>
                             </div>
                             <div>
@@ -799,16 +806,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     <input type="form-control" class="form-control input-sm col-xs-1" id="quan" placeholder="Quantity">
                                 </div>
                             </div>
-
-                            <div>
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="ite" placeholder="Item">
-                                </div>
-                            </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea placeholder="Description" class="form-control" rows="2" id="desc"></textarea>
                                 </div>
                             </div>
@@ -818,16 +818,28 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     <textarea placeholder="Purpose" class="form-control" rows="2" id="purp"></textarea>
                                 </div>
                             </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea placeholder="Description" class="form-control" rows="2" id="req"></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center" style="padding-bottom:10px;">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Department Head:</label>
+                                    <textarea placeholder="Department Head" class="form-control" rows="2" id="dephead"></textarea>
+                                </div>
+                            </div>
+
                             <div class="modal-footer justify-content-md-center">
                                 <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary col-md-2">Create Request</button>
+                                <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     <script>
                     var now = new Date();
                     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
