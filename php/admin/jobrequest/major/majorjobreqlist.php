@@ -1075,8 +1075,6 @@ require_once('../../../authentication/anti_pagetrans.php');
                                             document.getElementById("step3d").hidden = false;
                                             document.getElementById("_cadapprovedby").disabled = false;
                                             }
-
-
                                             updtbtn.classList.remove("disabled");
                                             updtbtn.classList.remove("text-white");
 
