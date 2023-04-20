@@ -628,7 +628,7 @@ $(document).on("click", ".submitBtn", function (event) {
                                       var department = $("#_department").val();
                                       var date = $("#dateminor").val();
                                       var quantity = $("#_quantity_").val();
-                                      var description = $("#_itemdesc_").val();
+                                      var description = $("#_itemdesc").val();
                                       var purpose = $("#_purpose_").val();
                                       $.ajax({
                                         url: "functions/addons.php",
@@ -770,7 +770,7 @@ $(document).on("click", ".submitBtn", function (event) {
                                   var department = $("#_department").val();
                                   var date = $("#dateminor").val();
                                   var quantity = $("#_quantity_").val();
-                                  var description = $("#_itemdesc_").val();
+                                  var description = $("#_itemdesc").val();
                                   var purpose = $("#_purpose_").val();
                                   $.ajax({
                                     url: "functions/addons.php",
