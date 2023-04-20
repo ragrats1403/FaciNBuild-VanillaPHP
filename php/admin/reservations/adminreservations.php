@@ -274,7 +274,7 @@ require_once('../../authentication/anti_pagetrans.php');
 
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
-                                <select class="form-control input-sm col-xs-1" name="sections" id="_facility">
+                                <select class="form-control input-sm col-xs-1" name="sections" id="_facility" onchange="promptBeforechange()">
 
                                     <?php include('../../connection/connection.php');
                                     $sql = "SELECT facilityname FROM facility";
@@ -348,20 +348,64 @@ require_once('../../authentication/anti_pagetrans.php');
                             <label class="fw-bold" for="date">CHAIRPERSON/DEAN/DEPARTMENT</label>
                             <input type="name" class="form-control input-sm col-xs-1" id="_chairdeandep" placeholder="CHAIRPERSON/DEAN/DEPARTMENT">
                         </div>
+                        <div id = "eqDiv" style = "display:none;">
+                            <div class="table-responsive">
+                                <table id="testtable2" class="table" width="100%">
+                                    <thead>
+                                        <th>Equipments Name</th>
+                                        <th>Quantity</th>
+                                        <th>Quantity to Reserve</th>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="alert1" id="alert1" style = "display:none;">
+                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                            <strong>Warning!</strong> You need to remove the existing reserved equipments first to edit the equipments.
+                            <style>
+                                .alert1 {
+                                padding: 20px;
+                                background-color: #ff9800;
+                                color: white;
+                                }
+
+                                .cbtn {
+                                margin-left: 15px;
+                                color: white;
+                                font-weight: bold;
+                                float: right;
+                                font-size: 22px;
+                                line-height: 20px;
+                                cursor: pointer;
+                                transition: 0.3s;
+                                }
+
+                                .cbtn:hover {
+                                color: black;
+                                }
+                            </style>
+                        </div>
+                        <br>
                             <label class="fw-bold">Equipments Added To Reservation</label>
                                     <div id="container3">
                                         <div id="container4">
 
                                         </div>
                                     </div>
-
                                     <div class="row" style="padding-top:6px;">     
-                                        <div class="col-md-1" style="margin-top:5px;">
-                                            <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                        <div class="col-md-4" style="margin-top:5px;">
+                                            <label class="fw-bold" for="inputName">Facilities Department Approval Status:</label>
                                         </div> 
                                         <div class="col-md-2" style="margin-top:5px;">
                                             <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1" disabled>
-                                        </div> 
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="fw-bold">Approved By</label>
+                                        </div>
+                                        <div class="col-md-4 "> 
+                                            <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_fdapprovedby" disabled>
+                                        </div>
                                         <div class="col-md-1">
                                             <!--Id:step1approveBtn-->
                                             <a href= "javascript:void();" class ="btn btn-success step1approveBtn" id="step1a">Approve</a>
@@ -369,15 +413,21 @@ require_once('../../authentication/anti_pagetrans.php');
                                         <div class="col-md-1" style="padding-left:18px;">
                                         <!--Id:step1declineBtn-->
                                             <a href= "javascript:void();" class ="btn btn-danger step1declineBtn" id="step1d">Decline</a>
-                                        </div>
+                                        </div> 
                                     </div>
                                     <div class="row" style="padding-top:6px;">     
-                                        <div class="col-md-1" style="margin-top:5px;">
-                                            <label class="fw-bold" for="inputName">Step 2 Status:</label>
+                                        <div class="col-md-4" style="margin-top:5px;">
+                                            <label class="fw-bold" for="inputName">Student Affairs Office Approval Status:</label>
                                         </div> 
                                         <div class="col-md-2" style="margin-top:5px;">
                                             <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step2" disabled>
-                                        </div> 
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="fw-bold" >Approved By</label>
+                                        </div>
+                                        <div class="col-md-4 "> 
+                                            <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_saoapprovedby" disabled>
+                                        </div>
                                         <div class="col-md-1">
                                             <!--Id:step1approveBtn-->
                                             <a href= "javascript:void();" class ="btn btn-success step2approveBtn" id="step2a">Approve</a>
@@ -387,6 +437,13 @@ require_once('../../authentication/anti_pagetrans.php');
                                             <a href= "javascript:void();" class ="btn btn-danger step2declineBtn" id="step2d">Decline</a>
                                         </div>
                                     </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Feedback:</label>
+                                            <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled hidden>
                             <label class="form-check-label" for="flexCheckDefault" hidden> Add-on </label>
@@ -454,6 +511,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                         <textarea class="form-control" rows="2" id="_minorpurpose" placeholder="Purpose"></textarea>
                                     </div>
                                 </div>  
+                                
                                 <!-- Form Controls End-->
                             </form>
                         </div>
@@ -468,8 +526,8 @@ require_once('../../authentication/anti_pagetrans.php');
                     <div class="mr">
                     <a href= "javascript:void();" class ="btn btn-primary editResBtn">Edit</a>
                     <a href= "javascript:void();" class ="btn btn-warning updateResBtn disabled" id= "uResBtn">Save Changes</a>
-                    <a href= "javascript:void();" class ="btn btn-info approveAll" id ="appAllBtn">Approve All</a>
-                    <a href= "javascript:void();" class ="btn btn-danger declineAll" id ="decAllBtn">Decline All</a>
+                    <!--<a href= "javascript:void();" class ="btn btn-info approveAll" id ="appAllBtn">Approve All</a>
+                    <a href= "javascript:void();" class ="btn btn-danger declineAll" id ="decAllBtn">Decline All</a>-->
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>
                     </div>
                 </div>     
@@ -677,9 +735,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <!--<button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>-->
                     <a href="javascript:void();" class="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
-
                 </div>
-                <script type="text/javascript" src="functions/js/createresdep.js?random=<?php echo uniqid(); ?>"></script>
 
             </div>
         </div>

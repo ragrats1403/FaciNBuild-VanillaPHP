@@ -38,11 +38,16 @@
 //edit button control
 $(document).on("click", ".editBtn", function (event) {
   var id = $(this).data("id");
+  var f = document.getElementById("alert1");
+  f.style.display = "none";
+
+
   var trid = $(this).closest("tr").attr("reservationid");
   const myNode =  document.getElementById('container4');
     while (myNode.firstChild ) {
     myNode.removeChild(myNode.lastChild);
   } 
+  document.getElementById("uResBtn").hidden = true;
   document.getElementById("_flexCheckDefault").checked = false;
   document.getElementById("_facility").disabled = true;
   document.getElementById("_eventname").disabled = true;
@@ -56,8 +61,11 @@ $(document).on("click", ".editBtn", function (event) {
   document.getElementById("_stageperformers").disabled = true;
   document.getElementById("_adviser").disabled = true;
   document.getElementById("_chairdeandep").disabled = true;
+  document.getElementById("_inputFeedback").disabled = true;
   var x = document.getElementById("_myDIV1");
   x.style.display = "none";
+  var v = document.getElementById("eqDiv");
+  v.style.display = "none";
 
   $.ajax({
     url: "functions/get_reservation_details.php",
@@ -91,50 +99,60 @@ $(document).on("click", ".editBtn", function (event) {
       $("#_statustext").val(json.status);
       $("#_step1").val(json.fdstatus);
       $("#_step2").val(json.saostatus);
-      if(json.status = "Approved")
+      $("#_inputFeedback").val(json.feedback);
+      $("#_fdapprovedby").val(json.fdapprovedby);
+      $("#_saoapprovedby").val(json.saoapprovedby);
+      if(json.fdstatus != 'Pending')
       {
-        document.getElementById("appAllBtn").hidden = true;
-        document.getElementById("decAllBtn").hidden = true;
+
+        document.getElementById("_inputFeedback").disabled = true;
         document.getElementById("step1a").hidden = true;
         document.getElementById("step1d").hidden = true;
+        document.getElementById("_fdapprovedby").disabled = true;
+        
+      }
+      else{
+        document.getElementById("_inputFeedback").disabled = false;
+        document.getElementById("step1a").hidden = false;
+        document.getElementById("step1d").hidden = false;
+        document.getElementById("_fdapprovedby").disabled = false;
+      }
+
+
+
+
+
+      if(json.saostatus != 'Pending')
+      {
+        document.getElementById("_inputFeedback").disabled = true;
         document.getElementById("step2a").hidden = true;
         document.getElementById("step2d").hidden = true;
+        document.getElementById("_saoapprovedby").disabled = true;
       }
+      else{
+        document.getElementById("_inputFeedback").disabled = false;
+        document.getElementById("step2a").hidden = false;
+        document.getElementById("step2d").hidden = false;
+        document.getElementById("_saoapprovedby").disabled = false;
+      }
+
+
+      if(json.status != 'Declined')
+      {
+
+      }
+      else{
+        document.getElementById("_inputFeedback").disabled = true;
+        document.getElementById("step2a").hidden = true;
+        document.getElementById("step2d").hidden = true;
+        document.getElementById("_saoapprovedby").disabled = true;
+        document.getElementById("step1a").hidden = true;
+        document.getElementById("step1d").hidden = true;
+        document.getElementById("_fdapprovedby").disabled = true;
+      }
+
       $("#test").modal("show");
-        var en = json.eventname;
-        var adu = json.actualdateofuse; 
-        var rp = json.requestingparty;
-            $.ajax({
-                url: "functions/get_addon_details.php",
-                data: {
-                eventname: en,
-                actualdate: adu,
-                reqsource: rp,
-                },
-                type: "POST",
-                success: function (data) {
-                var jsonfaddon = JSON.parse(data);           
-                  if(jsonfaddon!=null){ 
-                    document.getElementById("_flexCheckDefault").checked = true;
-                    var x = document.getElementById("_myDIV1");
-                    x.style.display = "block";
-                    document.getElementById("_dept").disabled = true //department
-                    document.getElementById("_dateresm").disabled = true //date
-                    document.getElementById("_minorqres").disabled = true //quantity
-                    document.getElementById("_minoritemres").disabled = true//itemname
-                    document.getElementById("_minoritemdesc").disabled = true//itemdescription
-                    document.getElementById("_minorpurpose").disabled = true//purpose
-                    $("#_dept").val(jsonfaddon.department);
-                    $("#_dateresm").val(jsonfaddon.datesubmitted);
-                    $("#_minorqres").val(jsonfaddon.quantity);
-                    $("#_minoritemres").val(jsonfaddon.item);
-                    $("#_minoritemdesc").val(jsonfaddon.item_desc);
-                    $("#_minorpurpose").val(jsonfaddon.purpose);
-                    $("#_addonstat").val(jsonfaddon.bdstatus);
-                    $("#_addonID").val(jsonfaddon.minorjobid);
-                  }
-                },
-            });
+          var en = json.eventname;
           var eqdatesubmit = json.datefiled;
           var tstart = json.timestart;
           var tend = json.timeend;
@@ -171,12 +189,13 @@ $(document).on("click", ".editBtn", function (event) {
                     var uniqueID = "fbe" + i + "_" + nid;
                     btn.className = "btn btn-sm btn-danger disabled removeEq";
                     btn.id = uniqueID;
-                    btn.setAttribute("onclick","removeAddedEq2(this);");
+                    btn.setAttribute("data-id",jsonreseq[i][2]);
                     btn.style.marginTop = '3px';
                     btn.innerHTML = "Remove";
                     var textbox = document.createElement('text');
                     textbox.className = "form-control input-sm col-xs-1 disabled";
                     textbox.innerHTML = equipn + ' x ' + equipq;
+                    
         
                     divCol.appendChild(textbox);
                     divCol2.appendChild(btn);
@@ -193,10 +212,311 @@ $(document).on("click", ".editBtn", function (event) {
 });
 
 
+
+//updateChanges
+
+$(document).on('click','.updateResBtn', function(event){
+  alert("test");
+  var id = $("#_ID").val();
+  var eventname = $("#_eventname").val();
+  var datefiled = $("#_datefiled").val();
+  var actualdate = $("#_actualdate").val();
+  var timein = $("#_timein").val();
+  var timeout = $("#_timeout").val();
+  var reqparty = $("#_reqparty").val();
+  var purpose = $("#_purpose").val();
+  var numparticipants = $("#_numparticipants").val();
+  var stageperf = $("#_stageperformers").val();
+  var adviser = $("#_adviser").val();
+  var chairman = $("#_chairdeandep").val();
+  var e = document.getElementById("_facility");
+  var faci = e.options[e.selectedIndex].text;
+    if(computedaysdiff(datefiled, actualdate) <= 4 )
+    {
+      var computeval = computedaysdiff(datefiled, actualdate);
+      alert("Please Note that you need to reserve 5 days before the desired reservation day\nReservation Day(s) Count:"+computeval+" Day(s) Away.");
+    }
+    else
+    {
+    }
+
+    checkdateconflict(actualdate, timein, timeout, faci, function(confirm) {
+      if (confirm) {
+          // do something if there is a conflict
+            checkReservationConflict(timein, timeout, actualdate, faci, function(result) {
+              // Do something with the result, which will be a boolean value
+              if (result) {
+                  // Handle case where there is a conflict
+                  alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
+              } else {
+                  // Handle case where there is no conflict
+                  if (
+                    eventname != "" &&
+                    datefiled != "" &&
+                    actualdate != "" &&
+                    timein != "" &&
+                    timeout != "" &&
+                    reqparty != "" &&
+                    purpose != "" &&
+                    numparticipants != "" &&
+                    stageperf != "" &&
+                    adviser != "" &&
+                    chairman != ""
+                  ) {
+                    $.ajax({
+                      url: "functions/update_data.php", 
+                      data: {
+                        id:id,
+                        eventname: eventname,
+                        datefiled: datefiled,
+                        actualdate: actualdate,
+                        timein: timein,
+                        timeout: timeout,
+                        reqparty: reqparty,
+                        purpose: purpose,
+                        numparticipants: numparticipants,
+                        stageperf: stageperf,
+                        adviser: adviser,
+                        chairman: chairman,
+                        faci: faci,
+                      },
+                      type: "POST",
+                      success: function (data) {
+                        var json = JSON.parse(data);
+                        var status = json.status;
+                        if ((status = "success")) {
+                          //equipment additionals
+                            var testarr = [...document.querySelectorAll('[id^="fbh"]')].map(
+                              (elm) => elm.id
+                            );
+                            var testarr2 = [...document.querySelectorAll('[id^="fbe"]')].map(
+                              (elm) => elm.id
+                            );
+                            var testarr3 = [...document.querySelectorAll('[id^="fbv"]')].map(
+                              (elm) => elm.id
+                            );
+                            for (i = 0; i <= testarr.length - 1; i++) {
+                              var eid = document.getElementById(testarr[i]).value; //id
+                              var ename = document.getElementById(testarr2[i]).value; //name
+                              var eqval = document.getElementById(testarr3[i]).value; //value
+                              $.ajax({
+                                url: "functions/addeqreserve.php",
+                                data: {
+                                  eventname: eventname,
+                                  dateofusage: actualdate,
+                                  datesubmitted: datefiled,
+                                  timestart: timein,
+                                  timeend: timeout,
+                                  quantity: eqval,
+                                  facility: faci,
+                                  eqid: eid,
+                                  eqname: ename,
+                                },
+                                type: "POST",
+                                success: function (data) {
+                                  var eqjson = JSON.parse(data);
+                                  var status = eqjson.status;
+                                  if (status == "success") {
+                                    console.log("equipment added to reservation!");
+                                  }
+                                },
+                              });
+                          }
+                          $("#test").modal("hide");
+                          //force remove faded background  -Ragrats
+                          $("body").removeClass("modal-open");
+                          $(".modal-backdrop").remove();
+                          //force remove end
+                          //update table list
+                          table = $("#datatable").DataTable();
+                          table.draw();
+                          alert("Successfully Updated Reservation!");
+                        }
+                      },
+                    });
+                  } else {
+                    alert("Please fill all the Required fields");
+                  }
+              }
+          });
+      } else {
+          // do something if there is no conflict
+          checkReservationConflict(timein, timeout, actualdate, faci, function(result) {
+            // Do something with the result, which will be a boolean value
+            if (result) {
+                // Handle case where there is a conflict
+                alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
+            } else {
+                // Handle case where there is no conflict
+                if (
+                  eventname != "" &&
+                  datefiled != "" &&
+                  actualdate != "" &&
+                  timein != "" &&
+                  timeout != "" &&
+                  reqparty != "" &&
+                  purpose != "" &&
+                  numparticipants != "" &&
+                  stageperf != "" &&
+                  adviser != "" &&
+                  chairman != ""
+                ) {
+                  $.ajax({
+                    url: "functions/update_data.php", 
+                      data: {
+                        id:id,
+                      eventname: eventname,
+                      datefiled: datefiled,
+                      actualdate: actualdate,
+                      timein: timein,
+                      timeout: timeout,
+                      reqparty: reqparty,
+                      purpose: purpose,
+                      numparticipants: numparticipants,
+                      stageperf: stageperf,
+                      adviser: adviser,
+                      chairman: chairman,
+                      faci: faci,
+                    },
+                    type: "POST",
+                    success: function (data) {
+                      var json = JSON.parse(data);
+                      var status = json.status;
+                      if ((status = "success")) {
+                        //equipment additionals
+                        var testarr = [...document.querySelectorAll('[id^="fbh"]')].map(
+                          (elm) => elm.id
+                        );
+                        var testarr2 = [...document.querySelectorAll('[id^="fbe"]')].map(
+                          (elm) => elm.id
+                        );
+                        var testarr3 = [...document.querySelectorAll('[id^="fbv"]')].map(
+                          (elm) => elm.id
+                        );
+                        for (i = 0; i <= testarr.length - 1; i++) {
+                          var eid = document.getElementById(testarr[i]).value; //id
+                          var ename = document.getElementById(testarr2[i]).value; //name
+                          var eqval = document.getElementById(testarr3[i]).value; //value
+                          $.ajax({
+                            url: "functions/addeqreserve.php",
+                            data: {
+                              eventname: eventname,
+                              dateofusage: actualdate,
+                              datesubmitted: datefiled,
+                              timestart: timein,
+                              timeend: timeout,
+                              quantity: eqval,
+                              facility: faci,
+                              eqid: eid,
+                              eqname: ename,
+                            },
+                            type: "POST",
+                            success: function (data) {
+                              var eqjson = JSON.parse(data);
+                              var status = eqjson.status;
+                              if (status == "success") {
+                                console.log("equipment added to reservation!");
+
+                              }
+                            },
+                          });
+                        }
+                        //$('#department').val('');
+                        /*var now = new Date();
+                                  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                                  document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);*/
+                        $("#test").modal("hide");
+                        //force remove faded background  -Ragrats
+                        $("body").removeClass("modal-open");
+                        $(".modal-backdrop").remove();
+                        //force remove end
+                        //update table list
+                        table = $("#datatable").DataTable();
+                        table.draw();
+                        alert("Successfully Updated Reservation!");
+                      }
+                    },
+                  });
+                } else {
+                  alert("Please fill all the Required fields");
+                }
+            }
+        });
+      }
+  });
+    //alert(testarr.length);
+    /*
+    if(checkdateconflict(actualdate, timein, timeout, faci)==true)
+    {
+      alert("true test");
+      if(checkreservationConflict(timein, timeout, actualdate, faci)==false){
+        alert("no conflicts");
+      }
+      else{
+        alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
+      }
+    }
+    else{
+      alert("false test");
+    }
+*/
+
+});
+
+
+
+
+
+
+
+
+
 //closeinfomodal
 $("#closemodal").click(function () {
   $("#myModal").modal("hide");
 });
+
+
+
+
+//remove equipment from reservation equipment database
+
+$(document).on("click", ".removeEq", function(event){
+  var x = document.getElementById('container4');
+  var id = $(this).data("id");
+
+  if (confirm("Are you sure to delete this equipment from the reservation?"))
+  {
+    removeAddedEq2(this);
+    $.ajax({
+      url: "functions/deletereservedeq.php",
+      data: {
+          id:id,
+      },
+      type: "POST",
+      success: function(data) {
+        alert("Successfully Removed Equipment!");
+
+      }
+    });
+  }
+  else
+  {
+
+  }
+
+  if(x.hasChildNodes())
+  {
+
+  }
+  else{
+    dynamicEq2();
+
+  }
+
+});
+
+
 
 //create reservation
 
@@ -571,6 +891,87 @@ $('#testtable').DataTable().clear().destroy();
       //removeChild();
 }
 
+function promptBeforechange()
+{
+  var x = document.getElementById('container4');
+  var ename = $("#_eventname").val();
+  var df = $("#_datefiled").val();
+  var ad = $("#_actualdate").val();
+  var ti = $("#_timein").val();
+  var to = $("#_timeout").val();
+  if(x.hasChildNodes())
+  {
+    if (confirm("Changing Facilities will delete reserved equipments on previous facility. Continue?"))
+      {
+        $.ajax({
+          url: "functions/deleqonchange.php",
+          data: {
+              eventname: ename,
+              actualdate: ad,
+              datesubmitted: df,
+              timestart: ti,
+              timeend: to,
+
+          },
+          type: 'POST',
+          success: function(data) {
+
+            dynamicEq2();
+            const myNode =  document.getElementById('container4');
+            while (myNode.firstChild) {
+            myNode.removeChild(myNode.lastChild);}
+        }
+        });
+
+
+      }
+    }
+ 
+  else
+  {
+    dynamicEq2();
+    const myNode =  document.getElementById('container4');
+    while (myNode.firstChild) {
+    myNode.removeChild(myNode.lastChild);
+  
+    }
+  }
+}
+function dynamicEq2(){
+var e = document.getElementById("_facility");
+var faci = e.options[e.selectedIndex].text;
+$('#testtable2').DataTable().clear().destroy();
+      $('#testtable2').DataTable({
+      'searching':false,
+      'autoWidth': false,
+      'serverSide': true,
+      'processing': true,
+      'bJQueryUI': true,
+      'info': false,
+      "bPaginate": false,
+      'order': [],
+      'ajax': {
+          'url': 'functions/fetch_eq2.php',
+          'type': 'post',
+          'data':{
+              faci:faci,
+          },
+      },
+      'fnCreatedRow': function(nRow, aData, iDataIndex) {
+          $(nRow).attr('id', aData[0]);
+      },
+      'columnDefs': [{
+          'target': [0, 2],
+          'orderable': false,
+      }],
+      scrollY: 200,
+      scrollCollapse: true,
+      paging: false 
+
+      });
+
+      //removeChild();
+}
 
 $(document).on('click', '.addresBtn', function(event){
   //var value = document.getElementById("id").value;
@@ -595,6 +996,98 @@ $(document).on('click', '.addresBtn', function(event){
               var json = JSON.parse(data);
               var eqname = json.equipmentname;
               var container = document.getElementById('container2');
+              var newDiv = document.createElement('div');
+              var divCol = document.createElement('div');
+  
+              //variables for hidden inputs for getting values
+              var hid = document.createElement('input');
+              var heqname = document.createElement('input');
+              var hvalue = document.createElement('input');
+              var hfaci = document.createElement('input');
+              
+              //assigning attributes and values to each variable[to get them for backend]
+          
+              hid.type = 'hidden';
+              hid.id = hiddenid;
+              hid.value = json.id;
+  
+              heqname.type = 'hidden';
+              heqname.id = hiddeneqn;
+              heqname.value = json.equipmentname;
+  
+              hvalue.type = 'hidden';
+              hvalue.id = hiddenval;
+              hvalue.value = value;
+  
+              hfaci.type = 'hidden';
+              hfaci.id = hiddenfaci;
+              hfaci.value = json.facility;
+  
+              
+  
+  
+              divCol2 = document.createElement('div');
+              newDiv.className = "row";
+              divCol.className = "col-md-2";
+              divCol2.className = "col-md-2";
+              var btn = document.createElement('button');
+              btn.className = "btn btn-sm btn-danger removeEq";
+              btn.id = "btn"+value;
+              btn.setAttribute("onClick","removeAddedEq(this);");
+              btn.style.marginTop = '3px';
+              btn.innerHTML = "Remove";
+              var textbox = document.createElement('text');
+              //var joinedtxt = json.equipmentname + '';
+              textbox.className = "form-control input-sm col-xs-1 disabled";
+              textbox.innerHTML = eqname +' x '+ value;
+  
+  
+              divCol.appendChild(textbox);
+              divCol2.appendChild(btn);
+              newDiv.appendChild(divCol);
+              newDiv.appendChild(divCol2);
+              newDiv.appendChild(hid);
+              newDiv.appendChild(heqname);
+              newDiv.appendChild(hvalue);
+              newDiv.appendChild(hfaci);
+              container.appendChild(newDiv);
+
+              
+  
+          }
+      }); 
+  }
+  else{
+      alert("This equipment is already added to the reservation form!");
+  }
+  
+  
+
+});
+
+$(document).on('click', '.addresBtn2', function(event){
+  //var value = document.getElementById("id").value;
+  //alert("test");
+  //var quantitytxt = eq.value;
+  var id = $(this).data('id');
+  var nid = 'a'+id;
+  var hiddenid = 'fbh'+id;
+  var hiddeneqn = 'fbe'+id;
+  var hiddenval = 'fbv'+id;
+  var hiddenfaci = 'fbf'+id;
+  var value = document.getElementById(nid).value;
+  //var checkval = document.getElementById("hid").value;
+  if(document.getElementById(hiddenid)==null){
+      $.ajax({
+          url: "functions/addselectedeq.php",
+          data: {
+              id:id,
+          },
+          type: 'POST',
+          success: function(data) {
+              var json = JSON.parse(data);
+              var eqname = json.equipmentname;
+              var container = document.getElementById('container4');
               var newDiv = document.createElement('div');
               var divCol = document.createElement('div');
   
@@ -701,40 +1194,6 @@ $(document).on("click", ".deleteBtn", function (event) {
 
 
 //Admin Buttons for Approval
-//minorjobaddon admin approval
-$(document).on('click', '.aoapproveBtn', function(event){
-
-  //var status = "Approved";
-  //var id = $('#_addonID').val();
-  var id = document.getElementById("_addonID").value;
-  var trid = $('#trid').val();
-  $.ajax({
-      url: "functions/aoapprove.php",
-      data: {
-          id: id,
-          
-      },
-      type: 'POST',
-      success: function(data) {
-          var json = JSON.parse(data);
-          var status = json.status;
-          if (status == 'success') {
-              table = $('#datatable').DataTable();
-              table.draw();
-              alert('Add-on Approved Successfully!');
-             
-              /*table = $('#datatable').DataTable();
-              var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-              var row = table.row("[id='" + trid + "']");
-              row.row("[id='" + trid + "']").data([department, date, button]);*/
-              $('#_addonstat').val('Approved');
-              //$('#test').modal('hide');
-          } else { 
-              alert('failed');
-          }
-      }
-  });
-});
 
 
 $(document).on('click', '.approveAll', function(event){
@@ -779,10 +1238,16 @@ $(document).on('click', '.step1approveBtn', function(event){
   //var status = "Approved";
   var id = $('#_ID').val();
   var trid = $('#trid').val();
+  var dept = $("#_reqparty").val();
+  var feedb = $("#_inputFeedback").val();
+  var fdapprove = $("#_fdapprovedby").val();
   $.ajax({
       url: "functions/step1approve.php",
       data: {
-          id: id,
+        id: id,
+        dept: dept,
+        feedb: feedb,
+        fdapprove: fdapprove,
           
       },
       type: 'POST',
@@ -799,6 +1264,9 @@ $(document).on('click', '.step1approveBtn', function(event){
               var row = table.row("[id='" + trid + "']");
               row.row("[id='" + trid + "']").data([department, date, button]);*/
               $('#_step1').val('Approved');
+              $('#test').modal('hide');
+              $('body').removeClass('modal-open');
+              $('.modal-backdrop').remove();
           } else { 
               alert('failed');
           }
@@ -812,10 +1280,17 @@ $(document).on('click', '.step2approveBtn', function(event){
   //var status = "Approved";
   var id = $('#_ID').val();
   var trid = $('#trid').val();
+  var dept = $("#_reqparty").val();
+  var feedb = $("#_inputFeedback").val();
+  var saoapprovedby = $("#_saoapprovedby").val();
+
   $.ajax({
       url: "functions/step2approve.php",
       data: {
           id: id,
+          dept: dept,
+          feedb: feedb,
+          saoapprovedby: saoapprovedby,
           
       },
       type: 'POST',
@@ -831,7 +1306,11 @@ $(document).on('click', '.step2approveBtn', function(event){
               var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
               var row = table.row("[id='" + trid + "']");
               row.row("[id='" + trid + "']").data([department, date, button]);*/
+              $('#_statustext').val('Approved');
               $('#_step2').val('Approved');
+              $('#test').modal('hide');
+              $('body').removeClass('modal-open');
+              $('.modal-backdrop').remove();
           } else { 
               alert('failed');
           }
@@ -882,47 +1361,18 @@ $(document).on('click', '.declineAll', function(event){
 });
 
 
-//minorjobaddon admin decline
-$(document).on('click', '.aodeclineBtn', function(event){
-  var id = document.getElementById("_addonID").value;
-  var trid = $('#trid').val();
-  $.ajax({
-      url: "functions/aodecline.php",
-      data: {
-          id: id,
-          
-      },
-      type: 'POST',
-      success: function(data) {
-          var json = JSON.parse(data);
-          var status = json.status;
-          if (status == 'success') {
-              table = $('#datatable').DataTable();
-              table.draw();
-              alert('Successfully Declined Add-on!');
-
-          
-              /*table = $('#datatable').DataTable();
-              var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-              var row = table.row("[id='" + trid + "']");
-              row.row("[id='" + trid + "']").data([department, date, button]);*/
-              //$('#_itemdesc_').text('');
-              $('#_addonstat').val('Declined');
-              //$('#test').modal('hide');
-          } else { 
-              alert('failed');
-          }
-      }
-      });
-});
 
 $(document).on('click', '.step1declineBtn', function(event){
   var id = $('#_ID').val();
   var trid = $('#trid').val();
+  var dept = $("#_reqparty").val();
+  var feedb = $("#_inputFeedback").val();
   $.ajax({
       url: "functions/step1decline.php",
       data: {
-          id: id,
+        id: id,
+        dept: dept,
+        feedb: feedb,
           
       },
       type: 'POST',
@@ -940,7 +1390,11 @@ $(document).on('click', '.step1declineBtn', function(event){
               var row = table.row("[id='" + trid + "']");
               row.row("[id='" + trid + "']").data([department, date, button]);*/
               //$('#_itemdesc_').text('');
+              $('#_statustext').val('Declined');
               $('#_step1').val('Declined');
+              $('#test').modal('hide');
+              $('body').removeClass('modal-open');
+              $('.modal-backdrop').remove();
           } else { 
               alert('failed');
           }
@@ -951,10 +1405,14 @@ $(document).on('click', '.step1declineBtn', function(event){
 $(document).on('click', '.step2declineBtn', function(event){
   var id = $('#_ID').val();
   var trid = $('#trid').val();
+  var dept = $("#_reqparty").val();
+  var feedb = $("#_inputFeedback").val();
   $.ajax({
       url: "functions/step2decline.php",
       data: {
           id: id,
+          dept: dept,
+          feedb: feedb,
           
       },
       type: 'POST',
@@ -972,7 +1430,11 @@ $(document).on('click', '.step2declineBtn', function(event){
               var row = table.row("[id='" + trid + "']");
               row.row("[id='" + trid + "']").data([department, date, button]);*/
               //$('#_itemdesc_').text('');
+              $('#_statustext').val('Declined');
               $('#_step2').val('Declined');
+              $('#test').modal('hide');
+              $('body').removeClass('modal-open');
+              $('.modal-backdrop').remove();
           } else { 
               alert('failed');
           }
@@ -980,6 +1442,7 @@ $(document).on('click', '.step2declineBtn', function(event){
       });
 });
 //Admin Buttons for Decline End
+
 
 
 
@@ -1073,6 +1536,39 @@ function removeAddedEq(e){
 
 var testarr = [];
 $(document).on('click', '.editResBtn', function(event){
+  editreserationEq("eqDiv");
+  var x = document.getElementById('container4');
+  if(x.hasChildNodes())
+  {
+    $('#testtable2').DataTable().clear().destroy();
+    editreserationEq("alert1");
+  }
+  else{
+    dynamicEq2();
+  }
+  document.getElementById("_facility").disabled = false;
+  document.getElementById("_fdapprovedby").disabled = false;
+  document.getElementById("_saoapprovedby").disabled = false;
+  document.getElementById("_eventname").disabled = false;
+  document.getElementById("uResBtn").hidden = false;
+  document.getElementById("_inputFeedback").disabled = false;
+  //document.getElementById("_datefiled").disabled = false;
+  document.getElementById("_actualdate").disabled = false;
+  document.getElementById("_timein").disabled = false;
+  document.getElementById("_timeout").disabled = false;
+  //document.getElementById("_reqparty").disabled = false;
+  document.getElementById("_purpose").disabled = false;
+  document.getElementById("_numparticipants").disabled = false;
+  document.getElementById("_stageperformers").disabled = false;
+  document.getElementById("_adviser").disabled = false;
+  document.getElementById("_chairdeandep").disabled = false;
+
+  document.getElementById("_dept").disabled = false //department
+  document.getElementById("_dateresm").disabled = false //date
+  document.getElementById("_minorqres").disabled = false //quantity
+  document.getElementById("_minoritemres").disabled = false//itemname
+  document.getElementById("_minoritemdesc").disabled = false//itemdescription
+  document.getElementById("_minorpurpose").disabled = false//purpose
   var updatebtn = document.getElementById("uResBtn");
   updatebtn.classList.remove("disabled");
   var testarr = [...document.querySelectorAll('#container4 button[id^="fbe"]')].map(elm => elm.id);
@@ -1086,25 +1582,7 @@ $(document).on('click', '.editResBtn', function(event){
           eqbtn.classList.remove("disabled");
           eqbtn.classList.remove("disabled");
   }
-  document.getElementById("_facility").disabled = false;
-  document.getElementById("_eventname").disabled = false;
-  document.getElementById("_datefiled").disabled = false;
-  document.getElementById("_actualdate").disabled = false;
-  document.getElementById("_timein").disabled = false;
-  document.getElementById("_timeout").disabled = false;
-  document.getElementById("_reqparty").disabled = false;
-  document.getElementById("_purpose").disabled = false;
-  document.getElementById("_numparticipants").disabled = false;
-  document.getElementById("_stageperformers").disabled = false;
-  document.getElementById("_adviser").disabled = false;
-  document.getElementById("_chairdeandep").disabled = false;
-
-  document.getElementById("_dept").disabled = false //department
-  document.getElementById("_dateresm").disabled = false //date
-  document.getElementById("_minorqres").disabled = false //quantity
-  document.getElementById("_minoritemres").disabled = false//itemname
-  document.getElementById("_minoritemdesc").disabled = false//itemdescription
-  document.getElementById("_minorpurpose").disabled = false//purpose
+  
 
 });
 
@@ -1141,6 +1619,16 @@ function myFunction(divID) {
   var now = new Date();
   now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
   document.getElementById('dateminor').value = now.toISOString().substring(0,10);
+
+}
+
+function editreserationEq(divID) {
+  var x = document.getElementById(divID);
+  if (x.style.display === "block") {
+      x.style.display = "none";
+  } else {
+      x.style.display = "block";
+  }
 
 }
 
@@ -1212,6 +1700,7 @@ $("#test").on("hidden.bs.modal", function () {
           document.getElementById("_flexCheckDefault").checked = true;
   
 });
+
 
 
 

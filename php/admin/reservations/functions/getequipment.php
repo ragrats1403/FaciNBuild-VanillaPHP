@@ -18,6 +18,7 @@ while ($row = mysqli_fetch_assoc($query)) {
     $subarray = array();
     $subarray[] = $row['eqname'];
     $subarray[] = $row['quantity'];
+    $subarray[] = $row['eqresid'];
     $data[] = $subarray;
     
 }
