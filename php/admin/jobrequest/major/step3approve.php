@@ -2,17 +2,29 @@
 
 
 $id = $_POST['id'];
+$dept = $_POST['dept'];
+$feedb = $_POST['feedb'];
+$cadapprovedby = $_POST['cadapprovedby'];
 
+date_default_timezone_set('Asia/Manila');
 
-/*
-bdstatus
-cadstatus
-pcostatus
-*/
-$sql = "UPDATE `majoreq` SET `cadstatus`='Approved', `status`='Approved' WHERE jobreqno = '$id'";
+// Get the current datetime in the server timezone
+$date = new DateTime('now', new DateTimeZone(date_default_timezone_get()));
+
+// Set the timezone to your local timezone
+$date->setTimezone(new DateTimeZone(date_default_timezone_get()));
+
+// Format the date in your local timezone
+$formatted_date = $date->format('Y-m-d H:i:s');
+$sql = "UPDATE `majoreq` SET `cadstatus`='Approved', `cadapprovedby` = '$cadapprovedby', `status`='Approved', `feedback` = '$feedb' WHERE jobreqno = '$id'";
 $query = mysqli_query($con, $sql);
-
+$message = "Campus Academic Directors Office approved your Job Request with Job Request no: ".$id."!\nYou can check your request status at Major Job Request Section.";
+$message2 = "You successfully approved a Major Job Request from ".$dept." with Job Request No. ".$id."";
 if ($query == true) {
+    $sqlnotif = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$message', '$dept', '$formatted_date','0')";
+    $notifquery = mysqli_query($con, $sqlnotif);
+    $sqlnotif2 = "INSERT INTO `notif_data` (`message`, `department`, `created_at`, `is_read`) VALUES ('$message2', 'Campus Academic Directors Office', '$formatted_date','0')";
+    $notifquery = mysqli_query($con, $sqlnotif2);
     $data = array(
         'status' => 'success',
     );

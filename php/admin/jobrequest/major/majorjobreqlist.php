@@ -372,7 +372,6 @@ require_once('../../../authentication/anti_pagetrans.php');
             document.getElementById("date").disabled = true;
             document.getElementById("sections").disabled = true;
             document.getElementById("quantity").disabled = true;
-            document.getElementById("item").disabled = true;
             document.getElementById("description").disabled = true;
             document.getElementById("purpose").disabled = true;
             document.getElementById("_statustext").disabled = true;
@@ -395,7 +394,6 @@ require_once('../../../authentication/anti_pagetrans.php');
                     $('#date').val(json.date);
                     /*$('#sections').val(json.section);*/
                     $('#quantity').val(json.quantity);
-                    $('#item').val(json.item);
                     $('#description').val(json.description);
                     $('#purpose').val(json.purpose);
 
@@ -409,7 +407,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                     x.add(option);
                     var a = document.getElementById("remark");
                     var option2 = document.createElement("option");
-                    option2.text = json.section;
+                    option2.text = json.outsource;
                     option2.hidden = true;
                     option2.disabled = true;
                     option2.selected = true;
@@ -421,6 +419,63 @@ require_once('../../../authentication/anti_pagetrans.php');
                     $('#_step3').val(json.cadstatus);
                     $('#_inputFeedback').val(json.feedback);
                     /*$('#remark').val(json.outsource);*/
+                    if(json.bdstatus != 'Pending' || json.status === 'Declined')
+                    {
+                        document.getElementById("_bdapprovedby").disabled = true;
+                        document.getElementById("sections").disabled = true;
+                        document.getElementById("remark").disabled = true;
+                        document.getElementById("_inputFeedback").disabled = true;
+                        document.getElementById("step1a").hidden = true;
+                        document.getElementById("step1d").hidden = true;
+                    }
+                    else
+                    {
+                        document.getElementById("_bdapprovedby").disabled = false;
+                        document.getElementById("sections").disabled = false;
+                        document.getElementById("remark").disabled = false;
+                        document.getElementById("_inputFeedback").disabled = false;
+                        document.getElementById("step1a").hidden = false;
+                        document.getElementById("step1d").hidden = false;
+                    }
+
+                    if(json.pcostatus != 'Pending' || json.status === 'Declined')
+                    {
+                        document.getElementById("_pcoapprovedby").disabled = true;
+                        document.getElementById("sections").disabled = true;
+                        document.getElementById("remark").disabled = true
+                        document.getElementById("_inputFeedback").disabled = true;
+                        document.getElementById("step2a").hidden = true;
+                        document.getElementById("step2d").hidden = true;
+                    }
+                    else
+                    {
+                        document.getElementById("_pcoapprovedby").disabled = false;
+                        document.getElementById("_inputFeedback").disabled = false;
+                        document.getElementById("step2a").hidden = false;
+                        document.getElementById("step2d").hidden = false;
+
+                    }
+
+                    $('#_bdapprovedby').val(json.bdapprovedby);
+                    $('#_pcoapprovedby').val(json.pcoapprovedby);
+                    $('#_cadapprovedby').val(json.cadapprovedby);
+                    $('#_inputFeedback').val(json.feedback);
+                    if(json.cadstatus != 'Pending' || json.status === 'Declined')
+                    {
+                        document.getElementById("_cadapprovedby").disabled = true;
+                        document.getElementById("sections").disabled = true;
+                        document.getElementById("remark").disabled = true
+                        document.getElementById("_inputFeedback").disabled = true;
+                        document.getElementById("step3a").hidden = true;
+                        document.getElementById("step3d").hidden = true;
+                    }
+                    else
+                    {
+                        document.getElementById("_cadapprovedby").disabled = false; 
+                        document.getElementById("_inputFeedback").disabled = false;
+                        document.getElementById("step3a").hidden = false;
+                        document.getElementById("step3d").hidden = false;
+                    }
                     $('#editUserModal').modal('show');
                 }
             });
@@ -464,14 +519,12 @@ require_once('../../../authentication/anti_pagetrans.php');
             var date = $('#date').val();
             var section = $('#sections').val();
             var quantity = $('#quantity').val();
-            var item = $('#item').val();
             var description = $('#description').val();
             var purpose = $('#purpose').val();
             var outsource = $('#remark').val();
             var feedback = $('#_inputFeedback').val();
-
             $.ajax({
-                url: "update_user.php",
+                url: "update_request.php",
                 data: {
                     jobreqno: jobreqno,
                     requino: requino,
@@ -479,11 +532,10 @@ require_once('../../../authentication/anti_pagetrans.php');
                     date: date,
                     section: section,
                     quantity: quantity,
-                    item: item,
                     description: description,
                     purpose: purpose,
                     outsource: outsource,
-                    feedback: feedback
+                    feedback: feedback,
                 },
                 type: 'POST',
                 success: function(data) {
@@ -503,149 +555,22 @@ require_once('../../../authentication/anti_pagetrans.php');
 
         //APPROVE=================================================
 
-        $(document).on('click', '.approveBtn', function(event) {
-            var id = $('#jobrequestno').val();
-            var trid = $('#trid').val();
-            $.ajax({
-                url: "approverequest.php",
-                data: {
-                    id: id,
-                },
-                type: 'POST',
-                success: function(data) {
-                    try {
-                        var json = JSON.parse(data);
-                        var status = json.status;
-                        if (status == 'success') {
-                            table = $('#datatable').DataTable();
-                            table.draw();
-                            alert('Approved Successfully!');
-                            $('#editUserModal').modal('hide');
-                        } else {
-                            alert('failed');
-                        }
-                    } catch (e) {
-                        console.log('An error occurred while processing the response: ' + e);
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log('An error occurred while making the request: ' + textStatus + ' ' + errorThrown);
-                }
-            });
-        });
-
-
-        $(document).on('click', '.declineBtn', function(event) {
-            //var status = "Approved";
-            var id = $('#jobrequestno').val();
-            var trid = $('#trid').val();
-            $.ajax({
-                url: "declinerequest.php",
-                data: {
-                    id: id,
-
-                },
-                type: 'POST',
-                success: function(data) {
-                    var json = JSON.parse(data);
-                    var status = json.status;
-                    if (status == 'success') {
-                        table = $('#datatable').DataTable();
-                        table.draw();
-                        alert('Request Declined Successfully!');
-
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        $('#editUserModal').modal('hide');
-                    } else {
-                        alert('failed');
-                    }
-                }
-            });
-            //alert('test');
-        });
-
-        $(document).on('click', '.step1approveBtn', function(event) {
-
-            //var status = "Approved";
-            var id = $('#jobrequestno').val();
-            var trid = $('#trid').val();
-            $.ajax({
-                url: "step1approve.php",
-                data: {
-                    id: id,
-
-                },
-                type: 'POST',
-                success: function(data) {
-                    var json = JSON.parse(data);
-                    var status = json.status;
-                    if (status == 'success') {
-                        table = $('#datatable').DataTable();
-                        table.draw();
-                        alert('Step 1 Approved Successfully!');
-
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        $('#_step1').val('Approved');
-                    } else {
-                        alert('failed');
-                    }
-                }
-            });
-            //alert('test');
-        });
-             //datetime auto fill up
-             var now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            document.getElementById('deeto').value = now.toISOString().slice(0,16);
-      
-        $(document).on('click', '.step2approveBtn', function(event) {
-
-            //var status = "Approved";
-            var id = $('#jobrequestno').val();
-            var trid = $('#trid').val();
-            $.ajax({
-                url: "step2approve.php",
-                data: {
-                    id: id,
-
-                },
-                type: 'POST',
-                success: function(data) {
-                    var json = JSON.parse(data);
-                    var status = json.status;
-                    if (status == 'success') {
-                        table = $('#datatable').DataTable();
-                        table.draw();
-                        alert('Step 2 Approved Successfully!');
-
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        $('#_step2').val('Approved');
-                    } else {
-                        alert('failed');
-                    }
-                }
-            });
-            //alert('test');
-        });
 
         $(document).on('click', '.step3approveBtn', function(event) {
+            alert("test");
             //var status = "Approved";
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
+            var dept = $('#department').val();
+            var feedb = $('#_inputFeedback').val();
+            var cadapprovedby = $('#_cadapprovedby').val();
             $.ajax({
                 url: "step3approve.php",
                 data: {
                     id: id,
-
+                    dept: dept,
+                    feedb: feedb,
+                    cadapprovedby: cadapprovedby,
                 },
                 type: 'POST',
                 success: function(data) {
@@ -655,15 +580,11 @@ require_once('../../../authentication/anti_pagetrans.php');
                         table = $('#datatable').DataTable();
                         table.draw();
                         alert('Step 3 Approved Successfully!');
-
-
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        //$('#_itemdesc_').text('');
                         $('#_step3').val('Approved');
                         $('#_statustext').val('Approved');
+                        document.getElementById("_inputFeedback").disabled = true;
+                        document.getElementById("step3a").hidden = true;
+                        document.getElementById("step3d").hidden = true;
                     } else {
                         alert('failed');
                     }
@@ -674,10 +595,14 @@ require_once('../../../authentication/anti_pagetrans.php');
         $(document).on('click', '.step1declineBtn', function(event) {
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
+            var dept = $('#department').val();
+            var feedb = $('#_inputFeedback').val();
             $.ajax({
                 url: "step1decline.php",
                 data: {
                     id: id,
+                    dept: dept,
+                    feedb: feedb,
 
                 },
                 type: 'POST',
@@ -688,28 +613,79 @@ require_once('../../../authentication/anti_pagetrans.php');
                         table = $('#datatable').DataTable();
                         table.draw();
                         alert('Step 1 Declined Successfully!');
+                        $('#_step1').val('Declined');
+                        $('#_statustext').val('Declined');
+                        if(json.bdstatus )
+                        document.getElementById("_cadapprovedby").disabled = true;
+                        document.getElementById("_inputFeedback").disabled = true;
+                        document.getElementById("step3a").hidden = true;
+                        document.getElementById("step3d").hidden = true;
+                        document.getElementById("_pcoapprovedby").disabled = true;
+                        document.getElementById("step2a").hidden = true;
+                        document.getElementById("step2d").hidden = true;
+                        document.getElementById("step1a").hidden = true;
+                        document.getElementById("step1d").hidden = true;
+                        document.getElementById("_bdapprovedby").disabled = true;
 
+                    } else {
+                        alert('failed');
+                        
+                    }
+                }
+            });
+        });
+        $(document).on('click', '.step2approveBtn', function(event) {
+            //var status = "Approved";\
+            
+            var id = $('#jobrequestno').val();
+            var trid = $('#trid').val();
+            var reqno = $('#requino').val();
+            var dept = $('#department').val();
+            var feedb = $('#_inputFeedback').val();
+            var pcoapprovedby = $('#_pcoapprovedby').val();
 
+            $.ajax({
+                url: "step2approve.php",
+                data: {
+                    id: id,
+                    reqno: reqno,
+                    dept: dept,
+                    feedb: feedb,
+                    pcoapprovedby: pcoapprovedby,
+
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    var status = json.status;
+                    if (status == 'success') {
+                        table = $('#datatable').DataTable();
+                        table.draw();
+                        alert('Step 2 Approved Successfully!');
                         /*table = $('#datatable').DataTable();
                         var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
                         var row = table.row("[id='" + trid + "']");
                         row.row("[id='" + trid + "']").data([department, date, button]);*/
                         //$('#_itemdesc_').text('');
-                        $('#_step1').val('Declined');
+                        $('#_step2').val('Approved');
+
                     } else {
                         alert('failed');
                     }
                 }
             });
         });
-
         $(document).on('click', '.step2declineBtn', function(event) {
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
+            var dept = $('#department').val();
+            var feedb = $('#_inputFeedback').val();
             $.ajax({
                 url: "step2decline.php",
                 data: {
                     id: id,
+                    dept: dept,
+                    feedb: feedb,
 
                 },
                 type: 'POST',
@@ -720,14 +696,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                         table = $('#datatable').DataTable();
                         table.draw();
                         alert('Step 2 Declined Successfully!');
-
-
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        //$('#_itemdesc_').text('');
                         $('#_step2').val('Declined');
+                        $('#_statustext').val('Declined');
+
                     } else {
                         alert('failed');
                     }
@@ -739,10 +710,15 @@ require_once('../../../authentication/anti_pagetrans.php');
         $(document).on('click', '.step3declineBtn', function(event) {
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
+            var dept = $('#department').val();
+            var feedb = $('#_inputFeedback').val();
+            
             $.ajax({
                 url: "step3decline.php",
                 data: {
                     id: id,
+                    dept: dept,
+                    feedb: feedb,
 
                 },
                 type: 'POST',
@@ -753,15 +729,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                         table = $('#datatable').DataTable();
                         table.draw();
                         alert('Step 3 Declined Successfully!');
-
-
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        //$('#_itemdesc_').text('');
                         $('#_step3').val('Declined');
                         $('#_statustext').val('Declined');
+
 
                     } else {
                         alert('failed');
@@ -769,6 +739,67 @@ require_once('../../../authentication/anti_pagetrans.php');
                 }
             });
         });
+
+        $(document).on('click', '.step1approveBtn', function(event) {
+            //var status = "Approved";
+            var id = $('#jobrequestno').val();
+            var trid = $('#trid').val();
+            var dept = $('#department').val();
+            var feedb = $('#_inputFeedback').val();
+            
+            var e = document.getElementById("sections");
+            var section = e.options[e.selectedIndex].text;
+            var e = document.getElementById("remark");
+            var remark = e.options[e.selectedIndex].text;
+            var bdapprovedby = $('#_bdapprovedby').val();
+            if(
+                id != '' &&
+                dept != '' &&
+                section != '' &&
+                remark != '' &&
+                bdapprovedby != ''
+            )
+            {
+                $.ajax({
+                url: "step1approve.php",
+                data: {
+                    id: id,
+                    dept: dept,
+                    feedb: feedb,
+                    section: section,
+                    remark: remark,
+                    bdapprovedby: bdapprovedby,
+
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    var status = json.status;
+                    if (status == 'success') {
+                        table = $('#datatable').DataTable();
+                        table.draw();
+                        alert('Step 1 Approved Successfully!');
+                        $('#_step1').val('Approved');
+
+                    } else {
+                        alert('failed');
+                    }
+                }
+            });
+            }
+            else{
+                alert("Please fill up required fields!")
+            }
+            
+        });
+             //datetime auto fill up
+             var now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('deeto').value = now.toISOString().slice(0,16);
+      
+    
+
+
         
     </script>
     <!-- Script Process End-->
@@ -899,15 +930,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                                 </div>
                             </div>
 
-                            <div>
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control input-sm col-xs-1" id="item" placeholder="Item" disabled>
-                                </div>
-                            </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
-                                    <label class="fw-bold" for="date">Description:</label>
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea placeholder="Description" class="form-control" rows="2" id="description" disabled></textarea>
                                 </div>
                             </div>
@@ -929,54 +954,76 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     </select>
                                 </div>
                             </div>
+                            <!--step 1-->
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 1 Status:</label>
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Building Department Approval Status:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step1" disabled>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step1" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_bdapprovedby" disabled>
                                 </div>
                                 <div class="col-md-1">
                                     <!--Id:step1approveBtn-->
-                                    <a href="javascript:void();" class="btn btn-success step1approveBtn">Approve</a>
+                                    <a href="javascript:void();" class="btn btn-success step1approveBtn" id="step1a">Approve</a>
                                 </div>
                                 <div class="col-md-1" style="padding-left:18px;">
                                     <!--Id:step1declineBtn-->
-                                    <a href="javascript:void();" class="btn btn-danger step1declineBtn">Decline</a>
+                                    <a href="javascript:void();" class="btn btn-danger step1declineBtn" id="step1d">Decline</a>
                                 </div>
                             </div>
+                            <!--step 2-->
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 2 Status:</label>
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Property Custodian Approval Status:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step2" disabled>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step2" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_pcoapprovedby" disabled>
                                 </div>
                                 <div class="col-md-1">
                                     <!--Id:step2approveBtn-->
-                                    <a href="javascript:void();" class="btn btn-success step2approveBtn">Approve</a>
+                                    <a href="javascript:void();" class="btn btn-success step2approveBtn" id="step2a">Approve</a>
                                 </div>
                                 <div class="col-md-1" style="padding-left:18px;">
                                     <!--Id:step2declineBtn-->
-                                    <a href="javascript:void();" class="btn btn-danger step2declineBtn">Decline</a>
+                                    <a href="javascript:void();" class="btn btn-danger step2declineBtn" id="step2d">Decline</a>
                                 </div>
                             </div>
+                            <!--step 3-->
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 3 Status:</label>
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Campus Academic Director Approval Status:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_step3" disabled>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step3" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_cadapprovedby" disabled>
                                 </div>
                                 <div class="col-md-1">
                                     <!--Id:step3approveBtn-->
-                                    <a href="javascript:void();" class="btn btn-success step3approveBtn">Approve</a>
+                                    <a href="javascript:void();" class="btn btn-success step3approveBtn" id="step3a">Approve</a>
                                 </div>
                                 <div class="col-md-1" style="padding-left:18px;">
                                     <!--Id:step3declineBtn-->
-                                    <a href="javascript:void();" class="btn btn-danger step3declineBtn">Decline</a>
+                                    <a href="javascript:void();" class="btn btn-danger step3declineBtn" id="step3d">Decline</a>
                                 </div>
                             </div>
+                            <br>
                             <div class="row">
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-bottom:5px;" for="date">Remarks:</label>
@@ -995,8 +1042,6 @@ require_once('../../../authentication/anti_pagetrans.php');
                             </div>
                             <div>
                                 <div class="modal-footer justify-content-md-center">
-                                    <a href="javascript:void();" class="btn btn-primary approveBtn">Approve All</a>
-                                    <a href="javascript:void();" class="btn btn-danger declineBtn">Decline All</a>
                                     <a href="javascript:void();" class="btn btn-info text-white updateBtn disabled" id="updbtn">Update</a>
                                     <a href="javascript:void();" class="btn btn-secondary editfieldBtn">Edit</a>
                                     <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
@@ -1006,12 +1051,30 @@ require_once('../../../authentication/anti_pagetrans.php');
                                         $(document).on('click', '.editfieldBtn', function(event) {
                                             var updtbtn = document.getElementById("updbtn");
                                             document.getElementById("quantity").disabled = false;
-                                            document.getElementById("item").disabled = false;
                                             document.getElementById("description").disabled = false;
                                             document.getElementById("purpose").disabled = false;
                                             document.getElementById("remark").disabled = false;
                                             document.getElementById("sections").disabled = false;
                                             document.getElementById("_inputFeedback").disabled = false;
+                                            if(document.getElementById("_step1").value == 'Declined')
+                                            {
+                                            document.getElementById("step1a").hidden = false;
+                                            document.getElementById("step1d").hidden = false;
+                                            document.getElementById("_bdapprovedby").disabled = false;
+                                            }
+                                            if(document.getElementById("_step2").value == 'Declined')
+                                            {
+                                            document.getElementById("step2a").hidden = false;
+                                            document.getElementById("step2d").hidden = false;
+                                            document.getElementById("_pcoapprovedby").disabled = false;
+                                            }
+
+                                            if(document.getElementById("_step3").value == 'Declined')
+                                            {
+                                            document.getElementById("step3a").hidden = false;
+                                            document.getElementById("step3d").hidden = false;
+                                            document.getElementById("_cadapprovedby").disabled = false;
+                                            }
 
 
                                             updtbtn.classList.remove("disabled");
