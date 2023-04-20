@@ -366,6 +366,7 @@ require_once('../../../authentication/anti_pagetrans.php');
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
+            document.getElementById("updbtn").hidden = true;
             document.getElementById("jobrequestno").disabled = true;
             document.getElementById("requino").disabled = true;
             document.getElementById("department").disabled = true;
@@ -1040,7 +1041,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                             </div>
                             <div>
                                 <div class="modal-footer justify-content-md-center">
-                                    <a href="javascript:void();" class="btn btn-info text-white updateBtn disabled" id="updbtn">Update</a>
+                                    <a href="javascript:void();" class="btn btn-info text-white updateBtn disabled" id="updbtn" hidden>Update</a>
                                     <a href="javascript:void();" class="btn btn-secondary editfieldBtn">Edit</a>
                                     <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
                                 <button type="button" class="btn btn-danger">Decline</button>
@@ -1075,6 +1076,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                                             }
                                             updtbtn.classList.remove("disabled");
                                             updtbtn.classList.remove("text-white");
+                                            document.getElementById("updbtn").hidden = false;
 
                                         });
                                     </script>
