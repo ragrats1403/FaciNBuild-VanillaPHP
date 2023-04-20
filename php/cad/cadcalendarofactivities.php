@@ -178,12 +178,6 @@ require_once('../authentication/anti_pagetrans.php');
                         </ul>
                     </div>
                 </li>
-                <li>
-                    <a href="../../../php/cad/generatereports/generatereports.php">
-                        <i class='bx bx-food-menu'></i>
-                        <span class="link_name">Generate Report</span>
-                    </a>
-                </li>
             </ul>
             <div class="profile_content">
                 <div class="profile">
