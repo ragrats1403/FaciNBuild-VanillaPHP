@@ -698,7 +698,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <div class="justify-content-center">
                                     <div class="col-md-12">
                                         <label class="fw-bold" for="date">Item with Complete Description:</label>
-                                        <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
+                                        <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description"></textarea>
                                     </div>
                                 </div>
                                 <div class="justify-content-center">
