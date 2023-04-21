@@ -356,17 +356,10 @@ require_once('../../../authentication/anti_pagetrans.php');
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                    <label class="fw-bold" for="date">Item Name:</label>
-                                    <input type="form-control" class="form-control" id ="_item"placeholder="Item" disabled>
-                                </div>
-                            </div>
-
                             <div class="justify-content-center">
-                                <div class="col-md-12" >
-                                    <label class="fw-bold" for="date">Description:</label>
-                                    <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description" disabled></textarea>
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                    <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description"></textarea>
                                 </div>
                             </div>
 
@@ -374,6 +367,12 @@ require_once('../../../authentication/anti_pagetrans.php');
                                 <div class="col-md-12" >
                                     <label class="fw-bold" for="date">Purpose:</label>
                                     <textarea class="form-control" rows="2" id="_purpose" placeholder="Purpose" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="justify-content-center">
+                                <div class="col-md-12">
+                                    <label class="fw-bold" for="date">Requested by:</label>
+                                    <textarea class="form-control" rows="2" id="_requestedby" placeholder="Requested by" disabled></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -388,42 +387,53 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     </select>
                                 </div>
                             </div>
-                            <div class="row" style="padding-top:6px;">     
+                            <div class="row" style="padding-top:6px;">
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <label class="fw-bold" for="inputName">Building Department Approval Status:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-control" type="text" style = "margin-left:-50px;"name="" id="_step1" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="fw-bold" for="date">Approved By</label>
+                                </div>
+                                <div class="col-md-4 "> 
+                                    <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_bdapprovedby" disabled>
+                                </div>
                                 <div class="col-md-1" style="margin-top:5px;">
-                                    <label class="fw-bold" for="inputName">Step 1 Status:</label>
-                                </div> 
+                                    <label class="fw-bold" for="inputName">Noted By:</label>
+                                </div>
                                 <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1">
-                                </div> 
+                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_notedby">
+                                </div>
+                                <div class="col-md-1" style="margin-top:5px; margin-left:30px;">
+                                    <a href= "javascript:void();" class ="btn btn-success step1approveBtn" id = "step1a">Approve</a>
+                                </div>
+                                <div class="col-md-1"style="margin-top:5px;">
+                                    <a href= "javascript:void();" class ="btn btn-danger step1declineBtn" id = "step1d">Decline</a>
+                                </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6" >
+                                <div class="col-md-6">
                                     <label class="fw-bold" for="renderedby">Rendered by:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_renderedby" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_renderedby" onKeyPress = "enableFields();" disabled>
                                 </div>
-                                <div class="col-md-6" >
+                                <div class="col-md-6">
                                     <label class="fw-bold" for="date">Date:</label>
                                     <input type="date" class="form-control input-sm col-xs-1" id="_daterendered" disabled>
                                 </div>
                             </div>
-                            <div class="modal-footer justify-content-md-right">
-                                <button onclick = "enableFields()" type="button" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                            <button type="button" class="btn btn-success col-md-1 renderUpdate" id="end-editing">Update</button>
-                        </div>
+
                             <div class="row justify-content-center" style="padding-bottom:10px;">
-                                <div class="col-md-6" >
+                                <div class="col-md-6">
                                     <label class="fw-bold" for="renderedby">Confirmed by:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="_confirmedby" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="_confirmedby"  onKeyPress = "enableFields2();"disabled>
                                 </div>
-                                <div class="col-md-6" >
+                                <div class="col-md-6">
                                     <label class="fw-bold" for="date">Date:</label>
                                     <input type="date" class="form-control input-sm col-xs-1" id="_dateconfirmed" disabled>
                                 </div>
                             </div>
-                            <div class="modal-footer justify-content-md-right">
-                            <button onclick = "enableFields2()" type="button" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                            <button type="button" class="btn btn-success col-md-1 confirmUpdate" id="end-editing">Update</button>
-                        </div>
                         <div class="justify-content-center">
                                 <div class="col-md-12" >
                                     <label class="fw-bold" for="date">Feedback:</label>
@@ -432,9 +442,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                             </div>
                         <div>
                         <div class="modal-footer justify-content-md-center">
-                            <a href= "javascript:void();" class ="btn btn-primary step1approveBtn">Approve</a>
-                            <a href= "javascript:void();" class ="btn btn-danger step1declineBtn">Decline</a>
-                            <a href="javascript:void();" class="btn btn-info text-white updateBtn disabled" id="updbtn">Update</a>
+                            <a href="javascript:void();" class="btn btn-info text-white updateBtn" id="updbtn" hidden>Update</a>
                             <a href="javascript:void();" class="btn btn-secondary editfieldBtn">Edit</a>
                                 <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
                                 <button type="button" class="btn btn-danger">Decline</button>
@@ -599,15 +607,13 @@ require_once('../../../authentication/anti_pagetrans.php');
             
         }
         function enableFields() {
-            document.getElementById("_renderedby").disabled = false;
-            document.getElementById("_daterendered").disabled = false;
+
            
             autofilldate("_daterendered");
             
         }
         function enableFields2() {
-            document.getElementById("_confirmedby").disabled = false;
-            document.getElementById("_dateconfirmed").disabled = false;
+
             autofilldate("_dateconfirmed");
         }
         

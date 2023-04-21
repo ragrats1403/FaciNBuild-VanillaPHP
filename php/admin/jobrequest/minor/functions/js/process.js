@@ -146,35 +146,41 @@ $(document).on('submit', '#saveUserForm', function(event) {
 });
 
 $(document).on('click', '.renderUpdate', function(event){
-    //var status = "Approved";
-    var id = $('#_ID').val();
-    var trid = $('#trid').val();
-    var renderedby = $('#_renderedby').val();
-    var renderdate = $('#_daterendered').val();
-    $.ajax({
-        url: "functions/updaterender.php",
-        data: {
-            id: id,
-            renderdate: renderdate,
-            renderedby: renderedby,
-            
-        },
-        type: 'POST',
-        success: function(data) {
-            var json = JSON.parse(data);
-            var status = json.status;
-            if (status == 'success') {
-                alert('Updated Successfully!');
-                document.getElementById("_renderedby").disabled = false;
-                document.getElementById("_daterendered").disabled = false;
-            } else { 
-                alert('failed');
-            }
-        }
-    });
-    //alert('test');
+   
 });
-$(document).on('click', '.confirmUpdate', function(event){
+
+function renderedbyUpdate()
+{
+     //var status = "Approved";
+     var id = $('#_ID').val();
+     var trid = $('#trid').val();
+     var renderedby = $('#_renderedby').val();
+     var renderdate = $('#_daterendered').val();
+     $.ajax({
+         url: "functions/updaterender.php",
+         data: {
+             id: id,
+             renderdate: renderdate,
+             renderedby: renderedby,
+             
+         },
+         type: 'POST',
+         success: function(data) {
+             var json = JSON.parse(data);
+             var status = json.status;
+             if (status == 'success') {
+                 //alert('Updated Successfully!');
+                 document.getElementById("_renderedby").disabled = false;
+                 document.getElementById("_daterendered").disabled = false;
+             } else { 
+                 alert('failed');
+             }
+         }
+     });
+     //alert('test');
+}
+function confirmedbyUpdate()
+{
     //var status = "Approved";
     var id = $('#_ID').val();
     var trid = $('#trid').val();
@@ -193,7 +199,7 @@ $(document).on('click', '.confirmUpdate', function(event){
             var json = JSON.parse(data);
             var status = json.status;
             if (status == 'success') {
-                alert('Updated Successfully!');
+                //alert('Updated Successfully!');
                 document.getElementById("_confirmedby").disabled = false;
                 document.getElementById("_dateconfirmed").disabled = false;
                 /*table = $('#datatable').DataTable();
@@ -206,6 +212,9 @@ $(document).on('click', '.confirmUpdate', function(event){
         }
     });
     //alert('test');
+}
+$(document).on('click', '.confirmUpdate', function(event){
+
 });
 //delete user button control
 $(document).on('click', '.btnDelete', function(event) {
@@ -344,47 +353,67 @@ $(document).on('click', '.editBtn', function(event) {
     document.getElementById("_inputFeedback").disabled = true;
     document.getElementById("_quantity").disabled = true;
     document.getElementById("_itemdesc").disabled = true;
-    document.getElementById("_item").disabled = true;
     document.getElementById("_purpose").disabled = true;
     document.getElementById("_sect").disabled = true;
     document.getElementById("_purpose").disabled = true;
+    document.getElementById("_requestedby").disabled = true;
+    document.getElementById("updbtn").hidden = true;
+    //document.getElementById("_sect").disabled = true;
     $.ajax({
         url: "functions/get_request_details.php",
         data: {
-            id: id
+        id: id
         },
         type: 'POST',
         success: function(data) {
-            var json = JSON.parse(data);
-            //var itemwdesc = json.item + json.item_desc;
-            $('#minorjobid').val(json.minorjobid);
-            $('#trid').val(trid);
-            $('#_ID').val(id);
-            $('#_datemajorjr').val(json.datesubmitted);
-            $('#_department').val(json.department);
-            $('#_quantity').val(json.quantity);
-            $('#_itemdesc').val(json.item_desc);
-            $('#_item').val(json.item);
-            $('#_purpose').val(json.purpose);
-            $('#_statustext').val(json.status);
-            $('#_step1').val(json.bdstatus);
-            var x = document.getElementById("_sect");
-            var option = document.createElement("option");
-            option.text = json.section;
-            option.hidden = true;
-            option.disabled = true;
-            option.selected = true;
-            x.add(option); 
-            $('#_inputFeedback').val(json.feedback);
-            $('#editMinorjreqmodal').modal('show');
-
-            //$('#_datemajorjr').val(json.datesubmitted);
-            /*$('#_inputName').val(json.name)
-            $('#_inputUsername').val(json.username);
-            $('#_inputPassword').val(json.password);
-            $('#_inputRoleLevel').val(json.rolelevel);
-            $('#_inputRoleID').val(json.roleid);*/
-            
+        var json = JSON.parse(data);
+        $('#minorjobid').val(json.minorjobid);
+        $('#trid').val(trid);
+        $('#_ID').val(id);
+        $('#_datemajorjr').val(json.datesubmitted);
+        $('#_department').val(json.department);
+        $('#_quantity').val(json.quantity);
+        $('#_itemdesc').val(json.item_desc);
+        $('#_purpose').val(json.purpose);
+        $('#_statustext').val(json.status);
+        $('#_step1').val(json.bdstatus);
+        $('#_renderedby').val(json.renderedby);
+        $('#_daterendered').val(json.daterendered);
+        $('#_confirmedby').val(json.confirmedby);
+        $('#_dateconfirmed').val(json.dateconfirmed);
+        $('#_notedby').val(json.notedby);
+        $('#_requestedby').val(json.requestedby);
+        $('#_bdapprovedby').val(json.approvedby);
+        var x = document.getElementById("_sect");
+        var option = document.createElement("option");
+        option.text = json.section;
+        option.hidden = true;
+        option.disabled = true;
+        option.selected = true;
+        x.add(option); 
+        $('#_inputFeedback').val(json.feedback);
+        if(json.bdstatus != 'Pending')
+        {
+            document.getElementById("_bdapprovedby").disabled = true;
+            document.getElementById("_sect").disabled = true;
+            document.getElementById("_inputFeedback").disabled = true;
+            document.getElementById("_notedby").disabled = true;
+            document.getElementById("step1a").hidden = true;
+            document.getElementById("step1d").hidden = true;
+        }
+        else
+        {
+            document.getElementById("_bdapprovedby").disabled = false;
+            document.getElementById("_sect").disabled = false;
+            document.getElementById("_notedby").disabled = false;
+            document.getElementById("_inputFeedback").disabled = false;
+            document.getElementById("step1a").hidden = false;
+            document.getElementById("step1d").hidden = false;
+        }
+        $('#editMinorjreqmodal').modal('show');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
         }
     });
 });
@@ -395,12 +424,15 @@ $(document).on('click', '.updateBtn', function() {
     var department = $('#_department').val();
     var date = $('#_datemajorjr').val();
     var quantity = $('#_quantity').val();
-    var itemname = $('#_item').val();
     var description = $('#_itemdesc').val();
     var purpose = $('#_purpose').val();
     var s = document.getElementById("_sect"); //dropdown
     var sect = s.options[s.selectedIndex].text; //end
     var feedback = $('#_inputFeedback').val();
+    var notedby = $('#_notedby').val();
+    var approvedby = $('#_bdapprovedby').val();
+    var requestedby = $('#_requestedby').val();
+    
     $.ajax({
         url: "functions/update_data.php",
         data: {
@@ -408,20 +440,27 @@ $(document).on('click', '.updateBtn', function() {
             department: department,
             date: date,
             quantity: quantity,
-            itemname: itemname,
             description: description,
             purpose: purpose,
             sect: sect,
-            feedback: feedback
+            feedback: feedback,
+            notedby: notedby,
+            approvedby: approvedby,
+            requestedby: requestedby,
+            
         },
         type: 'POST',
         success: function(data) {
             var json = JSON.parse(data);
             var status = json.status;
             if (status == 'success') {
+                confirmedbyUpdate();
+                renderedbyUpdate();
                 alert('Updated Successfully!');
                 table = $('#datatable').DataTable();
                 table.draw();
+
+
                 /*table = $('#datatable').DataTable();
                 var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
                 var row = table.row("[id='" + trid + "']");
@@ -442,37 +481,48 @@ $(document).on('click', '.updateBtn', function() {
 //step 1
 $(document).on('click', '.step1approveBtn', function(event){
 
-    //var status = "Approved";
-    var id = $('#_ID').val();
-    var trid = $('#trid').val();
-    $.ajax({
-        url: "functions/step1approve.php",
-        data: {
-            id: id,
-            
-        },
-        type: 'POST',
-        success: function(data) {
-            var json = JSON.parse(data);
-            var status = json.status;
-            if (status == 'success') {
-                table = $('#datatable').DataTable();
-                table.draw();
-                alert('Approved Successfully!');
-               
-                /*table = $('#datatable').DataTable();
-                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                var row = table.row("[id='" + trid + "']");
-                row.row("[id='" + trid + "']").data([department, date, button]);*/
-                $('#_step1').val('Approved');
-                $('#editMinorjreqmodal').modal('hide');
-            } else { 
-                alert('failed');
-            }
-        }
-    });
-    //alert('test');
+ //var status = "Approved";
+ var id = $('#_ID').val();
+ var trid = $('#trid').val();
+ var dept = $('#_department').val();
+ var feedb = $('#_inputFeedback').val();
+ var notedby = $('#_notedby').val();
+ var approvedby = $('#_bdapprovedby').val();
+ var e = document.getElementById("_sect");
+ var section = e.options[e.selectedIndex].text;
+ $.ajax({
+     url: "functions/step1approve.php",
+     data: {
+         id: id,
+         dept: dept,
+         feedb: feedb,
+         notedby: notedby,
+         approvedby: approvedby,
+         section: section,
 
+         
+     },
+     type: 'POST',
+     success: function(data) {
+         var json = JSON.parse(data);
+         var status = json.status;
+         if (status == 'success') {
+             table = $('#datatable').DataTable();
+             table.draw();
+             alert('Approved Successfully!');
+             document.getElementById("step1a").hidden = true;
+             document.getElementById("step1d").hidden = true;
+             /*table = $('#datatable').DataTable();
+             var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+             var row = table.row("[id='" + trid + "']");
+             row.row("[id='" + trid + "']").data([department, date, button]);*/
+             $('#_step1').val('Approved');             
+         } else { 
+             alert('failed');
+         }
+     }
+ });
+ //alert('test');
 
 });
 //step 3
@@ -483,10 +533,14 @@ $(document).on('click', '.step1approveBtn', function(event){
 $(document).on('click', '.step1declineBtn', function(event){
     var id = $('#_ID').val();
     var trid = $('#trid').val();
+    var dept = $('#_department').val();
+    var feedb = $('#_inputFeedback').val();
     $.ajax({
         url: "functions/step1decline.php",
         data: {
             id: id,
+            dept: dept,
+            feedb: feedb,
             
         },
         type: 'POST',
@@ -497,7 +551,8 @@ $(document).on('click', '.step1declineBtn', function(event){
                 table = $('#datatable').DataTable();
                 table.draw();
                 alert('Step 1 Declined Successfully!');
-
+                document.getElementById("step1a").hidden = true;
+                document.getElementById("step1d").hidden = true;
             
                 /*table = $('#datatable').DataTable();
                 var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
@@ -505,7 +560,7 @@ $(document).on('click', '.step1declineBtn', function(event){
                 row.row("[id='" + trid + "']").data([department, date, button]);*/
                 //$('#_itemdesc_').text('');
                 $('#_step1').val('Declined');
-                $('#editMinorjreqmodal').modal('hide');
+                $('#_statustext').val('Declined');
             } else { 
                 alert('failed');
             }
@@ -518,27 +573,37 @@ $(document).on('click', '.step1declineBtn', function(event){
 
 //edit button keypress event
 $(document).on('click', '.editfieldBtn', function(event) {
-    var updtbtn = document.getElementById("updbtn");
+    var status = $('#_step1').val();
 
     document.getElementById("_quantity").disabled = false;
     document.getElementById("_itemdesc").disabled = false;
-    document.getElementById("_item").disabled = false;
     document.getElementById("_purpose").disabled = false;
-    //document.getElementById("_dateconfirmed").disabled = false;
-    //document.getElementById("_daterendered").disabled = false;
+    document.getElementById("_requestedby").disabled = false;
+    document.getElementById("updbtn").hidden = false;
     //document.getElementById("_dateconfirmed").disabled = false;
     document.getElementById("_sect").disabled = false;
     document.getElementById("_statustext").disabled = false;
     document.getElementById("_inputFeedback").disabled = false;
+    document.getElementById("_renderedby").disabled = false;
+    document.getElementById("_confirmedby").disabled = false;
 
+    if(status != 'Approved')
+    {
+        document.getElementById("_notedby").disabled = false;
+        document.getElementById("_bdapprovedby").disabled = false;
+        document.getElementById("step1a").hidden = false;
+        document.getElementById("step1d").hidden = false;
 
-        updtbtn.classList.remove("disabled");  
-        updtbtn.classList.remove("text-white");
+    }
+    else
+    {
+        document.getElementById("step1a").hidden = true;
+        document.getElementById("step1d").hidden = true;
+    }
+    //var notedby = $('#_notedby').val();
+    //var approvedby = $('#_bdapprovedby').val();
+
 
 });
 //edit button keypress event end
 
-$(document).on('click', '.editfieldBtn', function(event) {
-
-
-});

@@ -366,9 +366,13 @@ $(document).on('click', '.updateBtn', function() {
             $('#_notedby').val(json.notedby);
             $('#requestedby').val(json.requestedby);
             $('#_bdapprovedby').val(json.approvedby);
-            var e = document.getElementById("_sect");
-            var section = e.options[e.selectedIndex].text;
-            e.options[e.selectedIndex].text = json.section;
+            var x = document.getElementById("_sect");
+            var option = document.createElement("option");
+            option.text = json.section;
+            option.hidden = true;
+            option.disabled = true;
+            option.selected = true;
+            x.add(option); 
             $('#_inputFeedback').val(json.feedback);
             if(json.bdstatus != 'Pending')
             {
