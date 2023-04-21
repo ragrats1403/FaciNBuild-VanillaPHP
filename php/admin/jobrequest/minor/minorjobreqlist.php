@@ -493,6 +493,10 @@ require_once('../../../authentication/anti_pagetrans.php');
                                             <th class="col-md-2" style="text-align: left;">Date</th>
                                             <td><input style="border: none; border-color: transparent;" type="text" id="_datemajorjr1" disabled></td>
                                         </tr>
+                                        <tr>
+                                            <th class="col-md-2" style="text-align: left;">Section</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="_section" disabled></td>
+                                        </tr>
                                     </table>
                                     <hr>
                                     <table class="table borderless">

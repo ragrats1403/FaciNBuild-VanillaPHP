@@ -328,6 +328,7 @@ $(document).on('click', '.btnprint', function(event) {
             $('#_idnum').val(json.minorjobid);
             $('#_department1').val(json.department);
             $('#_datemajorjr1').val(json.datesubmitted);
+            $('#_section').val(json.section);
             $('#_quantity1').val(json.quantity);
             $('#_itemdesc1').val(json.item_desc);
             $('#_purpose1').val(json.purpose);
