@@ -329,7 +329,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 </div>
                             </div>
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
+                                <div class="col-md-2" style="margin-top:5px;">
                                     <label class="fw-bold" for="inputName">Noted By:</label>
                                 </div>
                                 <div class="col-md-2" style="margin-top:5px;">
