@@ -334,6 +334,8 @@ $(document).on('click', '.btnprint', function(event) {
             $('#_renderedby1').val(json.renderedby);
             $('#_notedby1').val(json.notedby);
             $('#_confirmedby1').val(json.confirmedby);
+            $('#_daterendered1').val(json.daterendered);
+            $('#_dateconfirmed1').val(json.dateconfirmed);
             $('#printmodal').modal('show');
         }
     });
