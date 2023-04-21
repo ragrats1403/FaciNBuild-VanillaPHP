@@ -104,13 +104,19 @@ $(document).on('click', '.btnprint', function(event) {
             var json = JSON.parse(data);
             $('#id').val(json.id);
             $('#trid').val(trid);
+            $('#_idnum').val(json.minorjobid);
             $('#_department1').val(json.department);
             $('#_datemajorjr1').val(json.datesubmitted);
+            $('#_section').val(json.section);
             $('#_quantity1').val(json.quantity);
             $('#_itemdesc1').val(json.item_desc);
             $('#_purpose1').val(json.purpose);
+            $('#_requestedby1').val(json.requestedby);
             $('#_renderedby1').val(json.renderedby);
-            $('#_confirmedby1').val(json.confirmby);
+            $('#_notedby1').val(json.notedby);
+            $('#_confirmedby1').val(json.confirmedby);
+            $('#_daterendered1').val(json.daterendered);
+            $('#_dateconfirmed1').val(json.dateconfirmed);
             $('#printmodal').modal('show');
         }
     });
