@@ -482,6 +482,10 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     </div>
                                     <table class="table borderless">
                                         <tr>
+                                            <th class="col-md-3">ID:</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="_idnum" disabled></td>
+                                        </tr>
+                                        <tr>
                                             <th class="col-md-3">Department:</th>
                                             <td><input style="border: none; border-color: transparent;" type="text" id="_department1" disabled></td>
                                         </tr>

@@ -325,6 +325,7 @@ $(document).on('click', '.btnprint', function(event) {
             var json = JSON.parse(data);
             $('#id').val(json.id);
             $('#trid').val(trid);
+            $('#_idnum').val(json.minorjobid);
             $('#_department1').val(json.department);
             $('#_datemajorjr1').val(json.datesubmitted);
             $('#_quantity1').val(json.quantity);
