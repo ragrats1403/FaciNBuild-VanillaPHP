@@ -482,12 +482,20 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     </div>
                                     <table class="table borderless">
                                         <tr>
+                                            <th class="col-md-3">ID:</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="_idnum" disabled></td>
+                                        </tr>
+                                        <tr>
                                             <th class="col-md-3">Department:</th>
                                             <td><input style="border: none; border-color: transparent;" type="text" id="_department1" disabled></td>
                                         </tr>
                                         <tr>
                                             <th class="col-md-2" style="text-align: left;">Date</th>
                                             <td><input style="border: none; border-color: transparent;" type="text" id="_datemajorjr1" disabled></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-md-2" style="text-align: left;">Section</th>
+                                            <td><input style="border: none; border-color: transparent;" type="text" id="_section" disabled></td>
                                         </tr>
                                     </table>
                                     <hr>
@@ -510,13 +518,13 @@ require_once('../../../authentication/anti_pagetrans.php');
                                         </tr>
                                         <tr style="border: 0px; border: none">
                                             <th style="border: 0px; border: none">Requested by:</th>
-                                            <th colspan="2" style="border: 0px; border: none ">__________________________________</th>
+                                            <td colspan="2" style="border: 0px; border: none "><input style="border: none; border-color: transparent;" type="text" id="_requestedby1" disabled></td>
                                             <td style="border: 0px; border: none "></td>
                                             <td style="border: 0px; border: none "></td>
                                         </tr>
                                         <tr>
                                             <th style="border: 0px; border: none">Noted By:</th>
-                                            <th colspan="2" style="border: 0px; border: none ">__________________________________</th>
+                                            <td colspan="2" style="border: 0px; border: none "><input style="border: none; border-color: transparent;" type="text" id="_notedby1" disabled></td>
                                             <td style="border: 0px; border: none "></td>
                                             <td style="border: 0px; border: none "></td>
                                         </tr>
@@ -527,7 +535,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                                             <td style="border: 0px; border: none "></td>
                                         </tr>
                                         <tr>
-                                            <th style="border: 0px; border: none">Noted By:</th>
+                                            <th style="border: 0px; border: none">Rendered by:</th>
                                             <td style="border: 0px; border: none"><input style="border: none; border-color: transparent;" type="text" id="_renderedby1" disabled></td>
                                             <th style="border: 0px; border: none ">Date:</th>
                                             <td style="border: 0px; border: none"><input style="border: none; border-color: transparent;" type="text" id="_daterendered1" disabled></td>
