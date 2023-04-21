@@ -330,8 +330,10 @@ $(document).on('click', '.btnprint', function(event) {
             $('#_quantity1').val(json.quantity);
             $('#_itemdesc1').val(json.item_desc);
             $('#_purpose1').val(json.purpose);
+            $('#_requestedby1').val(json.requestedby);
             $('#_renderedby1').val(json.renderedby);
-            $('#_confirmedby1').val(json.confirmby);
+            $('#_notedby1').val(json.notedby);
+            $('#_confirmedby1').val(json.confirmedby);
             $('#printmodal').modal('show');
         }
     });

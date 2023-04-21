@@ -510,13 +510,13 @@ require_once('../../../authentication/anti_pagetrans.php');
                                         </tr>
                                         <tr style="border: 0px; border: none">
                                             <th style="border: 0px; border: none">Requested by:</th>
-                                            <th colspan="2" style="border: 0px; border: none ">__________________________________</th>
+                                            <td colspan="2" style="border: 0px; border: none "><input style="border: none; border-color: transparent;" type="text" id="_requestedby1" disabled></td>
                                             <td style="border: 0px; border: none "></td>
                                             <td style="border: 0px; border: none "></td>
                                         </tr>
                                         <tr>
                                             <th style="border: 0px; border: none">Noted By:</th>
-                                            <th colspan="2" style="border: 0px; border: none ">__________________________________</th>
+                                            <td colspan="2" style="border: 0px; border: none "><input style="border: none; border-color: transparent;" type="text" id="_notedby1" disabled></td>
                                             <td style="border: 0px; border: none "></td>
                                             <td style="border: 0px; border: none "></td>
                                         </tr>
@@ -527,7 +527,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                                             <td style="border: 0px; border: none "></td>
                                         </tr>
                                         <tr>
-                                            <th style="border: 0px; border: none">Noted By:</th>
+                                            <th style="border: 0px; border: none">Rendered by:</th>
                                             <td style="border: 0px; border: none"><input style="border: none; border-color: transparent;" type="text" id="_renderedby1" disabled></td>
                                             <th style="border: 0px; border: none ">Date:</th>
                                             <td style="border: 0px; border: none"><input style="border: none; border-color: transparent;" type="text" id="_daterendered1" disabled></td>
