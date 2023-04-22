@@ -61,6 +61,10 @@ require_once('../../authentication/anti_pagetrans.php');
                     success: function(data) {
                         var notifications = JSON.parse(data);
                         var len = notifications.length;
+                        //reload datatable start
+                        table = $('#datatable').DataTable();
+                        table.draw();
+                        //reload datatable end
                         // Update the badge count
                         notificationBadge.innerText = notifications.length;
 

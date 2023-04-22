@@ -220,6 +220,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     <th>Job Request no.</th>
                                     <th>Requisition no.</th>
                                     <th>Department</th>
+                                    <th>Date</th>
                                     <th>Quantity</th>
                                     <th>Status</th>
                                     <th>Options</th>
@@ -260,13 +261,13 @@ require_once('../../../authentication/anti_pagetrans.php');
     },
     'fnCreatedRow': function(nRow, aData, iDataIndex) {
         $(nRow).attr('id', aData[0]);
-        if (aData[4] === 'Approved') {
+        if (aData[5] === 'Approved') {
             $(nRow).css('background-color', '#a7d9ae');
         }
-        if (aData[4] === 'Declined') {
+        if (aData[5] === 'Declined') {
             $(nRow).css('background-color', '#e09b8d');
         }
-        if (aData[4] === 'Pending') {
+        if (aData[5] === 'Pending') {
             $(nRow).css('background-color', '#d9d2a7');
         }
     },
@@ -336,7 +337,7 @@ require_once('../../../authentication/anti_pagetrans.php');
             var table = $('#datatable').DataTable();
             event.preventDefault();
             var id = $(this).data('id');
-            if (confirm('Are you sure to delete this user?')) {
+            if (confirm('Are you sure to delete this request?')) {
                 $.ajax({
                     url: "delete_user.php",
                     data: {

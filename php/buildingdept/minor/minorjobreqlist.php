@@ -250,7 +250,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     </div>
                     <div class="col-md-12" style="width:15%">
                         <label class="" for="inputName">Status:</label>
-                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id="_statustext">
+                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id="_statustext" disabled>
                     </div>
                     <div class="col-md-1" style="width:10%">
                         <label class="" for="inputName">ID:</label>
@@ -330,8 +330,8 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <div class="col-md-2" style="margin-top:5px;">
                                     <label class="fw-bold" for="inputName">Noted By:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_notedby">
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%; margin-left:-50px;" name="" id="_notedby">
                                 </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
