@@ -284,7 +284,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     </div>
                     <div class="col-md-12" style="width:15%">
                         <label class="" for="inputName">Status:</label>
-                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id="_statustext">
+                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id="_statustext" disabled>
                     </div>
                     <div class="col-md-1" style="width:10%">
                         <label class="" for="inputName">ID:</label>
@@ -637,9 +637,9 @@ require_once('../../authentication/anti_pagetrans.php');
                         <input id="termscond" type="checkbox" onchange="updateButtonState()" />
                         <label for="termscond"> I agree to these <a href="termsandcondition.html" target="_blank"> Terms and Conditions prior to Approval</a></label>
                     </div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onkeydown="return event.key != 'Enter';">Close</button>
                     <!--<button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>-->
-                    <a href="javascript:void();" class="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
+                    <a href="javascript:void();" class="btn btn-primary submitBtn disabled" id='termscond-create' onkeydown="return event.key != 'Enter';">Save Changes</a>
 
                 </div>
                 <script type="text/javascript" src="functions/js/createresdep.js?random=<?php echo uniqid(); ?>"></script>

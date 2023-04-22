@@ -16,7 +16,6 @@ require_once('../../authentication/anti_pagetrans.php');
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
 </head>
 
 <header class="shadow">
@@ -53,7 +52,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservations/functions/notification.php",
+                    url: "../reservation/functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -61,7 +60,6 @@ require_once('../../authentication/anti_pagetrans.php');
                     success: function(data) {
                         var notifications = JSON.parse(data);
                         var len = notifications.length;
-                        
                         // Update the badge count
                         notificationBadge.innerText = notifications.length;
 
@@ -113,7 +111,7 @@ require_once('../../authentication/anti_pagetrans.php');
             markAsReadButton.addEventListener("click", function(event) {
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservations/functions/update_notification.php",
+                    url: "../reservation/functions/update_notification.php",
                     type: 'POST',
                     data: {
                         department: department,
@@ -143,7 +141,7 @@ require_once('../../authentication/anti_pagetrans.php');
 
 <body onload="fetchNotifications();">
 
-<div class="sidebar">
+    <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../../images/Brown_logo_faci.png" />
@@ -152,38 +150,29 @@ require_once('../../authentication/anti_pagetrans.php');
         <div class="navdiv">
             <ul class="nav_list">
                 <li>
-                    <a href="../../../../php/facilitiesdept/reservations/facilitiescalendar.php">
+                    <a href="../../../../php/user/userdashboard.php">
                         <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../../php/facilitiesdept/equipments/departmentheadeq.php">
-                        <i class='bx bx-wrench'></i>
-                        <span class="link_name">Equipment</span>
-                    </a>
-                </li>
-                <li>
-                    <div class="dropdown">
-                        <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Manage Request
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/facilitiesdept/managereserve/managereservation.php">Reservations</a>
-                        </ul>
-                    </div>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
                         <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            View/Create Request
+                            Job Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
-                            <a class="dropdown-item" href="../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
+                            <a class="dropdown-item" href="../../../../php/user/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../../php/user/major/majorjobreqlist.php">Major Job Request</a>
                         </ul>
                     </div>
+                </li>
+                <li>
+                <li>
+                    <a href="../../../../php/user/reservation/userreservation.php">
+                        <i class='bx bx-check-square'></i>
+                        <span class="link_name">Reservation</span>
+                    </a>
                 </li>
             </ul>
             <div class="profile_content">
@@ -191,11 +180,11 @@ require_once('../../authentication/anti_pagetrans.php');
                     <div class="profile_details">
                         <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
-                            <div class="role">Facilities Department</div>
+                            <div class="name"><?php echo $_SESSION['department']; ?></div>
+                            <div class="role">User</div>
                         </div>
                     </div>
-                    <a href="../../../logout.php">
+                    <a href="../../../../logout.php">
                         <i class='bx bx-log-out' id="log_out"></i>
                     </a>
                 </div>
@@ -228,7 +217,7 @@ require_once('../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
-      <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Optional JavaScript; choose one of the two! -->
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -238,44 +227,44 @@ require_once('../../authentication/anti_pagetrans.php');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
         var dpt = "<?php echo $_SESSION['department']; ?>";
-        $('#datatable').DataTable({
-            'serverSide': true,
-            'processing': true,
-            'paging': true,
-            'order': [],
-            'responsive': true,
-            'ajax': {
-                'url': 'functions/fetch_data.php',
-                'type': 'post',
-                'data': {
-                    'dpt': dpt,
-                },
-            },
-            'fnCreatedRow': function(nRow, aData, iDataIndex) {
-                $(nRow).attr('id', aData[0]);
-                if (aData[4] === 'Approved') {
-                    $(nRow).css('background-color', '#a7d9ae');
-                }
-                if (aData[4] === 'Declined') {
-                    $(nRow).css('background-color', '#e09b8d');
-                }
-                if (aData[4] === 'Pending') {
-                    $(nRow).css('background-color', '#d9d2a7');
-                }
-            },
-            'columnDefs': [{
-                'target': [0, 4],
-                'orderable': false,
-            }],
-            scrollY: 670,
-            'scrollCollapse': true,
-            'paging': false
-
-        });
+$('#datatable').DataTable({
+    'serverSide': true,
+    'processing': true,
+    'paging': true,
+    'order': [],
+    'responsive': true,
+    'ajax': {
+        'url': 'functions/fetch_data.php',
+        'type': 'post',
+        'data': {
+            'dpt': dpt,
+        },
+    },
+    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+        $(nRow).attr('id', aData[0]);
+        if (aData[4] === 'Approved') {
+            $(nRow).css('background-color', '#a7d9ae');
+        }
+        if (aData[4] === 'Declined') {
+            $(nRow).css('background-color', '#e09b8d');
+        }
+        if (aData[4] === 'Pending') {
+            $(nRow).css('background-color', '#d9d2a7');
+        }
+    },
+    'columnDefs': [{
+        'target': [0, 4],
+        'orderable': false,
+    }],
+    scrollY: 670,
+    'scrollCollapse': true,
+    'paging': false,
+});
     </script>
     <script type="text/javascript">
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
+            document.getElementById("savechange").disabled = true;
             var department = $('#department').val();
             var date = $('#datemajorjr').val();
             var quantity = $('#_quantity_').val();
@@ -319,6 +308,7 @@ require_once('../../authentication/anti_pagetrans.php');
                             $('#confirmedby').val('');
                             $('#dateconfirmed').val('');
                             $('#addUserModal').modal('hide');
+                            document.getElementById("savechange").disabled = false;
                             $("body").removeClass("modal-open");
                             $(".modal-backdrop").remove();
                         }
@@ -326,6 +316,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 });
             } else {
                 alert("Please fill all the Required fields");
+                document.getElementById("savechange").disabled = false;
             }
         });
         //edit button control 
@@ -453,7 +444,7 @@ require_once('../../authentication/anti_pagetrans.php');
                         </div>
                         <div class="modal-footer justify-content-md-center">
                             <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
+                            <button type="submit" class="btn btn-primary col-md-2" id ="savechange">Save Changes</button>
                         </div>
                     </form>
                 </div>

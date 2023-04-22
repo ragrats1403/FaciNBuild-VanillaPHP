@@ -309,6 +309,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                         <option value="P">PLUMBING</option>
                                         <option value="A">AIRCON</option>
                                         <option value="E">ELECTRICAL</option>
+                                        <option value="H">HOUSEKEEPING</option>
                                     </select>
                                 </div>
                             </div>

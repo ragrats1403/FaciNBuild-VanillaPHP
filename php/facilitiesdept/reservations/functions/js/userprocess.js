@@ -1,5 +1,3 @@
-
-
 //edit button control
 $(document).on("click", ".editBtn", function (event) {
   var id = $(this).data("id");
@@ -46,17 +44,19 @@ $(document).on("click", ".editBtn", function (event) {
       $("#_stageperformers").val(json.stageperformers);
       $("#_adviser").val(json.adviser);
       $("#_chairdeandep").val(json.chairperson);
-      $("#_inputFeedback").val(json.feedback);
-
       $("#_statustext").val(json.status);
+      $("#_step1").val(json.fdstatus);
+      $("#_step2").val(json.saostatus);
+      $("#_inputFeedback").val(json.feedback);
+      $("#_fdapprovedby").val(json.fdapprovedby);
+      $("#_saoapprovedby").val(json.saoapprovedby);
       $("#test").modal("show");
-        var en = json.eventname; 
+        var en = json.eventname;
+            
           var eqdatesubmit = json.datefiled;
           var tstart = json.timestart;
           var tend = json.timeend;
           var dateuse = json.actualdateofuse;  
-
-
 
             $.ajax({
               url: "functions/getequipment.php",
@@ -116,7 +116,6 @@ $("#closemodal").click(function () {
 });
 
 //create reservation
-
 $(document).on("click", ".submitBtn", function (event) {
   event.preventDefault();
   var eventname = $("#eventname_").val();
@@ -130,7 +129,9 @@ $(document).on("click", ".submitBtn", function (event) {
   var stageperf = $("#stageperformers").val();
   var adviser = $("#adviser").val();
   var chairman = $("#chairdeandep").val();
+  var requestedby = $("#requestedby").val();
   var e = document.getElementById("faci");
+  document.getElementById("termscond-create").disabled = true;
 
   var faci = e.options[e.selectedIndex].text;
     if(computedaysdiff(datefiled, actualdate) <= 4 )
@@ -150,6 +151,7 @@ $(document).on("click", ".submitBtn", function (event) {
               if (result) {
                   // Handle case where there is a conflict
                   alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
+                  document.getElementById("termscond-create").disabled = false;
               } else {
                   // Handle case where there is no conflict
                   if (
@@ -224,7 +226,6 @@ $(document).on("click", ".submitBtn", function (event) {
                                       var department = $("#_department").val();
                                       var date = $("#dateminor").val();
                                       var quantity = $("#_quantity_").val();
-                                      var itemname = $("#_item_").val();
                                       var description = $("#_itemdesc_").val();
                                       var purpose = $("#_purpose_").val();
                                       $.ajax({
@@ -233,12 +234,13 @@ $(document).on("click", ".submitBtn", function (event) {
                                           department: department,
                                           date: date,
                                           quantity: quantity,
-                                          itemname: itemname,
                                           description: description,
                                           purpose: purpose,
                                           eventname: eventname,
                                           actualdate: actualdate,
                                           reqparty: reqparty,
+                                          requestedby: requestedby,
+
                                         },
                                         type: "POST",
                                         success: function (data) {
@@ -255,10 +257,6 @@ $(document).on("click", ".submitBtn", function (event) {
                                 },
                               });
                           }
-                          //$('#department').val('');
-                          /*var now = new Date();
-                                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                                    document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);*/
                           $("#eventname").val("");
                           $("#actualdate").val("");
                           $("#timein").val("");
@@ -269,6 +267,12 @@ $(document).on("click", ".submitBtn", function (event) {
                           $("#stageperformers").val("");
                           $("#adviser").val("");
                           $("#chairdeandep").val("");
+                          $("#_department").val("");
+                          $("#dateminor").val("");
+                          $("#_quantity_").val("");
+                          $("#_itemdesc_").val("");
+                          $("#_purpose_").val("");
+                          $("#requestedby").val("");
                           $("#reserModal").modal("hide");
                           //force remove faded background  -Ragrats
                           $("body").removeClass("modal-open");
@@ -278,23 +282,29 @@ $(document).on("click", ".submitBtn", function (event) {
                           table = $("#datatable").DataTable();
                           table.draw();
                           alert("Successfully Requested Reservation!");
+                          document.getElementById("termscond-create").disabled = false;
                         }
                       },
                     });
                   } else {
                     alert("Please fill all the Required fields");
+                    document.getElementById("termscond-create").disabled = false;
                   }
               }
           });
       } else {
           // do something if there is no conflict
+          
           checkReservationConflict(timein, timeout, actualdate, faci, function(result) {
             // Do something with the result, which will be a boolean value
+            document.getElementById("termscond-create").disabled = true;
             if (result) {
                 // Handle case where there is a conflict
                 alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
+                document.getElementById("termscond-create").disabled = false;
             } else {
                 // Handle case where there is no conflict
+                
                 if (
                   eventname != "" &&
                   datefiled != "" &&
@@ -367,7 +377,6 @@ $(document).on("click", ".submitBtn", function (event) {
                                   var department = $("#_department").val();
                                   var date = $("#dateminor").val();
                                   var quantity = $("#_quantity_").val();
-                                  var itemname = $("#_item_").val();
                                   var description = $("#_itemdesc_").val();
                                   var purpose = $("#_purpose_").val();
                                   $.ajax({
@@ -376,12 +385,12 @@ $(document).on("click", ".submitBtn", function (event) {
                                       department: department,
                                       date: date,
                                       quantity: quantity,
-                                      itemname: itemname,
                                       description: description,
                                       purpose: purpose,
                                       eventname: eventname,
                                       actualdate: actualdate,
                                       reqparty: reqparty,
+                                      requestedby: requestedby,
                                     },
                                     type: "POST",
                                     success: function (data) {
@@ -412,6 +421,12 @@ $(document).on("click", ".submitBtn", function (event) {
                         $("#stageperformers").val("");
                         $("#adviser").val("");
                         $("#chairdeandep").val("");
+                        $("#_department").val("");
+                        $("#dateminor").val("");
+                        $("#_quantity_").val("");
+                        $("#_itemdesc_").val("");
+                        $("#_purpose_").val("");
+                        $("#requestedby").val("");
                         $("#reserModal").modal("hide");
                         //force remove faded background  -Ragrats
                         $("body").removeClass("modal-open");
@@ -426,6 +441,7 @@ $(document).on("click", ".submitBtn", function (event) {
                   });
                 } else {
                   alert("Please fill all the Required fields");
+                  document.getElementById("termscond-create").disabled = false;
                 }
             }
         });
