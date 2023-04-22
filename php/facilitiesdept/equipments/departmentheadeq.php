@@ -199,7 +199,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 </div>
             </div>
         </div>
-    </div>
+</div>
     <div class="table1">
 
         <div class="container-fluid">

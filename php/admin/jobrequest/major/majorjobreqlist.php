@@ -439,7 +439,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                         document.getElementById("step1d").hidden = false;
                     }
 
-                    if(json.pcostatus != 'Pending' || json.status === 'Declined')
+                    if(json.pcostatus != 'Pending' || json.status === 'Declined' || json.pcostatus === 'Declined')
                     {
                         document.getElementById("_pcoapprovedby").disabled = true;
                         document.getElementById("sections").disabled = true;
@@ -457,11 +457,7 @@ require_once('../../../authentication/anti_pagetrans.php');
 
                     }
 
-                    $('#_bdapprovedby').val(json.bdapprovedby);
-                    $('#_pcoapprovedby').val(json.pcoapprovedby);
-                    $('#_cadapprovedby').val(json.cadapprovedby);
-                    $('#_inputFeedback').val(json.feedback);
-                    if(json.cadstatus != 'Pending' || json.status === 'Declined')
+                    if(json.cadstatus != 'Pending' || json.status === 'Declined' || json.pcostatus === 'Declined')
                     {
                         document.getElementById("_cadapprovedby").disabled = true;
                         document.getElementById("sections").disabled = true;
@@ -476,7 +472,13 @@ require_once('../../../authentication/anti_pagetrans.php');
                         document.getElementById("_inputFeedback").disabled = false;
                         document.getElementById("step3a").hidden = false;
                         document.getElementById("step3d").hidden = false;
-                    }
+                    }   
+
+                    $('#_bdapprovedby').val(json.bdapprovedby);
+                    $('#_pcoapprovedby').val(json.pcoapprovedby);
+                    $('#_cadapprovedby').val(json.cadapprovedby);
+                    $('#_inputFeedback').val(json.feedback);
+                    
                     $('#editUserModal').modal('show');
                 }
             });
@@ -1055,20 +1057,20 @@ require_once('../../../authentication/anti_pagetrans.php');
                                             document.getElementById("remark").disabled = false;
                                             document.getElementById("sections").disabled = false;
                                             document.getElementById("_inputFeedback").disabled = false;
-                                            if(document.getElementById("_step1").value == 'Declined')
+                                            if(document.getElementById("_step1").value == 'Declined' || document.getElementById("_step1").value == 'Pending')
                                             {
                                             document.getElementById("step1a").hidden = false;
                                             document.getElementById("step1d").hidden = false;
                                             document.getElementById("_bdapprovedby").disabled = false;
                                             }
-                                            if(document.getElementById("_step2").value == 'Declined')
+                                            if(document.getElementById("_step2").value == 'Declined' || document.getElementById("_step2").value == 'Pending')
                                             {
                                             document.getElementById("step2a").hidden = false;
                                             document.getElementById("step2d").hidden = false;
                                             document.getElementById("_pcoapprovedby").disabled = false;
                                             }
 
-                                            if(document.getElementById("_step3").value == 'Declined')
+                                            if(document.getElementById("_step3").value == 'Declined' || document.getElementById("_step3").value == 'Pending' )
                                             {
                                             document.getElementById("step3a").hidden = false;
                                             document.getElementById("step3d").hidden = false;

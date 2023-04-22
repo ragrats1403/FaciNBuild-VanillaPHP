@@ -458,7 +458,6 @@ require_once('../../authentication/anti_pagetrans.php');
     <br>
     <br>
     <!-- Modal Popup End -->
-
     <!-- Create Reservation start-->
     <div class="modal " tabindex="-1" id="reserModal" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" style="max-width:1100px;">
