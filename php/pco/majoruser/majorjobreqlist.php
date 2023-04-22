@@ -145,43 +145,47 @@ require_once('../../authentication/anti_pagetrans.php');
 <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../../images/Brown_logo_faci.png" />
+                <img src="../../../images/Brown_logo_faci.png" />
             </div>
         </div>
-        <div class ="navdiv">
-        <ul class="nav_list">
-            <li>
-                <a href="../../../../php/user/userdashboard.php">
-                    <i class='bx bx-calendar'></i>
-                    <span class="link_name">Calendar of Activities</span>
-                </a>
-            </li>
-            <li>
-                <div class="dropdown">
-                    <i class='bx bx-clipboard' style="margin-left:17px;" ></i>
-                    <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Job Request
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="../../../../php/user/minor/minorjobreqlist.php">Minor Job Request</a>
-                        <a class="dropdown-item" href="../../../../php/user/major/majorjobreqlist.php">Major Job Request</a>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <a href="../../../../php/user/reservation/userreservation.php">
-                    <i class='bx bx-check-square'></i>
-                    <span class="link_name">Reservation</span>
-                </a>
-            </li>
-        </ul>
+        <div class="navdiv">
+            <ul class="nav_list">
+                <li>
+                    <a href="../../../../php/pco/pcocalendar.php">
+                        <i class='bx bx-calendar'></i>
+                        <span class="link_name">Calendar of Activities</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <i class='bx bx-clipboard' style="margin-left:17px;"></i>
+                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Manage Request
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="./../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <i class='bx bx-notepad' style="margin-left:17px;"></i>
+                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            View/Create Request
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="../../../php/pco/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../php/pco/majoruser/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="../../../php/pco/reservation/pcoreservation.php">Request Reservation</a>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
         <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
                     <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
                             <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
-                            <div class="role">User</div>
+                            <div class="role">PCO Department</div>
                         </div>
                     </div>
                     <a href="../../../../logout.php">
