@@ -680,9 +680,11 @@ require_once('../../../authentication/anti_pagetrans.php');
                         var row = table.row("[id='" + trid + "']");
                         row.row("[id='" + trid + "']").data([department, date, button]);*/
                         //$('#_itemdesc_').text('');
+                        document.getElementById("step2a").hidden = true;
+                        document.getElementById("step2d").hidden = true;
+                        document.getElementById("_pcoapprovedby").disabled = true;
+                        document.getElementById("reqnobtn").hidden = true;
                         $('#_step2').val('Approved');
-                        $('body').removeClass('modal-open');
-                        $('.modal-backdrop').remove();
                     } else {
                         alert('failed');
                     }
@@ -797,6 +799,7 @@ require_once('../../../authentication/anti_pagetrans.php');
         $(document).on('click', '.assignReqnoBtn', function(event) {
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
+            document.getElementById("reqnobtn").hidden = true;
             $.ajax({
                 url: "setrequisition.php",
                 type: 'GET',
