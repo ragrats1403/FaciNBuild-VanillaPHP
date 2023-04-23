@@ -277,7 +277,22 @@ $("#reserModal").on("hidden.bs.modal", function () {
     myNode.removeChild(myNode.lastChild);
     }
     $('#testtable').DataTable().clear().destroy();
-    
+                        $("#eventname").val("");
+                        $("#actualdate").val("");
+                        $("#timein").val("");
+                        $("#timeout").val("");
+                        $("#eventname_").val("");
+                        $("#purpose").val("");
+                        $("#numparticipants").val("");
+                        $("#stageperformers").val("");
+                        $("#adviser").val("");
+                        $("#chairdeandep").val("");
+                        $("#_department").val("");
+                        $("#dateminor").val("");
+                        $("#_quantity_").val("");
+                        $("#_itemdesc_").val("");
+                        $("#_purpose_").val("");
+                        $("#requestedby").val("");
   });
   
   
@@ -304,6 +319,9 @@ $("#reserModal").on("hidden.bs.modal", function () {
     }
     
   });
+
+
+  
 
 
 
