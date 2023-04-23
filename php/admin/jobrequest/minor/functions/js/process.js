@@ -134,6 +134,7 @@ $(document).on('submit', '#saveUserForm', function(event) {
                     $('#daterendered').val('');
                     $('#confirmedby').val('');
                     $('#dateconfirmed').val('');
+                    $('#requestedby').val('');
                     $('#addUserModal').modal('hide');
                     $("body").removeClass("modal-open");
                     $(".modal-backdrop").remove();

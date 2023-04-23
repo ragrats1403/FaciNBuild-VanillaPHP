@@ -398,7 +398,7 @@ require_once('../../authentication/anti_pagetrans.php');
             var feedb = $('#_inputFeedback').val();
             var pcoapprovedby = $('#_pcoapprovedby').val();
             var pcoby = document.getElementById("_pcoapprovedby").value;
-            if(pcoby != '' && reqno != '')
+            if(pcoby != '' || reqno != '' || reqno != 0)
             {
                 $.ajax({
                 url: "functions/step2approve.php",
@@ -486,8 +486,8 @@ require_once('../../authentication/anti_pagetrans.php');
                 success: function(data) {
                     var json = JSON.parse(data);
                     var addReqno = parseInt(json.totalno) + 1;
-                    if(json.totalno == null){
-                        $('#requino').val(addReqno);
+                    if(json.totalno == null || json.totalno ==''){
+                        $('#requino').val("1");
                     }
                     else
                     {

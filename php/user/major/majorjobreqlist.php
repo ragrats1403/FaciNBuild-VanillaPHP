@@ -322,6 +322,7 @@ require_once('../../authentication/anti_pagetrans.php');
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
+            document.getElementById("_inputFeedback").disabled = true;
             $.ajax({
                 url: "functions/get_single_user.php",
                 data: {

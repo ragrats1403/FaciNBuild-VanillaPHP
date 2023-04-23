@@ -36,9 +36,9 @@ $filtered_rows = $filtered_rows -1;
 while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray = array();
     $subarray[] = $row['eventname'];
-    $subarray[] = $row['actualdateofuse'];
-    $subarray[] = $row['timestart'];
-    $subarray[] = $row['timeend'];
+    $subarray[] = date("F j, Y", strtotime($row['actualdateofuse']));
+    $subarray[] = date("h:i A", strtotime($row['timestart']));
+    $subarray[] = date("h:i A", strtotime($row['timeend']));
     $subarray[] = $row['facility'];
     $data[] = $subarray;
 }

@@ -41,7 +41,7 @@ $(document).on("click", ".editBtn", function (event) {
   var f = document.getElementById("alert1");
   f.style.display = "none";
 
-
+  document.getElementById("editrbtn").hidden = false;
   var trid = $(this).closest("tr").attr("reservationid");
   const myNode =  document.getElementById('container4');
     while (myNode.firstChild ) {
@@ -62,6 +62,7 @@ $(document).on("click", ".editBtn", function (event) {
   document.getElementById("_adviser").disabled = true;
   document.getElementById("_chairdeandep").disabled = true;
   document.getElementById("_inputFeedback").disabled = true;
+  
   var x = document.getElementById("_myDIV1");
   x.style.display = "none";
   var v = document.getElementById("eqDiv");
@@ -173,7 +174,6 @@ $(document).on("click", ".editBtn", function (event) {
             success: function(data) {
                 var jsonreseq = JSON.parse(data);
                 var len = data.length;
-        
                 for (var i = 0; i < len - 1; i++) {
                     var equipn = jsonreseq[i][0];
                     var equipq = jsonreseq[i][1];
@@ -211,6 +211,65 @@ $(document).on("click", ".editBtn", function (event) {
   //$('#test').modal('show');
 });
 
+function editFields()
+{
+  
+    document.getElementById("_facility").disabled = false;
+    document.getElementById("_fdapprovedby").disabled = false;
+    document.getElementById("_saoapprovedby").disabled = false;
+    document.getElementById("_eventname").disabled = false;
+    document.getElementById("uResBtn").hidden = false;
+    document.getElementById("_inputFeedback").disabled = false;
+    document.getElementById("_actualdate").disabled = false;
+    document.getElementById("_timein").disabled = false;
+    document.getElementById("_timeout").disabled = false;
+    document.getElementById("_purpose").disabled = false;
+    document.getElementById("_numparticipants").disabled = false;
+    document.getElementById("_stageperformers").disabled = false;
+    document.getElementById("_adviser").disabled = false;
+    document.getElementById("_chairdeandep").disabled = false;
+    document.getElementById("editrbtn").hidden = true;
+    
+}
+//more info eq
+
+var testarr = [];
+$(document).on('click', '.editResBtn', function(event){
+  editreserationEq("eqDiv");
+  var x = document.getElementById('container4');
+  if(x.hasChildNodes())
+  {
+    editreserationEq("alert1");
+    $('#testtable2').DataTable().clear().destroy();
+    
+    editFields();
+    var updatebtn = document.getElementById("uResBtn");
+          updatebtn.classList.remove("disabled");
+          var testarr = [...document.querySelectorAll('#container4 button[id^="fbe"]')].map(elm => elm.id);
+          console.log(testarr);
+
+            for (i = 0; i <= testarr.length; i++) {
+              console.log(testarr[i]);
+              var val = document.getElementById(testarr[i]).value;//eq
+              //document.getElementById(val).disabled = false;
+              var eqbtn = document.getElementById(testarr[i]);
+                  eqbtn.classList.remove("disabled");
+                  eqbtn.classList.remove("disabled");
+          }
+            
+    
+  }
+  else{
+    
+    dynamicEq2();
+    editFields();
+  
+    
+  }
+ 
+  
+
+});
 
 
 //updateChanges
@@ -502,7 +561,7 @@ $(document).on("click", ".removeEq", function(event){
   }
   else
   {
-
+    return false;
   }
 
   if(x.hasChildNodes())
@@ -988,6 +1047,25 @@ $('#testtable2').DataTable().clear().destroy();
 
       //removeChild();
 }
+$(document).on('click', '.assignReqnoBtn', function(event) {
+  var id = $('#jobrequestno').val();
+  var trid = $('#trid').val();
+  $.ajax({
+      url: "functions/setrequisition.php",
+      type: 'GET',
+      success: function(data) {
+          var json = JSON.parse(data);
+          var addReqno = parseInt(json.totalno) + 1;
+          if(json.totalno == null || json.totalno ==''){
+              $('#requino').val("1");
+          }
+          else
+          {
+              $('#requino').val(addReqno);
+          }
+      }
+});
+});
 
 $(document).on('click', '.addresBtn', function(event){
   //var value = document.getElementById("id").value;
@@ -1049,7 +1127,7 @@ $(document).on('click', '.addresBtn', function(event){
               var btn = document.createElement('button');
               btn.className = "btn btn-sm btn-danger removeEq";
               btn.id = "btn"+value;
-              btn.setAttribute("onClick","removeAddedEq(this);");
+              //btn.setAttribute("onClick","removeAddedEq(this);");
               btn.style.marginTop = '3px';
               btn.innerHTML = "Remove";
               var textbox = document.createElement('text');
@@ -1141,7 +1219,7 @@ $(document).on('click', '.addresBtn2', function(event){
               var btn = document.createElement('button');
               btn.className = "btn btn-sm btn-danger removeEq";
               btn.id = "btn"+value;
-              btn.setAttribute("onClick","removeAddedEq(this);");
+              //btn.setAttribute("onClick","removeAddedEq(this);");
               btn.style.marginTop = '3px';
               btn.innerHTML = "Remove";
               var textbox = document.createElement('text');
@@ -1291,23 +1369,27 @@ $(document).on('click', '.step1approveBtn', function(event){
   //alert('test');
 });
 
-$(document).on('click', '.step2approveBtn', function(event){
-
-  //var status = "Approved";
-  var id = $('#_ID').val();
+$(document).on('click', '.step2approveBtn', function(event) {
+  //var status = "Approved";\
+  
+  var id = $('#jobrequestno').val();
   var trid = $('#trid').val();
-  var dept = $("#_reqparty").val();
-  var feedb = $("#_inputFeedback").val();
-  var saoapprovedby = $("#_saoapprovedby").val();
-
-  $.ajax({
+  var reqno = $('#requino').val();
+  var dept = $('#department').val();
+  var feedb = $('#_inputFeedback').val();
+  var pcoapprovedby = $('#_pcoapprovedby').val();
+  var pcoby = document.getElementById("_pcoapprovedby").value;
+  if(pcoby != '' && reqno != '')
+  {
+      $.ajax({
       url: "functions/step2approve.php",
       data: {
           id: id,
+          reqno: reqno,
           dept: dept,
           feedb: feedb,
-          saoapprovedby: saoapprovedby,
-          
+          pcoapprovedby: pcoapprovedby,
+
       },
       type: 'POST',
       success: function(data) {
@@ -1317,22 +1399,28 @@ $(document).on('click', '.step2approveBtn', function(event){
               table = $('#datatable').DataTable();
               table.draw();
               alert('Step 2 Approved Successfully!');
-          
               /*table = $('#datatable').DataTable();
               var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
               var row = table.row("[id='" + trid + "']");
               row.row("[id='" + trid + "']").data([department, date, button]);*/
-              $('#_statustext').val('Approved');
+              //$('#_itemdesc_').text('');
               $('#_step2').val('Approved');
-              $('#test').modal('hide');
               $('body').removeClass('modal-open');
               $('.modal-backdrop').remove();
-          } else { 
+          } else {
               alert('failed');
           }
       }
   });
-//alert('test');
+
+  }
+
+  else
+  {
+      alert("Please fill out required fields!");
+  }
+
+  
 });
 //Admin Buttons for Approval End
 
@@ -1548,59 +1636,7 @@ $.ajax({
 function removeAddedEq(e){
   e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
   }
-//more info eq
 
-var testarr = [];
-$(document).on('click', '.editResBtn', function(event){
-  editreserationEq("eqDiv");
-  var x = document.getElementById('container4');
-  if(x.hasChildNodes())
-  {
-    $('#testtable2').DataTable().clear().destroy();
-    editreserationEq("alert1");
-  }
-  else{
-    dynamicEq2();
-  }
-  document.getElementById("_facility").disabled = false;
-  document.getElementById("_fdapprovedby").disabled = false;
-  document.getElementById("_saoapprovedby").disabled = false;
-  document.getElementById("_eventname").disabled = false;
-  document.getElementById("uResBtn").hidden = false;
-  document.getElementById("_inputFeedback").disabled = false;
-  //document.getElementById("_datefiled").disabled = false;
-  document.getElementById("_actualdate").disabled = false;
-  document.getElementById("_timein").disabled = false;
-  document.getElementById("_timeout").disabled = false;
-  //document.getElementById("_reqparty").disabled = false;
-  document.getElementById("_purpose").disabled = false;
-  document.getElementById("_numparticipants").disabled = false;
-  document.getElementById("_stageperformers").disabled = false;
-  document.getElementById("_adviser").disabled = false;
-  document.getElementById("_chairdeandep").disabled = false;
-
-  document.getElementById("_dept").disabled = false //department
-  document.getElementById("_dateresm").disabled = false //date
-  document.getElementById("_minorqres").disabled = false //quantity
-  document.getElementById("_minoritemres").disabled = false//itemname
-  document.getElementById("_minoritemdesc").disabled = false//itemdescription
-  document.getElementById("_minorpurpose").disabled = false//purpose
-  var updatebtn = document.getElementById("uResBtn");
-  updatebtn.classList.remove("disabled");
-  var testarr = [...document.querySelectorAll('#container4 button[id^="fbe"]')].map(elm => elm.id);
-  console.log(testarr);
-
-    for (i = 0; i <= testarr.length; i++) {
-      console.log(testarr[i]);
-      var val = document.getElementById(testarr[i]).value;//eq
-      //document.getElementById(val).disabled = false;
-      var eqbtn = document.getElementById(testarr[i]);
-          eqbtn.classList.remove("disabled");
-          eqbtn.classList.remove("disabled");
-  }
-  
-
-});
 
 
 
