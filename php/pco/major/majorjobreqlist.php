@@ -60,6 +60,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     success: function(data) {
                         var notifications = JSON.parse(data);
                         var len = notifications.length;
+                        
                         // Update the badge count
                         notificationBadge.innerText = notifications.length;
 
@@ -363,7 +364,6 @@ require_once('../../authentication/anti_pagetrans.php');
                     if(json.pcostatus != 'Pending')
                     {
                         document.getElementById("_pcoapprovedby").disabled = true;
-                        document.getElementById("sections").disabled = true;
                         document.getElementById("_inputFeedback").disabled = true;
                         document.getElementById("step2a").hidden = true;
                         document.getElementById("step2d").hidden = true;
@@ -372,7 +372,6 @@ require_once('../../authentication/anti_pagetrans.php');
                     else
                     {
                         document.getElementById("_pcoapprovedby").disabled = false;
-                        document.getElementById("sections").disabled = false;
                         document.getElementById("_inputFeedback").disabled = false;
                         document.getElementById("step2a").hidden = false;
                         document.getElementById("step2d").hidden = false;
@@ -398,8 +397,10 @@ require_once('../../authentication/anti_pagetrans.php');
             var dept = $('#department').val();
             var feedb = $('#_inputFeedback').val();
             var pcoapprovedby = $('#_pcoapprovedby').val();
-
-            $.ajax({
+            var pcoby = document.getElementById("_pcoapprovedby").value;
+            if(pcoby != '' || reqno != '' || reqno != 0)
+            {
+                $.ajax({
                 url: "functions/step2approve.php",
                 data: {
                     id: id,
@@ -431,6 +432,15 @@ require_once('../../authentication/anti_pagetrans.php');
                     }
                 }
             });
+
+            }
+
+            else
+            {
+                alert("Please fill out required fields!");
+            }
+
+            
         });
 
         $(document).on('click', '.step2declineBtn', function(event) {
@@ -476,8 +486,8 @@ require_once('../../authentication/anti_pagetrans.php');
                 success: function(data) {
                     var json = JSON.parse(data);
                     var addReqno = parseInt(json.totalno) + 1;
-                    if(json.totalno == null){
-                        $('#requino').val(addReqno);
+                    if(json.totalno == null || json.totalno ==''){
+                        $('#requino').val("1");
                     }
                     else
                     {

@@ -231,15 +231,13 @@ require_once('../../authentication/anti_pagetrans.php');
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
     <!-- Optional JavaScript; choose one of the two! -->
-
+    
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- Script Process Start-- DO NOT MOVE THIS Script tags!!-->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script type="text/javascript" src="functions/js/process.js?random=<?php echo uniqid(); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-
     <!-- Script Process End-->
     <!-- edit user modal-->
     <!-- Modal -->
@@ -252,7 +250,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     </div>
                     <div class="col-md-12" style="width:15%">
                         <label class="" for="inputName">Status:</label>
-                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id="_statustext">
+                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id="_statustext" disabled>
                     </div>
                     <div class="col-md-1" style="width:10%">
                         <label class="" for="inputName">ID:</label>
@@ -311,6 +309,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                         <option value="P">PLUMBING</option>
                                         <option value="A">AIRCON</option>
                                         <option value="E">ELECTRICAL</option>
+                                        <option value="H">HOUSEKEEPING</option>
                                     </select>
                                 </div>
                             </div>
@@ -329,11 +328,11 @@ require_once('../../authentication/anti_pagetrans.php');
                                 </div>
                             </div>
                             <div class="row" style="padding-top:6px;">
-                                <div class="col-md-1" style="margin-top:5px;">
+                                <div class="col-md-2" style="margin-top:5px;">
                                     <label class="fw-bold" for="inputName">Noted By:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
-                                    <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_notedby">
+                                <div class="col-md-4" style="margin-top:5px;">
+                                    <input class="form-control" type="text" style="width:100%; height:80%; margin-left:-50px;" name="" id="_notedby">
                                 </div>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">

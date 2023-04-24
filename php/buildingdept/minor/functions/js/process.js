@@ -467,37 +467,43 @@ $(document).on('click', '.step1declineBtn', function(event){
     var trid = $('#trid').val();
     var dept = $('#_department').val();
     var feedb = $('#_inputFeedback').val();
-    $.ajax({
-        url: "functions/step1decline.php",
-        data: {
-            id: id,
-            dept: dept,
-            feedb: feedb,
-            
-        },
-        type: 'POST',
-        success: function(data) {
-            var json = JSON.parse(data);
-            var status = json.status;
-            if (status == 'success') {
-                table = $('#datatable').DataTable();
-                table.draw();
-                alert('Step 1 Declined Successfully!');
-
-            
-                /*table = $('#datatable').DataTable();
-                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                var row = table.row("[id='" + trid + "']");
-                row.row("[id='" + trid + "']").data([department, date, button]);*/
-                //$('#_itemdesc_').text('');
-                $('#_step1').val('Declined');
-                $('#_statustext').val('Declined');
-                $('#editMinorjreqmodal').modal('hide');
-            } else { 
-                alert('failed');
+    if (feedb != '')
+    {
+        $.ajax({
+            url: "functions/step1decline.php",
+            data: {
+                id: id,
+                dept: dept,
+                feedb: feedb,
+                
+            },
+            type: 'POST',
+            success: function(data) {
+                var json = JSON.parse(data);
+                var status = json.status;
+                if (status == 'success') {
+                    table = $('#datatable').DataTable();
+                    table.draw();
+                    alert('Step 1 Declined Successfully!');
+    
+                
+                    /*table = $('#datatable').DataTable();
+                    var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                    var row = table.row("[id='" + trid + "']");
+                    row.row("[id='" + trid + "']").data([department, date, button]);*/
+                    //$('#_itemdesc_').text('');
+                    $('#_step1').val('Declined');
+                    $('#_statustext').val('Declined');
+                    $('#editMinorjreqmodal').modal('hide');
+                } else { 
+                    alert('failed');
+                }
             }
-        }
-        });
+            });
+    }
+    else{
+        alert("Please Provide a feedback when declining request!");
+    }
 });
 
 //steps decline end

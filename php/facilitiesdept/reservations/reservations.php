@@ -61,6 +61,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     success: function(data) {
                         var notifications = JSON.parse(data);
                         var len = notifications.length;
+                        
                         // Update the badge count
                         notificationBadge.innerText = notifications.length;
 
@@ -291,7 +292,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     </div>
                     <div class="col-md-12" style="width:15%">
                         <label class="" for="inputName">Status:</label>
-                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id="_statustext">
+                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id="_statustext" disabled>
                     </div>
                     <div class="col-md-1" style="width:10%">
                         <label class="" for="inputName">ID:</label>

@@ -410,6 +410,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                             <!--Id:step1approveBtn-->
                                             <a href= "javascript:void();" class ="btn btn-success step1approveBtn" id="step1a">Approve</a>
                                         </div>
+                                        
                                         <div class="col-md-1" style="padding-left:18px;">
                                         <!--Id:step1declineBtn-->
                                             <a href= "javascript:void();" class ="btn btn-danger step1declineBtn" id="step1d">Decline</a>
@@ -514,11 +515,11 @@ require_once('../../authentication/anti_pagetrans.php');
                 <div class="modal-footer justify-content-between">
                     <div class="mr-auto">           
                         <input id="termscond" type="checkbox"/>
-                        <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>           
+                        <label for="termscond"> I agree to these <a href="../../../php/admin/reservations/termsandcondition.html"> Terms and Conditions prior to Approval</a></label>           
                     </div>
                     <div class="mr">
-                    <a href= "javascript:void();" class ="btn btn-primary editResBtn">Edit</a>
-                    <a href= "javascript:void();" class ="btn btn-warning updateResBtn disabled" id= "uResBtn">Save Changes</a>
+                    <a href= "javascript:void();" class ="btn btn-primary editResBtn" id="editrbtn">Edit</a>
+                    <a href= "javascript:void();" class ="btn btn-warning updateResBtn" id= "uResBtn">Save Changes</a>
                     <!--<a href= "javascript:void();" class ="btn btn-info approveAll" id ="appAllBtn">Approve All</a>
                     <a href= "javascript:void();" class ="btn btn-danger declineAll" id ="decAllBtn">Decline All</a>-->
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>

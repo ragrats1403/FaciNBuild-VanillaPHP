@@ -60,6 +60,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     success: function(data) {
                         var notifications = JSON.parse(data);
                         var len = notifications.length;
+                        
                         // Update the badge count
                         notificationBadge.innerText = notifications.length;
 
@@ -163,7 +164,6 @@ require_once('../../authentication/anti_pagetrans.php');
                                 Manage Request
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
                                 <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
                             </ul>
                         </div>
@@ -265,6 +265,7 @@ require_once('../../authentication/anti_pagetrans.php');
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
+            document.getElementById("sections").disabled = true;
             $.ajax({
                 url: "functions/get_single_user.php",
                 data: {
@@ -311,7 +312,6 @@ require_once('../../authentication/anti_pagetrans.php');
                     if(json.cadstatus != 'Pending')
                     {
                         document.getElementById("_cadapprovedby").disabled = true;
-                        document.getElementById("sections").disabled = true;
                         document.getElementById("_inputFeedback").disabled = true;
                         document.getElementById("step3a").hidden = true;
                         document.getElementById("step3d").hidden = true;
@@ -319,7 +319,6 @@ require_once('../../authentication/anti_pagetrans.php');
                     else
                     {
                         document.getElementById("_cadapprovedby").disabled = false;
-                        document.getElementById("sections").disabled = false;
                         document.getElementById("_inputFeedback").disabled = false;
                         document.getElementById("step3a").hidden = false;
                         document.getElementById("step3d").hidden = false;
@@ -339,7 +338,10 @@ require_once('../../authentication/anti_pagetrans.php');
             var dept = $('#department').val();
             var feedb = $('#_inputFeedback').val();
             var cadapprovedby = $('#_cadapprovedby').val();
-            $.ajax({
+
+            if(cadapprovedby != '')
+            {
+                $.ajax({
                 url: "functions/step3approve.php",
                 data: {
                     id: id,
@@ -365,6 +367,10 @@ require_once('../../authentication/anti_pagetrans.php');
                     }
                 }
             });
+            }
+            else{
+                alert("Please fill out required fields!");
+            }
         });
 
         $(document).on('click', '.step3declineBtn', function(event) {

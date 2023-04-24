@@ -2,7 +2,7 @@
 
 $id = $_POST['id'];
 
-$sql = "DELETE FROM `reservation` WHERE reservationid ='$id' and `status` = 'Pending' OR `status` = 'Declined'";
+$sql = "DELETE FROM `reservation` WHERE reservationid ='$id'";
 $query = mysqli_query($con, $sql);
 if ($query == true) 
 {

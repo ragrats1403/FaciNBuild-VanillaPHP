@@ -60,6 +60,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     success: function(data) {
                         var notifications = JSON.parse(data);
                         var len = notifications.length;
+                        
                         // Update the badge count
                         notificationBadge.innerText = notifications.length;
 
@@ -184,16 +185,16 @@ require_once('../../authentication/anti_pagetrans.php');
                     </div>
                 </li>
             </ul>
-            <div class="profile_content">
+        <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                        <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                    <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
+                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
                             <div class="role">Facilities Department</div>
                         </div>
                     </div>
-                    <a href="../../../logout.php">
+                    <a href="../../../../logout.php">
                         <i class='bx bx-log-out' id="log_out"></i>
                     </a>
                 </div>
@@ -228,7 +229,7 @@ require_once('../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
-     <!-- Optional JavaScript; choose one of the two! -->
+      <!-- Optional JavaScript; choose one of the two! -->
   <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -276,6 +277,7 @@ require_once('../../authentication/anti_pagetrans.php');
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
             event.preventDefault();
+            document.getElementById("savechange").disabled = true;
             var requino = $('#requi').val();
             var department = $('#depart').val();
             var date = $('#deeto').val();
@@ -314,6 +316,7 @@ require_once('../../authentication/anti_pagetrans.php');
                             $('#req').val('');
                             $('#dephead').val('');
                             $('#addUserModal').modal('hide');
+                            document.getElementById("savechange").disabled = false;
                             $('body').removeClass('modal-open');
                             $('.modal-backdrop').remove();
                         }
@@ -321,6 +324,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 });
             } else {
                 alert("Please fill all the Required fields");
+                document.getElementById("savechange").disabled = false;
             }
         });
 
@@ -433,7 +437,7 @@ require_once('../../authentication/anti_pagetrans.php');
 
                             <div class="modal-footer justify-content-md-center">
                                 <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
+                                <button type="submit" class="btn btn-primary col-md-2" id = "savechange">Save Changes</button>
                             </div>
                         </form>
                     </div>

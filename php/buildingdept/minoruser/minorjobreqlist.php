@@ -7,7 +7,7 @@ require_once('../../authentication/anti_pagetrans.php');
 <head>
     <meta charset="UTF-8">
     <title>Minor Job Request List</title>
-    <!--dependencies-->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
@@ -141,7 +141,7 @@ require_once('../../authentication/anti_pagetrans.php');
 
 <body onload="fetchNotifications();">
 
-    <div class="sidebar">
+<div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../images/Brown_logo_faci.png" />
@@ -187,13 +187,12 @@ require_once('../../authentication/anti_pagetrans.php');
                     </a>
                 </li>
             </ul>
-
             <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
                         <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
+                            <div class="name"><?php echo $_SESSION['department']; ?></div>
                             <div class="role">Building Department</div>
                         </div>
                     </div>
@@ -209,15 +208,14 @@ require_once('../../authentication/anti_pagetrans.php');
             <div class="row">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-2" style="width: 15%;"></div>
                         <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF; padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <table id="datatable" class="table">
                                 <thead>
                                     <th>ID</th>
                                     <th>Department</th>
-                                    <th>Section</th>
                                     <th>Date</th>
+                                    <th>Section</th>
                                     <th>Status</th>
                                     <th>Options</th>
                                 </thead>
@@ -231,7 +229,7 @@ require_once('../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
-      <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Optional JavaScript; choose one of the two! -->
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -241,44 +239,44 @@ require_once('../../authentication/anti_pagetrans.php');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
         var dpt = "<?php echo $_SESSION['department']; ?>";
-        $('#datatable').DataTable({
-            'serverSide': true,
-            'processing': true,
-            'paging': true,
-            'order': [],
-            'responsive': true,
-            'ajax': {
-                'url': 'functions/fetch_data.php',
-                'type': 'post',
-                'data': {
-                    'dpt': dpt,
-                },
-            },
-            'fnCreatedRow': function(nRow, aData, iDataIndex) {
-                $(nRow).attr('id', aData[0]);
-                if (aData[4] === 'Approved') {
-                    $(nRow).css('background-color', '#a7d9ae');
-                }
-                if (aData[4] === 'Declined') {
-                    $(nRow).css('background-color', '#e09b8d');
-                }
-                if (aData[4] === 'Pending') {
-                    $(nRow).css('background-color', '#d9d2a7');
-                }
-            },
-            'columnDefs': [{
-                'target': [0, 4],
-                'orderable': false,
-            }],
-            scrollY: 670,
-            'scrollCollapse': true,
-            'paging': false
-
-        });
+$('#datatable').DataTable({
+    'serverSide': true,
+    'processing': true,
+    'paging': true,
+    'order': [],
+    'responsive': true,
+    'ajax': {
+        'url': 'functions/fetch_data.php',
+        'type': 'post',
+        'data': {
+            'dpt': dpt,
+        },
+    },
+    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+        $(nRow).attr('id', aData[0]);
+        if (aData[4] === 'Approved') {
+            $(nRow).css('background-color', '#a7d9ae');
+        }
+        if (aData[4] === 'Declined') {
+            $(nRow).css('background-color', '#e09b8d');
+        }
+        if (aData[4] === 'Pending') {
+            $(nRow).css('background-color', '#d9d2a7');
+        }
+    },
+    'columnDefs': [{
+        'target': [0, 4],
+        'orderable': false,
+    }],
+    scrollY: 670,
+    'scrollCollapse': true,
+    'paging': false,
+});
     </script>
     <script type="text/javascript">
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
+            document.getElementById("savechange").disabled = true;
             var department = $('#department').val();
             var date = $('#datemajorjr').val();
             var quantity = $('#_quantity_').val();
@@ -322,6 +320,7 @@ require_once('../../authentication/anti_pagetrans.php');
                             $('#confirmedby').val('');
                             $('#dateconfirmed').val('');
                             $('#addUserModal').modal('hide');
+                            document.getElementById("savechange").disabled = false;
                             $("body").removeClass("modal-open");
                             $(".modal-backdrop").remove();
                         }
@@ -329,6 +328,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 });
             } else {
                 alert("Please fill all the Required fields");
+                document.getElementById("savechange").disabled = false;
             }
         });
         //edit button control 
@@ -456,7 +456,7 @@ require_once('../../authentication/anti_pagetrans.php');
                         </div>
                         <div class="modal-footer justify-content-md-center">
                             <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
+                            <button type="submit" class="btn btn-primary col-md-2" id ="savechange">Save Changes</button>
                         </div>
                     </form>
                 </div>

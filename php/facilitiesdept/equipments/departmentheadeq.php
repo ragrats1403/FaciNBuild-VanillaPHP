@@ -60,6 +60,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     success: function(data) {
                         var notifications = JSON.parse(data);
                         var len = notifications.length;
+                        
                         // Update the badge count
                         notificationBadge.innerText = notifications.length;
 
@@ -199,7 +200,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 </div>
             </div>
         </div>
-    </div>
+</div>
     <div class="table1">
 
         <div class="container-fluid">
@@ -357,7 +358,14 @@ require_once('../../authentication/anti_pagetrans.php');
                     $('#trid').val(trid);
                     $('#_inputEqname').val(json.equipmentname)
                     $('#_inputQty').val(json.quantity);
-                    $('#_inputFacility').val(json.facility);
+                    //$('#_inputFacility').val(json.facility);
+                    var x = document.getElementById("_inputFacility");
+                    var option = document.createElement("option");
+                    option.text = json.facility;
+                    option.hidden = true;
+                    option.disabled = true;
+                    option.selected = true;
+                    x.add(option); 
                     $('#editUserModal').modal('show');
                 }
             });
@@ -368,7 +376,8 @@ require_once('../../authentication/anti_pagetrans.php');
             var trid = $('#trid').val();
             var equipmentname = $('#_inputEqname').val();
             var qty = $('#_inputQty').val();
-            var facility = $('#_inputFacility').val();
+            var e = document.getElementById("_inputFacility");
+            var facility = e.options[e.selectedIndex].text;
             $.ajax({
                 url: "update_equipments.php",
                 data: {
@@ -384,9 +393,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     if (status == 'success') {
                         alert('Updated Successfully!');
                         table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([id, equipmentname, qty, facility, button]);
+                        table.draw();
                         $('#editUserModal').modal('hide');
                     } else {
                         alert('failed');
@@ -427,10 +434,15 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <!--<input type="text" class="form-control" id="inputFacility" name="inputFacility">-->
 
                                     <select name="inputFacility" id="inputFacility" class="form-control">
-                                        <option value="AVR">AVR</option>
-                                        <option value="OLD AVR">OLD AVR</option>
-                                        <option value="FUNCTION HALL">FUNCTION HALL</option>
-                                        <option value="AUDITORIUM">AUDITORIUM</option>
+                                    <?php include('../../connection/connection.php');
+                                    $sql = "SELECT facilityname FROM facility";
+                                    $query = mysqli_query($con, $sql);
+                                    $i = 1;
+                                    while ($row = mysqli_fetch_assoc($query)) {
+                                        echo "<option value=$i>" . $row["facilityname"] . "</option>";
+                                        $i++;
+                                    }
+                                    ?>
                                     </select>
                                 </div>
                             </div>
@@ -479,11 +491,16 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <label for="inputFacility" class="col-sm-2 col-form-label">Facility</label>
                                 <div class="col-sm-10">
                                     <!--<input type="text" class="form-control" id="inputFacility" name="inputFacility">-->
-                                    <select name="_inputFacility" id="_inputFacility" class="form-control" disabled>
-                                        <option value="AVR">AVR</option>
-                                        <option value="OLD AVR">OLD AVR</option>
-                                        <option value="FUNCTION HALL">FUNCTION HALL</option>
-                                        <option value="AUDITORIUM">AUDITORIUM</option>
+                                    <select name="_inputFacility" id="_inputFacility" class="form-control">
+                                        <?php include('../../connection/connection.php');
+                                        $sql = "SELECT facilityname FROM facility";
+                                        $query = mysqli_query($con, $sql);
+                                        $i = 1;
+                                        while ($row = mysqli_fetch_assoc($query)) {
+                                            echo "<option value=$i>" . $row["facilityname"] . "</option>";
+                                            $i++;
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>

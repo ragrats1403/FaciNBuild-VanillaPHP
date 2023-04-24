@@ -60,6 +60,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     success: function(data) {
                         var notifications = JSON.parse(data);
                         var len = notifications.length;
+                        
                         // Update the badge count
                         notificationBadge.innerText = notifications.length;
 
@@ -350,6 +351,8 @@ require_once('../../authentication/anti_pagetrans.php');
 
                         if (status == 'success') {
                             $('#' + id).closest('tr').remove();
+                            table = $('#datatable').DataTable();
+                            table.draw();
 
                         } else {
                             alart('failed');
@@ -406,10 +409,8 @@ require_once('../../authentication/anti_pagetrans.php');
                     status = json.status;
                     if (status == 'success') {
                         alert('Updated Successfully!');
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" class="btn btn-sm btn-info" data-id="' + id + '" >Edit</a> <a href="javascript:void();" class="btn btn-sm btn-danger" data-id="' + id + '" >Delete</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([id, department, username, password, rolelevel, roleid, button]);*/
+                        table = $('#datatable').DataTable();
+                        table.draw();
                         $('#editUserModal').modal('hide');
 
                     } else {

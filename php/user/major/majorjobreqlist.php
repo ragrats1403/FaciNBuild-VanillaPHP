@@ -60,6 +60,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     success: function(data) {
                         var notifications = JSON.parse(data);
                         var len = notifications.length;
+                        
                         // Update the badge count
                         notificationBadge.innerText = notifications.length;
 
@@ -266,6 +267,7 @@ require_once('../../authentication/anti_pagetrans.php');
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
             event.preventDefault();
+            document.getElementById("savechange").disabled = true;
             var requino = $('#requi').val();
             var department = $('#depart').val();
             var date = $('#deeto').val();
@@ -304,6 +306,7 @@ require_once('../../authentication/anti_pagetrans.php');
                             $('#req').val('');
                             $('#dephead').val('');
                             $('#addUserModal').modal('hide');
+                            document.getElementById("savechange").disabled = false;
                             $('body').removeClass('modal-open');
                             $('.modal-backdrop').remove();
                         }
@@ -311,6 +314,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 });
             } else {
                 alert("Please fill all the Required fields");
+                document.getElementById("savechange").disabled = false;
             }
         });
 
@@ -318,6 +322,7 @@ require_once('../../authentication/anti_pagetrans.php');
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
+            document.getElementById("_inputFeedback").disabled = true;
             $.ajax({
                 url: "functions/get_single_user.php",
                 data: {
@@ -423,7 +428,7 @@ require_once('../../authentication/anti_pagetrans.php');
 
                             <div class="modal-footer justify-content-md-center">
                                 <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
+                                <button type="submit" class="btn btn-primary col-md-2" id = "savechange">Save Changes</button>
                             </div>
                         </form>
                     </div>

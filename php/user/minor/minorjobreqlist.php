@@ -264,6 +264,7 @@ $('#datatable').DataTable({
     <script type="text/javascript">
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
+            document.getElementById("savechange").disabled = true;
             var department = $('#department').val();
             var date = $('#datemajorjr').val();
             var quantity = $('#_quantity_').val();
@@ -307,6 +308,7 @@ $('#datatable').DataTable({
                             $('#confirmedby').val('');
                             $('#dateconfirmed').val('');
                             $('#addUserModal').modal('hide');
+                            document.getElementById("savechange").disabled = false;
                             $("body").removeClass("modal-open");
                             $(".modal-backdrop").remove();
                         }
@@ -314,6 +316,7 @@ $('#datatable').DataTable({
                 });
             } else {
                 alert("Please fill all the Required fields");
+                document.getElementById("savechange").disabled = false;
             }
         });
         //edit button control 
@@ -441,7 +444,7 @@ $('#datatable').DataTable({
                         </div>
                         <div class="modal-footer justify-content-md-center">
                             <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary col-md-2">Save Changes</button>
+                            <button type="submit" class="btn btn-primary col-md-2" id ="savechange">Save Changes</button>
                         </div>
                     </form>
                 </div>

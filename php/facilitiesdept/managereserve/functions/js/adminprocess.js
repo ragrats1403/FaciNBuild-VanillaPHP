@@ -421,7 +421,10 @@ $(document).on('click', '.step1approveBtn', function(event){
   var dept = $("#_reqparty").val();
   var feedb = $("#_inputFeedback").val();
   var fdapprove = $("#_fdapprovedby").val();
-  $.ajax({
+
+  if(fdapprove != '')
+  {
+    $.ajax({
       url: "functions/step1approve.php",
       data: {
         id: id,
@@ -452,6 +455,11 @@ $(document).on('click', '.step1approveBtn', function(event){
           }
       }
   });
+  }
+  else
+  {
+    alert("Please fill out required fields!");
+  }
   //alert('test');
 });
 
@@ -577,7 +585,9 @@ $(document).on('click', '.step1declineBtn', function(event){
   var trid = $('#trid').val();
   var dept = $("#_reqparty").val();
   var feedb = $("#_inputFeedback").val();
-  $.ajax({
+  if(feedb != '')
+  {
+    $.ajax({
       url: "functions/step1decline.php",
       data: {
         id: id,
@@ -610,6 +620,12 @@ $(document).on('click', '.step1declineBtn', function(event){
           }
       }
       });
+  }
+  else
+  {
+    alert("Please provide a feedback when declining a request!");
+  }
+  
 });
 
 $(document).on('click', '.step2declineBtn', function(event){
