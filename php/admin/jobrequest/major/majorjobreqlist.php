@@ -497,6 +497,8 @@ require_once('../../../authentication/anti_pagetrans.php');
                     $('#trid').val(trid);
                     $('#jobrequestno1').val(json.jobreqno);
                     $('#requino1').val(json.requino);
+                    $('#request').val(json.requestby);
+                    $('#depart').val(json.departmenthead);
                     $('#department1').val(json.department);
                     $('#date1').val(json.date);
                     $('#sections1').val(json.section);
@@ -1151,6 +1153,12 @@ require_once('../../../authentication/anti_pagetrans.php');
                                             <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="purpose1" disabled></textarea></td>
                                             <td></td>
                                             <td></td>
+                                        </tr>
+                                        <tr style="border: 0px; border: none">
+                                            <th style="text-align: left; ; border: 0px; border: none">Requested by:</th>
+                                            <td style="border: 0px; border: none "><input style="border: none; border-color: transparent;" type="text" id="request" disabled></td>
+                                            <th style="text-align: left; ; border: 0px; border: none">Department head:</th>
+                                            <td style="border: 0px; border: none "><input style="border: none; border-color: transparent;" type="text" id="depart" disabled></td>
                                         </tr>
                                         <tr>
                                             <th class="col-md-3">B.1. RECOMMENDATION</th>
