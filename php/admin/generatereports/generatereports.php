@@ -55,7 +55,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservation/functions/notification.php",
+                    url: "../reservations/functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -114,7 +114,7 @@ require_once('../../authentication/anti_pagetrans.php');
             markAsReadButton.addEventListener("click", function(event) {
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservation/functions/update_notification.php",
+                    url: "../reservations/functions/update_notification.php",
                     type: 'POST',
                     data: {
                         department: department,
@@ -143,51 +143,51 @@ require_once('../../authentication/anti_pagetrans.php');
 </header>
 
 <body onload="fetchNotifications();">
-    <div class="sidebar">
+<div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../../images/Brown_logo_faci.png" />
+                <img src="../../../images/Black_logo.png" />
             </div>
         </div>
-        <div class="navdiv">
-            <ul class="nav_list">
+        <div class ="navdiv">
+        <ul class="nav_list">
                 <li>
-                    <a href="../../../php/buildingdept/buildingcalendar.php">
+                    <a href="../../../php/admin/reservations/admincalendar.php">
                         <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
                 </li>
                 <li>
-                    <div class="dropdown">
-                        <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Manage Request
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/buildingdept/minor/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
-                        </ul>
-                    </div>
+                    <a href="../../../php/admin/accounts/admin_account.php">
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">Account</span>
+                    </a>
                 </li>
                 <li>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            View/Create Request
+                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Create/Manage Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/buildingdept/minoruser/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../php/buildingdept/majoruser/majorjobreqlist.php">Major Job Request</a>
-                            <a class="dropdown-item" href="../../../php/buildingdept/reservation/buildingdeptreservation.php">Reservation</a>
+                            <a class="dropdown-item" href="../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="../../../php/admin/reservations/adminreservations.php">Reservations</a>  
                         </ul>
                     </div>
                 </li>
                 <li>
-                    <a href="../../../php/buildingdept/generatereports/generatereports.php">
-                        <i class='bx bx-food-menu'></i>
-                        <span class="link_name">Generate Report</span>
+                    <a href="../../../php/admin/equipments/adminequipment.php">
+                        <i class='bx bx-wrench'></i>
+                        <span class="link_name">Facilities Equipment</span>
                     </a>
                 </li>
+                <li>
+                        <a href="../../../php/admin/generatereports/generatereports.php">
+                            <i class='bx bx-food-menu'></i>
+                            <span class="link_name">Generate Report</span>
+                        </a>
+                    </li>
             </ul>
             <div class="profile_content">
                 <div class="profile">
