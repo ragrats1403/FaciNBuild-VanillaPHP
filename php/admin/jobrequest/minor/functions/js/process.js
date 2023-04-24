@@ -344,6 +344,8 @@ $(document).on('click', '.btnprint', function(event) {
     });
 });
 
+
+
 //edit button control 
 $(document).on('click', '.editBtn', function(event) {
     var id = $(this).data('id');
