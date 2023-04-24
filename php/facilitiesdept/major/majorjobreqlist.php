@@ -525,6 +525,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                         <option value="PLUMBING">PLUMBING</option>
                                         <option value="AIRCON">AIRCON</option>
                                         <option value="ELECTRICAL">ELECTRICAL</option>
+                                        <option value="HOUSEKEEPING">HOUSEKEEPING</option>
                                     </select>
                                 </div>
                             </div>

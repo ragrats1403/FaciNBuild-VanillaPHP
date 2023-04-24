@@ -1,6 +1,9 @@
 <?php include('../../connection/connection.php');
+$section = $_POST['section'];
 $department = $_POST['department'];
-$sql = "SELECT * FROM `minorjreq` WHERE `department` = '$department'";
+$datestart = $_POST['datestart'];
+$dateend = $_POST['dateend'];
+$sql = "SELECT * FROM `minorjreq` WHERE `section` = '$section' AND `datesubmitted` BETWEEN '$datestart' AND '$dateend' AND `department` = '$department'";
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
 
@@ -12,6 +15,7 @@ if (isset($_POST['order'])) {
 } else {
     $sql .= "ORDER BY minorjobid ASC";
 }
+
 
 
 if ($_POST['length'] != -1) {

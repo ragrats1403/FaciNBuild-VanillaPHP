@@ -55,7 +55,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservations/functions/notification.php",
+                    url: "../reservation/functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -114,7 +114,7 @@ require_once('../../authentication/anti_pagetrans.php');
             markAsReadButton.addEventListener("click", function(event) {
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservations/functions/update_notification.php",
+                    url: "../reservation/functions/update_notification.php",
                     type: 'POST',
                     data: {
                         department: department,
@@ -143,48 +143,47 @@ require_once('../../authentication/anti_pagetrans.php');
 </header>
 
 <body onload="fetchNotifications();">
-<div class="sidebar">
+    <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../images/Black_logo.png" />
+                <img src="../../../../images/Brown_logo_faci.png" />
             </div>
         </div>
-
         <div class="navdiv">
             <ul class="nav_list">
                 <li>
-                    <a href="../../../php/admin/reservations/admincalendar.php">
+                    <a href="../../../php/buildingdept/buildingcalendar.php">
                         <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../../php/admin/accounts/admin_account.php">
-                        <i class='bx bx-user'></i>
-                        <span class="link_name">Account</span>
-                    </a>
+                    <div class="dropdown">
+                        <i class='bx bx-notepad' style="margin-left:17px;"></i>
+                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Manage Request
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="../../../php/buildingdept/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
+                        </ul>
+                    </div>
                 </li>
                 <li>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
                         <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Create/Manage Request
+                            View/Create Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/admin/jobrequest/minor/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../php/admin/jobrequest/major/majorjobreqlist.php">Major Job Request</a>
-                            <a class="dropdown-item" href="../../../php/admin/reservations/adminreservations.php">Reservations</a>
+                            <a class="dropdown-item" href="../../../php/buildingdept/minoruser/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../php/buildingdept/majoruser/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="../../../php/buildingdept/reservation/buildingdeptreservation.php">Reservation</a>
                         </ul>
                     </div>
                 </li>
                 <li>
-                    <a href="../../../php/admin/equipments/adminequipment.php">
-                        <i class='bx bx-wrench'></i>
-                        <span class="link_name">Facilities Equipment</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../../php/admin/generatereports/generatereports.php">
+                    <a href="../../../php/buildingdept/generatereports/generatereports.php">
                         <i class='bx bx-food-menu'></i>
                         <span class="link_name">Generate Report</span>
                     </a>
@@ -196,7 +195,7 @@ require_once('../../authentication/anti_pagetrans.php');
                         <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
                             <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
-                            <div class="role">Administrator</div>
+                            <div class="role">Building Department</div>
                         </div>
                     </div>
                     <a href="../../../../logout.php">
@@ -206,6 +205,25 @@ require_once('../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
+    <div id="loading-overlay"></div>
+    <style>
+        #loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background-color: rgba(255, 255, 255, 0.8);
+        /* add additional styles here as needed */
+        }
+    </style>
+    <script>
+        window.addEventListener("load", function() {
+        var loadingOverlay = document.getElementById("loading-overlay");
+        loadingOverlay.style.display = "none";
+        });
+    </script>
     <!--<script>
         let btn = document.querySelector("#btn");
         let sidebar = document.querySelector(".sidebar");
@@ -230,28 +248,99 @@ require_once('../../authentication/anti_pagetrans.php');
                             </div>
                             <div class="row">
                                 <div class="col-md-3" onMouseDown="return false;" onSelectStart="return false;">
-                                    <input class="form-check-input" type="checkbox" id="minorDivCheckdefault" onclick="myFunction('minorDiv', 'minortable', 'minorfetch.php')" onchange = "onchangeval('minorDiv', 'minordatestart', 'minordateend');">
-                                    <label class="form-check-label" for="minorDivCheckdefault"> Minor Job Request </label>
+                                    <input class="form-check-input" type="checkbox" id="minorDivCheckdefault" onclick="myFunction('minorDiv', 'minortable', 'minorfetch.php', 'minordatestart', 'minordateend','selectminordept', 'selectminorsect', 'minorfiltersectionCheck', 'minorfilterdeptCheck')" onchange = "onchangeval('minorDiv', 'minordatestart', 'minordateend', 'minorfiltersectionCheck', 'minorfilterdeptCheck', 'selectminorsect','selectminordept');">
+                                    <label class="form-check-label"> Minor Job Request </label>
 
                                     <br>
                                         <label class="fw-bold" for="date">Date Start:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="minordatestart" placeholder="Date Filed" onchange="myFunction('minorDiv', 'minortable', 'minorfetchdate.php')" disabled>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="minordatestart" placeholder="Date Filed" onchange="myFunction('minorDiv', 'minortable', 'minorfetchdate.php','minordatestart','minordateend', 'selectminordept', 'selectminorsect', 'minorfiltersectionCheck', 'minorfilterdeptCheck')" disabled>
                                     
                                     
                                         <label class="fw-bold" for="date">Date End:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="minordateend" placeholder="Date Filed" onchange="myFunction('minorDiv', 'minortable', 'minorfetchdate.php')" disabled>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="minordateend" placeholder="Date Filed" onchange="myFunction('minorDiv', 'minortable', 'minorfetchdate.php','minordatestart','minordateend', 'selectminordept', 'selectminorsect', 'minorfiltersectionCheck', 'minorfilterdeptCheck')" disabled>
+                                    
+                                </div>
+                                <div class="col-md-3">
+                                <br>
+                                    <input class="form-check-input" type="checkbox" id="minorfiltersectionCheck" onclick="" onchange = "onsectioncheck('minorDiv');"disabled>
+                                    <label class="form-check-label" >Filter By Section</label>
+                                    
+                                    <br>
+                                        <select class="form-control input-sm col-xs-1" name="sections" id="selectminorsect" onchange="filterbysection('minorDiv','minortable');" disabled>
+                                            <option selected value="" hidden>--Select Section--</option>
+                                            <option value="C">CARPENTRY</option>
+                                            <option value="P">PLUMBING</option>
+                                            <option value="A">AIRCON</option>
+                                            <option value="E">ELECTRICAL</option>
+                                            <option value="H">HOUSEKEEPING</option>
+                                        </select>
+
+                                        <input class="form-check-input" type="checkbox" id="minorfilterdeptCheck" onclick="" onchange = "ondeptcheck('minorDiv');" disabled>
+                                        <label class="form-check-label" >Filter By Department</label>
+
+                                    <br>
+                                        <select class="form-control input-sm col-xs-1" name="sections" id="selectminordept" onchange="filterbydept('minorDiv','minortable');"disabled>
+                                            <option selected value hidden>--Select Department--</option>
+                                            <?php include('../../connection/connection.php');
+                                                $sql = "SELECT department FROM users WHERE department != 'Administrator'";
+                                                $query = mysqli_query($con, $sql);
+                                                $i = 1;
+                                                while ($row = mysqli_fetch_assoc($query)) {
+                                                    echo "<option value=$i>" . $row["department"] . "</option>";
+                                                    $i++;
+                                                }
+                                                ?>
+                                        </select>
                                     
                                 </div>
                                 <div class="col-md-3" onMouseDown="return false;" onSelectStart="return false;">
-                                    <input class="form-check-input" type="checkbox" value="" id="majorDivCheckDefault" onclick="myFunction('majorDiv', 'majortable', 'majorfetch.php')" onchange = "onchangeval('majorDiv', 'majordatestart', 'majordateend');">
+                                    
+                                    
+                                </div>
+                                <div class="col-md-3" onMouseDown="return false;" onSelectStart="return false;" style="margin-left: -25%;">
+                                    <input class="form-check-input" type="checkbox" value="" id="majorDivCheckDefault" onclick="myFunction('majorDiv', 'majortable', 'majorfetch.php', 'majordatestart', 'majordateend','selectmajordept', 'selectmajorsect', 'majorfiltersectionCheck', 'majorfilterdeptCheck')" onchange = "onchangeval('majorDiv', 'majordatestart', 'majordateend', 'majorfiltersectionCheck', 'majorfilterdeptCheck', 'selectmajorsect','selectmajordept');">
                                     <label class="form-check-label" for="majorDivCheckDefault"> Major Job Request </label>
                                     <br>
                                         <label class="fw-bold" for="date">Date Start:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="majordatestart" placeholder="Date Filed" onchange="myFunction('majorDiv', 'majortable', 'majorfetchdate.php')" disabled>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="majordatestart" placeholder="Date Filed" onchange="myFunction('majorDiv', 'majortable', 'majorfetch.php', 'majordatestart', 'majordateend','selectmajordept', 'selectmajorsect', 'majorfiltersectionCheck', 'majorfilterdeptCheck')" disabled>
                                         <label class="fw-bold" for="date">Date End:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="majordateend" placeholder="Date Filed" onchange="myFunction('majorDiv', 'majortable', 'majorfetchdate.php')" disabled>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="majordateend" placeholder="Date Filed" onchange="myFunction('majorDiv', 'majortable', 'majorfetch.php', 'majordatestart', 'majordateend','selectmajordept', 'selectmajorsect', 'majorfiltersectionCheck', 'majorfilterdeptCheck')" disabled>
+                                </div>
+                                <div class="col-md-3">
+                                <br>
+                                    <input class="form-check-input" type="checkbox" id="majorfiltersectionCheck" onclick="" onchange = "monsectioncheck('majorDiv');" disabled > 
+                                    <label class="form-check-label" for="majorfiltersectionCheck">Filter By Section</label>
+                                    
+                                    <br>
+                                        <select class="form-control input-sm col-xs-1" name="sections" id="selectmajorsect" onchange="mfilterbysection('majorDiv','majortable');" disabled>
+                                            <option selected value="" hidden>--Select Section--</option>
+                                            <option value="C">CARPENTRY</option>
+                                            <option value="P">PLUMBING</option>
+                                            <option value="A">AIRCON</option>
+                                            <option value="E">ELECTRICAL</option>
+                                            <option value="H">HOUSEKEEPING</option>
+                                        </select>
+
+                                        <input class="form-check-input" type="checkbox" id="majorfilterdeptCheck" onclick="" onchange = "mondeptcheck('majorDiv');" disabled>
+                                        <label class="form-check-label" for="majorfilterdeptCheck">Filter By Department</label>
+
+                                    <br>
+                                        <select class="form-control input-sm col-xs-1" name="sections" id="selectmajordept"  onchange="mfilterbydept('majorDiv','majortable');" disabled>
+                                            <option selected value hidden>--Select Department--</option>
+                                            <?php include('../../connection/connection.php');
+                                                $sql = "SELECT department FROM users WHERE department != 'Administrator'";
+                                                $query = mysqli_query($con, $sql);
+                                                $i = 1;
+                                                while ($row = mysqli_fetch_assoc($query)) {
+                                                    echo "<option value=$i>" . $row["department"] . "</option>";
+                                                    $i++;
+                                                }
+                                                ?>
+                                        </select>
+                                    
                                 </div>
                             </div>
+                            
                             <br>
                             <div class="col-md-2">
                                 <button class="btn btn-info" onclick="printDiv()">Print</button>
@@ -329,38 +418,1624 @@ require_once('../../authentication/anti_pagetrans.php');
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
-        function onchangeval(divID, datestart, dateend)
+
+        // minor functions start
+        function onchangeval(divID, datestart, dateend, minorsectchk, minordeptchk, minorsectsel, minordeptsel)
         {   
+           
             var dates = document.getElementById(datestart);
             var datee = document.getElementById(dateend);
+            var sectchkbox = document.getElementById(minorsectchk);
+            var deptchkbox = document.getElementById(minordeptchk);
+            var f = document.getElementById(minorsectsel);
+            var e = document.getElementById(minordeptsel);
+            dates.value = null;
+            datee.value = null;
+            
             var x = document.getElementById(divID);
-            if (x.style.display === "block") {
+            if(divID == 'minorDiv' || divID == 'majorDiv')
+            {
+                
+                if (x.style.display === "block") {
                     x.style.display = "none";
                     dates.disabled = true;
                     datee.disabled = true;
+                    sectchkbox.disabled = true;
+                    deptchkbox.disabled = true;
+                    sectchkbox.checked = false;
+                    deptchkbox.checked = false;
                     dates.value = null;
                     datee.value = null;
+                    f.disabled = true;
+                    e.disabled = true;
+                    
                 } else {
                     x.style.display = "block";
                     dates.disabled = false;
                     datee.disabled = false;
-                  
-                    
+                    sectchkbox.disabled = false;
+                    deptchkbox.disabled = false;
+                    sectchkbox.checked = false;
+                    deptchkbox.checked = false;
+                
+
+                }
             }
+
+
+            
+        }
+        function filterbydept(divID, tableid)
+        {
+                var e = document.getElementById("selectminordept");
+                var filterdeptval = e.options[e.selectedIndex].text;
+                var f = document.getElementById("selectminorsect");
+                var filtersectval = f.options[f.selectedIndex].text;
+                var sectselchk = document.getElementById("minorfiltersectionCheck");
+                var deptselchk = document.getElementById("minorfilterdeptCheck");
+                var tid = tableid;
+
+                if(filtersectval == '--Select Section--')
+                {
+                    if(divID == "minorDiv")
+                    {
+                        
+                        var dates = document.getElementById("minordatestart").value;
+                        var datee = document.getElementById("minordateend").value;
+                        console.log(dates);
+                        console.log(datee);
+                        if(dates == '' || datee == '' || dates == null || datee == null)
+                        {
+                            console.log("line executed");
+                            $('#' + tid).DataTable().clear().destroy();
+                            $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'filterdeptfetch.php',
+                                'type': 'post',
+                                'data':{
+                                    department:filterdeptval,
+                                },
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                        }
+                        else
+                        {
+                            console.log("line2 executed");
+                            $('#' + tid).DataTable().clear().destroy();
+                            $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'filterdeptwdate.php',
+                                'type': 'post',
+                                'data':{
+                                    department:filterdeptval,
+                                    datestart:dates,
+                                    dateend:datee,
+
+                                },
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                        }
+                    }
+                }
+                else
+                {
+                    if(divID == "minorDiv")
+                        {       
+                        var dates = document.getElementById("minordatestart").value;
+                        var datee = document.getElementById("minordateend").value;
+                        console.log(dates);
+                        console.log(datee);
+                        if(dates == '' || datee == '' || dates == null || datee == null)
+                        {
+                            console.log("line executed");
+                            $('#' + tid).DataTable().clear().destroy();
+                            $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'filtersectdeptfetch.php',
+                                'type': 'post',
+                                'data':{
+                                    section:filtersectval,
+                                    department: filterdeptval,
+                                },
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                        }
+                        else
+                        {
+                            console.log("line2 executed");
+                            $('#' + tid).DataTable().clear().destroy();
+                            $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'filtersectwdeptdate.php',
+                                'type': 'post',
+                                'data':{
+                                    section:filtersectval,
+                                    department: filterdeptval,
+                                    datestart:dates,
+                                    dateend:datee,
+
+                                },
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                        }
+                       
+                    }
+                }
+                if ((dates !== undefined && dates !== null && dates !== '') ||
+                        (datee !== undefined && datee !== null && datee !== '')) 
+                        {
+
+                            if (sectselchk.checked && deptselchk.checked) {
+                                console.log("line2 executed");
+                                    $('#' + tid).DataTable().clear().destroy();
+                                    $('#' + tid).DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'filtersectwdeptdate.php',
+                                        'type': 'post',
+                                        'data':{
+                                            section:filtersectval,
+                                            department: filterdeptval,
+                                            datestart:dates,
+                                            dateend:datee,
+
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                });
+                            }
+
+                                if (!sectselchk.checked && deptselchk.checked) {
+                                    $('#' + tid).DataTable().clear().destroy();
+                                        $('#' + tid).DataTable({
+                                        'searching': false,
+                                        'serverSide': true,
+                                        'processing': true,
+                                        'autoWidth': true,
+                                        'paging': false,
+                                        'info': false,
+                                        'order': [],
+                                        'ajax': {
+                                            'url': 'filterdeptwdate.php',
+                                            'type': 'post',
+                                            'data':{
+                                                department:filterdeptval,
+                                                datestart:dates,
+                                                dateend:datee,
+
+                                            },
+                                        },
+                                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                            $(nRow).attr('id', aData[0]);
+                                        },
+                                        'columnDefs': [{
+                                                'target': [0, 4],
+                                                'orderable': false,
+                                            },
+                                            {
+                                                'width': '5%',
+                                                'targets': 0
+                                            }, // set 30% width for first column
+                                            {
+                                                'width': '5%',
+                                                'targets': 2
+                                            },
+                                            {
+                                                'width': '7%',
+                                                'targets': 3
+                                            },
+                                            {
+                                                'width': '5%',
+                                                'targets': 6
+                                            },
+                                            {
+                                                'width': '5%',
+                                                'targets': 7
+                                            },
+                                        ],
+                                        scrollCollapse: false,
+                                        paging: false
+                                    }); 
+                                }
+                                if (sectselchk.checked && !deptselchk.checked) {
+                                    $('#' + tid).DataTable().clear().destroy();
+                                        $('#minortable').DataTable({
+                                        'searching': false,
+                                        'serverSide': true,
+                                        'processing': true,
+                                        'autoWidth': true,
+                                        'paging': false,
+                                        'info': false,
+                                        'order': [],
+                                        'ajax': {
+                                            'url': 'filtersectwdate.php',
+                                            'type': 'post',
+                                            'data':{
+                                                section:filtersectval,
+                                                datestart:dates,
+                                                dateend:datee,
+
+                                            },
+                                        },
+                                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                            $(nRow).attr('id', aData[0]);
+                                        },
+                                        'columnDefs': [{
+                                                'target': [0, 4],
+                                                'orderable': false,
+                                            },
+                                            {
+                                                'width': '5%',
+                                                'targets': 0
+                                            }, // set 30% width for first column
+                                            {
+                                                'width': '5%',
+                                                'targets': 2
+                                            },
+                                            {
+                                                'width': '7%',
+                                                'targets': 3
+                                            },
+                                            {
+                                                'width': '5%',
+                                                'targets': 6
+                                            },
+                                            {
+                                                'width': '5%',
+                                                'targets': 7
+                                            },
+                                        ],
+                                        scrollCollapse: false,
+                                        paging: false
+                                    });
+                                }
+                        }
+                        if ((dates == undefined && dates == null && dates == '') ||
+                            (datee == undefined && datee == null && datee == '')) {
+                            if(sectselchk.checked && deptselchk.checked) {
+                                $('#' + tid).DataTable().clear().destroy();
+                                    $('#' + tid).DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'filtersectdeptfetch.php',
+                                        'type': 'post',
+                                        'data':{
+                                            section:filtersectval,
+                                            department: filterdeptval,
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                });
+                            }
+                            if(!sectselchk.checked && deptselchk.checked){
+                                $('#' + tid).DataTable().clear().destroy();
+                                    $('#' + tid).DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'filterdeptfetch.php',
+                                        'type': 'post',
+                                        'data':{
+                                            department:filterdeptval,
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                });
+                            }
+                            if(sectselchk.checked && !deptselchk.checked)
+                            {
+                                $('#' + tid).DataTable().clear().destroy();
+                                    $('#' + tid).DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'filtersectfetch.php',
+                                        'type': 'post',
+                                        'data':{
+                                            section:filtersectval,
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                });
+                            }
+
+                        }     
+        }
+            
+        function filterbysection(divID, tableid)
+        {
+                var e = document.getElementById("selectminordept");
+                var filterdeptval = e.options[e.selectedIndex].text;
+                var f = document.getElementById("selectminorsect");
+                var filtersectval = f.options[f.selectedIndex].text;
+                var sectselchk = document.getElementById("minorfiltersectionCheck");
+                var deptselchk = document.getElementById("minorfilterdeptCheck");
+                var tid = tableid;
+
+                if(filterdeptval == '--Select Department--')
+                {
+                    if(divID == "minorDiv")
+                    {       
+                    var dates = document.getElementById("minordatestart").value;
+                    var datee = document.getElementById("minordateend").value;
+                    console.log(dates);
+                    console.log(datee);
+                    if(dates == '' || datee == '' || dates == null || datee == null)
+                    {
+                        console.log("line executed");
+                        $('#' + tid).DataTable().clear().destroy();
+                        $('#' + tid).DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                            'url': 'filtersectfetch.php',
+                            'type': 'post',
+                            'data':{
+                                section:filtersectval,
+                            },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                            $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                                'target': [0, 4],
+                                'orderable': false,
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 0
+                            }, // set 30% width for first column
+                            {
+                                'width': '5%',
+                                'targets': 2
+                            },
+                            {
+                                'width': '7%',
+                                'targets': 3
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 6
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 7
+                            },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                    });
+                    }
+                    else
+                    {
+                        console.log("line2 executed");
+                        $('#' + tid).DataTable().clear().destroy();
+                        $('#' + tid).DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                            'url': 'filtersectwdate.php',
+                            'type': 'post',
+                            'data':{
+                                section:filtersectval,
+                                datestart:dates,
+                                dateend:datee,
+
+                            },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                            $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                                'target': [0, 4],
+                                'orderable': false,
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 0
+                            }, // set 30% width for first column
+                            {
+                                'width': '5%',
+                                'targets': 2
+                            },
+                            {
+                                'width': '7%',
+                                'targets': 3
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 6
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 7
+                            },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                    });
+                    }
+                    
+                    }
+                }
+                else{
+                        if(divID == "minorDiv")
+                        {       
+                        var dates = document.getElementById("minordatestart").value;
+                        var datee = document.getElementById("minordateend").value;
+                        console.log(dates);
+                        console.log(datee);
+                        if(dates == '' || datee == '' || dates == null || datee == null)
+                        {
+                            console.log("line executed");
+                            $('#' + tid).DataTable().clear().destroy();
+                            $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'filtersectdeptfetch.php',
+                                'type': 'post',
+                                'data':{
+                                    section:filtersectval,
+                                    department: filterdeptval,
+                                },
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                        }
+                        else
+                        {
+                            console.log("line2 executed");
+                            $('#' + tid).DataTable().clear().destroy();
+                            $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'filtersectwdeptdate.php',
+                                'type': 'post',
+                                'data':{
+                                    section:filtersectval,
+                                    department: filterdeptval,
+                                    datestart:dates,
+                                    dateend:datee,
+
+                                },
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                        }
+                       
+                    }
+
+                }
+
+                if ((dates !== undefined && dates !== null && dates !== '') ||
+                        (datee !== undefined && datee !== null && datee !== '')) 
+                    {
+
+                        if (sectselchk.checked && deptselchk.checked) {
+                            console.log("line2 executed");
+                                $('#' + tid).DataTable().clear().destroy();
+                                $('#' + tid).DataTable({
+                                'searching': false,
+                                'serverSide': true,
+                                'processing': true,
+                                'autoWidth': true,
+                                'paging': false,
+                                'info': false,
+                                'order': [],
+                                'ajax': {
+                                    'url': 'filtersectwdeptdate.php',
+                                    'type': 'post',
+                                    'data':{
+                                        section:filtersectval,
+                                        department: filterdeptval,
+                                        datestart:dates,
+                                        dateend:datee,
+
+                                    },
+                                },
+                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                    $(nRow).attr('id', aData[0]);
+                                },
+                                'columnDefs': [{
+                                        'target': [0, 4],
+                                        'orderable': false,
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 0
+                                    }, // set 30% width for first column
+                                    {
+                                        'width': '5%',
+                                        'targets': 2
+                                    },
+                                    {
+                                        'width': '7%',
+                                        'targets': 3
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 6
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 7
+                                    },
+                                ],
+                                scrollCollapse: false,
+                                paging: false
+                            });
+                        }
+
+                            if (!sectselchk.checked && deptselchk.checked) {
+                                $('#' + tid).DataTable().clear().destroy();
+                                    $('#' + tid).DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'filterdeptwdate.php',
+                                        'type': 'post',
+                                        'data':{
+                                            department:filterdeptval,
+                                            datestart:dates,
+                                            dateend:datee,
+
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                }); 
+                            }
+                            if (sectselchk.checked && !deptselchk.checked) {
+                                $('#' + tid).DataTable().clear().destroy();
+                                    $('#minortable').DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'filtersectwdate.php',
+                                        'type': 'post',
+                                        'data':{
+                                            section:filtersectval,
+                                            datestart:dates,
+                                            dateend:datee,
+
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                });
+                            }
+                    }
+                    if ((dates == undefined && dates == null && dates == '') ||
+                        (datee == undefined && datee == null && datee == '')) {
+                        if(sectselchk.checked && deptselchk.checked) {
+                            $('#' + tid).DataTable().clear().destroy();
+                                $('#' + tid).DataTable({
+                                'searching': false,
+                                'serverSide': true,
+                                'processing': true,
+                                'autoWidth': true,
+                                'paging': false,
+                                'info': false,
+                                'order': [],
+                                'ajax': {
+                                    'url': 'filtersectdeptfetch.php',
+                                    'type': 'post',
+                                    'data':{
+                                        section:filtersectval,
+                                        department: filterdeptval,
+                                    },
+                                },
+                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                    $(nRow).attr('id', aData[0]);
+                                },
+                                'columnDefs': [{
+                                        'target': [0, 4],
+                                        'orderable': false,
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 0
+                                    }, // set 30% width for first column
+                                    {
+                                        'width': '5%',
+                                        'targets': 2
+                                    },
+                                    {
+                                        'width': '7%',
+                                        'targets': 3
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 6
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 7
+                                    },
+                                ],
+                                scrollCollapse: false,
+                                paging: false
+                            });
+                        }
+                        if(!sectselchk.checked && deptselchk.checked){
+                            $('#' + tid).DataTable().clear().destroy();
+                                $('#' + tid).DataTable({
+                                'searching': false,
+                                'serverSide': true,
+                                'processing': true,
+                                'autoWidth': true,
+                                'paging': false,
+                                'info': false,
+                                'order': [],
+                                'ajax': {
+                                    'url': 'filterdeptfetch.php',
+                                    'type': 'post',
+                                    'data':{
+                                        department:filterdeptval,
+                                    },
+                                },
+                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                    $(nRow).attr('id', aData[0]);
+                                },
+                                'columnDefs': [{
+                                        'target': [0, 4],
+                                        'orderable': false,
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 0
+                                    }, // set 30% width for first column
+                                    {
+                                        'width': '5%',
+                                        'targets': 2
+                                    },
+                                    {
+                                        'width': '7%',
+                                        'targets': 3
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 6
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 7
+                                    },
+                                ],
+                                scrollCollapse: false,
+                                paging: false
+                            });
+                        }
+                        if(sectselchk.checked && !deptselchk.checked)
+                        {
+                            $('#' + tid).DataTable().clear().destroy();
+                                $('#' + tid).DataTable({
+                                'searching': false,
+                                'serverSide': true,
+                                'processing': true,
+                                'autoWidth': true,
+                                'paging': false,
+                                'info': false,
+                                'order': [],
+                                'ajax': {
+                                    'url': 'filtersectfetch.php',
+                                    'type': 'post',
+                                    'data':{
+                                        section:filtersectval,
+                                    },
+                                },
+                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                    $(nRow).attr('id', aData[0]);
+                                },
+                                'columnDefs': [{
+                                        'target': [0, 4],
+                                        'orderable': false,
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 0
+                                    }, // set 30% width for first column
+                                    {
+                                        'width': '5%',
+                                        'targets': 2
+                                    },
+                                    {
+                                        'width': '7%',
+                                        'targets': 3
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 6
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 7
+                                    },
+                                ],
+                                scrollCollapse: false,
+                                paging: false
+                            });
+                        }
+
+                    }
+
+                
+        }
+        function onsectioncheck(divID)
+        {
+                var e = document.getElementById("selectminorsect");
+                var filtersectval = e.options[e.selectedIndex].text;
+                var sectselchk = document.getElementById("minorfiltersectionCheck");
+                var sectsel = document.getElementById("selectminorsect");
+                var dates = document.getElementById("minordatestart").value;
+                var datee = document.getElementById("minordateend").value;
+                var e = document.getElementById("selectminordept");
+                var filterdeptval = e.options[e.selectedIndex].text;
+                var option = document.createElement("option");
+                option.text = '--Select Section--';
+                option.hidden = true;
+                option.disabled = true;
+                option.selected = true;
+                sectsel.add(option);
+                if (!sectselchk.checked) {
+                    sectsel.disabled = true;
+                    console.log("else executed");
+                    if(filterdeptval == '--Select Department--' && filtersectval == '--Select Section--')
+                    {                   
+                        if(dates == '' || datee == '' || dates == null || datee == null)
+                        {
+                            $('#minortable').DataTable().clear().destroy();
+                            $('#minortable').DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'minorfetch.php',
+                                'type': 'post',
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                        }   
+                    }
+
+                    if(filtersectval != '--Select Section--' &&  filterdeptval == '--Select Department--')
+                {
+                        $('#minortable').DataTable().clear().destroy();
+                        $('#minortable').DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                            'url': 'filtersectwdate.php',
+                            'type': 'post',
+                            'data':{
+                                section:filtersectval,
+                                datestart:dates,
+                                dateend:datee,
+
+                            },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                            $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                                'target': [0, 4],
+                                'orderable': false,
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 0
+                            }, // set 30% width for first column
+                            {
+                                'width': '5%',
+                                'targets': 2
+                            },
+                            {
+                                'width': '7%',
+                                'targets': 3
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 6
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 7
+                            },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                    });
+                }
+                if(!sectselchk.checked &&  filterdeptval != '--Select Department--')
+                {
+                        $('#minortable').DataTable().clear().destroy();
+                        $('#minortable').DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                            'url': 'filterdeptwdate.php',
+                            'type': 'post',
+                            'data':{
+                                department:filterdeptval,
+                                datestart:dates,
+                                dateend:datee,
+
+                            },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                            $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                                'target': [0, 4],
+                                'orderable': false,
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 0
+                            }, // set 30% width for first column
+                            {
+                                'width': '5%',
+                                'targets': 2
+                            },
+                            {
+                                'width': '7%',
+                                'targets': 3
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 6
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 7
+                            },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                    });
+                }
+                } 
+                else{
+                    sectsel.disabled = false;
+
+                    if(dates == '' || datee == '' || dates == null || datee == null)
+                        {
+                            if(divID == "minorDiv")
+
+                            {
+                                console.log("line executed");
+                                    $('#minortable').DataTable().clear().destroy();
+                                    $('#minortable').DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'filtersectfetch.php',
+                                        'type': 'post',
+                                        'data':{
+                                            section:filtersectval,
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                });
+                            }
+                            
+                        }
+                        else
+                        {
+                            if(divID == "minorDiv")
+
+                            {
+                                console.log("line2 executed");
+                                $('#minortable').DataTable().clear().destroy();
+                                $('#minortable').DataTable({
+                                'searching': false,
+                                'serverSide': true,
+                                'processing': true,
+                                'autoWidth': true,
+                                'paging': false,
+                                'info': false,
+                                'order': [],
+                                'ajax': {
+                                    'url': 'filtersectwdate.php',
+                                    'type': 'post',
+                                    'data':{
+                                        section:filtersectval,
+                                        datestart:dates,
+                                        dateend:datee,
+
+                                    },
+                                },
+                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                    $(nRow).attr('id', aData[0]);
+                                },
+                                'columnDefs': [{
+                                        'target': [0, 4],
+                                        'orderable': false,
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 0
+                                    }, // set 30% width for first column
+                                    {
+                                        'width': '5%',
+                                        'targets': 2
+                                    },
+                                    {
+                                        'width': '7%',
+                                        'targets': 3
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 6
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 7
+                                    },
+                                ],
+                                scrollCollapse: false,
+                                paging: false
+                            });
+                            }
+                            
+                        }
+                }
+
+        }
+        function ondeptcheck(divID)
+        {
+                var deptselchk = document.getElementById("minorfilterdeptCheck");
+                var deptsel = document.getElementById("selectminordept");
+                var dates = document.getElementById("minordatestart").value;
+                var datee = document.getElementById("minordateend").value;
+                var option = document.createElement("option");
+                option.text = '--Select Department--';
+                option.hidden = true;
+                option.disabled = true;
+                option.selected = true;
+                deptsel.add(option);
+                if(deptselchk.checked == true)
+                {
+                    deptsel.disabled = false;
+                }
+                else{
+                    deptsel.disabled = true;
+                    if(dates == null || datee == null || dates == '' || datee == '')
+                    {
+                        if (divID == "minorDiv") {
+                        $('#minortable').DataTable().clear().destroy();
+                        $('#minortable').DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'minorfetch.php',
+                                'type': 'post',
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+
+
+                        }
+                    }
+                    else
+                    {
+
+                        if (divID == "minorDiv") {
+                            $('#minortable').DataTable().clear().destroy();
+                            $('#minortable').DataTable({
+                                'searching': false,
+                                'serverSide': true,
+                                'processing': true,
+                                'autoWidth': true,
+                                'paging': false,
+                                'info': false,
+                                'order': [],
+                                'ajax': {
+                                    'url': 'minorfetchdate.php',
+                                    'type': 'post',
+                                        'data': {
+                                        datestart: dates,
+                                        dateend: datee,
+                                    },
+                                },
+                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                    $(nRow).attr('id', aData[0]);
+                                },
+                                'columnDefs': [{
+                                        'target': [0, 4],
+                                        'orderable': false,
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 0
+                                    }, // set 30% width for first column
+                                    {
+                                        'width': '5%',
+                                        'targets': 2
+                                    },
+                                    {
+                                        'width': '7%',
+                                        'targets': 3
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 6
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 7
+                                    },
+                                ],
+                                scrollCollapse: false,
+                                paging: false
+                            });
+                        }
+                    }
+                }
         }
 
-        function myFunction(divID, tableid, fetchdataid) {
+        function myFunction(divID, tableid, fetchdataid, datestart, dateend, selectdept, selectsect, sectionchk, deptchk) {
             var x = document.getElementById(divID);
             var tid = tableid;
             var fdid = fetchdataid;
-            var dates = document.getElementById("minordatestart").value;
-            var datee = document.getElementById("minordateend").value;
+            var dates = document.getElementById(datestart).value;
+            var datee = document.getElementById(dateend).value;
             var ndates = document.getElementById("majordatestart").value;
             var ndatee = document.getElementById("majordateend").value;
-            
-            if(dates == null || datee == null)
+            var e = document.getElementById(selectdept);
+            var filterdeptval = e.options[e.selectedIndex].text;
+            var f = document.getElementById(selectsect);
+            var filtersectval = f.options[f.selectedIndex].text;
+            var sectselchk = document.getElementById(sectionchk);
+            var deptselchk = document.getElementById(deptchk);
+            //console.log(filterdeptval, filtersectval, dates, datee);
+            if(dates == null || datee == null || dates == '' || datee == '' && filterdeptval == '--Select Department--' && filtersectval == '--Select Section--')
             {
-                    if (divID == "minorDiv") {
+                //alert("executed");
+                if (divID == "minorDiv") {
                     $('#' + tid).DataTable().clear().destroy();
                     $('#' + tid).DataTable({
                         'searching': false,
@@ -453,10 +2128,11 @@ require_once('../../authentication/anti_pagetrans.php');
                 }
  
             }
-            else
-            {
-
-                    if (divID == "minorDiv") {
+            try{
+                if ((dates && datee) || (dates !== '' || datee !== '') && (dates !== null || datee !== null))
+                {
+                    
+                    if (divID == "minorDiv" || divID == "majorDiv") {
                         $('#' + tid).DataTable().clear().destroy();
                         $('#' + tid).DataTable({
                             'searching': false,
@@ -506,9 +2182,415 @@ require_once('../../authentication/anti_pagetrans.php');
                             paging: false
                         });
                     }
-                    if (divID == "majorDiv") {
+                }
+
+            }
+            catch (e)
+            {
+                console.error('Datatables Error:', e);
+            }
+            
+                    
+           
+            
+
+            if(filterdeptval != '--Select Department--')
+            {
+                if(dates != null || datee != null || dates != '' || datee != '')
+                {
+                    if (divID == "minorDiv")
+                    {
+                        filterbydept('minorDiv','minortable');
+                    }
+                    
+                    if(divID == "majorDiv")
+                    {
+                        mfilterbydept('majorDiv','majortable');
+                    }
+                    
+                }
+                
+            }
+
+            if(filtersectval != '--Select Section--')
+            {
+                if(dates != null || datee != null || dates != '' || datee != '')
+                {
+
+                    if (divID == "minorDiv")
+                    {
+                        filterbysection('minorDiv','minortable')
+                    }
+                    
+                    if(divID == "majorDiv")
+                    {
+                        mfilterbysection('majorDiv','majortable')
+                    }
+
+                    
+                    
+                }
+                
+            }
+            if ((dates !== undefined && dates !== null && dates !== '') ||
+                (datee !== undefined && datee !== null && datee !== '')) {
+                    if (divID == "minorDiv")
+                    {
+                        if (sectselchk.checked && deptselchk.checked) {
+
                         $('#' + tid).DataTable().clear().destroy();
                         $('#' + tid).DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                            'url': 'filtersectwdeptdate.php',
+                            'type': 'post',
+                            'data':{
+                                section:filtersectval,
+                                department: filterdeptval,
+                                datestart:dates,
+                                dateend:datee,
+
+                            },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                            $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                                'target': [0, 4],
+                                'orderable': false,
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 0
+                            }, // set 30% width for first column
+                            {
+                                'width': '5%',
+                                'targets': 2
+                            },
+                            {
+                                'width': '7%',
+                                'targets': 3
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 6
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 7
+                            },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                        });
+                        }
+
+                        if (!sectselchk.checked && deptselchk.checked) {
+                        $('#' + tid).DataTable().clear().destroy();
+                        $('#' + tid).DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                        'url': 'filterdeptwdate.php',
+                        'type': 'post',
+                        'data':{
+                            department:filterdeptval,
+                            datestart:dates,
+                            dateend:datee,
+
+                        },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                        $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                            'target': [0, 4],
+                            'orderable': false,
+                        },
+                        {
+                            'width': '5%',
+                            'targets': 0
+                        }, // set 30% width for first column
+                        {
+                            'width': '5%',
+                            'targets': 2
+                        },
+                        {
+                            'width': '7%',
+                            'targets': 3
+                        },
+                        {
+                            'width': '5%',
+                            'targets': 6
+                        },
+                        {
+                            'width': '5%',
+                            'targets': 7
+                        },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                        }); 
+                        }
+                        if (sectselchk.checked && !deptselchk.checked) {
+                        $('#' + tid).DataTable().clear().destroy();
+                        $('#minortable').DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                        'url': 'filtersectwdate.php',
+                        'type': 'post',
+                        'data':{
+                            section:filtersectval,
+                            datestart:dates,
+                            dateend:datee,
+
+                        },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                        $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                            'target': [0, 4],
+                            'orderable': false,
+                        },
+                        {
+                            'width': '5%',
+                            'targets': 0
+                        }, // set 30% width for first column
+                        {
+                            'width': '5%',
+                            'targets': 2
+                        },
+                        {
+                            'width': '7%',
+                            'targets': 3
+                        },
+                        {
+                            'width': '5%',
+                            'targets': 6
+                        },
+                        {
+                            'width': '5%',
+                            'targets': 7
+                        },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                        });
+                        }
+                    }
+                    
+                    if(divID == "majorDiv")
+                    {
+                        if (sectselchk.checked && deptselchk.checked) {
+
+                        $('#' + tid).DataTable().clear().destroy();
+                        $('#' + tid).DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                            'url': 'mfiltersectwdeptdate.php',
+                            'type': 'post',
+                            'data':{
+                                section:filtersectval,
+                                department: filterdeptval,
+                                datestart:dates,
+                                dateend:datee,
+
+                            },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                            $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                                'target': [0, 4],
+                                'orderable': false,
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 0
+                            }, // set 30% width for first column
+                            {
+                                'width': '5%',
+                                'targets': 2
+                            },
+                            {
+                                'width': '7%',
+                                'targets': 3
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 6
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 7
+                            },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                        });
+                        }
+
+                        if (!sectselchk.checked && deptselchk.checked) {
+                        $('#' + tid).DataTable().clear().destroy();
+                        $('#' + tid).DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                        'url': 'mfilterdeptwdate.php',
+                        'type': 'post',
+                        'data':{
+                            department:filterdeptval,
+                            datestart:dates,
+                            dateend:datee,
+
+                        },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                        $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                            'target': [0, 4],
+                            'orderable': false,
+                        },
+                        {
+                            'width': '5%',
+                            'targets': 0
+                        }, // set 30% width for first column
+                        {
+                            'width': '5%',
+                            'targets': 2
+                        },
+                        {
+                            'width': '7%',
+                            'targets': 3
+                        },
+                        {
+                            'width': '5%',
+                            'targets': 6
+                        },
+                        {
+                            'width': '5%',
+                            'targets': 7
+                        },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                        }); 
+                        }
+                        if (sectselchk.checked && !deptselchk.checked) {
+                        $('#' + tid).DataTable().clear().destroy();
+                        $('#minortable').DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                        'url': 'mfiltersectwdate.php',
+                        'type': 'post',
+                        'data':{
+                            section:filtersectval,
+                            datestart:dates,
+                            dateend:datee,
+
+                        },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                        $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                            'target': [0, 4],
+                            'orderable': false,
+                        },
+                        {
+                            'width': '5%',
+                            'targets': 0
+                        }, // set 30% width for first column
+                        {
+                            'width': '5%',
+                            'targets': 2
+                        },
+                        {
+                            'width': '7%',
+                            'targets': 3
+                        },
+                        {
+                            'width': '5%',
+                            'targets': 6
+                        },
+                        {
+                            'width': '5%',
+                            'targets': 7
+                        },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                        });
+                        }
+                    }
+
+                }
+            
+        }
+
+        //minor function end
+
+
+        //major functions start
+        function mondeptcheck(divID)
+        {
+                var deptselchk = document.getElementById("majorfilterdeptCheck");
+                var deptsel = document.getElementById("selectmajordept");
+                var dates = document.getElementById("majordatestart").value;
+                var datee = document.getElementById("majordateend").value;
+                var option = document.createElement("option");
+                option.text = '--Select Department--';
+                option.hidden = true;
+                option.disabled = true;
+                option.selected = true;
+                deptsel.add(option);
+                if(deptselchk.checked == true)
+                {
+                    deptsel.disabled = false;
+                }
+                else{
+                    deptsel.disabled = true;
+                    if(dates == null || datee == null || dates == '' || datee == '')
+                    {
+                        if (divID == "majorDiv") {
+                        $('#majortable').DataTable().clear().destroy();
+                        $('#majortable').DataTable({
                             'searching': false,
                             'serverSide': true,
                             'processing': true,
@@ -517,11 +2599,551 @@ require_once('../../authentication/anti_pagetrans.php');
                             'info': false,
                             'order': [],
                             'ajax': {
-                                'url': fdid,
+                                'url': 'majorfetch.php',
                                 'type': 'post',
-                                'data': {
-                                    datestart: ndates,
-                                    dateend: ndatee,
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+
+
+                        }
+                    }
+                    else
+                    {
+
+                        if (divID == "majorDiv") {
+                            $('#majortable').DataTable().clear().destroy();
+                            $('#majortable').DataTable({
+                                'searching': false,
+                                'serverSide': true,
+                                'processing': true,
+                                'autoWidth': true,
+                                'paging': false,
+                                'info': false,
+                                'order': [],
+                                'ajax': {
+                                    'url': 'majorfetchdate.php',
+                                    'type': 'post',
+                                        'data': {
+                                        datestart: dates,
+                                        dateend: datee,
+                                    },
+                                },
+                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                    $(nRow).attr('id', aData[0]);
+                                },
+                                'columnDefs': [{
+                                        'target': [0, 4],
+                                        'orderable': false,
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 0
+                                    }, // set 30% width for first column
+                                    {
+                                        'width': '5%',
+                                        'targets': 2
+                                    },
+                                    {
+                                        'width': '7%',
+                                        'targets': 3
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 6
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 7
+                                    },
+                                ],
+                                scrollCollapse: false,
+                                paging: false
+                            });
+                        }
+                    }
+                }
+        }
+
+        function monsectioncheck(divID)
+        {
+                var e = document.getElementById("selectmajorsect");
+                var filtersectval = e.options[e.selectedIndex].text;
+                var sectselchk = document.getElementById("majorfiltersectionCheck");
+                var sectsel = document.getElementById("selectmajorsect");
+                var dates = document.getElementById("majordatestart").value;
+                var datee = document.getElementById("majordateend").value;
+                var e = document.getElementById("selectmajordept");
+                var filterdeptval = e.options[e.selectedIndex].text;
+                var option = document.createElement("option");
+                option.text = '--Select Section--';
+                option.hidden = true;
+                option.disabled = true;
+                option.selected = true;
+                sectsel.add(option);
+                if (!sectselchk.checked) {
+                    sectsel.disabled = true;
+                    console.log("else executed");
+                    if(filterdeptval == '--Select Department--' && filtersectval == '--Select Section--')
+                    {                   
+                        if(dates == '' || datee == '' || dates == null || datee == null)
+                        {
+                            $('#majortable').DataTable().clear().destroy();
+                            $('#majortable').DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'majorfetch.php',
+                                'type': 'post',
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                        }   
+                    }
+
+                    if(filtersectval != '--Select Section--' &&  filterdeptval == '--Select Department--')
+                {
+                        $('#majortable').DataTable().clear().destroy();
+                        $('#majortable').DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                            'url': 'mfiltersectwdate.php',
+                            'type': 'post',
+                            'data':{
+                                section:filtersectval,
+                                datestart:dates,
+                                dateend:datee,
+
+                            },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                            $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                                'target': [0, 4],
+                                'orderable': false,
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 0
+                            }, // set 30% width for first column
+                            {
+                                'width': '5%',
+                                'targets': 2
+                            },
+                            {
+                                'width': '7%',
+                                'targets': 3
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 6
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 7
+                            },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                    });
+                }
+                if(!sectselchk.checked &&  filterdeptval != '--Select Department--')
+                {
+                        $('#majortable').DataTable().clear().destroy();
+                        $('#majortable').DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                            'url': 'mfilterdeptwdate.php',
+                            'type': 'post',
+                            'data':{
+                                department:filterdeptval,
+                                datestart:dates,
+                                dateend:datee,
+
+                            },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                            $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                                'target': [0, 4],
+                                'orderable': false,
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 0
+                            }, // set 30% width for first column
+                            {
+                                'width': '5%',
+                                'targets': 2
+                            },
+                            {
+                                'width': '7%',
+                                'targets': 3
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 6
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 7
+                            },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                    });
+                }
+                } 
+                else{
+                    sectsel.disabled = false;
+
+                    if(dates == '' || datee == '' || dates == null || datee == null)
+                        {
+                            if(divID == "majorDiv")
+
+                            {
+                                console.log("line executed");
+                                    $('#majortable').DataTable().clear().destroy();
+                                    $('#majortable').DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'mfiltersectfetch.php',
+                                        'type': 'post',
+                                        'data':{
+                                            section:filtersectval,
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                });
+                            }
+                            
+                        }
+                        else
+                        {
+                            if(divID == "majorDiv")
+
+                            {
+                                console.log("line2 executed");
+                                $('#majortable').DataTable().clear().destroy();
+                                $('#majortable').DataTable({
+                                'searching': false,
+                                'serverSide': true,
+                                'processing': true,
+                                'autoWidth': true,
+                                'paging': false,
+                                'info': false,
+                                'order': [],
+                                'ajax': {
+                                    'url': 'mfiltersectwdate.php',
+                                    'type': 'post',
+                                    'data':{
+                                        section:filtersectval,
+                                        datestart:dates,
+                                        dateend:datee,
+
+                                    },
+                                },
+                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                    $(nRow).attr('id', aData[0]);
+                                },
+                                'columnDefs': [{
+                                        'target': [0, 4],
+                                        'orderable': false,
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 0
+                                    }, // set 30% width for first column
+                                    {
+                                        'width': '5%',
+                                        'targets': 2
+                                    },
+                                    {
+                                        'width': '7%',
+                                        'targets': 3
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 6
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 7
+                                    },
+                                ],
+                                scrollCollapse: false,
+                                paging: false
+                            });
+                            }
+                            
+                        }
+                }
+
+        }
+
+        function mfilterbysection(divID, tableid)
+        {
+                var e = document.getElementById("selectmajordept");
+                var filterdeptval = e.options[e.selectedIndex].text;
+                var f = document.getElementById("selectmajorsect");
+                var filtersectval = f.options[f.selectedIndex].text;
+                var sectselchk = document.getElementById("majorfiltersectionCheck");
+                var deptselchk = document.getElementById("majorfilterdeptCheck");
+                var tid = tableid;
+
+                if(filterdeptval == '--Select Department--')
+                {
+                    if(divID == "majorDiv")
+                    {       
+                    var dates = document.getElementById("majordatestart").value;
+                    var datee = document.getElementById("majordateend").value;
+                    console.log(dates);
+                    console.log(datee);
+                    if(dates == '' || datee == '' || dates == null || datee == null)
+                    {
+                        console.log("line executed");
+                        $('#' + tid).DataTable().clear().destroy();
+                        $('#' + tid).DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                            'url': 'mfiltersectfetch.php',
+                            'type': 'post',
+                            'data':{
+                                section:filtersectval,
+                            },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                            $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                                'target': [0, 4],
+                                'orderable': false,
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 0
+                            }, // set 30% width for first column
+                            {
+                                'width': '5%',
+                                'targets': 2
+                            },
+                            {
+                                'width': '7%',
+                                'targets': 3
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 6
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 7
+                            },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                    });
+                    }
+                    else
+                    {
+                        console.log("line2 executed");
+                        $('#' + tid).DataTable().clear().destroy();
+                        $('#' + tid).DataTable({
+                        'searching': false,
+                        'serverSide': true,
+                        'processing': true,
+                        'autoWidth': true,
+                        'paging': false,
+                        'info': false,
+                        'order': [],
+                        'ajax': {
+                            'url': 'mfiltersectwdate.php',
+                            'type': 'post',
+                            'data':{
+                                section:filtersectval,
+                                datestart:dates,
+                                dateend:datee,
+
+                            },
+                        },
+                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                            $(nRow).attr('id', aData[0]);
+                        },
+                        'columnDefs': [{
+                                'target': [0, 4],
+                                'orderable': false,
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 0
+                            }, // set 30% width for first column
+                            {
+                                'width': '5%',
+                                'targets': 2
+                            },
+                            {
+                                'width': '7%',
+                                'targets': 3
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 6
+                            },
+                            {
+                                'width': '5%',
+                                'targets': 7
+                            },
+                        ],
+                        scrollCollapse: false,
+                        paging: false
+                    });
+                    }
+                    
+                    }
+                }
+                else{
+                        if(divID == "majorDiv")
+                        {       
+                        var dates = document.getElementById("majordatestart").value;
+                        var datee = document.getElementById("majordateend").value;
+                        console.log(dates);
+                        console.log(datee);
+                        if(dates == '' || datee == '' || dates == null || datee == null)
+                        {
+                            console.log("line executed");
+                            $('#' + tid).DataTable().clear().destroy();
+                            $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'mfiltersectdeptfetch.php',
+                                'type': 'post',
+                                'data':{
+                                    section:filtersectval,
+                                    department: filterdeptval,
                                 },
                             },
                             'fnCreatedRow': function(nRow, aData, iDataIndex) {
@@ -537,27 +3159,973 @@ require_once('../../authentication/anti_pagetrans.php');
                                 }, // set 30% width for first column
                                 {
                                     'width': '5%',
-                                    'targets': 1
+                                    'targets': 2
                                 },
                                 {
                                     'width': '7%',
                                     'targets': 3
                                 },
                                 {
-                                    'width': '7%',
-                                    'targets': 4
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
                                 },
                             ],
-                            paging: false,
-                            scrollCollapse: false
+                            scrollCollapse: false,
+                            paging: false
                         });
+                        }
+                        else
+                        {
+                            console.log("line2 executed");
+                            $('#' + tid).DataTable().clear().destroy();
+                            $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'mfiltersectwdeptdate.php',
+                                'type': 'post',
+                                'data':{
+                                    section:filtersectval,
+                                    department: filterdeptval,
+                                    datestart:dates,
+                                    dateend:datee,
+
+                                },
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                        }
+                       
+                    }
+
+                }
+
+                if ((dates !== undefined && dates !== null && dates !== '') ||
+                        (datee !== undefined && datee !== null && datee !== '')) 
+                    {
+
+                        if (sectselchk.checked && deptselchk.checked) {
+                            console.log("line2 executed");
+                                $('#' + tid).DataTable().clear().destroy();
+                                $('#' + tid).DataTable({
+                                'searching': false,
+                                'serverSide': true,
+                                'processing': true,
+                                'autoWidth': true,
+                                'paging': false,
+                                'info': false,
+                                'order': [],
+                                'ajax': {
+                                    'url': 'mfiltersectwdeptdate.php',
+                                    'type': 'post',
+                                    'data':{
+                                        section:filtersectval,
+                                        department: filterdeptval,
+                                        datestart:dates,
+                                        dateend:datee,
+
+                                    },
+                                },
+                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                    $(nRow).attr('id', aData[0]);
+                                },
+                                'columnDefs': [{
+                                        'target': [0, 4],
+                                        'orderable': false,
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 0
+                                    }, // set 30% width for first column
+                                    {
+                                        'width': '5%',
+                                        'targets': 2
+                                    },
+                                    {
+                                        'width': '7%',
+                                        'targets': 3
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 6
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 7
+                                    },
+                                ],
+                                scrollCollapse: false,
+                                paging: false
+                            });
+                        }
+
+                            if (!sectselchk.checked && deptselchk.checked) {
+                                $('#' + tid).DataTable().clear().destroy();
+                                    $('#' + tid).DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'mfilterdeptwdate.php',
+                                        'type': 'post',
+                                        'data':{
+                                            department:filterdeptval,
+                                            datestart:dates,
+                                            dateend:datee,
+
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                }); 
+                            }
+                            if (sectselchk.checked && !deptselchk.checked) {
+                                $('#' + tid).DataTable().clear().destroy();
+                                    $('#' + tid).DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'mfiltersectwdate.php',
+                                        'type': 'post',
+                                        'data':{
+                                            section:filtersectval,
+                                            datestart:dates,
+                                            dateend:datee,
+
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                });
+                            }
+                    }
+                    if ((dates == undefined && dates == null && dates == '') ||
+                        (datee == undefined && datee == null && datee == '')) {
+                        if(sectselchk.checked && deptselchk.checked) {
+                            $('#' + tid).DataTable().clear().destroy();
+                                $('#' + tid).DataTable({
+                                'searching': false,
+                                'serverSide': true,
+                                'processing': true,
+                                'autoWidth': true,
+                                'paging': false,
+                                'info': false,
+                                'order': [],
+                                'ajax': {
+                                    'url': 'mfiltersectdeptfetch.php',
+                                    'type': 'post',
+                                    'data':{
+                                        section:filtersectval,
+                                        department: filterdeptval,
+                                    },
+                                },
+                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                    $(nRow).attr('id', aData[0]);
+                                },
+                                'columnDefs': [{
+                                        'target': [0, 4],
+                                        'orderable': false,
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 0
+                                    }, // set 30% width for first column
+                                    {
+                                        'width': '5%',
+                                        'targets': 2
+                                    },
+                                    {
+                                        'width': '7%',
+                                        'targets': 3
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 6
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 7
+                                    },
+                                ],
+                                scrollCollapse: false,
+                                paging: false
+                            });
+                        }
+                        if(!sectselchk.checked && deptselchk.checked){
+                            $('#' + tid).DataTable().clear().destroy();
+                                $('#' + tid).DataTable({
+                                'searching': false,
+                                'serverSide': true,
+                                'processing': true,
+                                'autoWidth': true,
+                                'paging': false,
+                                'info': false,
+                                'order': [],
+                                'ajax': {
+                                    'url': 'mfilterdeptfetch.php',
+                                    'type': 'post',
+                                    'data':{
+                                        department:filterdeptval,
+                                    },
+                                },
+                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                    $(nRow).attr('id', aData[0]);
+                                },
+                                'columnDefs': [{
+                                        'target': [0, 4],
+                                        'orderable': false,
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 0
+                                    }, // set 30% width for first column
+                                    {
+                                        'width': '5%',
+                                        'targets': 2
+                                    },
+                                    {
+                                        'width': '7%',
+                                        'targets': 3
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 6
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 7
+                                    },
+                                ],
+                                scrollCollapse: false,
+                                paging: false
+                            });
+                        }
+                        if(sectselchk.checked && !deptselchk.checked)
+                        {
+                            $('#' + tid).DataTable().clear().destroy();
+                                $('#' + tid).DataTable({
+                                'searching': false,
+                                'serverSide': true,
+                                'processing': true,
+                                'autoWidth': true,
+                                'paging': false,
+                                'info': false,
+                                'order': [],
+                                'ajax': {
+                                    'url': 'mfiltersectfetch.php',
+                                    'type': 'post',
+                                    'data':{
+                                        section:filtersectval,
+                                    },
+                                },
+                                'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                    $(nRow).attr('id', aData[0]);
+                                },
+                                'columnDefs': [{
+                                        'target': [0, 4],
+                                        'orderable': false,
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 0
+                                    }, // set 30% width for first column
+                                    {
+                                        'width': '5%',
+                                        'targets': 2
+                                    },
+                                    {
+                                        'width': '7%',
+                                        'targets': 3
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 6
+                                    },
+                                    {
+                                        'width': '5%',
+                                        'targets': 7
+                                    },
+                                ],
+                                scrollCollapse: false,
+                                paging: false
+                            });
+                        }
 
                     }
 
+                
+        }
+        
+        function mfilterbydept(divID, tableid)
+        {
+                var e = document.getElementById("selectmajordept");
+                var filterdeptval = e.options[e.selectedIndex].text;
+                var f = document.getElementById("selectmajorsect");
+                var filtersectval = f.options[f.selectedIndex].text;
+                var sectselchk = document.getElementById("majorfiltersectionCheck");
+                var deptselchk = document.getElementById("majorfilterdeptCheck");
+                var tid = tableid;
 
+                if(filtersectval == '--Select Section--')
+                {
+                    if(divID == "majorDiv")
+                    {
+                        
+                        var dates = document.getElementById("majordatestart").value;
+                        var datee = document.getElementById("majordateend").value;
+                        console.log(dates);
+                        console.log(datee);
+                        if(dates == '' || datee == '' || dates == null || datee == null)
+                        {
+                            console.log("line executed");
+                            $('#' + tid).DataTable().clear().destroy();
+                            $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'mfilterdeptfetch.php',
+                                'type': 'post',
+                                'data':{
+                                    department:filterdeptval,
+                                },
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                        }
+                        else
+                        {
+                            console.log("line2 executed");
+                            $('#' + tid).DataTable().clear().destroy();
+                            $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'mfilterdeptwdate.php',
+                                'type': 'post',
+                                'data':{
+                                    department:filterdeptval,
+                                    datestart:dates,
+                                    dateend:datee,
+
+                                },
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                        }
+                    }
                 }
-            }
+                else
+                {
+                    if(divID == "majorDiv")
+                        {       
+                        var dates = document.getElementById("majordatestart").value;
+                        var datee = document.getElementById("majordateend").value;
+                        console.log(dates);
+                        console.log(datee);
+                        if(dates == '' || datee == '' || dates == null || datee == null)
+                        {
+                            console.log("line executed");
+                            $('#' + tid).DataTable().clear().destroy();
+                            $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'mfiltersectdeptfetch.php',
+                                'type': 'post',
+                                'data':{
+                                    section:filtersectval,
+                                    department: filterdeptval,
+                                },
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                        }
+                        else
+                        {
+                            console.log("line2 executed");
+                            $('#' + tid).DataTable().clear().destroy();
+                            $('#' + tid).DataTable({
+                            'searching': false,
+                            'serverSide': true,
+                            'processing': true,
+                            'autoWidth': true,
+                            'paging': false,
+                            'info': false,
+                            'order': [],
+                            'ajax': {
+                                'url': 'mfiltersectwdeptdate.php',
+                                'type': 'post',
+                                'data':{
+                                    section:filtersectval,
+                                    department: filterdeptval,
+                                    datestart:dates,
+                                    dateend:datee,
 
+                                },
+                            },
+                            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                $(nRow).attr('id', aData[0]);
+                            },
+                            'columnDefs': [{
+                                    'target': [0, 4],
+                                    'orderable': false,
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 0
+                                }, // set 30% width for first column
+                                {
+                                    'width': '5%',
+                                    'targets': 2
+                                },
+                                {
+                                    'width': '7%',
+                                    'targets': 3
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 6
+                                },
+                                {
+                                    'width': '5%',
+                                    'targets': 7
+                                },
+                            ],
+                            scrollCollapse: false,
+                            paging: false
+                        });
+                        }
+                       
+                    }
+                }
+                if ((dates !== undefined && dates !== null && dates !== '') ||
+                        (datee !== undefined && datee !== null && datee !== '')) 
+                        {
+
+                            if (sectselchk.checked && deptselchk.checked) {
+                                console.log("line2 executed");
+                                    $('#' + tid).DataTable().clear().destroy();
+                                    $('#' + tid).DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'mfiltersectwdeptdate.php',
+                                        'type': 'post',
+                                        'data':{
+                                            section:filtersectval,
+                                            department: filterdeptval,
+                                            datestart:dates,
+                                            dateend:datee,
+
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                });
+                            }
+
+                                if (!sectselchk.checked && deptselchk.checked) {
+                                    $('#' + tid).DataTable().clear().destroy();
+                                        $('#' + tid).DataTable({
+                                        'searching': false,
+                                        'serverSide': true,
+                                        'processing': true,
+                                        'autoWidth': true,
+                                        'paging': false,
+                                        'info': false,
+                                        'order': [],
+                                        'ajax': {
+                                            'url': 'mfilterdeptwdate.php',
+                                            'type': 'post',
+                                            'data':{
+                                                department:filterdeptval,
+                                                datestart:dates,
+                                                dateend:datee,
+
+                                            },
+                                        },
+                                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                            $(nRow).attr('id', aData[0]);
+                                        },
+                                        'columnDefs': [{
+                                                'target': [0, 4],
+                                                'orderable': false,
+                                            },
+                                            {
+                                                'width': '5%',
+                                                'targets': 0
+                                            }, // set 30% width for first column
+                                            {
+                                                'width': '5%',
+                                                'targets': 2
+                                            },
+                                            {
+                                                'width': '7%',
+                                                'targets': 3
+                                            },
+                                            {
+                                                'width': '5%',
+                                                'targets': 6
+                                            },
+                                            {
+                                                'width': '5%',
+                                                'targets': 7
+                                            },
+                                        ],
+                                        scrollCollapse: false,
+                                        paging: false
+                                    }); 
+                                }
+                                if (sectselchk.checked && !deptselchk.checked) {
+                                    $('#' + tid).DataTable().clear().destroy();
+                                        $('#minortable').DataTable({
+                                        'searching': false,
+                                        'serverSide': true,
+                                        'processing': true,
+                                        'autoWidth': true,
+                                        'paging': false,
+                                        'info': false,
+                                        'order': [],
+                                        'ajax': {
+                                            'url': 'mfiltersectwdate.php',
+                                            'type': 'post',
+                                            'data':{
+                                                section:filtersectval,
+                                                datestart:dates,
+                                                dateend:datee,
+
+                                            },
+                                        },
+                                        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                            $(nRow).attr('id', aData[0]);
+                                        },
+                                        'columnDefs': [{
+                                                'target': [0, 4],
+                                                'orderable': false,
+                                            },
+                                            {
+                                                'width': '5%',
+                                                'targets': 0
+                                            }, // set 30% width for first column
+                                            {
+                                                'width': '5%',
+                                                'targets': 2
+                                            },
+                                            {
+                                                'width': '7%',
+                                                'targets': 3
+                                            },
+                                            {
+                                                'width': '5%',
+                                                'targets': 6
+                                            },
+                                            {
+                                                'width': '5%',
+                                                'targets': 7
+                                            },
+                                        ],
+                                        scrollCollapse: false,
+                                        paging: false
+                                    });
+                                }
+                        }
+                        if ((dates == undefined && dates == null && dates == '') ||
+                            (datee == undefined && datee == null && datee == '')) {
+                            if(sectselchk.checked && deptselchk.checked) {
+                                $('#' + tid).DataTable().clear().destroy();
+                                    $('#' + tid).DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'mfiltersectdeptfetch.php',
+                                        'type': 'post',
+                                        'data':{
+                                            section:filtersectval,
+                                            department: filterdeptval,
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                });
+                            }
+                            if(!sectselchk.checked && deptselchk.checked){
+                                $('#' + tid).DataTable().clear().destroy();
+                                    $('#' + tid).DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'mfilterdeptfetch.php',
+                                        'type': 'post',
+                                        'data':{
+                                            department:filterdeptval,
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                });
+                            }
+                            if(sectselchk.checked && !deptselchk.checked)
+                            {
+                                $('#' + tid).DataTable().clear().destroy();
+                                    $('#' + tid).DataTable({
+                                    'searching': false,
+                                    'serverSide': true,
+                                    'processing': true,
+                                    'autoWidth': true,
+                                    'paging': false,
+                                    'info': false,
+                                    'order': [],
+                                    'ajax': {
+                                        'url': 'mfiltersectfetch.php',
+                                        'type': 'post',
+                                        'data':{
+                                            section:filtersectval,
+                                        },
+                                    },
+                                    'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                                        $(nRow).attr('id', aData[0]);
+                                    },
+                                    'columnDefs': [{
+                                            'target': [0, 4],
+                                            'orderable': false,
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 0
+                                        }, // set 30% width for first column
+                                        {
+                                            'width': '5%',
+                                            'targets': 2
+                                        },
+                                        {
+                                            'width': '7%',
+                                            'targets': 3
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 6
+                                        },
+                                        {
+                                            'width': '5%',
+                                            'targets': 7
+                                        },
+                                    ],
+                                    scrollCollapse: false,
+                                    paging: false
+                                });
+                            }
+
+                        }     
+        }
+        //major functions end
+
+
+
+            
 
          
 

@@ -1,6 +1,6 @@
 <?php include('../../connection/connection.php');
-$department = $_POST['department'];
-$sql = "SELECT * FROM `minorjreq` WHERE `department` = '$department'";
+$section = $_POST['section'];
+$sql = "SELECT * FROM `minorjreq` WHERE `section` = '$section'";
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
 
@@ -12,6 +12,7 @@ if (isset($_POST['order'])) {
 } else {
     $sql .= "ORDER BY minorjobid ASC";
 }
+
 
 
 if ($_POST['length'] != -1) {
