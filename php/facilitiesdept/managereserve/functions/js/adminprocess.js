@@ -421,45 +421,113 @@ $(document).on('click', '.step1approveBtn', function(event){
   var dept = $("#_reqparty").val();
   var feedb = $("#_inputFeedback").val();
   var fdapprove = $("#_fdapprovedby").val();
-
-  if(fdapprove != '')
-  {
-    $.ajax({
-      url: "functions/step1approve.php",
-      data: {
-        id: id,
-        dept: dept,
-        feedb: feedb,
-        fdapprove: fdapprove,
-          
-      },
-      type: 'POST',
-      success: function(data) {
-          var json = JSON.parse(data);
-          var status = json.status;
-          if (status == 'success') {
-              table = $('#datatable').DataTable();
-              table.draw();
-              alert('Step 1 Approved Successfully!');
-          
-              /*table = $('#datatable').DataTable();
-              var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-              var row = table.row("[id='" + trid + "']");
-              row.row("[id='" + trid + "']").data([department, date, button]);*/
-              $('#_step1').val('Approved');
-              $('#test').modal('hide');
-              $('body').removeClass('modal-open');
-              $('.modal-backdrop').remove();
-          } else { 
-              alert('failed');
-          }
-      }
+  var actualdate =  $("#_actualdate").val();
+  var timein = $("#_timein").val();
+  var timeout = $("#_timeout").val();
+  var e = document.getElementById("_facility");
+  var faci = e.options[e.selectedIndex].text;
+  checkdateconflict(actualdate, timein, timeout, faci, function(confirm) {
+    if(confirm)
+    {
+      checkReservationConflict(timein, timeout, actualdate, faci, function(result){
+        if(result)
+        {
+          alert("Someone already reserved the facility within that day on the same time! \nCheck Calendar of Activities for approved schedules. ");
+        }
+        else
+        {
+          if(fdapprove != '')
+            {
+              $.ajax({
+                url: "functions/step1approve.php",
+                data: {
+                  id: id,
+                  dept: dept,
+                  feedb: feedb,
+                  fdapprove: fdapprove,
+                    
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    var status = json.status;
+                    if (status == 'success') {
+                        table = $('#datatable').DataTable();
+                        table.draw();
+                        alert('Step 1 Approved Successfully!');
+                    
+                        /*table = $('#datatable').DataTable();
+                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                        var row = table.row("[id='" + trid + "']");
+                        row.row("[id='" + trid + "']").data([department, date, button]);*/
+                        $('#_step1').val('Approved');
+                        $('#test').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
+                    } else { 
+                        alert('failed');
+                    }
+                }
+            });
+            }
+            else
+            {
+              alert("Please fill out required fields!");
+            }
+        }
+      });
+    }
+    else{
+      checkReservationConflict(timein, timeout, actualdate, faci, function(result){
+        if(result)
+        {
+          alert("Someone already reserved the facility within that day on the same time! \nCheck Calendar of Activities for approved schedules. ");
+        }
+        else
+        {
+          if(fdapprove != '')
+            {
+              $.ajax({
+                url: "functions/step1approve.php",
+                data: {
+                  id: id,
+                  dept: dept,
+                  feedb: feedb,
+                  fdapprove: fdapprove,
+                    
+                },
+                type: 'POST',
+                success: function(data) {
+                    var json = JSON.parse(data);
+                    var status = json.status;
+                    if (status == 'success') {
+                        table = $('#datatable').DataTable();
+                        table.draw();
+                        alert('Step 1 Approved Successfully!');
+                    
+                        /*table = $('#datatable').DataTable();
+                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                        var row = table.row("[id='" + trid + "']");
+                        row.row("[id='" + trid + "']").data([department, date, button]);*/
+                        $('#_step1').val('Approved');
+                        $('#test').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
+                    } else { 
+                        alert('failed');
+                    }
+                }
+            });
+            }
+            else
+            {
+              alert("Please fill out required fields!");
+            }
+        }
+      });
+    }
   });
-  }
-  else
-  {
-    alert("Please fill out required fields!");
-  }
+  
   //alert('test');
 });
 
@@ -668,3 +736,73 @@ $(document).on('click', '.step2declineBtn', function(event){
       });
 });
 //Admin Buttons for Decline End
+
+function computedaysdiff(d1, d2){
+  var date1 = new Date(d1);
+  var date2 = new Date(d2);
+
+  var diffInMilliseconds = Math.abs(date2 - date1);
+  var diffInDays = Math.ceil(diffInMilliseconds / (1000 * 60 * 60 * 24));
+
+  //console.log(diffInDays);
+
+  return diffInDays;
+}
+
+function checkdateconflict(adate, timestart, timeend, facility, callback) {
+  var actualdate = adate;
+  var tstart = timestart;
+  var tend = timeend;
+  var faci = facility;
+
+  $.ajax({
+      url: "functions/checkdateconflict.php",
+      data: {
+          facility: faci,
+          actualdate: actualdate,
+          timestart: tstart,
+          timeend: tend,
+      },
+      type: 'POST',
+      success: function(data) {
+          var json = JSON.parse(data);
+
+          if (json.countval > 0) {
+              callback(true);
+          } else {
+              callback(false);
+          }
+      }
+  });
+}
+function checkReservationConflict(timestart, timeend, adate, rfacility, callback) {
+  var tstart = timestart;
+var tend = timeend;
+const date = new Date(adate);
+var actualdate = adate;
+var facility = rfacility;
+
+// convert date and time values to strings
+const datestartString = `${date.toISOString().substr(0, 10)}T${tstart}`;
+const dateendString = `${date.toISOString().substr(0, 10)}T${tend}`;
+
+$.ajax({
+  url: "functions/checkresconflict.php",
+  data: {
+      datestart: datestartString,
+      dateend: dateendString,
+      actualdate: actualdate,
+      facility: facility,
+  },
+  type: 'POST',
+  success: function(data) {
+      var json = JSON.parse(data);
+      console.log(json.tcount);
+      if (json.tcount > 0) {
+          callback(true);
+      } else {
+          callback(false);
+      }
+  }
+});
+}

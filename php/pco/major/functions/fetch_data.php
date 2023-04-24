@@ -42,7 +42,7 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = $row['requino'];
     $subarray[] = $row['department'];
     $subarray[] = $row['quantity']; 
-    $subarray[] = $row['pcostatus']; 
+    $subarray[] = $row['status'];
     $subarray[] = '<a href= "javascript:void();" data-id="' . $row['jobreqno'] . '" class ="btn btn-sm btn-info editBtn">More Info</a>';
     $data[] = $subarray;
 }

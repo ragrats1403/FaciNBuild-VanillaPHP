@@ -218,6 +218,8 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <th>Time Start</th>
                                     <th>Time End</th>
                                     <th>Venue</th>
+                                    <th>FD Status</th>
+                                    <th>SAO Status</th>
                                 </thead>
                             </table>
                         </div>
@@ -246,11 +248,23 @@ require_once('../../authentication/anti_pagetrans.php');
             },
             fnCreatedRow: function(nRow, aData, iDataIndex) {
                 $(nRow).attr("id", aData[0]);
+                if (aData[6] === 'Approved') {
+                    $(nRow).css('background-color', '#a7d9ae');
+                }
+                if (aData[5] === 'Approved' && aData[6] === 'Pending') {
+                    //$(nRow).css('background-color', '#d9d2a7');//yellow
+                    $(nRow).css('background-color', '#89afcc');
+                }
             },
             'columnDefs': [{
-                'target': [0, 3],
-                'orderable': false,
-            }, ],
+                target: 5,
+                visible: false,
+            },
+            {
+                target: 6,
+                visible: false,
+            } 
+            ],
             scrollY: 670,
             'scrollCollapse': true,
             'paging': false,

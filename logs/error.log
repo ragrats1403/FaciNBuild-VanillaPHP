@@ -15,3 +15,8 @@
 2023-04-18 16:21:34 Unauthorized access attempt by user with role level 4 to URL /php/admin/jobrequest/minor/minorjobreqlist.php
 2023-04-20 18:52:19 Unauthorized access attempt by user with role level 2 to URL /php/user/minor/minorjobreqlist.php
 2023-04-22 18:40:37 Unauthorized access attempt by user with role level 7 to URL /php/user/reservation/userreservation.php
+2023-04-24 08:48:42 Unauthorized access attempt by user with role level 2 to URL /php/admin/jobrequest/minor/minorjobreqlist.php
+2023-04-24 08:48:44 Unauthorized access attempt by user with role level 2 to URL /php/admin/jobrequest/major/majorjobreqlist.php
+2023-04-24 08:48:45 Unauthorized access attempt by user with role level 2 to URL /php/admin/reservations/admincalendar.php
+2023-04-24 10:58:02 Unauthorized access attempt by user with role level 1 to URL /php/facilitiesdept/equipments/departmentheadeq.php
+2023-04-24 10:58:04 Unauthorized access attempt by user with role level 1 to URL /php/facilitiesdept/reservations/facilitiescalendar.php

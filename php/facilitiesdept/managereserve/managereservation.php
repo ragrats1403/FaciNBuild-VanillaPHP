@@ -230,6 +230,8 @@ require_once('../../authentication/anti_pagetrans.php');
                   <th>Date Filed</th>
                   <th>Actual Date of Use</th>
                   <th>Status</th>
+                  <th>FD Status</th>
+                  <th>SAO Status</th>
                   <th>Options</th>
                 </thead>
               </table>
@@ -268,14 +270,24 @@ require_once('../../authentication/anti_pagetrans.php');
       if (aData[6] === 'Declined') {
         $(nRow).css('background-color', '#e09b8d');
       }
-      if (aData[6] === 'Pending') {
-        $(nRow).css('background-color', '#d9d2a7');
+      if (aData[6] === 'Pending' && aData[7] === 'Approved') {
+        //$(nRow).css('background-color', '#d9d2a7');//yellow
+        $(nRow).css('background-color', '#89afcc');
+      }
+      if (aData[6] === 'Pending' && aData[7] === 'Pending') {
+        $(nRow).css('background-color', '#d9d2a7');//yellow
+        //$(nRow).css('background-color', '#89afcc');
       }
     },
     'columnDefs': [{
-      'targets': [0, 4],
-      'orderable': false,
-    }],
+        target: 7,
+        visible: false,
+    },
+    {
+        target: 8,
+        visible: false,
+    }
+    ],
     scrollY: 670,
     'scrollCollapse': false,
     'paging': false,
