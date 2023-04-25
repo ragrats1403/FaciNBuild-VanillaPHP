@@ -547,7 +547,7 @@ $('#datatable').DataTable({
                                 <div class="col-md-1" style="margin-top:5px;">
                                     <label class="fw-bold" for="inputName">Noted By:</label>
                                 </div>
-                                <div class="col-md-2" style="margin-top:5px;">
+                                <div class="col-md-4" style="margin-top:5px;">
                                     <input class="form-control" type="text" style="width:100%; height:80%;" name="" id="_notedby" disabled>
                                 </div>
                             </div>
