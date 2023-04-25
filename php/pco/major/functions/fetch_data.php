@@ -1,5 +1,5 @@
 <?php include('../../../connection/connection.php');
-$sql = "select * FROM majoreq WHERE cadstatus = 'Approved'";
+$sql = "select * FROM majoreq WHERE bdstatus = 'Approved'";
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
 
@@ -42,7 +42,7 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = $row['requino'];
     $subarray[] = $row['department'];
     $subarray[] = $row['quantity']; 
-    $subarray[] = $row['status'];
+    $subarray[] = $row['pcostatus'];
     $subarray[] = '<a href= "javascript:void();" data-id="' . $row['jobreqno'] . '" class ="btn btn-sm btn-info editBtn">More Info</a>';
     $data[] = $subarray;
 }

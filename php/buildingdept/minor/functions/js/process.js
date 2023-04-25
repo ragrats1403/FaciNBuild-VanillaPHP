@@ -402,33 +402,37 @@ $(document).on('click', '.updateBtn', function() {
                 document.getElementById("_inputFeedback").disabled = false;
                 document.getElementById("step1a").hidden = false;
                 document.getElementById("step1d").hidden = false;
+                
             }
-            var a = document.getElementById("_renderedby").value;
-            var b = document.getElementById("_confirmedby").value;
-                if(a !== '' || a !== undefined || a !== null )
+                var a = document.getElementById("_renderedby").value;
+                var b = document.getElementById("_confirmedby").value;
+                var c = document.getElementById("_step1").value;
+                
+
+                if(a !== '')
                 {
 
                     document.getElementById("editbutton1").hidden = true;
-
+                    document.getElementById("editbutton2").hidden = false;
 
 
                 }
                 else
                 {   
                     document.getElementById("editbutton1").hidden = false;
-
-
                 }
 
-                if(b !== '' || b !== undefined || b !== null)
+                if(b !== '')
                 {
                     document.getElementById("editbutton2").hidden = true;
 
                 }
-                else
+
+                if(c == 'Pending')
                 {
-                    document.getElementById("editbutton2").hidden = false;
+                    document.getElementById("editbutton1").hidden = true;
                 }
+
 
                 
             
