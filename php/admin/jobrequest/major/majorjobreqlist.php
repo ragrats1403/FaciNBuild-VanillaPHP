@@ -572,7 +572,9 @@ require_once('../../../authentication/anti_pagetrans.php');
             var dept = $('#department').val();
             var feedb = $('#_inputFeedback').val();
             var cadapprovedby = $('#_cadapprovedby').val();
-            $.ajax({
+            if(cadapprovedby != '' && feedb != '')
+            {
+                $.ajax({
                 url: "step3approve.php",
                 data: {
                     id: id,
@@ -593,11 +595,17 @@ require_once('../../../authentication/anti_pagetrans.php');
                         document.getElementById("step3a").hidden = true;
                         document.getElementById("step3d").hidden = true;
                         document.getElementById("_cadapprovedby").disabled = true;
-                    } else {
+                        document.getElementById("_inputFeedback").disabled = true;
                         alert('failed');
                     }
                 }
             });
+            }
+            else
+            {
+                alert("Please fill out required fields!");
+            }
+            
         });
 
         $(document).on('click', '.step1declineBtn', function(event) {

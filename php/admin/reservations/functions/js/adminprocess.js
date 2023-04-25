@@ -1369,27 +1369,24 @@ $(document).on('click', '.step1approveBtn', function(event){
   //alert('test');
 });
 
-$(document).on('click', '.step2approveBtn', function(event) {
-  //var status = "Approved";\
-  
-  var id = $('#jobrequestno').val();
+$(document).on('click', '.step2approveBtn', function(event){
+
+  //var status = "Approved";
+  var id = $('#_ID').val();
   var trid = $('#trid').val();
-  var reqno = $('#requino').val();
-  var dept = $('#department').val();
-  var feedb = $('#_inputFeedback').val();
-  var pcoapprovedby = $('#_pcoapprovedby').val();
-  var pcoby = document.getElementById("_pcoapprovedby").value;
-  if(pcoby != '' && reqno != '')
+  var dept = $("#_reqparty").val();
+  var feedb = $("#_inputFeedback").val();
+  var saoapprovedby = $("#_saoapprovedby").val();
+  if(saoapprovedby != '')
   {
-      $.ajax({
+    $.ajax({
       url: "functions/step2approve.php",
       data: {
           id: id,
-          reqno: reqno,
           dept: dept,
           feedb: feedb,
-          pcoapprovedby: pcoapprovedby,
-
+          saoapprovedby: saoapprovedby,
+          
       },
       type: 'POST',
       success: function(data) {
@@ -1399,28 +1396,28 @@ $(document).on('click', '.step2approveBtn', function(event) {
               table = $('#datatable').DataTable();
               table.draw();
               alert('Step 2 Approved Successfully!');
+          
               /*table = $('#datatable').DataTable();
               var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
               var row = table.row("[id='" + trid + "']");
               row.row("[id='" + trid + "']").data([department, date, button]);*/
-              //$('#_itemdesc_').text('');
+              $('#_statustext').val('Approved');
               $('#_step2').val('Approved');
+              $('#test').modal('hide');
               $('body').removeClass('modal-open');
               $('.modal-backdrop').remove();
-          } else {
+          } else { 
               alert('failed');
           }
       }
   });
-
   }
-
   else
   {
-      alert("Please fill out required fields!");
+    alert("Please fill out required fields!");
   }
-
   
+//alert('test');
 });
 //Admin Buttons for Approval End
 
