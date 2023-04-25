@@ -1,6 +1,6 @@
 <?php include('../../../php/connection/connection.php');
 //$dep = $_POST['dep'];
-$sql = "SELECT * FROM reservation WHERE status = 'Approved' AND MONTH(actualdateofuse) = MONTH(now()) AND YEAR(actualdateofuse) = YEAR(now())";
+$sql = "SELECT * FROM reservation WHERE fdstatus = 'Approved' AND saostatus != 'Declined' AND actualdateofuse > now()";
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
 //search
@@ -40,6 +40,8 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = date("h:i A", strtotime($row['timestart']));
     $subarray[] = date("h:i A", strtotime($row['timeend']));
     $subarray[] = $row['facility'];
+    $subarray[] = $row['fdstatus'];
+    $subarray[] = $row['saostatus'];
     $data[] = $subarray;
 }
 

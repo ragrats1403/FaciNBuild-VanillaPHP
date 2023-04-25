@@ -304,7 +304,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <div class="col-md-12">
                                     <label class="fw-bold" style="padding-top:20px;" for="date">Section:</label>
                                     <select class="" style="width: 150px; Border: 5px;" name="sections" id="_sect">
-                                        <option value="P">Select</option>
+                                        <option value="P" selected hidden>Select</option>
                                         <option value="C">CARPENTRY</option>
                                         <option value="P">PLUMBING</option>
                                         <option value="A">AIRCON</option>
@@ -346,8 +346,8 @@ require_once('../../authentication/anti_pagetrans.php');
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-md-right">
-                                <button onclick="enableFields()" type="button" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                                <button type="button" class="btn btn-success col-md-1 renderUpdate" id="end-editing">Update</button>
+                                <button onclick="enableFields()" type="button" class="btn btn-primary col-md-1" id="editbutton1">Edit</button>
+                                <button type="button" class="btn btn-success col-md-1 renderUpdate" id="endediting1" hidden>Update</button>
                             </div>
                             <div class="row justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-6">
@@ -360,8 +360,8 @@ require_once('../../authentication/anti_pagetrans.php');
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-md-right">
-                                <button onclick="enableFields2()" type="button" class="btn btn-primary col-md-1" id="edit-button">Edit</button>
-                                <button type="button" class="btn btn-success col-md-1 confirmUpdate" id="end-editing">Update</button>
+                                <button onclick="enableFields2()" type="button" class="btn btn-primary col-md-1" id="editbutton2">Edit</button>
+                                <button type="button" class="btn btn-success col-md-1 confirmUpdate" id="endediting2" hidden>Update</button>
                             </div>
                             <div class="justify-content-center">
                                 <div class="col-md-12">
@@ -545,7 +545,8 @@ require_once('../../authentication/anti_pagetrans.php');
         function enableFields() {
             document.getElementById("_renderedby").disabled = false;
             document.getElementById("_daterendered").disabled = false;
-
+            document.getElementById("endediting1").hidden = false;
+            document.getElementById("editbutton1").hidden = true;
             autofilldate("_daterendered");
 
         }
@@ -553,6 +554,8 @@ require_once('../../authentication/anti_pagetrans.php');
         function enableFields2() {
             document.getElementById("_confirmedby").disabled = false;
             document.getElementById("_dateconfirmed").disabled = false;
+            document.getElementById("endediting2").hidden = false;
+            document.getElementById("editbutton2").hidden = true;
             autofilldate("_dateconfirmed");
         }
     </script>

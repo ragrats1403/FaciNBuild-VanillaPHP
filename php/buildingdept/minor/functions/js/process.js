@@ -178,6 +178,9 @@ $(document).on('click', '.renderUpdate', function(event){
             var status = json.status;
             if (status == 'success') {
                 alert('Updated Successfully!');
+                document.getElementById("endediting1").hidden = true;
+                document.getElementById("editbutton1").hidden = true;
+                document.getElementById("editbutton2").hidden = false;
             } else { 
                 alert('failed');
             }
@@ -210,10 +213,8 @@ $(document).on('click', '.confirmUpdate', function(event){
             var status = json.status;
             if (status == 'success') {
                 alert('Updated Successfully!');
-                /*table = $('#datatable').DataTable();
-                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                var row = table.row("[id='" + trid + "']");
-                row.row("[id='" + trid + "']").data([department, date, button]);*/
+                document.getElementById("editbutton2").hidden = true;
+                document.getElementById("endediting2").hidden = true;
             } else { 
                 alert('failed');
             }
@@ -345,6 +346,10 @@ $(document).on('click', '.updateBtn', function() {
             document.getElementById("_dateconfirmed").disabled = true;
             document.getElementById("_step1").disabled = true;
             document.getElementById("_itemdesc").disabled = true;
+            document.getElementById("editbutton1").hidden = true;
+                    document.getElementById("endediting1").hidden = true;
+                    document.getElementById("editbutton2").hidden = true;
+                    document.getElementById("endediting2").hidden = true;
             $('#_renderedby, #_daterendered, #_confirmedby, #_dateconfirmed, #_statustext, #_step1','#_renderedby','#_daterendered','#_confirmedby','#_dateconfirmed').prop('disabled', true);            
             $.ajax({
             url: "functions/get_request_details.php",
@@ -398,6 +403,35 @@ $(document).on('click', '.updateBtn', function() {
                 document.getElementById("step1a").hidden = false;
                 document.getElementById("step1d").hidden = false;
             }
+            var a = document.getElementById("_renderedby").value;
+            var b = document.getElementById("_confirmedby").value;
+                if(a !== '' || a !== undefined || a !== null )
+                {
+
+                    document.getElementById("editbutton1").hidden = true;
+
+
+
+                }
+                else
+                {   
+                    document.getElementById("editbutton1").hidden = false;
+
+
+                }
+
+                if(b !== '' || b !== undefined || b !== null)
+                {
+                    document.getElementById("editbutton2").hidden = true;
+
+                }
+                else
+                {
+                    document.getElementById("editbutton2").hidden = false;
+                }
+
+                
+            
             $('#editMinorjreqmodal').modal('show');
             },
             error: function(jqXHR, textStatus, errorThrown) {
