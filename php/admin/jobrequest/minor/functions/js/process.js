@@ -605,7 +605,7 @@ $(document).on('click', '.editfieldBtn', function(event) {
     document.getElementById("updbtn").hidden = false;
     //document.getElementById("_dateconfirmed").disabled = false;
     document.getElementById("_sect").disabled = false;
-    document.getElementById("_statustext").disabled = false;
+    document.getElementById("_statustext").disabled = true;
     document.getElementById("_inputFeedback").disabled = false;
     document.getElementById("_renderedby").disabled = false;
     document.getElementById("_confirmedby").disabled = false;
