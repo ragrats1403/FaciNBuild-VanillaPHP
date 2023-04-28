@@ -7,10 +7,9 @@ require_once('../../../authentication/anti_pagetrans.php');
 <head>
     <meta charset="UTF-8">
     <title>Major Job Request List</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" href="../../../../dependencies/bootstrap/css/bootstrap.min.css?<?= time() ?>" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../dependencies/datatables/datatables.min.css?<?= time() ?>" />
     <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
@@ -19,7 +18,6 @@ require_once('../../../authentication/anti_pagetrans.php');
     <link rel="stylesheet" type="text/css" href="../../../../css/print.css?<?= time() ?>">
     <link href='../../../../dependencies/boxicons/css/boxicons.min.css?<?= time() ?>' rel='stylesheet'>
 </head>
-
 <header class="shadow">
     <div class="imgctrl">
     </div>
@@ -142,7 +140,6 @@ require_once('../../../authentication/anti_pagetrans.php');
     </nav>
     </div>
 </header>
-
 <body onload="autofilltime();">
     <div class="sidebar">
         <div class="logo_content">
@@ -241,44 +238,44 @@ require_once('../../../authentication/anti_pagetrans.php');
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- Script Process Start-->
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script>
+        <script src="../../../../dependencies/jquery/jquery-3.6.4.min.js"></script>
+        <script type="text/javascript" src="../../../../dependencies/datatables/datatables.min.js"></script>
+        <script src="../../../../dependencies/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script>
         var dpt = "<?php echo $_SESSION['department'];?>";
-        $('#datatable').DataTable({
-    'serverSide': true,
-    'processing': true,
-    'paging': true,
-    'responsive': true,
-    'order': [],
-    'ajax': {
-        'url': 'fetch_data.php',
-        'type': 'post',
-        'data': {
-            'dpt': dpt,
+            $('#datatable').DataTable({
+            'serverSide': true,
+            'processing': true,
+            'paging': true,
+            'responsive': true,
+            'order': [],
+            'ajax': {
+            'url': 'fetch_data.php',
+            'type': 'post',
+            'data': {
+                'dpt': dpt,
+            },
         },
-    },
-    'fnCreatedRow': function(nRow, aData, iDataIndex) {
-        $(nRow).attr('id', aData[0]);
-        if (aData[5] === 'Approved') {
-            $(nRow).css('background-color', '#a7d9ae');
-        }
-        if (aData[5] === 'Declined') {
-            $(nRow).css('background-color', '#e09b8d');
-        }
-        if (aData[5] === 'Pending') {
-            $(nRow).css('background-color', '#d9d2a7');
-        }
-    },
-    'columnDefs': [{
-        'targets': [0, 4],
-        'orderable': false,
-    }],
-    scrollY: 670,
-    'scrollCollapse': true,
-    'paging': false,
-});
+        'fnCreatedRow': function(nRow, aData, iDataIndex) {
+            $(nRow).attr('id', aData[0]);
+            if (aData[5] === 'Approved') {
+                $(nRow).css('background-color', '#a7d9ae');
+            }
+            if (aData[5] === 'Declined') {
+                $(nRow).css('background-color', '#e09b8d');
+            }
+            if (aData[5] === 'Pending') {
+                $(nRow).css('background-color', '#d9d2a7');
+            }
+        },
+        'columnDefs': [{
+            'targets': [0, 4],
+            'orderable': false,
+        }],
+        scrollY: 670,
+        'scrollCollapse': true,
+        'paging': false,
+    });
     </script>
 
     <script type="text/javascript">
