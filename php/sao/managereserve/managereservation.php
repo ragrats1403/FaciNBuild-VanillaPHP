@@ -422,7 +422,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 <div class="modal-footer justify-content-between">
                     <div class="mr-auto">           
                         <input id="termscond" type="checkbox"/>
-                        <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>
+                        <label for="termscond"> I agree to these <a href="termsandcondition.html"> Terms and Conditions prior to Approval</a></label>
                                 
                     </div>
                     <div class="mr">

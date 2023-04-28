@@ -446,7 +446,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 <div class="modal-footer">
                     <div class="tacbox"></div>
                     <input id="termscond" type="checkbox" />
-                    <label for="termscond"> I agree to these <a href="#"> Terms and Conditions prior to Approval</a></label>
+                    <label for="termscond"> I agree to these <a href="termsandcondition.html"> Terms and Conditions prior to Approval</a></label>
                 </div>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
