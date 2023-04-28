@@ -9,13 +9,13 @@ require_once('../../authentication/anti_pagetrans.php');
     <title>Reservations</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link type="text/css" href="../../../dependencies/bootstrap/css/bootstrap.min.css?<?=time()?>" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>"/>
+    <link href='../../../dependencies/boxicons/css/boxicons.min.css?<?= time() ?>' rel='stylesheet'>
 
 </head>
 
@@ -244,10 +244,10 @@ require_once('../../authentication/anti_pagetrans.php');
         </div>
     </div> 
 <!-- Script Process Start-- DO NOT MOVE THIS Script tags!!-->
-<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
+    <script src="../../../dependencies/jquery/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript" src="../../../dependencies/datatables/datatables.min.js"></script>
     <script type="text/javascript" src="functions/js/adminprocess.js?random=<?php echo uniqid(); ?>"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="../../../dependencies/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Modal Popup for More Info button-->
     <div class="modal fade" id="test" aria-hidden="true">
     <div class="modal-dialog" style="max-width:1100px;">
@@ -738,14 +738,13 @@ require_once('../../authentication/anti_pagetrans.php');
 
     <script>
 
-function bodyonload(){
-    //date auto fill
-var now = new Date();
-now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-document.getElementById('datefiled').value = now.toISOString().substring(0,10);
-//date end
-
-}
+        function bodyonload(){
+            //date auto fill
+        var now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        document.getElementById('datefiled').value = now.toISOString().substring(0,10);
+        //date end
+        }
     </script>
         <!-- create reservation end -->
                                     

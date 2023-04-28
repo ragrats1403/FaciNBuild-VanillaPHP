@@ -9,7 +9,7 @@ require_once('../../../authentication/anti_pagetrans.php');
     <title>Major Job Request List</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link type="text/css" href="../../../../dependencies/bootstrap/css/bootstrap.min.css?<?= time() ?>" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?= time() ?>">
@@ -17,7 +17,7 @@ require_once('../../../authentication/anti_pagetrans.php');
     <link rel="stylesheet" type="text/css" href="../../../../css/modal.css?<?= time() ?>" />
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
     <link rel="stylesheet" type="text/css" href="../../../../css/print.css?<?= time() ?>">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='../../../../dependencies/boxicons/css/boxicons.min.css?<?= time() ?>' rel='stylesheet'>
 </head>
 
 <header class="shadow">
