@@ -1,8 +1,13 @@
 <?php include('../../connection/connection.php');
 
-$datestart = $_POST['datestart'];
-$dateend = $_POST['dateend'];
-$sql = "SELECT * FROM `majoreq` WHERE `date` BETWEEN '$datestart' AND '$dateend'";
+$datestart = isset($_POST['datestart']) ? $_POST['datestart'] : "";
+$dateend = isset($_POST['dateend']) ? $_POST['dateend'] : "";
+$sql = "SELECT * FROM `majoreq` WHERE 1=1";
+
+if (!empty($datestart) && !empty($dateend)) {
+    $sql .= " AND `date` BETWEEN '$datestart' AND '$dateend'";
+}
+
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
 

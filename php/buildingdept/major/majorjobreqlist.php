@@ -565,33 +565,41 @@
             var trid = $('#trid').val();
             var dept = $('#department').val();
             var feedb = $('#_inputFeedback').val();
-            $.ajax({
-                url: "functions/step1decline.php",
-                data: {
-                    id: id,
-                    dept: dept,
-                    feedb: feedb,
+            if(feedb != '')
+            {
+                $.ajax({
+                    url: "functions/step1decline.php",
+                    data: {
+                        id: id,
+                        dept: dept,
+                        feedb: feedb,
 
-                },
-                type: 'POST',
-                success: function(data) {
-                    var json = JSON.parse(data);
-                    var status = json.status;
-                    if (status == 'success') {
-                        table = $('#datatable').DataTable();
-                        table.draw();
-                        alert('Step 1 Declined Successfully!');
-                        $('#_step1').val('Declined');
-                        $('#_statustext').val('Declined');
-                        $('#editUserModal').modal('hide');
-                        $('body').removeClass('modal-open');
-                        $('.modal-backdrop').remove();
+                    },
+                    type: 'POST',
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        var status = json.status;
+                        if (status == 'success') {
+                            table = $('#datatable').DataTable();
+                            table.draw();
+                            alert('Step 1 Declined Successfully!');
+                            $('#_step1').val('Declined');
+                            $('#_statustext').val('Declined');
+                            $('#editUserModal').modal('hide');
+                            $('body').removeClass('modal-open');
+                            $('.modal-backdrop').remove();
 
-                    } else {
-                        alert('failed');
+                        } else {
+                            alert('failed');
+                        }
                     }
-                }
-            });
+                });
+            }
+            else
+            {
+                alert("Please provide a feedback when declining requests!");
+            }
+            
         });
 
         $(document).on('click', '.updateBtn', function() {

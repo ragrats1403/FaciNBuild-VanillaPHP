@@ -81,11 +81,11 @@ require_once('../../authentication/anti_pagetrans.php');
                                 notificationItem.classList.add("unread"); // Add "unread" class if the notification is unread
                             }
                             notificationItem.innerHTML = `
-            <div class="d-flex align-items-center">
-            <div class="flex-grow-1 notification-message">${notification.message}</div>
-            <div class="text-muted notification-date">${new Date(notification.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} ${new Date(notification.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</div>
-            </div>
-        `;
+                                <div class="d-flex align-items-center">
+                                <div class="flex-grow-1 notification-message">${notification.message}</div>
+                                <div class="text-muted notification-date">${new Date(notification.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} ${new Date(notification.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</div>
+                                </div>
+                            `;
                             notificationList.appendChild(notificationItem);
                             if (i < notifications.length - 1) {
                                 // Add a divider after each item except the last one
@@ -360,7 +360,6 @@ require_once('../../authentication/anti_pagetrans.php');
                     var e = document.getElementById("sections");
                     var section = e.options[e.selectedIndex].text;
                     e.options[e.selectedIndex].text = json.section;
-                    /*$('#sections').val(json.section);*/
                     $('#quantity').val(json.quantity);
                     $('#_req').val(json.requestedby);
                     $('#_dephead').val(json.departmenthead);
@@ -369,7 +368,6 @@ require_once('../../authentication/anti_pagetrans.php');
                     var e = document.getElementById("remark");
                     var outsource = e.options[e.selectedIndex].text;
                     e.options[e.selectedIndex].text = json.outsource;
-
                     $('#_statustext').val(json.status);
                     $('#_step1').val(json.bdstatus);
                     $('#_step2').val(json.pcostatus);

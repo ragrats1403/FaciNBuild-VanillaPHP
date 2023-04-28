@@ -22,13 +22,13 @@ $faci = $_POST['faci'];
 date_default_timezone_set('Asia/Manila');
 
 // Get the current datetime in the server timezone
-$adate = new DateTime('now', new DateTimeZone(date_default_timezone_get()));
+$date = new DateTime('now', new DateTimeZone(date_default_timezone_get()));
 // Set the timezone to your local timezone
-$adate->setTimezone(new DateTimeZone(date_default_timezone_get()));
+$date->setTimezone(new DateTimeZone(date_default_timezone_get()));
 // Format the date in your local timezone
-$newdate = $adate->format('Y-m-d H:i:s');
+$newdate = $date->format('Y-m-d H:i:s');
 // Format the date in your local timezone
-$formatted_date = $adate->format('F d, Y g:iA');
+$formatted_date = $date->format('F d, Y g:iA');
 
 
 
@@ -43,7 +43,7 @@ $aformatted_date = $adate->format('F d, Y');
 
 
 $message = "You have submitted your facility reservation to use on \n".$aformatted_date." and is now Pending for approval!";
-$facilitiesDeptmesg = "".$reqparty." submitted a facility reservation request to use on ".$aformatted_date." and is waiting for Approval\nCheck them in Manage Reservations!";
+$facilitiesDeptmesg = "".$reqparty." submitted a facility reservation request to use on ".$aformatted_date." and is waiting for Approval\nCheck them in Manage Reservations";
 $saoDeptmesg = "".$reqparty." submitted a facility reservation request to use on ".$aformatted_date." and is waiting for Approval\nCheck them in Manage Reservations!";
 $adminDeptmesg = "".$reqparty." submitted a facility reservation request to use on ".$aformatted_date." and is waiting for Approval\nCheck them in Manage Reservations!";
 //notification message construct end

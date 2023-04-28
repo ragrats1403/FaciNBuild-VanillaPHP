@@ -305,9 +305,9 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <label class="form-check-label" for="majorDivCheckDefault"> Major Job Request </label>
                                     <br>
                                         <label class="fw-bold" for="date">Date Start:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="majordatestart" placeholder="Date Filed" onchange="myFunction('majorDiv', 'majortable', 'majorfetch.php', 'majordatestart', 'majordateend','selectmajordept', 'selectmajorsect', 'majorfiltersectionCheck', 'majorfilterdeptCheck')" disabled>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="majordatestart" placeholder="Date Filed" onchange="myFunction('majorDiv', 'majortable', 'majorfetchdate.php', 'majordatestart', 'majordateend','selectmajordept', 'selectmajorsect', 'majorfiltersectionCheck', 'majorfilterdeptCheck')" disabled>
                                         <label class="fw-bold" for="date">Date End:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="majordateend" placeholder="Date Filed" onchange="myFunction('majorDiv', 'majortable', 'majorfetch.php', 'majordatestart', 'majordateend','selectmajordept', 'selectmajorsect', 'majorfiltersectionCheck', 'majorfilterdeptCheck')" disabled>
+                                        <input type="date" class="form-control input-sm col-xs-1" id="majordateend" placeholder="Date Filed" onchange="myFunction('majorDiv', 'majortable', 'majorfetchdate.php', 'majordatestart', 'majordateend','selectmajordept', 'selectmajorsect', 'majorfiltersectionCheck', 'majorfilterdeptCheck')" disabled>
                                 </div>
                                 <div class="col-md-3">
                                 <br>

@@ -543,7 +543,7 @@ require_once('../../authentication/anti_pagetrans.php');
         <!-- Modal Popup End -->
 
         <!-- Create Reservation start-->
-        <div class="modal " tabindex="-1" id="reserModal" aria-labelledby="exampleModalLabel">
+    <div class="modal " tabindex="-1" id="reserModal" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
@@ -588,11 +588,6 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <label class="fw-bold" for="date">Date Filed:</label>
                                 <input type="date" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
                             </div>
-                            <script>
-                                var now = new Date();
-                                now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                                document.getElementById('datefiled').value = now.toISOString().substring(0,10);
-                            </script>
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Actual Date of Use:</label>
                                 <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use">
@@ -725,15 +720,16 @@ require_once('../../authentication/anti_pagetrans.php');
                         <input id="termscond" type="checkbox" onchange="updateButtonState()" />
                         <label for="termscond"> I agree to these <a href="termsandcondition.html" target="_blank"> Terms and Conditions prior to Approval</a></label>
                     </div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onkeydown="return event.key != 'Enter';">Close</button>
                     <!--<button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>-->
-                    <a href="javascript:void();" class="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
+                    <a href="javascript:void();" class="btn btn-primary submitBtn disabled" id='termscond-create' onkeydown="return event.key != 'Enter';">Save Changes</a>
+
                 </div>
 
             </div>
         </div>
     </div>
-
+    <!-- create reservation end -->
 
 
     <script>

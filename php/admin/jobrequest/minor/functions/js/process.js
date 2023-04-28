@@ -499,40 +499,42 @@ $(document).on('click', '.step1approveBtn', function(event){
  var approvedby = $('#_bdapprovedby').val();
  var e = document.getElementById("_sect");
  var section = e.options[e.selectedIndex].text;
- $.ajax({
-     url: "functions/step1approve.php",
-     data: {
-         id: id,
-         dept: dept,
-         feedb: feedb,
-         notedby: notedby,
-         approvedby: approvedby,
-         section: section,
-
-         
-     },
-     type: 'POST',
-     success: function(data) {
-         var json = JSON.parse(data);
-         var status = json.status;
-         if (status == 'success') {
-             table = $('#datatable').DataTable();
-             table.draw();
-             alert('Approved Successfully!');
-             document.getElementById("step1a").hidden = true;
-             document.getElementById("step1d").hidden = true;
-             /*table = $('#datatable').DataTable();
-             var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-             var row = table.row("[id='" + trid + "']");
-             row.row("[id='" + trid + "']").data([department, date, button]);*/
-             $('#_step1').val('Approved');             
-         } else { 
-             alert('failed');
-         }
-     }
- });
- //alert('test');
-
+ if(approvedby != '' && notedby != '' && section != '')
+    {
+        $.ajax({
+            url: "functions/step1approve.php",
+            data: {
+                id: id,
+                dept: dept,
+                feedb: feedb,
+                notedby: notedby,
+                approvedby: approvedby,
+                section: section,
+    
+                
+            },
+            type: 'POST',
+            success: function(data) {
+                var json = JSON.parse(data);
+                var status = json.status;
+                if (status == 'success') {
+                    table = $('#datatable').DataTable();
+                    table.draw();
+                    alert('Approved Successfully!');
+                    document.getElementById("step1a").hidden = true;
+                    document.getElementById("step1d").hidden = true;
+                    $('#_step1').val('Approved');
+                    $('#editMinorjreqmodal').modal('hide');
+                } else { 
+                    alert('failed');
+                }
+            }
+        });
+    }
+    else
+    {
+        alert("Please fill in required fields");
+    }
 });
 //step 3
 //alert('test');
@@ -544,37 +546,49 @@ $(document).on('click', '.step1declineBtn', function(event){
     var trid = $('#trid').val();
     var dept = $('#_department').val();
     var feedb = $('#_inputFeedback').val();
-    $.ajax({
-        url: "functions/step1decline.php",
-        data: {
-            id: id,
-            dept: dept,
-            feedb: feedb,
-            
-        },
-        type: 'POST',
-        success: function(data) {
-            var json = JSON.parse(data);
-            var status = json.status;
-            if (status == 'success') {
-                table = $('#datatable').DataTable();
-                table.draw();
-                alert('Step 1 Declined Successfully!');
-                document.getElementById("step1a").hidden = true;
-                document.getElementById("step1d").hidden = true;
-            
-                /*table = $('#datatable').DataTable();
-                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                var row = table.row("[id='" + trid + "']");
-                row.row("[id='" + trid + "']").data([department, date, button]);*/
-                //$('#_itemdesc_').text('');
-                $('#_step1').val('Declined');
-                $('#_statustext').val('Declined');
-            } else { 
-                alert('failed');
+    if(feedb == '' || feedb == null || feedb == undefined)
+    {
+        alert("Please provide a feedback before declining request!");
+    }
+    else
+    {
+        $.ajax({
+            url: "functions/step1decline.php",
+            data: {
+                id: id,
+                dept: dept,
+                feedb: feedb,
+                
+            },
+            type: 'POST',
+            success: function(data) {
+                var json = JSON.parse(data);
+                var status = json.status;
+                if (status == 'success') {
+                    table = $('#datatable').DataTable();
+                    table.draw();
+                    alert('Step 1 Declined Successfully!');
+                    document.getElementById("step1a").hidden = true;
+                    document.getElementById("step1d").hidden = true;
+
+
+                    document.getElementById("_inputFeedback").disabled = true;
+                    document.getElementById("_notedby").disabled = true;
+                    document.getElementById("_bdapprovedby").disabled = true;
+                    $('#_bdapprovedby').val('');
+                    $('#_notedby').val('');
+                
+                    //$('#_itemdesc_').text('');
+                    $('#_step1').val('Declined');
+                    $('#_statustext').val('Declined');
+                } else { 
+                    alert('failed');
+                }
             }
-        }
-        });
+            });
+    }
+    
+
 });
 
 //steps decline end

@@ -9,13 +9,13 @@ require_once('../../authentication/anti_pagetrans.php');
     <title>Reservation</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />
+    <link type="text/css" href="../../../dependencies/bootstrap/css/bootstrap.min.css?<?= time() ?>" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../../dependencies/datatables/datatables.min.css?<?= time() ?>" />
     <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='../../../dependencies/boxicons/css/boxicons.min.css?<?= time() ?>' rel='stylesheet'>
 
 </head>
 
@@ -53,7 +53,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "functions/notification.php",
+                    url: "../reservations/functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -113,7 +113,7 @@ require_once('../../authentication/anti_pagetrans.php');
             markAsReadButton.addEventListener("click", function(event) {
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "functions/update_notification.php",
+                    url: "../reservations/functions/update_notification.php",
                     type: 'POST',
                     data: {
                         department: department,
@@ -165,7 +165,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 <li>
                     <div class="dropdown">
                         <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Manage Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -174,7 +174,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     </div>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             View/Create Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -242,45 +242,48 @@ require_once('../../authentication/anti_pagetrans.php');
     </div>
 
     <!-- Script Process Start-- DO NOT MOVE THIS Script tags!!-->
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>
+    <script src="../../../dependencies/jquery/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript" src="../../../dependencies/datatables/datatables.min.js"></script>
     <script type="text/javascript" src="functions/js/userprocess.js?random=<?php echo uniqid(); ?>"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="../../../dependencies/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
-        var dpt = "<?php echo $_SESSION['department'];?>";
+        //table display start
+        var dpt = "<?php echo $_SESSION['department']; ?>";
         $('#datatable').DataTable({
-    'serverSide': true,
-    'processing': true,
-    'paging': true,
-    'order': [],
-    'responsive': true,
-    'ajax': {
-        'url': 'functions/fetch_data.php',
-        'type': 'post',
-        'data': {
-            'dpt': dpt,
-        },
-    },
-    'fnCreatedRow': function(nRow, aData, iDataIndex) {
-        $(nRow).attr('id', aData[0]);
-        if (aData[6] === 'Approved') {
-            $(nRow).css('background-color', '#a7d9ae');
-        }
-        if (aData[6] === 'Declined') {
-            $(nRow).css('background-color', '#e09b8d');
-        }
-        if (aData[6] === 'Pending') {
-            $(nRow).css('background-color', '#d9d2a7');
-        }
-    },
-    'columnDefs': [{
-        'targets': [0, 4],
-        'orderable': false,
-    }],
-    scrollY: 670,
-    'scrollCollapse': true,
-    'paging': false,
-});
+            'serverSide': true,
+            'processing': true,
+            'paging': false,
+            'responsive': true,
+            'order': [],
+            'responsive': true,
+            'ajax': {
+                'url': 'functions/fetch_data.php',
+                'type': 'post',
+                'data': {
+                    dpt: dpt,
+                },
+            },
+            'fnCreatedRow': function(nRow, aData, iDataIndex) {
+                $(nRow).attr('id', aData[0]);
+                if (aData[6] === 'Approved') {
+                    $(nRow).css('background-color', '#a7d9ae');
+                }
+                if (aData[6] === 'Declined') {
+                    $(nRow).css('background-color', '#e09b8d');
+                }
+                if (aData[6] === 'Pending') {
+                    $(nRow).css('background-color', '#d9d2a7');
+                }
+            },
+            'columnDefs': [{
+                'target': [0, 4],
+                'orderable': false,
+            }],
+            scrollY: 670,
+            'scrollCollapse': true,
+            'paging': false,
+
+        });
     </script>
     <!-- Modal Popup for More Info button-->
     <div class="modal fade" id="test" aria-hidden="true">
@@ -400,63 +403,45 @@ require_once('../../authentication/anti_pagetrans.php');
 
                             </div>
                         </div>
-                        <div class="justify-content-center">
-                                    <div class="col-md-12">
-                                        <label class="fw-bold" for="date">Feedback:</label>
-                                        <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
+                                    <div class="row" style="padding-top:6px;">     
+                                        <div class="col-md-4" style="margin-top:5px;">
+                                            <label class="fw-bold" for="inputName">Facilities Department Approval Status:</label>
+                                        </div> 
+                                        <div class="col-md-2" style="margin-top:5px;">
+                                            <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step1" disabled>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="fw-bold">Approved By</label>
+                                        </div>
+                                        <div class="col-md-4 "> 
+                                            <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_fdapprovedby" disabled>
+                                        </div> 
                                     </div>
-                                </div>
+                                    <div class="row" style="padding-top:6px;">     
+                                        <div class="col-md-4" style="margin-top:5px;">
+                                            <label class="fw-bold" for="inputName">Student Affairs Office Approval Status:</label>
+                                        </div> 
+                                        <div class="col-md-2" style="margin-top:5px;">
+                                            <input class="form-control" type="text" style="width:100%; height:80%;" name="" id= "_step2" disabled>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="fw-bold" >Approved By</label>
+                                        </div>
+                                        <div class="col-md-4 "> 
+                                            <input type="name" style = "margin-left:-50px;"class="form-control input-sm col-xs-1" id="_saoapprovedby" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Feedback:</label>
+                                            <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
+                                        </div>
+                                    </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="_flexCheckDefault" disabled hidden>
-                            <label class="form-check-label" for="flexCheckDefault" hidden> Add-on </label>
+
                         </div>
                         <div id="_myDIV1" style="display: none;">
-                            <div class="col-sm-12 d-flex justify-content-center">
-                                <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
-                            </div>
-                            <form id="saveUserForm" action="javascript:void();" method="POST">
-                                <input type="hidden" id="eventname">
-                                <!-- Form Controls-->
-                                <div class="row justify-content-center" style="padding-bottom:13px;">
-                                    <div class="col-md-6 ">
-                                        <label class="fw-bold" for="date">Department:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_dept" placeholder="Department">
-                                    </div>
-                                    <div class="col-md-6 ">
-                                        <label class="fw-bold" for="date">Date:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="_dateresm" placeholder="Date" disabled>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2" style="width:20%">
-                                        <label class="fw-bold" for="date">Quantity:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_minorqres" placeholder="Quantity">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                        <label class="fw-bold" for="date">Item Name:</label>
-                                        <input type="form-control" class="form-control" id="_minoritemres" placeholder="Item">
-                                    </div>
-                                </div>
-                                <div class="justify-content-center">
-                                    <div class="col-md-12">
-                                        <label class="fw-bold" for="date">Description:</label>
-                                        <textarea class="form-control" rows="2" id="_minoritemdesc" placeholder="Description"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="justify-content-center">
-                                    <div class="col-md-12">
-                                        <label class="fw-bold" for="date">Purpose:</label>
-                                        <textarea class="form-control" rows="2" id="_minorpurpose" placeholder="Purpose"></textarea>
-                                    </div>
-                                </div>
-
+                            
                                 <!-- Form Controls End-->
                             </form>
                         </div>
@@ -485,7 +470,6 @@ require_once('../../authentication/anti_pagetrans.php');
     <br>
     <br>
     <!-- Modal Popup End -->
-
     <!-- Create Reservation start-->
     <div class="modal " tabindex="-1" id="reserModal" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" style="max-width:1100px;">
@@ -618,7 +602,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <div class="row justify-content-center" style="padding-bottom:13px;">
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Department:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_department" placeholder="Department">
+                                        <input type="name" class="form-control input-sm col-xs-1" id="_department" placeholder="Department" value = "<?php echo $_SESSION['department']; ?>" disabled>
                                     </div>
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Date:</label>
@@ -635,23 +619,22 @@ require_once('../../authentication/anti_pagetrans.php');
                                         <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                        <label class="fw-bold" for="date">Item Name:</label>
-                                        <input type="form-control" class="form-control" id="_item_" placeholder="Item">
-                                    </div>
-                                </div>
                                 <div class="justify-content-center">
                                     <div class="col-md-12">
-                                        <label class="fw-bold" for="date">Description:</label>
+                                        <label class="fw-bold" for="date">Item with Complete Description:</label>
                                         <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
                                     </div>
                                 </div>
-
                                 <div class="justify-content-center">
                                     <div class="col-md-12">
                                         <label class="fw-bold" for="date">Purpose:</label>
                                         <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
+                                    </div>
+                                </div>
+                                <div class="justify-content-center">
+                                    <div class="col-md-12">
+                                        <label class="fw-bold" for="date">Requested by:</label>
+                                        <textarea class="form-control" rows="2" id="requestedby" placeholder="Requested by"></textarea>
                                     </div>
                                 </div>
                                 <!-- Form Controls End-->
@@ -665,9 +648,9 @@ require_once('../../authentication/anti_pagetrans.php');
                         <input id="termscond" type="checkbox" onchange="updateButtonState()" />
                         <label for="termscond"> I agree to these <a href="termsandcondition.html" target="_blank"> Terms and Conditions prior to Approval</a></label>
                     </div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onkeydown="return event.key != 'Enter';">Close</button>
                     <!--<button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>-->
-                    <a href="javascript:void();" class="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
+                    <a href="javascript:void();" class="btn btn-primary submitBtn disabled" id='termscond-create' onkeydown="return event.key != 'Enter';">Save Changes</a>
 
                 </div>
                 <script type="text/javascript" src="functions/js/createresdep.js?random=<?php echo uniqid(); ?>"></script>

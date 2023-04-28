@@ -174,7 +174,7 @@ require_once('../../authentication/anti_pagetrans.php');
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="../../../php/pco/minor/minorjobreqlist.php">Minor Job Request</a>
                             <a class="dropdown-item" href="../../../php/pco/majoruser/majorjobreqlist.php">Major Job Request</a>
-                            <a class="dropdown-item" href="../../../php/pco/reservation/pcoreservation.php">Request Reservation</a>
+                            <a class="dropdown-item" href="../../../php/pco/reservation/pcoreservation.php">Reservation</a>
                         </ul>
                     </div>
                 </li>
@@ -398,40 +398,47 @@ require_once('../../authentication/anti_pagetrans.php');
             var feedb = $('#_inputFeedback').val();
             var pcoapprovedby = $('#_pcoapprovedby').val();
             var pcoby = document.getElementById("_pcoapprovedby").value;
-            if(pcoby != '' || reqno != '' || reqno != 0)
-            {
-                $.ajax({
-                url: "functions/step2approve.php",
-                data: {
-                    id: id,
-                    reqno: reqno,
-                    dept: dept,
-                    feedb: feedb,
-                    pcoapprovedby: pcoapprovedby,
+            if(pcoby !== '' && pcoby !== undefined && pcoby !== null)
+                {
+                 if(reqno !== '' && reqno !== 0 && reqno !== undefined && reqno !== null)
+                 {
+                    $.ajax({
+                        url: "functions/step2approve.php",
+                        data: {
+                            id: id,
+                            reqno: reqno,
+                            dept: dept,
+                            feedb: feedb,
+                            pcoapprovedby: pcoapprovedby,
 
-                },
-                type: 'POST',
-                success: function(data) {
-                    var json = JSON.parse(data);
-                    var status = json.status;
-                    if (status == 'success') {
-                        table = $('#datatable').DataTable();
-                        table.draw();
-                        alert('Step 2 Approved Successfully!');
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        //$('#_itemdesc_').text('');
-                        $('#_step2').val('Approved');
-                        $('#editUserModal').modal('hide');
-                        $('body').removeClass('modal-open');
-                        $('.modal-backdrop').remove();
-                    } else {
-                        alert('failed');
-                    }
+                        },
+                        type: 'POST',
+                        success: function(data) {
+                            var json = JSON.parse(data);
+                            var status = json.status;
+                            if (status == 'success') {
+                                table = $('#datatable').DataTable();
+                                table.draw();
+                                alert('Step 2 Approved Successfully!');
+                                /*table = $('#datatable').DataTable();
+                                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                                var row = table.row("[id='" + trid + "']");
+                                row.row("[id='" + trid + "']").data([department, date, button]);*/
+                                //$('#_itemdesc_').text('');
+                                $('#_step2').val('Approved');
+                                $('#editUserModal').modal('hide');
+                                $('body').removeClass('modal-open');
+                                $('.modal-backdrop').remove();
+                            } else {
+                                alert('failed');
+                            }
+                        }
+                    });
                 }
-            });
+                else
+                {
+                    alert("Please add Requisition Number when approving request!");
+                }
 
             }
 

@@ -299,32 +299,50 @@ require_once('../../authentication/anti_pagetrans.php');
             var rolelevel = $('#inputRolelevel').val();
             if (name != '' && password != '' && rolelevel != '' && username != '') {
                 $.ajax({
-                    url: "add_user.php",
+                    url: "getexistingacc.php",
                     data: {
-                        name: name,
-                        username: username,
-                        password: password,
-                        rolelevel: rolelevel,
-
+                        department: name,
                     },
                     type: 'POST',
                     success: function(data) {
                         var json = JSON.parse(data);
-                        status = json.status;
-                        if (status = 'success') {
-                            table = $('#datatable').DataTable();
-                            table.draw();
-                            alert('Successfully Added User!');
-                            $('#inputName').val('');
-                            $('#inputUsername').val('');
-                            $('#inputPassword').val('');
-                            $('#inputRolelevel').val('');
-                            $('#addUserModal').modal('hide');
-                            $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
+                        if(json.countnum > 0)
+                        {
+                            alert("The account for said department already exist!");
+                        }
+                        else
+                        {
+                            $.ajax({
+                                url: "add_user.php",
+                                data: {
+                                    name: name,
+                                    username: username,
+                                    password: password,
+                                    rolelevel: rolelevel,
+
+                                },
+                                type: 'POST',
+                                success: function(data) {
+                                    var json = JSON.parse(data);
+                                    status = json.status;
+                                    if (status = 'success') {
+                                        table = $('#datatable').DataTable();
+                                        table.draw();
+                                        alert('Successfully Added User!');
+                                        $('#inputName').val('');
+                                        $('#inputUsername').val('');
+                                        $('#inputPassword').val('');
+                                        $('#inputRolelevel').val('');
+                                        $('#addUserModal').modal('hide');
+                                        $('body').removeClass('modal-open');
+                                        $('.modal-backdrop').remove();
+                                    }
+                                }
+                            });
                         }
                     }
                 });
+                
             } else {
                 alert("Please fill all the Required fields");
             }
@@ -335,7 +353,6 @@ require_once('../../authentication/anti_pagetrans.php');
             event.preventDefault();
             var id = $(this).data('id');
             if (confirm('Are you sure to delete this user?')) {
-
 
                 $.ajax({
                     url: "delete_user.php",
@@ -393,29 +410,47 @@ require_once('../../authentication/anti_pagetrans.php');
             var password = $('#_inputPassword').val();
             var rolelevel = $('#_inputRoleLevel').val();
             $.ajax({
-                url: "update_user.php",
-                data: {
-                    id: id,
-                    name: name,
-                    username: username,
-                    password: password,
-                    rolelevel: rolelevel,
-                },
-                type: 'POST',
-                success: function(data) {
-                    var json = JSON.parse(data);
-                    status = json.status;
-                    if (status == 'success') {
-                        alert('Updated Successfully!');
-                        table = $('#datatable').DataTable();
-                        table.draw();
-                        $('#editUserModal').modal('hide');
+                    url: "getexistingacc.php",
+                    data: {
+                        department: name,
+                    },
+                    type: 'POST',
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        if(json.countnum > 0)
+                        {
+                            alert("The account for said department already exist!");
+                        }
+                        else
+                        {
+                            $.ajax({
+                                url: "update_user.php",
+                                data: {
+                                    id: id,
+                                    name: name,
+                                    username: username,
+                                    password: password,
+                                    rolelevel: rolelevel,
+                                },
+                                type: 'POST',
+                                success: function(data) {
+                                    var json = JSON.parse(data);
+                                    status = json.status;
+                                    if (status == 'success') {
+                                        alert('Updated Successfully!');
+                                        table = $('#datatable').DataTable();
+                                        table.draw();
+                                        $('#editUserModal').modal('hide');
 
-                    } else {
-                        alert('failed');
+                                    } else {
+                                        alert('failed');
+                                    }
+                                }
+                            });
+                        }
+
                     }
-                }
-            });
+                });
         });
     </script>
     <!-- Script Process End-->

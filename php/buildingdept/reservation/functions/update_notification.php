@@ -5,6 +5,7 @@ $password = "";
 $db_name = "testdb";
 
 $department = $_POST['department'];
+
 // Connect to the database
 $con = mysqli_connect($host, $user, $password, $db_name);
 

@@ -275,7 +275,6 @@ $(document).on('click', '.editResBtn', function(event){
 //updateChanges
 
 $(document).on('click','.updateResBtn', function(event){
-  alert("test");
   var id = $("#_ID").val();
   var eventname = $("#_eventname").val();
   var datefiled = $("#_datefiled").val();
@@ -503,22 +502,6 @@ $(document).on('click','.updateResBtn', function(event){
         });
       }
   });
-    //alert(testarr.length);
-    /*
-    if(checkdateconflict(actualdate, timein, timeout, faci)==true)
-    {
-      alert("true test");
-      if(checkreservationConflict(timein, timeout, actualdate, faci)==false){
-        alert("no conflicts");
-      }
-      else{
-        alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
-      }
-    }
-    else{
-      alert("false test");
-    }
-*/
 
 });
 
@@ -575,8 +558,6 @@ $(document).on("click", ".removeEq", function(event){
 
 });
 
-
-
 //create reservation
 $(document).on("click", ".submitBtn", function (event) {
   event.preventDefault();
@@ -594,6 +575,8 @@ $(document).on("click", ".submitBtn", function (event) {
   var requestedby = $("#requestedby").val();
   var e = document.getElementById("faci");
   document.getElementById("termscond-create").disabled = true;
+  var chkbx = document.getElementById("flexCheckDefault");
+
 
   var faci = e.options[e.selectedIndex].text;
     if(computedaysdiff(datefiled, actualdate) <= 4 )
@@ -650,6 +633,38 @@ $(document).on("click", ".submitBtn", function (event) {
                         var json = JSON.parse(data);
                         var status = json.status;
                         if ((status = "success")) {
+                          chkbx.checked = false;
+                                var checkbox = document.getElementById("flexCheckDefault");
+                                if (checkbox.checked == true) {
+                                  var department = $("#_department").val();
+                                  var date = $("#dateminor").val();
+                                  var quantity = $("#_quantity_").val();
+                                  var description = $("#_itemdesc_").val();
+                                  var purpose = $("#_purpose_").val();
+                                  $.ajax({
+                                    url: "functions/addons.php",
+                                    data: {
+                                      department: department,
+                                      date: date,
+                                      quantity: quantity,
+                                      description: description,
+                                      purpose: purpose,
+                                      eventname: eventname,
+                                      actualdate: actualdate,
+                                      reqparty: reqparty,
+                                      requestedby: requestedby,
+                                    },
+                                    type: "POST",
+                                    success: function (data) {
+                                      var addonjson = JSON.parse(data);
+                                      var status = addonjson.status;
+                                      if (status == "success") {
+                                        console.log("Addons added to reservation!");                          
+                                      }
+                                    },
+                                  });
+                                } else {
+                                }
                           //equipment additionals
                             var testarr = [...document.querySelectorAll('[id^="fbh"]')].map(
                               (elm) => elm.id
@@ -682,68 +697,23 @@ $(document).on("click", ".submitBtn", function (event) {
                                   var eqjson = JSON.parse(data);
                                   var status = eqjson.status;
                                   if (status == "success") {
+                                    chkbx.checked = false;
                                     console.log("equipment added to reservation!");
-                                    var checkbox = document.getElementById("flexCheckDefault");
-                                    if (checkbox.checked == true) {
-                                      var department = $("#_department").val();
-                                      var date = $("#dateminor").val();
-                                      var quantity = $("#_quantity_").val();
-                                      var description = $("#_itemdesc_").val();
-                                      var purpose = $("#_purpose_").val();
-                                      $.ajax({
-                                        url: "functions/addons.php",
-                                        data: {
-                                          department: department,
-                                          date: date,
-                                          quantity: quantity,
-                                          description: description,
-                                          purpose: purpose,
-                                          eventname: eventname,
-                                          actualdate: actualdate,
-                                          reqparty: reqparty,
-                                          requestedby: requestedby,
-
-                                        },
-                                        type: "POST",
-                                        success: function (data) {
-                                          var addonjson = JSON.parse(data);
-                                          var status = addonjson.status;
-                                          if (status == "success") {
-                                            console.log("Addons added to reservation!");                          
-                                          }
-                                        },
-                                      });
-                                    } else {
-                                    }
                                   }
                                 },
                               });
                           }
-                          $("#eventname").val("");
-                          $("#actualdate").val("");
-                          $("#timein").val("");
-                          $("#timeout").val("");
-                          $("#eventname_").val("");
-                          $("#purpose").val("");
-                          $("#numparticipants").val("");
-                          $("#stageperformers").val("");
-                          $("#adviser").val("");
-                          $("#chairdeandep").val("");
-                          $("#_department").val("");
-                          $("#dateminor").val("");
-                          $("#_quantity_").val("");
-                          $("#_itemdesc_").val("");
-                          $("#_purpose_").val("");
-                          $("#requestedby").val("");
-                          $("#reserModal").modal("hide");
-                          //force remove faded background  -Ragrats
-                          $("body").removeClass("modal-open");
-                          $(".modal-backdrop").remove();
+                          
+
                           //force remove end
                           //update table list
                           table = $("#datatable").DataTable();
                           table.draw();
                           alert("Successfully Requested Reservation!");
+                          $("#reserModal").modal("hide");
+                          //force remove faded background  -Ragrats
+                          $("body").removeClass("modal-open");
+                          $(".modal-backdrop").remove();
                           document.getElementById("termscond-create").disabled = false;
                         }
                       },
@@ -802,6 +772,37 @@ $(document).on("click", ".submitBtn", function (event) {
                       var status = json.status;
                       if ((status = "success")) {
                         //equipment additionals
+                                var checkbox = document.getElementById("flexCheckDefault");
+                                if (checkbox.checked == true) {
+                                  var department = $("#_department").val();
+                                  var date = $("#dateminor").val();
+                                  var quantity = $("#_quantity_").val();
+                                  var description = $("#_itemdesc").val();
+                                  var purpose = $("#_purpose_").val();
+                                  $.ajax({
+                                    url: "functions/addons.php",
+                                    data: {
+                                      department: department,
+                                      date: date,
+                                      quantity: quantity,
+                                      description: description,
+                                      purpose: purpose,
+                                      eventname: eventname,
+                                      actualdate: actualdate,
+                                      reqparty: reqparty,
+                                      requestedby: requestedby,
+                                    },
+                                    type: "POST",
+                                    success: function (data) {
+                                      var addonjson = JSON.parse(data);
+                                      var status = addonjson.status;
+                                      if (status == "success") {
+                                        console.log("Addons added to reservation!");                          
+                                      }
+                                    },
+                                  });
+                                } else {
+                                }
                         var testarr = [...document.querySelectorAll('[id^="fbh"]')].map(
                           (elm) => elm.id
                         );
@@ -834,37 +835,7 @@ $(document).on("click", ".submitBtn", function (event) {
                               var status = eqjson.status;
                               if (status == "success") {
                                 console.log("equipment added to reservation!");
-                                var checkbox = document.getElementById("flexCheckDefault");
-                                if (checkbox.checked == true) {
-                                  var department = $("#_department").val();
-                                  var date = $("#dateminor").val();
-                                  var quantity = $("#_quantity_").val();
-                                  var description = $("#_itemdesc_").val();
-                                  var purpose = $("#_purpose_").val();
-                                  $.ajax({
-                                    url: "functions/addons.php",
-                                    data: {
-                                      department: department,
-                                      date: date,
-                                      quantity: quantity,
-                                      description: description,
-                                      purpose: purpose,
-                                      eventname: eventname,
-                                      actualdate: actualdate,
-                                      reqparty: reqparty,
-                                      requestedby: requestedby,
-                                    },
-                                    type: "POST",
-                                    success: function (data) {
-                                      var addonjson = JSON.parse(data);
-                                      var status = addonjson.status;
-                                      if (status == "success") {
-                                        console.log("Addons added to reservation!");                          
-                                      }
-                                    },
-                                  });
-                                } else {
-                                }
+                                
                               }
                             },
                           });
@@ -873,31 +844,16 @@ $(document).on("click", ".submitBtn", function (event) {
                         /*var now = new Date();
                                   now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
                                   document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);*/
-                        $("#eventname").val("");
-                        $("#actualdate").val("");
-                        $("#timein").val("");
-                        $("#timeout").val("");
-                        $("#eventname_").val("");
-                        $("#purpose").val("");
-                        $("#numparticipants").val("");
-                        $("#stageperformers").val("");
-                        $("#adviser").val("");
-                        $("#chairdeandep").val("");
-                        $("#_department").val("");
-                        $("#dateminor").val("");
-                        $("#_quantity_").val("");
-                        $("#_itemdesc_").val("");
-                        $("#_purpose_").val("");
-                        $("#requestedby").val("");
-                        $("#reserModal").modal("hide");
-                        //force remove faded background  -Ragrats
-                        $("body").removeClass("modal-open");
-                        $(".modal-backdrop").remove();
+
                         //force remove end
                         //update table list
                         table = $("#datatable").DataTable();
                         table.draw();
                         alert("Successfully Requested Reservation!");
+                        $("#reserModal").modal("hide");
+                        //force remove faded background  -Ragrats
+                        $("body").removeClass("modal-open");
+                        $(".modal-backdrop").remove();
                       }
                     },
                   });
@@ -926,6 +882,8 @@ $(document).on("click", ".submitBtn", function (event) {
     }
 */
 });
+
+
 function dynamicEq(){
   const myNode =  document.getElementById('container2');
   while (myNode.firstChild) {

@@ -593,7 +593,11 @@ require_once('../../../authentication/anti_pagetrans.php');
                         document.getElementById("step3d").hidden = true;
                         document.getElementById("_cadapprovedby").disabled = true;
                         document.getElementById("_inputFeedback").disabled = true;
-                        alert('failed');
+                        
+                    }
+                    else
+                    {
+                        alert('Failed');
                     }
                 }
             });
@@ -662,41 +666,48 @@ require_once('../../../authentication/anti_pagetrans.php');
             var feedb = $('#_inputFeedback').val();
             var pcoapprovedby = $('#_pcoapprovedby').val();
             var pcoby = document.getElementById("_pcoapprovedby").value;
-            if(pcoby != '' && reqno != '' && reqno != 0)
+            if(pcoby !== '' && pcoby !== undefined && pcoby !== null)
             {
+                if(reqno !== '' && reqno !== 0 && reqno !== undefined && reqno !== null)
+                 {
                 $.ajax({
-                url: "step2approve.php",
-                data: {
-                    id: id,
-                    reqno: reqno,
-                    dept: dept,
-                    feedb: feedb,
-                    pcoapprovedby: pcoapprovedby,
+                        url: "step2approve.php",
+                        data: {
+                            id: id,
+                            reqno: reqno,
+                            dept: dept,
+                            feedb: feedb,
+                            pcoapprovedby: pcoapprovedby,
 
-                },
-                type: 'POST',
-                success: function(data) {
-                    var json = JSON.parse(data);
-                    var status = json.status;
-                    if (status == 'success') {
-                        table = $('#datatable').DataTable();
-                        table.draw();
-                        alert('Step 2 Approved Successfully!');
-                        /*table = $('#datatable').DataTable();
-                        var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
-                        var row = table.row("[id='" + trid + "']");
-                        row.row("[id='" + trid + "']").data([department, date, button]);*/
-                        //$('#_itemdesc_').text('');
-                        document.getElementById("step2a").hidden = true;
-                        document.getElementById("step2d").hidden = true;
-                        document.getElementById("_pcoapprovedby").disabled = true;
-                        document.getElementById("reqnobtn").hidden = true;
-                        $('#_step2').val('Approved');
-                    } else {
-                        alert('failed');
-                    }
+                        },
+                        type: 'POST',
+                        success: function(data) {
+                            var json = JSON.parse(data);
+                            var status = json.status;
+                            if (status == 'success') {
+                                table = $('#datatable').DataTable();
+                                table.draw();
+                                alert('Step 2 Approved Successfully!');
+                                /*table = $('#datatable').DataTable();
+                                var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
+                                var row = table.row("[id='" + trid + "']");
+                                row.row("[id='" + trid + "']").data([department, date, button]);*/
+                                //$('#_itemdesc_').text('');
+                                document.getElementById("step2a").hidden = true;
+                                document.getElementById("step2d").hidden = true;
+                                document.getElementById("_pcoapprovedby").disabled = true;
+                                document.getElementById("reqnobtn").hidden = true;
+                                $('#_step2').val('Approved');
+                            } else {
+                                alert('failed');
+                            }
+                        }
+                    });
                 }
-            });
+                else
+                {
+                    alert("Please add Requisition Number when approving request!");
+                }
 
             }
 

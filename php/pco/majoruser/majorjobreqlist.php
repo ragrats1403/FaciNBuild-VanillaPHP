@@ -174,7 +174,7 @@ require_once('../../authentication/anti_pagetrans.php');
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="../../../php/pco/minor/minorjobreqlist.php">Minor Job Request</a>
                             <a class="dropdown-item" href="../../../php/pco/majoruser/majorjobreqlist.php">Major Job Request</a>
-                            <a class="dropdown-item" href="../../../php/pco/reservation/pcoreservation.php">Request Reservation</a>
+                            <a class="dropdown-item" href="../../../php/pco/reservation/pcoreservation.php">Reservation</a>
                         </ul>
                     </div>
                 </li>

@@ -45,7 +45,6 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = $row['quantity']; 
     $subarray[] = $row['bdstatus']; 
     $subarray[] = '<a href= "javascript:void();" data-id="' . $row['jobreqno'] . '" class ="btn btn-sm btn-info editBtn">More Info</a> 
-    <a href= "javascript:void();" data-id="' . $row['jobreqno'] . '" class ="btn btn-sm btn-danger btnDelete">Delete</a>
     <a href= "javascript:void();" onclick="printDiv()" data-id="' . $row['jobreqno'] . '" class ="btn btn-sm btn-secondary btnprint">Print</a>';
 
     $data[] = $subarray;

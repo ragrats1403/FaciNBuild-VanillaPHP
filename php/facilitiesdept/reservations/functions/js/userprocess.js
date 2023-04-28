@@ -18,6 +18,7 @@ $(document).on("click", ".editBtn", function (event) {
   document.getElementById("_stageperformers").disabled = true;
   document.getElementById("_adviser").disabled = true;
   document.getElementById("_chairdeandep").disabled = true;
+  document.getElementById("_inputFeedback").disabled = true;
   var x = document.getElementById("_myDIV1");
   x.style.display = "none";
 
