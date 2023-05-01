@@ -475,50 +475,48 @@ require_once('../../authentication/anti_pagetrans.php');
                         <div class="alert2" id="alert2" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                             <strong id = "strongId">Warning!</strong> Someone is using the facility within that time! Check Calendar of Activities for approved schedules. 
-                            
                         </div>
+                </div>
+                    <style>
+                        .alert1 {
+                        padding: 20px;
+                        background-color: green;
+                        color: white;
+                        }
 
-                    </div>
-                        <style>
-                                .alert1 {
-                                padding: 20px;
-                                background-color: green;
-                                color: white;
-                                }
+                        .cbtn {
+                        margin-left: 15px;
+                        color: white;
+                        font-weight: bold;
+                        float: right;
+                        font-size: 22px;
+                        line-height: 20px;
+                        cursor: pointer;
+                        transition: 0.3s;
+                        }
 
-                                .cbtn {
-                                margin-left: 15px;
-                                color: white;
-                                font-weight: bold;
-                                float: right;
-                                font-size: 22px;
-                                line-height: 20px;
-                                cursor: pointer;
-                                transition: 0.3s;
-                                }
+                        .cbtn:hover {
+                        color: black;
+                        }
+                    </style>
+                    <script>
+                        //add ons click
+                            function myFunctionPrompt(divID) {
+                            var x = document.getElementById(divID);
+                            if (x.style.display === "block") {
+                                x.style.display = "none";
+                            } else {
+                                x.style.display = "block";
+                            }
+                            }
 
-                                .cbtn:hover {
-                                color: black;
-                                }
-                            </style>
-                            <script>
-                                //add ons click
-                                    function myFunctionPrompt(divID) {
-                                    var x = document.getElementById(divID);
-                                    if (x.style.display === "block") {
-                                        x.style.display = "none";
-                                    } else {
-                                        x.style.display = "block";
-                                    }
-                                    }
-
-                                    $("#reserModal").on("hidden.bs.modal", function () {
-                                            var x = document.getElementById("alert1");
-                                            x.style.display = "none";    
-                                            var a = document.getElementById("alert2");
-                                            a.style.display = "none";                                   
-                                        });
-                            </script>
+                            $("#reserModal").on("hidden.bs.modal", function () {
+                                    var x = document.getElementById("alert1");
+                                    x.style.display = "none";    
+                                    var a = document.getElementById("alert2");
+                                    a.style.display = "none";                                   
+                                });
+                    </script>
                 <div class="modal-body ">
                     <form action="">
                         Please select the facilities you would like to request.
@@ -560,7 +558,7 @@ require_once('../../authentication/anti_pagetrans.php');
                             </div>
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Actual Date of Use:</label>
-                                <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use">
+                                <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use" min="<?php echo date('Y-m-d'); ?>" />
                             </div>
                         </div>
 

@@ -512,7 +512,7 @@ require_once('../../authentication/anti_pagetrans.php');
                             </div>
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Actual Date of Use:</label>
-                                <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use">
+                                <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use" min="<?php echo date('Y-m-d'); ?>" />
                             </div>
                         </div>
 
