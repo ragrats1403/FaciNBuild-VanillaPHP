@@ -398,8 +398,10 @@ $('#datatable').DataTable({
                     <div class="col-md-2" style="width:17%;">
                         <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Job Request</h5>
                     </div>
-                    <div class="col-md-5">
-                    <div class="alert1" id="alert1" style = "display:none;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12">
+                        <div class="alert1" id="alert1" style = "display:none;">
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                             <strong id = "strongId">Success!</strong> Successfully Submitted Job Request!
                             <style>
@@ -438,9 +440,6 @@ $('#datatable').DataTable({
                         </div>
 
                     </div>
-                    
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
                 <div class="modal-body ">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">

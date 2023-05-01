@@ -375,12 +375,13 @@ require_once('../../authentication/anti_pagetrans.php');
                     <div class="col-md-2" style="width:17%;">
                         <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Job Request</h5>
                     </div>
-                    <div class="col-md-10">
-                    <div class="alert1" id="alert1" style = "display:none; width: 100%;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-md-12">
+                        <div class="alert1" id="alert1" style = "display:none; width: 100%;">
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                             <strong id = "strongId">Success!</strong> Successfully submitted Major Job request!
                         </div>
-
                     </div>
                         <style>
                                 .alert1 {
@@ -422,8 +423,6 @@ require_once('../../authentication/anti_pagetrans.php');
                                             a.style.display = "none";                                   
                                         });
                             </script>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
                     <div class="modal-body ">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                             <div class="row justify-content-center" style="padding-bottom:13px;">
