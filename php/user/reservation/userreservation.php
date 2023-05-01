@@ -291,10 +291,8 @@ require_once('../../authentication/anti_pagetrans.php');
                         <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
                 </div>
-
-                <div class="modal-body ">
+                <div class="modal-body">
                     <form action="">
                         Please select the facilities you would like to request.
                         <!--
@@ -387,11 +385,11 @@ require_once('../../authentication/anti_pagetrans.php');
                             <input type="name" class="form-control input-sm col-xs-1" id="_chairdeandep" placeholder="CHAIRPERSON/DEAN/DEPARTMENT">
                         </div>
                         <label class="fw-bold">Equipments Added To Reservation</label>
-                        <div id="container3">
-                            <div id="container4">
+                            <div id="container3">
+                                <div id="container4">
 
+                                </div>
                             </div>
-                        </div>
                                     <div class="row" style="padding-top:6px;">     
                                         <div class="col-md-4" style="margin-top:5px;">
                                             <label class="fw-bold" for="inputName">Facilities Department Approval Status:</label>
@@ -558,7 +556,7 @@ require_once('../../authentication/anti_pagetrans.php');
                             </div>
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Actual Date of Use:</label>
-                                <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use" min="<?php echo date('Y-m-d'); ?>" />
+                                <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use" min="<?php date_default_timezone_set('Asia/Manila'); echo date('Y-m-d'); ?>" />
                             </div>
                         </div>
 
@@ -699,11 +697,6 @@ require_once('../../authentication/anti_pagetrans.php');
         </div>
     </div>
     <!-- create reservation end -->
-
-
-
-
-
 
     <!-- BODY END-->
 </body>

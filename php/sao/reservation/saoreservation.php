@@ -398,6 +398,7 @@ require_once('../../authentication/anti_pagetrans.php');
 
                             </div>
                         </div>
+                        
                                     <div class="row" style="padding-top:6px;">     
                                         <div class="col-md-4" style="margin-top:5px;">
                                             <label class="fw-bold" for="inputName">Facilities Department Approval Status:</label>
@@ -565,10 +566,9 @@ require_once('../../authentication/anti_pagetrans.php');
                             </div>
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Actual Date of Use:</label>
-                                <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use" min="<?php echo date('Y-m-d'); ?>" />
+                                <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use" min="<?php date_default_timezone_set('Asia/Manila'); echo date('Y-m-d'); ?>" />
                             </div>
                         </div>
-
                         <div class="col-md-2">
                             <label class="fw-bold" for="date">Time In:</label>
                             <input type="time" class="form-control input-sm col-xs-1" id="timein" placeholder="Time In">
@@ -577,7 +577,6 @@ require_once('../../authentication/anti_pagetrans.php');
                             <label class="fw-bold" for="date">Time Out:</label>
                             <input type="time" class="form-control input-sm col-xs-1" id="timeout" placeholder="Time Out">
                         </div>
-
                         <div class="col-md-6 ">
                             <label class="fw-bold" for="date">Requesting Party:</label>
                             <input type="name" class="form-control input-sm col-xs-1" id="reqparty" placeholder="Requesting Party" value="<?php echo $_SESSION['department']; ?>" disabled>
