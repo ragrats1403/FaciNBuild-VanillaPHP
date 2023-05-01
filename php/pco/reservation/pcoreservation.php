@@ -11,11 +11,11 @@ require_once('../../authentication/anti_pagetrans.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" href="../../../dependencies/bootstrap/css/bootstrap.min.css?<?= time() ?>" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../../dependencies/datatables/datatables.min.css?<?= time() ?>" />
-    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?= time() ?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?= time() ?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
-    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
-    <link href='../../../dependencies/boxicons/css/boxicons.min.css?<?= time() ?>' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
+    <link href='../../../dependencies/boxicons/css/boxicons.min.css?<?= time() ?>' rel='stylesheet'> 
 
 </head>
 
