@@ -153,7 +153,8 @@ $(document).on("click", ".submitBtn", function (event) {
               // Do something with the result, which will be a boolean value
               if (result) {
                   // Handle case where there is a conflict
-                  alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
+                  //alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
+                  myFunctionPrompt("alert2");
                   document.getElementById("termscond-create").disabled = false;
               } else {
                   // Handle case where there is no conflict
@@ -267,11 +268,8 @@ $(document).on("click", ".submitBtn", function (event) {
                           //update table list
                           table = $("#datatable").DataTable();
                           table.draw();
-                          alert("Successfully Requested Reservation!");
-                          $("#reserModal").modal("hide");
+                          myFunctionPrompt("alert1");
                           //force remove faded background  -Ragrats
-                          $("body").removeClass("modal-open");
-                          $(".modal-backdrop").remove();
                           document.getElementById("termscond-create").disabled = false;
                         }
                       },
@@ -290,7 +288,8 @@ $(document).on("click", ".submitBtn", function (event) {
             document.getElementById("termscond-create").disabled = true;
             if (result) {
                 // Handle case where there is a conflict
-                alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
+                //alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
+                myFunctionPrompt("alert2");
                 document.getElementById("termscond-create").disabled = false;
             } else {
                 // Handle case where there is no conflict
@@ -407,11 +406,7 @@ $(document).on("click", ".submitBtn", function (event) {
                         //update table list
                         table = $("#datatable").DataTable();
                         table.draw();
-                        alert("Successfully Requested Reservation!");
-                        $("#reserModal").modal("hide");
-                        //force remove faded background  -Ragrats
-                        $("body").removeClass("modal-open");
-                        $(".modal-backdrop").remove();
+                        myFunctionPrompt("alert1");
                       }
                     },
                   });
