@@ -343,42 +343,63 @@ require_once('../../authentication/anti_pagetrans.php');
                             <div class="col-md-2">
                                 <button class="btn btn-info" onclick="printDiv()">Print</button>
                             </div>
-                            <div id="minorDiv" style="display: none;">
-                                <table id="minortable" class="table" width="100%">
-                                    <thead>
-                                        <h5 class="fw-bold"> Minor Job Request </h5>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Department</th>
-                                            <th>Section</th>
-                                            <th>Date</th>
-                                            <th>Description</th>
-                                            <th>Purpose</th>
-                                            <th>Date Rendered</th>
-                                            <th>Date Confirmed</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                </table>
+
+                            <div class="row" id="headerDiv" style="display: none;">
+                                <div class="col-md-1 float-start">
+                                    <img style="position: relative; left:" src='../../../../images/uclogo.png' alt='' width='75' height='50' />
+                                </div>   
+                                <div class="col-md-3">
+                                    <h1 class="fw-bold form-check-label" style="padding-left: 100px; position: relative; left:">Generate Reports </h1>
+                                </div>     
                             </div>
+                            <div id="catch" style="display: none;">
+                                <label class="fw-bold">ㅤ</label>
+                            </div>
+                            <div class="row" id="minorDiv" style=" position:relative; display: none;">
+                            <table id="minortable" class="table" width="100%">
+                                <thead>
+                                <tr>
+                                    <th colspan="9">
+                                    <label class="fw-bold">Minor Job Request</label>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Department</th>
+                                    <th>Section</th>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Purpose</th>
+                                    <th>Date Rendered</th>
+                                    <th>Date Confirmed</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                            </table>
+                            </div>
+
                             <div id="majorDiv" style="display: none;">
-                                <table id="majortable" class="table" width="100%">
-                                    <thead>
-                                        <h5 class="fw-bold"> Major Job Request </h5>
-                                        <tr>
-                                            <th>Job Request no.</th>
-                                            <th>Requisition no.</th>
-                                            <th>Department</th>
-                                            <th>Quantity</th>
-                                            <th>Date</th>
-                                            <th>Description</th>
-                                            <th>Section</th>
-                                            <th>Purpose</th>
-                                            <th>Outsource</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                </table>
+                            <table id="majortable" class="table" width="100%">
+                                <thead>
+                                <tr>
+                                    <th colspan="10">
+                                    <label class="fw-bold">Major Job Request</label>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Job Request no.</th>
+                                    <th>Requisition no.</th>
+                                    <th>Department</th>
+                                    <th>Quantity</th>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Section</th>
+                                    <th>Purpose</th>
+                                    <th>Outsource</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                            </table>
                             </div>
                         </div>
                     </div>
@@ -388,23 +409,35 @@ require_once('../../authentication/anti_pagetrans.php');
     </div>
     <script>
         function printDiv() {
-  if (document.getElementById("minorDivCheckdefault").checked || document.getElementById("majorDivCheckDefault").checked) {
-    var printContents = "";
-    if (document.getElementById("minorDivCheckdefault").checked) {
-      printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + document.getElementById("minorDiv").innerHTML + "</div>";
-    }
-    if (document.getElementById("majorDivCheckDefault").checked) {
-      printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + document.getElementById("majorDiv").innerHTML + "</div>";
-    }
-    var originalContents = document.body.innerHTML;
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents;
-    window.location.reload();
-  } else {
-    alert("Please select at least one checkbox before printing.");
-  }
-}
+            var minorChecked = document.getElementById("minorDivCheckdefault").checked;
+            var majorChecked = document.getElementById("majorDivCheckDefault").checked;
+            var header = document.getElementById("headerDiv").checked;
+            var catcher = document.getElementById("catch").checked;
+
+            if (minorChecked || majorChecked) {
+                var printContents = "";
+                var header = "";
+
+                if (majorChecked && !minorChecked) {
+                    header = document.getElementById("headerDiv").innerHTML;
+                    printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("majorDiv").innerHTML + "</div>";
+                } else if (minorChecked && !majorChecked) {
+                    header = document.getElementById("headerDiv").innerHTML;
+                    printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("minorDiv").innerHTML + "</div>";
+                } else if (minorChecked && majorChecked) {
+                    header = document.getElementById("headerDiv").innerHTML;
+                    printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("minorDiv").innerHTML + document.getElementById("majorDiv").innerHTML + "</div>";
+                }
+
+                var originalContents = document.body.innerHTML;
+                document.body.innerHTML = printContents;
+                window.print();
+                document.body.innerHTML = originalContents;
+                window.location.reload();
+            } else {
+                alert("Please select at least one checkbox before printing.");
+            }
+        }
     </script>
     <!-- Data Table End-->
 
