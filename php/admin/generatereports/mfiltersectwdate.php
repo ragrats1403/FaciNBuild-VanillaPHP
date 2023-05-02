@@ -35,7 +35,6 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = $row['department'];
     $subarray[] = $row['quantity'];
     $subarray[] = $row['date'];  
-    $subarray[] = $row['description']; 
     $subarray[] = $row['section']; 
     $subarray[] = $row['purpose']; 
     $subarray[] = $row['outsource']; 
