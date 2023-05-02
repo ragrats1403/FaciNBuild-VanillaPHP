@@ -8,6 +8,7 @@ if (!empty($datestart) && !empty($dateend)) {
     $sql .= " AND `date` BETWEEN '$datestart' AND '$dateend'";
 }
 
+
 $query = mysqli_query($con, $sql);
 $count_all_rows = mysqli_num_rows($query);
 
@@ -43,8 +44,7 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = $row['requino'];
     $subarray[] = $row['department'];
     $subarray[] = $row['quantity'];
-    $subarray[] = $row['date'];  
-    $subarray[] = $row['description']; 
+    $subarray[] = $row['date'];   
     $subarray[] = $row['section']; 
     $subarray[] = $row['purpose']; 
     $subarray[] = $row['outsource']; 

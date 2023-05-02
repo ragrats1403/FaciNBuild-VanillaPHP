@@ -35,7 +35,6 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = $row['department'];
     $subarray[] = $row['section'];
     $subarray[] = $row['datesubmitted'];
-    $subarray[] = $row['item_desc'];
     $subarray[] = $row['purpose'];
     $subarray[] = $row['daterendered'];
     $subarray[] = $row['dateconfirmed'];
