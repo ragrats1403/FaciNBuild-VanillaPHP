@@ -537,6 +537,22 @@ require_once('../../authentication/anti_pagetrans.php');
                                             <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="_itemdesc1" disabled></textarea></td>
                                         </tr>
                                         <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity2" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="itemdesc2" disabled></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity3" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="itemdesc3" disabled></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity4" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="itemdesc4" disabled></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity5" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="itemdesc5" disabled></textarea></td>
+                                        </tr>
+                                        <tr>
                                             <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
                                             <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="_purpose1" disabled></textarea></td>
                                             <td></td>

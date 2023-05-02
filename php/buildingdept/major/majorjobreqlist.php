@@ -306,6 +306,38 @@
                     $('#purpose1').val(json.purpose);
                     $('#remarks1').val(json.outsource);
                     $('#printmodal').modal('show');
+
+                    var dep = json.department;
+                    var rqby = json.requestedby;
+                    var datesub = json.date;
+                    var purp = json.purpose;
+                    $.ajax({
+                        url: "functions/multicount.php",
+                        type: 'POST',
+                        data: {
+                            department: dep,
+                            requestedby: rqby,
+                            datesubmitted: datesub,
+                            purpose: purp,
+                        },
+                        success: function(data) {
+                            var mjson = JSON.parse(data);
+                            var storecount = mjson.count;
+                            var newiter = storecount;
+
+                            var nia = parseInt(newiter) + 1;
+                            if(mjson.count>1)
+                            {
+                                for(var i = 2; i<=nia; i++)
+                                {
+                                    var divid = "_"+i
+                                    console.log(i);
+                                    myFunctionPrompt(divid);
+                                    iteratemultivals(dep, rqby, datesub, purp, i);
+                                }
+                            }
+                        }
+                    });
                 }
             });
         });
@@ -726,6 +758,38 @@
                     });          
 
                 }
+
+                function iteratemultivals(dep, rqby, datesub, purp, i)
+                {
+                    $.ajax({
+                            url: "functions/getmultivalues.php",
+                            type: 'POST',
+                            data: {
+                                department: dep,
+                                requestedby: rqby,
+                                datesubmitted: datesub,
+                                purpose: purp,
+                                multinum: i,
+                                },
+                                success: function(data) {
+                                var njson = JSON.parse(data);
+                                console.log(i);
+                                var qua = document.getElementById("quantity"+i);
+                                var des = document.getElementById("itemdesc"+i);
+                                console.log(njson.item_desc, njson.quantity);
+                                var newqid = "quantity" + i;
+                                var newdesid= "itemdesc" + i;
+                                console.log(newqid);
+                                console.log(newdesid);
+                                $('#'+newqid).val("test");
+                                $('#'+newdesid).val("test");
+                                document.getElementById("quantity"+i).value = njson.quantity;
+                                document.getElementById("itemdesc"+i).value = njson.item_desc;     
+                                }
+                    });          
+
+                }
+
     </script>
     <!-- Script Process End-->
     <!-- edit user modal-->
@@ -1057,6 +1121,22 @@
                                         <tr>
                                             <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity1" disabled></textarea></td>
                                             <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="description1" disabled></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity2" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="itemdesc2" disabled></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity3" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="itemdesc3" disabled></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity4" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="itemdesc4" disabled></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity5" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="itemdesc5" disabled></textarea></td>
                                         </tr>
                                         <tr>
                                             <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
