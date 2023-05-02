@@ -75,6 +75,7 @@ $.ajax({
 }
 //dynamic fetch data with drop down menu
 function dynamicEq(){
+    document.getElementById("actualdate").disabled = false;
     const myNode =  document.getElementById('container2');
     while (myNode.firstChild) {
     myNode.removeChild(myNode.lastChild);
@@ -203,7 +204,6 @@ $(document).on('click', '.addresBtn', function(event){
                 textbox.className = "form-control input-sm col-xs-1 disabled";
                 textbox.innerHTML = eqname +' x '+ value;
     
-    
                 divCol.appendChild(textbox);
                 divCol2.appendChild(btn);
                 newDiv.appendChild(divCol);
@@ -213,9 +213,6 @@ $(document).on('click', '.addresBtn', function(event){
                 newDiv.appendChild(hvalue);
                 newDiv.appendChild(hfaci);
                 container.appendChild(newDiv);
-
-                
-    
             }
         }); 
     }
@@ -231,14 +228,16 @@ $(document).on('click', '.addresBtn', function(event){
 //date auto fill
 var now = new Date();
 now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-document.getElementById('datefiled').value = now.toISOString().substring(0,10);
+var formattedDate = now.toISOString().slice(0, 19);
+document.getElementById('datefiled').value = formattedDate;
 //date end
 
 function bodyonload(){
         //date auto fill
-    var now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    document.getElementById('datefiled').value = now.toISOString().substring(0,10);
+        var now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        var formattedDate = now.toISOString().slice(0, 19);
+        document.getElementById('datefiled').value = formattedDate;
     //date end
 
 }
@@ -265,18 +264,18 @@ function myFunction(divID) {
     }
     var now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    document.getElementById('dateminor').value = now.toISOString().substring(0,10);
+    var formattedDate = now.toISOString().slice(0, 19);
+    document.getElementById('dateminor').value = formattedDate;
 
 }
 
 //modal events
-
-$("#reserModal").on("hidden.bs.modal", function () {
+$("#reserModal").on("hide.bs.modal", function () {
     const myNode =  document.getElementById('container2');
     while (myNode.firstChild) {
     myNode.removeChild(myNode.lastChild);
     }
-    $('#testtable').DataTable().clear().destroy();
+        $('#testtable').DataTable().clear().destroy();
                         $("#eventname").val("");
                         $("#actualdate").val("");
                         $("#timein").val("");
@@ -293,8 +292,18 @@ $("#reserModal").on("hidden.bs.modal", function () {
                         $("#_itemdesc_").val("");
                         $("#_purpose_").val("");
                         $("#requestedby").val("");
+            var x = document.getElementById("faci");
+            var option = document.createElement("option");
+            option.text = " -- Select Facility -- "
+            option.hidden = true;
+            option.disabled = true;
+            option.selected = true;
+            x.add(option); 
+            document.getElementById("actualdate").disabled = true;
+            document.getElementById("timein").disabled = true;
+            document.getElementById("timeout").disabled = true;
+            location.reload();
   });
-  
   
   $("#test").on("hidden.bs.modal", function () {
     const myNode =  document.getElementById('container4');

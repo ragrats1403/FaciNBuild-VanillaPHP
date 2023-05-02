@@ -9,9 +9,7 @@ require_once('../../authentication/anti_pagetrans.php');
     <title>Major Job Request List</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <link type="text/css" href="../../../dependencies/bootstrap/css/bootstrap.min.css?<?= time() ?>" rel="stylesheet">
-    <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />-->
     <link rel="stylesheet" type="text/css" href="../../../dependencies/datatables/datatables.min.css?<?= time() ?>" />
     <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?=time()?>">
@@ -54,7 +52,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservations/functions/notification.php",
+                    url: "../reservation/functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -114,7 +112,7 @@ require_once('../../authentication/anti_pagetrans.php');
             markAsReadButton.addEventListener("click", function(event) {
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservations/functions/update_notification.php",
+                    url: "../reservation/functions/update_notification.php",
                     type: 'POST',
                     data: {
                         department: department,
@@ -152,49 +150,50 @@ require_once('../../authentication/anti_pagetrans.php');
         </div>
         <div class="navdiv">
             <ul class="nav_list">
-                <li>
-                    <a href="../../../../php/cad/cadcalendarofactivities.php">
-                        <i class='bx bx-calendar'></i>
-                        <span class="link_name">Calendar of Activities</span>
-                    </a>
-                </li>
-                <li>
-                    <div class="dropdown">
-                        <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Manage Request
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            View/Create Request
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../../php/cad/minoruser/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../../php/cad/majoruser/majorjobreqlist.php">Major Job Request</a>
-                            <a class="dropdown-item" href="../../../../php/cad/reservations/cadreservation.php">Reservation</a>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        <div class="profile_content">
-                <div class="profile">
-                    <div class="profile_details">
-                    <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
-                        <div class="name_role">
-                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
-                            <div class="role">CAD</div>
+                <ul class="nav_list">
+                    <li>
+                        <a href="../../../../php/cad/cadcalendarofactivities.php">
+                            <i class='bx bx-calendar'></i>
+                            <span class="link_name">Calendar of Activities</span>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <i class='bx bx-notepad' style="margin-left:17px;"></i>
+                            <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Manage Request
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="../../../../php/cad/major/majorjobreqlist.php">Major Job Request</a>
+                            </ul>
                         </div>
+                        <div class="dropdown">
+                            <i class='bx bx-clipboard' style="margin-left:17px;"></i>
+                            <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                View/Create Request
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="../../../../php/cad/minoruser/minorjobreqlist.php">Minor Job Request</a>
+                                <a class="dropdown-item" href="../../../../php/cad/majoruser/majorjobreqlist.php">Major Job Request</a>
+                                <a class="dropdown-item" href="../../../../php/cad/reservations/cadreservation.php">Reservation</a>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <div class="profile_content">
+                    <div class="profile">
+                        <div class="profile_details">
+                            <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                            <div class="name_role">
+                                <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
+                                <div class="role">CAD</div>
+                            </div>
+                        </div>
+                        <a href="../../../../logout.php">
+                            <i class='bx bx-log-out' id="log_out"></i>
+                        </a>
                     </div>
-                    <a href="../../../../logout.php">
-                        <i class='bx bx-log-out' id="log_out"></i>
-                    </a>
                 </div>
-            </div>
         </div>
     </div>
     
@@ -211,6 +210,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <th>Job Request no.</th>
                                     <th>Requisition no.</th>
                                     <th>Department</th>
+                                    <th>Date</th>
                                     <th>Quantity</th>
                                     <th>Status</th>
                                     <th>Options</th>
@@ -230,11 +230,8 @@ require_once('../../authentication/anti_pagetrans.php');
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- Script Process Start-->
-    <!--<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>-->
     <script src="../../../dependencies/jquery/jquery-3.6.4.min.js"></script>
-    <!--<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>-->
     <script type="text/javascript" src="../../../dependencies/datatables/datatables.min.js"></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
     <script src="../../../dependencies/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
         var dpt = "<?php echo $_SESSION['department'];?>";
@@ -253,13 +250,13 @@ require_once('../../authentication/anti_pagetrans.php');
     },
     'fnCreatedRow': function(nRow, aData, iDataIndex) {
         $(nRow).attr('id', aData[0]);
-        if (aData[4] === 'Approved') {
+        if (aData[5] === 'Approved') {
             $(nRow).css('background-color', '#a7d9ae');
         }
-        if (aData[4] === 'Declined') {
+        if (aData[5] === 'Declined') {
             $(nRow).css('background-color', '#e09b8d');
         }
-        if (aData[4] === 'Pending') {
+        if (aData[5] === 'Pending') {
             $(nRow).css('background-color', '#d9d2a7');
         }
     },
@@ -307,17 +304,16 @@ require_once('../../authentication/anti_pagetrans.php');
                         if (status = 'success') {
                             table = $('#datatable').DataTable();
                             table.draw();
-                            alert('Requested Successfully!');
+                            myFunctionPrompt("alert1");
                             $('#requi').val('');
                             $('#quan').val('');
                             $('#desc').val('');
                             $('#purp').val('');
                             $('#req').val('');
                             $('#dephead').val('');
-                            $('#addUserModal').modal('hide');
+
                             document.getElementById("savechange").disabled = false;
-                            $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
+
                         }
                     }
                 });
@@ -331,6 +327,7 @@ require_once('../../authentication/anti_pagetrans.php');
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
+            document.getElementById("_inputFeedback").disabled = true;
             $.ajax({
                 url: "functions/get_single_user.php",
                 data: {
@@ -386,6 +383,52 @@ require_once('../../authentication/anti_pagetrans.php');
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="col-md-12">
+                        <div class="alert1" id="alert1" style = "display:none; width: 100%;">
+                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                            <strong id = "strongId">Success!</strong> Successfully submitted Major Job request!
+                        </div>
+                    </div>
+                        <style>
+                                .alert1 {
+                                padding: 20px;
+                                background-color: green;
+                                color: white;
+                                }
+
+                                .cbtn {
+                                margin-left: 15px;
+                                color: white;
+                                font-weight: bold;
+                                float: right;
+                                font-size: 22px;
+                                line-height: 20px;
+                                cursor: pointer;
+                                transition: 0.3s;
+                                }
+
+                                .cbtn:hover {
+                                color: black;
+                                }
+                            </style>
+                            <script>
+                                //add ons click
+                                    function myFunctionPrompt(divID) {
+                                    var x = document.getElementById(divID);
+                                    if (x.style.display === "block") {
+                                        x.style.display = "none";
+                                    } else {
+                                        x.style.display = "block";
+                                    }
+                                    }
+
+                                    $("#addUserModal").on("hidden.bs.modal", function () {
+                                            var x = document.getElementById("alert1");
+                                            x.style.display = "none";    
+                                            var a = document.getElementById("alert2");
+                                            a.style.display = "none";                                   
+                                        });
+                            </script>
                     <div class="modal-body ">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                             <div class="row justify-content-center" style="padding-bottom:13px;">
@@ -395,7 +438,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date" disabled>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date" disabled>
                                 </div>
                             </div>
                             <div class="row">
@@ -610,7 +653,8 @@ require_once('../../authentication/anti_pagetrans.php');
         //date auto fill
         var now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        document.getElementById('deeto').value = now.toISOString().substring(0,10);
+        var formattedDate = now.toISOString().slice(0, 19);
+        document.getElementById('deeto').value = formattedDate;
         //date end
     </script>
 </body>
