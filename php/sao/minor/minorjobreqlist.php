@@ -179,12 +179,12 @@ require_once('../../authentication/anti_pagetrans.php');
                         </div>
                     </li>
                 </ul>
-            <div class="profile_content">
+        <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                        <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                    <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name"><?php echo $_SESSION['department']; ?></div>
+                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
                             <div class="role">SAO</div>
                         </div>
                     </div>
