@@ -519,7 +519,6 @@
                             $('#_statustext').val('Approved');
                             $('#editUserModal').modal('hide');
                             $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
                         } else {
                             alert('failed');
                         }
@@ -580,8 +579,6 @@
                             $('#_statustext').val('Declined');
                             $('#editUserModal').modal('hide');
                             $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
-
                         } else {
                             alert('failed');
                         }
