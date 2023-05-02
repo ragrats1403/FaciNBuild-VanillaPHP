@@ -16,6 +16,7 @@ require_once('../../authentication/anti_pagetrans.php');
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?=time()?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?=time()?>" />
     <link href='../../../dependencies/boxicons/css/boxicons.min.css?<?= time() ?>' rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js?<?= time() ?>"></script>
 </head>
 
 <header class="shadow">
@@ -348,6 +349,7 @@ require_once('../../authentication/anti_pagetrans.php');
                             document.getElementById("savechange").disabled = false;
                             
                         }
+                            $('#addUserModal').scrollTop(0);
                             document.getElementById("savechange").disabled = false;
 
                         }
@@ -614,7 +616,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                             x.style.display = "none";
                                         } else {
                                             x.style.display = "block";
-                                        }
+                                        }   
                                         }
                                 </script>
                                 <style>
@@ -981,6 +983,7 @@ require_once('../../authentication/anti_pagetrans.php');
     <!-- edit user modalPopup end-->
     <script>
         //date auto fill
+        // Get the current datetime in Asia/Manila timezone
         var now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
         var formattedDate = now.toISOString().slice(0, 19);

@@ -393,6 +393,11 @@
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
+            for(var a = 2; a<=5; a++)
+            {
+                var divid = "_"+a
+                allhide(divid);
+            }
             document.getElementById("jobrequestno").disabled = true;
             document.getElementById("requino").disabled = true;
             document.getElementById("department").disabled = true;
@@ -467,7 +472,38 @@
                     option2.selected = true;
                     a.add(option2);
 
-                    //drop down fix end
+                    var dep = json.department;
+                    var rqby = json.requestedby;
+                    var datesub = json.date;
+                    var purp = json.purpose;
+                    $.ajax({
+                        url: "functions/multicount.php",
+                        type: 'POST',
+                        data: {
+                            department: dep,
+                            requestedby: rqby,
+                            datesubmitted: datesub,
+                            purpose: purp,
+                        },
+                        success: function(data) {
+                            var mjson = JSON.parse(data);
+                            var storecount = mjson.count;
+                            var newiter = storecount;
+
+                            var nia = parseInt(newiter) + 1;
+                            if(mjson.count>1)
+                            {
+                                for(var i = 2; i<=nia; i++)
+                                {
+                                    var divid = "_"+i
+                                    console.log(i);
+                                    myFunctionPrompt(divid);
+                                    iteratemultival(dep, rqby, datesub, purp, i);
+
+                                }
+                            }
+                        }
+                    });
                     
                     $('#editUserModal').modal('show');
                     
@@ -639,6 +675,57 @@
                 }
             });
         });
+
+                            function allhide(divId)
+                                    {
+                                        var x = document.getElementById(divId);
+                                        if(x.style.display === "block")
+                                        {
+                                            x.style.display = "none";
+                                        }
+                                        
+                                    }
+
+
+                                    function myFunctionPrompt(divID) {
+                                    var x = document.getElementById(divID);
+                                    if (x.style.display === "block") {
+                                        x.style.display = "none";
+                                    } else {
+                                        x.style.display = "block";
+                                    }
+                                    }
+
+        function iteratemultival(dep, rqby, datesub, purp, i)
+                {
+                    $.ajax({
+                            url: "functions/getmultivalues.php",
+                            type: 'POST',
+                            data: {
+                                department: dep,
+                                requestedby: rqby,
+                                datesubmitted: datesub,
+                                purpose: purp,
+                                multinum: i,
+                                },
+                                success: function(data) {
+                                var njson = JSON.parse(data);
+                                console.log(i);
+                                var qua = document.getElementById("quantity_"+i);
+                                var des = document.getElementById("itemdesc_"+i);
+                                console.log(njson.item_desc, njson.quantity);
+                                var newqid = "quantity_" + i;
+                                var newdesid= "itemdesc_" + i;
+                                console.log(newqid);
+                                console.log(newdesid);
+                                $('#'+newqid).val("test");
+                                $('#'+newdesid).val("test");
+                                document.getElementById("quantity_"+i).value = njson.quantity;
+                                document.getElementById("itemdesc_"+i).value = njson.item_desc;     
+                                }
+                    });          
+
+                }
     </script>
     <!-- Script Process End-->
     <!-- edit user modal-->
@@ -694,6 +781,69 @@
                                     <label class="fw-bold" for="date">Item with Complete Description</label>
                                     <textarea placeholder="Description" class="form-control" rows="2" id="description" disabled></textarea>
                                 </div>
+                            </div>
+                             <!--multiple start-->
+                             <div class = "2" style= "display:none;" id="_2">
+                            <hr class="solid">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_2" placeholder="Quantity" disabled>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_2" placeholder="Description" disabled></textarea>
+                                        </div>
+                                    </div>
+                            <hr class="solid">
+                            </div>
+                            <div class = "3" style= "display:none;" id="_3">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_3" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_3" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "4" style= "display:none;" id="_4">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_4" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_4" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "5" style= "display:none;" id="_5">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_5" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_5" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
@@ -786,35 +936,7 @@
                                     <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback" disabled></textarea>
                                 </div>
                             </div>
-                            <!--
-                            <div class="image-container">
-                                <img id="testimage" />
-                                <p>Test loooooooong text</p>
-                                <a href="javascript:void();" class="btn btn-secondary loadImage">Load Image</a>
-                            </div>
-                            <style>
-                                .image-container {
-                                    position: relative;
-                                    display: inline-block;
-                                }
-
-                                #testimage {
-                                    position: absolute;
-                                    top: 0;
-                                    left: 50%;
-                                    transform: translate(-50%, 0%);
-                                    margin-right: 10px;
-                                    height: 100px; /* adjust height to desired size */
-                                }
-
-                                p {
-                                    position: relative;
-                                    z-index: 1;
-                                    text-align: center;
-                                    margin-top: 0; /* remove margin-top to have text touch the image */
-                                }
-
-                            </style>-->
+                            
                             <div class="col-md-12">
                                         <div class="alert1" id="alert1" style = "display:none; width: 100%;">
                                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 

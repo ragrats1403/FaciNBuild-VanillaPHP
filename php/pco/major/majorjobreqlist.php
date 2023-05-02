@@ -318,6 +318,11 @@ require_once('../../authentication/anti_pagetrans.php');
 
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
+            for(var a = 2; a<=5; a++)
+            {
+                var divid = "_"+a
+                allhide(divid);
+            }
             $.ajax({
                 url: "functions/get_single_user.php",
                 data: {
@@ -378,7 +383,40 @@ require_once('../../authentication/anti_pagetrans.php');
                         document.getElementById("reqnobtn").hidden = false;
                     }
 
+                    
+                    var dep = json.department;
+                    var rqby = json.requestedby;
+                    var datesub = json.date;
+                    var purp = json.purpose;
+                
+                    $.ajax({
+                        url: "functions/multicount.php",
+                        type: 'POST',
+                        data: {
+                            department: dep,
+                            requestedby: rqby,
+                            datesubmitted: datesub,
+                            purpose: purp,
+                        },
+                        success: function(data) {
+                            var mjson = JSON.parse(data);
+                            var storecount = mjson.count;
+                            var newiter = storecount;
 
+                            var nia = parseInt(newiter) + 1;
+                            if(mjson.count>1)
+                            {
+                                for(var i = 2; i<=nia; i++)
+                                {
+                                    var divid = "_"+i
+                                    console.log(i);
+                                    myFunctionPrompt(divid);
+                                    iteratemultival(dep, rqby, datesub, purp, i);
+
+                                }
+                            }
+                        }
+                    });
 
                     /*$('#remark').val(json.outsource);*/
                     $('#editUserModal').modal('show');
@@ -504,6 +542,57 @@ require_once('../../authentication/anti_pagetrans.php');
                 }
         });
     });
+
+                    function allhide(divId)
+                                    {
+                                        var x = document.getElementById(divId);
+                                        if(x.style.display === "block")
+                                        {
+                                            x.style.display = "none";
+                                        }
+                                        
+                                    }
+
+
+                                    function myFunctionPrompt(divID) {
+                                    var x = document.getElementById(divID);
+                                    if (x.style.display === "block") {
+                                        x.style.display = "none";
+                                    } else {
+                                        x.style.display = "block";
+                                    }
+                                    }
+
+        function iteratemultival(dep, rqby, datesub, purp, i)
+                {
+                    $.ajax({
+                            url: "functions/getmultivalues.php",
+                            type: 'POST',
+                            data: {
+                                department: dep,
+                                requestedby: rqby,
+                                datesubmitted: datesub,
+                                purpose: purp,
+                                multinum: i,
+                                },
+                                success: function(data) {
+                                var njson = JSON.parse(data);
+                                console.log(i);
+                                var qua = document.getElementById("quantity_"+i);
+                                var des = document.getElementById("itemdesc_"+i);
+                                console.log(njson.item_desc, njson.quantity);
+                                var newqid = "quantity_" + i;
+                                var newdesid= "itemdesc_" + i;
+                                console.log(newqid);
+                                console.log(newdesid);
+                                $('#'+newqid).val("test");
+                                $('#'+newdesid).val("test");
+                                document.getElementById("quantity_"+i).value = njson.quantity;
+                                document.getElementById("itemdesc_"+i).value = njson.item_desc;     
+                                }
+                    });          
+
+                }
     </script>
     <!-- Script Process End-->
     <!-- edit user modal-->
@@ -587,6 +676,69 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description" disabled></textarea>
                                 </div>
+                            </div>
+                             <!--multiple start-->
+                             <div class = "2" style= "display:none;" id="_2">
+                            <hr class="solid">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_2" placeholder="Quantity" disabled>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_2" placeholder="Description" disabled></textarea>
+                                        </div>
+                                    </div>
+                            <hr class="solid">
+                            </div>
+                            <div class = "3" style= "display:none;" id="_3">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_3" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_3" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "4" style= "display:none;" id="_4">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_4" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_4" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "5" style= "display:none;" id="_5">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_5" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_5" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">

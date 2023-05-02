@@ -350,6 +350,7 @@ $('#datatable').DataTable({
                             document.getElementById("savechange").disabled = false;
                             
                         }
+                        $('#addUserModal').scrollTop(0);
                     }
                     }
                 });
