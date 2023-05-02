@@ -314,22 +314,35 @@ $('#datatable').DataTable({
                             {
                                 for(var i = 1; i<loopnum; i++)
                                 {
-                                    console.log(loopnum);
+                                    var iterate = i+1
+                                    var quantityid = "_quantity_" + iterate;
+                                    var itemdescid = "_itemdesc_" + iterate;
+                                    var exquantity = document.getElementById(quantityid).value;
+                                    var exitemdesc = document.getElementById(itemdescid).value;
+                                    console.log(quantityid);
+                                    console.log(itemdescid);
                                     $.ajax({
                                             url: "functions/addmultidata.php",
                                             data: {
                                                 department: department,
                                                 date: date,
-                                                quantity: quantity,
+                                                quantity: exquantity,
                                                 requestedby: requestedby,
-                                                description: description,
+                                                description: exitemdesc,
                                                 purpose: purpose,
+                                                multinum: iterate,
 
                                             },
                                             type: 'POST',
                                             success: function(data) {
-                                                
-                                            
+                                                $('#_quantity_2').val('');
+                                                $('#_itemdesc_2').val('');
+                                                $('#_quantity_3').val('');
+                                                $('#_itemdesc_3').val('');
+                                                $('#_quantity_4').val('');
+                                                $('#_itemdesc_4').val('');
+                                                $('#_quantity_5').val('');
+                                                $('#_itemdesc_5').val('');
                                             }
                                         });
                             }
@@ -349,6 +362,11 @@ $('#datatable').DataTable({
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('tr').attr('minorjobid');
+            for(var a = 2; a<=5; a++)
+            {
+                var divid = "_"+a
+                allhide(divid);
+            }
             document.getElementById("_renderedby").disabled = true;
             document.getElementById("_daterendered").disabled = true;
             document.getElementById("_purpose").disabled = true;
@@ -391,6 +409,39 @@ $('#datatable').DataTable({
                     var section = e.options[e.selectedIndex].text;
 
                     e.options[e.selectedIndex].text = json.section;
+                    var dep = json.department;
+                    var rqby = json.requestedby;
+                    var datesub = json.datesubmitted;
+                    var purp = json.purpose;
+                    $.ajax({
+                        url: "functions/multicount.php",
+                        type: 'POST',
+                        data: {
+                            department: dep,
+                            requestedby: rqby,
+                            datesubmitted: datesub,
+                            purpose: purp,
+                        },
+                        success: function(data) {
+                            var mjson = JSON.parse(data);
+                            var storecount = mjson.count;
+                            var newiter = storecount;
+
+                            var nia = parseInt(newiter) + 1;
+                            if(mjson.count>1)
+                            {
+                                for(var i = 2; i<=nia; i++)
+                                {
+                                    var divid = "_"+i
+                                    console.log(i);
+                                    myFunctionPrompt(divid);
+                                    iteratemultival(dep, rqby, datesub, purp, i);
+
+                                }
+                            }
+                        }
+                    });
+                    
                     $('#editMinorjreqmodal').modal('show');
                     //$('#_datemajorjr').val(json.datesubmitted);
                     $('').val();
@@ -412,6 +463,38 @@ $('#datatable').DataTable({
         });
 
 
+
+
+        function iteratemultival(dep, rqby, datesub, purp, i)
+        {
+            $.ajax({
+                    url: "functions/getmultivalues.php",
+                    type: 'POST',
+                    data: {
+                        department: dep,
+                        requestedby: rqby,
+                        datesubmitted: datesub,
+                        purpose: purp,
+                        multinum: i,
+                        },
+                        success: function(data) {
+                        var njson = JSON.parse(data);
+                        console.log(i);
+                        var qua = document.getElementById("quantity_"+i);
+                        var des = document.getElementById("itemdesc_"+i);
+                        console.log(njson.item_desc, njson.quantity);
+                        var newqid = "quantity_" + i;
+                        var newdesid= "itemdesc_" + i;
+                        console.log(newqid);
+                        console.log(newdesid);
+                        $('#'+newqid).val("test");
+                        $('#'+newdesid).val("test");
+                        document.getElementById("quantity_"+i).value = njson.quantity;
+                        document.getElementById("itemdesc_"+i).value = njson.item_desc;     
+                        }
+            });          
+
+        }
         
 
     </script>
@@ -463,6 +546,15 @@ $('#datatable').DataTable({
                                     } else {
                                         x.style.display = "block";
                                     }
+                                    }
+                                    function allhide(divId)
+                                    {
+                                        var x = document.getElementById(divId);
+                                        if(x.style.display === "block")
+                                        {
+                                            x.style.display = "none";
+                                        }
+                                        
                                     }
                             </script>
                         </div>
@@ -563,14 +655,14 @@ $('#datatable').DataTable({
                                     <div class="justify-content-center">                                 
                                         <div class="col-md-2" style="padding-bottom:10px">
                                             <label class="fw-bold" for="date">Quantity:</label>
-                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity2_" placeholder="Quantity">
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity_2" placeholder="Quantity">
                                             
                                         </div>
                                     </div>
                                     <div class="justify-content-center">
                                         <div class="col-md-12">
                                             <label class="fw-bold" for="date">Item with Complete Description:</label>
-                                            <textarea class="form-control" rows="2" id="_itemdesc2_" placeholder="Description"></textarea>
+                                            <textarea class="form-control" rows="2" id="_itemdesc_2" placeholder="Description"></textarea>
                                         </div>
                                     </div>
                             <hr class="solid">
@@ -579,13 +671,13 @@ $('#datatable').DataTable({
                                     <div class="justify-content-center">                                 
                                         <div class="col-md-2" style="padding-bottom:10px">
                                             <label class="fw-bold" for="date">Quantity:</label>
-                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity3_" placeholder="Quantity">
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity_3" placeholder="Quantity">
                                         </div>
                                     </div>
                                     <div class="justify-content-center">
                                         <div class="col-md-12">
                                             <label class="fw-bold" for="date">Item with Complete Description:</label>
-                                            <textarea class="form-control" rows="2" id="_itemdesc3_" placeholder="Description"></textarea>
+                                            <textarea class="form-control" rows="2" id="_itemdesc_3" placeholder="Description"></textarea>
                                     </div>
                                 </div>
                                 <hr class="solid">
@@ -594,13 +686,13 @@ $('#datatable').DataTable({
                                     <div class="justify-content-center">                                 
                                         <div class="col-md-2" style="padding-bottom:10px">
                                             <label class="fw-bold" for="date">Quantity:</label>
-                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity4_" placeholder="Quantity">
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity_4" placeholder="Quantity">
                                         </div>
                                     </div>
                                     <div class="justify-content-center">
                                         <div class="col-md-12">
                                             <label class="fw-bold" for="date">Item with Complete Description:</label>
-                                            <textarea class="form-control" rows="2" id="_itemdesc4_" placeholder="Description"></textarea>
+                                            <textarea class="form-control" rows="2" id="_itemdesc_4" placeholder="Description"></textarea>
                                     </div>
                                 </div>
                                 <hr class="solid">
@@ -609,13 +701,13 @@ $('#datatable').DataTable({
                                     <div class="justify-content-center">                                 
                                         <div class="col-md-2" style="padding-bottom:10px">
                                             <label class="fw-bold" for="date">Quantity:</label>
-                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity5_" placeholder="Quantity">
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity_5" placeholder="Quantity">
                                         </div>
                                     </div>
                                     <div class="justify-content-center">
                                         <div class="col-md-12">
                                             <label class="fw-bold" for="date">Item with Complete Description:</label>
-                                            <textarea class="form-control" rows="2" id="_itemdesc5_" placeholder="Description"></textarea>
+                                            <textarea class="form-control" rows="2" id="_itemdesc_5" placeholder="Description"></textarea>
                                     </div>
                                 </div>
                                 <hr class="solid">
@@ -695,11 +787,70 @@ $('#datatable').DataTable({
                                     <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description"></textarea>
                                 </div>
                             </div>
-                            <div id="container3">
-                                <div id="container4">
-                                </div>
+                            <!--multiple start-->
+                            <div class = "2" style= "display:none;" id="_2">
+                            <hr class="solid">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_2" placeholder="Quantity" disabled>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_2" placeholder="Description" disabled></textarea>
+                                        </div>
+                                    </div>
+                            <hr class="solid">
                             </div>
-
+                            <div class = "3" style= "display:none;" id="_3">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_3" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_3" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "4" style= "display:none;" id="_4">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_4" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_4" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "5" style= "display:none;" id="_5">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_5" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_5" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <!--multiple end-->
                             <div class="justify-content-center">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Purpose:</label>

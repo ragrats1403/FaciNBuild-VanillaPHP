@@ -470,8 +470,8 @@ $(document).on('click', '.step1approveBtn', function(event){
                 notedby: notedby,
                 approvedby: approvedby,
                 section: section,
-    
-                
+
+
             },
             type: 'POST',
             success: function(data) {
@@ -480,7 +480,7 @@ $(document).on('click', '.step1approveBtn', function(event){
                 if (status == 'success') {
                     table = $('#datatable').DataTable();
                     table.draw();
-                    alert('Approved Successfully!');
+                    $('#deletemodal').modal('show');
                     document.getElementById("step1a").hidden = true;
                     document.getElementById("step1d").hidden = true;
                     $('#_step1').val('Approved');
@@ -495,11 +495,7 @@ $(document).on('click', '.step1approveBtn', function(event){
     {
         alert("Please fill in required fields");
     }
-
-    
     //alert('test');
-
-
 });
 //step 3
 //alert('test');
@@ -528,7 +524,7 @@ $(document).on('click', '.step1declineBtn', function(event){
                 if (status == 'success') {
                     table = $('#datatable').DataTable();
                     table.draw();
-                    alert('Step 1 Declined Successfully!');
+                    $('#declinemodal').modal('show');
                     $('#_step1').val('Declined');
                     $('#_statustext').val('Declined');
                     $('#editMinorjreqmodal').modal('hide');

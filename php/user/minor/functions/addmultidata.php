@@ -12,7 +12,7 @@ $multinum = $_POST['multinum'];
 date_default_timezone_set('Asia/Manila');
 
 
-$sql = "INSERT INTO `minorjreq` (`department`,`datesubmitted`, `quantity`, `requestedby`,`item_desc`,`purpose`, `bdstatus`,`status`) VALUES ('$department','$date','$quantity','$requestedby','$description',' $purpose','Pending', 'Pending')";
+$sql = "INSERT INTO `multiminor` (`department`,`datesubmitted`, `quantity`, `requestedby`,`item_desc`,`purpose`, `multinum`) VALUES ('$department','$date','$quantity','$requestedby','$description',' $purpose','$multinum')";
 $query = mysqli_query($con, $sql);
 if ($query == true) {
 
