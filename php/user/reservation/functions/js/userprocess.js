@@ -135,7 +135,6 @@ $(document).on("click", ".submitBtn", function (event) {
   document.getElementById("termscond-create").disabled = true;
   var chkbx = document.getElementById("flexCheckDefault");
 
-
   var faci = e.options[e.selectedIndex].text;
     if(computedaysdiff(datefiled, actualdate) <= 4 )
     {
@@ -155,6 +154,7 @@ $(document).on("click", ".submitBtn", function (event) {
                   // Handle case where there is a conflict
                   //alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
                   myFunctionPrompt("alert2");
+                  $('#reserModal').scrollTop(0);
                   document.getElementById("termscond-create").disabled = false;
               } else {
                   // Handle case where there is no conflict
@@ -269,6 +269,7 @@ $(document).on("click", ".submitBtn", function (event) {
                           table = $("#datatable").DataTable();
                           table.draw();
                           myFunctionPrompt("alert1");
+                          $('#reserModal').scrollTop(0);
                           //force remove faded background  -Ragrats
                           document.getElementById("termscond-create").disabled = false;
                         }
@@ -290,6 +291,7 @@ $(document).on("click", ".submitBtn", function (event) {
                 // Handle case where there is a conflict
                 //alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
                 myFunctionPrompt("alert2");
+                $('#reserModal').scrollTop(0);
                 document.getElementById("termscond-create").disabled = false;
             } else {
                 // Handle case where there is no conflict
@@ -407,6 +409,7 @@ $(document).on("click", ".submitBtn", function (event) {
                         table = $("#datatable").DataTable();
                         table.draw();
                         myFunctionPrompt("alert1");
+                        $('#reserModal').scrollTop(0);
                       }
                     },
                   });
@@ -469,3 +472,5 @@ $(document).on("click", ".deleteBtn", function (event) {
     return null;
   }
 });
+
+

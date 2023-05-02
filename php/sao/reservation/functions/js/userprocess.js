@@ -145,7 +145,6 @@ $(document).on("click", ".submitBtn", function (event) {
     else
     {
     }
-
     checkdateconflict(actualdate, timein, timeout, faci, function(confirm) {
       if (confirm) {
           // do something if there is a conflict
@@ -467,5 +466,46 @@ $(document).on("click", ".deleteBtn", function (event) {
     });
   } else {
     return null;
+  }
+});
+function disableReservedTimes(timeIn, timeOut) {
+  $("input[type='time']").each(function() {
+    var inputTime = $(this).val();
+
+    if (inputTime >= timeIn && inputTime <= timeOut) {
+      $(this).prop("disabled", true);
+    } else {
+      $(this).prop("disabled", false);
+    }
+  });
+}
+
+function fetchReservedTimes(selectedDate, facility) {
+  $.ajax({
+    url: "getconflictdates.php", // Replace with your API endpoint to fetch reserved times
+    method: "POST",
+    data: { 
+      date: selectedDate,
+      facility:facility,
+     },
+    success: function(response) {
+      var timeIn = response.timestart; // Assuming the API response contains the reserved "timein"
+      var timeOut = response.timeend; // Assuming the API response contains the reserved "timeout"
+
+      // Call the function to disable times, passing the reserved times
+      disableReservedTimes(timeIn, timeOut);
+    },
+    error: function() {
+      console.log("Error fetching reserved times.");
+    }
+  });
+}
+
+$("#actualdate").on("change", function() {
+  var selectedDate = $(this).val();
+  if (selectedDate !== "") {
+    fetchReservedTimes(selectedDate);
+  } else {
+    $("input[type='time']").prop("disabled", false);
   }
 });

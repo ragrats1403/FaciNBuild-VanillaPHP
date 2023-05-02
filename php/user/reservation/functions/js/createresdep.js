@@ -75,6 +75,7 @@ $.ajax({
 }
 //dynamic fetch data with drop down menu
 function dynamicEq(){
+    document.getElementById("actualdate").disabled = false;
     const myNode =  document.getElementById('container2');
     while (myNode.firstChild) {
     myNode.removeChild(myNode.lastChild);
@@ -270,8 +271,7 @@ function myFunction(divID) {
 }
 
 //modal events
-
-$("#reserModal").on("hidden.bs.modal", function () {
+$("#reserModal").on("hide.bs.modal", function () {
     const myNode =  document.getElementById('container2');
     while (myNode.firstChild) {
     myNode.removeChild(myNode.lastChild);
@@ -293,8 +293,18 @@ $("#reserModal").on("hidden.bs.modal", function () {
                         $("#_itemdesc_").val("");
                         $("#_purpose_").val("");
                         $("#requestedby").val("");
+            var x = document.getElementById("faci");
+            var option = document.createElement("option");
+            option.text = " -- Select Facility -- "
+            option.hidden = true;
+            option.disabled = true;
+            option.selected = true;
+            x.add(option); 
+            document.getElementById("actualdate").disabled = true;
+            document.getElementById("timein").disabled = true;
+            document.getElementById("timeout").disabled = true;
+                        
   });
-  
   
   $("#test").on("hidden.bs.modal", function () {
     const myNode =  document.getElementById('container4');
