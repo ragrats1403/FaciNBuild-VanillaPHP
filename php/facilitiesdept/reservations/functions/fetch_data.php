@@ -44,7 +44,14 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = date('M j, Y h:iA', strtotime($row['datefiled']));
     $subarray[] = $row['actualdateofuse'];
     $subarray[] = $row['status'];
-    $subarray[] = '<a href= "javascript:void();" data-id="' . $row['reservationid'] . '" class ="btn btn-sm btn-info editBtn" >More Info</a> <a href= "javascript:void();" data-id="' . $row['reservationid'] . '" class ="btn btn-sm btn-danger deleteBtn">Delete</a>';
+    if($row['status'] == 'Pending')
+    {
+        $subarray[] = '<a href= "javascript:void();" data-id="' . $row['reservationid'] . '" class ="btn btn-sm btn-info editBtn" >More Info</a> <a href= "javascript:void();" data-id="' . $row['reservationid'] . '" class ="btn btn-sm btn-danger deleteBtn">Delete</a>';
+    }
+    else{
+        $subarray[] = '<a href= "javascript:void();" data-id="' . $row['reservationid'] . '" class ="btn btn-sm btn-info editBtn" >More Info</a>';
+    }
+    
     $data[] = $subarray;
     
 }
