@@ -352,6 +352,7 @@ $('#datatable').DataTable({
                             document.getElementById("savechange").disabled = false;
                             
                         }
+                        $('#addUserModal').scrollTop(0);
                     }
                     }
                 });
@@ -431,7 +432,7 @@ $('#datatable').DataTable({
                             var newiter = storecount;
 
                             var nia = parseInt(newiter) + 1;
-                            if(mjson.count>1)
+                            if(mjson.count>=1)
                             {
                                 for(var i = 2; i<=nia; i++)
                                 {
@@ -439,7 +440,6 @@ $('#datatable').DataTable({
                                     console.log(i);
                                     myFunctionPrompt(divid);
                                     iteratemultival(dep, rqby, datesub, purp, i);
-
                                 }
                             }
                         }
