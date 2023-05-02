@@ -412,8 +412,9 @@ require_once('../../authentication/anti_pagetrans.php');
             var trid = $('#trid').val();
             var dept = $('#department').val();
             var feedb = $('#_inputFeedback').val();
-            
-            $.ajax({
+            if(feedb !== '')
+            {
+                $.ajax({
                 url: "functions/step3decline.php",
                 data: {
                     id: id,
@@ -435,10 +436,14 @@ require_once('../../authentication/anti_pagetrans.php');
                         $('body').removeClass('modal-open');
 
                     } else {
-                        alert('failed');
+                        //alert('failed');
                     }
                 }
             });
+            }
+            else{
+                
+            }
         });
 
 

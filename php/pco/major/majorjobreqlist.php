@@ -383,12 +383,10 @@ require_once('../../authentication/anti_pagetrans.php');
                         document.getElementById("reqnobtn").hidden = false;
                     }
 
-                    
                     var dep = json.department;
                     var rqby = json.requestedby;
                     var datesub = json.date;
                     var purp = json.purpose;
-                
                     $.ajax({
                         url: "functions/multicount.php",
                         type: 'POST',
@@ -408,6 +406,7 @@ require_once('../../authentication/anti_pagetrans.php');
                             {
                                 for(var i = 2; i<=nia; i++)
                                 {
+
                                     var divid = "_"+i
                                     console.log(i);
                                     myFunctionPrompt(divid);
@@ -494,7 +493,9 @@ require_once('../../authentication/anti_pagetrans.php');
             var trid = $('#trid').val();
             var dept = $('#department').val();
             var feedb = $('#_inputFeedback').val();
-            $.ajax({
+            if(feedb !== '')
+            {
+                $.ajax({
                 url: "functions/step2decline.php",
                 data: {
                     id: id,
@@ -521,6 +522,12 @@ require_once('../../authentication/anti_pagetrans.php');
                     }
                 }
             });
+            }
+            else
+            {
+                return null;
+            }
+            
         });
 
         $(document).on('click', '.assignReqnoBtn', function(event) {
