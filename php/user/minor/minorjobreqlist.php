@@ -437,7 +437,6 @@ $('#datatable').DataTable({
                                     console.log(i);
                                     myFunctionPrompt(divid);
                                     iteratemultival(dep, rqby, datesub, purp, i);
-
                                 }
                             }
                         }
