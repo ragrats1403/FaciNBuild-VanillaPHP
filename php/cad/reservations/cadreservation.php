@@ -174,7 +174,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 View/Create Request
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="../../../../php/cad/minoruser/minorjobreqlist.php">Minor Job Request</a>
+                                <a class="dropdown-item" href="../../../../php/cad/minor/minorjobreqlist.php">Minor Job Request</a>
                                 <a class="dropdown-item" href="../../../../php/cad/majoruser/majorjobreqlist.php">Major Job Request</a>
                                 <a class="dropdown-item" href="../../../../php/cad/reservations/cadreservation.php">Reservation</a>
                             </ul>
