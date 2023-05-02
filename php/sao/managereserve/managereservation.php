@@ -495,7 +495,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Successfully approved form</p>
+                    <p>Successfully approved Reservation</p>
                 </div>
             </div>
         </div>
@@ -508,7 +508,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Successfully declined form</p>
+                    <p>Successfully declined Reservation</p>
                 </div>
             </div>
         </div>
