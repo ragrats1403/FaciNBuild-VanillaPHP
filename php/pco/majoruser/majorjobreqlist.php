@@ -145,7 +145,7 @@ require_once('../../authentication/anti_pagetrans.php');
 <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../images/Brown_logo_faci.png" />
+                <img src="../../../../images/Brown_logo_faci.png" />
             </div>
         </div>
         <div class="navdiv">
@@ -163,7 +163,7 @@ require_once('../../authentication/anti_pagetrans.php');
                             Manage Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="./../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="/../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
                         </ul>
                     </div>
                     <div class="dropdown">
@@ -179,12 +179,12 @@ require_once('../../authentication/anti_pagetrans.php');
                     </div>
                 </li>
             </ul>
-            <div class="profile_content">
+        <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                        <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                    <img src="../../../../images/ico/profileicon.png" alt="" style = "height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name"><?php echo $_SESSION['department']; ?></div>
+                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
                             <div class="role">PCO Department</div>
                         </div>
                     </div>
@@ -317,7 +317,8 @@ require_once('../../authentication/anti_pagetrans.php');
                     }
                 });
             } else {
-                alert("Please fill all the Required fields");
+                $('#alert2').css('display', 'block');
+                $('#strongId1').html('Please fill all the Required fields');
                 document.getElementById("savechange").disabled = false;
             }
         });
@@ -385,7 +386,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 <div class="col-md-12">
                         <div class="alert1" id="alert1" style = "display:none; width: 100%;">
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                            <strong id = "strongId">Success!</strong> Successfully submitted Major Job request!
+                            <strong id = "strongId">Success! </strong> Successfully submitted Major Job request!
                         </div>
                     </div>
                         <style>
@@ -477,6 +478,34 @@ require_once('../../authentication/anti_pagetrans.php');
                             </div>
 
                             <div class="modal-footer justify-content-md-center">
+                            <div class="col-md-12">
+                                        <div class="alert2" id="alert2" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId1">Please fill in all required fields</strong>
+                                        </div>
+                                    </div>
+                                        <style>
+                                            .alert2 {
+                                            padding: 20px;
+                                            background-color: red;
+                                            color: white;
+                                            }
+
+                                            .cbtn {
+                                            margin-left: 15px;
+                                            color: white;
+                                            font-weight: bold;
+                                            float: right;
+                                            font-size: 22px;
+                                            line-height: 20px;
+                                            cursor: pointer;
+                                            transition: 0.3s;
+                                            }
+
+                                            .cbtn:hover {
+                                            color: black;
+                                            }
+                                        </style>
                                 <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary col-md-2" id = "savechange">Save Changes</button>
                             </div>
