@@ -354,7 +354,8 @@ $('#datatable').DataTable({
                     }
                 });
             } else {
-                alert("Please fill all the Required fields");
+                $('#alert2').css('display', 'block');
+                $('#strongId1').html('Please fill all the Required fields');
                 document.getElementById("savechange").disabled = false;
             }
         });
@@ -514,7 +515,7 @@ $('#datatable').DataTable({
                 <div class="col-md-12">
                         <div class="alert1" id="alert1" style = "display:none;">
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                            <strong id = "strongId">Success!</strong> Successfully Submitted Job Request!
+                            <strong id = "strongId">Success! </strong> Successfully Submitted Job Request!
                             <style>
                                 .alert1 {
                                 padding: 20px;
@@ -730,6 +731,34 @@ $('#datatable').DataTable({
                             <!-- Form Controls End-->
                         </div>
                         <div class="modal-footer justify-content-md-center">
+                        <div class="col-md-12">
+                                        <div class="alert2" id="alert2" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId1">Please fill in all required fields</strong>
+                                        </div>
+                                    </div>
+                                        <style>
+                                            .alert2 {
+                                            padding: 20px;
+                                            background-color: red;
+                                            color: white;
+                                            }
+
+                                            .cbtn {
+                                            margin-left: 15px;
+                                            color: white;
+                                            font-weight: bold;
+                                            float: right;
+                                            font-size: 22px;
+                                            line-height: 20px;
+                                            cursor: pointer;
+                                            transition: 0.3s;
+                                            }
+
+                                            .cbtn:hover {
+                                            color: black;
+                                            }
+                                        </style>
                             <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary col-md-2" id ="savechange">Save Changes</button>
                         </div>
