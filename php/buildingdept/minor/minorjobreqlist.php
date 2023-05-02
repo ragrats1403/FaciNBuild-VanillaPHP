@@ -378,6 +378,34 @@ require_once('../../authentication/anti_pagetrans.php');
                             </div>
                             <div>
                                 <div class="modal-footer justify-content-md-center">
+                                    <div class="col-md-12">
+                                        <div class="alert1" id="alert1" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId">Success!</strong>
+                                        </div>
+                                    </div>
+                                        <style>
+                                            .alert1 {
+                                            padding: 20px;
+                                            background-color: red;
+                                            color: white;
+                                            }
+
+                                            .cbtn {
+                                            margin-left: 15px;
+                                            color: white;
+                                            font-weight: bold;
+                                            float: right;
+                                            font-size: 22px;
+                                            line-height: 20px;
+                                            cursor: pointer;
+                                            transition: 0.3s;
+                                            }
+
+                                            .cbtn:hover {
+                                            color: black;
+                                            }
+                                        </style>
                                     <a href="javascript:void();" class="btn btn-primary step1approveBtn" id= "step1a">Approve</a>
                                     <a href="javascript:void();" class="btn btn-danger step1declineBtn"id= "step1d">Decline</a>
                                     <!--<button type="" class="btn btn-primary approveBtn">Approve</button>

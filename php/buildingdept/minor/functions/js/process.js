@@ -493,7 +493,8 @@ $(document).on('click', '.step1approveBtn', function(event){
     }
     else
     {
-        alert("Please fill in required fields");
+        $('#alert1').css('display', 'block');
+        $('#strongId').html('Please fill in required fields');
     }
     //alert('test');
 });
@@ -535,7 +536,8 @@ $(document).on('click', '.step1declineBtn', function(event){
             });
     }
     else{
-        alert("Please Provide a feedback when declining request!");
+        $('#alert1').css('display', 'block');
+        $('#strongId').html('Please Provide a feedback when declining request!');
     }
 });
 
