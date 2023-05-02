@@ -266,24 +266,22 @@ require_once('../../authentication/anti_pagetrans.php');
 });
     </script>
     <div class="modal fade" id="test" aria-hidden="true">
-    <div class="modal-dialog" style="max-width:1100px;">
+        <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
-            <div class="modal-header justify-content-center" style="max-width:1100px;">
+                <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <div class="col-md-2" style="width:27%;">
                         <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel" >Manage Reservations</h5>
                     </div>
                     <div class="col-md-12" style="width:15%">
                         <label class=""  for="inputName">Status:</label>
-                        <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id= "_statustext" disabled>
+                    <input type="text" style="width:60%" class="col-sm-1" name="_ID" class="form-control" id= "_statustext" disabled>
                     </div>
                     <div class="col-md-1" style="width:10%">
                         <label class=""  for="inputName">ID:</label>
-                        <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
+                    <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModalforInfo()"></button>
-                    
-            </div>
-            
+                </div>
                 <div class="modal-body ">
                     <form action="">
                         Please select the facilities you would like to request.
@@ -411,11 +409,9 @@ require_once('../../authentication/anti_pagetrans.php');
                         </div>
                         <div id="_myDIV1" style="display: none;">
                             <div class="col-sm-12 d-flex justify-content-between">
-                                    <h5 class="modal-title text-uppercase fw-bold mr-auto" id="exampleModalLabel">Add-ons</h5>
-                                
-                                    
+                                <h5 class="modal-title text-uppercase fw-bold mr-auto" id="exampleModalLabel">Add-ons</h5>
                             </div>
-                           
+                        </div> 
                         <!-- ADD ON SECTION END-->
                     </form>
                 </div>
@@ -423,15 +419,12 @@ require_once('../../authentication/anti_pagetrans.php');
                     <div class="mr-auto">           
                         <input id="termscond" type="checkbox"/>
                         <label for="termscond"> I agree to these <a href="termsandcondition.html"> Terms and Conditions prior to Approval</a></label>
-                                
                     </div>
                     <div class="mr">
-                    <a href= "javascript:void();" class ="btn btn-success step2approveBtn" id="step2a">Approve</a>
-                    <a href= "javascript:void();" class ="btn btn-danger step2declineBtn"id="step2d">Decline</a>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>
+                        <a href= "javascript:void();" class ="btn btn-success step2approveBtn" id="step2a">Approve</a>
+                        <a href= "javascript:void();" class ="btn btn-danger step2declineBtn"id="step2d">Decline</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>
                     </div>
-                    
-                    
                 </div>     
                 <script>
                     document.getElementById("termscond").checked = true;
@@ -441,214 +434,30 @@ require_once('../../authentication/anti_pagetrans.php');
                     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
                     document.getElementById('datefiled').value = now.toISOString().substring(0,10);
                     //date end
-                    
                 </script>
             </div>
         </div>
     </div>
     <br>
     <br>
-        <!-- Modal Popup End -->
-
-        <!-- Create Reservation start-->
-        <div class="modal " tabindex="-1" id="reserModal" aria-labelledby="exampleModalLabel">
-        <div class="modal-dialog" style="max-width:1100px;">
-            <div class="modal-content">
-                <div class="modal-header justify-content-center" style="max-width:1100px;">
-                    <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Reservation Form</h5>
+        <!-- Modal Popup End -->        
+    <div class="modal fade" id="deletemodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body ">
-                    <form action="">
-                        Please select the facilities you would like to request.
-                        <!--
-                        <input type="checkbox" id="annex_avr" name="Annex AVR" value="annex_avr">
-                        <label for="annex_avr"> Annex AVR</label>
-                        <input type="checkbox" id="new_avr" name="New AVR" value="new_avr">
-                        <label for="new_avr"> New AVR</label>
-                        <input type="checkbox" id="cbe_functionhall" name="CBE Function Hall" value="cbe_functionhall">
-                        <label for="cbe_functionhall"> CBE Function Hall</label>
-                        <input type="checkbox" id="auditorium" name="Auditorium" value="auditorium">
-                        <label for="auditorium"> Auditorium</label>
-                        <input type="checkbox" id="be_functionhall" name="BE Function Hall" value="be_functionhall">
-                        <label for="be_functionhall"> BE Function Hall</label><br><br>-->
-                        <div class="row justify-content-center" style="padding-bottom:13px;">
-                            <div class="col-md-6 ">
-                                <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange ="dynamicEq()" >
-                                <option id ="selectedfaci" disabled selected value hidden> -- Select Facility -- </option>
-                                    select = document.getElementById("faci");
-                                    <?php include('../../connection/connection.php');
-                                    $sql = "SELECT facilityname FROM facility";
-                                    $query = mysqli_query($con,$sql);
-                                    $i=1;
-                                    while($row = mysqli_fetch_assoc($query)){
-                                        echo "<option value=$i>".$row["facilityname"]."</option>";
-                                        $i++;
-                                    }
-                                    ?>
-                                                
-                                </select>
-                            </div>
-                            <div class="col-md-6 ">
-                            <input type="text" class="form-control input-sm col-xs-1" id="eventname" placeholder="Event Name">
-                            </div>        
-                        </div>
-                        <div class="row justify-content-center" style="padding-bottom:13px;">
-                            <div class="col-md-6 ">
-                                <label class="fw-bold" for="date">Date Filed:</label>
-                                <input type="date" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
-                            </div>
-                            <div class="col-md-6 ">
-                                <label class="fw-bold" for="date">Actual Date of Use:</label>
-                                <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use">
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-2">
-                            <label class="fw-bold" for="date">Time In:</label>
-                            <input type="time" class="form-control input-sm col-xs-1" id="timein" placeholder="Time In">
-                        </div>
-                        <div class="col-md-2">
-                            <label class="fw-bold" for="date">Time Out:</label>
-                            <input type="time" class="form-control input-sm col-xs-1" id="timeout" placeholder="Time Out">
-                        </div>
-
-                        <div class="col-md-6 ">
-                            <label class="fw-bold" for="date">Requesting Party:</label>
-                            <input type="name" class="form-control input-sm col-xs-1" id="reqparty" placeholder="Requesting Party">
-                        </div>
-                        <div class="justify-content-center">
-                            <div class="col-md-12">
-                                <label class="fw-bold" for="date">Purpose of Activity:</label>
-                                <textarea class="form-control" rows="2" id="purpose" placeholder="Purpose"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-6 ">
-                            <label class="fw-bold" for="date">Estimated No. of Audience/Participants:</label>
-                            <input type="name" class="form-control input-sm col-xs-1" id="numparticipants" placeholder="Estimated No. of Audience/Participants">
-                        </div>
-                        <div class="col-md-6 ">
-                            <label class="fw-bold" for="date">Stage Performers (if any):</label>
-                            <input type="name" class="form-control input-sm col-xs-1" id="stageperformers" placeholder="Stage Performers (if any)">
-                        </div>
-                        <br><br>
-                        <label>NB: All other equipment (e.g. Backdrop, chairs, etc.,) shall be the responsibility of the requesting party.
-                            Technician’s, Electrical, Janitor’s and security guards overtime fees/excess fees are subject to the terms an condition provided at the bank thereof.<br>
-                            Secure Reservation from the AVR (filled up by the AVR personnel only)
-                            <br>
-                            <br>
-                            The activity is officially endorsed and approved by the adviser, Chairperson/Dean, Department Head,
-                            and the SAO/ Cultural Directory. (if “disapproved”, it must be so stated, citing briefly the reason thereof)<br><br>
-                        </label>
-
-                        <div class="col-md-6 ">
-                            <label class="fw-bold" for="date">Adviser</label>
-                            <input type="name" class="form-control input-sm col-xs-1" id="adviser" placeholder="Adviser">
-                        </div>
-                        <div class="col-md-6 ">
-                            <label class="fw-bold" for="date">CHAIRPERSON/DEAN/DEPARTMENT</label>
-                            <input type="name" class="form-control input-sm col-xs-1" id="chairdeandep" placeholder="CHAIRPERSON/DEAN/DEPARTMENT">
-                        </div>
-                        <br>
-                        <label class="fw-bold" for="date">Facility Equipments</label>
-                        <div class="table-responsive">
-                        <table id="testtable" class="table" width="100%" >
-                            <thead>
-                                <th>Equipments Name</th>
-                                <th>Quantity</th>                                  
-                                <th>Quantity to Reserve</th>
-                            </thead>
-                        </table>
-                        </div>
-                        <label class="fw-bold">Equipments Added To Reservation</label><br>
-                        <!--<a href= "javascript:void();" class ="btn btn-primary testBtn" onclick = "testClick();">Test Console</a>-->
-                                <div id="container1">
-                                    <div id="container2">
-                                    </div>
-                                </div>
-                        <!--<div class="col-sm-12 d-flex justify-content-end">
-                            <a data-toggle="modal" href="#myModal2" class="btn btn-primary">Add-ons</a>
-                        </div>-->
-                        <!-- ADD ON SECTION-->
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="myFunction('_myDIV2')">
-                            <label class="form-check-label" for="flexCheckDefault"> Add-on </label>
-                        </div>
-                        <div id="_myDIV2" style="display: none;">
-                            <div class="col-sm-12 d-flex justify-content-center">
-                                <h5 class="modal-title text-uppercase fw-bold " id="exampleModalLabel">Add-ons</h5>
-                            </div>
-                            <form id="saveUserForm" action="javascript:void();" method="POST">
-                                <input type = "hidden" id="eventname" >
-                                <!-- Form Controls-->
-                                <div class="row justify-content-center" style="padding-bottom:13px;">
-                                    <div class="col-md-6 ">
-                                        <label class="fw-bold" for="date">Department:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_department" placeholder="Department">
-                                    </div>
-                                    <div class="col-md-6 ">
-                                        <label class="fw-bold" for="date">Date:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="dateminor" placeholder="Date" disabled> 
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <h5 class="text-uppercase fw-bold" >A. Requisition(To be filled up by the requesting party)</h5>
-                                    
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2" style="width:20%">
-                                        <label class="fw-bold" for="date">Quantity:</label>
-                                        <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2" style="padding-bottom:10px; width:20%">
-                                        <label class="fw-bold" for="date">Item Name:</label>
-                                        <input type="form-control" class="form-control" id ="_item_"placeholder="Item">
-                                    </div>
-                                </div>
-                                <div class="justify-content-center">
-                                    <div class="col-md-12" >
-                                        <label class="fw-bold" for="date">Description:</label>
-                                        <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="justify-content-center">
-                                    <div class="col-md-12" >
-                                        <label class="fw-bold" for="date">Purpose:</label>
-                                        <textarea class="form-control" rows="2" id="_purpose_" placeholder="Purpose"></textarea>
-                                    </div>
-                                </div>  
-                                <!-- Form Controls End-->
-                            </form>
-                        </div>
-                        <!-- ADD ON SECTION END-->
-                    </form>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete?</p>
                 </div>
                 <div class="modal-footer">
-                <div class="tacbox">
-                    <input id="termscond" type="checkbox" onchange="updateButtonState()" />
-                    <label for="termscond"> I agree to these <a href="termsandcondition.html" target="_blank"> Terms and Conditions prior to Approval</a></label>
+                    <button type="button" class="btn btn-secondary" id="close-modal">No</button>
+                    <button type="button" class="btn btn-danger">Yes</button>
                 </div>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModalforInfo()">Close</button>
-                    <!--<button type="submit" class="btn btn-primary disabled" id='termscond-create'>Save Changes</button>-->
-                    <a href= "javascript:void();" class ="btn btn-primary submitBtn disabled" id='termscond-create'>Save Changes</a>
-                    
-                    
-                </div>
-                <script type="text/javascript" src="functions/js/resdep.js?random=<?php echo uniqid(); ?>"></script>                       
-                
             </div>
         </div>
-    </div>
-        <!-- create reservation end -->
-                                    
-   
-
-    
-    
- 
+    </div>    
     <!-- BODY END-->
-
 </body>
 </html>
