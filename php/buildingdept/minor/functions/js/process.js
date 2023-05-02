@@ -434,7 +434,37 @@ $(document).on('click', '.updateBtn', function() {
                 }
 
 
-                
+                var dep = json.department;
+                    var rqby = json.requestedby;
+                    var datesub = json.datesubmitted;
+                    var purp = json.purpose;
+                    $.ajax({
+                        url: "functions/multicount.php",
+                        type: 'POST',
+                        data: {
+                            department: dep,
+                            requestedby: rqby,
+                            datesubmitted: datesub,
+                            purpose: purp,
+                        },
+                        success: function(data) {
+                            var mjson = JSON.parse(data);
+                            var storecount = mjson.count;
+                            var newiter = storecount;
+
+                            var nia = parseInt(newiter) + 1;
+                            if(mjson.count>1)
+                            {
+                                for(var i = 2; i<=nia; i++)
+                                {
+                                    var divid = "_"+i
+                                    console.log(i);
+                                    myFunctionPrompt(divid);
+                                    iteratemultival(dep, rqby, datesub, purp, i);
+                                }
+                            }
+                        }
+                    });
             
             $('#editMinorjreqmodal').modal('show');
             },
@@ -444,6 +474,54 @@ $(document).on('click', '.updateBtn', function() {
         });
     });
 
+
+    function myFunctionPrompt(divID) {
+        var x = document.getElementById(divID);
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+        }
+        function allhide(divId)
+        {
+            var x = document.getElementById(divId);
+            if(x.style.display === "block")
+            {
+                x.style.display = "none";
+            }
+            
+        }
+        function iteratemultival(dep, rqby, datesub, purp, i)
+        {
+            $.ajax({
+                    url: "functions/getmultivalues.php",
+                    type: 'POST',
+                    data: {
+                        department: dep,
+                        requestedby: rqby,
+                        datesubmitted: datesub,
+                        purpose: purp,
+                        multinum: i,
+                        },
+                        success: function(data) {
+                        var njson = JSON.parse(data);
+                        console.log(i);
+                        var qua = document.getElementById("quantity_"+i);
+                        var des = document.getElementById("itemdesc_"+i);
+                        console.log(njson.item_desc, njson.quantity);
+                        var newqid = "quantity_" + i;
+                        var newdesid= "itemdesc_" + i;
+                        console.log(newqid);
+                        console.log(newdesid);
+                        $('#'+newqid).val("test");
+                        $('#'+newdesid).val("test");
+                        document.getElementById("quantity_"+i).value = njson.quantity;
+                        document.getElementById("itemdesc_"+i).value = njson.item_desc;     
+                        }
+            });          
+
+        }
 //steps approval javascript
 
 
