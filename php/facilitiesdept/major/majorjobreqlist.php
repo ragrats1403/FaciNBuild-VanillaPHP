@@ -52,7 +52,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservation/functions/notification.php",
+                    url: "../reservations/functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -112,7 +112,7 @@ require_once('../../authentication/anti_pagetrans.php');
             markAsReadButton.addEventListener("click", function(event) {
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservation/functions/update_notification.php",
+                    url: "../reservations/functions/update_notification.php",
                     type: 'POST',
                     data: {
                         department: department,
@@ -324,8 +324,8 @@ require_once('../../authentication/anti_pagetrans.php');
                     }
                 });
             } else {
-                alert("Please fill all the Required fields");
-                document.getElementById("savechange").disabled = false;
+                $('#alert2').css('display', 'block');
+                $('#strongId2').html('Please fill all of the required fields');
             }
         });
 
@@ -392,16 +392,26 @@ require_once('../../authentication/anti_pagetrans.php');
                 <div class="col-md-12">
                         <div class="alert1" id="alert1" style = "display:none; width: 100%;">
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                            <strong id = "strongId">Success!</strong> Successfully submitted Major Job request!
+                            <strong id = "strongId1">Success!</strong> Successfully submitted Major Job request!
                         </div>
                     </div>
+                                <div class="col-md-12">
+                                    <div class="alert2" id="alert2" style = "display:none; width: 100%;">
+                                        <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                        <strong id = "strongId2">Please fill all of the required fields</strong>
+                                    </div>
+                                </div>
                         <style>
                                 .alert1 {
                                 padding: 20px;
                                 background-color: green;
                                 color: white;
                                 }
-
+                                .alert2 {
+                                        padding: 20px;
+                                        background-color: red;
+                                        color: white;
+                                        }
                                 .cbtn {
                                 margin-left: 15px;
                                 color: white;
