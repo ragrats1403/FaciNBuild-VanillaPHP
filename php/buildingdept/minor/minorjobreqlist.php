@@ -376,9 +376,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <textarea class="form-control" rows="2" id="_inputFeedback" placeholder="Feedback"></textarea>
                                 </div>
                             </div>
-                            <div>
-                                <div class="modal-footer justify-content-md-center">
-                                    <div class="col-md-12">
+                            <div class="col-md-12">
                                         <div class="alert1" id="alert1" style = "display:none; width: 100%;">
                                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                                             <strong id = "strongId">Success!</strong>
@@ -406,6 +404,8 @@ require_once('../../authentication/anti_pagetrans.php');
                                             color: black;
                                             }
                                         </style>
+                            <div>
+                                <div class="modal-footer justify-content-md-center">
                                     <a href="javascript:void();" class="btn btn-primary step1approveBtn" id= "step1a">Approve</a>
                                     <a href="javascript:void();" class="btn btn-danger step1declineBtn"id= "step1d">Decline</a>
                                     <!--<button type="" class="btn btn-primary approveBtn">Approve</button>
@@ -547,7 +547,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Successfully approve form</p>
+                    <p>Successfully approved form</p>
                 </div>
             </div>
         </div>

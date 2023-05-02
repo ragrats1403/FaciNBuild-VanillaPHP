@@ -815,9 +815,7 @@
                                 }
 
                             </style>-->
-                            <div>
-                                <div class="modal-footer justify-content-md-center">
-                                    <div class="col-md-12">
+                            <div class="col-md-12">
                                         <div class="alert1" id="alert1" style = "display:none; width: 100%;">
                                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                                             <strong id = "strongId"> Please fill in the blanks</strong>
@@ -849,6 +847,8 @@
                                             color: black;
                                             }
                                         </style>
+                            <div>
+                                <div class="modal-footer justify-content-md-center">
                                     <a href="javascript:void();" class="btn btn-primary step1approveBtn" id="step1a">Approve</a>
                                     <a href="javascript:void();" class="btn btn-danger step1declineBtn" id="step1d">Decline</a>
                                     <a href="javascript:void();" class="btn btn-info text-white updateBtn disabled" id="updbtn" hidden>Update</a>
@@ -1044,7 +1044,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Successfully approve form</p>
+                    <p>Successfully approved form</p>
                 </div>
             </div>
         </div>

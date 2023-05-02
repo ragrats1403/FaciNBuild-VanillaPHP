@@ -464,7 +464,7 @@ $(document).on('click', '.step2approveBtn', function(event){
           if (status == 'success') {
               table = $('#datatable').DataTable();
               table.draw();
-              alert('Step 2 Approved Successfully!');
+              $('#deletemodal1').modal('show');
           
               /*table = $('#datatable').DataTable();
               var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
@@ -474,7 +474,6 @@ $(document).on('click', '.step2approveBtn', function(event){
               $('#_step2').val('Approved');
               $('#test').modal('hide');
               $('body').removeClass('modal-open');
-              $('.modal-backdrop').remove();
           } else { 
               alert('failed');
           }
@@ -483,7 +482,8 @@ $(document).on('click', '.step2approveBtn', function(event){
   }
   else
   {
-    alert("Please fill out required fields!");
+    $('#alert1').css('display', 'block');
+    $('#strongId').html('Please fill out required fields!');
   }
   
 //alert('test');
@@ -619,7 +619,7 @@ $(document).on('click', '.step2declineBtn', function(event){
           if (status == 'success') {
               table = $('#datatable').DataTable();
               table.draw();
-              alert('Step 2 Declined Successfully!');
+              $('#declinemodal').modal('show');
 
           
               /*table = $('#datatable').DataTable();
@@ -631,7 +631,6 @@ $(document).on('click', '.step2declineBtn', function(event){
               $('#_step2').val('Declined');
               $('#test').modal('hide');
               $('body').removeClass('modal-open');
-              $('.modal-backdrop').remove();
           } else { 
               alert('failed');
           }
@@ -639,7 +638,8 @@ $(document).on('click', '.step2declineBtn', function(event){
       });
   }
   else{
-    alert("Please provide a feedback when declining the request!");
+    $('#alert1').css('display', 'block');
+    $('#strongId').html('Please provide a feedback when declining the request!');
   }
   
 });

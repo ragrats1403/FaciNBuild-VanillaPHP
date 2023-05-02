@@ -496,7 +496,7 @@ require_once('../../authentication/anti_pagetrans.php');
                         </div>
                         <div class="alert3" id="alert2" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                            <strong id = "strongId">Warning!</strong> Someone is using the facility within that time! Check Calendar of Activities for approved schedules. 
+                            <strong id = "strongId"></strong> Someone is using the facility within that time! Check Calendar of Activities for approved schedules. 
                         </div>
                 </div>
                     <style>

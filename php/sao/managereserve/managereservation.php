@@ -282,6 +282,35 @@ require_once('../../authentication/anti_pagetrans.php');
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModalforInfo()"></button>
                 </div>
+                <div class="col-md-12">
+                    <div class="alert1" id="alert1" style = "display:none; width: 100%;">
+                        <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        <strong id = "strongId">Success!</strong>
+                    </div>
+                </div>
+                    <style>
+                        .alert1 {
+                        padding: 20px;
+                        background-color: red;
+                        color: white;
+                        }
+
+                        .cbtn {
+                        margin-left: 15px;
+                        color: white;
+                        font-weight: bold;
+                        float: right;
+                        font-size: 22px;
+                        line-height: 20px;
+                        cursor: pointer;
+                        transition: 0.3s;
+                        }
+
+                        .cbtn:hover {
+                        color: black;
+                        }
+                    </style>
+                    
                 <div class="modal-body ">
                     <form action="">
                         Please select the facilities you would like to request.
@@ -458,6 +487,32 @@ require_once('../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>    
+    <div class="modal fade" id="deletemodal1">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully approved form</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="declinemodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully declined form</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- BODY END-->
 </body>
 </html>
