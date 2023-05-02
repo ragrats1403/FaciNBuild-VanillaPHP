@@ -307,10 +307,37 @@ $('#datatable').DataTable({
                             $('#daterendered').val('');
                             $('#confirmedby').val('');
                             $('#dateconfirmed').val('');   
-                            $('#requestedby').val('');                       
+                            $('#requestedby').val('');
+                            
+                            var loopnum = $('#numForms').val();
+                            if(loopnum > 1)
+                            {
+                                for(var i = 1; i<loopnum; i++)
+                                {
+                                    console.log(loopnum);
+                                    $.ajax({
+                                            url: "functions/addmultidata.php",
+                                            data: {
+                                                department: department,
+                                                date: date,
+                                                quantity: quantity,
+                                                requestedby: requestedby,
+                                                description: description,
+                                                purpose: purpose,
+
+                                            },
+                                            type: 'POST',
+                                            success: function(data) {
+                                                
+                                            
+                                            }
+                                        });
+                            }
+                            
                             document.getElementById("savechange").disabled = false;
                             myFunctionPrompt("alert1");
                         }
+                    }
                     }
                 });
             } else {
@@ -396,8 +423,8 @@ $('#datatable').DataTable({
         <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
-                    <div class="col-md-2" style="width:17%;">
-                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Job Request</h5>
+                    <div class="col-md-2" style="width:30%;">
+                        <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Minor Job Request</h5>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -456,19 +483,144 @@ $('#datatable').DataTable({
 
                                 </div>
                             </div>
-                            <div class="justify-content-center">
+                            <div class="justify-content-left">
                                 <h5 class="text-uppercase fw-bold">Requisition(To be filled up by the requesting party)</h5>
-                                <div class="col-md-2" style="padding-bottom:10px">
+                            </div>
+
+
+                                <div class = "row">
+                                    <div class="col-md-1" >
+                                        <input type="name" class="form-control input-sm col-xs-1" id="numForms" style="width:60%; text-align:left;" value = "1" disabled>
+                                    </div>
+                                    <div class="col-md-1" style="margin-left: -4.5%;">
+                                        <button type="button" class="btn btn-light" id="subForm" onclick= "subtract();"><b>-</b></button>
+                                    </div>
+                                    
+                                    <div class="col-md-1" style="margin-left: -5%;">
+                                        <button type="button" class="btn btn-light" id="addForm" onclick = "add();"><b>+</b></button>
+                                    </div>
+                                </div>
+                                <script>
+                                    function subtract()
+                                    {
+                                        var num = document.getElementById("numForms").value;
+
+                                        if(num <= 5 && num >= 2)
+                                        {
+                                            myFunctionPrompt(num);
+                                            var newnum = num - 1;
+                                            $('#numForms').val(newnum);
+                                        }
+                                        else
+                                        {
+                                            
+                                            return null;
+                                        }
+                                    }
+
+                                    function add()
+                                    {
+                                        var num = document.getElementById("numForms").value;
+
+                                        if(num < 5 && num >= 1)
+                                        {
+                                            var newnum = parseInt(num) + 1;
+                                            $('#numForms').val(newnum);
+                                            myFunctionPrompt(newnum);
+                                        }
+                                        else
+                                        {
+                                            return null;
+                                        }
+                                    }
+                                    function myFunctionPrompt(divID) {
+                                        var x = document.getElementById(divID);
+                                        if (x.style.display === "block") {
+                                            x.style.display = "none";
+                                        } else {
+                                            x.style.display = "block";
+                                        }
+                                        }
+                                </script>
+                                <style>
+                                    hr.solid {
+                                    border-top: 3px solid #bbb;
+                                    }
+                                </style>
+                            <div class="col-md-2" style="padding-bottom:10px">
                                     <label class="fw-bold" for="date">Quantity:</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
                                 </div>
-                            </div>
                             <div class="justify-content-center">
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
                                 </div>
                             </div>
+                            
+                            <div class = "2" style= "display:none;" id="2">
+                            <hr class="solid">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity2_" placeholder="Quantity">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="_itemdesc2_" placeholder="Description"></textarea>
+                                        </div>
+                                    </div>
+                            <hr class="solid">
+                            </div>
+                            <div class = "3" style= "display:none;" id="3">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity3_" placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="_itemdesc3_" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "4" style= "display:none;" id="4">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity4_" placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="_itemdesc4_" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "5" style= "display:none;" id="5">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity5_" placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="_itemdesc5_" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+
 
                             <div class="justify-content-center">
                                 <div class="col-md-12">
@@ -541,6 +693,10 @@ $('#datatable').DataTable({
                                 <div class="col-md-12">
                                     <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description"></textarea>
+                                </div>
+                            </div>
+                            <div id="container3">
+                                <div id="container4">
                                 </div>
                             </div>
 
