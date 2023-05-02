@@ -340,6 +340,11 @@ $(document).on('click', '.updateBtn', function() {
     $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('tr').attr('minorjobid');
+            for(var a = 2; a<=5; a++)
+            {
+                var divid = "_"+a
+                allhide(divid);
+            }
             document.getElementById("_renderedby").disabled = true;
             document.getElementById("_daterendered").disabled = true;
             document.getElementById("_confirmedby").disabled = true;

@@ -269,6 +269,11 @@ require_once('../../authentication/anti_pagetrans.php');
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
             document.getElementById("sections").disabled = true;
+            for(var a = 2; a<=5; a++)
+            {
+                var divid = "_"+a
+                allhide(divid);
+            }
             $.ajax({
                 url: "functions/get_single_user.php",
                 data: {
