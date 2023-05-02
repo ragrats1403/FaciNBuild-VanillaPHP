@@ -266,6 +266,7 @@ $('#datatable').DataTable({
 });
     </script>
     <script type="text/javascript">
+        
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
             document.getElementById("savechange").disabled = true;
@@ -302,7 +303,6 @@ $('#datatable').DataTable({
                         if (status = 'success') {
                             table = $('#datatable').DataTable();
                             table.draw();
-                            alert('Requested Successfully!');
                             $('#_quantity_').val('');
                             $('#_item_').val('');
                             $('#_itemdesc_').val('');
@@ -310,11 +310,10 @@ $('#datatable').DataTable({
                             $('#renderedby').val('');
                             $('#daterendered').val('');
                             $('#confirmedby').val('');
-                            $('#dateconfirmed').val('');
-                            $('#addUserModal').modal('hide');
+                            $('#dateconfirmed').val('');   
+                            $('#requestedby').val('');                       
                             document.getElementById("savechange").disabled = false;
-                            $("body").removeClass("modal-open");
-                            $(".modal-backdrop").remove();
+                            myFunctionPrompt("alert1");
                         }
                     }
                 });
@@ -346,6 +345,7 @@ $('#datatable').DataTable({
                 success: function(data) {
                     var json = JSON.parse(data);
                     //var itemwdesc = json.item + json.item_desc;
+                    
                     $('#minorjobid').val(json.minorjobid);
                     $('#trid').val(trid);
                     $('#_ID').val(id);
@@ -388,6 +388,9 @@ $('#datatable').DataTable({
 
         });
 
+
+        
+
     </script>
 
     <!-- Script Process End-->
@@ -402,6 +405,46 @@ $('#datatable').DataTable({
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="col-md-12">
+                        <div class="alert1" id="alert1" style = "display:none;">
+                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                            <strong id = "strongId">Success!</strong> Successfully Submitted Job Request!
+                            <style>
+                                .alert1 {
+                                padding: 20px;
+                                background-color: green;
+                                color: white;
+                                }
+
+                                .cbtn {
+                                margin-left: 15px;
+                                color: white;
+                                font-weight: bold;
+                                float: right;
+                                font-size: 22px;
+                                line-height: 20px;
+                                cursor: pointer;
+                                transition: 0.3s;
+                                }
+
+                                .cbtn:hover {
+                                color: black;
+                                }
+                            </style>
+                            <script>
+                                //add ons click
+                                    function myFunctionPrompt(divID) {
+                                    var x = document.getElementById(divID);
+                                    if (x.style.display === "block") {
+                                        x.style.display = "none";
+                                    } else {
+                                        x.style.display = "block";
+                                    }
+                                    }
+                            </script>
+                        </div>
+
+                    </div>
                 <div class="modal-body ">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
@@ -413,7 +456,7 @@ $('#datatable').DataTable({
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
 
                                 </div>
                             </div>
@@ -589,7 +632,8 @@ $('#datatable').DataTable({
         //date auto fill
         var now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        document.getElementById('datemajorjr').value = now.toISOString().substring(0, 10);
+        var formattedDate = now.toISOString().slice(0, 19);
+        document.getElementById('datemajorjr').value = formattedDate;
         //date end
     </script>
 </body>

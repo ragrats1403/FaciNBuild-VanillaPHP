@@ -135,7 +135,6 @@ $(document).on("click", ".submitBtn", function (event) {
   document.getElementById("termscond-create").disabled = true;
   var chkbx = document.getElementById("flexCheckDefault");
 
-
   var faci = e.options[e.selectedIndex].text;
     if(computedaysdiff(datefiled, actualdate) <= 4 )
     {
@@ -145,6 +144,7 @@ $(document).on("click", ".submitBtn", function (event) {
     else
     {
     }
+
     checkdateconflict(actualdate, timein, timeout, faci, function(confirm) {
       if (confirm) {
           // do something if there is a conflict
@@ -154,6 +154,7 @@ $(document).on("click", ".submitBtn", function (event) {
                   // Handle case where there is a conflict
                   //alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
                   myFunctionPrompt("alert2");
+                  $('#reserModal').scrollTop(0);
                   document.getElementById("termscond-create").disabled = false;
               } else {
                   // Handle case where there is no conflict
@@ -268,6 +269,7 @@ $(document).on("click", ".submitBtn", function (event) {
                           table = $("#datatable").DataTable();
                           table.draw();
                           myFunctionPrompt("alert1");
+                          $('#reserModal').scrollTop(0);
                           //force remove faded background  -Ragrats
                           document.getElementById("termscond-create").disabled = false;
                         }
@@ -289,6 +291,7 @@ $(document).on("click", ".submitBtn", function (event) {
                 // Handle case where there is a conflict
                 //alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
                 myFunctionPrompt("alert2");
+                $('#reserModal').scrollTop(0);
                 document.getElementById("termscond-create").disabled = false;
             } else {
                 // Handle case where there is no conflict
@@ -406,6 +409,7 @@ $(document).on("click", ".submitBtn", function (event) {
                         table = $("#datatable").DataTable();
                         table.draw();
                         myFunctionPrompt("alert1");
+                        $('#reserModal').scrollTop(0);
                       }
                     },
                   });
@@ -468,44 +472,5 @@ $(document).on("click", ".deleteBtn", function (event) {
     return null;
   }
 });
-function disableReservedTimes(timeIn, timeOut) {
-  $("input[type='time']").each(function() {
-    var inputTime = $(this).val();
 
-    if (inputTime >= timeIn && inputTime <= timeOut) {
-      $(this).prop("disabled", true);
-    } else {
-      $(this).prop("disabled", false);
-    }
-  });
-}
 
-function fetchReservedTimes(selectedDate, facility) {
-  $.ajax({
-    url: "getconflictdates.php", // Replace with your API endpoint to fetch reserved times
-    method: "POST",
-    data: { 
-      date: selectedDate,
-      facility:facility,
-     },
-    success: function(response) {
-      var timeIn = response.timestart; // Assuming the API response contains the reserved "timein"
-      var timeOut = response.timeend; // Assuming the API response contains the reserved "timeout"
-
-      // Call the function to disable times, passing the reserved times
-      disableReservedTimes(timeIn, timeOut);
-    },
-    error: function() {
-      console.log("Error fetching reserved times.");
-    }
-  });
-}
-
-$("#actualdate").on("change", function() {
-  var selectedDate = $(this).val();
-  if (selectedDate !== "") {
-    fetchReservedTimes(selectedDate);
-  } else {
-    $("input[type='time']").prop("disabled", false);
-  }
-});

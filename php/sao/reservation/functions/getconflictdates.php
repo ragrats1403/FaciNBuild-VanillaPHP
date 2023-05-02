@@ -1,20 +1,38 @@
-<?php include('../../../connection/connection.php');
-$date = $_POST['date'];
-$facility = $_POST['facility'];
-$sql = "SELECT timestart, timeend FROM reservations WHERE facility='$facility' AND actualdateofuse = '$date'";
+<?php
+include('../../../connection/connection.php');
+
+$date = isset($_POST['date']) ? $_POST['date'] : "";
+$facility = isset($_POST['facility']) ? $_POST['facility'] : "";
+$timein = isset($_POST['timein']) ? $_POST['timein'] : "";
+$timeout = isset($_POST['timeout']) ? $_POST['timeout'] : "";
+
+$timeinStr = date("H:i:s", strtotime($timein));
+$timeoutStr = date("H:i:s", strtotime($timeout));
+
+$sql = "SELECT * 
+        FROM reservation 
+        WHERE facility='$facility' 
+        AND actualdateofuse = '$date' 
+        AND status = 'Approved'
+        AND (
+            ('$timeinStr' < timeend AND '$timeoutStr' > timestart) OR
+            ('$timeinStr' = timestart AND '$timeoutStr' = timeend) OR
+            ('$timeinStr' >= timestart AND '$timeinStr' < timeend) OR
+            ('$timeoutStr' > timestart AND '$timeoutStr' <= timeend)
+        )";
 $query = mysqli_query($con, $sql);
-$count_all_rows = mysqli_num_rows($query);
 
-$data = array();
+$subarray = array();
+while ($row = mysqli_fetch_assoc($query)) {
+    $timeInFormatted = date("h:i A", strtotime($row['timestart']));
+    $timeOutFormatted = date("h:i A", strtotime($row['timeend']));
 
-$run_query = mysqli_query($con, $sql);
-$filtered_rows = mysqli_num_rows($run_query);
-$filtered_rows = $filtered_rows -1;
-while ($row = mysqli_fetch_assoc($run_query)) {
-    $subarray = array();
+    $subarray[] = $timeInFormatted;
+    $subarray[] = $timeOutFormatted;
     $subarray[] = $row['timestart'];
     $subarray[] = $row['timeend'];
-    $data[] = $subarray;
+
 }
 
 echo json_encode($subarray);
+?>

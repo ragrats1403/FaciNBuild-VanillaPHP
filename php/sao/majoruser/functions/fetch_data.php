@@ -17,7 +17,7 @@ if (isset($_POST['order'])) {
     $order = $_POST['order'][0]['dir'];
     $sql .= " ORDER BY `" . $column . "` " . $order;
 } else {
-    $sql .= " ORDER BY jobreqno ASC";
+    $sql .= " ORDER BY jobreqno DESC";
 }
 
 /*if ($_POST['length'] != -1) {
@@ -42,6 +42,7 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = $row['jobreqno'];
     $subarray[] = $row['requino'];
     $subarray[] = $row['department'];
+    $subarray[] = date('M j, Y h:iA', strtotime($row['date']));
     $subarray[] = $row['quantity']; 
     $subarray[] = $row['status']; 
     $subarray[] = '<a href= "javascript:void();" data-id="' . $row['jobreqno'] . '" class ="btn btn-sm btn-info editBtn">More Info</a>';

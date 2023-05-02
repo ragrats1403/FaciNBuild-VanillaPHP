@@ -210,6 +210,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <th>Job Request no.</th>
                                     <th>Requisition no.</th>
                                     <th>Department</th>
+                                    <th>Date</th>
                                     <th>Quantity</th>
                                     <th>Status</th>
                                     <th>Options</th>
@@ -235,12 +236,12 @@ require_once('../../authentication/anti_pagetrans.php');
     <script>
         var dpt = "<?php echo $_SESSION['department'];?>";
         $('#datatable').DataTable({
-        'serverSide': true,
-        'processing': true,
-        'paging': true,
-        'order': [],
-        'responsive': true,
-        'ajax': {
+    'serverSide': true,
+    'processing': true,
+    'paging': true,
+    'order': [],
+    'responsive': true,
+    'ajax': {
         'url': 'functions/fetch_data.php',
         'type': 'post',
         'data': {
@@ -249,13 +250,13 @@ require_once('../../authentication/anti_pagetrans.php');
     },
     'fnCreatedRow': function(nRow, aData, iDataIndex) {
         $(nRow).attr('id', aData[0]);
-        if (aData[4] === 'Approved') {
+        if (aData[5] === 'Approved') {
             $(nRow).css('background-color', '#a7d9ae');
         }
-        if (aData[4] === 'Declined') {
+        if (aData[5] === 'Declined') {
             $(nRow).css('background-color', '#e09b8d');
         }
-        if (aData[4] === 'Pending') {
+        if (aData[5] === 'Pending') {
             $(nRow).css('background-color', '#d9d2a7');
         }
     },
@@ -303,17 +304,16 @@ require_once('../../authentication/anti_pagetrans.php');
                         if (status = 'success') {
                             table = $('#datatable').DataTable();
                             table.draw();
-                            alert('Requested Successfully!');
+                            myFunctionPrompt("alert1");
                             $('#requi').val('');
                             $('#quan').val('');
                             $('#desc').val('');
                             $('#purp').val('');
                             $('#req').val('');
                             $('#dephead').val('');
-                            $('#addUserModal').modal('hide');
+
                             document.getElementById("savechange").disabled = false;
-                            $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
+
                         }
                     }
                 });
@@ -327,6 +327,7 @@ require_once('../../authentication/anti_pagetrans.php');
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
             var trid = $(this).closest('trid').attr('majoreq');
+            document.getElementById("_inputFeedback").disabled = true;
             $.ajax({
                 url: "functions/get_single_user.php",
                 data: {
@@ -382,6 +383,52 @@ require_once('../../authentication/anti_pagetrans.php');
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="col-md-12">
+                        <div class="alert1" id="alert1" style = "display:none; width: 100%;">
+                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                            <strong id = "strongId">Success!</strong> Successfully submitted Major Job request!
+                        </div>
+                    </div>
+                        <style>
+                                .alert1 {
+                                padding: 20px;
+                                background-color: green;
+                                color: white;
+                                }
+
+                                .cbtn {
+                                margin-left: 15px;
+                                color: white;
+                                font-weight: bold;
+                                float: right;
+                                font-size: 22px;
+                                line-height: 20px;
+                                cursor: pointer;
+                                transition: 0.3s;
+                                }
+
+                                .cbtn:hover {
+                                color: black;
+                                }
+                            </style>
+                            <script>
+                                //add ons click
+                                    function myFunctionPrompt(divID) {
+                                    var x = document.getElementById(divID);
+                                    if (x.style.display === "block") {
+                                        x.style.display = "none";
+                                    } else {
+                                        x.style.display = "block";
+                                    }
+                                    }
+
+                                    $("#addUserModal").on("hidden.bs.modal", function () {
+                                            var x = document.getElementById("alert1");
+                                            x.style.display = "none";    
+                                            var a = document.getElementById("alert2");
+                                            a.style.display = "none";                                   
+                                        });
+                            </script>
                     <div class="modal-body ">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                             <div class="row justify-content-center" style="padding-bottom:13px;">
@@ -391,7 +438,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date" disabled>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date" disabled>
                                 </div>
                             </div>
                             <div class="row">
@@ -606,7 +653,8 @@ require_once('../../authentication/anti_pagetrans.php');
         //date auto fill
         var now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        document.getElementById('deeto').value = now.toISOString().substring(0,10);
+        var formattedDate = now.toISOString().slice(0, 19);
+        document.getElementById('deeto').value = formattedDate;
         //date end
     </script>
 </body>
