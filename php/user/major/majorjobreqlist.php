@@ -205,6 +205,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <th>Job Request no.</th>
                                     <th>Requisition no.</th>
                                     <th>Department</th>
+                                    <th>Date</th>
                                     <th>Quantity</th>
                                     <th>Status</th>
                                     <th>Options</th>
@@ -244,13 +245,13 @@ require_once('../../authentication/anti_pagetrans.php');
     },
     'fnCreatedRow': function(nRow, aData, iDataIndex) {
         $(nRow).attr('id', aData[0]);
-        if (aData[4] === 'Approved') {
+        if (aData[5] === 'Approved') {
             $(nRow).css('background-color', '#a7d9ae');
         }
-        if (aData[4] === 'Declined') {
+        if (aData[5] === 'Declined') {
             $(nRow).css('background-color', '#e09b8d');
         }
-        if (aData[4] === 'Pending') {
+        if (aData[5] === 'Pending') {
             $(nRow).css('background-color', '#d9d2a7');
         }
     },
@@ -432,7 +433,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date" disabled>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date" disabled>
                                 </div>
                             </div>
                             <div class="row">
@@ -647,7 +648,8 @@ require_once('../../authentication/anti_pagetrans.php');
         //date auto fill
         var now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        document.getElementById('deeto').value = now.toISOString().substring(0,10);
+        var formattedDate = now.toISOString().slice(0, 19);
+        document.getElementById('deeto').value = formattedDate;
         //date end
     </script>
 </body>

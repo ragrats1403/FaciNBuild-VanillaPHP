@@ -341,6 +341,7 @@ $('#datatable').DataTable({
                 success: function(data) {
                     var json = JSON.parse(data);
                     //var itemwdesc = json.item + json.item_desc;
+                    
                     $('#minorjobid').val(json.minorjobid);
                     $('#trid').val(trid);
                     $('#_ID').val(id);
@@ -451,7 +452,7 @@ $('#datatable').DataTable({
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
 
                                 </div>
                             </div>
@@ -627,7 +628,8 @@ $('#datatable').DataTable({
         //date auto fill
         var now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        document.getElementById('datemajorjr').value = now.toISOString().substring(0, 10);
+        var formattedDate = now.toISOString().slice(0, 19);
+        document.getElementById('datemajorjr').value = formattedDate;
         //date end
     </script>
 </body>

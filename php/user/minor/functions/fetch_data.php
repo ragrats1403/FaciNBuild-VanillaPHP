@@ -37,7 +37,7 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray = array();
     $subarray[] = $row['minorjobid'];
     $subarray[] = $row['department'];
-    $subarray[] = $row['datesubmitted'];
+    $subarray[] = date('M j, Y h:iA', strtotime($row['datesubmitted']));
     $subarray[] = $row['section'];
     $subarray[] = $row['status']; 
     $subarray[] = '<a href= "javascript:void();" data-id="' . $row['minorjobid'] . '" class ="btn btn-sm btn-info editBtn">More Info</a>';
