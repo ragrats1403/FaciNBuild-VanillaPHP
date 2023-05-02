@@ -301,12 +301,11 @@ $(document).on("click", ".submitBtn", function (event) {
 
 //delete pending reservation
 $(document).on("click", ".deleteBtn", function (event) {
-  //alert("test");
-  //confirm('test');
-
   event.preventDefault();
   var id = $(this).data("id");
-  if (confirm("Are you sure to delete this request?")) {
+  $('#deletemodal').modal('show');
+  
+  $('#deletemodal').on('click', '.btn-danger', function() {
     $.ajax({
       url: "functions/delete_data.php",
       data: {
@@ -316,25 +315,21 @@ $(document).on("click", ".deleteBtn", function (event) {
       success: function (data) {
         var json = JSON.parse(data);
         var status = json.status;
-        //var table = $('#datatable').DataTable();
-
         if (status == "success") {
-          $("#" + id)
-            .closest("tr")
-            .remove();
-          //table.draw();
+          $("#" + id).closest("tr").remove();
         } else {
-          alart("failed");
+          alert("failed");
           return;
         }
       },
     });
-  } else {
-    return null;
-  }
+    $('#deletemodal').modal('hide');
+  });
+  
+  $('#deletemodal').on('click', '#close-modal', function() {
+    $('#deletemodal').modal('hide');
+  });
 });
-
-
 
 //Admin Buttons for Approval
 //minorjobaddon admin approval

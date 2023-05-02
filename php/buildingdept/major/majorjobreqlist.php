@@ -478,88 +478,78 @@
 
 
         $(document).on('click', '.step1approveBtn', function(event) {
-            //var status = "Approved";
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
             var dept = $('#department').val();
             var feedb = $('#_inputFeedback').val();
-            
             var e = document.getElementById("sections");
             var section = e.options[e.selectedIndex].text;
             var e = document.getElementById("remark");
             var remark = e.options[e.selectedIndex].text;
             var bdapprovedby = $('#_bdapprovedby').val();
-            if(
-                id != '' &&
+            if (id != '' &&
                 dept != '' &&
                 section != '' &&
                 remark != '' &&
-                bdapprovedby != ''
-            )
-            {
+                bdapprovedby != '') {
                 $.ajax({
-                url: "functions/step1approve.php",
-                data: {
-                    id: id,
-                    dept: dept,
-                    feedb: feedb,
-                    section: section,
-                    remark: remark,
-                    bdapprovedby: bdapprovedby,
+                    url: "functions/step1approve.php",
+                    data: {
+                        id: id,
+                        dept: dept,
+                        feedb: feedb,
+                        section: section,
+                        remark: remark,
+                        bdapprovedby: bdapprovedby,
 
-                },
-                type: 'POST',
-                success: function(data) {
-                    var json = JSON.parse(data);
-                    var status = json.status;
-                    if (status == 'success') {
-                        table = $('#datatable').DataTable();
-                        table.draw();
-                        alert('Step 1 Approved Successfully!');
-                        $('#department').val('');
-                        $('#sections').val('');
-                        $('#remark').val('');
-                        $('#_inputFeedback').val('');
-                        $('#_bdapprovedby').val('');
-                        $('#_statustext').val('Approved');
-                        $('#editUserModal').modal('hide');
-                        $('body').removeClass('modal-open');
-                        $('.modal-backdrop').remove();
-                    } else {
-                        alert('failed');
+                    },
+                    type: 'POST',
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        var status = json.status;
+                        if (status == 'success') {
+                            table = $('#datatable').DataTable();
+                            table.draw();
+                            $('#deletemodal').modal('show');
+                            $('#department').val('');
+                            $('#sections').val('');
+                            $('#remark').val('');
+                            $('#_inputFeedback').val('');
+                            $('#_bdapprovedby').val('');
+                            $('#_statustext').val('Approved');
+                            $('#editUserModal').modal('hide');
+                            $('body').removeClass('modal-open');
+                        } else {
+                            alert('failed');
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                $('#alert1').css('display', 'block');
+                $('#strongId').html('Please fill up required fields!');
             }
-            else{
-                alert("Please fill up required fields!")
-            }
-            
         });
         $(document).on('click', '.loadImage', function(event) {
             $.ajax({
-                    url: "functions/testfetchimage.php",
-                    type: "GET",
-                    dataType: "json",
-                    success: function(response) {
-                        var status = response.status;
-                        if (status === "success") {
-                            var imageData = response.image;
-                            var imageSource = "data:image/jpg;base64," + imageData;
-                            $("#testimage").attr("src", imageSource);
-                        } else {
-                            console.log("Failed to fetch image");
-                            alert("Failed to fetch image");
-                        }
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.log("AJAX error:", textStatus, errorThrown);
+                url: "functions/testfetchimage.php",
+                type: "GET",
+                dataType: "json",
+                success: function(response) {
+                    var status = response.status;
+                    if (status === "success") {
+                        var imageData = response.image;
+                        var imageSource = "data:image/jpg;base64," + imageData;
+                        $("#testimage").attr("src", imageSource);
+                    } else {
+                        console.log("Failed to fetch image");
+                        alert("Failed to fetch image");
                     }
-                });
-
-                            
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("AJAX error:", textStatus, errorThrown);
+                }
+            });
         });
-
         $(document).on('click', '.step1declineBtn', function(event) {
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
@@ -582,13 +572,11 @@
                         if (status == 'success') {
                             table = $('#datatable').DataTable();
                             table.draw();
-                            alert('Step 1 Declined Successfully!');
+                            $('#declinemodal').modal('show');
                             $('#_step1').val('Declined');
                             $('#_statustext').val('Declined');
                             $('#editUserModal').modal('hide');
                             $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
-
                         } else {
                             alert('failed');
                         }
@@ -597,7 +585,8 @@
             }
             else
             {
-                alert("Please provide a feedback when declining requests!");
+                $('#alert1').css('display', 'block');
+                $('#strongId').html('Please provide a feedback when declining request ');
             }
             
         });
@@ -828,6 +817,38 @@
                             </style>-->
                             <div>
                                 <div class="modal-footer justify-content-md-center">
+                                    <div class="col-md-12">
+                                        <div class="alert1" id="alert1" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId"> Please fill in the blanks</strong>
+                                        </div>
+                                        <div class="alert2" id="alert1" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId"> Please provide a feedback when declining request</strong>
+                                        </div>
+                                    </div>
+                                        <style>
+                                            .alert1 {
+                                            padding: 20px;
+                                            background-color: red;
+                                            color: white;
+                                            }
+
+                                            .cbtn {
+                                            margin-left: 15px;
+                                            color: white;
+                                            font-weight: bold;
+                                            float: right;
+                                            font-size: 22px;
+                                            line-height: 20px;
+                                            cursor: pointer;
+                                            transition: 0.3s;
+                                            }
+
+                                            .cbtn:hover {
+                                            color: black;
+                                            }
+                                        </style>
                                     <a href="javascript:void();" class="btn btn-primary step1approveBtn" id="step1a">Approve</a>
                                     <a href="javascript:void();" class="btn btn-danger step1declineBtn" id="step1d">Decline</a>
                                     <a href="javascript:void();" class="btn btn-info text-white updateBtn disabled" id="updbtn" hidden>Update</a>
@@ -1011,6 +1032,32 @@
                                 </div>
                         </form>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deletemodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully approve form</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="declinemodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully declined form</p>
                 </div>
             </div>
         </div>

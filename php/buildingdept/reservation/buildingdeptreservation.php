@@ -146,21 +146,15 @@ require_once('../../authentication/anti_pagetrans.php');
 <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../../images/Brown_logo_faci.png" />
+                <img src="../../../images/Brown_logo_faci.png" />
             </div>
         </div>
         <div class="navdiv">
             <ul class="nav_list">
                 <li>
-                    <a href="../../../../php/facilitiesdept/reservations/facilitiescalendar.php">
+                    <a href="../../../php/buildingdept/buildingcalendar.php">
                         <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../../php/facilitiesdept/equipments/departmentheadeq.php">
-                        <i class='bx bx-wrench'></i>
-                        <span class="link_name">Equipment</span>
                     </a>
                 </li>
                 <li>
@@ -170,33 +164,41 @@ require_once('../../authentication/anti_pagetrans.php');
                             Manage Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/facilitiesdept/managereserve/managereservation.php">Reservations</a>
+                            <a class="dropdown-item" href="../../../php/buildingdept/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
                         </ul>
                     </div>
+                </li>
+                <li>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
                         <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             View/Create Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
-                            <a class="dropdown-item" href="../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
+                            <a class="dropdown-item" href="../../../php/buildingdept/minoruser/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../php/buildingdept/majoruser/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="../../../php/buildingdept/reservation/buildingdeptreservation.php">Reservation</a>
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <a href="../../../php/buildingdept/generatereports/generatereports.php">
+                        <i class='bx bx-food-menu'></i>
+                        <span class="link_name">Generate Report</span>
+                    </a>
+                </li>
             </ul>
-
             <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                        <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                        <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                        <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
-                            <div class="role">Facilities Department</div>
+                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
+                            <div class="role">Building Department</div>
                         </div>
                     </div>
-                    <a href="../../../logout.php">
+                    <a href="../../../../logout.php">
                         <i class='bx bx-log-out' id="log_out"></i>
                     </a>
                 </div>
@@ -797,7 +799,23 @@ require_once('../../authentication/anti_pagetrans.php');
         </div>
     </div>
     <!-- create reservation end -->
-
+    <div class="modal fade" id="deletemodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="close-modal">No</button>
+                    <button type="button" class="btn btn-danger">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>                        
     <!-- BODY END-->
 </body>
 

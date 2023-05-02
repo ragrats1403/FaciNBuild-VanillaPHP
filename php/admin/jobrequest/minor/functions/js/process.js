@@ -218,36 +218,37 @@ $(document).on('click', '.confirmUpdate', function(event){
 
 });
 //delete user button control
-$(document).on('click', '.btnDelete', function(event) {
-    var table = $('#datatable').DataTable();
+$(document).on("click", ".btnDelete", function (event) {
     event.preventDefault();
-    var id = $(this).data('id');
-    if (confirm('Are you sure to delete this request?')) {
-
-
+    var id = $(this).data("id");
+    $('#deletemodal').modal('show');
+    
+    $('#deletemodal').on('click', '.btn-danger', function() {
         $.ajax({
-            url: "functions/delete_data.php",
-            data: {
-                id: id
-            },
-            type: 'POST',
-            success: function(data) {
-                var json = JSON.parse(data);
-                status = json.status;
-
-                if (status == 'success') {
-                    $('#' + id).closest('tr').remove();
-
-                } else {
-                    alart('failed');
-                    return;
-                }
+        url: "functions/delete_data.php",
+        data: {
+            id: id,
+        },
+        type: "POST",
+        success: function (data) {
+            var json = JSON.parse(data);
+            var status = json.status;
+            if (status == "success") {
+            $("#" + id).closest("tr").remove();
+            } else {
+            alert("failed");
+            return;
             }
+        },
         });
-    } else {
-        return null;
-    }
+        $('#deletemodal').modal('hide');
+    });
+    
+    $('#deletemodal').on('click', '#close-modal', function() {
+        $('#deletemodal').modal('hide');
+    });
 });
+
 //approve button 
 $(document).on('click', '.approveBtn', function(event){
     //var status = "Approved";
