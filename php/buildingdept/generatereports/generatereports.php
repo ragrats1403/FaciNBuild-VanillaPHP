@@ -9,19 +9,14 @@ require_once('../../authentication/anti_pagetrans.php');
     <title>Generate Reports</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <link type="text/css" href="../../../dependencies/bootstrap/css/bootstrap.min.css?<?= time() ?>" rel="stylesheet">
-    <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />-->
     <link rel="stylesheet" type="text/css" href="../../../dependencies/datatables/datatables.min.css?<?= time() ?>" />
     <link rel="stylesheet" type="text/css" href="../../../css/sidebar.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../css/header.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../css/body.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../css/print.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../css/admin/adminaccount.css?<?= time() ?>" />
-    <!--<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>-->
     <link href='../../../dependencies/boxicons/css/boxicons.min.css?<?= time() ?>' rel='stylesheet'>
-
-
 </head>
 
 <header class="shadow">
@@ -146,7 +141,7 @@ require_once('../../authentication/anti_pagetrans.php');
 </header>
 
 <body onload="fetchNotifications();">
-    <div class="sidebar">
+<div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../../images/Brown_logo_faci.png" />
@@ -163,7 +158,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 <li>
                     <div class="dropdown">
                         <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Manage Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -175,7 +170,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 <li>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             View/Create Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -348,6 +343,7 @@ require_once('../../authentication/anti_pagetrans.php');
                             <div class="col-md-2">
                                 <button class="btn btn-info" onclick="printDiv()">Print</button>
                             </div>
+
                             <div class="row" id="headerDiv" style="display: none;">
                                 <div class="col-md-1 float-start">
                                     <img style="position: relative;" src='../../../../images/uclogo.png' alt='' width='75' height='50' />
@@ -372,7 +368,6 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <th>Department</th>
                                     <th>Section</th>
                                     <th>Date</th>
-                                    <th>Description</th>
                                     <th>Purpose</th>
                                     <th>Date Rendered</th>
                                     <th>Date Confirmed</th>
@@ -396,7 +391,6 @@ require_once('../../authentication/anti_pagetrans.php');
                                     <th>Department</th>
                                     <th>Quantity</th>
                                     <th>Date</th>
-                                    <th>Description</th>
                                     <th>Section</th>
                                     <th>Purpose</th>
                                     <th>Outsource</th>
@@ -412,7 +406,7 @@ require_once('../../authentication/anti_pagetrans.php');
         </div>
     </div>
     <script>
-         function printDiv() {
+        function printDiv() {
             var minorChecked = document.getElementById("minorDivCheckdefault").checked;
             var majorChecked = document.getElementById("majorDivCheckDefault").checked;
             var header = document.getElementById("headerDiv").checked;
@@ -449,11 +443,8 @@ require_once('../../authentication/anti_pagetrans.php');
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!-- Script Process Start-->
-    <!--<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>-->
     <script src="../../../dependencies/jquery/jquery-3.6.4.min.js"></script>
-    <!--<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>-->
     <script type="text/javascript" src="../../../dependencies/datatables/datatables.min.js"></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
     <script src="../../../dependencies/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
 

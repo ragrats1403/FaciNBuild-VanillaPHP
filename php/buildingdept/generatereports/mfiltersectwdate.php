@@ -24,6 +24,7 @@ if ($_POST['length'] != -1) {
 }
 
 $data = array();
+
 $run_query = mysqli_query($con, $sql);
 $filtered_rows = mysqli_num_rows($run_query);
 $filtered_rows = $filtered_rows -1;
@@ -34,7 +35,6 @@ while ($row = mysqli_fetch_assoc($run_query)) {
     $subarray[] = $row['department'];
     $subarray[] = $row['quantity'];
     $subarray[] = $row['date'];  
-    $subarray[] = $row['description']; 
     $subarray[] = $row['section']; 
     $subarray[] = $row['purpose']; 
     $subarray[] = $row['outsource']; 
