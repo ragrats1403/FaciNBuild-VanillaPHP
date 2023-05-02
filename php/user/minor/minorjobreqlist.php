@@ -308,7 +308,7 @@ $('#datatable').DataTable({
                             $('#confirmedby').val('');
                             $('#dateconfirmed').val('');   
                             $('#requestedby').val('');
-                            
+                            myFunctionPrompt("alert1");
                             var loopnum = $('#numForms').val();
                             if(loopnum > 1)
                             {
@@ -348,7 +348,7 @@ $('#datatable').DataTable({
                             }
                             
                             document.getElementById("savechange").disabled = false;
-                            myFunctionPrompt("alert1");
+                            
                         }
                     }
                     }
