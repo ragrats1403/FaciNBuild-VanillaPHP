@@ -140,7 +140,6 @@ require_once('../../authentication/anti_pagetrans.php');
 </header>
 
 <body onload="fetchNotifications();">
-
 <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -359,6 +358,7 @@ $('#datatable').DataTable({
                             document.getElementById("savechange").disabled = false;
                             
                         }
+                        $('#addUserModal').scrollTop(0);
                     }
                     }
                 });
@@ -438,7 +438,7 @@ $('#datatable').DataTable({
                             var newiter = storecount;
 
                             var nia = parseInt(newiter) + 1;
-                            if(mjson.count>1)
+                            if(mjson.count>=1)
                             {
                                 for(var i = 2; i<=nia; i++)
                                 {
@@ -446,7 +446,6 @@ $('#datatable').DataTable({
                                     console.log(i);
                                     myFunctionPrompt(divid);
                                     iteratemultival(dep, rqby, datesub, purp, i);
-
                                 }
                             }
                         }
@@ -577,7 +576,7 @@ $('#datatable').DataTable({
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" value="<?php echo mb_strimwidth($_SESSION['department'], 0, 30, '…'); ?>" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" value="<?php echo $_SESSION['department']; ?>" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>

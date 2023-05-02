@@ -140,7 +140,6 @@ require_once('../../authentication/anti_pagetrans.php');
 </header>
 
 <body onload="fetchNotifications();">
-
 <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -320,7 +319,7 @@ $('#datatable').DataTable({
                             $('#confirmedby').val('');
                             $('#dateconfirmed').val('');   
                             $('#requestedby').val('');
-                            
+                            myFunctionPrompt("alert1");
                             var loopnum = $('#numForms').val();
                             if(loopnum > 1)
                             {
@@ -360,14 +359,15 @@ $('#datatable').DataTable({
                             }
                             
                             document.getElementById("savechange").disabled = false;
-                            myFunctionPrompt("alert1");
+                            
                         }
+                        $('#addUserModal').scrollTop(0);
                     }
                     }
                 });
             } else {
                 $('#alert2').css('display', 'block');
-                $('#strongId').html('Please fill all the Required fields');
+                $('#strongId1').html('Please fill all the Required fields');
                 document.getElementById("savechange").disabled = false;
             }
         });
@@ -441,7 +441,7 @@ $('#datatable').DataTable({
                             var newiter = storecount;
 
                             var nia = parseInt(newiter) + 1;
-                            if(mjson.count>1)
+                            if(mjson.count>=1)
                             {
                                 for(var i = 2; i<=nia; i++)
                                 {
@@ -449,7 +449,6 @@ $('#datatable').DataTable({
                                     console.log(i);
                                     myFunctionPrompt(divid);
                                     iteratemultival(dep, rqby, datesub, purp, i);
-
                                 }
                             }
                         }
@@ -527,7 +526,7 @@ $('#datatable').DataTable({
                 <div class="col-md-12">
                         <div class="alert1" id="alert1" style = "display:none;">
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                            <strong id = "strongId">Success!</strong> Successfully Submitted Job Request!
+                            <strong id = "strongId">Success! </strong> Successfully Submitted Job Request!
                             <style>
                                 .alert1 {
                                 padding: 20px;
@@ -580,7 +579,7 @@ $('#datatable').DataTable({
                             <div class="row justify-content-center" style="padding-bottom:13px;">
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Department:</label>
-                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" value="<?php echo mb_strimwidth($_SESSION['department'], 0, 30, '…'); ?>" disabled>
+                                    <input type="name" class="form-control input-sm col-xs-1" id="department" placeholder="Department" value="<?php echo $_SESSION['department']; ?>" disabled>
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
@@ -743,34 +742,34 @@ $('#datatable').DataTable({
                             <!-- Form Controls End-->
                         </div>
                         <div class="modal-footer justify-content-md-center">
-                            <div class="col-md-12">
-                                <div class="alert2" id="alert2" style = "display:none; width: 100%;">
-                                    <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                                    <strong id = "strongId">Please fill all the Required fields</strong>
-                                </div>
-                            </div>
-                                <style>
-                                    .alert2 {
-                                    padding: 20px;
-                                    background-color: red;
-                                    color: white;
-                                    }
+                        <div class="col-md-12">
+                                        <div class="alert2" id="alert2" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId1">Please fill in all required fields</strong>
+                                        </div>
+                                    </div>
+                                        <style>
+                                            .alert2 {
+                                            padding: 20px;
+                                            background-color: red;
+                                            color: white;
+                                            }
 
-                                    .cbtn {
-                                    margin-left: 15px;
-                                    color: white;
-                                    font-weight: bold;
-                                    float: right;
-                                    font-size: 22px;
-                                    line-height: 20px;
-                                    cursor: pointer;
-                                    transition: 0.3s;
-                                    }
+                                            .cbtn {
+                                            margin-left: 15px;
+                                            color: white;
+                                            font-weight: bold;
+                                            float: right;
+                                            font-size: 22px;
+                                            line-height: 20px;
+                                            cursor: pointer;
+                                            transition: 0.3s;
+                                            }
 
-                                    .cbtn:hover {
-                                    color: black;
-                                    }
-                                </style>
+                                            .cbtn:hover {
+                                            color: black;
+                                            }
+                                        </style>
                             <button type="button" class="btn btn-secondary col-md-2" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary col-md-2" id ="savechange">Save Changes</button>
                         </div>
