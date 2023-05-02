@@ -16,7 +16,7 @@ if (isset($_POST['order'])) {
     $order = $_POST['order'][0]['dir'];
     $sql .= " ORDER BY `" . $column . "` " . $order;
 } else {
-    $sql .= " ORDER BY jobreqno ASC";
+    $sql .= " ORDER BY jobreqno DESC";
 }
 
 /*if ($_POST['length'] != -1) {
