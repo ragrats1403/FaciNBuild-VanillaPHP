@@ -683,6 +683,8 @@ require_once('../../authentication/anti_pagetrans.php');
             document.getElementById("editbutton2").hidden = true;
             autofilldate("_dateconfirmed");
         }
+
+        
     </script>
     <!-- edit user modalPopup end-->
 </body>
