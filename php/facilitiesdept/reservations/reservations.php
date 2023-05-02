@@ -54,7 +54,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservation/functions/notification.php",
+                    url: "functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -114,7 +114,7 @@ require_once('../../authentication/anti_pagetrans.php');
             markAsReadButton.addEventListener("click", function(event) {
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservation/functions/update_notification.php",
+                    url: "functions/update_notification.php",
                     type: 'POST',
                     data: {
                         department: department,
