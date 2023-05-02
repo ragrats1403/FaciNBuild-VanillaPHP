@@ -24,7 +24,6 @@ if ($_POST['length'] != -1) {
 }
 
 $data = array();
-
 $run_query = mysqli_query($con, $sql);
 $filtered_rows = mysqli_num_rows($run_query);
 $filtered_rows = $filtered_rows -1;
