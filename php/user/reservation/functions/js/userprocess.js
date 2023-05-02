@@ -140,6 +140,7 @@ $(document).on("click", ".submitBtn", function (event) {
     {
       var computeval = computedaysdiff(datefiled, actualdate);
       alert("Please Note that you need to reserve 5 days before the desired reservation day\nReservation Day(s) Count:"+computeval+" Day(s) Away.");
+
     }
     else
     {
