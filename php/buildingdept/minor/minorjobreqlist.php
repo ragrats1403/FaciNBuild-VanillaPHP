@@ -511,6 +511,32 @@ require_once('../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
+    <div class="modal fade" id="deletemodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully approve form</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="declinemodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully declined form</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         //datetime auto fill up
         var now = new Date();

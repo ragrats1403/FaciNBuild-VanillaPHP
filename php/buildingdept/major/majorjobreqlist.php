@@ -525,33 +525,31 @@
                     }
                 });
             } else {
-                alert("Please fill up required fields!")
+                $('#alert1').css('display', 'block');
+                $('#strongId').html('Please fill up required fields!');
             }
         });
         $(document).on('click', '.loadImage', function(event) {
             $.ajax({
-                    url: "functions/testfetchimage.php",
-                    type: "GET",
-                    dataType: "json",
-                    success: function(response) {
-                        var status = response.status;
-                        if (status === "success") {
-                            var imageData = response.image;
-                            var imageSource = "data:image/jpg;base64," + imageData;
-                            $("#testimage").attr("src", imageSource);
-                        } else {
-                            console.log("Failed to fetch image");
-                            alert("Failed to fetch image");
-                        }
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.log("AJAX error:", textStatus, errorThrown);
+                url: "functions/testfetchimage.php",
+                type: "GET",
+                dataType: "json",
+                success: function(response) {
+                    var status = response.status;
+                    if (status === "success") {
+                        var imageData = response.image;
+                        var imageSource = "data:image/jpg;base64," + imageData;
+                        $("#testimage").attr("src", imageSource);
+                    } else {
+                        console.log("Failed to fetch image");
+                        alert("Failed to fetch image");
                     }
-                });
-
-                            
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("AJAX error:", textStatus, errorThrown);
+                }
+            });
         });
-
         $(document).on('click', '.step1declineBtn', function(event) {
             var id = $('#jobrequestno').val();
             var trid = $('#trid').val();
@@ -587,7 +585,8 @@
             }
             else
             {
-                alert("Please provide a feedback when declining requests!");
+                $('#alert1').css('display', 'block');
+                $('#strongId').html('Please provide a feedback when declining request ');
             }
             
         });
@@ -818,6 +817,38 @@
                             </style>-->
                             <div>
                                 <div class="modal-footer justify-content-md-center">
+                                    <div class="col-md-12">
+                                        <div class="alert1" id="alert1" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId"> Please fill in the blanks</strong>
+                                        </div>
+                                        <div class="alert2" id="alert1" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId"> Please provide a feedback when declining request</strong>
+                                        </div>
+                                    </div>
+                                        <style>
+                                            .alert1 {
+                                            padding: 20px;
+                                            background-color: red;
+                                            color: white;
+                                            }
+
+                                            .cbtn {
+                                            margin-left: 15px;
+                                            color: white;
+                                            font-weight: bold;
+                                            float: right;
+                                            font-size: 22px;
+                                            line-height: 20px;
+                                            cursor: pointer;
+                                            transition: 0.3s;
+                                            }
+
+                                            .cbtn:hover {
+                                            color: black;
+                                            }
+                                        </style>
                                     <a href="javascript:void();" class="btn btn-primary step1approveBtn" id="step1a">Approve</a>
                                     <a href="javascript:void();" class="btn btn-danger step1declineBtn" id="step1d">Decline</a>
                                     <a href="javascript:void();" class="btn btn-info text-white updateBtn disabled" id="updbtn" hidden>Update</a>
