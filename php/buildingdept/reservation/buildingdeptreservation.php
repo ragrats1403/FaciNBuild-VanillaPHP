@@ -16,6 +16,7 @@ require_once('../../authentication/anti_pagetrans.php');
     <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
     <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
     <link href='../../../dependencies/boxicons/css/boxicons.min.css?<?= time() ?>' rel='stylesheet'>
+    <script src="../../../dependencies/jquery/jquery-3.6.4.min.js"></script>
 
 </head>
 
@@ -145,15 +146,21 @@ require_once('../../authentication/anti_pagetrans.php');
 <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
-                <img src="../../../images/Brown_logo_faci.png" />
+                <img src="../../../../images/Brown_logo_faci.png" />
             </div>
         </div>
         <div class="navdiv">
             <ul class="nav_list">
                 <li>
-                    <a href="../../../php/buildingdept/buildingcalendar.php">
+                    <a href="../../../../php/facilitiesdept/reservations/facilitiescalendar.php">
                         <i class='bx bx-calendar'></i>
                         <span class="link_name">Calendar of Activities</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../../../php/facilitiesdept/equipments/departmentheadeq.php">
+                        <i class='bx bx-wrench'></i>
+                        <span class="link_name">Equipment</span>
                     </a>
                 </li>
                 <li>
@@ -163,38 +170,30 @@ require_once('../../authentication/anti_pagetrans.php');
                             Manage Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/buildingdept/minor/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../php/buildingdept/major/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="../../../php/facilitiesdept/managereserve/managereservation.php">Reservations</a>
                         </ul>
                     </div>
-                </li>
-                <li>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
                         <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             View/Create Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/buildingdept/minoruser/minorjobreqlist.php">Minor Job Request</a>
-                            <a class="dropdown-item" href="../../../php/buildingdept/majoruser/majorjobreqlist.php">Major Job Request</a>
-                            <a class="dropdown-item" href="../../../php/buildingdept/reservation/buildingdeptreservation.php">Reservation</a>
+                            <a class="dropdown-item" href="../../../php/facilitiesdept/minor/minorjobreqlist.php">Minor Job Request</a>
+                            <a class="dropdown-item" href="../../../php/facilitiesdept/major/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="../../../php/facilitiesdept/reservations/reservations.php">Reservations</a>
                         </ul>
                     </div>
                 </li>
-                <li>
-                    <a href="../../../php/buildingdept/generatereports/generatereports.php">
-                        <i class='bx bx-food-menu'></i>
-                        <span class="link_name">Generate Report</span>
-                    </a>
-                </li>
             </ul>
+
             <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
                         <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
-                            <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
-                            <div class="role">Building Department</div>
+                        <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…');?></div>
+                            <div class="role">Facilities Department</div>
                         </div>
                     </div>
                     <a href="../../../logout.php">
@@ -287,6 +286,11 @@ require_once('../../authentication/anti_pagetrans.php');
             'paging': false,
 
         });
+
+
+
+        
+             
     </script>
     <!-- Modal Popup for More Info button-->
     <div class="modal fade" id="test" aria-hidden="true">
@@ -305,10 +309,8 @@ require_once('../../authentication/anti_pagetrans.php');
                         <input type="text" style="width:21%" class="col-sm-1" name="_ID" class="form-control" id="_ID" disabled>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
                 </div>
-
-                <div class="modal-body ">
+                <div class="modal-body">
                     <form action="">
                         Please select the facilities you would like to request.
                         <!--
@@ -348,7 +350,7 @@ require_once('../../authentication/anti_pagetrans.php');
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Date Filed:</label>
-                                <input type="date" class="form-control input-sm col-xs-1" id="_datefiled" placeholder="Date Filed" disabled>
+                                <input type="datetime-local" class="form-control input-sm col-xs-1" id="_datefiled" placeholder="Date Filed" disabled>
                             </div>
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Actual Date of Use:</label>
@@ -401,11 +403,11 @@ require_once('../../authentication/anti_pagetrans.php');
                             <input type="name" class="form-control input-sm col-xs-1" id="_chairdeandep" placeholder="CHAIRPERSON/DEAN/DEPARTMENT">
                         </div>
                         <label class="fw-bold">Equipments Added To Reservation</label>
-                        <div id="container3">
-                            <div id="container4">
+                            <div id="container3">
+                                <div id="container4">
 
+                                </div>
                             </div>
-                        </div>
                                     <div class="row" style="padding-top:6px;">     
                                         <div class="col-md-4" style="margin-top:5px;">
                                             <label class="fw-bold" for="inputName">Facilities Department Approval Status:</label>
@@ -474,12 +476,65 @@ require_once('../../authentication/anti_pagetrans.php');
     <br>
     <!-- Modal Popup End -->
     <!-- Create Reservation start-->
-    <div class="modal " tabindex="-1" id="reserModal" aria-labelledby="exampleModalLabel">
+    <div class="modal fade" id="reserModal" aria-hidden="true">
         <div class="modal-dialog" style="max-width:1100px;">
             <div class="modal-content">
                 <div class="modal-header justify-content-center" style="max-width:1100px;">
                     <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Reservation Form</h5>
                 </div>
+                <div class="col-md-12">
+                    <div class="alert1" id="alert1" style = "display:none; width: 100%;">
+                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                            <strong id = "strongId">Success!</strong> Successfully submitted reservation request!
+                            
+                        </div>
+                        <div class="alert2" id="alert2" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
+                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                            <strong id = "strongId">Warning!</strong> Someone is using the facility within that time! Check Calendar of Activities for approved schedules. 
+                        </div>
+                </div>
+                    <style>
+                        .alert1 {
+                        padding: 20px;
+                        background-color: green;
+                        color: white;
+                        }
+
+                        .cbtn {
+                        margin-left: 15px;
+                        color: white;
+                        font-weight: bold;
+                        float: right;
+                        font-size: 22px;
+                        line-height: 20px;
+                        cursor: pointer;
+                        transition: 0.3s;
+                        }
+
+                        .cbtn:hover {
+                        color: black;
+                        }
+                    </style>
+                    <script>
+                        //add ons click
+                            function myFunctionPrompt(divID) {
+                            var x = document.getElementById(divID);
+                            if (x.style.display === "block") {
+                                x.style.display = "none";
+                            } else {
+                                x.style.display = "block";
+                            }
+                            }
+
+                            $("#reserModal").on("hidden.bs.modal", function () {
+                                    var x = document.getElementById("alert1");
+                                    x.style.display = "none";    
+                                    var a = document.getElementById("alert2");
+                                    a.style.display = "none";
+                                    var ab = document.getElementById("alert3");
+                                    b.style.display = "none";                                   
+                                });
+                    </script>
                 <div class="modal-body ">
                     <form action="">
                         Please select the facilities you would like to request.
@@ -517,23 +572,103 @@ require_once('../../authentication/anti_pagetrans.php');
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Date Filed:</label>
-                                <input type="date" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
+                                <input type="datetime-local" class="form-control input-sm col-xs-1" id="datefiled" placeholder="Date Filed" disabled>
                             </div>
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Actual Date of Use:</label>
-                                <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use" min="<?php echo date('Y-m-d'); ?>" />
+                                <input type="date" class="form-control input-sm col-xs-1" id="actualdate" placeholder="Actual Date of Use" min="<?php date_default_timezone_set('Asia/Manila'); echo date('Y-m-d'); ?>" onchange = "ondateusechange();" disabled/>
+                                
                             </div>
                         </div>
-
+                        <div class="col-md-12">
+                            <div class="alert3" id="alert3" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
+                                <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                <strong id = "strongId">Warning!</strong> <span id="messageWarning"></span>
+                            </div>
+                        </div>
                         <div class="col-md-2">
                             <label class="fw-bold" for="date">Time In:</label>
-                            <input type="time" class="form-control input-sm col-xs-1" id="timein" placeholder="Time In">
+                            <input type="time" class="form-control input-sm col-xs-1" id="timein" placeholder="Time In" onchange = "ontimechange();" disabled>
                         </div>
                         <div class="col-md-2">
                             <label class="fw-bold" for="date">Time Out:</label>
-                            <input type="time" class="form-control input-sm col-xs-1" id="timeout" placeholder="Time Out">
+                            <input type="time" class="form-control input-sm col-xs-1" id="timeout" placeholder="Time Out" onchange = "ontimechange();" disabled>
+                            
                         </div>
+                        <script>
+                            $(document).ready(function() {
+ 
+                            $('#actualdate').change(ondateusechange);
+                            });
 
+                            function ondateusechange()
+                            {
+                                document.getElementById("timein").disabled = false;
+                                document.getElementById("timeout").disabled = false;
+                            }
+
+                            function ontimechange() {
+                            var selectedDate = $('#actualdate').val();
+                            var facility = $('#faci option:selected').text();
+                            var messageElement = document.getElementById('messageWarning');
+                            var timein = $('#timein').val();
+                            var timeout = $('#timeout').val();
+                                    
+
+                                if (selectedDate !== "") {
+                                    fetchReservedTimes(selectedDate, facility, timein, timeout);
+                                } else {
+                                    
+                                    messageElement.textContent = "";
+                                }
+                            }
+
+                            function fetchReservedTimes(selectedDate, facility, timein, timeout) {
+                            $.ajax({
+                                url: "functions/getconflictdates.php",
+                                method: "POST",
+                                data: {
+                                date: selectedDate,
+                                facility: facility,
+                                timein: timein,
+                                timeout: timeout,
+                                },
+                                dataType: "json",
+                                success: function(response) {
+                               
+                                    var timeIn = response[0];
+                                    var timeOut = response[1];
+                                    var messageElement = document.getElementById('messageWarning');
+                                    var x = document.getElementById("alert3");
+                                    var a = document.getElementById("termscond-create");
+                                    if(timeIn !== undefined)
+                                    {
+                                        
+                                        x.style.display = "block";
+                                        a.hidden = true;
+                                        messageElement.textContent = "Someone is using the facility within that time! Conflicted Time: "+timeIn+" - "+timeOut;
+                                    }
+                                    else
+                                    {
+                                        x.style.display = "none";
+                                        a.hidden = false;
+                                      messageElement.textContent = "";
+                                    }
+                                    
+                             
+                                },
+                                error: function() {
+                                console.log("Error fetching reserved times.");
+                                }
+                            });
+                            }
+
+
+
+
+
+
+                        </script>
                         <div class="col-md-6 ">
                             <label class="fw-bold" for="date">Requesting Party:</label>
                             <input type="name" class="form-control input-sm col-xs-1" id="reqparty" placeholder="Requesting Party" value="<?php echo $_SESSION['department']; ?>" disabled>
@@ -609,7 +744,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                     </div>
                                     <div class="col-md-6 ">
                                         <label class="fw-bold" for="date">Date:</label>
-                                        <input type="date" class="form-control input-sm col-xs-1" id="dateminor" placeholder="Date" disabled>
+                                        <input type="datetime-local" class="form-control input-sm col-xs-1" id="dateminor" placeholder="Date" disabled>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -662,11 +797,6 @@ require_once('../../authentication/anti_pagetrans.php');
         </div>
     </div>
     <!-- create reservation end -->
-
-
-
-
-
 
     <!-- BODY END-->
 </body>
