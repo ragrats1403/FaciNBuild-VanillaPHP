@@ -306,7 +306,7 @@ $("#reserModal").on("hide.bs.modal", function () {
             document.getElementById("actualdate").disabled = true;
             document.getElementById("timein").disabled = true;
             document.getElementById("timeout").disabled = true;
-                        
+            location.reload();
   });
   
   $("#test").on("hidden.bs.modal", function () {
