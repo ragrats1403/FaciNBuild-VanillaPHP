@@ -1293,7 +1293,9 @@ $(document).on('click', '.step1approveBtn', function(event){
   var dept = $("#_reqparty").val();
   var feedb = $("#_inputFeedback").val();
   var fdapprove = $("#_fdapprovedby").val();
-  $.ajax({
+  if(fdapprove !== '')
+  {
+    $.ajax({
       url: "functions/step1approve.php",
       data: {
         id: id,
@@ -1324,6 +1326,9 @@ $(document).on('click', '.step1approveBtn', function(event){
           }
       }
   });
+  }
+
+  
   //alert('test');
 });
 
@@ -1335,7 +1340,7 @@ $(document).on('click', '.step2approveBtn', function(event){
   var dept = $("#_reqparty").val();
   var feedb = $("#_inputFeedback").val();
   var saoapprovedby = $("#_saoapprovedby").val();
-  if(saoapprovedby != '')
+  if(saoapprovedby !== '')
   {
     $.ajax({
       url: "functions/step2approve.php",
@@ -1426,7 +1431,9 @@ $(document).on('click', '.step1declineBtn', function(event){
   var trid = $('#trid').val();
   var dept = $("#_reqparty").val();
   var feedb = $("#_inputFeedback").val();
-  $.ajax({
+  if(feedb !== '')
+  {
+    $.ajax({
       url: "functions/step1decline.php",
       data: {
         id: id,
@@ -1459,6 +1466,8 @@ $(document).on('click', '.step1declineBtn', function(event){
           }
       }
       });
+  }
+  
 });
 
 $(document).on('click', '.step2declineBtn', function(event){
@@ -1466,7 +1475,9 @@ $(document).on('click', '.step2declineBtn', function(event){
   var trid = $('#trid').val();
   var dept = $("#_reqparty").val();
   var feedb = $("#_inputFeedback").val();
-  $.ajax({
+  if(feedb !== '')
+  {
+    $.ajax({
       url: "functions/step2decline.php",
       data: {
           id: id,
@@ -1499,6 +1510,8 @@ $(document).on('click', '.step2declineBtn', function(event){
           }
       }
       });
+  }
+  
 });
 //Admin Buttons for Decline End
 
