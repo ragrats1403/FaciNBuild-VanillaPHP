@@ -580,6 +580,10 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                                 <strong id = "strongId">Warning!</strong> <span id="messageWarning"></span>
                             </div>
+                            <div class="alert4" id="alert4" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
+                                <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                <strong id = "strongId">Warning!</strong> <span id="messageWarning2"></span>
+                            </div>
                         </div>
                         <div class="col-md-2">
                             <label class="fw-bold" for="date">Time In:</label>
@@ -606,15 +610,17 @@ require_once('../../authentication/anti_pagetrans.php');
                             var selectedDate = $('#actualdate').val();
                             var facility = $('#faci option:selected').text();
                             var messageElement = document.getElementById('messageWarning');
+                            var messageElement2 = document.getElementById('messageWarning2');
                             var timein = $('#timein').val();
                             var timeout = $('#timeout').val();
                                     
 
                                 if (selectedDate !== "") {
                                     fetchReservedTimes(selectedDate, facility, timein, timeout);
+                                    fetchPendingTimes(selectedDate, facility, timein, timeout);
                                 } else {
                                     
-                                    messageElement.textContent = "";
+                                    messageElement2.textContent = "";
                                 }
                             }
 
@@ -659,6 +665,45 @@ require_once('../../authentication/anti_pagetrans.php');
                             }
 
 
+                            function fetchPendingTimes(selectedDate, facility, timein, timeout) {
+                            $.ajax({
+                                url: "functions/getconflictpending.php",
+                                method: "POST",
+                                data: {
+                                date: selectedDate,
+                                facility: facility,
+                                timein: timein,
+                                timeout: timeout,
+                                },
+                                dataType: "json",
+                                success: function(response) {
+                               
+                                    var timeIn = response[0];
+                                    var timeOut = response[1];
+                                    var messageElement = document.getElementById('messageWarning2');
+                                    var x = document.getElementById("alert4");
+                                    var a = document.getElementById("termscond-create");
+                                    if(timeIn !== undefined)
+                                    {
+                                        
+                                        x.style.display = "block";
+                                        a.hidden = true;
+                                        messageElement.textContent = "There's a pending reservation within that time! Conflicted Time: "+timeIn+" - "+timeOut;
+                                    }
+                                    else
+                                    {
+                                        x.style.display = "none";
+                                        a.hidden = false;
+                                      messageElement.textContent = "";
+                                    }
+                                    
+                             
+                                },
+                                error: function() {
+                                console.log("Error fetching reserved times.");
+                                }
+                            });
+                            }
 
 
 

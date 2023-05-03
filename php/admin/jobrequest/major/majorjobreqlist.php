@@ -319,9 +319,50 @@ require_once('../../../authentication/anti_pagetrans.php');
                             $('#purp').val('');
                             $('#req').val('');
                             $('#dephead').val('');
-                    $('#addUserModal').modal('hide');
-                    $("body").removeClass("modal-open");
-                    $(".modal-backdrop").remove();
+                            var loopnum = $('#numForms').val();
+                            if(loopnum > 1)
+                            {
+                                for(var i = 1; i<loopnum; i++)
+                                {
+                                    var iterate = i+1
+                                    var quantityid = "_quantity_" + iterate;
+                                    var itemdescid = "_itemdesc_" + iterate;
+                                    var exquantity = document.getElementById(quantityid).value;
+                                    var exitemdesc = document.getElementById(itemdescid).value;
+                                    console.log(quantityid);
+                                    console.log(itemdescid);
+                                    $.ajax({
+                                            url: "addmultidata.php",
+                                            data: {
+                                                department: department,
+                                                date: date,
+                                                quantity: exquantity,
+                                                requestedby: requestby,
+                                                description: exitemdesc,
+                                                purpose: purpose,
+                                                multinum: iterate,
+                                                departmenthead: departmenthead,
+                                    
+                                            },
+                                            type: 'POST',
+                                            success: function(data) {
+                                                $('#_quantity_2').val('');
+                                                $('#_itemdesc_2').val('');
+                                                $('#_quantity_3').val('');
+                                                $('#_itemdesc_3').val('');
+                                                $('#_quantity_4').val('');
+                                                $('#_itemdesc_4').val('');
+                                                $('#_quantity_5').val('');
+                                                $('#_itemdesc_5').val('');
+                                            }
+                                        });
+                            }
+                            
+                            document.getElementById("savechange").disabled = false;
+                            
+                        }
+
+
                 }
             }
         });
@@ -482,6 +523,39 @@ require_once('../../../authentication/anti_pagetrans.php');
                     $('#_cadapprovedby').val(json.cadapprovedby);
                     $('#_inputFeedback').val(json.feedback);
                     
+
+                    var dep = json.department;
+                    var rqby = json.requestedby;
+                    var datesub = json.date;
+                    var purp = json.purpose;
+                    $.ajax({
+                        url: "multicount.php",
+                        type: 'POST',
+                        data: {
+                            department: dep,
+                            requestedby: rqby,
+                            datesubmitted: datesub,
+                            purpose: purp,
+                        },
+                        success: function(data) {
+                            var mjson = JSON.parse(data);
+                            var storecount = mjson.count;
+                            var newiter = storecount;
+
+                            var nia = parseInt(newiter) + 1;
+                            if(mjson.count>=1)
+                            {
+                                for(var i = 2; i<=nia; i++)
+                                {
+                                    var divid = "_"+i
+                                    console.log(i);
+                                    myFunctionPrompt(divid);
+                                    iteratemultival(dep, rqby, datesub, purp, i);
+
+                                }
+                            }
+                        }
+                    });
                     $('#editUserModal').modal('show');
                 }
             });
@@ -892,6 +966,88 @@ require_once('../../../authentication/anti_pagetrans.php');
             }
             
         });
+
+        function allhide(divId)
+                                    {
+                                        var x = document.getElementById(divId);
+                                        if(x.style.display === "block")
+                                        {
+                                            x.style.display = "none";
+                                        }
+                                        
+                                    }
+
+
+                                    function myFunctionPrompt(divID) {
+                                    var x = document.getElementById(divID);
+                                    if (x.style.display === "block") {
+                                        x.style.display = "none";
+                                    } else {
+                                        x.style.display = "block";
+                                    }
+                                    }
+
+        function iteratemultival(dep, rqby, datesub, purp, i)
+                {
+                    $.ajax({
+                            url: "getmultivalues.php",
+                            type: 'POST',
+                            data: {
+                                department: dep,
+                                requestedby: rqby,
+                                datesubmitted: datesub,
+                                purpose: purp,
+                                multinum: i,
+                                },
+                                success: function(data) {
+                                var njson = JSON.parse(data);
+                                console.log(i);
+                                var qua = document.getElementById("quantity_"+i);
+                                var des = document.getElementById("itemdesc_"+i);
+                                console.log(njson.item_desc, njson.quantity);
+                                var newqid = "quantity_" + i;
+                                var newdesid= "itemdesc_" + i;
+                                console.log(newqid);
+                                console.log(newdesid);
+                                $('#'+newqid).val("test");
+                                $('#'+newdesid).val("test");
+                                document.getElementById("quantity_"+i).value = njson.quantity;
+                                document.getElementById("itemdesc_"+i).value = njson.item_desc;     
+                                }
+                    });          
+
+                }
+
+                function iteratemultivals(dep, rqby, datesub, purp, i)
+                {
+                    $.ajax({
+                            url: "getmultivalues.php",
+                            type: 'POST',
+                            data: {
+                                department: dep,
+                                requestedby: rqby,
+                                datesubmitted: datesub,
+                                purpose: purp,
+                                multinum: i,
+                                },
+                                success: function(data) {
+                                var njson = JSON.parse(data);
+                                console.log(i);
+                                var qua = document.getElementById("quantity"+i);
+                                var des = document.getElementById("itemdesc"+i);
+                                console.log(njson.item_desc, njson.quantity);
+                                var newqid = "quantity" + i;
+                                var newdesid= "itemdesc" + i;
+                                console.log(newqid);
+                                console.log(newdesid);
+                                $('#'+newqid).val("test");
+                                $('#'+newdesid).val("test");
+                                document.getElementById("quantity"+i).value = njson.quantity;
+                                document.getElementById("itemdesc"+i).value = njson.item_desc;     
+                                }
+                    });          
+
+                }
              //datetime auto fill up
              var now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
@@ -923,13 +1079,76 @@ require_once('../../../authentication/anti_pagetrans.php');
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date" disabled>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date" disabled>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
                                 </div>
+                                <div class="col-md-1" >
+                                        <input type="name" class="form-control input-sm col-xs-1" id="numForms" style="width:60%; text-align:left;" value = "1" disabled>
+                                    </div>
+                                    <div class="col-md-1" style="margin-left: -4.5%;">
+                                        <button type="button" class="btn btn-light" id="subForm" onclick= "subtract();"><b>-</b></button>
+                                    </div>
+                                    
+                                    <div class="col-md-1" style="margin-left: -5%;">
+                                        <button type="button" class="btn btn-light" id="addForm" onclick = "add();"><b>+</b></button>
+                                    </div>
+                                
+
+                                <script>
+                                    function subtract()
+                                    {
+                                        var num = document.getElementById("numForms").value;
+
+                                        if(num <= 5 && num >= 2)
+                                        {
+                                            var divid = num+"_";
+                                            myFunctionPrompt(divid);
+                                            var newnum = num - 1;
+                                            $('#numForms').val(newnum);
+                                        }
+                                        else
+                                        {
+                                            
+                                            return null;
+                                        }
+                                    }
+
+                                    function add()
+                                    {
+                                        var num = document.getElementById("numForms").value;
+
+                                        if(num < 5 && num >= 1)
+                                        {
+                                            var newnum = parseInt(num) + 1;
+                                            $('#numForms').val(newnum);
+                                            var divid = newnum+"_";
+                                            myFunctionPrompt(divid);
+                                            table = $('#datatable').DataTable();
+                                            table.draw();
+                                        }
+                                        else
+                                        {
+                                            return null;
+                                        }
+                                    }
+                                    function myFunctionPrompt(divID) {
+                                        var x = document.getElementById(divID);
+                                        if (x.style.display === "block") {
+                                            x.style.display = "none";
+                                        } else {
+                                            x.style.display = "block";
+                                        }   
+                                        }
+                                </script>
+                                <style>
+                                    hr.solid {
+                                    border-top: 3px solid #bbb;
+                                    }
+                                </style>
                             </div>
                             <div>
                                 <div class="col-md-2" style="padding-bottom:10px; width:20%">
@@ -942,6 +1161,68 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea placeholder="Description" class="form-control" rows="2" id="desc"></textarea>
                                 </div>
+                            </div>
+                            <div class = "2" style= "display:none;" id="2_">
+                            <hr class="solid">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity_2" placeholder="Quantity">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="_itemdesc_2" placeholder="Description"></textarea>
+                                        </div>
+                                    </div>
+                            <hr class="solid">
+                            </div>
+                            <div class = "3" style= "display:none;" id="3_">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity_3" placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="_itemdesc_3" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "4" style= "display:none;" id="4_">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity_4" placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="_itemdesc_4" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "5" style= "display:none;" id="5_">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity_5" placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="_itemdesc_5" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">
@@ -974,11 +1255,8 @@ require_once('../../../authentication/anti_pagetrans.php');
     <script>
                     var now = new Date();
                     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
-                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
-                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
-                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
-                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
+                    var formattedDate = now.toISOString().slice(0, 19);
+                    document.getElementById('deeto').value = formattedDate;
     </script>
     <!-- add user modal end-->
     <!-- edit user modal-->
@@ -1035,6 +1313,69 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea placeholder="Description" class="form-control" rows="2" id="description" disabled></textarea>
                                 </div>
+                            </div>
+                             <!--multiple start-->
+                             <div class = "2" style= "display:none;" id="_2">
+                            <hr class="solid">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_2" placeholder="Quantity" disabled>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_2" placeholder="Description" disabled></textarea>
+                                        </div>
+                                    </div>
+                            <hr class="solid">
+                            </div>
+                            <div class = "3" style= "display:none;" id="_3">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_3" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_3" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "4" style= "display:none;" id="_4">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_4" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_4" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "5" style= "display:none;" id="_5">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_5" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_5" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
                             </div>
                             <div class="justify-content-center" style="padding-bottom:10px;">
                                 <div class="col-md-12">

@@ -561,7 +561,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <div class="col-md-12">
                                     <h5 class="text-uppercase fw-bold">A. Requisition(To be filled up by the requesting party)</h5>
                                 </div>
-                                <div class="col-md-1" >
+                                    <div class="col-md-1" >
                                         <input type="name" class="form-control input-sm col-xs-1" id="numForms" style="width:60%; text-align:left;" value = "1" disabled>
                                     </div>
                                     <div class="col-md-1" style="margin-left: -4.5%;">
