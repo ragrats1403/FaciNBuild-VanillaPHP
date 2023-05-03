@@ -54,7 +54,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservation/functions/notification.php",
+                    url: "functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -114,7 +114,7 @@ require_once('../../authentication/anti_pagetrans.php');
             markAsReadButton.addEventListener("click", function(event) {
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "../reservation/functions/update_notification.php",
+                    url: "functions/update_notification.php",
                     type: 'POST',
                     data: {
                         department: department,
@@ -192,13 +192,13 @@ require_once('../../authentication/anti_pagetrans.php');
             <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                        <img src="../../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
+                        <img src="../../../images/ico/profileicon.png" alt="" style="height: 45px; width:45px; object-fit:cover; border-radius:12px;" />
                         <div class="name_role">
                             <div class="name"><?php echo mb_strimwidth($_SESSION['department'], 0, 20, '…'); ?></div>
                             <div class="role">Building Department</div>
                         </div>
                     </div>
-                    <a href="../../../../logout.php">
+                    <a href="../../../logout.php">
                         <i class='bx bx-log-out' id="log_out"></i>
                     </a>
                 </div>
@@ -236,7 +236,6 @@ require_once('../../authentication/anti_pagetrans.php');
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reserModal">Create reservation</button>
-
                             </div>
                         </div>
                     </div>
@@ -492,17 +491,23 @@ require_once('../../authentication/anti_pagetrans.php');
                         </div>
                         <div class="alert2" id="alert2" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                            <strong id = "strongId">Warning!</strong> Someone is using the facility within that time! Check Calendar of Activities for approved schedules. 
+                            <strong id = "strongId1"></strong>
                         </div>
-                        <div class="alert3" id="alert2" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
+                        <div class="alert3" id="alert3" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                            <strong id = "strongId"></strong> Someone is using the facility within that time! Check Calendar of Activities for approved schedules. 
+                            <strong id = "strongId2">Warning!</strong> Someone is using the facility within that time! Check Calendar of Activities for approved schedules.
                         </div>
                 </div>
                     <style>
                         .alert1 {
                         padding: 20px;
                         background-color: green;
+                        color: white;
+                        }
+                        
+                        .alert2 {
+                        padding: 20px;
+                        background-color: red;
                         color: white;
                         }
 
@@ -536,9 +541,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                     var x = document.getElementById("alert1");
                                     x.style.display = "none";    
                                     var a = document.getElementById("alert2");
-                                    a.style.display = "none";
-                                    var ab = document.getElementById("alert3");
-                                    b.style.display = "none";                                   
+                                    a.style.display = "none";                                 
                                 });
                     </script>
                 <div class="modal-body ">
@@ -591,6 +594,10 @@ require_once('../../authentication/anti_pagetrans.php');
                                 <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                                 <strong id = "strongId">Warning!</strong> <span id="messageWarning"></span>
                             </div>
+                            <div class="alert4" id="alert4" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
+                                <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                <strong id = "strongId">Warning!</strong> <span id="messageWarning2"></span>
+                            </div>
                         </div>
                         <div class="col-md-2">
                             <label class="fw-bold" for="date">Time In:</label>
@@ -617,15 +624,17 @@ require_once('../../authentication/anti_pagetrans.php');
                             var selectedDate = $('#actualdate').val();
                             var facility = $('#faci option:selected').text();
                             var messageElement = document.getElementById('messageWarning');
+                            var messageElement2 = document.getElementById('messageWarning2');
                             var timein = $('#timein').val();
                             var timeout = $('#timeout').val();
                                     
 
                                 if (selectedDate !== "") {
                                     fetchReservedTimes(selectedDate, facility, timein, timeout);
+                                    fetchPendingTimes(selectedDate, facility, timein, timeout);
                                 } else {
                                     
-                                    messageElement.textContent = "";
+                                    messageElement2.textContent = "";
                                 }
                             }
 
@@ -670,6 +679,45 @@ require_once('../../authentication/anti_pagetrans.php');
                             }
 
 
+                            function fetchPendingTimes(selectedDate, facility, timein, timeout) {
+                            $.ajax({
+                                url: "functions/getconflictpending.php",
+                                method: "POST",
+                                data: {
+                                date: selectedDate,
+                                facility: facility,
+                                timein: timein,
+                                timeout: timeout,
+                                },
+                                dataType: "json",
+                                success: function(response) {
+                               
+                                    var timeIn = response[0];
+                                    var timeOut = response[1];
+                                    var messageElement = document.getElementById('messageWarning2');
+                                    var x = document.getElementById("alert4");
+                                    var a = document.getElementById("termscond-create");
+                                    if(timeIn !== undefined)
+                                    {
+                                        
+                                        x.style.display = "block";
+                                        a.hidden = true;
+                                        messageElement.textContent = "There's a pending reservation within that time! Conflicted Time: "+timeIn+" - "+timeOut;
+                                    }
+                                    else
+                                    {
+                                        x.style.display = "none";
+                                        a.hidden = false;
+                                      messageElement.textContent = "";
+                                    }
+                                    
+                             
+                                },
+                                error: function() {
+                                console.log("Error fetching reserved times.");
+                                }
+                            });
+                            }
 
 
 
@@ -803,6 +851,7 @@ require_once('../../authentication/anti_pagetrans.php');
         </div>
     </div>
     <!-- create reservation end -->
+
     <div class="modal fade" id="deletemodal">
         <div class="modal-dialog ">
             <div class="modal-content ">
@@ -819,7 +868,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 </div>
             </div>
         </div>
-    </div>                        
+    </div>
     <!-- BODY END-->
 </body>
 
