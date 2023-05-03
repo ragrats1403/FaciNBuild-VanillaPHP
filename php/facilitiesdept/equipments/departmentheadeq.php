@@ -312,36 +312,37 @@ require_once('../../authentication/anti_pagetrans.php');
             }
         });
         //delete user button control
-        $(document).on('click', '.btnDelete', function(event) {
-            var table = $('#datatable').DataTable();
+        $(document).on("click", ".btnDelete", function (event) {
             event.preventDefault();
-            var id = $(this).data('id');
-            if (confirm('Are you sure to delete this Equipment?')) {
-
-
+            var id = $(this).data("id");
+            $('#deletemodal').modal('show');
+            
+            $('#deletemodal').on('click', '.btn-danger', function() {
                 $.ajax({
-                    url: "delete_equipments.php",
-                    data: {
-                        id: id
-                    },
-                    type: 'POST',
-                    success: function(data) {
-                        var json = JSON.parse(data);
-                        status = json.status;
-
-                        if (status == 'success') {
-                            $('#' + id).closest('tr').remove();
-
-                        } else {
-                            alart('failed');
-                            return;
-                        }
+                url: "delete_equipments.php",
+                data: {
+                    id: id,
+                },
+                type: "POST",
+                success: function (data) {
+                    var json = JSON.parse(data);
+                    var status = json.status;
+                    if (status == "success") {
+                    $("#" + id).closest("tr").remove();
+                    } else {
+                    alert("failed");
+                    return;
                     }
+                },
                 });
-            } else {
-                return null;
-            }
+                $('#deletemodal').modal('hide');
+            });
+            
+            $('#deletemodal').on('click', '#close-modal', function() {
+                $('#deletemodal').modal('hide');
+            });
         });
+
         //edit button control 
         $(document).on('click', '.editBtn', function(event) {
             var id = $(this).data('id');
@@ -516,6 +517,23 @@ require_once('../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
+    <div class="modal fade" id="deletemodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="close-modal">No</button>
+                    <button type="button" class="btn btn-danger">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>  
     <!-- edit user modalPopup end-->
 
 </body>
