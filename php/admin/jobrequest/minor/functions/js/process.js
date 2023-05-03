@@ -379,6 +379,38 @@ $(document).on('click', '.btnprint', function(event) {
             $('#_daterendered1').val(json.daterendered);
             $('#_dateconfirmed1').val(json.dateconfirmed);
             $('#printmodal').modal('show');
+
+            var dep = json.department;
+                    var rqby = json.requestedby;
+                    var datesub = json.datesubmitted;
+                    var purp = json.purpose;
+                    $.ajax({
+                        url: "functions/multicount.php",
+                        type: 'POST',
+                        data: {
+                            department: dep,
+                            requestedby: rqby,
+                            datesubmitted: datesub,
+                            purpose: purp,
+                        },
+                        success: function(data) {
+                            var mjson = JSON.parse(data);
+                            var storecount = mjson.count;
+                            var newiter = storecount;
+
+                            var nia = parseInt(newiter) + 1;
+                            if(mjson.count>1)
+                            {
+                                for(var i = 2; i<=nia; i++)
+                                {
+                                    var divid = "_"+i
+                                    console.log(i);
+                                    myFunctionPrompt(divid);
+                                    iteratemultivals(dep, rqby, datesub, purp, i);
+                                }
+                            }
+                        }
+                    });
         }
     });
 });
@@ -543,6 +575,55 @@ function iteratemultival(dep, rqby, datesub, purp, i)
             });          
 
         }
+
+        function iteratemultivals(dep, rqby, datesub, purp, i)
+                {
+                    $.ajax({
+                            url: "functions/getmultivalues.php",
+                            type: 'POST',
+                            data: {
+                                department: dep,
+                                requestedby: rqby,
+                                datesubmitted: datesub,
+                                purpose: purp,
+                                multinum: i,
+                                },
+                                success: function(data) {
+                                var njson = JSON.parse(data);
+                                console.log(i);
+                                var qua = document.getElementById("quantity"+i);
+                                var des = document.getElementById("itemdesc"+i);
+                                console.log(njson.item_desc, njson.quantity);
+                                var newqid = "quantity" + i;
+                                var newdesid= "itemdesc" + i;
+                                console.log(newqid);
+                                console.log(newdesid);
+                                $('#'+newqid).val("test");
+                                $('#'+newdesid).val("test");
+                                document.getElementById("quantity"+i).value = njson.quantity;
+                                document.getElementById("itemdesc"+i).value = njson.item_desc;     
+                                }
+                    });          
+
+                }
+
+            $("#printmodal").on("hide.bs.modal", function () {
+                const myNode =  document.getElementById('container2');
+                while (myNode.firstChild) {
+                myNode.removeChild(myNode.lastChild);
+                }
+                    $('#testtable').DataTable().clear().destroy();
+                                    $("#_quantity1").val("");
+                                    $("#quantity2").val("");
+                                    $("#quantity3").val("");
+                                    $("#quantity4").val("");
+                                    $("#quantity5").val("");
+                                    $("#_itemdesc1").val("");
+                                    $("#itemdesc2").val("");
+                                    $("#itemdesc3").val("");
+                                    $("#itemdesc4").val("");
+                                    $("#itemdesc5").val("");
+                });
 
 $(document).on('click', '.updateBtn', function() {
     var id = $('#_ID').val();

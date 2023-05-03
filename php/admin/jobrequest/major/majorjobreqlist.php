@@ -282,6 +282,7 @@ require_once('../../../authentication/anti_pagetrans.php');
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
             event.preventDefault();
+            document.getElementById("savechange").disabled = true;
             var requino = $('#requi').val();
             var department = $('#depart').val();
             var date = $('#deeto').val();
@@ -291,10 +292,11 @@ require_once('../../../authentication/anti_pagetrans.php');
             var requestby = $('#req').val();
             var departmenthead = $('#dephead').val();
 
+
             if (department != '' && date != '' && quantity != '' && requestby != '' && description != '' && purpose != '' && departmenthead != '') {
-        $.ajax({
-                url: "add_data.php",
-                data: {
+                $.ajax({
+                    url: "functions/add_data.php",
+                    data: {
                         requino: requino,
                         department: department,
                         date: date,
@@ -303,16 +305,15 @@ require_once('../../../authentication/anti_pagetrans.php');
                         purpose: purpose,
                         requestby: requestby,
                         departmenthead: departmenthead,
-                
-            },
-            type: 'POST',
-            success: function(data) {
-                var json = JSON.parse(data);
-                status = json.status;
-                if (status = 'success') {
-                    table = $('#datatable').DataTable();
-                    table.draw();
-                    alert('Successfully Requested Job Request!');
+                    },
+                    type: 'POST',
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        status = json.status;
+                        if (status = 'success') {
+                            table = $('#datatable').DataTable();
+                            table.draw();
+                            myFunctionPrompt("alert1");
                             $('#requi').val('');
                             $('#quan').val('');
                             $('#desc').val('');
@@ -332,7 +333,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     console.log(quantityid);
                                     console.log(itemdescid);
                                     $.ajax({
-                                            url: "addmultidata.php",
+                                            url: "functions/addmultidata.php",
                                             data: {
                                                 department: department,
                                                 date: date,
@@ -361,15 +362,18 @@ require_once('../../../authentication/anti_pagetrans.php');
                             document.getElementById("savechange").disabled = false;
                             
                         }
+                            $('#addUserModal').scrollTop(0);
+                            document.getElementById("savechange").disabled = false;
 
-
-                }
+                        }
+                    }
+                });
+            } else {
+                $('#alert2').css('display', 'block');
+                $('#strongId1').html('Please fill all the Required fields');
+                document.getElementById("savechange").disabled = false;
             }
         });
-    } else {
-        alert("Please fill all the Required fields");
-    }
-});
         //delete user button control
         $(document).on("click", ".btnDelete", function (event) {
             event.preventDefault();
@@ -551,7 +555,6 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     console.log(i);
                                     myFunctionPrompt(divid);
                                     iteratemultival(dep, rqby, datesub, purp, i);
-
                                 }
                             }
                         }
@@ -587,6 +590,38 @@ require_once('../../../authentication/anti_pagetrans.php');
                     $('#purpose1').val(json.purpose);
                     $('#remarks1').val(json.outsource);
                     $('#printmodal').modal('show');
+
+                    var dep = json.department;
+                    var rqby = json.requestedby;
+                    var datesub = json.date;
+                    var purp = json.purpose;
+                    $.ajax({
+                        url: "multicount.php",
+                        type: 'POST',
+                        data: {
+                            department: dep,
+                            requestedby: rqby,
+                            datesubmitted: datesub,
+                            purpose: purp,
+                        },
+                        success: function(data) {
+                            var mjson = JSON.parse(data);
+                            var storecount = mjson.count;
+                            var newiter = storecount;
+
+                            var nia = parseInt(newiter) + 1;
+                            if(mjson.count>=1)
+                            {
+                                for(var i = 2; i<=nia; i++)
+                                {
+                                    var divid = "_"+i
+                                    console.log(i);
+                                    myFunctionPrompt(divid);
+                                    iteratemultivals(dep, rqby, datesub, purp, i);
+                                }
+                            }
+                        }
+                    });
                 }
             });
         });
@@ -962,9 +997,9 @@ require_once('../../../authentication/anti_pagetrans.php');
             });
             }
             else{
-                alert("Please fill up required fields!")
+                $('#alert1').css('display', 'block');
+                $('#strongId').html('Please provide a feedback when declining a request!');
             }
-            
         });
 
         function allhide(divId)
@@ -1052,11 +1087,24 @@ require_once('../../../authentication/anti_pagetrans.php');
              var now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
             document.getElementById('deeto').value = now.toISOString().slice(0,16);
-      
-    
-
-
         
+            $("#printmodal").on("hide.bs.modal", function () {
+                    const myNode =  document.getElementById('container2');
+                    while (myNode.firstChild) {
+                    myNode.removeChild(myNode.lastChild);
+                    }
+                        $('#testtable').DataTable().clear().destroy();
+                                        $("#quantity1").val("");
+                                        $("#quantity2").val("");
+                                        $("#quantity3").val("");
+                                        $("#quantity4").val("");
+                                        $("#quantity5").val("");
+                                        $("#description1").val("");
+                                        $("#itemdesc2").val("");
+                                        $("#itemdesc3").val("");
+                                        $("#itemdesc4").val("");
+                                        $("#itemdesc5").val("");
+                });
     </script>
     <!-- Script Process End-->
     <!-- add user modal-->
@@ -1594,6 +1642,22 @@ require_once('../../../authentication/anti_pagetrans.php');
                                         <tr>
                                             <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity1" disabled></textarea></td>
                                             <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="description1" disabled></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity2" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="itemdesc2" disabled></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity3" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="itemdesc3" disabled></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity4" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="itemdesc4" disabled></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea style="border: none; border-color: transparent;" class="form-control" rows="2" id="quantity5" disabled></textarea></td>
+                                            <td colspan="3"><textarea style="border: none; border-color: transparent;" class="form-control col-md-3" rows="2" id="itemdesc5" disabled></textarea></td>
                                         </tr>
                                         <tr>
                                             <th class="col-md-2" style="text-align: left;">PURPOSE:</th>
