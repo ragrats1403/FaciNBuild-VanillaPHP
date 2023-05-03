@@ -204,7 +204,6 @@ $(document).on('click', '.addresBtn', function(event){
                 textbox.className = "form-control input-sm col-xs-1 disabled";
                 textbox.innerHTML = eqname +' x '+ value;
     
-    
                 divCol.appendChild(textbox);
                 divCol2.appendChild(btn);
                 newDiv.appendChild(divCol);
@@ -214,9 +213,6 @@ $(document).on('click', '.addresBtn', function(event){
                 newDiv.appendChild(hvalue);
                 newDiv.appendChild(hfaci);
                 container.appendChild(newDiv);
-
-                
-    
             }
         }); 
     }
