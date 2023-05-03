@@ -543,7 +543,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                             var newiter = storecount;
 
                             var nia = parseInt(newiter) + 1;
-                            if(mjson.count>1)
+                            if(mjson.count>=1)
                             {
                                 for(var i = 2; i<=nia; i++)
                                 {
@@ -1079,7 +1079,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date" disabled>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="deeto" placeholder="Date" disabled>
                                 </div>
                             </div>
                             <div class="row">
@@ -1255,11 +1255,8 @@ require_once('../../../authentication/anti_pagetrans.php');
     <script>
                     var now = new Date();
                     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
-                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
-                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
-                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
-                    document.getElementById("deeto").value = now.toISOString().substring(0,10);
+                    var formattedDate = now.toISOString().slice(0, 19);
+                    document.getElementById('deeto').value = formattedDate;
     </script>
     <!-- add user modal end-->
     <!-- edit user modal-->

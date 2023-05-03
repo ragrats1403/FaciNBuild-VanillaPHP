@@ -267,12 +267,77 @@ require_once('../../../authentication/anti_pagetrans.php');
                                 </div>
                                 <div class="col-md-6 ">
                                     <label class="fw-bold" for="date">Date:</label>
-                                    <input type="date" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
+                                    <input type="datetime-local" class="form-control input-sm col-xs-1" id="datemajorjr" placeholder="Date" disabled>
 
                                 </div>
                             </div>
                             <div class="justify-content-center">
                                 <h5 class="text-uppercase fw-bold">Requisition(To be filled up by the requesting party)</h5>
+                                <div class = "row">
+                                    <div class="col-md-1" >
+                                        <input type="name" class="form-control input-sm col-xs-1" id="numForms" style="width:60%; text-align:left;" value = "1" disabled>
+                                    </div>
+                                    <div class="col-md-1" style="margin-left: -4.5%;">
+                                        <button type="button" class="btn btn-light" id="subForm" onclick= "subtract();"><b>-</b></button>
+                                    </div>
+                                    
+                                    <div class="col-md-1" style="margin-left: -5%;">
+                                        <button type="button" class="btn btn-light" id="addForm" onclick = "add();"><b>+</b></button>
+                                    </div>
+                                </div>
+                                <script>
+                                    function subtract()
+                                    {
+                                        var num = document.getElementById("numForms").value;
+
+                                        if(num <= 5 && num >= 2)
+                                        {
+                                            var divid = num+"_";
+                                            myFunctionPrompt(divid);
+                                            var newnum = num - 1;
+                                            $('#numForms').val(newnum);
+                                        }
+                                        else
+                                        {
+                                            
+                                            return null;
+                                        }
+                                    }
+
+                                    function add()
+                                    {
+                                        var num = document.getElementById("numForms").value;
+
+                                        if(num < 5 && num >= 1)
+                                        {
+                                            var newnum = parseInt(num) + 1;
+                                            $('#numForms').val(newnum);
+                                            var divid = newnum+"_";
+                                            myFunctionPrompt(divid);
+                                            table = $('#datatable').DataTable();
+                                            table.draw();
+                                        }
+                                        else
+                                        {
+                                            return null;
+                                        }
+                                    }
+                                    function myFunctionPrompt(divID) {
+                                        var x = document.getElementById(divID);
+                                        if (x.style.display === "block") {
+                                            x.style.display = "none";
+                                        } else {
+                                            x.style.display = "block";
+                                        }   
+                                        }
+
+                                        
+                                </script>
+                                <style>
+                                    hr.solid {
+                                    border-top: 3px solid #bbb;
+                                    }
+                                </style>
                                 <div class="col-md-2" style="padding-bottom:10px">
                                     <label class="fw-bold" for="date">Quantity:</label>
                                     <input type="name" class="form-control input-sm col-xs-1" id="_quantity_" placeholder="Quantity">
@@ -283,6 +348,69 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     <label class="fw-bold" for="date">Item with Complete Description:</label>
                                     <textarea class="form-control" rows="2" id="_itemdesc_" placeholder="Description"></textarea>
                                 </div>
+                            </div>
+
+                            <div class = "2" style= "display:none;" id="2_">
+                            <hr class="solid">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity_2" placeholder="Quantity">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="_itemdesc_2" placeholder="Description"></textarea>
+                                        </div>
+                                    </div>
+                            <hr class="solid">
+                            </div>
+                            <div class = "3" style= "display:none;" id="3_">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity_3" placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="_itemdesc_3" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "4" style= "display:none;" id="4_">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity_4" placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="_itemdesc_4" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "5" style= "display:none;" id="5_">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="_quantity_5" placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="_itemdesc_5" placeholder="Description"></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
                             </div>
 
                             <div class="justify-content-center">
@@ -362,6 +490,71 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     <textarea class="form-control" rows="2" id="_itemdesc" placeholder="Description"></textarea>
                                 </div>
                             </div>
+
+                            <!--multiple start-->
+                            <div class = "2" style= "display:none;" id="_2">
+                            <hr class="solid">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_2" placeholder="Quantity" disabled>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_2" placeholder="Description" disabled></textarea>
+                                        </div>
+                                    </div>
+                            <hr class="solid">
+                            </div>
+                            <div class = "3" style= "display:none;" id="_3">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_3" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_3" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "4" style= "display:none;" id="_4">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_4" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_4" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <div class = "5" style= "display:none;" id="_5">
+                                    <div class="justify-content-center">                                 
+                                        <div class="col-md-2" style="padding-bottom:10px">
+                                            <label class="fw-bold" for="date">Quantity:</label>
+                                            <input type="name" class="form-control input-sm col-xs-1" id="quantity_5" placeholder="Quantity" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="justify-content-center">
+                                        <div class="col-md-12">
+                                            <label class="fw-bold" for="date">Item with Complete Description:</label>
+                                            <textarea class="form-control" rows="2" id="itemdesc_5" placeholder="Description" disabled></textarea>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+                            </div>
+                            <!--multiple end-->
 
                             <div class="justify-content-center">
                                 <div class="col-md-12" >
@@ -598,7 +791,8 @@ require_once('../../../authentication/anti_pagetrans.php');
         //datetime auto fill up
         var now = new Date();
         now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        document.getElementById('datemajorjr').value = now.toISOString().slice(0,16);
+        var formattedDate = now.toISOString().slice(0, 19);
+        document.getElementById('datemajorjr').value = formattedDate;
         //Requesting department auto fill up
         
         /*  var deptname;
@@ -619,16 +813,10 @@ require_once('../../../authentication/anti_pagetrans.php');
         //Onclick event for enabling button
         function autofilldate(filldate) {
 
-            //document.getElementById("_daterendered").valueAsDate = today;
-            //document.getElementById('_daterendered').value = new Date().toISOString();
-            /*var now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            document.getElementById('_daterendered').value = now.toISOString().substring(0, 10);
-            
-            */
             var now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            document.getElementById(filldate).value = now.toISOString().substring(0, 10);
+            var formattedDate = now.toISOString().slice(0, 19);
+            document.getElementById(filldate).value = formattedDate;
             
         }
         function enableFields() {
