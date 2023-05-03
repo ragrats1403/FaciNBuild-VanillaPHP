@@ -345,9 +345,9 @@ require_once('../../authentication/anti_pagetrans.php');
                             </div>
 
                             <div class="row" id="headerDiv" style="display: none;">
-                                <div class="col-md-1 float-start">
-                                    <img style="position: relative;" src='../../../../images/uclogo.png' alt='' width='75' height='50' />
-                                </div>   
+                                <div class="col-md-12 float-start">
+                                    <img style="position: relative;" src='../../../../images/ucbanner.png' alt='' />
+                                </div>      
                                 <div class="col-md-3">
                                     <h1 class="fw-bold form-check-label" style="padding-left: 100px; position: relative;">Generate Reports </h1>
                                 </div>     
