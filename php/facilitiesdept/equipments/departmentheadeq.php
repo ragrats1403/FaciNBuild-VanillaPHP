@@ -299,7 +299,7 @@ require_once('../../authentication/anti_pagetrans.php');
                         if (status = 'success') {
                             table = $('#datatable').DataTable();
                             table.draw();
-                            alert('Successfully Added Equipment!');
+                            $('#addeqmodal').modal('show');
                             $('#inputEqname').val('');
                             $('#inputQty').val('');
                             $('#inputFacility').val('');
@@ -308,7 +308,8 @@ require_once('../../authentication/anti_pagetrans.php');
                     }
                 });
             } else {
-                alert("Please fill all the Required fields");
+                $('#alert1').css('display', 'block');
+                $('#strongId').html('Please fill all the Required fields');
             }
         });
         //delete user button control
@@ -392,7 +393,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     var json = JSON.parse(data);
                     status = json.status;
                     if (status == 'success') {
-                        alert('Updated Successfully!');
+                        $('#updateeqmodal').modal('show');
                         table = $('#datatable').DataTable();
                         table.draw();
                         $('#editUserModal').modal('hide');
@@ -413,6 +414,34 @@ require_once('../../authentication/anti_pagetrans.php');
                     <h5 class="modal-title" id="exampleModalLabel">Add New Equipment</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="col-md-12">
+                                        <div class="alert1" id="alert1" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId">Success!</strong>
+                                        </div>
+                                    </div>
+                                        <style>
+                                            .alert1 {
+                                            padding: 20px;
+                                            background-color: red;
+                                            color: white;
+                                            }
+
+                                            .cbtn {
+                                            margin-left: 15px;
+                                            color: white;
+                                            font-weight: bold;
+                                            float: right;
+                                            font-size: 22px;
+                                            line-height: 20px;
+                                            cursor: pointer;
+                                            transition: 0.3s;
+                                            }
+
+                                            .cbtn:hover {
+                                            color: black;
+                                            }
+                                        </style>
                 <div class="modal-body">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
@@ -530,6 +559,32 @@ require_once('../../authentication/anti_pagetrans.php');
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="close-modal">No</button>
                     <button type="button" class="btn btn-danger">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div class="modal fade" id="addeqmodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully added equipment!</p>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div class="modal fade" id="updateeqmodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully updated equipment!</p>
                 </div>
             </div>
         </div>
