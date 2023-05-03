@@ -790,7 +790,24 @@
 
                 }
 
-    </script>
+                $("#printmodal").on("hide.bs.modal", function () {
+                    const myNode =  document.getElementById('container2');
+                    while (myNode.firstChild) {
+                    myNode.removeChild(myNode.lastChild);
+                    }
+                        $('#testtable').DataTable().clear().destroy();
+                                        $("#quantity1").val("");
+                                        $("#quantity2").val("");
+                                        $("#quantity3").val("");
+                                        $("#quantity4").val("");
+                                        $("#quantity5").val("");
+                                        $("#description1").val("");
+                                        $("#itemdesc2").val("");
+                                        $("#itemdesc3").val("");
+                                        $("#itemdesc4").val("");
+                                        $("#itemdesc5").val("");
+                });
+        </script>
     <!-- Script Process End-->
     <!-- edit user modal-->
     <!-- Modal -->

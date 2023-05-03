@@ -512,7 +512,6 @@ $(document).on('click', '.updateBtn', function() {
         });
     });
 
-
     function myFunctionPrompt(divID) {
         var x = document.getElementById(divID);
         if (x.style.display === "block") {
@@ -558,7 +557,6 @@ $(document).on('click', '.updateBtn', function() {
                         document.getElementById("itemdesc_"+i).value = njson.item_desc;     
                         }
             });          
-
         }
 
             function iteratemultivals(dep, rqby, datesub, purp, i)
@@ -687,6 +685,24 @@ $(document).on('click', '.step1declineBtn', function(event){
     }
 });
 
+
+$("#printmodal").on("hide.bs.modal", function () {
+    const myNode =  document.getElementById('container2');
+    while (myNode.firstChild) {
+    myNode.removeChild(myNode.lastChild);
+    }
+        $('#testtable').DataTable().clear().destroy();
+                        $("#_quantity1").val("");
+                        $("#quantity2").val("");
+                        $("#quantity3").val("");
+                        $("#quantity4").val("");
+                        $("#quantity5").val("");
+                        $("#_itemdesc1").val("");
+                        $("#itemdesc2").val("");
+                        $("#itemdesc3").val("");
+                        $("#itemdesc4").val("");
+                        $("#itemdesc5").val("");
+  });
 //steps decline end
 
 
