@@ -125,7 +125,7 @@ $(document).on('submit', '#saveUserForm', function(event) {
                 if (status = 'success') {
                     table = $('#datatable').DataTable();
                     table.draw();
-                    alert('Requested Successfully!');
+                    $('#approvedmodal').modal('show');
                     $('#_quantity_').val('');
                     $('#_item_').val('');
                     $('#_itemdesc_').val('');
@@ -135,6 +135,7 @@ $(document).on('submit', '#saveUserForm', function(event) {
                     $('#confirmedby').val('');
                     $('#dateconfirmed').val('');
                     $('#requestedby').val('');
+                    $('#addUserModal').modal('hide');
                     var loopnum = $('#numForms').val();
                             if(loopnum > 1)
                             {
@@ -180,7 +181,8 @@ $(document).on('submit', '#saveUserForm', function(event) {
             }
         });
     } else {
-        alert("Please fill all the Required fields");
+        $('#alert1').css('display', 'block');
+        $('#strongId').html('Please fill all the Required fields');
     }
 });
 
@@ -663,7 +665,7 @@ $(document).on('click', '.updateBtn', function() {
             if (status == 'success') {
                 confirmedbyUpdate();
                 renderedbyUpdate();
-                alert('Updated Successfully!');
+                $('#updateform').modal('show');
                 table = $('#datatable').DataTable();
                 table.draw();
 
@@ -718,7 +720,7 @@ $(document).on('click', '.step1approveBtn', function(event){
                 if (status == 'success') {
                     table = $('#datatable').DataTable();
                     table.draw();
-                    alert('Approved Successfully!');
+                    $('#approvedmodal').modal('show');
                     document.getElementById("step1a").hidden = true;
                     document.getElementById("step1d").hidden = true;
                     $('#_step1').val('Approved');
@@ -731,7 +733,9 @@ $(document).on('click', '.step1approveBtn', function(event){
     }
     else
     {
-        alert("Please fill in required fields");
+        $('#editMinorjreqmodal').scrollTop(0);
+        $('#alert3').css('display', 'block');
+        $('#strongId3').html('Please fill in required fields');
     }
 });
 //step 3
@@ -746,7 +750,9 @@ $(document).on('click', '.step1declineBtn', function(event){
     var feedb = $('#_inputFeedback').val();
     if(feedb == '' || feedb == null || feedb == undefined)
     {
-        alert("Please provide a feedback before declining request!");
+        $('#editMinorjreqmodal').scrollTop(0);
+        $('#alert2').css('display', 'block');
+        $('#strongId2').html('Please provide a feedback before declining request!');
     }
     else
     {
@@ -765,7 +771,7 @@ $(document).on('click', '.step1declineBtn', function(event){
                 if (status == 'success') {
                     table = $('#datatable').DataTable();
                     table.draw();
-                    alert('Step 1 Declined Successfully!');
+                    $('#declinemodal').modal('show');
                     document.getElementById("step1a").hidden = true;
                     document.getElementById("step1d").hidden = true;
 
@@ -779,6 +785,7 @@ $(document).on('click', '.step1declineBtn', function(event){
                     //$('#_itemdesc_').text('');
                     $('#_step1').val('Declined');
                     $('#_statustext').val('Declined');
+                    $('#editMinorjreqmodal').modal('hide');
                 } else { 
                     alert('failed');
                 }

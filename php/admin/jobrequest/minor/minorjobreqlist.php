@@ -256,6 +256,34 @@ require_once('../../../authentication/anti_pagetrans.php');
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="col-md-12">
+                                        <div class="alert1" id="alert1" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId1">Please fill in required fields</strong>
+                                        </div>
+                                    </div>
+                                        <style>
+                                            .alert1 {
+                                            padding: 20px;
+                                            background-color: red;
+                                            color: white;
+                                            }
+
+                                            .cbtn {
+                                            margin-left: 15px;
+                                            color: white;
+                                            font-weight: bold;
+                                            float: right;
+                                            font-size: 22px;
+                                            line-height: 20px;
+                                            cursor: pointer;
+                                            transition: 0.3s;
+                                            }
+
+                                            .cbtn:hover {
+                                            color: black;
+                                            }
+                                        </style>
                 <div class="modal-body ">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
@@ -459,6 +487,43 @@ require_once('../../../authentication/anti_pagetrans.php');
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="col-md-12">
+                                        <div class="alert2" id="alert2" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId2"></strong>
+                                        </div>
+                                        <div class="alert3" id="alert3" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId3"></strong>
+                                        </div>
+                                    </div>
+                                        <style>
+                                            .alert2 {
+                                            padding: 20px;
+                                            background-color: red;
+                                            color: white;
+                                            }
+                                            .alert3 {
+                                            padding: 20px;
+                                            background-color: red;
+                                            color: white;
+                                            }
+
+                                            .cbtn {
+                                            margin-left: 15px;
+                                            color: white;
+                                            font-weight: bold;
+                                            float: right;
+                                            font-size: 22px;
+                                            line-height: 20px;
+                                            cursor: pointer;
+                                            transition: 0.3s;
+                                            }
+
+                                            .cbtn:hover {
+                                            color: black;
+                                            }
+                                        </style>
                 <div class="modal-body">
                     <form id="updateUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
@@ -799,6 +864,45 @@ require_once('../../../authentication/anti_pagetrans.php');
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="close-modal">No</button>
                     <button type="button" class="btn btn-danger">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="approvedmodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully approved Minor Job request</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="declinemodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully declined Minor Job request</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="updateform">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully updated Minor Job request</p>
                 </div>
             </div>
         </div>
