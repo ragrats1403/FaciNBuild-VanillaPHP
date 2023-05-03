@@ -477,13 +477,23 @@ require_once('../../authentication/anti_pagetrans.php');
                         </div>
                         <div class="alert2" id="alert2" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                            <strong id = "strongId">Warning!</strong> Someone is using the facility within that time! Check Calendar of Activities for approved schedules. 
+                            <strong id = "strongId1"></strong>
+                        </div>
+                        <div class="alert3" id="alert3" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
+                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                            <strong id = "strongId2">Warning!</strong> Someone is using the facility within that time! Check Calendar of Activities for approved schedules.
                         </div>
                 </div>
                     <style>
                         .alert1 {
                         padding: 20px;
                         background-color: green;
+                        color: white;
+                        }
+                        
+                        .alert2 {
+                        padding: 20px;
+                        background-color: red;
                         color: white;
                         }
 
@@ -517,9 +527,7 @@ require_once('../../authentication/anti_pagetrans.php');
                                     var x = document.getElementById("alert1");
                                     x.style.display = "none";    
                                     var a = document.getElementById("alert2");
-                                    a.style.display = "none";
-                                    var ab = document.getElementById("alert3");
-                                    b.style.display = "none";                                   
+                                    a.style.display = "none";                                 
                                 });
                     </script>
                 <div class="modal-body ">
