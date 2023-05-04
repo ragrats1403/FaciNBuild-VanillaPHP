@@ -1089,23 +1089,6 @@ require_once('../../../authentication/anti_pagetrans.php');
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
             document.getElementById('deeto').value = now.toISOString().slice(0,16);
         
-            $("#printmodal").on("hide.bs.modal", function () {
-                    const myNode =  document.getElementById('container2');
-                    while (myNode.firstChild) {
-                    myNode.removeChild(myNode.lastChild);
-                    }
-                        $('#testtable').DataTable().clear().destroy();
-                                        $("#quantity1").val("");
-                                        $("#quantity2").val("");
-                                        $("#quantity3").val("");
-                                        $("#quantity4").val("");
-                                        $("#quantity5").val("");
-                                        $("#description1").val("");
-                                        $("#itemdesc2").val("");
-                                        $("#itemdesc3").val("");
-                                        $("#itemdesc4").val("");
-                                        $("#itemdesc5").val("");
-                });
     </script>
     <!-- Script Process End-->
     <!-- add user modal-->
@@ -1760,6 +1743,11 @@ require_once('../../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
+    <script>
+        $('#printmodal').on('hidden.bs.modal', function () {
+        $('textarea').val(''); // clear all textareas
+        });
+    </script>
     <div class="modal fade" id="deletemodal">
         <div class="modal-dialog ">
             <div class="modal-content ">

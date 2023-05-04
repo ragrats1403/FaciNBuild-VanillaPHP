@@ -349,47 +349,90 @@
             var department = $('#depart').val();
             var date = $('#deeto').val();
             var quantity = $('#quan').val();
-            var item = $('#ite').val();
             var description = $('#desc').val();
             var purpose = $('#purp').val();
+            var requestby = $('#req').val();
+            var departmenthead = $('#dephead').val();
 
-            if (department != '' && date != '' && quantity != '' && item != '' && description != '' && purpose != '') {
-                $.ajax({
-                    url: "functions/add_data.php",
-                    data: {
+            if (department != '' && date != '' && quantity != '' && requestby != '' && description != '' && purpose != '' && departmenthead != '') {
+        $.ajax({
+                url: "add_data.php",
+                data: {
                         requino: requino,
                         department: department,
                         date: date,
                         quantity: quantity,
-                        item: item,
                         description: description,
                         purpose: purpose,
-                    },
-                    type: 'POST',
-                    success: function(data) {
-                        var json = JSON.parse(data);
-                        status = json.status;
-                        if (status = 'success') {
-                            table = $('#datatable').DataTable();
-                            table.draw();
-                            alert('Successfully Added Request!');
+                        requestby: requestby,
+                        departmenthead: departmenthead,
+                
+            },
+            type: 'POST',
+            success: function(data) {
+                var json = JSON.parse(data);
+                status = json.status;
+                if (status = 'success') {
+                    table = $('#datatable').DataTable();
+                    table.draw();
+                    alert('Successfully Requested Job Request!');
                             $('#requi').val('');
-                            $('#depart').val('');
-                            $('#deeto').val('');
                             $('#quan').val('');
-                            $('#ite').val('');
                             $('#desc').val('');
                             $('#purp').val('');
-                            $('#addUserModal').modal('hide');
-                            $('body').removeClass('modal-open');
-                            $('.modal-backdrop').remove();
+                            $('#req').val('');
+                            $('#dephead').val('');
+                            var loopnum = $('#numForms').val();
+                            if(loopnum > 1)
+                            {
+                                for(var i = 1; i<loopnum; i++)
+                                {
+                                    var iterate = i+1
+                                    var quantityid = "_quantity_" + iterate;
+                                    var itemdescid = "_itemdesc_" + iterate;
+                                    var exquantity = document.getElementById(quantityid).value;
+                                    var exitemdesc = document.getElementById(itemdescid).value;
+                                    console.log(quantityid);
+                                    console.log(itemdescid);
+                                    $.ajax({
+                                            url: "addmultidata.php",
+                                            data: {
+                                                department: department,
+                                                date: date,
+                                                quantity: exquantity,
+                                                requestedby: requestby,
+                                                description: exitemdesc,
+                                                purpose: purpose,
+                                                multinum: iterate,
+                                                departmenthead: departmenthead,
+                                    
+                                            },
+                                            type: 'POST',
+                                            success: function(data) {
+                                                $('#_quantity_2').val('');
+                                                $('#_itemdesc_2').val('');
+                                                $('#_quantity_3').val('');
+                                                $('#_itemdesc_3').val('');
+                                                $('#_quantity_4').val('');
+                                                $('#_itemdesc_4').val('');
+                                                $('#_quantity_5').val('');
+                                                $('#_itemdesc_5').val('');
+                                            }
+                                        });
+                            }
+                            
+                            document.getElementById("savechange").disabled = false;
+                            
                         }
-                    }
-                });
-            } else {
-                alert("Please fill all the Required fields");
+
+
+                }
             }
         });
+    } else {
+        alert("Please fill all the Required fields");
+    }
+});
 
 
         $(document).on('click', '.btnDelete', function(event) {
@@ -1059,20 +1102,9 @@
                                 </div>
                             </div>
                             <script>
-                                $(document).on('click', '.editfieldBtn', function(event) {
-                                    var updtbtn = document.getElementById("updbtn");
-                                    document.getElementById("quantity").disabled = false;
-                                    document.getElementById("item").disabled = false;
-                                    document.getElementById("description").disabled = false;
-                                    document.getElementById("purpose").disabled = false;
-                                    document.getElementById("remark").disabled = false;
-                                    document.getElementById("sections").disabled = false;
-                                    document.getElementById("_inputFeedback").disabled = false;
-
-
-                                    updtbtn.classList.remove("disabled");
-                                    updtbtn.classList.remove("text-white");
-
+                                $('#printmodal').on('hidden.bs.modal', function () {
+                                $('textarea').val(''); // clear all textareas
+                                location.reload(); // reload the page
                                 });
                             </script>
                         </div>
@@ -1255,6 +1287,11 @@
             </div>
         </div>
     </div>
+    <script>
+        $('#printmodal').on('hidden.bs.modal', function () {
+        $('textarea').val(''); // clear all textareas
+        });
+    </script>
     <div class="modal fade" id="deletemodal">
         <div class="modal-dialog ">
             <div class="modal-content ">

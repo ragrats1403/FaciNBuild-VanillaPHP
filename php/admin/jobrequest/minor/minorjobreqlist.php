@@ -851,6 +851,27 @@ require_once('../../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
+    <script>
+        $('#printmodal').on('hidden.bs.modal', function () {
+        $('textarea').val(''); // clear all textareas
+        });
+    </script>
+    <script>
+        function printContent() {
+            var printReport = document.getElementsByClassName("print-area");
+
+            $('body').append('<div id="print" class="printBc"></div>');
+            $(printReport).clone().appendTo('#print');
+
+            $('body').css('background-color', 'white');
+            $('body > :not(#print)').addClass('no-print-area');
+            window.print();
+
+            $('#print').remove();
+            $('body').css('background-color', '');
+            $('body > :not(#print)').removeClass('no-print-area');
+        };
+    </script>
     <div class="modal fade" id="deletemodal">
         <div class="modal-dialog ">
             <div class="modal-content ">

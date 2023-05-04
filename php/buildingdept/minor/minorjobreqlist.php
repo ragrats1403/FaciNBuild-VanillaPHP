@@ -619,6 +619,11 @@ require_once('../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
+    <script>
+        $('#printmodal').on('hidden.bs.modal', function () {
+        $('textarea').val(''); // clear all textareas
+        });
+    </script>
     <div class="modal fade" id="deletemodal">
         <div class="modal-dialog ">
             <div class="modal-content ">
