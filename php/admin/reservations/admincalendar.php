@@ -9,22 +9,23 @@ require_once('../../authentication/anti_pagetrans.php');
     <title>Calendar of Activities</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <link type="text/css" href="../../../dependencies/bootstrap/css/bootstrap.min.css?<?= time() ?>" rel="stylesheet">
+    <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.css" />-->
     <link rel="stylesheet" type="text/css" href="../../../dependencies/datatables/datatables.min.css?<?= time() ?>" />
-    <link rel="stylesheet" type="text/css" href="../../../css/sidebar.css?<?= time() ?>">
-    <link rel="stylesheet" type="text/css" href="../../../css/header.css?<?= time() ?>">
-    <link rel="stylesheet" type="text/css" href="../../../css/body.css?<?= time() ?>">
-    <link rel="stylesheet" type="text/css" href="../../../css/admin/adminaccount.css?<?= time() ?>" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/sidebar.css?<?= time() ?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/header.css?<?= time() ?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/body.css?<?= time() ?>">
+    <link rel="stylesheet" type="text/css" href="../../../../css/admin/adminaccount.css?<?= time() ?>" />
+    <!--<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>-->
     <link href='../../../dependencies/boxicons/css/boxicons.min.css?<?= time() ?>' rel='stylesheet'>
-
 </head>
 
 <header class="shadow">
     <div class="imgctrl">
-
     </div>
     <div class="navplace">
-    <div class="dropdown">
+        <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="notification-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; border: none;">
                 <i class='bx bxs-bell' style='color:#ffffff'></i>
                 <span class="icon-button__badge"></span>
@@ -62,7 +63,6 @@ require_once('../../authentication/anti_pagetrans.php');
                     success: function(data) {
                         var notifications = JSON.parse(data);
                         var len = notifications.length;
-                        
                         // Update the badge count
                         notificationBadge.innerText = notifications.length;
 
@@ -139,10 +139,11 @@ require_once('../../authentication/anti_pagetrans.php');
     </div>
     <nav class="gnav">
     </nav>
+    </div>
 </header>
 
-<body onload = "onfilterchk();">
-<div class="sidebar">
+<body onload="fetchNotifications();">
+    <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
                 <img src="../../../images/Black_logo.png" />
@@ -189,6 +190,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     </a>
                 </li>
             </ul>
+
             <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
@@ -206,6 +208,7 @@ require_once('../../authentication/anti_pagetrans.php');
         </div>
     </div>
     <div class="table1">
+
         <div class="container-fluid">
             <div class="row">
                 <div class="container">
@@ -213,56 +216,6 @@ require_once('../../authentication/anti_pagetrans.php');
                         <div class="col-sm-12 shadow" style="width: 100%; background-color: #FFF;  padding-top: 100px; padding-left:50px; padding-right:50px; padding-bottom:50px; ">
                             <!-- padding-left:50px; padding-right:50px; padding-bottom:50px;-->
                             <h2 style="text-align: center">CALENDAR OF ACTIVITIES</h2>
-                            <div class="col-md-3">
-                                <input class="form-check-input" type="checkbox" id="facilityfilterchk" onclick="" onchange = "onfilterchk();">
-                                <label class="form-check-label" >Filter By Facility</label>
-                            </div>
-                            <div class="col-md-3">
-                                <select class="form-control input-sm col-xs-1" name="sections" id="faci" onchange="onfilterchk();" disabled>
-                                        <option disabled selected value hidden> -- Select Facility -- </option>
-                                            select = document.getElementById("faci");
-                                            <?php include('../../connection/connection.php');
-                                            $sql = "SELECT facilityname FROM facility";
-                                            $query = mysqli_query($con, $sql);
-                                            $i = 1;
-                                            while ($row = mysqli_fetch_assoc($query)) {
-                                                    echo "<option value=$i>" . $row["facilityname"] . "</option>";
-                                                    $i++;
-                                                }
-                                            ?>
-                                    </select>
-                            </div>
-                            <script>
-                                function onfilterchk()
-                                {
-                                    var chkbox = document.getElementById("facilityfilterchk");
-                                    var filter = document.getElementById("faci");
-                                    var filterval = filter.options[filter.selectedIndex].text;
-                                    if(chkbox.checked !== true)
-                                    {
-                                        $('#calendar').DataTable().clear().destroy();
-                                        filter.disabled = true;
-                                        fetchalldata();
-                                    }
-                                    else
-                                    {
-                                        if(filterval == " -- Select Facility -- ")
-                                        {
-                                            $('#calendar').DataTable().clear().destroy();
-                                            filter.disabled = false;
-                                            fetchalldata();
-                                        }
-                                        else
-                                        {
-                                            $('#calendar').DataTable().clear().destroy();
-                                            filter.disabled = false;
-                                            filtereddata(filterval);
-                                        }
-                                        
-                                    }
-                                }
-                                
-                            </script>
                             <table id="calendar" class="table">
                                 <thead>
                                     <th>Event Name</th>
@@ -280,13 +233,14 @@ require_once('../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
+    <!--<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>-->
     <script src="../../../dependencies/jquery/jquery-3.6.4.min.js"></script>
+    <!--<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.13.1/datatables.min.js"></script>-->
     <script type="text/javascript" src="../../../dependencies/datatables/datatables.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
     <script src="../../../dependencies/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
-        function fetchalldata()
-        {
-            $("#calendar").DataTable({
+        $("#calendar").DataTable({
             'searching': false,
             'autoWidth': false,
             'bJQueryUI': true,
@@ -294,8 +248,8 @@ require_once('../../authentication/anti_pagetrans.php');
             'serverSide': true,
             'processing': true,
             'paging': true,
-            'order': [],
             'responsive': true,
+            'order': [],
             'ajax': {
                 'url': "../dfunctions/fetch_data.php",
                 'type': "post",
@@ -320,58 +274,10 @@ require_once('../../authentication/anti_pagetrans.php');
             } 
             ],
             scrollY: 670,
-            'scrollCollapse': false,
+            'scrollCollapse': true,
             'paging': false,
         });
-        }
-
-        function filtereddata(facility)
-        {
-            var faci = facility;
-            $("#calendar").DataTable({
-            'searching': false,
-            'autoWidth': false,
-            'bJQueryUI': true,
-            'info': false,
-            'serverSide': true,
-            'processing': true,
-            'paging': true,
-            'order': [],
-            'responsive': true,
-            'ajax': {
-                'url': "../dfunctions/fetchwfilter.php",
-                'type': "post",
-                'data': {
-                    facility: faci,
-                },
-            },
-            fnCreatedRow: function(nRow, aData, iDataIndex) {
-                $(nRow).attr("id", aData[0]);
-                if (aData[6] === 'Approved') {
-                    $(nRow).css('background-color', '#a7d9ae');
-                }
-                if (aData[5] === 'Approved' && aData[6] === 'Pending') {
-                    //$(nRow).css('background-color', '#d9d2a7');//yellow
-                    $(nRow).css('background-color', '#89afcc');
-                }
-            },
-            'columnDefs': [{
-                target: 5,
-                visible: false,
-            },
-            {
-                target: 6,
-                visible: false,
-            } 
-            ],
-            scrollY: 670,
-            'scrollCollapse': false,
-            'paging': false,
-        });
-        }
-        
     </script>
-
 </body>
 
 </html>

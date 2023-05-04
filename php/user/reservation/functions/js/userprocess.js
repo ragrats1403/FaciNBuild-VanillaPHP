@@ -277,8 +277,8 @@ $(document).on("click", ".submitBtn", function (event) {
                       },
                     });
                   } else {
-                    $('#alert4').css('display', 'block');
-                    $('#strongId3').html('Please fill all the Required fields');	
+                    $('#alert5').css('display', 'block');
+                    $('#strongId5').html('Please fill all the Required fields');	
                     document.getElementById("termscond-create").disabled = false;
                   }
               }
@@ -417,8 +417,8 @@ $(document).on("click", ".submitBtn", function (event) {
                     },
                   });
                 } else {
-                  $('#alert4').css('display', 'block');
-                  $('#strongId3').html('Please fill all the Required fields');	
+                  $('#alert5').css('display', 'block');
+                  $('#strongId5').html('Please fill all the Required fields');	
                   document.getElementById("termscond-create").disabled = false;
                 }
             }

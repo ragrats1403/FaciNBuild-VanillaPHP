@@ -479,9 +479,9 @@ require_once('../../authentication/anti_pagetrans.php');
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                             <strong id = "strongId1"></strong>
                         </div>
-                        <div class="alert4" id="alert4" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
+                        <div class="alert5" id="alert5" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                            <strong id = "strongId3">Someone is using the facility within that time! Check Calendar of Activities for approved schedules.</strong>
+                            <strong id = "strongId5">Someone is using the facility within that time! Check Calendar of Activities for approved schedules.</strong>
                         </div>
                 </div>
                     <style>
