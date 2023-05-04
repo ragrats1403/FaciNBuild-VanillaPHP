@@ -414,14 +414,14 @@ require_once('../../authentication/anti_pagetrans.php');
 
                 if (majorChecked && !minorChecked) {
                     header = document.getElementById("headerDiv").innerHTML;
-                    printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("majorDiv").innerHTML + "</div>";
+                    printContents += "<div style='position:absolute; left: -200px; margin-bottom: 50px; text-align: center;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("majorDiv").innerHTML + "</div>";
                 } else if (minorChecked && !majorChecked) {
                     header = document.getElementById("headerDiv").innerHTML;
-                    printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("minorDiv").innerHTML + "</div>";
+                    printContents += "<div style='position:absolute; left: -200px; margin-bottom: 50px; text-align: center;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("minorDiv").innerHTML + "</div>";
                 } else if (minorChecked && majorChecked) {
                     header = document.getElementById("headerDiv").innerHTML;
-                    printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("minorDiv").innerHTML + document.getElementById("majorDiv").innerHTML + "</div>";
-                }       
+                    printContents += "<div style='position:absolute; left: -200px; margin-bottom: 50px; text-align: center;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("minorDiv").innerHTML + document.getElementById("majorDiv").innerHTML + "</div>";
+                }
 
                 var originalContents = document.body.innerHTML;
                 document.body.innerHTML = printContents;
