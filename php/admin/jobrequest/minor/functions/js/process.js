@@ -125,7 +125,7 @@ $(document).on('submit', '#saveUserForm', function(event) {
                 if (status = 'success') {
                     table = $('#datatable').DataTable();
                     table.draw();
-                    $('#approvedmodal').modal('show');
+                    $('#createdmodal').modal('show');
                     $('#_quantity_').val('');
                     $('#_item_').val('');
                     $('#_itemdesc_').val('');

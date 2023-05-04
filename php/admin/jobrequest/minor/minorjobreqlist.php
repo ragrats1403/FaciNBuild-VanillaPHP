@@ -889,6 +889,19 @@ require_once('../../../authentication/anti_pagetrans.php');
             </div>
         </div>
     </div>
+    <div class="modal fade" id="createdmodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully Created Minor Job request</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="approvedmodal">
         <div class="modal-dialog ">
             <div class="modal-content ">
