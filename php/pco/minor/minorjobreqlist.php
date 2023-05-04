@@ -602,7 +602,8 @@ $('#datatable').DataTable({
 
                                         if(num <= 5 && num >= 2)
                                         {
-                                            myFunctionPrompt(num);
+                                            var divid = num+"_";
+                                            myFunctionPrompt(divid);
                                             var newnum = num - 1;
                                             $('#numForms').val(newnum);
                                         }
@@ -621,7 +622,8 @@ $('#datatable').DataTable({
                                         {
                                             var newnum = parseInt(num) + 1;
                                             $('#numForms').val(newnum);
-                                            myFunctionPrompt(newnum);
+                                            var divid = newnum+"_";
+                                            myFunctionPrompt(divid);
                                         }
                                         else
                                         {
@@ -653,7 +655,7 @@ $('#datatable').DataTable({
                                 </div>
                             </div>
                             
-                            <div class = "2" style= "display:none;" id="2">
+                            <div class = "2" style= "display:none;" id="2_">
                             <hr class="solid">
                                     <div class="justify-content-center">                                 
                                         <div class="col-md-2" style="padding-bottom:10px">
@@ -670,7 +672,7 @@ $('#datatable').DataTable({
                                     </div>
                             <hr class="solid">
                             </div>
-                            <div class = "3" style= "display:none;" id="3">
+                            <div class = "3" style= "display:none;" id="3_">
                                     <div class="justify-content-center">                                 
                                         <div class="col-md-2" style="padding-bottom:10px">
                                             <label class="fw-bold" for="date">Quantity:</label>
@@ -685,7 +687,7 @@ $('#datatable').DataTable({
                                 </div>
                                 <hr class="solid">
                             </div>
-                            <div class = "4" style= "display:none;" id="4">
+                            <div class = "4" style= "display:none;" id="4_">
                                     <div class="justify-content-center">                                 
                                         <div class="col-md-2" style="padding-bottom:10px">
                                             <label class="fw-bold" for="date">Quantity:</label>
@@ -700,7 +702,7 @@ $('#datatable').DataTable({
                                 </div>
                                 <hr class="solid">
                             </div>
-                            <div class = "5" style= "display:none;" id="5">
+                            <div class = "5" style= "display:none;" id="5_">
                                     <div class="justify-content-center">                                 
                                         <div class="col-md-2" style="padding-bottom:10px">
                                             <label class="fw-bold" for="date">Quantity:</label>
