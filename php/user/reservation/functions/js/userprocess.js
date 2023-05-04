@@ -154,7 +154,7 @@ $(document).on("click", ".submitBtn", function (event) {
               if (result) {
                   // Handle case where there is a conflict
                   //alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
-                  myFunctionPrompt("alert2");
+                  myFunctionPrompt("alert4");
                   $('#reserModal').scrollTop(0);
                   document.getElementById("termscond-create").disabled = false;
               } else {
