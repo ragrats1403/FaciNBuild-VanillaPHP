@@ -343,12 +343,14 @@ require_once('../../authentication/anti_pagetrans.php');
                             <div class="col-md-2">
                                 <button class="btn btn-info" onclick="printDiv()">Print</button>
                             </div>
-
-                            <div id="headerDiv" style="display: none; width: 100%;">
+                            <div class="col-sm-12 d-flex justify-content-end">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#printmodal">Create Major Job Request</button>
+                            </div>
+                            <div id="headerDiv" style="display: none; width: 100px; height:500px;">
                                 <div class="col-auto">
                                     <img src="../../../../images/ucbanner.jpg" class="img-fluid" alt="Responsive image">
-                                </div>
-                            </div>  
+                                </div>  
+                            </div>                  
                             <div id="catch" style="display: none;">
                                 <label class="fw-bold">ㅤ</label>
                             </div>
@@ -415,13 +417,13 @@ require_once('../../authentication/anti_pagetrans.php');
 
                 if (majorChecked && !minorChecked) {
                     header = document.getElementById("headerDiv").innerHTML;
-                    printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("majorDiv").innerHTML + "</div>";
+                    printContents += "<div style='position:absolute; left: -200px; margin-bottom: 50px; text-align: center;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("majorDiv").innerHTML + "</div>";
                 } else if (minorChecked && !majorChecked) {
                     header = document.getElementById("headerDiv").innerHTML;
-                    printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("minorDiv").innerHTML + "</div>";
+                    printContents += "<div style='position:absolute; left: -200px; margin-bottom: 50px; text-align: center;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("minorDiv").innerHTML + "</div>";
                 } else if (minorChecked && majorChecked) {
                     header = document.getElementById("headerDiv").innerHTML;
-                    printContents += "<div style='position: relative; left: -200px; margin-bottom: 50px;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("minorDiv").innerHTML + document.getElementById("majorDiv").innerHTML + "</div>";
+                    printContents += "<div style='position:absolute; left: -200px; margin-bottom: 50px; text-align: center;'>" + header + document.getElementById("catch").innerHTML + document.getElementById("minorDiv").innerHTML + document.getElementById("majorDiv").innerHTML + "</div>";
                 }
 
                 var originalContents = document.body.innerHTML;
