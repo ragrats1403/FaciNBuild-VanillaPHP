@@ -510,12 +510,11 @@ require_once('../../authentication/anti_pagetrans.php');
                     if (status == 'success') {
                         table = $('#datatable').DataTable();
                         table.draw();
-                        alert('Step 2 Declined Successfully!');
+                        $('#declinemodal').modal('show');
                         $('#_step2').val('Declined');
                         $('#_statustext').val('Declined');
                         $('#editUserModal').modal('hide');
                         $('body').removeClass('modal-open');
-                        $('.modal-backdrop').remove();
 
                     } else {
                         alert('failed');
@@ -525,7 +524,9 @@ require_once('../../authentication/anti_pagetrans.php');
             }
             else
             {
-                return null;
+                $('#editUserModal').scrollTop(0);
+                $('#alert1').css('display', 'block');
+                $('#strongId').html('Please add feedback before declining');  
             }
             
         });

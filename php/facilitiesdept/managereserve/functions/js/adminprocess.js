@@ -665,9 +665,7 @@ $(document).on('click', '.step1declineBtn', function(event){
           if (status == 'success') {
               table = $('#datatable').DataTable();
               table.draw();
-              alert('Step 1 Declined Successfully!');
-
-          
+              $('#declinemodal').modal('show');
               /*table = $('#datatable').DataTable();
               var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
               var row = table.row("[id='" + trid + "']");
@@ -677,7 +675,6 @@ $(document).on('click', '.step1declineBtn', function(event){
               $('#_step1').val('Declined');
               $('#test').modal('hide');
               $('body').removeClass('modal-open');
-              $('.modal-backdrop').remove();
           } else { 
               alert('failed');
           }
