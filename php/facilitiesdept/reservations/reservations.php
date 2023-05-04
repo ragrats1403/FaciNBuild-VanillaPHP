@@ -54,7 +54,7 @@ require_once('../../authentication/anti_pagetrans.php');
                 // Make an AJAX request to fetch the notifications
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "functions/notification.php",
+                    url: "../reservations/functions/notification.php",
                     data: {
                         department: department,
                     },
@@ -114,7 +114,7 @@ require_once('../../authentication/anti_pagetrans.php');
             markAsReadButton.addEventListener("click", function(event) {
                 var department = "<?php echo $_SESSION['department']; ?>";
                 $.ajax({
-                    url: "functions/update_notification.php",
+                    url: "../reservations/functions/update_notification.php",
                     type: 'POST',
                     data: {
                         department: department,
@@ -490,9 +490,9 @@ require_once('../../authentication/anti_pagetrans.php');
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                             <strong id = "strongId1"></strong>
                         </div>
-                        <div class="alert3" id="alert3" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
+                        <div class="alert4" id="alert4" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                            <strong id = "strongId2">Warning!</strong> Someone is using the facility within that time! Check Calendar of Activities for approved schedules.
+                            <strong id = "strongId3">Someone is using the facility within that time! Check Calendar of Activities for approved schedules.</strong>
                         </div>
                 </div>
                     <style>
@@ -503,6 +503,11 @@ require_once('../../authentication/anti_pagetrans.php');
                         }
                         
                         .alert2 {
+                        padding: 20px;
+                        background-color: red;
+                        color: white;
+                        }
+                        .alert4 {
                         padding: 20px;
                         background-color: red;
                         color: white;

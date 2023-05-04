@@ -160,16 +160,16 @@ require_once('../../authentication/anti_pagetrans.php');
                 <li>
                     <div class="dropdown">
                         <i class='bx bx-clipboard' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             Manage Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
+                            <a class="dropdown-item" href="/../../../php/pco/major/majorjobreqlist.php">Major Job Request</a>
                         </ul>
                     </div>
                     <div class="dropdown">
                         <i class='bx bx-notepad' style="margin-left:17px;"></i>
-                        <button class="btn dropdown-toggle" style="box-shadow: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn dropdown-toggle" style="box-shadow: none;"type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             View/Create Request
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -179,7 +179,7 @@ require_once('../../authentication/anti_pagetrans.php');
                         </ul>
                     </div>
                 </li>
-            </ul> 
+            </ul>
             <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
@@ -484,9 +484,9 @@ require_once('../../authentication/anti_pagetrans.php');
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                             <strong id = "strongId1"></strong>
                         </div>
-                        <div class="alert3" id="alert3" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
+                        <div class="alert4" id="alert4" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                            <strong id = "strongId2">Warning!</strong> Someone is using the facility within that time! Check Calendar of Activities for approved schedules.
+                            <strong id = "strongId3">Someone is using the facility within that time! Check Calendar of Activities for approved schedules.</strong>
                         </div>
                 </div>
                     <style>
@@ -497,6 +497,11 @@ require_once('../../authentication/anti_pagetrans.php');
                         }
                         
                         .alert2 {
+                        padding: 20px;
+                        background-color: red;
+                        color: white;
+                        }
+                        .alert4 {
                         padding: 20px;
                         background-color: red;
                         color: white;

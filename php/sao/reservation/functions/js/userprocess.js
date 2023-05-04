@@ -154,7 +154,7 @@ $(document).on("click", ".submitBtn", function (event) {
               if (result) {
                   // Handle case where there is a conflict
                   //alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
-                  myFunctionPrompt("alert2");
+                  myFunctionPrompt("alert4");
                   $('#reserModal').scrollTop(0);
                   document.getElementById("termscond-create").disabled = false;
               } else {
@@ -277,7 +277,8 @@ $(document).on("click", ".submitBtn", function (event) {
                       },
                     });
                   } else {
-                    alert("Please fill all the Required fields");
+                    $('#alert4').css('display', 'block');
+                    $('#strongId3').html('Please fill all the Required fields');	
                     document.getElementById("termscond-create").disabled = false;
                   }
               }
@@ -291,7 +292,8 @@ $(document).on("click", ".submitBtn", function (event) {
             if (result) {
                 // Handle case where there is a conflict
                 //alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
-                myFunctionPrompt("alert2");
+                $('#alert4').css('display', 'block');
+                $('#strongId3').html('Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules.');	
                 $('#reserModal').scrollTop(0);
                 document.getElementById("termscond-create").disabled = false;
             } else {
@@ -415,7 +417,8 @@ $(document).on("click", ".submitBtn", function (event) {
                     },
                   });
                 } else {
-                  alert("Please fill all the Required fields");
+                  $('#alert4').css('display', 'block');
+                  $('#strongId3').html('Please fill all the Required fields');	
                   document.getElementById("termscond-create").disabled = false;
                 }
             }
