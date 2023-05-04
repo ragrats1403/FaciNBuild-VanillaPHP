@@ -267,6 +267,76 @@ require_once('../../authentication/anti_pagetrans.php');
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModalforInfo()"></button>
                     
             </div>
+            <div class="col-md-12">
+                    <div class="alert6" id="alert6" style = "display:none; width: 100%;background-color: #008000; padding: 20px; color: white;" >
+                        <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        <strong id = "strongId6"></strong>
+                    </div>
+                    <div class="alert7" id="alert7" style = "display:none; width: 100%;background-color: #ff0000; padding: 20px; color: white;" >
+                        <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                        <strong id = "strongId7"></strong>
+                    </div>
+                </div>
+                    <style>
+                        .alert1 {
+                        padding: 20px;
+                        background-color: green;
+                        color: white;
+                        }
+                        
+                        .alert2 {
+                        padding: 20px;
+                        background-color: red;
+                        color: white;
+                        }
+                        .alert4 {
+                        padding: 20px;
+                        background-color: green;
+                        color: white;
+                        }
+                        .alert4 {
+                        padding: 20px;
+                        background-color: green;
+                        color: white;
+                        }
+
+                        .cbtn {
+                        margin-left: 15px;
+                        color: white;
+                        font-weight: bold;
+                        float: right;
+                        font-size: 22px;
+                        line-height: 20px;
+                        cursor: pointer;
+                        transition: 0.3s;
+                        }
+
+                        .cbtn:hover {
+                        color: black;
+                        }
+                    </style>
+                    <script>
+                        //add ons click
+                            function myFunctionPrompt(divID) {
+                            var x = document.getElementById(divID);
+                            if (x.style.display === "block") {
+                                x.style.display = "none";
+                            } else {
+                                x.style.display = "block";
+                            }
+                            }
+
+                            $("#reserModal").on("hidden.bs.modal", function () {
+                                    var x = document.getElementById("alert1");
+                                    x.style.display = "none";    
+                                    var a = document.getElementById("alert2");
+                                    a.style.display = "none";      
+                                    var a = document.getElementById("alert5");
+                                    a.style.display = "none";      
+                                    var a = document.getElementById("alert6");
+                                    a.style.display = "none";                          
+                                });
+                    </script>
             
                 <div class="modal-body ">
                     <form action="">
@@ -550,9 +620,13 @@ require_once('../../authentication/anti_pagetrans.php');
                     <h5 class="modal-title text-uppercase fw-bold" id="exampleModalLabel">Reservation Form</h5>
                 </div>
                 <div class="col-md-12">
+                    <div class="alert5" id="alert5" style = "display:none; width: 100%;background-color: #008000; padding: 20px; color: white;">
+                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                            <strong id = "strongId5">Success! </strong>Successfully submitted reservation request!
+                        </div>
                     <div class="alert1" id="alert1" style = "display:none; width: 100%;">
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                            <strong id = "strongId1"></strong>
+                            <strong id = "strongId">Success!</strong> Successfully submitted reservation request!
                         </div>
                         <div class="alert2" id="alert2" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
@@ -561,6 +635,10 @@ require_once('../../authentication/anti_pagetrans.php');
                         <div class="alert4" id="alert4" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                             <strong id = "strongId3">Someone is using the facility within that time! Check Calendar of Activities for approved schedules.</strong>
+                        </div>
+                        <div class="alert6" id="alert6" style = "display:none; width: 100%;background-color: #008000; padding: 20px; color: white;" >
+                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                            <strong id = "strongId6">Step 1 Approved Successfully!</strong>
                         </div>
                 </div>
                     <style>
@@ -577,7 +655,12 @@ require_once('../../authentication/anti_pagetrans.php');
                         }
                         .alert4 {
                         padding: 20px;
-                        background-color: red;
+                        background-color: green;
+                        color: white;
+                        }
+                        .alert4 {
+                        padding: 20px;
+                        background-color: green;
                         color: white;
                         }
 
@@ -611,7 +694,11 @@ require_once('../../authentication/anti_pagetrans.php');
                                     var x = document.getElementById("alert1");
                                     x.style.display = "none";    
                                     var a = document.getElementById("alert2");
-                                    a.style.display = "none";                                 
+                                    a.style.display = "none";      
+                                    var a = document.getElementById("alert5");
+                                    a.style.display = "none";      
+                                    var a = document.getElementById("alert6");
+                                    a.style.display = "none";                          
                                 });
                     </script>
                 <div class="modal-body ">

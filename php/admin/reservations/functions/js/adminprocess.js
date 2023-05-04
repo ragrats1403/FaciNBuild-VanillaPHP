@@ -577,12 +577,12 @@ $(document).on("click", ".submitBtn", function (event) {
   document.getElementById("termscond-create").disabled = true;
   var chkbx = document.getElementById("flexCheckDefault");
 
-
   var faci = e.options[e.selectedIndex].text;
     if(computedaysdiff(datefiled, actualdate) <= 4 )
     {
       var computeval = computedaysdiff(datefiled, actualdate);
-      alert("Please Note that you need to reserve 5 days before the desired reservation day\nReservation Day(s) Count:"+computeval+" Day(s) Away.");
+      $('#alert2').css('display', 'block');
+      $('#strongId1').html("Please Note that you need to reserve 5 days before the desired reservation day\nReservation Day(s) Count:"+computeval+" Day(s) Away.");
     }
     else
     {
@@ -595,7 +595,9 @@ $(document).on("click", ".submitBtn", function (event) {
               // Do something with the result, which will be a boolean value
               if (result) {
                   // Handle case where there is a conflict
-                  alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
+                  //alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
+                  myFunctionPrompt("alert4");
+                  $('#reserModal').scrollTop(0);
                   document.getElementById("termscond-create").disabled = false;
               } else {
                   // Handle case where there is no conflict
@@ -709,17 +711,17 @@ $(document).on("click", ".submitBtn", function (event) {
                           //update table list
                           table = $("#datatable").DataTable();
                           table.draw();
-                          alert("Successfully Requested Reservation!");
-                          $("#reserModal").modal("hide");
+                          myFunctionPrompt("alert1");
+                          alert("test");
+                          $('#reserModal').scrollTop(0);
                           //force remove faded background  -Ragrats
-                          $("body").removeClass("modal-open");
-                          $(".modal-backdrop").remove();
                           document.getElementById("termscond-create").disabled = false;
                         }
                       },
                     });
                   } else {
-                    alert("Please fill all the Required fields");
+                    $('#alert4').css('display', 'block');
+                    $('#strongId3').html('Please fill all the Required fields');	
                     document.getElementById("termscond-create").disabled = false;
                   }
               }
@@ -732,7 +734,10 @@ $(document).on("click", ".submitBtn", function (event) {
             document.getElementById("termscond-create").disabled = true;
             if (result) {
                 // Handle case where there is a conflict
-                alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
+                //alert("Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules. ");
+                $('#alert4').css('display', 'block');
+                $('#strongId3').html('Someone is using the facility within that time! \nCheck Calendar of Activities for approved schedules.');	
+                $('#reserModal').scrollTop(0);
                 document.getElementById("termscond-create").disabled = false;
             } else {
                 // Handle case where there is no conflict
@@ -777,7 +782,7 @@ $(document).on("click", ".submitBtn", function (event) {
                                   var department = $("#_department").val();
                                   var date = $("#dateminor").val();
                                   var quantity = $("#_quantity_").val();
-                                  var description = $("#_itemdesc").val();
+                                  var description = $("#_itemdesc_").val();
                                   var purpose = $("#_purpose_").val();
                                   $.ajax({
                                     url: "functions/addons.php",
@@ -849,16 +854,14 @@ $(document).on("click", ".submitBtn", function (event) {
                         //update table list
                         table = $("#datatable").DataTable();
                         table.draw();
-                        alert("Successfully Requested Reservation!");
-                        $("#reserModal").modal("hide");
-                        //force remove faded background  -Ragrats
-                        $("body").removeClass("modal-open");
-                        $(".modal-backdrop").remove();
+                        myFunctionPrompt("alert5");
+                        $('#reserModal').scrollTop(0);
                       }
                     },
                   });
                 } else {
-                  alert("Please fill all the Required fields");
+                  $('#alert4').css('display', 'block');
+                  $('#strongId3').html('Please fill all the Required fields');	
                   document.getElementById("termscond-create").disabled = false;
                 }
             }
@@ -1239,10 +1242,6 @@ $(document).on("click", ".deleteBtn", function (event) {
     $('#deletemodal').modal('hide');
   });
 });
-
-
-
-
 //Admin Buttons for Approval
 
 
@@ -1307,16 +1306,13 @@ $(document).on('click', '.step1approveBtn', function(event){
           if (status == 'success') {
               table = $('#datatable').DataTable();
               table.draw();
-              alert('Step 1 Approved Successfully!');
-          
+              $('#alert6').css('display', 'block');
+              $('#strongId6').html('Step 1 Approved Successfully!');	
               /*table = $('#datatable').DataTable();
               var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
               var row = table.row("[id='" + trid + "']");
               row.row("[id='" + trid + "']").data([department, date, button]);*/
               $('#_step1').val('Approved');
-              $('#test').modal('hide');
-              $('body').removeClass('modal-open');
-              $('.modal-backdrop').remove();
           } else { 
               alert('failed');
           }
@@ -1351,7 +1347,8 @@ $(document).on('click', '.step2approveBtn', function(event){
           if (status == 'success') {
               table = $('#datatable').DataTable();
               table.draw();
-              alert('Step 2 Approved Successfully!');
+              $('#alert6').css('display', 'block');
+              $('#strongId6').html('Step 2 Approved Successfully!');	
           
               /*table = $('#datatable').DataTable();
               var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
@@ -1359,9 +1356,6 @@ $(document).on('click', '.step2approveBtn', function(event){
               row.row("[id='" + trid + "']").data([department, date, button]);*/
               $('#_statustext').val('Approved');
               $('#_step2').val('Approved');
-              $('#test').modal('hide');
-              $('body').removeClass('modal-open');
-              $('.modal-backdrop').remove();
           } else { 
               alert('failed');
           }
@@ -1370,7 +1364,8 @@ $(document).on('click', '.step2approveBtn', function(event){
   }
   else
   {
-    alert("Please fill out required fields!");
+    $('#alert7').css('display', 'block');
+    $('#strongId7').html('Please fill out required fields!');	
   }
   
 //alert('test');
@@ -1439,9 +1434,8 @@ $(document).on('click', '.step1declineBtn', function(event){
           if (status == 'success') {
               table = $('#datatable').DataTable();
               table.draw();
-              alert('Step 1 Declined Successfully!');
-
-          
+              $('#alert6').css('display', 'block');
+              $('#strongId6').html('Step 1 Declined Successfully!');	
               /*table = $('#datatable').DataTable();
               var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
               var row = table.row("[id='" + trid + "']");
@@ -1449,9 +1443,6 @@ $(document).on('click', '.step1declineBtn', function(event){
               //$('#_itemdesc_').text('');
               $('#_statustext').val('Declined');
               $('#_step1').val('Declined');
-              $('#test').modal('hide');
-              $('body').removeClass('modal-open');
-              $('.modal-backdrop').remove();
           } else { 
               alert('failed');
           }
@@ -1479,8 +1470,8 @@ $(document).on('click', '.step2declineBtn', function(event){
           if (status == 'success') {
               table = $('#datatable').DataTable();
               table.draw();
-              alert('Step 2 Declined Successfully!');
-
+              $('#alert6').css('display', 'block');
+              $('#strongId6').html('Step 2 Declined Successfully!');	
           
               /*table = $('#datatable').DataTable();
               var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
@@ -1489,9 +1480,6 @@ $(document).on('click', '.step2declineBtn', function(event){
               //$('#_itemdesc_').text('');
               $('#_statustext').val('Declined');
               $('#_step2').val('Declined');
-              $('#test').modal('hide');
-              $('body').removeClass('modal-open');
-              $('.modal-backdrop').remove();
           } else { 
               alert('failed');
           }
