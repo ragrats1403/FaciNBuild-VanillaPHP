@@ -477,11 +477,15 @@ require_once('../../authentication/anti_pagetrans.php');
                         </div>
                         <div class="alert2" id="alert2" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                            <strong id = "strongId1"></strong>
+                            <strong id = "strongId1">Warning!</strong>Someone is using the facility within that time! Check Calendar of Activities for approved schedules.
                         </div>
                         <div class="alert3" id="alert3" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
                             <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                             <strong id = "strongId2">Warning!</strong> Someone is using the facility within that time! Check Calendar of Activities for approved schedules.
+                        </div>
+                        <div class="alert4" id="alert4" style = "display:none; width: 100%;background-color: #ff9800; padding: 20px; color: white;" >
+                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                            <strong id = "strongId3">Someone is using the facility within that time! Check Calendar of Activities for approved schedules.</strong>
                         </div>
                 </div>
                     <style>
@@ -492,6 +496,11 @@ require_once('../../authentication/anti_pagetrans.php');
                         }
                         
                         .alert2 {
+                        padding: 20px;
+                        background-color: red;
+                        color: white;
+                        }
+                        .alert4 {
                         padding: 20px;
                         background-color: red;
                         color: white;
