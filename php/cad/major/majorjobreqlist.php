@@ -447,7 +447,8 @@ require_once('../../authentication/anti_pagetrans.php');
             });
             }
             else{
-                
+                $('#alert1').css('display', 'block');
+                $('#strongId').html('Please give a feedback before declining');	
             }
         });
 
