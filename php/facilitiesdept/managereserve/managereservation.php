@@ -367,7 +367,7 @@ require_once('../../authentication/anti_pagetrans.php');
                         <div class="row justify-content-center" style="padding-bottom:13px;">
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Date Filed:</label>
-                                <input type="date" class="form-control input-sm col-xs-1" id="_datefiled" placeholder="Date Filed" disabled>
+                                <input type="datetime-local" class="form-control input-sm col-xs-1" id="_datefiled" placeholder="Date Filed" disabled>
                             </div>
                             <div class="col-md-6 ">
                                 <label class="fw-bold" for="date">Actual Date of Use:</label>
