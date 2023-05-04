@@ -314,7 +314,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                         if (status = 'success') {
                             table = $('#datatable').DataTable();
                             table.draw();
-                            myFunctionPrompt("alert1");
+                            $('#createmajorrequest').modal('show');
                             $('#requi').val('');
                             $('#quan').val('');
                             $('#desc').val('');
@@ -364,13 +364,13 @@ require_once('../../../authentication/anti_pagetrans.php');
                             
                         }
                             $('#addUserModal').scrollTop(0);
-                           
-
+                            $('#addUserModal').modal('hide');
+                        
                         }
                     }
                 });
             } else {
-                $('#alert2').css('display', 'block');
+                $('#alert1').css('display', 'block');
                 $('#strongId1').html('Please fill all the Required fields');
                 
             }
@@ -698,7 +698,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                     if (status == 'success') {
                         table = $('#datatable').DataTable();
                         table.draw();
-                        alert('Step 3 Approved Successfully!');
+                        $('#editUserModal').scrollTop(0);
+                        $('#alert3').css('display', 'block');
+                        $('#strongId3').html('Step 3 Approved Successfully!');  
                         $('#_step3').val('Approved');
                         $('#_statustext').val('Approved');
                         document.getElementById("step3a").hidden = true;
@@ -716,7 +718,9 @@ require_once('../../../authentication/anti_pagetrans.php');
             }
             else
             {
-                alert("Please fill out required fields!");
+                $('#editUserModal').scrollTop(0);
+                $('#alert2').css('display', 'block');
+                $('#strongId2').html('Please fill out required fields!');
             }
             
         });
@@ -743,7 +747,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                     if (status == 'success') {
                         table = $('#datatable').DataTable();
                         table.draw();
-                        alert('Step 1 Declined Successfully!');
+                        $('#editUserModal').scrollTop(0);
+                        $('#alert3').css('display', 'block');
+                        $('#strongId3').html('Step 1 Declined Successfully!');
                         $('#_step1').val('Declined');
                         $('#_statustext').val('Declined');
                         document.getElementById("step1a").hidden = true;
@@ -764,7 +770,9 @@ require_once('../../../authentication/anti_pagetrans.php');
             });
             }
             else{
-                alert("Please provide a feedback when declining request!");
+                $('#editUserModal').scrollTop(0);
+                $('#alert2').css('display', 'block');
+                $('#strongId2').html('Please provide a feedback when declining request!');
             }
             
         });
@@ -799,7 +807,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                             if (status == 'success') {
                                 table = $('#datatable').DataTable();
                                 table.draw();
-                                alert('Step 2 Approved Successfully!');
+                                $('#editUserModal').scrollTop(0);
+                                $('#alert3').css('display', 'block');
+                                $('#strongId3').html('Step 2 Approved Successfully!');  
                                 /*table = $('#datatable').DataTable();
                                 var button = '<a href="javascript:void();" data-id="' + id + '"  class="btn btn-sm btn-success btnDelete" >Approve</a> <a href= "javascript:void();" data-id="' + id + '" class ="btn btn-sm btn-info editBtn">More Info</a>';
                                 var row = table.row("[id='" + trid + "']");
@@ -816,16 +826,20 @@ require_once('../../../authentication/anti_pagetrans.php');
                         }
                     });
                 }
-                else
+                else    
                 {
-                    alert("Please add Requisition Number when approving request!");
+                    $('#editUserModal').scrollTop(0);
+                    $('#alert2').css('display', 'block');
+                    $('#strongId2').html('Please add Requisition Number when approving request!');
                 }
 
             }
 
             else
             {
-                alert("Please fill out required fields!");
+                $('#editUserModal').scrollTop(0);
+                $('#alert2').css('display', 'block');
+                $('#strongId2').html('Please fill out required fields!');
             }
 
             
@@ -852,7 +866,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                     if (status == 'success') {
                         table = $('#datatable').DataTable();
                         table.draw();
-                        alert('Step 2 Declined Successfully!');
+                        $('#editUserModal').scrollTop(0);
+                        $('#alert3').css('display', 'block');
+                        $('#strongId3').html('Step 2 Declined Successfully!');  
                         $('#_step2').val('Declined');
                         $('#_statustext').val('Declined');
                         document.getElementById("step1a").hidden = true;
@@ -873,7 +889,9 @@ require_once('../../../authentication/anti_pagetrans.php');
             });
             }
             else{
-                alert("Please provide a feedback when declining a request!");
+                $('#editUserModal').scrollTop(0);
+                $('#alert2').css('display', 'block');
+                $('#strongId2').html('Please provide a feedback when declining a request!');  
             }
             
         });
@@ -901,7 +919,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                     if (status == 'success') {
                         table = $('#datatable').DataTable();
                         table.draw();
-                        alert('Step 3 Declined Successfully!');
+                        $('#editUserModal').scrollTop(0);
+                        $('#alert3').css('display', 'block');
+                        $('#strongId3').html('Step 3 Declined Successfully!');  
                         $('#_step3').val('Declined');
                         $('#_statustext').val('Declined');
                         document.getElementById("step1a").hidden = true;
@@ -923,7 +943,10 @@ require_once('../../../authentication/anti_pagetrans.php');
             });
         }
         else{
-            alert("Please provide feedback before declining request");
+
+            $('#editUserModal').scrollTop(0);
+            $('#alert2').css('display', 'block');
+            $('#strongId2').html('Please provide feedback before declining request');  
         }
         });
         $(document).on('click', '.assignReqnoBtn', function(event) {
@@ -985,7 +1008,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                     if (status == 'success') {
                         table = $('#datatable').DataTable();
                         table.draw();
-                        alert('Step 1 Approved Successfully!');
+                        $('#editUserModal').scrollTop(0);
+                        $('#alert3').css('display', 'block');
+                        $('#strongId3').html('Step 1 Approved Successfully!');
                         $('#_step1').val('Approved');
                         document.getElementById("step1a").hidden = true;
                         document.getElementById("step1d").hidden = true;
@@ -998,8 +1023,9 @@ require_once('../../../authentication/anti_pagetrans.php');
             });
             }
             else{
-                $('#alert1').css('display', 'block');
-                $('#strongId').html('Please provide a feedback when declining a request!');
+                $('#editUserModal').scrollTop(0);
+                $('#alert2').css('display', 'block');
+                $('#strongId2').html('Please fill out required fields!');
             }
         });
 
@@ -1102,6 +1128,34 @@ require_once('../../../authentication/anti_pagetrans.php');
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="col-md-12">
+                                        <div class="alert1" id="alert1" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId1"></strong>
+                                        </div>
+                                    </div>
+                                        <style>
+                                            .alert1 {
+                                            padding: 20px;
+                                            background-color: red;
+                                            color: white;
+                                            }
+
+                                            .cbtn {
+                                            margin-left: 15px;
+                                            color: white;
+                                            font-weight: bold;
+                                            float: right;
+                                            font-size: 22px;
+                                            line-height: 20px;
+                                            cursor: pointer;
+                                            transition: 0.3s;
+                                            }
+
+                                            .cbtn:hover {
+                                            color: black;
+                                            }
+                                        </style>
                     <div class="modal-body ">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                             <div class="row justify-content-center" style="padding-bottom:13px;">
@@ -1306,6 +1360,43 @@ require_once('../../../authentication/anti_pagetrans.php');
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="col-md-12">
+                                        <div class="alert2" id="alert2" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId2"></strong>
+                                        </div>
+                                        <div class="alert3" id="alert3" style = "display:none; width: 100%;">
+                                            <span class="cbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                                            <strong id = "strongId3"></strong>
+                                        </div>
+                                    </div>
+                                        <style>
+                                            .alert2 {
+                                            padding: 20px;
+                                            background-color: red;
+                                            color: white;
+                                            }
+                                            .alert3 {
+                                            padding: 20px;
+                                            background-color: green;
+                                            color: white;
+                                            }
+
+                                            .cbtn {
+                                            margin-left: 15px;
+                                            color: white;
+                                            font-weight: bold;
+                                            float: right;
+                                            font-size: 22px;
+                                            line-height: 20px;
+                                            cursor: pointer;
+                                            transition: 0.3s;
+                                            }
+
+                                            .cbtn:hover {
+                                            color: black;
+                                            }
+                                        </style>
                 <div class="modal-body">
                     <form id="saveUserForm" action="javascript:void();" method="POST">
                         <div class="modal-body">
@@ -1761,6 +1852,58 @@ require_once('../../../authentication/anti_pagetrans.php');
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="close-modal">No</button>
                     <button type="button" class="btn btn-danger">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="createmajorrequest">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully created Major Job request</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="approvedmodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully approved Major Job request</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="declinemodal">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully declined Major Job request</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="updateform">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Successfully updated Major Job request</p>
                 </div>
             </div>
         </div>
