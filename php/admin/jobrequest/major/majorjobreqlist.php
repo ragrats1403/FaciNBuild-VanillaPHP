@@ -140,7 +140,7 @@ require_once('../../../authentication/anti_pagetrans.php');
     </nav>
     </div>
 </header>
-<body onload="autofilltime();">
+<body>
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -224,7 +224,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                                 </thead>
                             </table>
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal" onclick="autofilltime();">Create Major Job Request</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Create Major Job Request</button>
                             </div>
 
                         </div>
@@ -282,7 +282,8 @@ require_once('../../../authentication/anti_pagetrans.php');
         //add button control
         $(document).on('submit', '#saveUserForm', function(event) {
             event.preventDefault();
-            document.getElementById("savechange").disabled = true;
+            
+            
             var requino = $('#requi').val();
             var department = $('#depart').val();
             var date = $('#deeto').val();
@@ -292,10 +293,10 @@ require_once('../../../authentication/anti_pagetrans.php');
             var requestby = $('#req').val();
             var departmenthead = $('#dephead').val();
 
-
+            
             if (department != '' && date != '' && quantity != '' && requestby != '' && description != '' && purpose != '' && departmenthead != '') {
                 $.ajax({
-                    url: "functions/add_data.php",
+                    url: "add_data.php",
                     data: {
                         requino: requino,
                         department: department,
@@ -333,7 +334,7 @@ require_once('../../../authentication/anti_pagetrans.php');
                                     console.log(quantityid);
                                     console.log(itemdescid);
                                     $.ajax({
-                                            url: "functions/addmultidata.php",
+                                            url: "addmultidata.php",
                                             data: {
                                                 department: department,
                                                 date: date,
@@ -359,11 +360,11 @@ require_once('../../../authentication/anti_pagetrans.php');
                                         });
                             }
                             
-                            document.getElementById("savechange").disabled = false;
+                           
                             
                         }
                             $('#addUserModal').scrollTop(0);
-                            document.getElementById("savechange").disabled = false;
+                           
 
                         }
                     }
@@ -371,7 +372,7 @@ require_once('../../../authentication/anti_pagetrans.php');
             } else {
                 $('#alert2').css('display', 'block');
                 $('#strongId1').html('Please fill all the Required fields');
-                document.getElementById("savechange").disabled = false;
+                
             }
         });
         //delete user button control
