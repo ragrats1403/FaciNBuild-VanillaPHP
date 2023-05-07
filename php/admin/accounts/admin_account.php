@@ -417,7 +417,7 @@ require_once('../../authentication/anti_pagetrans.php');
                     type: 'POST',
                     success: function(data) {
                         var json = JSON.parse(data);
-                        if(json.countnum > 0)
+                        if(json.countnum > 1)
                         {
                             $('#alert2').css('display', 'block');
                             $('#strongId2').html('The account for said department already exist!');                           
