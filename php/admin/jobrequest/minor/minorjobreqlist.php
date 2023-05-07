@@ -965,25 +965,25 @@ require_once('../../../authentication/anti_pagetrans.php');
         paragraph.contentEditable = false;
         } )
         //Onclick event for enabling button
-        function autofilldate(filldate) {
+    function autofilldate(filldate) {
 
-            var now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            var formattedDate = now.toISOString().slice(0, 19);
-            document.getElementById(filldate).value = formattedDate;
+    var now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    var formattedDate = now.toISOString().slice(0, 10);
+    document.getElementById(filldate).value = formattedDate;
+
+    }
+    function enableFields() {
+
+
+    autofilldate("_daterendered");
+
+    }
+    function enableFields2() {
+
+    autofilldate("_dateconfirmed");
+    }
             
-        }
-        function enableFields() {
-
-           
-            autofilldate("_daterendered");
-            
-        }
-        function enableFields2() {
-
-            autofilldate("_dateconfirmed");
-        }
-        
     </script>
     <!-- edit user modalPopup end-->
 </body>

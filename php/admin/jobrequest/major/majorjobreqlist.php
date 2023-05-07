@@ -626,6 +626,9 @@ require_once('../../../authentication/anti_pagetrans.php');
                 }
             });
         });
+        
+
+        
 
         $(document).on('click', '.updateBtn', function() {
 
