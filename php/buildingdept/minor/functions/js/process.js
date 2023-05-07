@@ -490,7 +490,7 @@ $(document).on('click', '.updateBtn', function() {
                             var newiter = storecount;
 
                             var nia = parseInt(newiter) + 1;
-                            if(mjson.count>1)
+                            if(mjson.count>=1)
                             {
                                 for(var i = 2; i<=nia; i++)
                                 {
